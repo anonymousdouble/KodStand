@@ -1,0 +1,56 @@
+[package]
+name = "ruff_dev"
+version = "0.0.0"
+publish = false
+authors = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+homepage = { workspace = true }
+documentation = { workspace = true }
+repository = { workspace = true }
+license = { workspace = true }
+
+[dependencies]
+ruff = { path = "../ruff" }
+ruff_diagnostics = { path = "../ruff_diagnostics" }
+ruff_formatter = { path = "../ruff_formatter" }
+ruff_linter = { path = "../ruff_linter", features = ["schemars"] }
+ruff_notebook = { path = "../ruff_notebook" }
+ruff_python_ast = { path = "../ruff_python_ast" }
+ruff_python_codegen = { path = "../ruff_python_codegen" }
+ruff_python_formatter = { path = "../ruff_python_formatter" }
+ruff_python_parser = { path = "../ruff_python_parser" }
+ruff_python_stdlib = { path = "../ruff_python_stdlib" }
+ruff_python_trivia = { path = "../ruff_python_trivia" }
+ruff_workspace = { path = "../ruff_workspace", features = ["schemars"] }
+
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["wrap_help"] }
+ignore = { workspace = true }
+imara-diff = { workspace = true }
+indicatif = { workspace = true }
+itertools = { workspace = true }
+libcst = { workspace = true }
+pretty_assertions = { workspace = true }
+rayon = { workspace = true }
+regex = { workspace = true }
+schemars = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+similar = { workspace = true }
+strum = { workspace = true }
+tempfile = { workspace = true }
+toml = { workspace = true, features = ["parse"] }
+tracing = { workspace = true }
+tracing-indicatif = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
+
+[dev-dependencies]
+indoc = { workspace = true }
+
+[features]
+# Turn off rayon for profiling
+singlethreaded = []
+
+[lints]
+workspace = true

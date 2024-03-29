@@ -1,0 +1,28 @@
+[project]
+name = "scripts"
+version = "0.0.1"
+dependencies = ["sphinx"]
+requires-python = ">=3.8"
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "C901",  # McCabe complexity
+  "D",     # pydocstyle
+  "PL",    # pylint
+  "S",     # bandit
+  "G",     # flake8-logging
+  "T",     # flake8-print
+  "FBT",   # flake8-boolean-trap
+  "PERF",  # perflint
+  "ANN401",
+]
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
