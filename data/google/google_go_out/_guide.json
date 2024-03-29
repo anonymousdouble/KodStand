@@ -1,0 +1,152 @@
+[
+    {
+        "title": "\n    Style principles\n   ",
+        "belongs to": "\n    Style principles\n   ",
+        "cases": [
+            {
+                "description": "\n    There are a few overarching principles that summarize how to think about writing\nreadable Go code. The following are attributes of readable code, in order of\nimportance:\n   \n\n\n\n       Clarity\n      \n\n     : The code’s purpose and rationale is clear to the reader.\n    \n\n\n\n       Simplicity\n      \n\n     : The code accomplishes its goal in the simplest way\npossible.\n    \n\n\n\n       Concision\n      \n\n     : The code has a high signal-to-noise ratio.\n    \n\n\n\n       Maintainability\n      \n\n     : The code is written such that it can be easily\nmaintained.\n    \n\n\n\n       Consistency\n      \n\n     : The code is consistent with the broader Google codebase.\n    \n\n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Clarity\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   ",
+        "cases": [
+            {
+                "description": "\n    The core goal of readability is to produce code that is clear to the reader.\n   \n    Clarity is primarily achieved with effective naming, helpful commentary, and\nefficient code organization.\n   \n    Clarity is to be viewed through the lens of the reader, not the author of the\ncode. It is more important that code be easy to read than easy to write. Clarity\nin code has two distinct facets:\n   \n\n\n      What is the code actually doing?\n     \n\n\n\n      Why is the code doing what it does?\n     \n\n\n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    What is the code actually doing?\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    What is the code actually doing?\n   ",
+        "cases": [
+            {
+                "description": "\n    Go is designed such that it should be relatively straightforward to see what the\ncode is doing. In cases of uncertainty or where a reader may require prior\nknowledge in order to understand the code, it is worth investing time in order\nto make the code’s purpose clearer for future readers. For example, it may help\nto:\n   \n\n     Use more descriptive variable names\n    \n\n     Add additional commentary\n    \n\n     Break up the code with whitespace and comments\n    \n\n     Refactor the code into separate functions/methods to make it more modular\n    \n\n    There is no one-size-fits-all approach here, but it is important to prioritize\nclarity when developing Go code.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Why is the code doing what it does?\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    Why is the code doing what it does?\n   ",
+        "cases": [
+            {
+                "description": "\n    The code’s rationale is often sufficiently communicated by the names of\nvariables, functions, methods, or packages. Where it is not, it is important to\nadd commentary. The “Why?” is especially important when the code contains\nnuances that a reader may not be familiar with, such as:\n   \n\n     A nuance in the language, e.g., a closure will be capturing a loop variable,\nbut the closure is many lines away\n    \n\n     A nuance of the business logic, e.g., an access control check that needs to\ndistinguish between the actual user and someone impersonating a user\n    \n\n    An API might require care to use correctly. For example, a piece of code may be\nintricate and difficult to follow for performance reasons, or a complex sequence\nof mathematical operations may use type conversions in an unexpected way. In\nthese cases and many more, it is important that accompanying commentary and\ndocumentation explain these aspects so that future maintainers don’t make a\nmistake and so that readers can understand the code without needing to\nreverse-engineer it.\n   \n    It is also important to be aware that some attempts to provide clarity (such as\nadding extra commentary) can actually obscure the code’s purpose by adding\nclutter, restating what the code already says, contradicting the code, or adding\nmaintenance burden to keep the comments up-to-date. Allow the code to speak for\nitself (e.g., by making the symbol names themselves self-describing) rather than\nadding redundant comments. It is often better for comments to explain why\nsomething is done, not what the code is doing.\n   \n    The Google codebase is largely uniform and consistent. It is often the case that\ncode that stands out (e.g., by using an unfamiliar pattern) is doing so for a\ngood reason, typically for performance. Maintaining this property is important\nto make it clear to readers where they should focus their attention when reading\na new piece of code.\n   \n    The standard library contains many examples of this principle in action. Among\nthem:\n   \n\n     Maintainer comments in\n     \n\n       package sort\n      \n\n     .\n    \n\n     Good\n     \n      runnable examples in the same package\n     \n     ,\nwhich benefit both users (they\n     \n      show up in godoc\n     \n     ) and maintainers\n(they\n     \n      run as part of tests\n     \n     ).\n    \n\n\n\n       strings.Cut\n      \n\n     is only four lines of code,\nbut they improve the\n     \n      clarity and correctness of callsites\n     \n     .\n    \n\n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Simplicity\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    Simplicity\n   ",
+        "cases": [
+            {
+                "description": "\n    Your Go code should be simple for those using, reading, and maintaining it.\n   \n    Go code should be written in the simplest way that accomplishes its goals, both\nin terms of behavior and performance. Within the Google Go codebase, simple\ncode:\n   \n\n     Is easy to read from top to bottom\n    \n\n     Does not assume that you already know what it is doing\n    \n\n     Does not assume that you can memorize all of the preceding code\n    \n\n     Does not have unnecessary levels of abstraction\n    \n\n     Does not have names that call attention to something mundane\n    \n\n     Makes the propagation of values and decisions clear to the reader\n    \n\n     Has comments that explain why, not what, the code is doing to avoid future\ndeviation\n    \n\n     Has documentation that stands on its own\n    \n\n     Has useful errors and useful test failures\n    \n\n     May often be mutually exclusive with “clever” code\n    \n\n    Tradeoffs can arise between code simplicity and API usage simplicity. For\nexample, it may be worthwhile to have the code be more complex so that the end\nuser of the API may more easily call the API correctly. In contrast, it may also\nbe worthwhile to leave a bit of extra work to the end user of the API so that\nthe code remains simple and easy to understand.\n   \n    When code needs complexity, the complexity should be added deliberately. This is\ntypically necessary if additional performance is required or where there are\nmultiple disparate customers of a particular library or service. Complexity may\nbe justified, but it should come with accompanying documentation so that clients\nand future maintainers are able to understand and navigate the complexity. This\nshould be supplemented with tests and examples that demonstrate its correct\nusage, especially if there is both a “simple” and a “complex” way to use the\ncode.\n   \n    This principle does not imply that complex code cannot or should not be written\nin Go or that Go code is not allowed to be complex. We strive for a codebase\nthat avoids unnecessary complexity so that when complexity does appear, it\nindicates that the code in question requires care to understand and maintain.\nIdeally, there should be accompanying commentary that explains the rationale and\nidentifies the care that should be taken. This often arises when optimizing code\nfor performance; doing so often requires a more complex approach, like\npreallocating a buffer and reusing it throughout a goroutine lifetime. When a\nmaintainer sees this, it should be a clue that the code in question is\nperformance-critical, and that should influence the care that is taken when\nmaking future changes. If employed unnecessarily, on the other hand, this\ncomplexity is a burden on those who need to read or change the code in the\nfuture.\n   \n    If code turns out to be very complex when its purpose should be simple, this is\noften a signal to revisit the implementation to see if there is a simpler way to\naccomplish the same thing.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Least mechanism\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    Simplicity\n   /\n    Least mechanism\n   ",
+        "cases": [
+            {
+                "description": "\n    Where there are several ways to express the same idea, prefer the one that uses\nthe most standard tools. Sophisticated machinery often exists, but should not be\nemployed without reason. It is easy to add complexity to code as needed, whereas\nit is much harder to remove existing complexity after it has been found to be\nunnecessary.\n   \n\n     Aim to use a core language construct (for example a channel, slice, map,\nloop, or struct) when sufficient for your use case.\n    \n\n     If there isn’t one, look for a tool within the standard library (like an\nHTTP client or a template engine).\n    \n\n     Finally, consider whether there is a core library in the Google codebase\nthat is sufficient before introducing a new dependency or creating your own.\n    \n\n    As an example, consider production code that contains a flag bound to a variable\nwith a default value which must be overridden in tests. Unless intending to test\nthe program’s command-line interface itself (say, with\n    \n     os/exec\n    \n    ), it is simpler\nand therefore preferable to override the bound value directly rather than by\nusing\n    \n     flag.Set\n    \n    .\n   \n    Similarly, if a piece of code requires a set membership check, a boolean-valued\nmap (e.g.,\n    \n     map[string]bool\n    \n    ) often suffices. Libraries that provide set-like\ntypes and functionality should only be used if more complicated operations are\nrequired that are impossible or overly complicated with a map.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Concision\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    Simplicity\n   /\n    Concision\n   ",
+        "cases": [
+            {
+                "description": "\n    Concise Go code has a high signal-to-noise ratio. It is easy to discern the\nrelevant details, and the naming and structure guide the reader through these\ndetails.\n   \n    There are many things that can get in the way of surfacing the most salient\ndetails at any given time:\n   \n\n     Repetitive code\n    \n\n     Extraneous syntax\n    \n\n\n      Opaque names\n     \n\n\n     Unnecessary abstraction\n    \n\n     Whitespace\n    \n\n    Repetitive code especially obscures the differences between each\nnearly-identical section, and requires a reader to visually compare similar\nlines of code to find the changes.\n    \n     Table-driven testing\n    \n    is a good example of a\nmechanism that can concisely factor out the common code from the important\ndetails of each repetition, but the choice of which pieces to include in the\ntable will have an impact on how easy the table is to understand.\n   \n    When considering multiple ways to structure code, it is worth considering which\nway makes important details the most apparent.\n   \n    Understanding and using common code constructions and idioms are also important\nfor maintaining a high signal-to-noise ratio. For example, the following code\nblock is very common in\n    \n     error handling\n    \n    , and the reader can quickly understand\nthe purpose of this block.\n   \n\n// Good:\nif err := doSomething(); err != nil {\n    // ...\n}\n\n\n\n    If code looks very similar to this but is subtly different, a reader may not\nnotice the change. In cases like this, it is worth intentionally\n    \n     “boosting”\n    \n    the signal of the error check by adding a comment to call attention to it.\n   \n\n// Good:\nif err := doSomething(); err == nil { // if NO error\n    // ...\n}\n\n\n\n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Maintainability\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    Simplicity\n   /\n    Maintainability\n   ",
+        "cases": [
+            {
+                "description": "\n    Code is edited many more times than it is written. Readable code not only makes\nsense to a reader who is trying to understand how it works, but also to the\nprogrammer who needs to change it. Clarity is key.\n   \n    Maintainable code:\n   \n\n     Is easy for a future programmer to modify correctly\n    \n\n     Has APIs that are structured so that they can grow gracefully\n    \n\n     Is clear about the assumptions that it makes and chooses abstractions that\nmap to the structure of the problem, not to the structure of the code\n    \n\n     Avoids unnecessary coupling and doesn’t include features that are not used\n    \n\n     Has a comprehensive test suite to ensure promised behaviors are maintained\nand important logic is correct, and the tests provide clear, actionable\ndiagnostics in case of failure\n    \n\n    When using abstractions like interfaces and types which by definition remove\ninformation from the context in which they are used, it is important to ensure\nthat they provide sufficient benefit. Editors and IDEs can connect directly to a\nmethod definition and show the corresponding documentation when a concrete type\nis used, but can only refer to an interface definition otherwise. Interfaces are\na powerful tool, but come with a cost, since the maintainer may need to\nunderstand the specifics of the underlying implementation in order to correctly\nuse the interface, which must be explained within the interface documentation or\nat the call-site.\n   \n    Maintainable code also avoids hiding important details in places that are easy\nto overlook. For example, in each of the following lines of code, the presence\nor lack of a single character is critical to understand the line:\n   \n\n// Bad:\n// The use of = instead of := can change this line completely.\nif user, err = db.UserByID(userID); err != nil {\n    // ...\n}\n\n\n\n\n// Bad:\n// The ! in the middle of this line is very easy to miss.\nleap := (year%4 == 0) && (!(year%100 == 0) || (year%400 == 0))\n\n\n\n    Neither of these are incorrect, but both could be written in a more explicit\nfashion, or could have an accompanying comment that calls attention to the\nimportant behavior:\n   \n\n// Good:\nu, err := db.UserByID(userID)\nif err != nil {\n    return fmt.Errorf(\"invalid origin user: %s\", err)\n}\nuser = u\n\n\n\n\n// Good:\n// Gregorian leap years aren't just year%4 == 0.\n// See https://en.wikipedia.org/wiki/Leap_year#Algorithm.\nvar (\n    leap4   = year%4 == 0\n    leap100 = year%100 == 0\n    leap400 = year%400 == 0\n)\nleap := leap4 && (!leap100 || leap400)\n\n\n\n    In the same way, a helper function that hides critical logic or an important\nedge-case could make it easy for a future change to fail to account for it\nproperly.\n   \n    Predictable names are another feature of maintainable code. A user of a package\nor a maintainer of a piece of code should be able to predict the name of a\nvariable, method, or function in a given context. Function parameters and\nreceiver names for identical concepts should typically share the same name, both\nto keep documentation understandable and to facilitate refactoring code with\nminimal overhead.\n   \n    Maintainable code minimizes its dependencies (both implicit and explicit).\nDepending on fewer packages means fewer lines of code that can affect behavior.\nAvoiding dependencies on internal or undocumented behavior makes code less\nlikely to impose a maintenance burden when those behaviors change in the future.\n   \n    When considering how to structure or write code, it is worth taking the time to\nthink through ways in which the code may evolve over time. If a given approach\nis more conducive to easier and safer future changes, that is often a good\ntrade-off, even if it means a slightly more complicated design.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Consistency\n   ",
+        "belongs to": "\n    Style principles\n   /\n    Clarity\n   /\n    Simplicity\n   /\n    Consistency\n   ",
+        "cases": [
+            {
+                "description": "\n    Consistent code is code that looks, feels, and behaves like similar code\nthroughout the broader codebase, within the context of a team or package, and\neven within a single file.\n   \n    Consistency concerns do not override any of the principles above, but if a tie\nmust be broken, it is often beneficial to break it in favor of consistency.\n   \n    Consistency within a package is often the most immediately important level of\nconsistency. It can be very jarring if the same problem is approached in\nmultiple ways throughout a package, or if the same concept has many names within\na file. However, even this should not override documented style principles or\nglobal consistency.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Core guidelines\n   ",
+        "belongs to": "\n    Core guidelines\n   ",
+        "cases": [
+            {
+                "description": "\n    These guidelines collect the most important aspects of Go style that all Go code\nis expected to follow. We expect that these principles be learned and followed\nby the time readability is granted. These are not expected to change frequently,\nand new additions will have to clear a high bar.\n   \n    The guidelines below expand on the recommendations in\n    \n     Effective Go\n    \n    , which\nprovide a common baseline for Go code across the entire community.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Formatting\n   ",
+        "belongs to": "\n    Core guidelines\n   /\n    Formatting\n   ",
+        "cases": [
+            {
+                "description": "\n    All Go source files must conform to the format outputted by the\n    \n     gofmt\n    \n    tool.\nThis format is enforced by a presubmit check in the Google codebase.\n    \n     Generated code\n    \n    should generally also be formatted (e.g., by using\n    \n\n      format.Source\n     \n\n    ), as it is also browsable in Code Search.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    MixedCaps\n   ",
+        "belongs to": "\n    Core guidelines\n   /\n    MixedCaps\n   ",
+        "cases": [
+            {
+                "description": "\n    Go source code uses\n    \n     MixedCaps\n    \n    or\n    \n     mixedCaps\n    \n    (camel case) rather than\nunderscores (snake case) when writing multi-word names.\n   \n    This applies even when it breaks conventions in other languages. For example, a\nconstant is\n    \n     MaxLength\n    \n    (not\n    \n     MAX_LENGTH\n    \n    ) if exported and\n    \n     maxLength\n    \n    (not\n    \n     max_length\n    \n    ) if unexported.\n   \n    Local variables are considered\n    \n     unexported\n    \n    for the purpose of choosing the\ninitial capitalization.\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Line length\n   ",
+        "belongs to": "\n    Core guidelines\n   /\n    Line length\n   ",
+        "cases": [
+            {
+                "description": "\n    There is no fixed line length for Go source code. If a line feels too long,\nprefer refactoring instead of splitting it. If it is already as short as it is\npractical for it to be, the line should be allowed to remain long.\n   \n    Do not split a line:\n   \n\n     Before an\n     \n      indentation change\n     \n     (e.g.,\nfunction declaration, conditional)\n    \n\n     To make a long string (e.g., a URL) fit into multiple shorter lines\n    \n\n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Naming\n   ",
+        "belongs to": "\n    Core guidelines\n   /\n    Naming\n   ",
+        "cases": [
+            {
+                "description": "\n    Naming is more art than science. In Go, names tend to be somewhat shorter than\nin many other languages, but the same\n    \n     general guidelines\n    \n    apply. Names should:\n   \n\n     Not feel\n     \n      repetitive\n     \n     when they are used\n    \n\n     Take the context into consideration\n    \n\n     Not repeat concepts that are already clear\n    \n\n    You can find more specific guidance on naming in\n    \n     decisions\n    \n    .\n   \n\n\n",
+                "example": []
+            }
+        ]
+    },
+    {
+        "title": "\n    Local consistency\n   ",
+        "belongs to": "\n    Core guidelines\n   /\n    Local consistency\n   ",
+        "cases": [
+            {
+                "description": "\n    Where the style guide has nothing to say about a particular point of style,\nauthors are free to choose the style that they prefer, unless the code in close\nproximity (usually within the same file or package, but sometimes within a team\nor project directory) has taken a consistent stance on the issue.\n   \n    Examples of\n    \n     valid\n    \n    local style considerations:\n   \n\n     Use of\n     \n      %s\n     \n     or\n     \n      %v\n     \n     for formatted printing of errors\n    \n\n     Usage of buffered channels in lieu of mutexes\n    \n\n    Examples of\n    \n     invalid\n    \n    local style considerations:\n   \n\n     Line length restrictions for code\n    \n\n     Use of assertion-based testing libraries\n    \n\n    If the local style disagrees with the style guide but the readability impact is\nlimited to one file, it will generally be surfaced in a code review for which a\nconsistent fix would be outside the scope of the CL in question. At that point,\nit is appropriate to file a bug to track the fix.\n   \n    If a change would worsen an existing style deviation, expose it in more API\nsurfaces, expand the number of files in which the deviation is present, or\nintroduce an actual bug, then local consistency is no longer a valid\njustification for violating the style guide for new code. In these cases, it is\nappropriate for the author to clean up the existing codebase in the same CL,\nperform a refactor in advance of the current CL, or find an alternative that at\nleast does not make the local problem worse.\n   \n    This site is open source.\n    \n     Improve this page\n    \n    .\n   ",
+                "example": []
+            }
+        ]
+    }
+]
