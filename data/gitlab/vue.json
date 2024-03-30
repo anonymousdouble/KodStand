@@ -13,7 +13,7 @@
         "belongs to": "Basic Rules",
         "cases": [
             {
-                "description": "The service has its own file The store has its own file \nUse a function in the bundle file to instantiate the Vue component:",
+                "description": "The service has its own file \nThe store has its own file \nUse a function in the bundle file to instantiate the Vue component:",
                 "example": "// bad\nclass {\n  init() {\n    new Component({})\n  }\n}\n\n// good\ndocument.addEventListener('DOMContentLoaded', () => new Vue({\n  el: '#element',\n  components: {\n    componentName\n  },\n  render: createElement => createElement('component-name'),\n}));\n"
             },
             {
@@ -163,10 +163,8 @@
             },
             {
                 "description": "When dealing with nested `v-for` use the same guidelines as above.",
-                "example": "<div\n  v-for=\"item in items\"\n  :key=\"item.id\"\n>\n  <span\n    v-for=\"element in array\"\n    :key=\"element.id\"\n  >\n    <!-- content -->\n  </span>\n</div>\n"
-            },
-            {
-                "description": "Useful links:\nMaintaining State \nVue Style Guide: Keyed v-for"
+                "example": "<div\n  v-for=\"item in items\"\n  :key=\"item.id\"\n>\n  <span\n    v-for=\"element in array\"\n    :key=\"element.id\"\n  >\n    <!-- content -->\n  </span>\n</div>\n",
+                "appendix": "Useful links:\nMaintaining State \nVue Style Guide: Keyed v-for"
             }
         ]
     },
@@ -184,9 +182,9 @@
         "belongs to": "Vue testing/Mounting a component",
         "cases": [
             {
-                "description": "Typically, when testing a Vue component, the component should be “re-mounted” in every test block.\nTo achieve this:\nCreate a mutable `wrapper` variable inside the top-level `describe` block. Mount the component using mount or shallowMount . Reassign the resulting Wrapper instance to our `wrapper` variable.\nCreating a global, mutable wrapper provides a number of advantages, including the ability to:\nDefine common functions for finding components/DOM elements:",
+                "description": "Typically, when testing a Vue component, the component should be “re-mounted” in every test block.\nTo achieve this:\nCreate a mutable `wrapper` variable inside the top-level `describe` block. \nMount the component using mount or shallowMount . \nReassign the resulting Wrapper instance to our `wrapper` variable.\nCreating a global, mutable wrapper provides a number of advantages, including the ability to:\nDefine common functions for finding components/DOM elements:",
                 "example": "import MyComponent from '~/path/to/my_component.vue';\ndescribe('MyComponent', () => {\n  let wrapper;\n\n  // this can now be reused across tests\n  const findMyComponent = wrapper.findComponent(MyComponent);\n  // ...\n})\n",
-                "appendix": "Use a `beforeEach` block to mount the component (see the createComponent factory for more information). Automatically destroy the component after the test is run with enableAutoDestroy set in shared_test_setup.js ."
+                "appendix": "Use a `beforeEach` block to mount the component (see the\n \n createComponent\n \n factory for more information). \nAutomatically destroy the component after the test is run with enableAutoDestroy set in shared_test_setup.js ."
             }
         ]
     },
@@ -270,7 +268,7 @@
         "belongs to": "The JavaScript/Vue Accord",
         "cases": [
             {
-                "description": "The goal of this accord is to make sure we are all on the same page.\nWhen writing Vue, you may not use jQuery in your application. \nIf you need to grab data from the DOM, you may query the DOM 1 time while bootstrapping your application to grab data attributes using `dataset` . You can do this without jQuery. You may use a jQuery dependency in Vue.js following this example from the docs . If an outside jQuery Event needs to be listen to inside the Vue application, you may use jQuery event listeners. We avoid adding new jQuery events when they are not required. Instead of adding new jQuery events take a look at different methods to do the same task . \nYou may query the `window` object one time, while bootstrapping your application for application specific data (for example, `scrollTo` is ok to access anytime). Do this access during the bootstrapping of your application. You may have a temporary but immediate need to create technical debt by writing code that does not follow our standards, to be refactored later. Maintainers need to be ok with the tech debt in the first place. An issue should be created for that tech debt to evaluate it further and discuss. In the coming months you should fix that tech debt, with its priority to be determined by maintainers. When creating tech debt you must write the tests for that code before hand and those tests may not be rewritten. For example, jQuery tests rewritten to Vue tests. You may choose to use VueX as a centralized state management. If you choose not to use VueX, you must use the store pattern which can be found in the Vue.js documentation . Once you have chosen a centralized state-management solution you must use it for your entire application. Don’t mix and match your state-management solutions."
+                "description": "The goal of this accord is to make sure we are all on the same page.\nWhen writing Vue, you may not use jQuery in your application. \nIf you need to grab data from the DOM, you may query the DOM 1 time while bootstrapping your application to grab data attributes using `dataset` . You can do this without jQuery. \nYou may use a jQuery dependency in Vue.js following this example from the docs . \nIf an outside jQuery Event needs to be listen to inside the Vue application, you may use jQuery event listeners. \nWe avoid adding new jQuery events when they are not required. Instead of adding new jQuery events take a look at different methods to do the same task . \nYou may query the `window` object one time, while bootstrapping your application for application specific data (for example, `scrollTo` is ok to access anytime). Do this access during the bootstrapping of your application. \nYou may have a temporary but immediate need to create technical debt by writing code that does not follow our standards, to be refactored later. Maintainers need to be ok with the tech debt in the first place. An issue should be created for that tech debt to evaluate it further and discuss. In the coming months you should fix that tech debt, with its priority to be determined by maintainers. \nWhen creating tech debt you must write the tests for that code before hand and those tests may not be rewritten. For example, jQuery tests rewritten to Vue tests. \nYou may choose to use VueX as a centralized state management. If you choose not to use VueX, you must use the store pattern which can be found in the Vue.js documentation . \nOnce you have chosen a centralized state-management solution you must use it for your entire application. Don’t mix and match your state-management solutions."
             }
         ]
     },

@@ -1,7 +1,7 @@
 [
     {
-        "title": "Formatting¶",
-        "belongs to": "Formatting¶",
+        "title": "Formatting ¶",
+        "belongs to": "Formatting ¶",
         "cases": [
             {
                 "description": "All CSS documents must use two spaces for indentation and files should have no trailing whitespace. Other formatting rules:\nUse soft-tabs with a two space indent. \nUse double quotes. \nUse shorthand notation where possible. \nPut spaces after `:` in property declarations. \nPut spaces before `{` in rule declarations. \nUse hex color codes `#000` unless using `rgba()` . \nAlways provide fallback properties for older browsers. \nUse one line per property declaration. \nAlways follow a rule with one line of whitespace. \nAlways quote `url()` and `@import()` contents. \nDo not indent blocks.\nFor example:",
@@ -10,8 +10,8 @@
         ]
     },
     {
-        "title": "Naming¶",
-        "belongs to": "Naming¶",
+        "title": "Naming ¶",
+        "belongs to": "Naming ¶",
         "cases": [
             {
                 "description": "All ids, classes and attributes must be lowercase with hyphens used for separation.",
@@ -20,8 +20,8 @@
         ]
     },
     {
-        "title": "Comments¶",
-        "belongs to": "Comments¶",
+        "title": "Comments ¶",
+        "belongs to": "Comments ¶",
         "cases": [
             {
                 "description": "Comments should be used liberally to explain anything that may be unclear at first glance, especially IE workarounds or hacks.",
@@ -30,8 +30,8 @@
         ]
     },
     {
-        "title": "Modularity and specificity¶",
-        "belongs to": "Modularity and specificity¶",
+        "title": "Modularity and specificity ¶",
+        "belongs to": "Modularity and specificity ¶",
         "cases": [
             {
                 "description": "Try keep all selectors loosely grouped into modules where possible and avoid having too many selectors in one declaration to make them easy to override.",

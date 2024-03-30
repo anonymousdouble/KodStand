@@ -177,10 +177,8 @@
             },
             {
                 "description": "Doc comments appear in Godoc and are surfaced by IDEs, and therefore should be written for anyone using the package.\nA documentation comment applies to the following symbol, or the group of fields if it appears in a struct.",
-                "example": "// Good:\n// Options configure the group management service.\ntype Options struct {\n    // General setup:\n    Name  string\n    Group *FooGroup\n\n    // Dependencies:\n    DB *sql.DB\n\n    // Customization:\n    LargeGroupThreshold int // optional; default: 10\n    MinimumMembers      int // optional; default: 2\n}\n"
-            },
-            {
-                "description": "Best Practice: If you have doc comments for unexported code, follow the same custom as if it were exported (namely, starting the comment with the unexported name). This makes it easy to export it later by simply replacing the unexported name with the newly-exported one across both comments and code."
+                "example": "// Good:\n// Options configure the group management service.\ntype Options struct {\n    // General setup:\n    Name  string\n    Group *FooGroup\n\n    // Dependencies:\n    DB *sql.DB\n\n    // Customization:\n    LargeGroupThreshold int // optional; default: 10\n    MinimumMembers      int // optional; default: 2\n}\n",
+                "appendix": "Best Practice: If you have doc comments for unexported code, follow the same custom as if it were exported (namely, starting the comment with the unexported name). This makes it easy to export it later by simply replacing the unexported name with the newly-exported one across both comments and code."
             }
         ]
     },
@@ -221,10 +219,8 @@
             },
             {
                 "description": "In the code above, cancellation is a particular action a caller must take. However, were the result parameters written as `(Context,func())` alone, it would be unclear what is meant by “cancel function”.\nDon’t use named result parameters when the names produce unnecessary repetition .",
-                "example": "// Bad:\nfunc (n *Node) Parent1() (node *Node)\nfunc (n *Node) Parent2() (node *Node, err error)\n"
-            },
-            {
-                "description": "Don’t name result parameters in order to avoid declaring a variable inside the function. This practice results in unnecessary API verbosity at the cost of minor implementation brevity.\nNaked returns are acceptable only in a small function. Once it’s a medium-sized function, be explicit with your returned values. Similarly, do not name result parameters just because it enables you to use naked returns. Clarity is always more important than saving a few lines in your function.\nIt is always acceptable to name a result parameter if its value must be changed in a deferred closure.\nTip: Types can often be clearer than names in function signatures. GoTip #38: Functions as Named Types demonstrates this. \nIn, WithTimeout above, the real code uses a CancelFunc instead of a raw `func()` in the result parameter list and requires little effort to document."
+                "example": "// Bad:\nfunc (n *Node) Parent1() (node *Node)\nfunc (n *Node) Parent2() (node *Node, err error)\n",
+                "appendix": "Don’t name result parameters in order to avoid declaring a variable inside the function. This practice results in unnecessary API verbosity at the cost of minor implementation brevity.\nNaked returns are acceptable only in a small function. Once it’s a medium-sized function, be explicit with your returned values. Similarly, do not name result parameters just because it enables you to use naked returns. Clarity is always more important than saving a few lines in your function.\nIt is always acceptable to name a result parameter if its value must be changed in a deferred closure.\nTip: Types can often be clearer than names in function signatures. GoTip #38: Functions as Named Types demonstrates this. \nIn, WithTimeout above, the real code uses a CancelFunc instead of a raw `func()` in the result parameter list and requires little effort to document."
             }
         ]
     },
@@ -266,10 +262,8 @@
             },
             {
                 "description": "Imports that have package names with no useful identifying information (e.g. `packagev1` ) should be renamed to include the previous path component. The rename must be consistent with other local files importing the same package and may include the version number.\nNote: It is preferred to rename the package to conform with good package names , but that is often not feasible for packages in vendored directories.",
-                "example": "// Good:\nimport (\n    core \"github.com/kubernetes/api/core/v1\"\n    meta \"github.com/kubernetes/apimachinery/pkg/apis/meta/v1beta1\"\n)\n"
-            },
-            {
-                "description": "If you need to import a package whose name collides with a common local variable name that you want to use (e.g. `url` , `ssh` ) and you wish to rename the package, the preferred way to do so is with the `pkg` suffix (e.g. `urlpkg` ). Note that it is possible to shadow a package with a local variable; this rename is only necessary if the package still needs to be used when such a variable is in scope."
+                "example": "// Good:\nimport (\n    core \"github.com/kubernetes/api/core/v1\"\n    meta \"github.com/kubernetes/apimachinery/pkg/apis/meta/v1beta1\"\n)\n",
+                "appendix": "If you need to import a package whose name collides with a common local variable name that you want to use (e.g. `url` , `ssh` ) and you wish to rename the package, the preferred way to do so is with the `pkg` suffix (e.g. `urlpkg` ). Note that it is possible to shadow a package with a local variable; this rename is only necessary if the package still needs to be used when such a variable is in scope."
             }
         ]
     },
@@ -283,10 +277,8 @@
             },
             {
                 "description": "It is acceptable to split the project packages into multiple groups if you want a separate group, as long as the groups have some meaning. Common reasons to do this:\nrenamed imports \npackages imported for their side-effects\nExample:",
-                "example": "// Good:\npackage main\n\nimport (\n    \"fmt\"\n    \"hash/adler32\"\n    \"os\"\n\n\n    \"github.com/dsnet/compress/flate\"\n    \"golang.org/x/text/encoding\"\n    \"google.golang.org/protobuf/proto\"\n\n    foopb \"myproj/foo/proto/proto\"\n\n    _ \"myproj/rpc/protocols/dial\"\n    _ \"myproj/security/auth/authhooks\"\n)\n"
-            },
-            {
-                "description": "Note: Maintaining optional groups - splitting beyond what is necessary for the mandatory separation between standard library and Google imports - is not supported by the goimports tool. Additional import subgroups require attention on the part of both authors and reviewers to maintain in a conforming state.\nGoogle programs that are also AppEngine apps should have a separate group for AppEngine imports.\nGofmt takes care of sorting each group by import path. However, it does not automatically separate imports into groups. The popular goimports tool combines Gofmt and import management, separating imports into groups based on the decision above. It is permissible to let goimports manage import arrangement entirely, but as a file is revised its import list must remain internally consistent."
+                "example": "// Good:\npackage main\n\nimport (\n    \"fmt\"\n    \"hash/adler32\"\n    \"os\"\n\n\n    \"github.com/dsnet/compress/flate\"\n    \"golang.org/x/text/encoding\"\n    \"google.golang.org/protobuf/proto\"\n\n    foopb \"myproj/foo/proto/proto\"\n\n    _ \"myproj/rpc/protocols/dial\"\n    _ \"myproj/security/auth/authhooks\"\n)\n",
+                "appendix": "Note: Maintaining optional groups - splitting beyond what is necessary for the mandatory separation between standard library and Google imports - is not supported by the goimports tool. Additional import subgroups require attention on the part of both authors and reviewers to maintain in a conforming state.\nGoogle programs that are also AppEngine apps should have a separate group for AppEngine imports.\nGofmt takes care of sorting each group by import path. However, it does not automatically separate imports into groups. The popular goimports tool combines Gofmt and import management, separating imports into groups based on the decision above. It is permissible to let goimports manage import arrangement entirely, but as a file is revised its import list must remain internally consistent."
             }
         ]
     },
@@ -328,10 +320,8 @@
             },
             {
                 "description": "Exported functions that return errors should return them using the `error` type. Concrete error types are susceptible to subtle bugs: a concrete `nil` pointer can get wrapped into an interface and thus become a non-nil value (see the Go FAQ entry on the topic ).",
-                "example": "// Bad:\nfunc Bad() *os.PathError { /*...*/ }\n"
-            },
-            {
-                "description": "Tip : A function that takes a `context.Context` argument should usually return an `error` so that the caller can determine if the context was cancelled while the function was running."
+                "example": "// Bad:\nfunc Bad() *os.PathError { /*...*/ }\n",
+                "appendix": "Tip : A function that takes a `context.Context` argument should usually return an `error` so that the caller can determine if the context was cancelled while the function was running."
             }
         ]
     },
@@ -355,10 +345,8 @@
         "cases": [
             {
                 "description": "Code that encounters an error should make a deliberate choice about how to handle it. It is not usually appropriate to discard errors using `_` variables. If a function returns an error, do one of the following:\nHandle and address the error immediately. \nReturn the error to the caller. \nIn exceptional situations, call log.Fatal or (if absolutely necessary) `panic` .\nNote: \n`log.Fatalf` is not the standard library log. See [#logging].\nIn the rare circumstance where it is appropriate to ignore or discard an error (for example a call to (*bytes.Buffer).Write that is documented to never fail), an accompanying comment should explain why this is safe.",
-                "example": "// Good:\nvar b *bytes.Buffer\n\nn, _ := b.Write(p) // never returns a non-nil error\n"
-            },
-            {
-                "description": "For more discussion and examples of error handling, see Effective Go and best practices ."
+                "example": "// Good:\nvar b *bytes.Buffer\n\nn, _ := b.Write(p) // never returns a non-nil error\n",
+                "appendix": "For more discussion and examples of error handling, see Effective Go and best practices ."
             }
         ]
     },
@@ -380,10 +368,8 @@
             },
             {
                 "description": "This API prevents the caller from incorrectly writing `Parse(Lookup(key))` which causes a compile-time error, since `Lookup(key)` has 2 outputs.\nReturning errors in this way encourages more robust and explicit error handling:",
-                "example": "// Good:\nvalue, ok := Lookup(key)\nif !ok {\n    return fmt.Errorf(\"no value for %q\", key)\n}\nreturn Parse(value)\n"
-            },
-            {
-                "description": "Some standard library functions, like those in package `strings` , return in-band error values. This greatly simplifies string-manipulation code at the cost of requiring more diligence from the programmer. In general, Go code in the Google codebase should return additional values for errors."
+                "example": "// Good:\nvalue, ok := Lookup(key)\nif !ok {\n    return fmt.Errorf(\"no value for %q\", key)\n}\nreturn Parse(value)\n",
+                "appendix": "Some standard library functions, like those in package `strings` , return in-band error values. This greatly simplifies string-manipulation code at the cost of requiring more diligence from the programmer. In general, Go code in the Google codebase should return additional values for errors."
             }
         ]
     },
@@ -397,10 +383,8 @@
             },
             {
                 "description": "Tip: If you are using a variable for more than a few lines of code, it is generally not worth using the `if` -with-initializer style. In these cases, it is usually better to move the declaration out and use a standard `if` statement:",
-                "example": "// Good:\nx, err := f()\nif err != nil {\n  // error handling\n  return\n}\n// lots of code that uses x\n// across multiple lines\n\n// Bad:\nif x, err := f(); err != nil {\n  // error handling\n  return\n} else {\n  // lots of code that uses x\n  // across multiple lines\n}\n"
-            },
-            {
-                "description": "See Go Tip #1: Line of Sight and TotT: Reduce Code Complexity by Reducing Nesting for more details."
+                "example": "// Good:\nx, err := f()\nif err != nil {\n  // error handling\n  return\n}\n// lots of code that uses x\n// across multiple lines\n\n// Bad:\nif x, err := f(); err != nil {\n  // error handling\n  return\n} else {\n  // lots of code that uses x\n  // across multiple lines\n}\n",
+                "appendix": "See Go Tip #1: Line of Sight and TotT: Reduce Code Complexity by Reducing Nesting for more details."
             }
         ]
     },
@@ -466,10 +450,8 @@
         "cases": [
             {
                 "description": "Repeated type names may be omitted from slice and map literals. This can be helpful in reducing clutter. A reasonable occasion for repeating the type names explicitly is when dealing with a complex type that is not common in your project, when the repetitive type names are on lines that are far apart and can remind the reader of the context.",
-                "example": "// Good:\ngood := []*Type{\n    {A: 42},\n    {A: 43},\n}\n\n// Bad:\nrepetitive := []*Type{\n    &Type{A: 42},\n    &Type{A: 43},\n}\n\n// Good:\ngood := map[Type1]*Type2{\n    {A: 1}: {B: 2},\n    {A: 3}: {B: 4},\n}\n\n// Bad:\nrepetitive := map[Type1]*Type2{\n    Type1{A: 1}: &Type2{B: 2},\n    Type1{A: 3}: &Type2{B: 4},\n}\n"
-            },
-            {
-                "description": "Tip: If you want to remove repetitive type names in struct literals, you can run `gofmt-s` ."
+                "example": "// Good:\ngood := []*Type{\n    {A: 42},\n    {A: 43},\n}\n\n// Bad:\nrepetitive := []*Type{\n    &Type{A: 42},\n    &Type{A: 43},\n}\n\n// Good:\ngood := map[Type1]*Type2{\n    {A: 1}: {B: 2},\n    {A: 3}: {B: 4},\n}\n\n// Bad:\nrepetitive := map[Type1]*Type2{\n    Type1{A: 1}: &Type2{B: 2},\n    Type1{A: 3}: &Type2{B: 4},\n}\n",
+                "appendix": "Tip: If you want to remove repetitive type names in struct literals, you can run `gofmt-s` ."
             }
         ]
     },
@@ -513,10 +495,8 @@
             },
             {
                 "description": "Instead of relying on the distinction as a part of the API:",
-                "example": "// Bad:\nfunc maybeInts() []int { /* ... */ }\n\n// describeInts describes s with the given prefix; pass nil to skip completely.\nfunc describeInts(prefix string, s []int) {\n  // The behavior of this function unintentionally changes depending on what\n  // maybeInts() returns in 'empty' cases (nil or []int{}).\n  if s == nil {\n    return\n  }\n  fmt.Println(prefix, s)\n}\n\ndescribeInts(\"Here are some ints:\", maybeInts())\n"
-            },
-            {
-                "description": "See in-band errors for further discussion."
+                "example": "// Bad:\nfunc maybeInts() []int { /* ... */ }\n\n// describeInts describes s with the given prefix; pass nil to skip completely.\nfunc describeInts(prefix string, s []int) {\n  // The behavior of this function unintentionally changes depending on what\n  // maybeInts() returns in 'empty' cases (nil or []int{}).\n  if s == nil {\n    return\n  }\n  fmt.Println(prefix, s)\n}\n\ndescribeInts(\"Here are some ints:\", maybeInts())\n",
+                "appendix": "See in-band errors for further discussion."
             }
         ]
     },
@@ -526,10 +506,8 @@
         "cases": [
             {
                 "description": "Avoid introducing a line break if it would align the rest of the line with an indented code block. If this is unavoidable, leave a space to separate the code in the block from the wrapped line.",
-                "example": "// Bad:\nif longCondition1 && longCondition2 &&\n    // Conditions 3 and 4 have the same indentation as the code within the if.\n    longCondition3 && longCondition4 {\n    log.Info(\"all conditions met\")\n}\n"
-            },
-            {
-                "description": "See the following sections for specific guidelines and examples:\nFunction formatting \nConditionals and loops \nLiteral formatting"
+                "example": "// Bad:\nif longCondition1 && longCondition2 &&\n    // Conditions 3 and 4 have the same indentation as the code within the if.\n    longCondition3 && longCondition4 {\n    log.Info(\"all conditions met\")\n}\n",
+                "appendix": "See the following sections for specific guidelines and examples:\nFunction formatting \nConditionals and loops \nLiteral formatting"
             }
         ]
     },
@@ -623,10 +601,8 @@
             },
             {
                 "description": "But these are usually wrong:",
-                "example": "// Bad:\ntype Record struct {\n  buf bytes.Buffer\n  // other fields omitted\n}\n\n\nfunc (r Record) Process(...) {...} // Makes a copy of r.buf\n\nfunc Consumer(r Record) {...} // Makes a copy of r.buf\n"
-            },
-            {
-                "description": "This guidance also applies to copying `sync.Mutex` ."
+                "example": "// Bad:\ntype Record struct {\n  buf bytes.Buffer\n  // other fields omitted\n}\n\n\nfunc (r Record) Process(...) {...} // Makes a copy of r.buf\n\nfunc Consumer(r Record) {...} // Makes a copy of r.buf\n",
+                "appendix": "This guidance also applies to copying `sync.Mutex` ."
             }
         ]
     },
@@ -671,10 +647,8 @@
             },
             {
                 "description": "There are other variants of the above that use raw signal channels like `chanstruct{}` , synchronized variables, condition variables , and more. The important part is that the goroutine’s end is evident for subsequent maintainers.\nIn contrast, the following code is careless about when its spawned goroutines finish:",
-                "example": "// Bad:\nfunc (w *Worker) Run() {\n    // ...\n    for item := range w.q {\n        // process returns when it finishes, if ever, possibly not cleanly\n        // handling a state transition or termination of the Go program itself.\n        go process(item)\n    }\n    // ...\n}\n"
-            },
-            {
-                "description": "This code may look OK, but there are several underlying problems:\nThe code probably has undefined behavior in production, and the program may not terminate cleanly, even if the operating system releases the resources. \nThe code is difficult to test meaningfully due to the code’s indeterminate lifecycle. \nThe code may leak resources as described above.\nSee also:\nNever start a goroutine without knowing how it will stop \nRethinking Classical Concurrency Patterns: slides , video \nWhen Go programs end"
+                "example": "// Bad:\nfunc (w *Worker) Run() {\n    // ...\n    for item := range w.q {\n        // process returns when it finishes, if ever, possibly not cleanly\n        // handling a state transition or termination of the Go program itself.\n        go process(item)\n    }\n    // ...\n}\n",
+                "appendix": "This code may look OK, but there are several underlying problems:\nThe code probably has undefined behavior in production, and the program may not terminate cleanly, even if the operating system releases the resources. \nThe code is difficult to test meaningfully due to the code’s indeterminate lifecycle. \nThe code may leak resources as described above.\nSee also:\nNever start a goroutine without knowing how it will stop \nRethinking Classical Concurrency Patterns: slides , video \nWhen Go programs end"
             }
         ]
     },
@@ -737,10 +711,7 @@
             {
                 "description": "If the receiver is a “small” array or struct that is naturally a value type with no mutable fields and no pointers, a value receiver is usually the right choice.",
                 "example": "// Good:\n// See https://pkg.go.dev/time#Time.\ntype Time struct { /* omitted */ }\n\nfunc (t Time) Add(d Duration) Time { /* omitted */ }\n",
-                "appendix": "When in doubt, use a pointer receiver."
-            },
-            {
-                "description": "As a general guideline, prefer to make the methods for a type either all pointer methods or all value methods.\nNote: There is a lot of misinformation about whether passing a value or a pointer to a function can affect performance. The compiler can choose to pass pointers to values on the stack as well as copying values on the stack, but these considerations should not outweigh the readability and correctness of the code in most circumstances. When the performance does matter, it is important to profile both approaches with a realistic benchmark before deciding that one approach outperforms the other."
+                "appendix": "When in doubt, use a pointer receiver.\nAs a general guideline, prefer to make the methods for a type either all pointer methods or all value methods.\nNote: There is a lot of misinformation about whether passing a value or a pointer to a function can affect performance. The compiler can choose to pass pointers to values on the stack as well as copying values on the stack, but these considerations should not outweigh the readability and correctness of the code in most circumstances. When the performance does matter, it is important to profile both approaches with a realistic benchmark before deciding that one approach outperforms the other."
             }
         ]
     },
@@ -790,10 +761,8 @@
             },
             {
                 "description": "Prefer using `%q` over doing the equivalent manually, using `%s` :",
-                "example": "// Bad:\nfmt.Printf(\"value \\\"%s\\\" looks like English text\", someText)\n// Avoid manually wrapping strings with single-quotes too:\nfmt.Printf(\"value '%s' looks like English text\", someText)\n"
-            },
-            {
-                "description": "Using `%q` is recommended in output intended for humans where the input value could possibly be empty or contain control characters. It can be very hard to notice a silent empty string, but `\"\"` stands out clearly as such."
+                "example": "// Bad:\nfmt.Printf(\"value \\\"%s\\\" looks like English text\", someText)\n// Avoid manually wrapping strings with single-quotes too:\nfmt.Printf(\"value '%s' looks like English text\", someText)\n",
+                "appendix": "Using `%q` is recommended in output intended for humans where the input value could possibly be empty or contain control characters. It can be very hard to notice a silent empty string, but `\"\"` stands out clearly as such."
             }
         ]
     },
@@ -817,10 +786,8 @@
         "cases": [
             {
                 "description": "Go programs in the Google codebase use an internal variant of the standard\n \n flag\n \n package . It has a similar interface but interoperates well with internal Google systems. Flag names in Go binaries should prefer to use underscores to separate words, though the variables that hold a flag’s value should follow the standard Go name style ( mixed caps ). Specifically, the flag name should be in snake case, and the variable name should be the equivalent name in camel case.",
-                "example": "// Good:\nvar (\n    pollInterval = flag.Duration(\"poll_interval\", time.Minute, \"Interval to use for polling.\")\n)\n\n// Bad:\nvar (\n    poll_interval = flag.Int(\"pollIntervalSeconds\", 60, \"Interval to use for polling in seconds.\")\n)\n"
-            },
-            {
-                "description": "Flags must only be defined in `packagemain` or equivalent.\nGeneral-purpose packages should be configured using Go APIs, not by punching through to the command-line interface; don’t let importing a library export new flags as a side effect. That is, prefer explicit function arguments or struct field assignment or much less frequently and under the strictest of scrutiny exported global variables. In the extremely rare case that it is necessary to break this rule, the flag name must clearly indicate the package that it configures.\nIf your flags are global variables, place them in their own `var` group, following the imports section.\nThere is additional discussion around best practices for creating complex CLIs with subcommands.\nSee also:\nTip of the Week #45: Avoid Flags, Especially in Library Code \nGo Tip #10: Configuration Structs and Flags \nGo Tip #80: Dependency Injection Principles"
+                "example": "// Good:\nvar (\n    pollInterval = flag.Duration(\"poll_interval\", time.Minute, \"Interval to use for polling.\")\n)\n\n// Bad:\nvar (\n    poll_interval = flag.Int(\"pollIntervalSeconds\", 60, \"Interval to use for polling in seconds.\")\n)\n",
+                "appendix": "Flags must only be defined in `packagemain` or equivalent.\nGeneral-purpose packages should be configured using Go APIs, not by punching through to the command-line interface; don’t let importing a library export new flags as a side effect. That is, prefer explicit function arguments or struct field assignment or much less frequently and under the strictest of scrutiny exported global variables. In the extremely rare case that it is necessary to break this rule, the flag name must clearly indicate the package that it configures.\nIf your flags are global variables, place them in their own `var` group, following the imports section.\nThere is additional discussion around best practices for creating complex CLIs with subcommands.\nSee also:\nTip of the Week #45: Avoid Flags, Especially in Library Code \nGo Tip #10: Configuration Structs and Flags \nGo Tip #80: Dependency Injection Principles"
             }
         ]
     },
@@ -843,10 +810,8 @@
             },
             {
                 "description": "Exceptions are:\nIn an HTTP handler, where the context comes from req.Context() . \nIn streaming RPC methods, where the context comes from the stream. \nCode using gRPC streaming accesses a context from a `Context()` method in the generated server type, which implements `grpc.ServerStream` . See gRPC Generated Code documentation . \nIn entrypoint functions (see below for examples of such functions), use context.Background() . \nIn binary targets: `main` \nIn general purpose code and libraries: `init` \nIn tests: `TestXXX` , `BenchmarkXXX` , `FuzzXXX`\nNote : It is very rare for code in the middle of a callchain to require creating a base context of its own using `context.Background()` . Always prefer taking a context from your caller, unless it’s the wrong context. \nYou may come across server libraries (the implementation of Stubby, gRPC, or HTTP in Google’s server framework for Go) that construct a fresh context object per request. These contexts are immediately filled with information from the incoming request, so that when passed to the request handler, the context’s attached values have been propagated to it across the network boundary from the client caller. Moreover, these contexts’ lifetimes are scoped to that of the request: when the request is finished, the context is cancelled. \nUnless you are implementing a server framework, you shouldn’t create contexts with `context.Background()` in library code. Instead, prefer using context detachment, which is mentioned below, if there is an existing context available. If you think you do need `context.Background()` outside of entrypoint functions, discuss it with the Google Go style mailing list before committing to an implementation.\nThe convention that `context.Context` comes first in functions also applies to test helpers.",
-                "example": "// Good:\nfunc readTestFile(ctx context.Context, t *testing.T, path string) string {}\n"
-            },
-            {
-                "description": "Do not add a context member to a struct type. Instead, add a context parameter to each method on the type that needs to pass it along. The one exception is for methods whose signature must match an interface in the standard library or in a third party library outside Google’s control. Such cases are very rare, and should be discussed with the Google Go style mailing list before implementation and readability review.\nCode in the Google codebase that must spawn background operations which can run after the parent context has been cancelled can use an internal package for detachment. Follow issue #40221 for discussions on an open source alternative.\nSince contexts are immutable, it is fine to pass the same context to multiple calls that share the same deadline, cancellation signal, credentials, parent trace, and so on.\nSee also:\nContexts and structs"
+                "example": "// Good:\nfunc readTestFile(ctx context.Context, t *testing.T, path string) string {}\n",
+                "appendix": "Do not add a context member to a struct type. Instead, add a context parameter to each method on the type that needs to pass it along. The one exception is for methods whose signature must match an interface in the standard library or in a third party library outside Google’s control. Such cases are very rare, and should be discussed with the Google Go style mailing list before implementation and readability review.\nCode in the Google codebase that must spawn background operations which can run after the parent context has been cancelled can use an internal package for detachment. Follow issue #40221 for discussions on an open source alternative.\nSince contexts are immutable, it is fine to pass the same context to multiple calls that share the same deadline, cancellation signal, credentials, parent trace, and so on.\nSee also:\nContexts and structs"
             }
         ]
     },
@@ -865,10 +830,8 @@
         "cases": [
             {
                 "description": "Do not use package `math/rand` to generate keys, even throwaway ones. If unseeded, the generator is completely predictable. Seeded with `time.Nanoseconds()` , there are just a few bits of entropy. Instead, use `crypto/rand` ’s Reader, and if you need text, print to hexadecimal or base64.",
-                "example": "// Good:\nimport (\n    \"crypto/rand\"\n    // \"encoding/base64\"\n    // \"encoding/hex\"\n    \"fmt\"\n\n    // ...\n)\n\nfunc Key() string {\n    buf := make([]byte, 16)\n    if _, err := rand.Read(buf); err != nil {\n        log.Fatalf(\"Out of randomness, should never happen: %v\", err)\n    }\n    return fmt.Sprintf(\"%x\", buf)\n    // or hex.EncodeToString(buf)\n    // or base64.StdEncoding.EncodeToString(buf)\n}\n"
-            },
-            {
-                "description": "Note: \n`log.Fatalf` is not the standard library log. See [#logging]."
+                "example": "// Good:\nimport (\n    \"crypto/rand\"\n    // \"encoding/base64\"\n    // \"encoding/hex\"\n    \"fmt\"\n\n    // ...\n)\n\nfunc Key() string {\n    buf := make([]byte, 16)\n    if _, err := rand.Read(buf); err != nil {\n        log.Fatalf(\"Out of randomness, should never happen: %v\", err)\n    }\n    return fmt.Sprintf(\"%x\", buf)\n    // or hex.EncodeToString(buf)\n    // or base64.StdEncoding.EncodeToString(buf)\n}\n",
+                "appendix": "Note: \n`log.Fatalf` is not the standard library log. See [#logging]."
             }
         ]
     },
@@ -899,10 +862,8 @@
             },
             {
                 "description": "For more domain-specific comparison helpers, prefer returning a value or an error that can be used in the test’s failure message instead of passing `*testing.T` and calling its error reporting methods:",
-                "example": "// Good:\nfunc postLength(p BlogPost) int { return len(p.Body) }\n\nfunc TestBlogPost_VeritableRant(t *testing.T) {\n    post := BlogPost{Body: \"I am Gunnery Sergeant Hartman, your senior drill instructor.\"}\n\n    if got, want := postLength(post), 60; got != want {\n        t.Errorf(\"Length of post = %v, want %v\", got, want)\n    }\n}\n"
-            },
-            {
-                "description": "Best Practice: Were `postLength` non-trivial, it would make sense to test it directly, independently of any tests that use it.\nSee also:\nEquality comparison and diffs \nPrint diffs \nFor more on the distinction between test helpers and assertion helpers, see best practices"
+                "example": "// Good:\nfunc postLength(p BlogPost) int { return len(p.Body) }\n\nfunc TestBlogPost_VeritableRant(t *testing.T) {\n    post := BlogPost{Body: \"I am Gunnery Sergeant Hartman, your senior drill instructor.\"}\n\n    if got, want := postLength(post), 60; got != want {\n        t.Errorf(\"Length of post = %v, want %v\", got, want)\n    }\n}\n",
+                "appendix": "Best Practice: Were `postLength` non-trivial, it would make sense to test it directly, independently of any tests that use it.\nSee also:\nEquality comparison and diffs \nPrint diffs \nFor more on the distinction between test helpers and assertion helpers, see best practices"
             }
         ]
     },
@@ -971,10 +932,8 @@
             },
             {
                 "description": "As a general-purpose comparison library, `cmp` may not know how to compare certain types. For example, it can only compare protocol buffer messages if passed the protocmp.Transform option.",
-                "example": "// Good:\nif diff := cmp.Diff(want, got, protocmp.Transform()); diff != \"\" {\n    t.Errorf(\"Foo() returned unexpected difference in protobuf messages (-want +got):\\n%s\", diff)\n}\n"
-            },
-            {
-                "description": "Although the `cmp` package is not part of the Go standard library, it is maintained by the Go team and should produce stable equality results over time. It is user-configurable and should serve most comparison needs.\nExisting code may make use of the following older libraries, and may continue using them for consistency:\npretty produces aesthetically pleasing difference reports. However, it quite deliberately considers values that have the same visual representation as equal. In particular, `pretty` does not catch differences between nil slices and empty ones, is not sensitive to different interface implementations with identical fields, and it is possible to use a nested map as the basis for comparison with a struct value. It also serializes the entire value into a string before producing a diff, and as such is not a good choice for comparing large values. By default, it compares unexported fields, which makes it sensitive to changes in implementation details in your dependencies. For this reason, it is not appropriate to use `pretty` on protobuf messages.\nPrefer using `cmp` for new code, and it is worth considering updating older code to use `cmp` where and when it is practical to do so.\nOlder code may use the standard library `reflect.DeepEqual` function to compare complex structures. `reflect.DeepEqual` should not be used for checking equality, as it is sensitive to changes in unexported fields and other implementation details. Code that is using `reflect.DeepEqual` should be updated to one of the above libraries.\nNote: The `cmp` package is designed for testing, rather than production use. As such, it may panic when it suspects that a comparison is performed incorrectly to provide instruction to users on how to improve the test to be less brittle. Given cmp’s propensity towards panicking, it makes it unsuitable for code that is used in production as a spurious panic may be fatal."
+                "example": "// Good:\nif diff := cmp.Diff(want, got, protocmp.Transform()); diff != \"\" {\n    t.Errorf(\"Foo() returned unexpected difference in protobuf messages (-want +got):\\n%s\", diff)\n}\n",
+                "appendix": "Although the `cmp` package is not part of the Go standard library, it is maintained by the Go team and should produce stable equality results over time. It is user-configurable and should serve most comparison needs.\nExisting code may make use of the following older libraries, and may continue using them for consistency:\npretty produces aesthetically pleasing difference reports. However, it quite deliberately considers values that have the same visual representation as equal. In particular, `pretty` does not catch differences between nil slices and empty ones, is not sensitive to different interface implementations with identical fields, and it is possible to use a nested map as the basis for comparison with a struct value. It also serializes the entire value into a string before producing a diff, and as such is not a good choice for comparing large values. By default, it compares unexported fields, which makes it sensitive to changes in implementation details in your dependencies. For this reason, it is not appropriate to use `pretty` on protobuf messages.\nPrefer using `cmp` for new code, and it is worth considering updating older code to use `cmp` where and when it is practical to do so.\nOlder code may use the standard library `reflect.DeepEqual` function to compare complex structures. `reflect.DeepEqual` should not be used for checking equality, as it is sensitive to changes in unexported fields and other implementation details. Code that is using `reflect.DeepEqual` should be updated to one of the above libraries.\nNote: The `cmp` package is designed for testing, rather than production use. As such, it may panic when it suspects that a comparison is performed incorrectly to provide instruction to users on how to improve the test to be less brittle. Given cmp’s propensity towards panicking, it makes it unsuitable for code that is used in production as a spurious panic may be fatal."
             }
         ]
     },
@@ -1002,10 +961,8 @@
         "cases": [
             {
                 "description": "When a unit test performs string comparisons or uses a vanilla `cmp` to check that particular kinds of errors are returned for particular inputs, you may find that your tests are brittle if any of those error messages are reworded in the future. Since this has the potential to turn your unit test into a change detector (see TotT: Change-Detector Tests Considered Harmful ), don’t use string comparison to check what type of error your function returns. However, it is permissible to use string comparisons to check that error messages coming from the package under test satisfy certain properties, for example, that it includes the parameter name.\nError values in Go typically have a component intended for human eyes and a component intended for semantic control flow. Tests should seek to only test semantic information that can be reliably observed, rather than display information that is intended for human debugging, as this is often subject to future changes. For guidance on constructing errors with semantic meaning see best-practices regarding errors . If an error with insufficient semantic information is coming from a dependency outside your control, consider filing a bug against the owner to help improve the API, rather than relying on parsing the error message.\nWithin unit tests, it is common to only care whether an error occurred or not. If so, then it is sufficient to only test whether the error was non-nil when you expected an error. If you would like to test that the error semantically matches some other error, then consider using errors.Is or `cmp` with cmpopts.EquateErrors .\nNote: If a test uses cmpopts.EquateErrors but all of its `wantErr` values are either `nil` or `cmpopts.AnyError` , then using `cmp` is unnecessary mechanism . Simplify the code by making the want field a `bool` . You can then use a simple comparison with `!=` .",
-                "example": "// Good:\nerr := f(test.input)\ngotErr := err != nil\nif gotErr != test.wantErr {\n    t.Errorf(\"f(%q) = %v, want error presence = %v\", test.input, err, test.wantErr)\n}\n"
-            },
-            {
-                "description": "See also GoTip #13: Designing Errors for Checking ."
+                "example": "// Good:\nerr := f(test.input)\ngotErr := err != nil\nif gotErr != test.wantErr {\n    t.Errorf(\"f(%q) = %v, want error presence = %v\", test.input, err, test.wantErr)\n}\n",
+                "appendix": "See also GoTip #13: Designing Errors for Checking ."
             }
         ]
     },
@@ -1037,10 +994,8 @@
             },
             {
                 "description": "Here are a few examples of things to avoid:",
-                "example": "// Bad:\n// Too wordy.\nt.Run(\"check that there is no mention of scratched records or hovercrafts\", ...)\n// Slashes cause problems on the command line.\nt.Run(\"AM/PM confusion\", ...)\n"
-            },
-            {
-                "description": "See also Go Tip #117: Subtest Names ."
+                "example": "// Bad:\n// Too wordy.\nt.Run(\"check that there is no mention of scratched records or hovercrafts\", ...)\n// Slashes cause problems on the command line.\nt.Run(\"AM/PM confusion\", ...)\n",
+                "appendix": "See also Go Tip #117: Subtest Names ."
             }
         ]
     },
@@ -1050,10 +1005,8 @@
         "cases": [
             {
                 "description": "Use table-driven tests when many different test cases can be tested using similar testing logic.\nWhen testing whether the actual output of a function is equal to the expected output. For example, the many tests of\n \n fmt.Sprintf or the minimal snippet below. \nWhen testing whether the outputs of a function always conform to the same set of invariants. For example, tests for\n \n net.Dial .\nHere is the minimal structure of a table-driven test. If needed, you may use different names or add extra facilities such as subtests or setup and cleanup functions. Always keep useful test failures in mind.",
-                "example": "// Good:\nfunc TestCompare(t *testing.T) {\n    compareTests := []struct {\n        a, b string\n        want int\n    }{\n        {\"\", \"\", 0},\n        {\"a\", \"\", 1},\n        {\"\", \"a\", -1},\n        {\"abc\", \"abc\", 0},\n        {\"ab\", \"abc\", -1},\n        {\"abc\", \"ab\", 1},\n        {\"x\", \"ab\", 1},\n        {\"ab\", \"x\", -1},\n        {\"x\", \"a\", 1},\n        {\"b\", \"x\", -1},\n        // test runtime·memeq's chunked implementation\n        {\"abcdefgh\", \"abcdefgh\", 0},\n        {\"abcdefghi\", \"abcdefghi\", 0},\n        {\"abcdefghi\", \"abcdefghj\", -1},\n    }\n\n    for _, test := range compareTests {\n        got := Compare(test.a, test.b)\n        if got != test.want {\n            t.Errorf(\"Compare(%q, %q) = %v, want %v\", test.a, test.b, got, test.want)\n        }\n    }\n}\n"
-            },
-            {
-                "description": "Note : The failure messages in this example above fulfill the guidance to identify the function and identify the input . There’s no need to identify the row numerically .\nWhen some test cases need to be checked using different logic from other test cases, it is more appropriate to write multiple test functions, as explained in GoTip #50: Disjoint Table Tests . The logic of your test code can get difficult to understand when each entry in a table has its own different conditional logic to check each output for its inputs. If test cases have different logic but identical setup, a sequence of subtests within a single test function might make sense.\nYou can combine table-driven tests with multiple test functions. For example, when testing that a function’s output exactly matches the expected output and that the function returns a non-nil error for an invalid input, then writing two separate table-driven test functions is the best approach: one for normal non-error outputs, and one for error outputs."
+                "example": "// Good:\nfunc TestCompare(t *testing.T) {\n    compareTests := []struct {\n        a, b string\n        want int\n    }{\n        {\"\", \"\", 0},\n        {\"a\", \"\", 1},\n        {\"\", \"a\", -1},\n        {\"abc\", \"abc\", 0},\n        {\"ab\", \"abc\", -1},\n        {\"abc\", \"ab\", 1},\n        {\"x\", \"ab\", 1},\n        {\"ab\", \"x\", -1},\n        {\"x\", \"a\", 1},\n        {\"b\", \"x\", -1},\n        // test runtime·memeq's chunked implementation\n        {\"abcdefgh\", \"abcdefgh\", 0},\n        {\"abcdefghi\", \"abcdefghi\", 0},\n        {\"abcdefghi\", \"abcdefghj\", -1},\n    }\n\n    for _, test := range compareTests {\n        got := Compare(test.a, test.b)\n        if got != test.want {\n            t.Errorf(\"Compare(%q, %q) = %v, want %v\", test.a, test.b, got, test.want)\n        }\n    }\n}\n",
+                "appendix": "Note : The failure messages in this example above fulfill the guidance to identify the function and identify the input . There’s no need to identify the row numerically .\nWhen some test cases need to be checked using different logic from other test cases, it is more appropriate to write multiple test functions, as explained in GoTip #50: Disjoint Table Tests . The logic of your test code can get difficult to understand when each entry in a table has its own different conditional logic to check each output for its inputs. If test cases have different logic but identical setup, a sequence of subtests within a single test function might make sense.\nYou can combine table-driven tests with multiple test functions. For example, when testing that a function’s output exactly matches the expected output and that the function returns a non-nil error for an invalid input, then writing two separate table-driven test functions is the best approach: one for normal non-error outputs, and one for error outputs."
             }
         ]
     },
@@ -1077,10 +1030,8 @@
         "cases": [
             {
                 "description": "Do not use the index of the test in the test table as a substitute for naming your tests or printing the inputs. Nobody wants to go through your test table and count the entries in order to figure out which test case is failing.",
-                "example": "// Bad:\ntests := []struct {\n    input, want string\n}{\n    {\"hello\", \"HELLO\"},\n    {\"wORld\", \"WORLD\"},\n}\nfor i, d := range tests {\n    if strings.ToUpper(d.input) != d.want {\n        t.Errorf(\"Failed on case #%d\", i)\n    }\n}\n"
-            },
-            {
-                "description": "Add a test description to your test struct and print it along failure messages. When using subtests, your subtest name should be effective in identifying the row.\nImportant: Even though `t.Run` scopes the output and execution, you must always identify the input . The table test row names must follow the subtest naming guidance."
+                "example": "// Bad:\ntests := []struct {\n    input, want string\n}{\n    {\"hello\", \"HELLO\"},\n    {\"wORld\", \"WORLD\"},\n}\nfor i, d := range tests {\n    if strings.ToUpper(d.input) != d.want {\n        t.Errorf(\"Failed on case #%d\", i)\n    }\n}\n",
+                "appendix": "Add a test description to your test struct and print it along failure messages. When using subtests, your subtest name should be effective in identifying the row.\nImportant: Even though `t.Run` scopes the output and execution, you must always identify the input . The table test row names must follow the subtest naming guidance."
             }
         ]
     },
@@ -1090,10 +1041,8 @@
         "cases": [
             {
                 "description": "A test helper is a function that performs a setup or cleanup task. All failures that occur in test helpers are expected to be failures of the environment (not from the code under test) — for example when a test database cannot be started because there are no more free ports on this machine.\nIf you pass a `*testing.T` , call t.Helper to attribute failures in the test helper to the line where the helper is called. This parameter should come after a context parameter, if present, and before any remaining parameters.",
-                "example": "// Good:\nfunc TestSomeFunction(t *testing.T) {\n    golden := readFile(t, \"testdata/golden-result.txt\")\n    // ... tests against golden ...\n}\n\n// readFile returns the contents of a data file.\n// It must only be called from the same goroutine as started the test.\nfunc readFile(t *testing.T, filename string) string {\n    t.Helper()\n    contents, err := runfiles.ReadFile(filename)\n    if err != nil {\n        t.Fatal(err)\n    }\n    return string(contents)\n}\n"
-            },
-            {
-                "description": "Do not use this pattern when it obscures the connection between a test failure and the conditions that led to it. Specifically, the guidance about assert libraries still applies, and t.Helper should not be used to implement such libraries.\nTip: For more on the distinction between test helpers and assertion helpers, see best practices .\nAlthough the above refers to `*testing.T` , much of the advice stays the same for benchmark and fuzz helpers."
+                "example": "// Good:\nfunc TestSomeFunction(t *testing.T) {\n    golden := readFile(t, \"testdata/golden-result.txt\")\n    // ... tests against golden ...\n}\n\n// readFile returns the contents of a data file.\n// It must only be called from the same goroutine as started the test.\nfunc readFile(t *testing.T, filename string) string {\n    t.Helper()\n    contents, err := runfiles.ReadFile(filename)\n    if err != nil {\n        t.Fatal(err)\n    }\n    return string(contents)\n}\n",
+                "appendix": "Do not use this pattern when it obscures the connection between a test failure and the conditions that led to it. Specifically, the guidance about assert libraries still applies, and t.Helper should not be used to implement such libraries.\nTip: For more on the distinction between test helpers and assertion helpers, see best practices .\nAlthough the above refers to `*testing.T` , much of the advice stays the same for benchmark and fuzz helpers."
             }
         ]
     },
@@ -1108,10 +1057,8 @@
         "cases": [
             {
                 "description": "Tests may be defined in the same package as the code being tested.\nTo write a test in the same package:\nPlace the tests in a `foo_test.go` file \nUse `packagefoo` for the test file \nDo not explicitly import the package to be tested",
-                "example": "# Good:\ngo_library(\n    name = \"foo\",\n    srcs = [\"foo.go\"],\n    deps = [\n        ...\n    ],\n)\n\ngo_test(\n    name = \"foo_test\",\n    size = \"small\",\n    srcs = [\"foo_test.go\"],\n    library = \":foo\",\n    deps = [\n        ...\n    ],\n)\n"
-            },
-            {
-                "description": "A test in the same package can access unexported identifiers in the package. This may enable better test coverage and more concise tests. Be aware that any examples declared in the test will not have the package names that a user will need in their code."
+                "example": "# Good:\ngo_library(\n    name = \"foo\",\n    srcs = [\"foo.go\"],\n    deps = [\n        ...\n    ],\n)\n\ngo_test(\n    name = \"foo_test\",\n    size = \"small\",\n    srcs = [\"foo_test.go\"],\n    library = \":foo\",\n    deps = [\n        ...\n    ],\n)\n",
+                "appendix": "A test in the same package can access unexported identifiers in the package. This may enable better test coverage and more concise tests. Be aware that any examples declared in the test will not have the package names that a user will need in their code."
             }
         ]
     },

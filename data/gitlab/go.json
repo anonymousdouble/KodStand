@@ -22,7 +22,7 @@
         "belongs to": "Code Review",
         "cases": [
             {
-                "description": "We follow the common principles of Go Code Review Comments .\nReviewers and maintainers should pay attention to:\n`defer` functions: ensure the presence when needed, and after `err` check. Inject dependencies as parameters. Void structs when marshaling to JSON (generates `null` instead of `[]` )."
+                "description": "We follow the common principles of Go Code Review Comments .\nReviewers and maintainers should pay attention to:\n`defer` functions: ensure the presence when needed, and after `err` check. \nInject dependencies as parameters. \nVoid structs when marshaling to JSON (generates `null` instead of `[]` )."
             }
         ]
     },
@@ -31,7 +31,7 @@
         "belongs to": "Code Review/Security",
         "cases": [
             {
-                "description": "Security is our top priority at GitLab. During code reviews, we must take care of possible security breaches in our code:\nXSS when using text/template CSRF Protection using Gorilla Use a Go version without known vulnerabilities Don’t leak secret tokens SQL injections\nRemember to run SAST and Dependency Scanning on your project (or at least the gosec analyzer ), and to follow our Security requirements .\nWeb servers can take advantages of middlewares like Secure ."
+                "description": "Security is our top priority at GitLab. During code reviews, we must take care of possible security breaches in our code:\nXSS when using text/template \nCSRF Protection using Gorilla \nUse a Go version without known vulnerabilities \nDon’t leak secret tokens \nSQL injections\nRemember to run SAST and Dependency Scanning on your project (or at least the gosec\n \n analyzer ), and to follow our Security requirements .\nWeb servers can take advantages of middlewares like Secure ."
             }
         ]
     },
@@ -50,7 +50,7 @@
         "belongs to": "Code style and format",
         "cases": [
             {
-                "description": "Avoid global variables, even in packages. By doing so you introduce side effects if the package is included multiple times. \nUse `goimports` before committing. goimports is a tool that automatically formats Go source code using Gofmt , in addition to formatting import lines, adding missing ones and removing unreferenced ones. Most editors/IDEs allow you to run commands before/after saving a file, you can set it up to run `goimports` so that it’s applied to every file when saving. Place private methods below the first caller method in the source file."
+                "description": "Avoid global variables, even in packages. By doing so you introduce side effects if the package is included multiple times. \nUse `goimports` before committing. goimports is a tool that automatically formats Go source code using Gofmt , in addition to formatting import lines, adding missing ones and removing unreferenced ones. \nMost editors/IDEs allow you to run commands before/after saving a file, you can set it up to run `goimports` so that it’s applied to every file when saving. \nPlace private methods below the first caller method in the source file."
             }
         ]
     },
@@ -59,11 +59,9 @@
         "belongs to": "Code style and format/Automatic linting",
         "cases": [
             {
-                "description": "caution The use of `registry.gitlab.com/gitlab-org/gitlab-build-images:golangci-lint-alpine` has been deprecated as of 16.10 .\nUse the upstream version of golangci-lint . See the list of linters enabled/disabled by default .\nGo projects should include this GitLab CI/CD job:",
-                "example": "variables:\n  GOLANGCI_LINT_VERSION: 'v1.56.2'\nlint:\n  image: golangci/golangci-lint:$GOLANGCI_LINT_VERSION\n  stage: test\n  script:\n    # Write the code coverage report to gl-code-quality-report.json\n    # and print linting issues to stdout in the format: path/to/file:line description\n    # remove `--issues-exit-code 0` or set to non-zero to fail the job if linting issues are detected\n    - golangci-lint run --issues-exit-code 0 --print-issued-lines=false --out-format code-climate:gl-code-quality-report.json,line-number\n  artifacts:\n    reports:\n      codequality: gl-code-quality-report.json\n    paths:\n      - gl-code-quality-report.json\n"
-            },
-            {
-                "description": "Including a `.golangci.yml` in the root directory of the project allows for configuration of `golangci-lint` . All options for `golangci-lint` are listed in this example .\nOnce recursive includes become available, you can share job templates like this analyzer .\nGo GitLab linter plugins are maintained in the gitlab-org/language-tools/go/linters namespace."
+                "description": "caution \nThe use of `registry.gitlab.com/gitlab-org/gitlab-build-images:golangci-lint-alpine` has been deprecated as of 16.10 .\nUse the upstream version of golangci-lint . See the list of linters enabled/disabled by default .\nGo projects should include this GitLab CI/CD job:",
+                "example": "variables:\n  GOLANGCI_LINT_VERSION: 'v1.56.2'\nlint:\n  image: golangci/golangci-lint:$GOLANGCI_LINT_VERSION\n  stage: test\n  script:\n    # Write the code coverage report to gl-code-quality-report.json\n    # and print linting issues to stdout in the format: path/to/file:line description\n    # remove `--issues-exit-code 0` or set to non-zero to fail the job if linting issues are detected\n    - golangci-lint run --issues-exit-code 0 --print-issued-lines=false --out-format code-climate:gl-code-quality-report.json,line-number\n  artifacts:\n    reports:\n      codequality: gl-code-quality-report.json\n    paths:\n      - gl-code-quality-report.json\n",
+                "appendix": "Including a `.golangci.yml` in the root directory of the project allows for configuration of `golangci-lint` . All options for `golangci-lint` are listed in this example .\nOnce recursive includes become available, you can share job templates like this analyzer .\nGo GitLab linter plugins are maintained in the gitlab-org/language-tools/go/linters namespace."
             }
         ]
     },
@@ -159,7 +157,7 @@
         "belongs to": "Testing/Table-Driven Tests/Defining test cases",
         "cases": [
             {
-                "description": "Each table entry is a complete test case with inputs and expected results, and sometimes with additional information such as a test name to make the test output easily readable.\nDefine a slice of anonymous struct inside of the test. \nDefine a slice of anonymous struct outside of the test. \nNamed structs for code reuse. \nUsing map[string]struct{} ."
+                "description": "Each table entry is a complete test case with inputs and expected results, and sometimes with additional information such as a test name to make the test output easily readable.\nDefine a slice of anonymous struct inside of the test. \nDefine a slice of anonymous struct outside of the test. \nNamed structs for code reuse. \nUsing\n \n map[string]struct{} ."
             }
         ]
     },
@@ -168,7 +166,7 @@
         "belongs to": "Testing/Table-Driven Tests/Contents of the test case",
         "cases": [
             {
-                "description": "Ideally, each test case should have a field with a unique identifier to use for naming subtests. In the Go standard library, this is commonly the `namestring` field. Use `want` / `expect` / `actual` when you are specifying something in the test case that is used for assertion."
+                "description": "Ideally, each test case should have a field with a unique identifier to use for naming subtests. In the Go standard library, this is commonly the `namestring` field. \nUse `want` / `expect` / `actual` when you are specifying something in the test case that is used for assertion."
             }
         ]
     },
@@ -177,7 +175,7 @@
         "belongs to": "Testing/Table-Driven Tests/Variable names",
         "cases": [
             {
-                "description": "Each table-driven test map/slice of struct can be named `tests` . When looping through `tests` the anonymous struct can be referred to as `tt` or `tc` . The description of the test can be referred to as `name` / `testName` / `tn` ."
+                "description": "Each table-driven test map/slice of struct can be named `tests` . \nWhen looping through `tests` the anonymous struct can be referred to as `tt` or `tc` . \nThe description of the test can be referred to as `name` / `testName` / `tn` ."
             }
         ]
     },
@@ -201,10 +199,8 @@
         "cases": [
             {
                 "description": "Adding context before you return the error can be helpful, instead of just returning the error. This allows developers to understand what the program was trying to do when it entered the error state making it much easier to debug.\nFor example:",
-                "example": "// Wrap the error\nreturn nil, fmt.Errorf(\"get cache %s: %w\", f.Name, err)\n\n// Just add context\nreturn nil, fmt.Errorf(\"saving cache %s: %v\", f.Name, err)\n"
-            },
-            {
-                "description": "A few things to keep in mind when adding context:\nDecide if you want to expose the underlying error to the caller. If so, use `%w` , if not, you can use `%v` . Don’t use words like `failed` , `error` , `didn't` . As it’s an error, the user already knows that something failed and this might lead to having strings like `failedxxfailedxxfailedxx` . Explain what failed instead. Error strings should not be capitalized or end with punctuation or a newline. You can use `golint` to check for this."
+                "example": "// Wrap the error\nreturn nil, fmt.Errorf(\"get cache %s: %w\", f.Name, err)\n\n// Just add context\nreturn nil, fmt.Errorf(\"saving cache %s: %v\", f.Name, err)\n",
+                "appendix": "A few things to keep in mind when adding context:\nDecide if you want to expose the underlying error to the caller. If so, use `%w` , if not, you can use `%v` . \nDon’t use words like `failed` , `error` , `didn't` . As it’s an error, the user already knows that something failed and this might lead to having strings like `failedxxfailedxxfailedxx` . Explain what failed instead. \nError strings should not be capitalized or end with punctuation or a newline. You can use `golint` to check for this."
             }
         ]
     },
@@ -213,7 +209,7 @@
         "belongs to": "Error handling/Naming",
         "cases": [
             {
-                "description": "When using sentinel errors they should always be named like `ErrXxx` . When creating a new error type they should always be named like `XxxError` ."
+                "description": "When using sentinel errors they should always be named like `ErrXxx` . \nWhen creating a new error type they should always be named like `XxxError` ."
             }
         ]
     },
@@ -222,7 +218,7 @@
         "belongs to": "Error handling/Checking Error types",
         "cases": [
             {
-                "description": "To check error equality don’t use `==` . Use errors.Is instead (for Go versions >= 1.13). To check if the error is of a certain type don’t use type assertion, use errors.As instead (for Go versions >= 1.13)."
+                "description": "To check error equality don’t use `==` . Use errors.Is instead (for Go versions >= 1.13). \nTo check if the error is of a certain type don’t use type assertion, use errors.As instead (for Go versions >= 1.13)."
             }
         ]
     },
@@ -272,7 +268,7 @@
         "belongs to": "Libraries/LabKit/How to use Logrus",
         "cases": [
             {
-                "description": "There are a few guidelines one should follow when using the Logrus package:\nWhen printing an error use WithError . For example, `logrus.WithError(err).Error(\"Failedtodosomething\")` . Since we use structured logging we can log fields in the context of that code path, such as the URI of the request using WithField or WithFields . For example, `logrus.WithField(\"file\",\"/app/go\").Info(\"Openingdir\")` . If you have to log multiple keys, always use `WithFields` instead of calling `WithField` more than once."
+                "description": "There are a few guidelines one should follow when using the Logrus package:\nWhen printing an error use WithError . For example, `logrus.WithError(err).Error(\"Failedtodosomething\")` . \nSince we use structured logging we can log fields in the context of that code path, such as the URI of the request using WithField or WithFields . For example, `logrus.WithField(\"file\",\"/app/go\").Info(\"Openingdir\")` . If you have to log multiple keys, always use `WithFields` instead of calling `WithField` more than once."
             }
         ]
     },
@@ -290,7 +286,7 @@
         "belongs to": "Dockerfiles",
         "cases": [
             {
-                "description": "Every project should have a `Dockerfile` at the root of their repository, to build and run the project. Since Go program are static binaries, they should not require any external dependency, and shells in the final image are useless. We encourage Multistage builds :\nThey let the user build the project with the right Go version and dependencies. They generate a small, self-contained image, derived from `Scratch` .\nGenerated Docker images should have the program at their `Entrypoint` to create portable commands. That way, anyone can run the image, and without parameters it displays its help message (if `cli` has been used)."
+                "description": "Every project should have a `Dockerfile` at the root of their repository, to build and run the project. Since Go program are static binaries, they should not require any external dependency, and shells in the final image are useless. We encourage Multistage builds :\nThey let the user build the project with the right Go version and dependencies. \nThey generate a small, self-contained image, derived from `Scratch` .\nGenerated Docker images should have the program at their `Entrypoint` to create portable commands. That way, anyone can run the image, and without parameters it displays its help message (if `cli` has been used)."
             }
         ]
     },
@@ -336,10 +332,8 @@
             },
             {
                 "description": "Do:",
-                "example": "s2 := make([]string, 0, len(s1))\nfor _, val := range s1 {\n    s2 = append(s2, val)\n}\n"
-            },
-            {
-                "description": "If no capacity is passed to `make` when creating a new slice, `append` will continuously resize the slice’s backing array if it cannot hold the values. Providing the capacity ensures that allocations are kept to a minimum. It’s recommended that the prealloc golanci-lint rule automatically check for this."
+                "example": "s2 := make([]string, 0, len(s1))\nfor _, val := range s1 {\n    s2 = append(s2, val)\n}\n",
+                "appendix": "If no capacity is passed to `make` when creating a new slice, `append` will continuously resize the slice’s backing array if it cannot hold the values. Providing the capacity ensures that allocations are kept to a minimum. It’s recommended that the prealloc golanci-lint rule automatically check for this."
             }
         ]
     },
@@ -348,7 +342,7 @@
         "belongs to": "Secure Team standards and style guidelines/Analyzer Tests",
         "cases": [
             {
-                "description": "The conventional Secure analyzer has a convert function that converts SAST/DAST scanner reports into GitLab Security Reports . When writing tests for the `convert` function, we should make use of test fixtures using a `testdata` directory at the root of the analyzer’s repository. The `testdata` directory should contain two subdirectories: `expect` and `reports` . The `reports` directory should contain sample SAST/DAST scanner reports which are passed into the `convert` function during the test setup. The `expect` directory should contain the expected GitLab Security Report that the `convert` returns. See Secret Detection for an example .\nIf the scanner report is small, less than 35 lines, then feel free to inline the report rather than use a `testdata` directory."
+                "description": "The conventional Secure analyzer has a convert\n \n function that converts SAST/DAST scanner reports into GitLab Security Reports . When writing tests for the `convert` function, we should make use of test fixtures using a `testdata` directory at the root of the analyzer’s repository. The `testdata` directory should contain two subdirectories: `expect` and `reports` . The `reports` directory should contain sample SAST/DAST scanner reports which are passed into the `convert` function during the test setup. The `expect` directory should contain the expected GitLab Security Report that the `convert` returns. See Secret Detection for an example .\nIf the scanner report is small, less than 35 lines, then feel free to inline the report rather than use a `testdata` directory."
             }
         ]
     },
@@ -362,10 +356,8 @@
             },
             {
                 "description": "The output demonstrates why `go-cmp` is far superior when comparing large structs. Even though you could spot the difference with this small difference, it quickly gets unwieldy as the data grows.",
-                "example": "  main_test.go:36: reflect comparison:\n  main_test.go:38: Wrong result. want:\n      {{a b} {1 2}}\n      Got:\n      {{a b} {2 2}}\n  main_test.go:41: cmp comparison:\n  main_test.go:43: Wrong result. (-want +got):\n        main.Foo{\n              Desc: {A: \"a\", B: \"b\"},\n              Point: main.Baz{\n      -               X: 1,\n      +               X: 2,\n                      Y: 2,\n              },\n        }\n"
-            },
-            {
-                "description": "Return to Development documentation ."
+                "example": "  main_test.go:36: reflect comparison:\n  main_test.go:38: Wrong result. want:\n      {{a b} {1 2}}\n      Got:\n      {{a b} {2 2}}\n  main_test.go:41: cmp comparison:\n  main_test.go:43: Wrong result. (-want +got):\n        main.Foo{\n              Desc: {A: \"a\", B: \"b\"},\n              Point: main.Baz{\n      -               X: 1,\n      +               X: 2,\n                      Y: 2,\n              },\n        }\n",
+                "appendix": "Return to Development documentation ."
             }
         ]
     },

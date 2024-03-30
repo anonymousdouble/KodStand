@@ -18,7 +18,7 @@
         "belongs to": "Formatting guidelines/Naming rules/Code",
         "cases": [
             {
-                "description": "Names of classes, methods, enumerations, public fields, public properties, namespaces: `PascalCase` . \nNames of local variables, parameters: `camelCase` . \nNames of private, protected, internal and protected internal fields and properties: `_camelCase` . \nNaming convention is unaffected by modifiers such as const, static, readonly, etc. \nFor casing, a “word” is anything written without internal spaces, including acronyms. For example, `MyRpc` instead of `MyRPC` . \nNames of interfaces start with `I` , e.g. `IInterface` ."
+                "description": "Names of classes, methods, enumerations, public fields, public properties, namespaces: `PascalCase` . \nNames of local variables, parameters: `camelCase` . \nNames of private, protected, internal and protected internal fields and properties: `_camelCase` . \nNaming convention is unaffected by modifiers such as const, static, readonly, etc. \nFor casing, a “word” is anything written without internal spaces, including acronyms. For example, `MyRpc` instead of \n`MyRPC` \n. \nNames of interfaces start with `I` , e.g. `IInterface` ."
             }
         ]
     },
@@ -105,10 +105,8 @@
         "cases": [
             {
                 "description": "For example:",
-                "example": "int SomeProperty => _someProperty\n"
-            },
-            {
-                "description": "Judiciously use expression body syntax in lambdas and properties. \nDon’t use on method definitions. This will be reviewed when C# 7 is live, which uses this syntax heavily. \nAs with methods and other scoped blocks of code, align the closing with the first character of the line that includes the opening brace. See sample code for examples."
+                "example": "int SomeProperty => _someProperty\n",
+                "appendix": "Judiciously use expression body syntax in lambdas and properties. \nDon’t use on method definitions. This will be reviewed when C# 7 is live, which uses this syntax heavily. \nAs with methods and other scoped blocks of code, align the closing with the first character of the line that includes the opening brace. See sample code for examples."
             }
         ]
     },
@@ -217,10 +215,8 @@
         "cases": [
             {
                 "description": "For example:",
-                "example": "var x = new SomeClass {\n  Property1 = value1,\n  Property2 = value2,\n};\n"
-            },
-            {
-                "description": "Object Initializer Syntax is fine for ‘plain old data’ types. \nAvoid using this syntax for classes or structs with constructors. \nIf splitting across multiple lines, indent one block level."
+                "example": "var x = new SomeClass {\n  Property1 = value1,\n  Property2 = value2,\n};\n",
+                "appendix": "Object Initializer Syntax is fine for ‘plain old data’ types. \nAvoid using this syntax for classes or structs with constructors. \nIf splitting across multiple lines, indent one block level."
             }
         ]
     },
@@ -288,10 +284,8 @@
             },
             {
                 "description": "versus:",
-                "example": "// Good\nProductOptions options = new ProductOptions();\noptions.PrecisionDecimals = 7;\noptions.UseCache = CacheUsage.DontUseCache;\nDecimalNumber product = CalculateProduct(values, options, completionDelegate: null);\n"
-            },
-            {
-                "description": "This site is open source. Improve this page ."
+                "example": "// Good\nProductOptions options = new ProductOptions();\noptions.PrecisionDecimals = 7;\noptions.UseCache = CacheUsage.DontUseCache;\nDecimalNumber product = CalculateProduct(values, options, completionDelegate: null);\n",
+                "appendix": "This site is open source. Improve this page ."
             }
         ]
     }

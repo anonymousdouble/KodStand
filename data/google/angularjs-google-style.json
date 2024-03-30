@@ -10,10 +10,8 @@
         "cases": [
             {
                 "description": "Choose a namespace for your project, and use goog.provide and goog.require.",
-                "example": "\ngoog.provide('hello.about.AboutCtrl');\ngoog.provide('hello.versions.Versions');\n"
-            },
-            {
-                "description": "Why? Google BUILD rules integrate nicely with closure provide/require."
+                "example": "\ngoog.provide('hello.about.AboutCtrl');\ngoog.provide('hello.versions.Versions');\n",
+                "appendix": "Why? Google BUILD rules integrate nicely with closure provide/require."
             }
         ]
     },
@@ -32,10 +30,8 @@
         "cases": [
             {
                 "description": "For example:",
-                "example": "\n// file submodulea.js:\n  goog.provide('my.submoduleA');\n\n  my.submoduleA = angular.module('my.submoduleA', []);\n  // ...\n\n// file app.js\n  goog.require('my.submoduleA');\n\n  Yes: my.application.module = angular.module('hello', [my.submoduleA.name]);\n  \n      No: my.application.module = angular.module('hello', ['my.submoduleA']);\n  "
-            },
-            {
-                "description": "Why? Using a property of my.submoduleA prevents Closure presubmit failures complaining that the file is required but never used. Using the .name property avoids duplicating strings."
+                "example": "\n// file submodulea.js:\n  goog.provide('my.submoduleA');\n\n  my.submoduleA = angular.module('my.submoduleA', []);\n  // ...\n\n// file app.js\n  goog.require('my.submoduleA');\n\n  Yes: my.application.module = angular.module('hello', [my.submoduleA.name]);\n  \n      No: my.application.module = angular.module('hello', ['my.submoduleA']);\n  ",
+                "appendix": "Why? Using a property of my.submoduleA prevents Closure presubmit failures complaining that the file is required but never used. Using the .name property avoids duplicating strings."
             }
         ]
     },
@@ -80,10 +76,8 @@
             },
             {
                 "description": "If you are compiling with property renaming, expose properties and methods using the @export annotation. Remember to @export the constructor as well.\nAnd in the template:",
-                "example": "\n<div ng-controller=\"hello.mainpage.HomeCtrl as homeCtrl\"/>\n  <span ng-class=\"homeCtrl.myColor\">I'm in a color!</span>\n  <span>{{homeCtrl.add(5, 6)}}</span>\n</div>\n"
-            },
-            {
-                "description": "Why? Putting methods and properties directly onto the controller, instead of building up a scope object, fits better with the Google Closure class style. Additionally, using 'controller as' makes it obvious which controller you are accessing when multiple controllers apply to an element. Since there is always a '.' in the bindings, you don't have to worry about prototypal inheritance masking primitives."
+                "example": "\n<div ng-controller=\"hello.mainpage.HomeCtrl as homeCtrl\"/>\n  <span ng-class=\"homeCtrl.myColor\">I'm in a color!</span>\n  <span>{{homeCtrl.add(5, 6)}}</span>\n</div>\n",
+                "appendix": "Why? Putting methods and properties directly onto the controller, instead of building up a scope object, fits better with the Google Closure class style. Additionally, using 'controller as' makes it obvious which controller you are accessing when multiple controllers apply to an element. Since there is always a '.' in the bindings, you don't have to worry about prototypal inheritance masking primitives."
             }
         ]
     },
@@ -93,10 +87,8 @@
         "cases": [
             {
                 "description": "All DOM manipulation should be done inside directives. Directives should be kept small and use composition. Files defining directives should goog.provide a static function which returns the directive definition object.",
-                "example": "\ngoog.provide('hello.pane.paneDirective');\n\n/**\n * Description and usage\n * @return {angular.Directive} Directive definition object.\n */\nhello.pane.paneDirective = function() {\n  // ...\n};\n"
-            },
-            {
-                "description": "Exception : DOM manipulation may occur in services for DOM elements disconnected from the rest of the view, e.g. dialogs or keyboard shortcuts."
+                "example": "\ngoog.provide('hello.pane.paneDirective');\n\n/**\n * Description and usage\n * @return {angular.Directive} Directive definition object.\n */\nhello.pane.paneDirective = function() {\n  // ...\n};\n",
+                "appendix": "Exception : DOM manipulation may occur in services for DOM elements disconnected from the rest of the view, e.g. dialogs or keyboard shortcuts."
             }
         ]
     },
@@ -129,10 +121,8 @@
             },
             {
                 "description": "No:",
-                "example": "\n  $scope.$myModel = { value: 'foo' } // BAD\n  $scope.myModel = { $value: 'foo' } // BAD\n  myModule.service('$myService', function() { ... }); // BAD\n  var MyCtrl = function($http) {this.$http_ = $http;}; // BAD\n"
-            },
-            {
-                "description": "Why? It's useful to distinguish between Angular / jQuery builtins and things you add yourself. In addition, $ is not an acceptable character for variables names in the JS style guide."
+                "example": "\n  $scope.$myModel = { value: 'foo' } // BAD\n  $scope.myModel = { $value: 'foo' } // BAD\n  myModule.service('$myService', function() { ... }); // BAD\n  var MyCtrl = function($http) {this.$http_ = $http;}; // BAD\n",
+                "appendix": "Why? It's useful to distinguish between Angular / jQuery builtins and things you add yourself. In addition, $ is not an acceptable character for variables names in the JS style guide."
             }
         ]
     },

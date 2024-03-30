@@ -231,10 +231,8 @@
         "cases": [
             {
                 "description": "You may use `importtype{...}` when you use the imported symbol only as a type. Use regular imports for values:",
-                "example": "import type {Foo} from './foo';\nimport {Bar} from './foo';\n\nimport {type Foo, Bar} from './foo';\n"
-            },
-            {
-                "description": "Why? \nThe TypeScript compiler automatically handles the distinction and does not insert runtime loads for type references. So why annotate type imports? \nThe TypeScript compiler can run in 2 modes: \nIn development mode, we typically want quick iteration loops. The compiler transpiles to JavaScript without full type information. This is much faster, but requires `importtype` in certain cases. \nIn production mode, we want correctness. The compiler type checks everything and ensures `importtype` is used correctly. \nNote: If you need to force a runtime load for side effects, use `import'...';` . See"
+                "example": "import type {Foo} from './foo';\nimport {Bar} from './foo';\n\nimport {type Foo, Bar} from './foo';\n",
+                "appendix": "Why? \nThe TypeScript compiler automatically handles the distinction and does not insert runtime loads for type references. So why annotate type imports? \nThe TypeScript compiler can run in 2 modes: \nIn development mode, we typically want quick iteration loops. The compiler transpiles to JavaScript without full type information. This is much faster, but requires `importtype` in certain cases. \nIn production mode, we want correctness. The compiler type checks everything and ensures `importtype` is used correctly. \nNote: If you need to force a runtime load for side effects, use `import'...';` . See"
             }
         ]
     },
@@ -244,10 +242,8 @@
         "cases": [
             {
                 "description": "Use `exporttype` when re-exporting a type, e.g.:",
-                "example": "export type {AnInterface} from './foo';\n"
-            },
-            {
-                "description": "Why? \n`exporttype` is useful to allow type re-exports in file-by-file transpilation. See isolatedModules\n \n docs . \n`exporttype` might also seem useful to avoid ever exporting a value symbol for an API. However it does not give guarantees, either: downstream code might still import an API through a different path. A better way to split & guarantee type vs value usages of an API is to actually split the symbols into e.g. `UserService` and `AjaxUserService` . This is less error prone and also better communicates intent."
+                "example": "export type {AnInterface} from './foo';\n",
+                "appendix": "Why? \n`exporttype` is useful to allow type re-exports in file-by-file transpilation. See isolatedModules\n \n docs . \n`exporttype` might also seem useful to avoid ever exporting a value symbol for an API. However it does not give guarantees, either: downstream code might still import an API through a different path. A better way to split & guarantee type vs value usages of an API is to actually split the symbols into e.g. `UserService` and `AjaxUserService` . This is less error prone and also better communicates intent."
             }
         ]
     },
@@ -257,10 +253,8 @@
         "cases": [
             {
                 "description": "TypeScript supports two methods to organize code: namespaces and modules , but namespaces are disallowed. That is, your code must refer to code in other files using imports and exports of the form `import{foo}from'bar';`\nYour code must not use the `namespaceFoo{...}` construct. `namespace` s may only be used when required to interface with external, third party code. To semantically namespace your code, use separate files.\nCode must not use `require` (as in `importx=require('...');` ) for imports. Use ES6 module syntax.",
-                "example": "// Bad: do not use namespaces:\nnamespace Rocket {\n  function launch() { ... }\n}\n\n// Bad: do not use <reference>\n/// <reference path=\"...\"/>\n\n// Bad: do not use require()\nimport x = require('mydep');\n"
-            },
-            {
-                "description": "NB: TypeScript `namespace` s used to be called internal modules and used to use the `module` keyword in the form `moduleFoo{...}` . Don't use that either. Always use ES6 imports."
+                "example": "// Bad: do not use namespaces:\nnamespace Rocket {\n  function launch() { ... }\n}\n\n// Bad: do not use <reference>\n/// <reference path=\"...\"/>\n\n// Bad: do not use require()\nimport x = require('mydep');\n",
+                "appendix": "NB: TypeScript `namespace` s used to be called internal modules and used to use the `module` keyword in the form `moduleFoo{...}` . Don't use that either. Always use ES6 imports."
             }
         ]
     },
@@ -288,10 +282,8 @@
             },
             {
                 "description": "`const` and `let` are block scoped, like variables in most other languages. `var` in JavaScript is function scoped, which can cause difficult to understand bugs. Don't use it.",
-                "example": "var foo = someValue;     // Don't use - var scoping is complex and causes bugs.\n"
-            },
-            {
-                "description": "Variables must not be used before their declaration."
+                "example": "var foo = someValue;     // Don't use - var scoping is complex and causes bugs.\n",
+                "appendix": "Variables must not be used before their declaration."
             }
         ]
     },
@@ -360,10 +352,8 @@
             },
             {
                 "description": "Disallowed:",
-                "example": "function badDestructuring([a, b] = [4, 2]) { … }\n"
-            },
-            {
-                "description": "Tip: For (un)packing multiple values into a function’s parameter or return, prefer object destructuring to array destructuring when possible, as it allows naming the individual elements and specifying a different type for each."
+                "example": "function badDestructuring([a, b] = [4, 2]) { … }\n",
+                "appendix": "Tip: For (un)packing multiple values into a function’s parameter or return, prefer object destructuring to array destructuring when possible, as it allows naming the individual elements and specifying a different type for each."
             }
         ]
     },
@@ -508,10 +498,8 @@
         "cases": [
             {
                 "description": "Code must not use `this` in a static context.\nJavaScript allows accessing static fields through `this` . Different from other languages, static fields are also inherited.",
-                "example": "class ShoeStore {\n  static storage: Storage = ...;\n\n  static isAvailable(s: Shoe) {\n    // Bad: do not use `this` in a static method.\n    return this.storage.has(s.id);\n  }\n}\n\nclass EmptyShoeStore extends ShoeStore {\n  static storage: Storage = EMPTY_STORE;  // overrides storage from ShoeStore\n}\n"
-            },
-            {
-                "description": "Why? \nThis code is generally surprising: authors might not expect that static fields can be accessed through the this pointer, and might be surprised to find that they can be overridden - this feature is not commonly used. \nThis code also encourages an anti-pattern of having substantial static state, which causes problems with testability."
+                "example": "class ShoeStore {\n  static storage: Storage = ...;\n\n  static isAvailable(s: Shoe) {\n    // Bad: do not use `this` in a static method.\n    return this.storage.has(s.id);\n  }\n}\n\nclass EmptyShoeStore extends ShoeStore {\n  static storage: Storage = EMPTY_STORE;  // overrides storage from ShoeStore\n}\n",
+                "appendix": "Why? \nThis code is generally surprising: authors might not expect that static fields can be accessed through the this pointer, and might be surprised to find that they can be overridden - this feature is not commonly used. \nThis code also encourages an anti-pattern of having substantial static state, which causes problems with testability."
             }
         ]
     },
@@ -552,10 +540,8 @@
             },
             {
                 "description": "Instead, use TypeScript's visibility annotations:",
-                "example": "class Clazz {\n  private ident = 1;\n}\n"
-            },
-            {
-                "description": "Why? \nPrivate identifiers cause substantial emit size and performance regressions when down-leveled by TypeScript, and are unsupported before ES2015. They can only be downleveled to ES2015, not lower. At the same time, they do not offer substantial benefits when static type checking is used to enforce visibility."
+                "example": "class Clazz {\n  private ident = 1;\n}\n",
+                "appendix": "Why? \nPrivate identifiers cause substantial emit size and performance regressions when down-leveled by TypeScript, and are unsupported before ES2015. They can only be downleveled to ES2015, not lower. At the same time, they do not offer substantial benefits when static type checking is used to enforce visibility."
             }
         ]
     },
@@ -574,10 +560,8 @@
         "cases": [
             {
                 "description": "Rather than plumbing an obvious initializer through to a class member, use a TypeScript parameter property .",
-                "example": "class Foo {\n  private readonly barService: BarService;\n\n  constructor(barService: BarService) {\n    this.barService = barService;\n  }\n}\n\nclass Foo {\n  constructor(private readonly barService: BarService) {}\n}\n"
-            },
-            {
-                "description": "If the parameter property needs documentation, use an\n \n @param\n \n JSDoc tag ."
+                "example": "class Foo {\n  private readonly barService: BarService;\n\n  constructor(barService: BarService) {\n    this.barService = barService;\n  }\n}\n\nclass Foo {\n  constructor(private readonly barService: BarService) {}\n}\n",
+                "appendix": "If the parameter property needs documentation, use an\n \n @param\n \n JSDoc tag ."
             }
         ]
     },
@@ -587,10 +571,8 @@
         "cases": [
             {
                 "description": "If a class member is not a parameter, initialize it where it's declared, which sometimes lets you drop the constructor entirely.",
-                "example": "class Foo {\n  private readonly userList: string[];\n\n  constructor() {\n    this.userList = [];\n  }\n}\n\nclass Foo {\n  private readonly userList: string[] = [];\n}\n"
-            },
-            {
-                "description": "Tip: Properties should never be added to or removed from an instance after the constructor is finished, since it significantly hinders VMs’ ability to optimize classes' shape . Optional fields that may be filled in later should be explicitly initialized to `undefined` to prevent later shape changes."
+                "example": "class Foo {\n  private readonly userList: string[];\n\n  constructor() {\n    this.userList = [];\n  }\n}\n\nclass Foo {\n  private readonly userList: string[] = [];\n}\n",
+                "appendix": "Tip: Properties should never be added to or removed from an instance after the constructor is finished, since it significantly hinders VMs’ ability to optimize classes' shape . Optional fields that may be filled in later should be explicitly initialized to `undefined` to prevent later shape changes."
             }
         ]
     },
@@ -613,10 +595,8 @@
             },
             {
                 "description": "If an accessor is used to hide a class property, the hidden property may be prefixed or suffixed with any whole word, like `internal` or `wrapped` . When using these private properties, access the value through the accessor whenever possible. At least one accessor for a property must be non-trivial: do not define pass-through accessors only for the purpose of hiding a property. Instead, make the property public (or consider making it `readonly` rather than just defining a getter with no setter).",
-                "example": "class Foo {\n  private wrappedBar = '';\n  get bar() {\n    return this.wrappedBar || 'bar';\n  }\n\n  set bar(wrapped: string) {\n    this.wrappedBar = wrapped.trim();\n  }\n}\n\nclass Bar {\n  private barInternal = '';\n  // Neither of these accessors have logic, so just make bar public.\n  get bar() {\n    return this.barInternal;\n  }\n\n  set bar(value: string) {\n    this.barInternal = value;\n  }\n}\n"
-            },
-            {
-                "description": "Getters and setters must not be defined using `Object.defineProperty` , since this interferes with property renaming."
+                "example": "class Foo {\n  private wrappedBar = '';\n  get bar() {\n    return this.wrappedBar || 'bar';\n  }\n\n  set bar(wrapped: string) {\n    this.wrappedBar = wrapped.trim();\n  }\n}\n\nclass Bar {\n  private barInternal = '';\n  // Neither of these accessors have logic, so just make bar public.\n  get bar() {\n    return this.barInternal;\n  }\n\n  set bar(value: string) {\n    this.barInternal = value;\n  }\n}\n",
+                "appendix": "Getters and setters must not be defined using `Object.defineProperty` , since this interferes with property renaming."
             }
         ]
     },
@@ -635,10 +615,8 @@
         "cases": [
             {
                 "description": "Restricting visibility of properties, methods, and entire types helps with keeping code decoupled.\nLimit symbol visibility as much as possible. \nConsider converting private methods to non-exported functions within the same file but outside of any class, and moving private properties into a separate, non-exported class. \nTypeScript symbols are public by default. Never use the `public` modifier except when declaring non-readonly public parameter properties (in constructors).",
-                "example": "class Foo {\n  public bar = new Bar();  // BAD: public modifier not needed\n\n  constructor(public readonly baz: Baz) {}  // BAD: readonly implies it's a property which defaults to public\n}\n\nclass Foo {\n  bar = new Bar();  // GOOD: public modifier not needed\n\n  constructor(public baz: Baz) {}  // public modifier allowed\n}\n"
-            },
-            {
-                "description": "See also export visibility ."
+                "example": "class Foo {\n  public bar = new Bar();  // BAD: public modifier not needed\n\n  constructor(public readonly baz: Baz) {}  // BAD: readonly implies it's a property which defaults to public\n}\n\nclass Foo {\n  bar = new Bar();  // GOOD: public modifier not needed\n\n  constructor(public baz: Baz) {}  // public modifier allowed\n}\n",
+                "appendix": "See also export visibility ."
             }
         ]
     },
@@ -699,10 +677,8 @@
         "cases": [
             {
                 "description": "Do not use function expressions. Use arrow functions instead.",
-                "example": "bar(() => { this.doSomething(); })\n\nbar(function() { ... })\n"
-            },
-            {
-                "description": "Exception: Function expressions may be used only if code has to dynamically rebind `this` (but this is discouraged ), or for generator functions (which do not have an arrow syntax)."
+                "example": "bar(() => { this.doSomething(); })\n\nbar(function() { ... })\n",
+                "appendix": "Exception: Function expressions may be used only if code has to dynamically rebind `this` (but this is discouraged ), or for generator functions (which do not have an arrow syntax)."
             }
         ]
     },
@@ -716,10 +692,8 @@
             },
             {
                 "description": "Only use a concise body if the return value of the function is actually used. The block body makes sure the return type is `void` then and prevents potential side effects.",
-                "example": "// BAD: use a block body if the return value of the function is not used.\nmyPromise.then(v => console.log(v));\n// BAD: this typechecks, but the return value still leaks.\nlet f: () => void;\nf = () => 1;\n\n// GOOD: return value is unused, use a block body.\nmyPromise.then(v => {\n  console.log(v);\n});\n// GOOD: code may use blocks for readability.\nconst transformed = [1, 2, 3].map(v => {\n  const intermediate = someComplicatedExpr(v);\n  const more = acrossManyLines(intermediate);\n  return worthWrapping(more);\n});\n// GOOD: explicit `void` ensures no leaked return value\nmyPromise.then(v => void console.log(v));\n"
-            },
-            {
-                "description": "Tip: The `void` operator can be used to ensure an arrow function with an expression body returns `undefined` when the result is unused."
+                "example": "// BAD: use a block body if the return value of the function is not used.\nmyPromise.then(v => console.log(v));\n// BAD: this typechecks, but the return value still leaks.\nlet f: () => void;\nf = () => 1;\n\n// GOOD: return value is unused, use a block body.\nmyPromise.then(v => {\n  console.log(v);\n});\n// GOOD: code may use blocks for readability.\nconst transformed = [1, 2, 3].map(v => {\n  const intermediate = someComplicatedExpr(v);\n  const more = acrossManyLines(intermediate);\n  return worthWrapping(more);\n});\n// GOOD: explicit `void` ensures no leaked return value\nmyPromise.then(v => void console.log(v));\n",
+                "appendix": "Tip: The `void` operator can be used to ensure an arrow function with an expression body returns `undefined` when the result is unused."
             }
         ]
     },
@@ -729,10 +703,8 @@
         "cases": [
             {
                 "description": "Function expressions and function declarations must not use `this` unless they specifically exist to rebind the `this` pointer. Rebinding `this` can in most cases be avoided by using arrow functions or explicit parameters.",
-                "example": "function clickHandler() {\n  // Bad: what's `this` in this context?\n  this.textContent = 'Hello';\n}\n// Bad: the `this` pointer reference is implicitly set to document.body.\ndocument.body.onclick = clickHandler;\n\n// Good: explicitly reference the object from an arrow function.\ndocument.body.onclick = () => { document.body.textContent = 'hello'; };\n// Alternatively: take an explicit parameter\nconst setTextFn = (e: HTMLElement) => { e.textContent = 'hello'; };\ndocument.body.onclick = setTextFn.bind(null, document.body);\n"
-            },
-            {
-                "description": "Prefer arrow functions over other approaches to binding `this` , such as `f.bind(this)` , `goog.bind(f,this)` , or `constself=this` ."
+                "example": "function clickHandler() {\n  // Bad: what's `this` in this context?\n  this.textContent = 'Hello';\n}\n// Bad: the `this` pointer reference is implicitly set to document.body.\ndocument.body.onclick = clickHandler;\n\n// Good: explicitly reference the object from an arrow function.\ndocument.body.onclick = () => { document.body.textContent = 'hello'; };\n// Alternatively: take an explicit parameter\nconst setTextFn = (e: HTMLElement) => { e.textContent = 'hello'; };\ndocument.body.onclick = setTextFn.bind(null, document.body);\n",
+                "appendix": "Prefer arrow functions over other approaches to binding `this` , such as `f.bind(this)` , `goog.bind(f,this)` , or `constself=this` ."
             }
         ]
     },
@@ -780,10 +752,8 @@
         "cases": [
             {
                 "description": "Optional function parameters may be given a default initializer to use when the argument is omitted. Initializers must not have any observable side effects. Initializers should be kept as simple as possible.",
-                "example": "function process(name: string, extraContext: string[] = []) {}\nfunction activate(index = 0) {}\n\n// BAD: side effect of incrementing the counter\nlet globalCounter = 0;\nfunction newId(index = globalCounter++) {}\n\n// BAD: exposes shared mutable state, which can introduce unintended coupling\n// between function calls\nclass Foo {\n  private readonly defaultPaths: string[];\n  frobnicate(paths = defaultPaths) {}\n}\n"
-            },
-            {
-                "description": "Use default parameters sparingly. Prefer destructuring to create readable APIs when there are more than a small handful of optional parameters that do not have a natural order."
+                "example": "function process(name: string, extraContext: string[] = []) {}\nfunction activate(index = 0) {}\n\n// BAD: side effect of incrementing the counter\nlet globalCounter = 0;\nfunction newId(index = globalCounter++) {}\n\n// BAD: exposes shared mutable state, which can introduce unintended coupling\n// between function calls\nclass Foo {\n  private readonly defaultPaths: string[];\n  frobnicate(paths = defaultPaths) {}\n}\n",
+                "appendix": "Use default parameters sparingly. Prefer destructuring to create readable APIs when there are more than a small handful of optional parameters that do not have a natural order."
             }
         ]
     },
@@ -793,10 +763,8 @@
         "cases": [
             {
                 "description": "Use a rest parameter instead of accessing `arguments` . Never name a local variable or parameter `arguments` , which confusingly shadows the built-in name.",
-                "example": "function variadic(array: string[], ...numbers: number[]) {}\n"
-            },
-            {
-                "description": "Use function spread syntax instead of `Function.prototype.apply` ."
+                "example": "function variadic(array: string[], ...numbers: number[]) {}\n",
+                "appendix": "Use function spread syntax instead of `Function.prototype.apply` ."
             }
         ]
     },
@@ -1032,10 +1000,8 @@
             },
             {
                 "description": "Exception handlers must not defensively handle non- `Error` types unless the called API is conclusively known to throw non- `Error` s in violation of the above rule. In that case, a comment should be included to specifically identify where the non- `Error` s originate.",
-                "example": "try {\n  badApiThrowingStrings();\n} catch (e: unknown) {\n  // Note: bad API throws strings instead of errors.\n  if (typeof e === 'string') { ... }\n}\n"
-            },
-            {
-                "description": "Why? \nAvoid overly defensive programming . Repeating the same defenses against a problem that will not exist in most code leads to boiler-plate code that is not useful."
+                "example": "try {\n  badApiThrowingStrings();\n} catch (e: unknown) {\n  // Note: bad API throws strings instead of errors.\n  if (typeof e === 'string') { ... }\n}\n",
+                "appendix": "Why? \nAvoid overly defensive programming . Repeating the same defenses against a problem that will not exist in most code leads to boiler-plate code that is not useful."
             }
         ]
     },
@@ -1049,10 +1015,8 @@
             },
             {
                 "description": "Disallowed:",
-                "example": "  try {\n    shouldFail();\n    fail('expected an error');\n  } catch (expected: unknown) {\n  }\n"
-            },
-            {
-                "description": "Tip: Unlike in some other languages, patterns like the above simply don’t work since this will catch the error thrown by `fail` . Use `assertThrows()` instead."
+                "example": "  try {\n    shouldFail();\n    fail('expected an error');\n  } catch (expected: unknown) {\n  }\n",
+                "appendix": "Tip: Unlike in some other languages, patterns like the above simply don’t work since this will catch the error thrown by `fail` . Use `assertThrows()` instead."
             }
         ]
     },
@@ -1102,10 +1066,8 @@
             },
             {
                 "description": "Sometimes due to some local property of your code you can be sure that the assertion form is safe. In those situations, you should add clarification to explain why you are ok with the unsafe behavior:",
-                "example": "// x is a Foo, because ...\n(x as Foo).foo();\n\n// y cannot be null, because ...\ny!.bar();\n"
-            },
-            {
-                "description": "If the reasoning behind a type or non-nullability assertion is obvious, the comments may not be necessary. For example, generated proto code is always nullable, but perhaps it is well-known in the context of the code that certain fields are always provided by the backend. Use your judgement."
+                "example": "// x is a Foo, because ...\n(x as Foo).foo();\n\n// y cannot be null, because ...\ny!.bar();\n",
+                "appendix": "If the reasoning behind a type or non-nullability assertion is obvious, the comments may not be necessary. For example, generated proto code is always nullable, but perhaps it is well-known in the context of the code that certain fields are always provided by the backend. Use your judgement."
             }
         ]
     },
@@ -1125,10 +1087,8 @@
         "cases": [
             {
                 "description": "From the TypeScript handbook , TypeScript only allows type assertions which convert to a more specific or less specific version of a type. Adding a type assertion ( `xasFoo` ) which does not meet this criteria will give the error: Conversion of type 'X' to type 'Y' may be a mistake because neither type sufficiently overlaps with the other.\nIf you are sure an assertion is safe, you can perform a double assertion . This involves casting through `unknown` since it is less specific than all types.",
-                "example": "// x is a Foo here, because...\n(x as unknown as Foo).fooMethod();\n"
-            },
-            {
-                "description": "Use `unknown` (instead of `any` or `{}` ) as the intermediate type."
+                "example": "// x is a Foo here, because...\n(x as unknown as Foo).fooMethod();\n",
+                "appendix": "Use `unknown` (instead of `any` or `{}` ) as the intermediate type."
             }
         ]
     },
@@ -1148,10 +1108,8 @@
         "cases": [
             {
                 "description": "Limit the amount of code inside a try block, if this can be done without hurting readability.",
-                "example": "try {\n  const result = methodThatMayThrow();\n  use(result);\n} catch (error: unknown) {\n  // ...\n}\n\nlet result;\ntry {\n  result = methodThatMayThrow();\n} catch (error: unknown) {\n  // ...\n}\nuse(result);\n"
-            },
-            {
-                "description": "Moving the non-throwable lines out of the try/catch block helps the reader learn which method throws exceptions. Some inline calls that do not throw exceptions could stay inside because they might not be worth the extra complication of a temporary variable.\nException: There may be performance issues if try blocks are inside a loop. Widening try blocks to cover a whole loop is ok."
+                "example": "try {\n  const result = methodThatMayThrow();\n  use(result);\n} catch (error: unknown) {\n  // ...\n}\n\nlet result;\ntry {\n  result = methodThatMayThrow();\n} catch (error: unknown) {\n  // ...\n}\nuse(result);\n",
+                "appendix": "Moving the non-throwable lines out of the try/catch block helps the reader learn which method throws exceptions. Some inline calls that do not throw exceptions could stay inside because they might not be worth the extra complication of a temporary variable.\nException: There may be performance issues if try blocks are inside a loop. Widening try blocks to cover a whole loop is ok."
             }
         ]
     },
@@ -1176,10 +1134,8 @@
         "cases": [
             {
                 "description": "TypeScript code must not instantiate the wrapper classes for the primitive types `String` , `Boolean` , and `Number` . Wrapper classes have surprising behavior, such as `newBoolean(false)` evaluating to `true` .",
-                "example": "const s = new String('hello');\nconst b = new Boolean(false);\nconst n = new Number(5);\n"
-            },
-            {
-                "description": "The wrappers may be called as functions for coercing (which is preferred over using `+` or concatenating the empty string) or creating symbols. See type coercion for more information."
+                "example": "const s = new String('hello');\nconst b = new Boolean(false);\nconst n = new Number(5);\n",
+                "appendix": "The wrappers may be called as functions for coercing (which is preferred over using `+` or concatenating the empty string) or creating symbols. See type coercion for more information."
             }
         ]
     },
@@ -1341,10 +1297,8 @@
         "cases": [
             {
                 "description": "Module namespace imports are `lowerCamelCase` while files are `snake_case` , which means that imports correctly will not match in casing style, such as",
-                "example": "import * as fooBar from './foo_bar';\n"
-            },
-            {
-                "description": "Some libraries might commonly use a namespace import prefix that violates this naming scheme, but overbearingly common open source use makes the violating style more readable. The only libraries that currently fall under this exception are:\njquery , using the `$` prefix \nthreejs , using the `THREE` prefix"
+                "example": "import * as fooBar from './foo_bar';\n",
+                "appendix": "Some libraries might commonly use a namespace import prefix that violates this naming scheme, but overbearingly common open source use makes the violating style more readable. The only libraries that currently fall under this exception are:\njquery , using the `$` prefix \nthreejs , using the `THREE` prefix"
             }
         ]
     },
@@ -1358,10 +1312,8 @@
             },
             {
                 "description": "A constant can also be a `staticreadonly` property of a class.",
-                "example": "class Foo {\n  private static readonly MY_SPECIAL_NUMBER = 5;\n\n  bar() {\n    return 2 * Foo.MY_SPECIAL_NUMBER;\n  }\n}\n"
-            },
-            {
-                "description": "Global : Only symbols declared on the module level, static fields of module level classes, and values of module level enums, may use `CONST_CASE` . If a value can be instantiated more than once over the lifetime of the program (e.g. a local variable declared within a function, or a static field on a class nested in a function) then it must use `lowerCamelCase` .\nIf a value is an arrow function that implements an interface, then it may be declared `lowerCamelCase` ."
+                "example": "class Foo {\n  private static readonly MY_SPECIAL_NUMBER = 5;\n\n  bar() {\n    return 2 * Foo.MY_SPECIAL_NUMBER;\n  }\n}\n",
+                "appendix": "Global : Only symbols declared on the module level, static fields of module level classes, and values of module level enums, may use `CONST_CASE` . If a value can be instantiated more than once over the lifetime of the program (e.g. a local variable declared within a function, or a static field on a class nested in a function) then it must use `lowerCamelCase` .\nIf a value is an arrow function that implements an interface, then it may be declared `lowerCamelCase` ."
             }
         ]
     },
@@ -1398,10 +1350,8 @@
             },
             {
                 "description": "For more complex expressions, type annotations can help with readability of the program:",
-                "example": "// Hard to reason about the type of 'value' without an annotation.\nconst value = await rpc.getSomeValue().transform();\n\n// Can tell the type of 'value' at a glance.\nconst value: string[] = await rpc.getSomeValue().transform();\n"
-            },
-            {
-                "description": "Whether an annotation is required is decided by the code reviewer."
+                "example": "// Hard to reason about the type of 'value' without an annotation.\nconst value = await rpc.getSomeValue().transform();\n\n// Can tell the type of 'value' at a glance.\nconst value: string[] = await rpc.getSomeValue().transform();\n",
+                "appendix": "Whether an annotation is required is decided by the code reviewer."
             }
         ]
     },
@@ -1471,10 +1421,8 @@
         "cases": [
             {
                 "description": "TypeScript supports type aliases for naming a type expression. This can be used to name primitives, unions, tuples, and any other types.\nHowever, when declaring types for objects, use interfaces instead of a type alias for the object literal expression.",
-                "example": "interface User {\n  firstName: string;\n  lastName: string;\n}\n\ntype User = {\n  firstName: string,\n  lastName: string,\n}\n"
-            },
-            {
-                "description": "Why? \nThese forms are nearly equivalent, so under the principle of just choosing one out of two forms to prevent variation, we should choose one. Additionally, there are also interesting technical reasons to prefer interface . That page quotes the TypeScript team lead: Honestly, my take is that it should really just be interfaces for anything that they can model. There is no benefit to type aliases when there are so many issues around display/perf."
+                "example": "interface User {\n  firstName: string;\n  lastName: string;\n}\n\ntype User = {\n  firstName: string,\n  lastName: string,\n}\n",
+                "appendix": "Why? \nThese forms are nearly equivalent, so under the principle of just choosing one out of two forms to prevent variation, we should choose one. Additionally, there are also interesting technical reasons to prefer interface . That page quotes the TypeScript team lead: Honestly, my take is that it should really just be interfaces for anything that they can model. There is no benefit to type aliases when there are so many issues around display/perf."
             }
         ]
     },
@@ -1498,10 +1446,8 @@
             },
             {
                 "description": "In TypeScript, provide a meaningful label for the key. (The label only exists for documentation; it's unused otherwise.)",
-                "example": "const users: {[key: string]: number} = ...;\n\nconst users: {[userName: string]: number} = ...;\n"
-            },
-            {
-                "description": "Rather than using one of these, consider using the ES6 `Map` and `Set` types instead. JavaScript objects have surprising undesirable behaviors and the ES6 types more explicitly convey your intent. Also, `Map` s can be keyed by—and `Set` s can contain—types other than `string` .\nTypeScript's builtin `Record<Keys,ValueType>` type allows constructing types with a defined set of keys. This is distinct from associative arrays in that the keys are statically known. See advice on that below ."
+                "example": "const users: {[key: string]: number} = ...;\n\nconst users: {[userName: string]: number} = ...;\n",
+                "appendix": "Rather than using one of these, consider using the ES6 `Map` and `Set` types instead. JavaScript objects have surprising undesirable behaviors and the ES6 types more explicitly convey your intent. Also, `Map` s can be keyed by—and `Set` s can contain—types other than `string` .\nTypeScript's builtin `Record<Keys,ValueType>` type allows constructing types with a defined set of keys. This is distinct from associative arrays in that the keys are statically known. See advice on that below ."
             }
         ]
     },
@@ -1519,10 +1465,8 @@
             },
             {
                 "description": "To reduce duplication, `User` could extend `FoodPreferences` , or (possibly better) nest a field for food preferences:",
-                "example": "interface FoodPreferences { /* as above */ }\ninterface User extends FoodPreferences {\n  shoeSize: number;\n  // also includes the preferences.\n}\n"
-            },
-            {
-                "description": "Using interfaces here makes the grouping of properties explicit, improves IDE support, allows better optimization, and arguably makes the code easier to understand."
+                "example": "interface FoodPreferences { /* as above */ }\ninterface User extends FoodPreferences {\n  shoeSize: number;\n  // also includes the preferences.\n}\n",
+                "appendix": "Using interfaces here makes the grouping of properties explicit, improves IDE support, allows better optimization, and arguably makes the code easier to understand."
             }
         ]
     },
@@ -1551,10 +1495,8 @@
         "cases": [
             {
                 "description": "The `any` type allows assignment into any other type and dereferencing any property off it. Often this behaviour is not necessary or desirable, and code just needs to express that a type is unknown. Use the built-in type `unknown` in that situation — it expresses the concept and is much safer as it does not allow dereferencing arbitrary properties.",
-                "example": "// Can assign any value (including null or undefined) into this but cannot\n// use it without narrowing the type or casting.\nconst val: unknown = value;\n\nconst danger: any = value /* result of an arbitrary expression */;\ndanger.whoops();  // This access is completely unchecked!\n"
-            },
-            {
-                "description": "To safely use `unknown` values, narrow the type using a type guard"
+                "example": "// Can assign any value (including null or undefined) into this but cannot\n// use it without narrowing the type or casting.\nconst val: unknown = value;\n\nconst danger: any = value /* result of an arbitrary expression */;\ndanger.whoops();  // This access is completely unchecked!\n",
+                "appendix": "To safely use `unknown` values, narrow the type using a type guard"
             }
         ]
     },
@@ -1574,10 +1516,8 @@
         "cases": [
             {
                 "description": "The `{}` type, also known as an empty interface type, represents a interface with no properties. An empty interface type has no specified properties and therefore any non-nullish value is assignable to it.",
-                "example": "let player: {};\n\nplayer = {\n  health: 50,\n}; // Allowed.\n\nconsole.log(player.health) // Property 'health' does not exist on type '{}'.\n\nfunction takeAnything(obj:{}) {\n\n}\n\ntakeAnything({});\ntakeAnything({ a: 1, b: 2 });\n"
-            },
-            {
-                "description": "Google3 code should not use `{}` for most use cases. `{}` represents any non-nullish primitive or object type, which is rarely appropriate. Prefer one of the following more-descriptive types:\n`unknown` can hold any value, including `null` or `undefined` , and is generally more appropriate for opaque values. \n`Record<string,T>` is better for dictionary-like objects, and provides better type safety by being explicit about the type `T` of contained values (which may itself be `unknown` ). \n`object` excludes primitives as well, leaving only non-nullish functions and objects, but without any other assumptions about what properties may be available."
+                "example": "let player: {};\n\nplayer = {\n  health: 50,\n}; // Allowed.\n\nconsole.log(player.health) // Property 'health' does not exist on type '{}'.\n\nfunction takeAnything(obj:{}) {\n\n}\n\ntakeAnything({});\ntakeAnything({ a: 1, b: 2 });\n",
+                "appendix": "Google3 code should not use `{}` for most use cases. `{}` represents any non-nullish primitive or object type, which is rarely appropriate. Prefer one of the following more-descriptive types:\n`unknown` can hold any value, including `null` or `undefined` , and is generally more appropriate for opaque values. \n`Record<string,T>` is better for dictionary-like objects, and provides better type safety by being explicit about the type `T` of contained values (which may itself be `unknown` ). \n`object` excludes primitives as well, leaving only non-nullish functions and objects, but without any other assumptions about what properties may be available."
             }
         ]
     },
@@ -1669,10 +1609,8 @@
         "cases": [
             {
                 "description": "Multi-line comments are indented at the same level as the surrounding code. They must use multiple single-line comments ( `//` -style), not block comment style ( `/**/` ).",
-                "example": "// This is\n// fine\n\n/*\n * This should\n * use multiple\n * single-line comments\n */\n\n/* This should use // */\n"
-            },
-            {
-                "description": "Comments are not enclosed in boxes drawn with asterisks or other characters."
+                "example": "// This is\n// fine\n\n/*\n * This should\n * use multiple\n * single-line comments\n */\n\n/* This should use // */\n",
+                "appendix": "Comments are not enclosed in boxes drawn with asterisks or other characters."
             }
         ]
     },
@@ -1686,10 +1624,8 @@
             },
             {
                 "description": "or in this single-line example:",
-                "example": "/** This short jsdoc describes the function. */\nfunction doSomething(arg: number) { … }\n"
-            },
-            {
-                "description": "If a single-line comment overflows into multiple lines, it must use the multi-line style with `/**` and `*/` on their own lines.\nMany tools extract metadata from JSDoc comments to perform code validation and optimization. As such, these comments must be well-formed."
+                "example": "/** This short jsdoc describes the function. */\nfunction doSomething(arg: number) { … }\n",
+                "appendix": "If a single-line comment overflows into multiple lines, it must use the multi-line style with `/**` and `*/` on their own lines.\nMany tools extract metadata from JSDoc comments to perform code validation and optimization. As such, these comments must be well-formed."
             }
         ]
     },
@@ -1727,10 +1663,8 @@
         "cases": [
             {
                 "description": "Line-wrapped block tags are indented four spaces. Wrapped description text may be lined up with the description on previous lines, but this horizontal alignment is discouraged.",
-                "example": "/**\n * Illustrates line wrapping for long param/return descriptions.\n * @param foo This is a param with a particularly long description that just\n *     doesn't fit on one line.\n * @return This returns something that has a lengthy description too long to fit\n *     in one line.\n */\nexports.method = function(foo) {\n  return 5;\n};\n"
-            },
-            {
-                "description": "Do not indent when wrapping a `@desc` or `@fileoverview` description."
+                "example": "/**\n * Illustrates line wrapping for long param/return descriptions.\n * @param foo This is a param with a particularly long description that just\n *     doesn't fit on one line.\n * @return This returns something that has a lengthy description too long to fit\n *     in one line.\n */\nexports.method = function(foo) {\n  return 5;\n};\n",
+                "appendix": "Do not indent when wrapping a `@desc` or `@fileoverview` description."
             }
         ]
     },

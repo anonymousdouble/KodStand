@@ -4,7 +4,7 @@
         "belongs to": "Table of Contents",
         "cases": [
             {
-                "description": "Section \nContents \nBackground \nWhich Shell to Use - When to use Shell \nShell Files and Interpreter Invocation \nFile Extensions - SUID/SGID \nEnvironment \nSTDOUT vs STDERR \nComments \nFile Header - Function Comments - Implementation Comments - TODO Comments \nFormatting \nIndentation - Line Length and Long Strings - Pipelines - Loops - Case statement - Variable expansion - Quoting \nFeatures and Bugs \nShellCheck - Command Substitution - Test, [… ], and [[… ]] - Testing Strings - Wildcard Expansion of Filenames - Eval - Arrays - Pipes to While - Arithmetic \nNaming Conventions \nFunction Names - Variable Names - Constants and Environment Variable Names - Source Filenames - Read-only Variables - Use Local Variables - Function Location - main \nCalling Commands \nChecking Return Values - Builtin Commands vs. External Commands \nConclusion \n "
+                "description": "Section \nContents \nBackground \nWhich Shell to Use - When to use Shell \nShell Files and Interpreter Invocation \nFile Extensions - SUID/SGID \nEnvironment \nSTDOUT vs STDERR \nComments \nFile Header - Function Comments - Implementation Comments - TODO Comments \nFormatting \nIndentation - Line Length and Long Strings - Pipelines - Loops - Case statement - Variable expansion - Quoting \nFeatures and Bugs \nShellCheck - Command Substitution - Test,\n \n [… ]\n \n , and\n \n [[… ]] - Testing Strings - Wildcard Expansion of Filenames - Eval - Arrays - Pipes to While - Arithmetic \nNaming Conventions \nFunction Names - Variable Names - Constants and Environment Variable Names - Source Filenames - Read-only Variables - Use Local Variables - Function Location - main \nCalling Commands \nChecking Return Values - Builtin Commands vs. External Commands \nConclusion"
             }
         ]
     },
@@ -181,10 +181,8 @@
         "cases": [
             {
                 "description": "In order of precedence: Stay consistent with what you find; quote your variables; prefer `\"${var}\"` over `\"$var\"` .\nThese are strongly recommended guidelines but not mandatory regulation. Nonetheless, the fact that it’s a recommendation and not mandatory doesn’t mean it should be taken lightly or downplayed.\nThey are listed in order of precedence.\nStay consistent with what you find for existing code. \nQuote variables, see Quoting section below . \nDon’t brace-delimit single character shell specials / positional parameters, unless strictly necessary or avoiding deep confusion. \nPrefer brace-delimiting all other variables.",
-                "example": "# Section of *recommended* cases.\n\n# Preferred style for 'special' variables:\necho \"Positional: $1\" \"$5\" \"$3\"\necho \"Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \\$=$$ …\"\n\n# Braces necessary:\necho \"many parameters: ${10}\"\n\n# Braces avoiding confusion:\n# Output is \"a0b0c0\"\nset -- a b c\necho \"${1}0${2}0${3}0\"\n\n# Preferred style for other variables:\necho \"PATH=${PATH}, PWD=${PWD}, mine=${some_var}\"\nwhile read -r f; do\n  echo \"file=${f}\"\ndone < <(find /tmp)\n\n# Section of *discouraged* cases\n\n# Unquoted vars, unbraced vars, brace-delimited single letter\n# shell specials.\necho a=$avar \"b=$bvar\" \"PID=${$}\" \"${1}\"\n\n# Confusing use: this is expanded as \"${1}0${2}0${3}0\",\n# not \"${10}${20}${30}\nset -- a b c\necho \"$10$20$30\"\n"
-            },
-            {
-                "description": "NOTE: Using braces in `${var}` is not a form of quoting. “Double quotes” must be used as well ."
+                "example": "# Section of *recommended* cases.\n\n# Preferred style for 'special' variables:\necho \"Positional: $1\" \"$5\" \"$3\"\necho \"Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \\$=$$ …\"\n\n# Braces necessary:\necho \"many parameters: ${10}\"\n\n# Braces avoiding confusion:\n# Output is \"a0b0c0\"\nset -- a b c\necho \"${1}0${2}0${3}0\"\n\n# Preferred style for other variables:\necho \"PATH=${PATH}, PWD=${PWD}, mine=${some_var}\"\nwhile read -r f; do\n  echo \"file=${f}\"\ndone < <(find /tmp)\n\n# Section of *discouraged* cases\n\n# Unquoted vars, unbraced vars, brace-delimited single letter\n# shell specials.\necho a=$avar \"b=$bvar\" \"PID=${$}\" \"${1}\"\n\n# Confusing use: this is expanded as \"${1}0${2}0${3}0\",\n# not \"${10}${20}${30}\nset -- a b c\necho \"$10$20$30\"\n",
+                "appendix": "NOTE: Using braces in `${var}` is not a form of quoting. “Double quotes” must be used as well ."
             }
         ]
     },
@@ -193,7 +191,7 @@
         "belongs to": "Formatting/Quoting",
         "cases": [
             {
-                "description": "Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required or it’s a shell-internal integer (see next point). \nUse arrays for safe quoting of lists of elements, especially command-line flags. See Arrays below. \nOptionally quote shell-internal, readonly special variables that are defined to be integers: `$?` , `$#` , `$$` , `$!` (man bash). Prefer quoting of “named” internal integer variables, e.g. PPID etc for consistency. \nPrefer quoting strings that are “words” (as opposed to command options or path names). \nNever quote literal integers. \nBe aware of the quoting rules for pattern matches in `[[…]]` . See the Test, [ … ], and [[ … ]] section below. \nUse `\"$@\"` unless you have a specific reason to use `$*` , such as simply appending the arguments to a string in a message or log.",
+                "description": "Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required or it’s a shell-internal integer (see next point). \nUse arrays for safe quoting of lists of elements, especially command-line flags. See Arrays below. \nOptionally quote shell-internal, readonly special variables that are defined to be integers: `$?` , `$#` , `$$` , `$!` (man bash). Prefer quoting of “named” internal integer variables, e.g. PPID etc for consistency. \nPrefer quoting strings that are “words” (as opposed to command options or path names). \nNever quote literal integers. \nBe aware of the quoting rules for pattern matches in `[[…]]` . See the Test,\n \n [ … ]\n \n , and\n \n [[ … ]] section below. \nUse `\"$@\"` unless you have a specific reason to use `$*` , such as simply appending the arguments to a string in a message or log.",
                 "example": "# 'Single' quotes indicate that no substitution is desired.\n# \"Double\" quotes indicate that substitution is required/tolerated.\n\n# Simple examples\n\n# \"quote command substitutions\"\n# Note that quotes nested inside \"$()\" don't need escaping.\nflag=\"$(some_command and its args \"$@\" 'quoted separately')\"\n\n# \"quote variables\"\necho \"${flag}\"\n\n# Use arrays with quoted expansion for lists.\ndeclare -a FLAGS\nFLAGS=( --foo --bar='baz' )\nreadonly FLAGS\nmybinary \"${FLAGS[@]}\"\n\n# It's ok to not quote internal integer variables.\nif (( $# > 3 )); then\n  echo \"ppid=${PPID}\"\nfi\n\n# \"never quote literal integers\"\nvalue=32\n# \"quote command substitutions\", even when you expect integers\nnumber=\"$(generate_number)\"\n\n# \"prefer quoting words\", not compulsory\nreadonly USE_INTEGER='true'\n\n# \"quote shell meta characters\"\necho 'Hello stranger, and well met. Earn lots of $$$'\necho \"Process $$: Done making \\$\\$\\$.\"\n\n# \"command options or path names\"\n# ($1 is assumed to contain a value here)\ngrep -li Hugo /dev/null \"$1\"\n\n# Less simple examples\n# \"quote variables, unless proven false\": ccs might be empty\ngit send-email --to \"${reviewers}\" ${ccs:+\"--cc\" \"${ccs}\"}\n\n# Positional parameter precautions: $1 might be unset\n# Single quotes leave regex as-is.\ngrep -cP '([Ss]pecial|\\|?characters*)$' ${1:+\"$1\"}\n\n# For passing on arguments,\n# \"$@\" is right almost every time, and\n# $* is wrong almost every time:\n#\n# * $* and $@ will split on spaces, clobbering up arguments\n#   that contain spaces and dropping empty strings;\n# * \"$@\" will retain arguments as-is, so no args\n#   provided will result in no args being passed on;\n#   This is in most cases what you want to use for passing\n#   on arguments.\n# * \"$*\" expands to one argument, with all args joined\n#   by (usually) spaces,\n#   so no args provided will result in one empty string\n#   being passed on.\n# (Consult `man bash` for the nit-grits ;-)\n\n(set -- 1 \"2 two\" \"3 three tres\"; echo $#; set -- \"$*\"; echo \"$#, $@\")\n(set -- 1 \"2 two\" \"3 three tres\"; echo $#; set -- \"$@\"; echo \"$#, $@\")\n"
             }
         ]
@@ -223,15 +221,13 @@
         ]
     },
     {
-        "title": "Test, [ … ], and [[ … ]]",
-        "belongs to": "Features and Bugs/Test, [ … ], and [[ … ]]",
+        "title": "Test, [ … ] , and [[ … ]]",
+        "belongs to": "Features and Bugs/Test, [ … ] , and [[ … ]]",
         "cases": [
             {
                 "description": "`[[…]]` is preferred over `[…]` , `test` and `/usr/bin/[` .\n`[[…]]` reduces errors as no pathname expansion or word splitting takes place between `[[` and `]]` . In addition, `[[…]]` allows for regular expression matching, while `[…]` does not.",
-                "example": "# This ensures the string on the left is made up of characters in\n# the alnum character class followed by the string name.\n# Note that the RHS should not be quoted here.\nif [[ \"filename\" =~ ^[[:alnum:]]+name ]]; then\n  echo \"Match\"\nfi\n\n# This matches the exact pattern \"f*\" (Does not match in this case)\nif [[ \"filename\" == \"f*\" ]]; then\n  echo \"Match\"\nfi\n\n# This gives a \"too many arguments\" error as f* is expanded to the\n# contents of the current directory\nif [ \"filename\" == f* ]; then\n  echo \"Match\"\nfi\n"
-            },
-            {
-                "description": "For the gory details, see E14 at http://tiswww.case.edu/php/chet/bash/FAQ"
+                "example": "# This ensures the string on the left is made up of characters in\n# the alnum character class followed by the string name.\n# Note that the RHS should not be quoted here.\nif [[ \"filename\" =~ ^[[:alnum:]]+name ]]; then\n  echo \"Match\"\nfi\n\n# This matches the exact pattern \"f*\" (Does not match in this case)\nif [[ \"filename\" == \"f*\" ]]; then\n  echo \"Match\"\nfi\n\n# This gives a \"too many arguments\" error as f* is expanded to the\n# contents of the current directory\nif [ \"filename\" == f* ]; then\n  echo \"Match\"\nfi\n",
+                "appendix": "For the gory details, see E14 at http://tiswww.case.edu/php/chet/bash/FAQ"
             }
         ]
     },
@@ -324,10 +320,8 @@
             },
             {
                 "description": "Alternatively, use the `readarray` builtin to read the file into an array, then loop over the array’s contents. Notice that (for the same reason as above) you need to use a process substitution with `readarray` rather than a pipe, but with the advantage that the input generation for the loop is located before it, rather than after.",
-                "example": "last_line='NULL'\nreadarray -t lines < <(your_command)\nfor line in \"${lines[@]}\"; do\n  if [[ -n \"${line}\" ]]; then\n    last_line=\"${line}\"\n  fi\ndone\necho \"${last_line}\"\n"
-            },
-            {
-                "description": "Note: Be cautious using a for-loop to iterate over output, as in `forvarin$(...)` , as the output is split by whitespace, not by line. Sometimes you will know this is safe because the output can’t contain any unexpected whitespace, but where this isn’t obvious or doesn’t improve readability (such as a long command inside `$(...)` ), a `whileread` loop or `readarray` is often safer and clearer."
+                "example": "last_line='NULL'\nreadarray -t lines < <(your_command)\nfor line in \"${lines[@]}\"; do\n  if [[ -n \"${line}\" ]]; then\n    last_line=\"${line}\"\n  fi\ndone\necho \"${last_line}\"\n",
+                "appendix": "Note: Be cautious using a for-loop to iterate over output, as in `forvarin$(...)` , as the output is split by whitespace, not by line. Sometimes you will know this is safe because the output can’t contain any unexpected whitespace, but where this isn’t obvious or doesn’t improve readability (such as a long command inside `$(...)` ), a `whileread` loop or `readarray` is often safer and clearer."
             }
         ]
     },
@@ -356,10 +350,8 @@
         "cases": [
             {
                 "description": "Lower-case, with underscores to separate words. Separate libraries with `::` . Parentheses are required after the function name. The keyword `function` is optional, but must be used consistently throughout a project.\nIf you’re writing single functions, use lowercase and separate words with underscore. If you’re writing a package, separate package names with `::` . Braces must be on the same line as the function name (as with other languages at Google) and no space between the function name and the parenthesis.",
-                "example": "# Single function\nmy_func() {\n  …\n}\n\n# Part of a package\nmypackage::my_func() {\n  …\n}\n"
-            },
-            {
-                "description": "The `function` keyword is extraneous when “()” is present after the function name, but enhances quick identification of functions."
+                "example": "# Single function\nmy_func() {\n  …\n}\n\n# Part of a package\nmypackage::my_func() {\n  …\n}\n",
+                "appendix": "The `function` keyword is extraneous when “()” is present after the function name, but enhances quick identification of functions."
             }
         ]
     },
@@ -431,10 +423,8 @@
         "cases": [
             {
                 "description": "A function called `main` is required for scripts long enough to contain at least one other function.\nIn order to easily find the start of the program, put the main program in a function called `main` as the bottom most function. This provides consistency with the rest of the code base as well as allowing you to define more variables as `local` (which can’t be done if the main code is not a function). The last non-comment line in the file should be a call to `main` :",
-                "example": "main \"$@\"\n"
-            },
-            {
-                "description": "Obviously, for short scripts where it’s just a linear flow, `main` is overkill and so is not required."
+                "example": "main \"$@\"\n",
+                "appendix": "Obviously, for short scripts where it’s just a linear flow, `main` is overkill and so is not required."
             }
         ]
     },

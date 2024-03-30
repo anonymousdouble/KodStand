@@ -1,7 +1,7 @@
 [
     {
-        "title": "Use single quotes¶",
-        "belongs to": "Use single quotes¶",
+        "title": "Use single quotes ¶",
+        "belongs to": "Use single quotes ¶",
         "cases": [
             {
                 "description": "Use single-quotes for string literals, e.g. `'my-identifier'` , but use double-quotes for strings that are likely to contain single-quote characters as part of the string itself (such as error messages, or any strings containing natural language), e.g. `\"You'vegotanerror!\"` .\nSingle-quotes are easier to read and to type, but if a string contains single-quote characters then double-quotes are better than escaping the single-quote characters or wrapping the string in double single-quotes.\nWe also use triple single-quotes for docstrings, see Docstrings ."
@@ -9,8 +9,8 @@
         ]
     },
     {
-        "title": "Imports¶",
-        "belongs to": "Imports¶",
+        "title": "Imports ¶",
+        "belongs to": "Imports ¶",
         "cases": [
             {
                 "description": "Avoid creating circular imports by only importing modules more specialized than the one you are editing. \nCKAN often uses code imported into a data structure instead of importing names directly. For example CKAN controllers only use `get_action` to access logic functions. This allows customization by CKAN plugins. \nDon’t use `frommoduleimport*` . Instead list the names you need explicitly:",
@@ -24,21 +24,19 @@
         ]
     },
     {
-        "title": "Logging¶",
-        "belongs to": "Logging¶",
+        "title": "Logging ¶",
+        "belongs to": "Logging ¶",
         "cases": [
             {
                 "description": "We use the Python standard library’s logging module to log messages in CKAN, e.g.:",
-                "example": "import logging\n...\nlogger = logging.getLogger(__name__)\n...\nlogger.debug('some debug message')\n"
-            },
-            {
-                "description": "When logging:\nKeep log messages short. \nDon’t include object representations in the log message. It is useful to include a domain model identifier where appropriate. \nChoose an appropriate log-level (DEBUG, INFO, ERROR, WARNING or CRITICAL, see Python’s Logging HOWTO )."
+                "example": "import logging\n...\nlogger = logging.getLogger(__name__)\n...\nlogger.debug('some debug message')\n",
+                "appendix": "When logging:\nKeep log messages short. \nDon’t include object representations in the log message. It is useful to include a domain model identifier where appropriate. \nChoose an appropriate log-level (DEBUG, INFO, ERROR, WARNING or CRITICAL, see Python’s Logging HOWTO )."
             }
         ]
     },
     {
-        "title": "String formatting¶",
-        "belongs to": "String formatting¶",
+        "title": "String formatting ¶",
+        "belongs to": "String formatting ¶",
         "cases": [
             {
                 "description": "Don’t use the old `%s` style string formatting, e.g. `\"iama%s\"%sub` . This kind of string formatting is not helpful for internationalization.\nUse the new .format() method instead, and give meaningful names to each replacement field, for example:",
@@ -47,8 +45,8 @@
         ]
     },
     {
-        "title": "Unicode handling¶",
-        "belongs to": "Unicode handling¶",
+        "title": "Unicode handling ¶",
+        "belongs to": "Unicode handling ¶",
         "cases": [
             {
                 "description": "CKAN strives to only use Unicode internally (via the `unicode` type) and to convert to/from ASCII at the interface to other systems and libraries if necessary.\nSee also \nUnicode handling \nDetails on Unicode handling in CKAN"
@@ -56,8 +54,8 @@
         ]
     },
     {
-        "title": "Docstrings¶",
-        "belongs to": "Docstrings¶",
+        "title": "Docstrings ¶",
+        "belongs to": "Docstrings ¶",
         "cases": [
             {
                 "description": "We want CKAN’s docstrings to be clear and easy to read for programmers who are smart and competent but who may not know a lot of CKAN technical jargon and whose first language may not be English. We also want it to be easy to maintain the docstrings and keep them up to date with the actual behaviour of the code as it changes over time. So:\nAll modules and all public functions, classes and methods exported by a module should normally have docstrings (see PEP 257 ). \nKeep docstrings short, describe only what’s necessary and no more. \nKeep docstrings simple: use plain, concise English. \nTry to avoid repetition.\nPEP 257 (Docstring Conventions) ¶ \nGenerally, follow PEP 257 for docstrings. We’ll only describe the ways that CKAN differs from or extends PEP 257 below. \nCKAN docstrings deviate from PEP 257 in a couple of ways: \nWe use `'''triplesinglequotes'''` around docstrings, not `\"\"\"tripledoublequotes\"\"\"` (put triple single quotes around one-line docstrings as well as multi-line ones, it makes them easier to expand later) \nWe use Sphinx domain object cross-references to cross-reference to other code objects (see below) \nWe use Sphinx directives for documenting parameters, exceptions and return values (see below)"
@@ -65,8 +63,8 @@
         ]
     },
     {
-        "title": "Referencing other code objects with :py:¶",
-        "belongs to": "Referencing other code objects with :py:¶",
+        "title": "Referencing other code objects with :py: ¶",
+        "belongs to": "Referencing other code objects with :py: ¶",
         "cases": [
             {
                 "description": "If you want to refer to another Python or JavaScript module, function or class etc. in a docstring (or from a `.rst` file), use Sphinx domain object\ncross-references , for example:",
@@ -78,7 +76,7 @@
                 "appendix": "(But you should always use the fully qualified name in your docstring or `*.rst` file.)"
             },
             {
-                "description": "Documenting exceptions raised with `:raises` ¶ \nThere are a few guidelines that CKAN code should follow regarding exceptions: \nAll public functions that CKAN exports for third-party code to use should document any exceptions they raise . See below for how to document exceptions raised. \nFor example the template helper functions in ckan.lib.helpers , anything imported into ckan.plugins.toolkit , and all of the action API functions defined in `ckan.logic.action` , should list exceptions raised in their docstrings. \nThis is because CKAN themes, extensions and API clients need to be able to call CKAN code without crashing, so they need to know what exceptions they should handle (and extension developers shouldn’t have to understand the CKAN core source code). \nOn the other hand, internal functions that are only used within CKAN shouldn’t list exceptions in their docstrings . \nThis is because it would be difficult to keep all the exception lists up to date with the actual code behaviour, so the docstrings would become more misleading than useful. \nCode should only raise exceptions from within its allowed set . \nEach module in CKAN has a set of zero or more exceptions, defined somewhere near the module, that code in that module is allowed to raise. For example `ckan/logic/__init__.py` defines a number of exception types for code in `ckan/logic/` to use. CKAN code should never raise exceptions types defined elsewhere in CKAN, in third-party code or in the Python standard library. \nAll code should catch any exceptions raised by called functions , and either handle the exception, re-raise the exception (if it’s from the code’s set of allowed exception types), or wrap the exception in an allowed exception type and re-raise it. \nThis is to make it easy for a CKAN core developer to look at the source code of an internal function, scan it for the keyword `raise` , and see what types of exception the function may raise, so they know what exceptions they need to catch if they’re going to call the function. Developers shouldn’t have to read the source of all the functions that a function calls (and the functions they call…) to find out what exceptions they needs to catch to call a function without crashing. \nTodo \nInsert examples of how to re-raise and how to wrap-and-re-raise an exception. \nUse `:raises:` to document exceptions raised by public functions. The docstring should say what type of exception is raised and under what conditions. Use `:py:class:` to reference exception types. For example:",
+                "description": "Documenting exceptions raised with `:raises` \n¶ \nThere are a few guidelines that CKAN code should follow regarding exceptions: \nAll public functions that CKAN exports for third-party code to use should document any exceptions they raise . See below for how to document exceptions raised. \nFor example the template helper functions in ckan.lib.helpers , anything imported into ckan.plugins.toolkit , and all of the action API functions defined in `ckan.logic.action` , should list exceptions raised in their docstrings. \nThis is because CKAN themes, extensions and API clients need to be able to call CKAN code without crashing, so they need to know what exceptions they should handle (and extension developers shouldn’t have to understand the CKAN core source code). \nOn the other hand, internal functions that are only used within CKAN shouldn’t list exceptions in their docstrings . \nThis is because it would be difficult to keep all the exception lists up to date with the actual code behaviour, so the docstrings would become more misleading than useful. \nCode should only raise exceptions from within its allowed set . \nEach module in CKAN has a set of zero or more exceptions, defined somewhere near the module, that code in that module is allowed to raise. For example `ckan/logic/__init__.py` defines a number of exception types for code in `ckan/logic/` to use. CKAN code should never raise exceptions types defined elsewhere in CKAN, in third-party code or in the Python standard library. \nAll code should catch any exceptions raised by called functions , and either handle the exception, re-raise the exception (if it’s from the code’s set of allowed exception types), or wrap the exception in an allowed exception type and re-raise it. \nThis is to make it easy for a CKAN core developer to look at the source code of an internal function, scan it for the keyword `raise` , and see what types of exception the function may raise, so they know what exceptions they need to catch if they’re going to call the function. Developers shouldn’t have to read the source of all the functions that a function calls (and the functions they call…) to find out what exceptions they needs to catch to call a function without crashing. \nTodo \nInsert examples of how to re-raise and how to wrap-and-re-raise an exception. \nUse `:raises:` to document exceptions raised by public functions. The docstring should say what type of exception is raised and under what conditions. Use `:py:class:` to reference exception types. For example:",
                 "example": "def member_list(context, data_dict=None):\n    '''Return the members of a group.\n\n    ... (parameters and return values documented here) ...\n\n    :raises: :py:class:`ckan.logic.NotFound`: if the group doesn't exist\n\n    '''\n"
             },
             {
@@ -101,8 +99,8 @@
         ]
     },
     {
-        "title": "Some helpful tools for Python code quality¶",
-        "belongs to": "Some helpful tools for Python code quality¶",
+        "title": "Some helpful tools for Python code quality ¶",
+        "belongs to": "Some helpful tools for Python code quality ¶",
         "cases": [
             {
                 "description": "There are various tools that can help you to check your Python code for PEP8 conformance and general code quality. We recommend using them.\npep8 checks your Python code against some of the style conventions in PEP 8. As mentioned above, only perform style clean-ups on master to help avoid spurious merge conflicts. \npylint analyzes Python source code looking for bugs and signs of poor quality. \npyflakes also analyzes Python programs to detect errors. \nflake8 combines both pep8 and pyflakes into a single tool. \nSyntastic is a Vim plugin with support for flake8, pyflakes and pylint."

@@ -4,7 +4,7 @@
         "belongs to": "Table of Contents",
         "cases": [
             {
-                "description": "Source File Basics \nFile Names \nFile Encoding \nWhitespace Characters \nSpecial Escape Sequences \nInvisible Characters and Modifiers \nString Literals \nSource File Structure \nFile Comments \nImport Statements \nType, Variable, and Function Declarations \nOverloaded Declarations \nExtensions \nGeneral Formatting \nColumn Limit \nBraces \nSemicolons \nOne Statement Per Line \nLine-Wrapping \nFunction Declarations \nType and Extension Declarations \nFunction Calls \nControl Flow Statements \nOther Expressions \nHorizontal Whitespace \nHorizontal Alignment \nVertical Whitespace \nParentheses \nFormatting Specific Constructs \nNon-Documentation Comments \nProperties \nSwitch Statements \nEnum Cases \nTrailing Closures \nTrailing Commas \nNumeric Literals \nAttributes \nNaming \nApple’s API Style Guidelines \nNaming Conventions Are Not Access Control \nIdentifiers \nInitializers \nStatic and Class Properties \nGlobal Constants \nDelegate Methods \nProgramming Practices \nCompiler Warnings \nInitializers \nProperties \nTypes with Shorthand Names \nOptional Types \nError Types \nForce Unwrapping and Force Casts \nImplicitly Unwrapped Optionals \nAccess Levels \nNesting and Namespacing \nguards for Early Exits \nfor-where Loops \nfallthrough in switch Statements \nPattern Matching \nTuple Patterns \nNumeric and String Literals \nPlayground Literals \nTrapping vs. Overflowing Arithmetic \nDefining New Operators \nOverloading Existing Operators \nDocumentation Comments \nGeneral Format \nSingle-Sentence Summary \nParameter, Returns, and Throws Tags \nApple’s Markup Format \nWhere to Document"
+                "description": "Source File Basics \nFile Names \nFile Encoding \nWhitespace Characters \nSpecial Escape Sequences \nInvisible Characters and Modifiers \nString Literals \nSource File Structure \nFile Comments \nImport Statements \nType, Variable, and Function Declarations \nOverloaded Declarations \nExtensions \nGeneral Formatting \nColumn Limit \nBraces \nSemicolons \nOne Statement Per Line \nLine-Wrapping \nFunction Declarations \nType and Extension Declarations \nFunction Calls \nControl Flow Statements \nOther Expressions \nHorizontal Whitespace \nHorizontal Alignment \nVertical Whitespace \nParentheses \nFormatting Specific Constructs \nNon-Documentation Comments \nProperties \nSwitch Statements \nEnum Cases \nTrailing Closures \nTrailing Commas \nNumeric Literals \nAttributes \nNaming \nApple’s API Style Guidelines \nNaming Conventions Are Not Access Control \nIdentifiers \nInitializers \nStatic and Class Properties \nGlobal Constants \nDelegate Methods \nProgramming Practices \nCompiler Warnings \nInitializers \nProperties \nTypes with Shorthand Names \nOptional Types \nError Types \nForce Unwrapping and Force Casts \nImplicitly Unwrapped Optionals \nAccess Levels \nNesting and Namespacing \nguard\n \n s for Early Exits \nfor\n \n -\n \n where\n \n Loops \nfallthrough\n \n in\n \n switch\n \n Statements \nPattern Matching \nTuple Patterns \nNumeric and String Literals \nPlayground Literals \nTrapping vs. Overflowing Arithmetic \nDefining New Operators \nOverloading Existing Operators \nDocumentation Comments \nGeneral Format \nSingle-Sentence Summary \nParameter, Returns, and Throws Tags \nApple’s Markup Format \nWhere to Document"
             }
         ]
     },
@@ -81,10 +81,8 @@
             },
             {
                 "description": "The example below is forbidden because it mixes code points outside the 7-bit ASCII range in both literal form and in escaped form.",
-                "example": "let size = \"Übergr\\u{00F6}\\u{00DF}e\\n\"\n"
-            },
-            {
-                "description": "Aside: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and must be fixed."
+                "example": "let size = \"Übergr\\u{00F6}\\u{00DF}e\\n\"\n",
+                "appendix": "Aside: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and must be fixed."
             }
         ]
     },
@@ -117,7 +115,7 @@
         "belongs to": "Source File Structure/Type, Variable, and Function Declarations",
         "cases": [
             {
-                "description": "In general, most source files contain only one top-level type, especially when the type declaration is large. Exceptions are allowed when it makes sense to include multiple related types in a single file. For example,\nA class and its delegate protocol may be defined in the same file. \nA type and its small related helper types may be defined in the same file. This can be useful when using `fileprivate` to restrict certain functionality of the type and/or its helpers to only that file and not the rest of the module.\nThe order of types, variables, and functions in a source file, and the order of the members of those types, can have a great effect on readability. However, there is no single correct recipe for how to do it; different files and different types may order their contents in different ways.\nWhat is important is that each file and type uses some logical order, which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the type, as that would yield “chronological by date added” ordering, which is not a logical ordering.\nWhen deciding on the logical order of members, it can be helpful for readers and future writers (including yourself) to use `//MARK:` comments to provide descriptions for that grouping. These comments are also interpreted by Xcode and provide bookmarks in the source window’s navigation bar. (Likewise, `//MARK:-` , written with a hyphen before the description, causes Xcode to insert a divider before the menu item.) For example,",
+                "description": "In general, most source files contain only one top-level type, especially when the type declaration is large. Exceptions are allowed when it makes sense to include multiple related types in a single file. For example,\nA class and its delegate protocol may be defined in the same file. \nA type and its small related helper types may be defined in the same file. This can be useful when using `fileprivate` to restrict certain functionality of the type and/or its helpers to only that file and not the rest of the module.\nThe order of types, variables, and functions in a source file, and the order of the members of those types, can have a great effect on readability. However, there is no single correct recipe for how to do it; different files and different types may order their contents in different ways.\nWhat is important is that each file and type uses \nsome logical order, which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the type, as that would yield “chronological by date added” ordering, which is not a logical ordering.\nWhen deciding on the logical order of members, it can be helpful for readers and future writers (including yourself) to use `//MARK:` comments to provide descriptions for that grouping. These comments are also interpreted by Xcode and provide bookmarks in the source window’s navigation bar. (Likewise, `//MARK:-` , written with a hyphen before the description, causes Xcode to insert a divider before the menu item.) For example,",
                 "example": "class MovieRatingViewController: UITableViewController {\n\n  // MARK: - View controller lifecycle methods\n\n  override func viewDidLoad() {\n    // ...\n  }\n\n  override func viewWillAppear(_ animated: Bool) {\n    // ...\n  }\n\n  // MARK: - Movie rating manipulation methods\n\n  @objc private func ratingStarWasTapped(_ sender: UIButton?) {\n    // ...\n  }\n\n  @objc private func criticReviewWasTapped(_ sender: UIButton?) {\n    // ...\n  }\n}\n"
             }
         ]
@@ -136,7 +134,7 @@
         "belongs to": "Source File Structure/Extensions",
         "cases": [
             {
-                "description": "Extensions can be used to organize functionality of a type across multiple “units.” As with member order, the organizational structure/grouping you choose can have a great effect on readability; you must use some logical organizational structure that you could explain to a reviewer if asked."
+                "description": "Extensions can be used to organize functionality of a type across multiple “units.” As with member order, the organizational structure/grouping you choose can have a great effect on readability; you must use \nsome logical organizational structure that you could explain to a reviewer if asked."
             }
         ]
     },
@@ -179,10 +177,8 @@
         "cases": [
             {
                 "description": "There is at most one statement per line, and each statement is followed by a line break, except when the line ends with a block that also contains zero or one statements.",
-                "example": "guard let value = value else { return 0 }\n\ndefer { file.close() }\n\nswitch someEnum {\ncase .first: return 5\ncase .second: return 10\ncase .third: return 20\n}\n\nlet squares = numbers.map { $0 * $0 }\n\nvar someProperty: Int {\n  get { return otherObject.property }\n  set { otherObject.property = newValue }\n}\n\nvar someProperty: Int { return otherObject.somethingElse() }\n\nrequired init?(coder aDecoder: NSCoder) { fatalError(\"no coder\") }\n"
-            },
-            {
-                "description": "Wrapping the body of a single-statement block onto its own line is always allowed. Exercise best judgment when deciding whether to place a conditional statement and its body on the same line. For example, single line conditionals work well for early-return and basic cleanup tasks, but less so when the body contains a function call with significant logic. When in doubt, write it as a multi-line statement."
+                "example": "guard let value = value else { return 0 }\n\ndefer { file.close() }\n\nswitch someEnum {\ncase .first: return 5\ncase .second: return 10\ncase .third: return 20\n}\n\nlet squares = numbers.map { $0 * $0 }\n\nvar someProperty: Int {\n  get { return otherObject.property }\n  set { otherObject.property = newValue }\n}\n\nvar someProperty: Int { return otherObject.somethingElse() }\n\nrequired init?(coder aDecoder: NSCoder) { fatalError(\"no coder\") }\n",
+                "appendix": "Wrapping the body of a single-statement block onto its own line is always allowed. Exercise best judgment when deciding whether to place a conditional statement and its body on the same line. For example, single line conditionals work well for early-return and basic cleanup tasks, but less so when the body contains a function call with significant logic. When in doubt, write it as a multi-line statement."
             }
         ]
     },
@@ -225,10 +221,8 @@
             },
             {
                 "description": "If types are complex and/or deeply nested, individual elements in the arguments/constraints lists and/or the return type may also need to be wrapped. In these rare cases, the same line-wrapping rules apply to those parts as apply to the declaration itself.",
-                "example": "public func performanceTrackingIndex<Elements: Collection, Element>(\n  of element: Element,\n  in collection: Elements\n) -> (\n  Element.Index?,\n  PerformanceTrackingIndexStatistics.Timings,\n  PerformanceTrackingIndexStatistics.SpaceUsed\n) {\n  // ...\n}\n"
-            },
-            {
-                "description": "However, `typealias` es or some other means are often a better way to simplify complex declarations whenever possible."
+                "example": "public func performanceTrackingIndex<Elements: Collection, Element>(\n  of element: Element,\n  in collection: Elements\n) -> (\n  Element.Index?,\n  PerformanceTrackingIndexStatistics.Timings,\n  PerformanceTrackingIndexStatistics.SpaceUsed\n) {\n  // ...\n}\n",
+                "appendix": "However, `typealias` es or some other means are often a better way to simplify complex declarations whenever possible."
             }
         ]
     },
@@ -371,10 +365,8 @@
         "cases": [
             {
                 "description": "Parentheses are not used around the top-most expression that follows an `if` , `guard` , `while` , or `switch` keyword.",
-                "example": "if x == 0 {\n  print(\"x is zero\")\n}\n\nif (x == 0 || y == 1) && z == 2 {\n  print(\"...\")\n}\n\nif (x == 0) {\n  print(\"x is zero\")\n}\n\nif ((x == 0 || y == 1) && z == 2) {\n  print(\"...\")\n}\n"
-            },
-            {
-                "description": "Optional grouping parentheses are omitted only when the author and the reviewer agree that there is no reasonable chance that the code will be misinterpreted without them, nor that they would have made the code easier to read. It is not reasonable to assume that every reader has the entire Swift operator precedence table memorized."
+                "example": "if x == 0 {\n  print(\"x is zero\")\n}\n\nif (x == 0 || y == 1) && z == 2 {\n  print(\"...\")\n}\n\nif (x == 0) {\n  print(\"x is zero\")\n}\n\nif ((x == 0 || y == 1) && z == 2) {\n  print(\"...\")\n}\n",
+                "appendix": "Optional grouping parentheses are omitted only when the author and the reviewer agree that there is no reasonable chance that the code will be misinterpreted without them, nor that they would have made the code easier to read. It is not reasonable to assume that every reader has the entire Swift operator precedence table memorized."
             }
         ]
     },
@@ -546,10 +538,8 @@
         "cases": [
             {
                 "description": "Static and class properties that return instances of the declaring type are not suffixed with the name of the type.",
-                "example": "public class UIColor {\n  public class var red: UIColor {                // GOOD.\n    // ...\n  }\n}\n\npublic class URLSession {\n  public class var shared: URLSession {          // GOOD.\n    // ...\n  }\n}\n\npublic class UIColor {\n  public class var redColor: UIColor {           // AVOID.\n    // ...\n  }\n}\n\npublic class URLSession {\n  public class var sharedSession: URLSession {   // AVOID.\n    // ...\n  }\n}\n"
-            },
-            {
-                "description": "When a static or class property evaluates to a singleton instance of the declaring type, the names `shared` and `default` are commonly used. This style guide does not require specific names for these; the author should choose a name that makes sense for the type."
+                "example": "public class UIColor {\n  public class var red: UIColor {                // GOOD.\n    // ...\n  }\n}\n\npublic class URLSession {\n  public class var shared: URLSession {          // GOOD.\n    // ...\n  }\n}\n\npublic class UIColor {\n  public class var redColor: UIColor {           // AVOID.\n    // ...\n  }\n}\n\npublic class URLSession {\n  public class var sharedSession: URLSession {   // AVOID.\n    // ...\n  }\n}\n",
+                "appendix": "When a static or class property evaluates to a singleton instance of the declaring type, the names `shared` and `default` are commonly used. This style guide does not require specific names for these; the author should choose a name that makes sense for the type."
             }
         ]
     },
@@ -589,10 +579,8 @@
             },
             {
                 "description": "If the method returns some other value, the second argument is labeled with a noun phrase and trailing preposition that describes the return value in terms of the argument, and any other arguments (if present) provide further context.",
-                "example": "func tableView(\n  _ tableView: UITableView,\n  heightForRowAt indexPath: IndexPath\n) -> CGFloat\n"
-            },
-            {
-                "description": "Apple’s documentation on delegates and data sources also contains some good general guidance about such names."
+                "example": "func tableView(\n  _ tableView: UITableView,\n  heightForRowAt indexPath: IndexPath\n) -> CGFloat\n",
+                "appendix": "Apple’s documentation on delegates and data sources also contains some good general guidance about such names."
             }
         ]
     },
@@ -695,10 +683,8 @@
         "cases": [
             {
                 "description": "Force-unwrapping and force-casting are often code smells and are strongly discouraged. Unless it is extremely clear from surrounding code why such an operation is safe, a comment should be present that describes the invariant that ensures that the operation is safe. For example,",
-                "example": "let value = getSomeInteger()\n\n// ...intervening code...\n\n// This force-unwrap is safe because `value` is guaranteed to fall within the\n// valid enum cases because it came from some data source that only permits\n// those raw values.\nreturn SomeEnum(rawValue: value)!\n"
-            },
-            {
-                "description": "Exception: Force-unwraps are allowed in unit tests and test-only code without additional documentation. This keeps such code free of unnecessary control flow. In the event that `nil` is unwrapped or a cast operation is to an incompatible type, the test will fail which is the desired result."
+                "example": "let value = getSomeInteger()\n\n// ...intervening code...\n\n// This force-unwrap is safe because `value` is guaranteed to fall within the\n// valid enum cases because it came from some data source that only permits\n// those raw values.\nreturn SomeEnum(rawValue: value)!\n",
+                "appendix": "Exception: Force-unwraps are allowed in unit tests and test-only code without additional documentation. This keeps such code free of unnecessary control flow. In the event that `nil` is unwrapped or a cast operation is to an incompatible type, the test will fail which is the desired result."
             }
         ]
     },
@@ -708,10 +694,8 @@
         "cases": [
             {
                 "description": "Implicitly unwrapped optionals are inherently unsafe and should be avoided whenever possible in favor of non-optional declarations or regular `Optional` types. Exceptions are described below.\nUser-interface objects whose lifetimes are based on the UI lifecycle instead of being strictly based on the lifetime of the owning object are allowed to use implicitly unwrapped optionals. Examples of these include `@IBOutlet` properties connected to objects in a XIB file or storyboard, properties that are initialized externally like in the `prepareForSegue` implementation of a calling view controller, and properties that are initialized elsewhere during a class’s life cycle, like views in a view controller’s `viewDidLoad` method. Making such properties regular optionals can put too much burden on the user to unwrap them because they are guaranteed to be non-nil and remain that way once the objects are ready for use.",
-                "example": "class SomeViewController: UIViewController {\n  @IBOutlet var button: UIButton!\n\n  override func viewDidLoad() {\n    populateLabel(for: button)\n  }\n\n  private func populateLabel(for button: UIButton) {\n    // ...\n  }\n}\n"
-            },
-            {
-                "description": "Implicitly unwrapped optionals can also surface in Swift code when using Objective-C APIs that lack the appropriate nullability attributes. If possible, coordinate with the owners of that code to add those annotations so that the APIs are imported cleanly into Swift. If this is not possible, try to keep the footprint of those implicitly unwrapped optionals as small as possible in your Swift code; that is, do not propagate them through multiple layers of your own abstractions.\nImplicitly unwrapped optionals are also allowed in unit tests. This is for reasons similar to the UI object scenario above—the lifetime of test fixtures often begins not in the test’s initializer but in the `setUp()` method of a test so that they can be reset before the execution of each test."
+                "example": "class SomeViewController: UIViewController {\n  @IBOutlet var button: UIButton!\n\n  override func viewDidLoad() {\n    populateLabel(for: button)\n  }\n\n  private func populateLabel(for button: UIButton) {\n    // ...\n  }\n}\n",
+                "appendix": "Implicitly unwrapped optionals can also surface in Swift code when using Objective-C APIs that lack the appropriate nullability attributes. If possible, coordinate with the owners of that code to add those annotations so that the APIs are imported cleanly into Swift. If this is not possible, try to keep the footprint of those implicitly unwrapped optionals as small as possible in your Swift code; that is, do not propagate them through multiple layers of your own abstractions.\nImplicitly unwrapped optionals are also allowed in unit tests. This is for reasons similar to the UI object scenario above—the lifetime of test fixtures often begins not in the test’s initializer but in the `setUp()` method of a test so that they can be reset before the execution of each test."
             }
         ]
     },
@@ -740,21 +724,19 @@
         ]
     },
     {
-        "title": "guards for Early Exits",
-        "belongs to": "Programming Practices/guards for Early Exits",
+        "title": "guard s for Early Exits",
+        "belongs to": "Programming Practices/guard s for Early Exits",
         "cases": [
             {
                 "description": "A `guard` statement, compared to an `if` statement with an inverted condition, provides visual emphasis that the condition being tested is a special case that causes early exit from the enclosing scope.\nFurthermore, `guard` statements improve readability by eliminating extra levels of nesting (the “pyramid of doom”); failure conditions are closely coupled to the conditions that trigger them and the main logic remains flush left within its scope.\nThis can be seen in the following examples; in the first, there is a clear progression that checks for invalid states and exits, then executes the main logic in the successful case. In the second example without `guard` , the main logic is buried at an arbitrary nesting level and the thrown errors are separated from their conditions by a great distance.",
-                "example": "func discombobulate(_ values: [Int]) throws -> Int {\n  guard let first = values.first else {\n    throw DiscombobulationError.arrayWasEmpty\n  }\n  guard first >= 0 else {\n    throw DiscombobulationError.negativeEnergy\n  }\n\n  var result = 0\n  for value in values {\n    result += invertedCombobulatoryFactory(of: value)\n  }\n  return result\n}\n\nfunc discombobulate(_ values: [Int]) throws -> Int {\n  if let first = values.first {\n    if first >= 0 {\n      var result = 0\n      for value in values {\n        result += invertedCombobulatoryFactor(of: value)\n      }\n      return result\n    } else {\n      throw DiscombobulationError.negativeEnergy\n    }\n  } else {\n    throw DiscombobulationError.arrayWasEmpty\n  }\n}\n"
-            },
-            {
-                "description": "A `guard` - `continue` statement can also be useful in a loop to avoid increased indentation when the entire body of the loop should only be executed in some cases (but see also the `for` - `where` discussion below.)"
+                "example": "func discombobulate(_ values: [Int]) throws -> Int {\n  guard let first = values.first else {\n    throw DiscombobulationError.arrayWasEmpty\n  }\n  guard first >= 0 else {\n    throw DiscombobulationError.negativeEnergy\n  }\n\n  var result = 0\n  for value in values {\n    result += invertedCombobulatoryFactory(of: value)\n  }\n  return result\n}\n\nfunc discombobulate(_ values: [Int]) throws -> Int {\n  if let first = values.first {\n    if first >= 0 {\n      var result = 0\n      for value in values {\n        result += invertedCombobulatoryFactor(of: value)\n      }\n      return result\n    } else {\n      throw DiscombobulationError.negativeEnergy\n    }\n  } else {\n    throw DiscombobulationError.arrayWasEmpty\n  }\n}\n",
+                "appendix": "A `guard` - `continue` statement can also be useful in a loop to avoid increased indentation when the entire body of the loop should only be executed in some cases (but see also the `for` - `where` discussion below.)"
             }
         ]
     },
     {
-        "title": "for-where Loops",
-        "belongs to": "Programming Practices/for-where Loops",
+        "title": "for - where Loops",
+        "belongs to": "Programming Practices/for - where Loops",
         "cases": [
             {
                 "description": "When the entirety of a `for` loop’s body would be a single `if` block testing a condition of the element, the test is placed in the `where` clause of the `for` statement instead.",
@@ -768,10 +750,8 @@
         "cases": [
             {
                 "description": "When multiple `case` s of a `switch` would execute the same statements, the `case` patterns are combined into ranges or comma-delimited lists. Multiple `case` statements that do nothing but `fallthrough` to a `case` below are not allowed.",
-                "example": "switch value {\ncase 1: print(\"one\")\ncase 2...4: print(\"two to four\")\ncase 5, 7: print(\"five or seven\")\ndefault: break\n}\n\nswitch value {\ncase 1: print(\"one\")\ncase 2: fallthrough\ncase 3: fallthrough\ncase 4: print(\"two to four\")\ncase 5: fallthrough\ncase 7: print(\"five or seven\")\ndefault: break\n}\n"
-            },
-            {
-                "description": "In other words, there is never a `case` whose body contains only the `fallthrough` statement. Cases containing additional statements which then fallthrough to the next case are permitted."
+                "example": "switch value {\ncase 1: print(\"one\")\ncase 2...4: print(\"two to four\")\ncase 5, 7: print(\"five or seven\")\ndefault: break\n}\n\nswitch value {\ncase 1: print(\"one\")\ncase 2: fallthrough\ncase 3: fallthrough\ncase 4: print(\"two to four\")\ncase 5: fallthrough\ncase 7: print(\"five or seven\")\ndefault: break\n}\n",
+                "appendix": "In other words, there is never a `case` whose body contains only the `fallthrough` statement. Cases containing additional statements which then fallthrough to the next case are permitted."
             }
         ]
     },
@@ -849,10 +829,8 @@
             },
             {
                 "description": "Masking operations are comparatively rare but are permitted (and in fact necessary for correctness) in problem domains that use modular arithmetic, such as cryptography, big-integer implementations, hash functions, and so forth.",
-                "example": "var hashValue: Int {\n  // GOOD. What matters here is the distribution of the bit pattern rather than\n  // the actual numeric value.\n  return foo.hashValue &+ 31 * (bar.hashValue &+ 31 &* baz.hashValue)\n}\n\nvar hashValue: Int {\n  // INCORRECT. This will trap arbitrarily and unpredictably depending on the\n  // hash values of the individual terms.\n  return foo.hashValue + 31 * (bar.hashValue + 31 * baz.hashValue)\n}\n"
-            },
-            {
-                "description": "Masking operations are also permitted in performance-sensitive code where the values are already known to not cause overflow (or where overflow is not a concern). In this case, comments should be used to indicate why the use of masking operations is important. Additionally, consider adding debug preconditions to check these assumptions without affecting performance of optimized builds."
+                "example": "var hashValue: Int {\n  // GOOD. What matters here is the distribution of the bit pattern rather than\n  // the actual numeric value.\n  return foo.hashValue &+ 31 * (bar.hashValue &+ 31 &* baz.hashValue)\n}\n\nvar hashValue: Int {\n  // INCORRECT. This will trap arbitrarily and unpredictably depending on the\n  // hash values of the individual terms.\n  return foo.hashValue + 31 * (bar.hashValue + 31 * baz.hashValue)\n}\n",
+                "appendix": "Masking operations are also permitted in performance-sensitive code where the values are already known to not cause overflow (or where overflow is not a concern). In this case, comments should be used to indicate why the use of masking operations is important. Additionally, consider adding debug preconditions to check these assumptions without affecting performance of optimized builds."
             }
         ]
     },
@@ -932,10 +910,8 @@
             },
             {
                 "description": "The next example is more subtle, but it is an example of documentation that is not scalable because the extension or the conformance could be updated in the future. Consider that the type may be made `Comparable` at the time of that writing in order to sort the values, but that is not the only possible use of that conformance and client code could use it for other purposes in the future.",
-                "example": "/// Make `Candidate` comparable so that they can be sorted.\nextension Candidate: Comparable {\n  // ...\n}\n"
-            },
-            {
-                "description": "In general, if you find yourself writing documentation that simply repeats information that is obvious from the source and sugaring it with words like “a representation of,” then leave the comment out entirely.\nHowever, it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a property named `canonicalName` , don’t omit its documentation (with the rationale that it would only say `///Thecanonicalname.` ) if a typical reader may have no idea what the term “canonical name” means in that context. Use the documentation as an opportunity to define the term."
+                "example": "/// Make `Candidate` comparable so that they can be sorted.\nextension Candidate: Comparable {\n  // ...\n}\n",
+                "appendix": "In general, if you find yourself writing documentation that simply repeats information that is obvious from the source and sugaring it with words like “a representation of,” then leave the comment out entirely.\nHowever, it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a property named `canonicalName` , don’t omit its documentation (with the rationale that it would only say `///Thecanonicalname.` ) if a typical reader may have no idea what the term “canonical name” means in that context. Use the documentation as an opportunity to define the term."
             }
         ]
     }

@@ -4,7 +4,7 @@
         "belongs to": "Avoid using shell scripts",
         "cases": [
             {
-                "description": "caution This is a must-read section.\nHaving said all of the above, we recommend staying away from shell scripts as much as possible. A language like Ruby or Python (if required for consistency with codebases that we leverage) is almost always a better choice. The high-level interpreted languages have more readable syntax, offer much more mature capabilities for unit-testing, linting, and error reporting.\nUse shell scripts only if there’s a strong restriction on project’s dependencies size or any other requirements that are more important in a particular case."
+                "description": "caution \nThis is a must-read section.\nHaving said all of the above, we recommend staying away from shell scripts as much as possible. A language like Ruby or Python (if required for consistency with codebases that we leverage) is almost always a better choice. The high-level interpreted languages have more readable syntax, offer much more mature capabilities for unit-testing, linting, and error reporting.\nUse shell scripts only if there’s a strong restriction on project’s dependencies size or any other requirements that are more important in a particular case."
             }
         ]
     },
@@ -22,7 +22,7 @@
         "belongs to": "Shell language choice",
         "cases": [
             {
-                "description": "When you need to reduce the dependencies list, use what’s provided by the environment. For example, for Docker images it’s `sh` from `alpine` which is the base image for most of our tool images. Everywhere else, use `bash` if possible. It’s more powerful than `sh` but still a widespread shell."
+                "description": "When you need to reduce the dependencies list, use what’s provided by the environment. For example, for Docker images it’s `sh` from `alpine` which is the base image for most of our tool images. \nEverywhere else, use `bash` if possible. It’s more powerful than `sh` but still a widespread shell."
             }
         ]
     },
@@ -41,10 +41,8 @@
         "cases": [
             {
                 "description": "We’re using the ShellCheck utility in its default configuration to lint our shell scripts.\nAll projects with shell scripts should use this GitLab CI/CD job:",
-                "example": "shell check:\n  image: koalaman/shellcheck-alpine:stable\n  stage: test\n  before_script:\n    - shellcheck --version\n  script:\n    - shellcheck scripts/**/*.sh  # path to your shell scripts\n"
-            },
-            {
-                "description": "note By default, ShellCheck uses the shell detection to determine the shell dialect in use. If the shell file is out of your control and ShellCheck cannot detect the dialect, use `-s` flag to specify it: `-ssh` or `-sbash` ."
+                "example": "shell check:\n  image: koalaman/shellcheck-alpine:stable\n  stage: test\n  before_script:\n    - shellcheck --version\n  script:\n    - shellcheck scripts/**/*.sh  # path to your shell scripts\n",
+                "appendix": "note \nBy default, ShellCheck uses the shell detection to determine the shell dialect in use. If the shell file is out of your control and ShellCheck cannot detect the dialect, use `-s` flag to specify it: `-ssh` or `-sbash` ."
             }
         ]
     },
@@ -58,10 +56,8 @@
             },
             {
                 "description": "In addition to the Linting GitLab CI/CD job, all projects with shell scripts should also use this job:",
-                "example": "shfmt:\n  image: mvdan/shfmt:v3.2.0-alpine\n  stage: test\n  before_script:\n    - shfmt -version\n  script:\n    - shfmt -i 2 -ci -d scripts  # path to your shell scripts\n"
-            },
-            {
-                "description": "note By default, shfmt uses the shell detection similar to one of ShellCheck and ignore files starting with a period. To override this, use `-ln` flag to specify the shell dialect: `-lnposix` or `-lnbash` ."
+                "example": "shfmt:\n  image: mvdan/shfmt:v3.2.0-alpine\n  stage: test\n  before_script:\n    - shfmt -version\n  script:\n    - shfmt -i 2 -ci -d scripts  # path to your shell scripts\n",
+                "appendix": "note \nBy default, shfmt uses the shell detection similar to one of ShellCheck and ignore files starting with a period. To override this, use `-ln` flag to specify the shell dialect: `-lnposix` or `-lnbash` ."
             }
         ]
     },
@@ -70,7 +66,7 @@
         "belongs to": "Testing",
         "cases": [
             {
-                "description": "note This is a work in progress.\nIt is an ongoing effort to evaluate different tools for the automated testing of shell scripts (like BATS )."
+                "description": "note \nThis is a work in progress.\nIt is an ongoing effort to evaluate different tools for the automated testing of shell scripts (like BATS )."
             }
         ]
     },

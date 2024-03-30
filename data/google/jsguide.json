@@ -78,10 +78,8 @@
         "cases": [
             {
                 "description": "For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent hex or Unicode escape (e.g. `\\u221e` ) is used, depending only on which makes the code easier to read and understand .\nTip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.",
-                "example": "/* Best: perfectly clear even without a comment. */\nconst units = 'μs';\n\n/* Allowed: but unnecessary as μ is a printable character. */\nconst units = '\\u03bcs'; // 'μs'\n\n/* Good: use escapes for non-printable characters with a comment for clarity. */\nreturn '\\ufeff' + content;  // Prepend a byte order mark.\n\n/* Poor: the reader has no idea what character this is. */\nconst units = '\\u03bcs';\n"
-            },
-            {
-                "description": "Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that happens, those programs are broken and they must be fixed ."
+                "example": "/* Best: perfectly clear even without a comment. */\nconst units = 'μs';\n\n/* Allowed: but unnecessary as μ is a printable character. */\nconst units = '\\u03bcs'; // 'μs'\n\n/* Good: use escapes for non-printable characters with a comment for clarity. */\nreturn '\\ufeff' + content;  // Prepend a byte order mark.\n\n/* Poor: the reader has no idea what character this is. */\nconst units = '\\u03bcs';\n",
+                "appendix": "Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that happens, those programs are broken and they must be fixed ."
             }
         ]
     },
@@ -128,10 +126,8 @@
         "cases": [
             {
                 "description": "Module namespaces may never be named as a direct child of another module's namespace.\nDisallowed:",
-                "example": "goog.module('foo.bar');   // 'foo.bar.qux' would be fine, though\ngoog.module('foo.bar.baz');\n"
-            },
-            {
-                "description": "The directory hierarchy reflects the namespace hierarchy, so that deeper-nested children are subdirectories of higher-level parent directories. Note that this implies that owners of “parent” namespace groups are necessarily aware of all child namespaces, since they exist in the same directory."
+                "example": "goog.module('foo.bar');   // 'foo.bar.qux' would be fine, though\ngoog.module('foo.bar.baz');\n",
+                "appendix": "The directory hierarchy reflects the namespace hierarchy, so that deeper-nested children are subdirectories of higher-level parent directories. Note that this implies that owners of “parent” namespace groups are necessarily aware of all child namespaces, since they exist in the same directory."
             }
         ]
     },
@@ -141,10 +137,8 @@
         "cases": [
             {
                 "description": "The single `goog.module` statement may optionally be followed by a call to `goog.module.declareLegacyNamespace();` . Avoid `goog.module.declareLegacyNamespace()` when possible.\nExample:",
-                "example": "goog.module('my.test.helpers');\ngoog.module.declareLegacyNamespace();\ngoog.setTestOnly();\n"
-            },
-            {
-                "description": "`goog.module.declareLegacyNamespace` exists to ease the transition from traditional object hierarchy-based namespaces but comes with some naming restrictions. As the child module name must be created after the parent namespace, this name must not be a child or parent of any other `goog.module` (for example, `goog.module('parent');` and `goog.module('parent.child');` cannot both exist safely, nor can `goog.module('parent');` and `goog.module('parent.child.grandchild');` )."
+                "example": "goog.module('my.test.helpers');\ngoog.module.declareLegacyNamespace();\ngoog.setTestOnly();\n",
+                "appendix": "`goog.module.declareLegacyNamespace` exists to ease the transition from traditional object hierarchy-based namespaces but comes with some naming restrictions. As the child module name must be created after the parent namespace, this name must not be a child or parent of any other `goog.module` (for example, `goog.module('parent');` and `goog.module('parent.child');` cannot both exist safely, nor can `goog.module('parent');` and `goog.module('parent.child.grandchild');` )."
             }
         ]
     },
@@ -227,10 +221,8 @@
         "cases": [
             {
                 "description": "Default import names are derived from the imported file name and follow the rules in ?? .",
-                "example": "import MyClass from '../my-class.js';\nimport myFunction from '../my_function.js';\nimport SOME_CONSTANT from '../someconstant.js';\n"
-            },
-            {
-                "description": "Note: In general this should not happen as default exports are banned by this style guide, see ?? . Default imports are only used to import modules that do not conform to this style guide."
+                "example": "import MyClass from '../my-class.js';\nimport myFunction from '../my_function.js';\nimport SOME_CONSTANT from '../someconstant.js';\n",
+                "appendix": "Note: In general this should not happen as default exports are banned by this style guide, see ?? . Default imports are only used to import modules that do not conform to this style guide."
             }
         ]
     },
@@ -322,10 +314,8 @@
         "cases": [
             {
                 "description": "To reference the Closure `goog` namespace, import Closure's `goog.js` .",
-                "example": "import * as goog from '../closure/goog/goog.js';\n\nconst name = goog.require('a.name');\n\nexport const CONSTANT = name.compute();\n"
-            },
-            {
-                "description": "`goog.js` exports only a subset of properties from the global `goog` that can be used in ES modules."
+                "example": "import * as goog from '../closure/goog/goog.js';\n\nconst name = goog.require('a.name');\n\nexport const CONSTANT = name.compute();\n",
+                "appendix": "`goog.js` exports only a subset of properties from the global `goog` that can be used in ES modules."
             }
         ]
     },
@@ -452,10 +442,8 @@
         "cases": [
             {
                 "description": "Any array literal may optionally be formatted as if it were a “block-like construct.” For example, the following are all valid ( not an exhaustive list):",
-                "example": "const a = [\n  0,\n  1,\n  2,\n];\n\nconst b =\n    [0, 1, 2];\n\n\nconst c = [0, 1, 2];\n\nsomeMethod(foo, [\n  0, 1, 2,\n], bar);\n"
-            },
-            {
-                "description": "Other combinations are allowed, particularly when emphasizing semantic groupings between elements, but should not be used only to reduce the vertical size of larger arrays."
+                "example": "const a = [\n  0,\n  1,\n  2,\n];\n\nconst b =\n    [0, 1, 2];\n\n\nconst c = [0, 1, 2];\n\nsomeMethod(foo, [\n  0, 1, 2,\n], bar);\n",
+                "appendix": "Other combinations are allowed, particularly when emphasizing semantic groupings between elements, but should not be used only to reduce the vertical size of larger arrays."
             }
         ]
     },
@@ -550,10 +538,8 @@
             },
             {
                 "description": "Discouraged:",
-                "example": "currentEstimate = calc(currentEstimate + x *\n    currentEstimate) / 2.0;\n"
-            },
-            {
-                "description": "In the preceding example, the syntactic levels from highest to lowest are as follows: assignment, division, function call, parameters, number constant.\nOperators are wrapped as follows:\nWhen a line is broken at an operator the break comes after the symbol. (Note that this is not the same practice used in Google style for Java.) \nThis does not apply to the dot ( `.` ), which is not actually an operator. \nA method or constructor name stays attached to the open parenthesis ( `(` ) that follows it. \nA comma ( `,` ) stays attached to the token that precedes it.\nNote: The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines."
+                "example": "currentEstimate = calc(currentEstimate + x *\n    currentEstimate) / 2.0;\n",
+                "appendix": "In the preceding example, the syntactic levels from highest to lowest are as follows: assignment, division, function call, parameters, number constant.\nOperators are wrapped as follows:\nWhen a line is broken at an operator the break comes after the symbol. (Note that this is not the same practice used in Google style for Java.) \nThis does not apply to the dot ( `.` ), which is not actually an operator. \nA method or constructor name stays attached to the open parenthesis ( `(` ) that follows it. \nA comma ( `,` ) stays attached to the token that precedes it.\nNote: The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines."
             }
         ]
     },
@@ -595,10 +581,8 @@
         "cases": [
             {
                 "description": "Terminology Note : Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.\nThis practice is permitted, but it is generally discouraged by Google Style. It is not even required to maintain horizontal alignment in places where it was already used.\nHere is an example without alignment, followed by one with alignment. Both are allowed, but the latter is discouraged:",
-                "example": "{\n  tiny: 42, // this is great\n  longer: 435, // this too\n};\n\n{\n  tiny:   42,  // permitted, but future edits\n  longer: 435, // may leave it unaligned\n};\n"
-            },
-            {
-                "description": "Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed. More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a blast radius. This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts."
+                "example": "{\n  tiny: 42, // this is great\n  longer: 435, // this too\n};\n\n{\n  tiny:   42,  // permitted, but future edits\n  longer: 435, // may leave it unaligned\n};\n",
+                "appendix": "Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed. More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a blast radius. This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts."
             }
         ]
     },
@@ -636,10 +620,8 @@
         "cases": [
             {
                 "description": "Block comments are indented at the same level as the surrounding code. They may be in `/*…*/` or `//` -style. For multi-line `/*…*/` comments, subsequent lines must start with * aligned with the `*` on the previous line, to make comments obvious with no extra context.",
-                "example": "/*\n * This is\n * okay.\n */\n\n// And so\n// is this.\n\n/* This is fine, too. */\n"
-            },
-            {
-                "description": "Comments are not enclosed in boxes drawn with asterisks or other characters.\nDo not use JSDoc ( `/**…*/` ) for implementation comments."
+                "example": "/*\n * This is\n * okay.\n */\n\n// And so\n// is this.\n\n/* This is fine, too. */\n",
+                "appendix": "Comments are not enclosed in boxes drawn with asterisks or other characters.\nDo not use JSDoc ( `/**…*/` ) for implementation comments."
             }
         ]
     },
@@ -708,10 +690,8 @@
             },
             {
                 "description": "Mixing inline and JSDoc styles is not allowed: the compiler will only process the first JsDoc and the inline annotations will be lost.",
-                "example": "/** Some description. */\nconst /** !Array<number> */ data = [];\n"
-            },
-            {
-                "description": "Tip: There are many cases where the compiler can infer a templatized type but not its parameters. This is particularly the case when the initializing literal or constructor call does not include any values of the template parameter type (e.g., empty arrays, objects, `Map` s, or `Set` s), or if the variable is modified in a closure. Local variable type annotations are particularly helpful in these cases since otherwise the compiler will infer the template parameter as unknown."
+                "example": "/** Some description. */\nconst /** !Array<number> */ data = [];\n",
+                "appendix": "Tip: There are many cases where the compiler can infer a templatized type but not its parameters. This is particularly the case when the initializing literal or constructor call does not include any values of the template parameter type (e.g., empty arrays, objects, `Map` s, or `Set` s), or if the variable is modified in a closure. Local variable type annotations are particularly helpful in these cases since otherwise the compiler will infer the template parameter as unknown."
             }
         ]
     },
@@ -740,10 +720,8 @@
             },
             {
                 "description": "This works as expected except for the third case: if `x1` is a whole number then `a3` is an array of size `x1` where all elements are `undefined` . If `x1` is any other number, then an exception will be thrown, and if it is anything else then it will be a single-element array.\nInstead, write",
-                "example": "const a1 = [x1, x2, x3];\nconst a2 = [x1, x2];\nconst a3 = [x1];\nconst a4 = [];\n"
-            },
-            {
-                "description": "Explicitly allocating an array of a given length using `newArray(length)` is allowed when appropriate."
+                "example": "const a1 = [x1, x2, x3];\nconst a2 = [x1, x2];\nconst a3 = [x1];\nconst a4 = [];\n",
+                "appendix": "Explicitly allocating an array of a given length using `newArray(length)` is allowed when appropriate."
             }
         ]
     },
@@ -770,10 +748,8 @@
             },
             {
                 "description": "Disallowed:",
-                "example": "function badDestructuring([a, b] = [4, 2]) { … };\n"
-            },
-            {
-                "description": "Tip: For (un)packing multiple values into a function’s parameter or return, prefer object destructuring to array destructuring when possible, as it allows naming the individual elements and specifying a different type for each."
+                "example": "function badDestructuring([a, b] = [4, 2]) { … };\n",
+                "appendix": "Tip: For (un)packing multiple values into a function’s parameter or return, prefer object destructuring to array destructuring when possible, as it allows naming the individual elements and specifying a different type for each."
             }
         ]
     },
@@ -871,10 +847,8 @@
             },
             {
                 "description": "Disallowed:",
-                "example": "/** @param {{x: {num: (number|undefined), str: (string|undefined)}}} param1 */\nfunction nestedTooDeeply({x: {num, str}}) {};\n/** @param {{num: (number|undefined), str: (string|undefined)}=} param1 */\nfunction nonShorthandProperty({num: a, str: b} = {}) {};\n/** @param {{a: number, b: number}} param1 */\nfunction computedKey({a, b, [a + b]: c}) {};\n/** @param {{a: number, b: string}=} param1 */\nfunction nontrivialDefault({a, b} = {a: 2, b: 4}) {};\n"
-            },
-            {
-                "description": "Destructuring may also be used for `goog.require` statements, and in this case must not be wrapped: the entire statement occupies one line, regardless of how long it is (see ?? )."
+                "example": "/** @param {{x: {num: (number|undefined), str: (string|undefined)}}} param1 */\nfunction nestedTooDeeply({x: {num, str}}) {};\n/** @param {{num: (number|undefined), str: (string|undefined)}=} param1 */\nfunction nonShorthandProperty({num: a, str: b} = {}) {};\n/** @param {{a: number, b: number}} param1 */\nfunction computedKey({a, b, [a + b]: c}) {};\n/** @param {{a: number, b: string}=} param1 */\nfunction nontrivialDefault({a, b} = {a: 2, b: 4}) {};\n",
+                "appendix": "Destructuring may also be used for `goog.require` statements, and in this case must not be wrapped: the entire statement occupies one line, regardless of how long it is (see ?? )."
             }
         ]
     },
@@ -908,10 +882,8 @@
         "cases": [
             {
                 "description": "Set all of a concrete object’s fields (i.e. all properties other than methods) in the constructor. Annotate fields that are never reassigned with `@const` (these need not be deeply immutable). Annotate non-public fields with the proper visibility annotation ( `@private` , `@protected` , `@package` ), and end all `@private` fields' names with an underscore. Fields are never set on a concrete class' `prototype` .\nExample:",
-                "example": "class Foo {\n  constructor() {\n    /** @private @const {!Bar} */\n    this.bar_ = computeBar();\n\n    /** @protected @const {!Baz} */\n    this.baz = computeBaz();\n  }\n}\n"
-            },
-            {
-                "description": "Tip: Properties should never be added to or removed from an instance after the constructor is finished, since it significantly hinders VMs’ ability to optimize. If necessary, fields that are initialized later should be explicitly set to `undefined` in the constructor to prevent later shape changes. Adding `@struct` to an object will check that undeclared properties are not added/accessed. Classes have this added by default."
+                "example": "class Foo {\n  constructor() {\n    /** @private @const {!Bar} */\n    this.bar_ = computeBar();\n\n    /** @protected @const {!Baz} */\n    this.baz = computeBaz();\n  }\n}\n",
+                "appendix": "Tip: Properties should never be added to or removed from an instance after the constructor is finished, since it significantly hinders VMs’ ability to optimize. If necessary, fields that are initialized later should be explicitly set to `undefined` in the constructor to prevent later shape changes. Adding `@struct` to an object will check that undeclared properties are not added/accessed. Classes have this added by default."
             }
         ]
     },
@@ -944,10 +916,8 @@
             },
             {
                 "description": "Alternatively, while `goog.defineClass` should be preferred for all new code, more traditional syntax is also allowed.",
-                "example": "/**\n  * @constructor @extends {S}\n  * @param {string} value\n  */\nfunction C(value) {\n  S.call(this, 2);\n  /** @const */\n  this.prop = value;\n}\ngoog.inherits(C, S);\n\n/**\n * @param {string} param\n * @return {number}\n */\nC.prototype.method = function(param) {\n  return 0;\n};\n"
-            },
-            {
-                "description": "Per-instance properties should be defined in the constructor after the call to the super class constructor, if there is a super class. Methods should be defined on the prototype of the constructor.\nDefining constructor prototype hierarchies correctly is harder than it first appears! For that reason, it is best to use `goog.inherits` from the Closure Library ."
+                "example": "/**\n  * @constructor @extends {S}\n  * @param {string} value\n  */\nfunction C(value) {\n  S.call(this, 2);\n  /** @const */\n  this.prop = value;\n}\ngoog.inherits(C, S);\n\n/**\n * @param {string} param\n * @return {number}\n */\nC.prototype.method = function(param) {\n  return 0;\n};\n",
+                "appendix": "Per-instance properties should be defined in the constructor after the call to the super class constructor, if there is a super class. Methods should be defined on the prototype of the constructor.\nDefining constructor prototype hierarchies correctly is harder than it first appears! For that reason, it is best to use `goog.inherits` from the Closure Library ."
             }
         ]
     },
@@ -1061,10 +1031,8 @@
         "cases": [
             {
                 "description": "Optional parameters are permitted using the equals operator in the parameter list. Optional parameters must include spaces on both sides of the equals operator, be named exactly like required parameters (i.e., not prefixed with `opt_` ), use the `=` suffix in their JSDoc type, come after required parameters, and not use initializers that produce observable side effects. All optional parameters for concrete functions must have default values, even if that value is `undefined` . In contrast to concrete functions, abstract and interface methods must omit default parameter values.\nExample:",
-                "example": "/**\n * @param {string} required This parameter is always needed.\n * @param {string=} optional This parameter can be omitted.\n * @param {!Node=} node Another optional parameter.\n */\nfunction maybeDoSomething(required, optional = '', node = undefined) {}\n\n/** @interface */\nclass MyInterface {\n  /**\n   * Interface and abstract methods must omit default parameter values.\n   * @param {string=} optional\n   */\n  someMethod(optional) {}\n}\n"
-            },
-            {
-                "description": "Use default parameters sparingly. Prefer destructuring (as in ?? ) to create readable APIs when there are more than a small handful of optional parameters that do not have a natural order.\nNote: Unlike Python's default parameters, it is okay to use initializers that return new mutable objects (such as `{}` or `[]` ) because the initializer is evaluated each time the default value is used, so a single object won't be shared across invocations.\nTip: While arbitrary expressions including function calls may be used as initializers, these should be kept as simple as possible. Avoid initializers that expose shared mutable state, as that can easily introduce unintended coupling between function calls."
+                "example": "/**\n * @param {string} required This parameter is always needed.\n * @param {string=} optional This parameter can be omitted.\n * @param {!Node=} node Another optional parameter.\n */\nfunction maybeDoSomething(required, optional = '', node = undefined) {}\n\n/** @interface */\nclass MyInterface {\n  /**\n   * Interface and abstract methods must omit default parameter values.\n   * @param {string=} optional\n   */\n  someMethod(optional) {}\n}\n",
+                "appendix": "Use default parameters sparingly. Prefer destructuring (as in ?? ) to create readable APIs when there are more than a small handful of optional parameters that do not have a natural order.\nNote: Unlike Python's default parameters, it is okay to use initializers that return new mutable objects (such as `{}` or `[]` ) because the initializer is evaluated each time the default value is used, so a single object won't be shared across invocations.\nTip: While arbitrary expressions including function calls may be used as initializers, these should be kept as simple as possible. Avoid initializers that expose shared mutable state, as that can easily introduce unintended coupling between function calls."
             }
         ]
     },
@@ -1177,10 +1145,8 @@
             },
             {
                 "description": "Disallowed:",
-                "example": "  try {\n    shouldFail();\n    fail('expected an error');\n  } catch (expected) {\n  }\n"
-            },
-            {
-                "description": "Tip: Unlike in some other languages, patterns like the above simply don’t work since this will catch the error thrown by `fail` . Use `assertThrows()` instead."
+                "example": "  try {\n    shouldFail();\n    fail('expected an error');\n  } catch (expected) {\n  }\n",
+                "appendix": "Tip: Unlike in some other languages, patterns like the above simply don’t work since this will catch the error thrown by `fail` . Use `assertThrows()` instead."
             }
         ]
     },
@@ -1397,10 +1363,8 @@
         "cases": [
             {
                 "description": "Every constant is a `@const` static property or a module-local `const` declaration, but not all `@const` static properties and module-local `const` s are constants. Before choosing constant case, consider whether the field really feels like a deeply immutable constant. For example, if any of that instance's observable state can change, it is almost certainly not a constant. Merely intending to never mutate the object is generally not enough.\nExamples:",
-                "example": "// Constants\nconst NUMBER = 5;\n/** @const */ exports.NAMES = ImmutableList.of('Ed', 'Ann');\n/** @enum */ exports.SomeEnum = { ENUM_CONSTANT: 'value' };\n\n// Not constants\nlet letVariable = 'non-const';\nclass MyClass { constructor() { /** @const {string} */ this.nonStatic = 'non-static'; } };\n/** @type {string} */ MyClass.staticButMutable = 'not @const, can be reassigned';\nconst /** Set<string> */ mutableCollection = new Set();\nconst /** ImmutableSet<SomeMutableType> */ mutableElements = ImmutableSet.of(mutable);\nconst Foo = goog.require('my.Foo');  // mirrors imported name\nconst logger = log.getLogger('loggers.are.not.immutable');\n"
-            },
-            {
-                "description": "Constants’ names are typically nouns or noun phrases."
+                "example": "// Constants\nconst NUMBER = 5;\n/** @const */ exports.NAMES = ImmutableList.of('Ed', 'Ann');\n/** @enum */ exports.SomeEnum = { ENUM_CONSTANT: 'value' };\n\n// Not constants\nlet letVariable = 'non-const';\nclass MyClass { constructor() { /** @const {string} */ this.nonStatic = 'non-static'; } };\n/** @type {string} */ MyClass.staticButMutable = 'not @const, can be reassigned';\nconst /** Set<string> */ mutableCollection = new Set();\nconst /** ImmutableSet<SomeMutableType> */ mutableElements = ImmutableSet.of(mutable);\nconst Foo = goog.require('my.Foo');  // mirrors imported name\nconst logger = log.getLogger('loggers.are.not.immutable');\n",
+                "appendix": "Constants’ names are typically nouns or noun phrases."
             }
         ]
     },
@@ -1487,10 +1451,8 @@
             },
             {
                 "description": "or in this single-line example:",
-                "example": "/** @const @private {!Foo} A short bit of JSDoc. */\nthis.foo_ = foo;\n"
-            },
-            {
-                "description": "If a single-line comment overflows into multiple lines, it must use the multi-line style with `/**` and `*/` on their own lines.\nMany tools extract metadata from JSDoc comments to perform code validation and optimization. As such, these comments must be well-formed."
+                "example": "/** @const @private {!Foo} A short bit of JSDoc. */\nthis.foo_ = foo;\n",
+                "appendix": "If a single-line comment overflows into multiple lines, it must use the multi-line style with `/**` and `*/` on their own lines.\nMany tools extract metadata from JSDoc comments to perform code validation and optimization. As such, these comments must be well-formed."
             }
         ]
     },
@@ -1522,10 +1484,8 @@
             },
             {
                 "description": "Simple tags that do not require any additional data (such as `@private` , `@const` , `@final` , `@export` ) may be combined onto the same line, along with an optional type when appropriate.",
-                "example": "/**\n * Place more complex annotations (like \"implements\" and \"template\")\n * on their own lines.  Multiple simple tags (like \"export\" and \"final\")\n * may be combined in one line.\n * @export @final\n * @implements {Iterable<TYPE>}\n * @template TYPE\n */\nclass MyClass {\n  /**\n   * @param {!ObjType} obj Some object.\n   * @param {number=} num An optional number.\n   */\n  constructor(obj, num = 42) {\n    /** @private @const {!Array<!ObjType|number>} */\n    this.data_ = [obj, num];\n  }\n}\n"
-            },
-            {
-                "description": "There is no hard rule for when to combine tags, or in which order, but be consistent.\nFor general information about annotating types in JavaScript see Annotating JavaScript for the Closure Compiler and Types in the Closure Type\nSystem ."
+                "example": "/**\n * Place more complex annotations (like \"implements\" and \"template\")\n * on their own lines.  Multiple simple tags (like \"export\" and \"final\")\n * may be combined in one line.\n * @export @final\n * @implements {Iterable<TYPE>}\n * @template TYPE\n */\nclass MyClass {\n  /**\n   * @param {!ObjType} obj Some object.\n   * @param {number=} num An optional number.\n   */\n  constructor(obj, num = 42) {\n    /** @private @const {!Array<!ObjType|number>} */\n    this.data_ = [obj, num];\n  }\n}\n",
+                "appendix": "There is no hard rule for when to combine tags, or in which order, but be consistent.\nFor general information about annotating types in JavaScript see Annotating JavaScript for the Closure Compiler and Types in the Closure Type\nSystem ."
             }
         ]
     },
@@ -1535,10 +1495,8 @@
         "cases": [
             {
                 "description": "Line-wrapped block tags are indented four spaces. Wrapped description text may be lined up with the description on previous lines, but this horizontal alignment is discouraged.",
-                "example": "/**\n * Illustrates line wrapping for long param/return descriptions.\n * @param {string} foo This is a param with a description too long to fit in\n *     one line.\n * @return {number} This returns something that has a description too long to\n *     fit in one line.\n */\nexports.method = function(foo) {\n  return 5;\n};\n"
-            },
-            {
-                "description": "Do not indent when wrapping a `@desc` or `@fileoverview` description."
+                "example": "/**\n * Illustrates line wrapping for long param/return descriptions.\n * @param {string} foo This is a param with a description too long to fit in\n *     one line.\n * @return {number} This returns something that has a description too long to\n *     fit in one line.\n */\nexports.method = function(foo) {\n  return 5;\n};\n",
+                "appendix": "Do not indent when wrapping a `@desc` or `@fileoverview` description."
             }
         ]
     },
@@ -1568,10 +1526,8 @@
         "cases": [
             {
                 "description": "All enums and typedefs must be documented with appropriate JSDoc tags ( `@typedef` or `@enum` ) on the preceding line. Public enums and typedefs must also have a description. Individual enum items may be documented with a JSDoc comment on the preceding line.",
-                "example": "/**\n * A useful type union, which is reused often.\n * @typedef {!Bandersnatch|!BandersnatchType}\n */\nlet CoolUnionType;\n\n\n/**\n * Types of bandersnatches.\n * @enum {string}\n */\nconst BandersnatchType = {\n  /** This kind is really frumious. */\n  FRUMIOUS: 'frumious',\n  /** The less-frumious kind. */\n  MANXOME: 'manxome',\n};\n"
-            },
-            {
-                "description": "Typedefs are useful for defining short record types, or aliases for unions, complex functions, or generic types. Typedefs should be avoided for record types with many fields, since they do not allow documenting individual fields, nor using templates or recursive references. For large record types, prefer `@record` ."
+                "example": "/**\n * A useful type union, which is reused often.\n * @typedef {!Bandersnatch|!BandersnatchType}\n */\nlet CoolUnionType;\n\n\n/**\n * Types of bandersnatches.\n * @enum {string}\n */\nconst BandersnatchType = {\n  /** This kind is really frumious. */\n  FRUMIOUS: 'frumious',\n  /** The less-frumious kind. */\n  MANXOME: 'manxome',\n};\n",
+                "appendix": "Typedefs are useful for defining short record types, or aliases for unions, complex functions, or generic types. Typedefs should be avoided for record types with many fields, since they do not allow documenting individual fields, nor using templates or recursive references. For large record types, prefer `@record` ."
             }
         ]
     },
@@ -1593,10 +1549,8 @@
             },
             {
                 "description": "In anonymous functions annotations are generally optional. If the automatic type inference is insufficient or explicit annotation improves readability, then annotate param and return types like this:",
-                "example": "promise.then(\n    /** @return {string} */\n    (/** !Array<string> */ items) => {\n      doSomethingWith(items);\n      return items[0];\n    });\n"
-            },
-            {
-                "description": "For function type expressions, see ?? ."
+                "example": "promise.then(\n    /** @return {string} */\n    (/** !Array<string> */ items) => {\n      doSomethingWith(items);\n      return items[0];\n    });\n",
+                "appendix": "For function type expressions, see ?? ."
             }
         ]
     },
@@ -1653,10 +1607,8 @@
             },
             {
                 "description": "Good:",
-                "example": "const /** !Object<string, !User> */ users = {};\nconst /** !Array<string> */ books = [];\nconst /** !Promise<!Response> */ response = ...;\n\nconst /** !Promise<undefined> */ thisPromiseReturnsNothingButParameterIsStillUseful = ...;\nconst /** !Object<string, *> */ mapOfEverything = {};\n"
-            },
-            {
-                "description": "Cases when template parameters should not be used:\n`Object` is used for type hierarchy and not as map-like structure."
+                "example": "const /** !Object<string, !User> */ users = {};\nconst /** !Array<string> */ books = [];\nconst /** !Promise<!Response> */ response = ...;\n\nconst /** !Promise<undefined> */ thisPromiseReturnsNothingButParameterIsStillUseful = ...;\nconst /** !Object<string, *> */ mapOfEverything = {};\n",
+                "appendix": "Cases when template parameters should not be used:\n`Object` is used for type hierarchy and not as map-like structure."
             }
         ]
     },
@@ -1744,10 +1696,8 @@
         "cases": [
             {
                 "description": "Warnings are suppressed at the narrowest reasonable scope, usually that of a single local variable or very small method. Often a variable or method is extracted for that reason alone.\nExample",
-                "example": "/** @suppress {uselessCode} Unrecognized 'use asm' declaration */\nfunction fn() {\n  'use asm';\n  return 0;\n}\n"
-            },
-            {
-                "description": "Even a large number of suppressions in a class is still better than blinding the entire class to this type of warning."
+                "example": "/** @suppress {uselessCode} Unrecognized 'use asm' declaration */\nfunction fn() {\n  'use asm';\n  return 0;\n}\n",
+                "appendix": "Even a large number of suppressions in a class is still better than blinding the entire class to this type of warning."
             }
         ]
     },

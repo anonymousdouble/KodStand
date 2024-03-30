@@ -60,10 +60,8 @@
         "cases": [
             {
                 "description": "Names should be as descriptive as possible, within reason. Follow standard Objective-C naming\nrules .\nAvoid non-standard abbreviations (including non-standard acronyms and initialisms). Don’t worry about saving horizontal space as it is far more important to make your code immediately understandable by a new reader. For example:",
-                "example": "// GOOD:\n\n// Good names.\nint numberOfErrors = 0;\nint completedConnectionsCount = 0;\ntickets = [[NSMutableArray alloc] init];\nuserInfo = [someObject object];\nport = [network port];\nNSDate *gAppLaunchDate;\n\n// AVOID:\n\n// Names to avoid.\nint w;\nint nerr;\nint nCompConns;\ntix = [[NSMutableArray alloc] init];\nobj = [someObject object];\np = [network port];\n"
-            },
-            {
-                "description": "Any class, category, method, function, or variable name should use all capitals for acronyms and initialisms within the name. This follows Apple’s standard of using all capitals within a name for acronyms such as URL, ID, TIFF, and EXIF.\nNames of C functions and typedefs should be capitalized and use camel case as appropriate for the surrounding code."
+                "example": "// GOOD:\n\n// Good names.\nint numberOfErrors = 0;\nint completedConnectionsCount = 0;\ntickets = [[NSMutableArray alloc] init];\nuserInfo = [someObject object];\nport = [network port];\nNSDate *gAppLaunchDate;\n\n// AVOID:\n\n// Names to avoid.\nint w;\nint nerr;\nint nCompConns;\ntix = [[NSMutableArray alloc] init];\nobj = [someObject object];\np = [network port];\n",
+                "appendix": "Any class, category, method, function, or variable name should use all capitals for acronyms and initialisms within the name. This follows Apple’s standard of using all capitals within a name for acronyms such as URL, ID, TIFF, and EXIF.\nNames of C functions and typedefs should be capitalized and use camel case as appropriate for the surrounding code."
             }
         ]
     },
@@ -131,10 +129,8 @@
             },
             {
                 "description": "Accessors that return the value of boolean adjectives have method names beginning with `is` , but property names for those methods omit the `is` .\nDot notation is used only with property names, not with method names.",
-                "example": "// GOOD:\n\n@property(nonatomic, getter=isGlorious) BOOL glorious;\n- (BOOL)isGlorious;\n\nBOOL isGood = object.glorious;      // GOOD.\nBOOL isGood = [object isGlorious];  // GOOD.\n\n// AVOID:\n\nBOOL isGood = object.isGlorious;    // AVOID.\n\n// GOOD:\n\nNSArray<Frog *> *frogs = [NSArray<Frog *> arrayWithObject:frog];\nNSEnumerator *enumerator = [frogs reverseObjectEnumerator];  // GOOD.\n\n// AVOID:\n\nNSEnumerator *enumerator = frogs.reverseObjectEnumerator;    // AVOID.\n"
-            },
-            {
-                "description": "See Apple’s Guide to Naming\nMethods for more details on Objective-C naming.\nThese guidelines are for Objective-C methods only. C++ method names continue to follow the rules set in the C++ style guide."
+                "example": "// GOOD:\n\n@property(nonatomic, getter=isGlorious) BOOL glorious;\n- (BOOL)isGlorious;\n\nBOOL isGood = object.glorious;      // GOOD.\nBOOL isGood = [object isGlorious];  // GOOD.\n\n// AVOID:\n\nBOOL isGood = object.isGlorious;    // AVOID.\n\n// GOOD:\n\nNSArray<Frog *> *frogs = [NSArray<Frog *> arrayWithObject:frog];\nNSEnumerator *enumerator = [frogs reverseObjectEnumerator];  // GOOD.\n\n// AVOID:\n\nNSEnumerator *enumerator = frogs.reverseObjectEnumerator;    // AVOID.\n",
+                "appendix": "See Apple’s Guide to Naming\nMethods for more details on Objective-C naming.\nThese guidelines are for Objective-C methods only. C++ method names continue to follow the rules set in the C++ style guide."
             }
         ]
     },
@@ -194,10 +190,8 @@
             },
             {
                 "description": "A lowercase k can be used as a standalone prefix for constants of static storage duration declared within implementation files:",
-                "example": "// GOOD:\n\nstatic const int kFileCount = 12;\nstatic NSString *const kUserKey = @\"kUserKey\";\n"
-            },
-            {
-                "description": "NOTE: Previous convention was for public constant names to begin with a lowercase k followed by a project-specific prefix . This practice is no longer recommended."
+                "example": "// GOOD:\n\nstatic const int kFileCount = 12;\nstatic NSString *const kUserKey = @\"kUserKey\";\n",
+                "appendix": "NOTE: Previous convention was for public constant names to begin with a lowercase k followed by a project-specific prefix . This practice is no longer recommended."
             }
         ]
     },
@@ -225,10 +219,8 @@
             },
             {
                 "description": "Occasionally, efficiency will make it more appropriate to declare a variable outside the scope of its use. This example declares meters separate from initialization, and needlessly sends the lastKnownLocation message each time through the loop:",
-                "example": "// AVOID:\n\nint meters;                                         // AVOID.\nfor (meters = 1; meters < 10; meters++) {\n  CLLocation *location = [self lastKnownLocation];  // AVOID.\n  reportFrogsWithinRadius(location, meters);\n}\n"
-            },
-            {
-                "description": "Under Automatic Reference Counting, strong and weak pointers to Objective-C objects are automatically initialized to `nil` , so explicit initialization to `nil` is not required for those common cases. However, automatic initialization does not occur for many Objective-C pointer types, including object pointers declared with the `__unsafe_unretained` ownership qualifier and CoreFoundation object pointer types. When in doubt, prefer to initialize all Objective-C local variables."
+                "example": "// AVOID:\n\nint meters;                                         // AVOID.\nfor (meters = 1; meters < 10; meters++) {\n  CLLocation *location = [self lastKnownLocation];  // AVOID.\n  reportFrogsWithinRadius(location, meters);\n}\n",
+                "appendix": "Under Automatic Reference Counting, strong and weak pointers to Objective-C objects are automatically initialized to `nil` , so explicit initialization to `nil` is not required for those common cases. However, automatic initialization does not occur for many Objective-C pointer types, including object pointers declared with the `__unsafe_unretained` ownership qualifier and CoreFoundation object pointer types. When in doubt, prefer to initialize all Objective-C local variables."
             }
         ]
     },
@@ -238,10 +230,8 @@
         "cases": [
             {
                 "description": "Avoid unsigned integers except when matching types used by system interfaces.\nSubtle errors crop up when doing math or counting down to zero using unsigned integers. Rely only on signed integers in math expressions except when matching NSUInteger in system interfaces.",
-                "example": "// GOOD:\n\nNSUInteger numberOfObjects = array.count;\nfor (NSInteger counter = numberOfObjects - 1; counter > 0; --counter)\n\n// AVOID:\n\nfor (NSUInteger counter = numberOfObjects - 1; counter > 0; --counter)  // AVOID.\n"
-            },
-            {
-                "description": "Unsigned integers may be used for flags and bitmasks, though often NS_OPTIONS or NS_ENUM will be more appropriate."
+                "example": "// GOOD:\n\nNSUInteger numberOfObjects = array.count;\nfor (NSInteger counter = numberOfObjects - 1; counter > 0; --counter)\n\n// AVOID:\n\nfor (NSUInteger counter = numberOfObjects - 1; counter > 0; --counter)  // AVOID.\n",
+                "appendix": "Unsigned integers may be used for flags and bitmasks, though often NS_OPTIONS or NS_ENUM will be more appropriate."
             }
         ]
     },
@@ -251,10 +241,8 @@
         "cases": [
             {
                 "description": "Due to sizes that differ in 32- and 64-bit builds, avoid types long, NSInteger, NSUInteger, and CGFloat except when matching system interfaces.\nTypes long, NSInteger, NSUInteger, and CGFloat vary in size between 32- and 64-bit builds. Use of these types is appropriate when handling values exposed by system interfaces, but they should be avoided for most other computations.",
-                "example": "// GOOD:\n\nint32_t scalar1 = proto.intValue;\n\nint64_t scalar2 = proto.longValue;\n\nNSUInteger numberOfObjects = array.count;\n\nCGFloat offset = view.bounds.origin.x;\n\n// AVOID:\n\nNSInteger scalar2 = proto.longValue;  // AVOID.\n"
-            },
-            {
-                "description": "File and buffer sizes often exceed 32-bit limits, so they should be declared using `int64_t` , not with `long` , `NSInteger` , or `NSUInteger` ."
+                "example": "// GOOD:\n\nint32_t scalar1 = proto.intValue;\n\nint64_t scalar2 = proto.longValue;\n\nNSUInteger numberOfObjects = array.count;\n\nCGFloat offset = view.bounds.origin.x;\n\n// AVOID:\n\nNSInteger scalar2 = proto.longValue;  // AVOID.\n",
+                "appendix": "File and buffer sizes often exceed 32-bit limits, so they should be declared using `int64_t` , not with `long` , `NSInteger` , or `NSUInteger` ."
             }
         ]
     },
@@ -282,10 +270,8 @@
         "cases": [
             {
                 "description": "Every non-trivial interface, public and private, should have an accompanying comment describing its purpose and how it fits into the larger picture.\nComments should be used to document classes, properties, ivars, functions, categories, protocol declarations, and enums.",
-                "example": "// GOOD:\n\n/**\n * A delegate for NSApplication to handle notifications about app\n * launch and shutdown. Owned by the main app controller.\n */\n@interface MyAppDelegate : NSObject {\n  /**\n   * The background task in progress, if any. This is initialized\n   * to the value UIBackgroundTaskInvalid.\n   */\n  UIBackgroundTaskIdentifier _backgroundTaskID;\n}\n\n/** The factory that creates and manages fetchers for the app. */\n@property(nonatomic) GTMSessionFetcherService *fetcherService;\n\n@end\n"
-            },
-            {
-                "description": "Doxygen-style comments are encouraged for interfaces as they are parsed by Xcode to display formatted documentation. There is a wide variety of Doxygen commands; use them consistently within a project.\nIf you have already described an interface in detail in the comments at the top of your file, feel free to simply state, “See comment at top of file for a complete description”, but be sure to have some sort of comment.\nAdditionally, each method should have a comment explaining its function, arguments, return value, thread or queue assumptions, and any side effects. Documentation comments should be in the header for public methods, or immediately preceding the method for non-trivial private methods.\nUse descriptive form (“Opens the file”) rather than imperative form (“Open the file”) for method and function comments. The comment describes the function; it does not tell the function what to do.\nDocument the thread usage assumptions the class, properties, or methods make, if any. If an instance of the class can be accessed by multiple threads, take extra care to document the rules and invariants surrounding multithreaded use.\nAny sentinel values for properties and ivars, such as `NULL` or `-1` , should be documented in comments.\nDeclaration comments explain how a method or function is used. Comments explaining how a method or function is implemented should be with the implementation rather than with the declaration."
+                "example": "// GOOD:\n\n/**\n * A delegate for NSApplication to handle notifications about app\n * launch and shutdown. Owned by the main app controller.\n */\n@interface MyAppDelegate : NSObject {\n  /**\n   * The background task in progress, if any. This is initialized\n   * to the value UIBackgroundTaskInvalid.\n   */\n  UIBackgroundTaskIdentifier _backgroundTaskID;\n}\n\n/** The factory that creates and manages fetchers for the app. */\n@property(nonatomic) GTMSessionFetcherService *fetcherService;\n\n@end\n",
+                "appendix": "Doxygen-style comments are encouraged for interfaces as they are parsed by Xcode to display formatted documentation. There is a wide variety of Doxygen commands; use them consistently within a project.\nIf you have already described an interface in detail in the comments at the top of your file, feel free to simply state, “See comment at top of file for a complete description”, but be sure to have some sort of comment.\nAdditionally, each method should have a comment explaining its function, arguments, return value, thread or queue assumptions, and any side effects. Documentation comments should be in the header for public methods, or immediately preceding the method for non-trivial private methods.\nUse descriptive form (“Opens the file”) rather than imperative form (“Open the file”) for method and function comments. The comment describes the function; it does not tell the function what to do.\nDocument the thread usage assumptions the class, properties, or methods make, if any. If an instance of the class can be accessed by multiple threads, take extra care to document the rules and invariants surrounding multithreaded use.\nAny sentinel values for properties and ivars, such as `NULL` or `-1` , should be documented in comments.\nDeclaration comments explain how a method or function is used. Comments explaining how a method or function is implemented should be with the implementation rather than with the declaration."
             }
         ]
     },
@@ -368,10 +354,8 @@
             },
             {
                 "description": "Avoid macros that expand to unbalanced C or Objective-C constructs. Avoid macros that introduce scope, or may obscure the capturing of values in blocks.\nAvoid macros that generate class, property, or method definitions in headers to be used as public API. These only make the code hard to understand, and the language already has better ways of doing this.\nAvoid macros that generate method implementations, or that generate declarations of variables that are later used outside of the macro. Macros shouldn’t make code hard to understand by hiding where and how a variable is declared.",
-                "example": "// AVOID:\n\n#define ARRAY_ADDER(CLASS) \\\n  -(void)add ## CLASS ## :(CLASS *)obj toArray:(NSMutableArray *)array\n\nARRAY_ADDER(NSString) {\n  if (array.count > 5) {              // AVOID -- where is 'array' defined?\n    ...\n  }\n}\n"
-            },
-            {
-                "description": "Examples of acceptable macro use include assertion and debug logging macros that are conditionally compiled based on build settings—often, these are not compiled into release builds."
+                "example": "// AVOID:\n\n#define ARRAY_ADDER(CLASS) \\\n  -(void)add ## CLASS ## :(CLASS *)obj toArray:(NSMutableArray *)array\n\nARRAY_ADDER(NSString) {\n  if (array.count > 5) {              // AVOID -- where is 'array' defined?\n    ...\n  }\n}\n",
+                "appendix": "Examples of acceptable macro use include assertion and debug logging macros that are conditionally compiled based on build settings—often, these are not compiled into release builds."
             }
         ]
     },
@@ -539,10 +523,8 @@
         "cases": [
             {
                 "description": "Avoid `nil` pointer checks that exist only to prevent sending messages to `nil` . Sending a message to `nil` \nreliably\nreturns \n`nil` as a pointer, zero as an integer or floating-point value, structs initialized to `0` , and `_Complex` values equal to `{0,0}` .",
-                "example": "// AVOID:\n\nif (dataSource) {  // AVOID.\n  [dataSource moveItemAtIndex:1 toIndex:0];\n}\n\n// GOOD:\n\n[dataSource moveItemAtIndex:1 toIndex:0];  // GOOD.\n"
-            },
-            {
-                "description": "Note that this applies to `nil` as a message target, not as a parameter value. Individual methods may or may not safely handle `nil` parameter values.\nNote too that this is distinct from checking C/C++ pointers and block pointers against `NULL` , which the runtime does not handle and will cause your application to crash. You still need to make sure you do not dereference a `NULL` pointer."
+                "example": "// AVOID:\n\nif (dataSource) {  // AVOID.\n  [dataSource moveItemAtIndex:1 toIndex:0];\n}\n\n// GOOD:\n\n[dataSource moveItemAtIndex:1 toIndex:0];  // GOOD.\n",
+                "appendix": "Note that this applies to `nil` as a message target, not as a parameter value. Individual methods may or may not safely handle `nil` parameter values.\nNote too that this is distinct from checking C/C++ pointers and block pointers against `NULL` , which the runtime does not handle and will cause your application to crash. You still need to make sure you do not dereference a `NULL` pointer."
             }
         ]
     },
@@ -552,10 +534,8 @@
         "cases": [
             {
                 "description": "Interfaces can be decorated with nullability annotations to describe how the interface should be used and how it behaves. Use of nullability regions (e.g., `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` ) and explicit nullability annotations are both accepted. Prefer using the `_Nullable` and `_Nonnull` keywords over the `__nullable` and `__nonnull` keywords. For Objective-C methods and properties prefer using the context-sensitive, non-underscored keywords, e.g., `nonnull` and `nullable` .",
-                "example": "// GOOD:\n\n/** A class representing an owned book. */\n@interface GTMBook : NSObject\n\n/** The title of the book. */\n@property(readonly, copy, nonnull) NSString *title;\n\n/** The author of the book, if one exists. */\n@property(readonly, copy, nullable) NSString *author;\n\n/** The owner of the book. Setting nil resets to the default owner. */\n@property(copy, null_resettable) NSString *owner;\n\n/** Initializes a book with a title and an optional author. */\n- (nonnull instancetype)initWithTitle:(nonnull NSString *)title\n                               author:(nullable NSString *)author\n    NS_DESIGNATED_INITIALIZER;\n\n/** Returns nil because a book is expected to have a title. */\n- (nullable instancetype)init;\n\n@end\n\n/** Loads books from the file specified by the given path. */\nNSArray<GTMBook *> *_Nullable GTMLoadBooksFromFile(NSString *_Nonnull path);\n\n// AVOID:\n\nNSArray<GTMBook *> *__nullable GTMLoadBooksFromTitle(NSString *__nonnull path);\n"
-            },
-            {
-                "description": "Be careful assuming that a pointer is not null based on a non-null qualifier because the compiler may not guarantee that the pointer is not null."
+                "example": "// GOOD:\n\n/** A class representing an owned book. */\n@interface GTMBook : NSObject\n\n/** The title of the book. */\n@property(readonly, copy, nonnull) NSString *title;\n\n/** The author of the book, if one exists. */\n@property(readonly, copy, nullable) NSString *author;\n\n/** The owner of the book. Setting nil resets to the default owner. */\n@property(copy, null_resettable) NSString *owner;\n\n/** Initializes a book with a title and an optional author. */\n- (nonnull instancetype)initWithTitle:(nonnull NSString *)title\n                               author:(nullable NSString *)author\n    NS_DESIGNATED_INITIALIZER;\n\n/** Returns nil because a book is expected to have a title. */\n- (nullable instancetype)init;\n\n@end\n\n/** Loads books from the file specified by the given path. */\nNSArray<GTMBook *> *_Nullable GTMLoadBooksFromFile(NSString *_Nonnull path);\n\n// AVOID:\n\nNSArray<GTMBook *> *__nullable GTMLoadBooksFromTitle(NSString *__nonnull path);\n",
+                "appendix": "Be careful assuming that a pointer is not null based on a non-null qualifier because the compiler may not guarantee that the pointer is not null."
             }
         ]
     },
@@ -608,10 +588,8 @@
         "cases": [
             {
                 "description": "Within an Objective-C++ source file, follow the style for the language of the function or method you’re implementing. In order to minimize clashes between the differing naming styles when mixing Cocoa/Objective-C and C++, follow the style of the method being implemented.\nFor code in an `@implementation` block, use the Objective-C naming rules. For code in a method of a C++ class, use the C++ naming rules.\nFor code in an Objective-C++ file outside of a class implementation, be consistent within the file.",
-                "example": "// GOOD:\n\n// file: cross_platform_header.h\n\nclass CrossPlatformAPI {\n public:\n  ...\n  int DoSomethingPlatformSpecific();  // impl on each platform\n private:\n  int an_instance_var_;\n};\n\n// file: mac_implementation.mm\n#include \"cross_platform_header.h\"\n\n/** A typical Objective-C class, using Objective-C naming. */\n@interface MyDelegate : NSObject {\n @private\n  int _instanceVar;\n  CrossPlatformAPI* _backEndObject;\n}\n\n- (void)respondToSomething:(id)something;\n\n@end\n\n@implementation MyDelegate\n\n- (void)respondToSomething:(id)something {\n  // bridge from Cocoa through our C++ backend\n  _instanceVar = _backEndObject->DoSomethingPlatformSpecific();\n  NSString* tempString = [NSString stringWithFormat:@\"%d\", _instanceVar];\n  NSLog(@\"%@\", tempString);\n}\n\n@end\n\n/** The platform-specific implementation of the C++ class, using C++ naming. */\nint CrossPlatformAPI::DoSomethingPlatformSpecific() {\n  NSString* temp_string = [NSString stringWithFormat:@\"%d\", an_instance_var_];\n  NSLog(@\"%@\", temp_string);\n  return [temp_string intValue];\n}\n"
-            },
-            {
-                "description": "Projects may opt to use an 80 column line length limit for consistency with Google’s C++ style guide."
+                "example": "// GOOD:\n\n// file: cross_platform_header.h\n\nclass CrossPlatformAPI {\n public:\n  ...\n  int DoSomethingPlatformSpecific();  // impl on each platform\n private:\n  int an_instance_var_;\n};\n\n// file: mac_implementation.mm\n#include \"cross_platform_header.h\"\n\n/** A typical Objective-C class, using Objective-C naming. */\n@interface MyDelegate : NSObject {\n @private\n  int _instanceVar;\n  CrossPlatformAPI* _backEndObject;\n}\n\n- (void)respondToSomething:(id)something;\n\n@end\n\n@implementation MyDelegate\n\n- (void)respondToSomething:(id)something {\n  // bridge from Cocoa through our C++ backend\n  _instanceVar = _backEndObject->DoSomethingPlatformSpecific();\n  NSString* tempString = [NSString stringWithFormat:@\"%d\", _instanceVar];\n  NSLog(@\"%@\", tempString);\n}\n\n@end\n\n/** The platform-specific implementation of the C++ class, using C++ naming. */\nint CrossPlatformAPI::DoSomethingPlatformSpecific() {\n  NSString* temp_string = [NSString stringWithFormat:@\"%d\", an_instance_var_];\n  NSLog(@\"%@\", temp_string);\n  return [temp_string intValue];\n}\n",
+                "appendix": "Projects may opt to use an 80 column line length limit for consistency with Google’s C++ style guide."
             }
         ]
     },
@@ -658,10 +636,8 @@
         "cases": [
             {
                 "description": "Prefer putting the return type on the same line as the function name and append all parameters on the same line if they will fit. Wrap parameter lists which do not fit on a single line as you would wrap arguments in a function\ncall .",
-                "example": "// GOOD:\n\nNSString *GTMVersionString(int majorVersion, minorVersion) {\n  ...\n}\n\nvoid GTMSerializeDictionaryToFileOnDispatchQueue(\n    NSDictionary<NSString *, NSString *> *dictionary,\n    NSString *filename,\n    dispatch_queue_t queue) {\n  ...\n}\n"
-            },
-            {
-                "description": "Function declarations and definitions should also satisfy the following conditions:\nThe opening parenthesis must always be on the same line as the function name. \nIf you cannot fit the return type and the function name on a single line, break between them and do not indent the function name. \nThere should never be a space before the opening parenthesis. \nThere should never be a space between function parentheses and parameters. \nThe open curly brace is always on the end of the last line of the function declaration, not the start of the next line. \nThe close curly brace is either on the last line by itself or on the same line as the open curly brace. \nThere should be a space between the close parenthesis and the open curly brace. \nAll parameters should be aligned if possible. \nFunction scopes should be indented 2 spaces. \nWrapped parameters should have a 4 space indent."
+                "example": "// GOOD:\n\nNSString *GTMVersionString(int majorVersion, minorVersion) {\n  ...\n}\n\nvoid GTMSerializeDictionaryToFileOnDispatchQueue(\n    NSDictionary<NSString *, NSString *> *dictionary,\n    NSString *filename,\n    dispatch_queue_t queue) {\n  ...\n}\n",
+                "appendix": "Function declarations and definitions should also satisfy the following conditions:\nThe opening parenthesis must always be on the same line as the function name. \nIf you cannot fit the return type and the function name on a single line, break between them and do not indent the function name. \nThere should never be a space before the opening parenthesis. \nThere should never be a space between function parentheses and parameters. \nThe open curly brace is always on the end of the last line of the function declaration, not the start of the next line. \nThe close curly brace is either on the last line by itself or on the same line as the open curly brace. \nThere should be a space between the close parenthesis and the open curly brace. \nAll parameters should be aligned if possible. \nFunction scopes should be indented 2 spaces. \nWrapped parameters should have a 4 space indent."
             }
         ]
     },
@@ -719,10 +695,8 @@
             },
             {
                 "description": "As with declarations and definitions, when the first keyword is shorter than the others, indent the later lines by at least four spaces, maintaining colon alignment:",
-                "example": "// GOOD:\n\n[myObj short:arg1\n          longKeyword:arg2\n    evenLongerKeyword:arg3\n                error:arg4];\n"
-            },
-            {
-                "description": "Invocations containing multiple inlined blocks may have their parameter names left-aligned at a four space indent."
+                "example": "// GOOD:\n\n[myObj short:arg1\n          longKeyword:arg2\n    evenLongerKeyword:arg3\n                error:arg4];\n",
+                "appendix": "Invocations containing multiple inlined blocks may have their parameter names left-aligned at a four space indent."
             }
         ]
     },

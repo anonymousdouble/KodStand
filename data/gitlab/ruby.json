@@ -14,10 +14,8 @@
         "cases": [
             {
                 "description": "History \nIntroduced in GitLab 14.1.\nInstance variables can be accessed in a variety of ways in a class:",
-                "example": "# public\nclass Foo\n  attr_reader :my_var\n\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  def do_stuff\n    puts my_var\n  end\nend\n\n# private\nclass Foo\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  private\n\n  attr_reader :my_var\n\n  def do_stuff\n    puts my_var\n  end\nend\n\n# direct\nclass Foo\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  private\n\n  def do_stuff\n    puts @my_var\n  end\nend\n"
-            },
-            {
-                "description": "Public attributes should only be used if they are accessed outside of the class. There is not a strong opinion on what strategy is used when attributes are only accessed internally, as long as there is consistency in related code."
+                "example": "# public\nclass Foo\n  attr_reader :my_var\n\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  def do_stuff\n    puts my_var\n  end\nend\n\n# private\nclass Foo\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  private\n\n  attr_reader :my_var\n\n  def do_stuff\n    puts my_var\n  end\nend\n\n# direct\nclass Foo\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  private\n\n  def do_stuff\n    puts @my_var\n  end\nend\n",
+                "appendix": "Public attributes should only be used if they are accessed outside of the class. There is not a strong opinion on what strategy is used when attributes are only accessed internally, as long as there is consistency in related code."
             }
         ]
     },
@@ -71,7 +69,7 @@
         "belongs to": "Why callbacks should be avoided",
         "cases": [
             {
-                "description": "In general, callbacks should be avoided because:\nCallbacks are hard to reason about because invocation order is not obvious and they break code narrative. Callbacks are harder to locate and navigate because they rely on reflection to trigger rather than being ordinary method calls. Callbacks make it difficult to apply changes selectively to an object’s state because changes always trigger the entire callback chain. Callbacks trap logic in the ActiveRecord class. This tight coupling encourages fat models that contain too much business logic, which could instead live in service objects that are more reusable, composable, and are easier to test. Illegal state transitions of an object can be better enforced through attribute validations. Heavy use of callbacks affects factory creation speed. With some classes having hundreds of callbacks, creating an instance of that object for an automated test can be a very slow operation, resulting in slow specs.\nSome of these examples are discussed in this video from thoughtbot .\nThe GitLab codebase relies heavily on callbacks and it is hard to refactor them once added due to invisible dependencies. As a result, this guideline does not call for removing all existing callbacks."
+                "description": "In general, callbacks should be avoided because:\nCallbacks are hard to reason about because invocation order is not obvious and they break code narrative. \nCallbacks are harder to locate and navigate because they rely on reflection to trigger rather than being ordinary method calls. \nCallbacks make it difficult to apply changes selectively to an object’s state because changes always trigger the entire callback chain. \nCallbacks trap logic in the ActiveRecord class. This tight coupling encourages fat models that contain too much business logic, which could instead live in service objects that are more reusable, composable, and are easier to test. \nIllegal state transitions of an object can be better enforced through attribute validations. \nHeavy use of callbacks affects factory creation speed. With some classes having hundreds of callbacks, creating an instance of that object for an automated test can be a very slow operation, resulting in slow specs.\nSome of these examples are discussed in this video from thoughtbot .\nThe GitLab codebase relies heavily on callbacks and it is hard to refactor them once added due to invisible dependencies. As a result, this guideline does not call for removing all existing callbacks."
             }
         ]
     },
@@ -80,7 +78,7 @@
         "belongs to": "Why callbacks should be avoided/When to use callbacks",
         "cases": [
             {
-                "description": "Callbacks can be used in special cases. Some examples of cases where adding a callback makes sense:\nA dependency uses callbacks and we would like to override the callback behavior. Incrementing cache counts. Data normalization that only relates to data on the current model."
+                "description": "Callbacks can be used in special cases. Some examples of cases where adding a callback makes sense:\nA dependency uses callbacks and we would like to override the callback behavior. \nIncrementing cache counts. \nData normalization that only relates to data on the current model."
             }
         ]
     },
@@ -98,10 +96,8 @@
             },
             {
                 "description": "While this seems pretty harmless for a baby Rails app, adding this type of logic via callbacks has many downsides once your Rails app becomes large and complex (all of which are listed in this documentation). Instead, we can add this logic to a service class:",
-                "example": "class Project\n  has_one :repository\nend\n\nclass Repository\n  belongs_to :project\nend\n\nclass ProjectCreator\n  def self.execute\n    ApplicationRecord.transaction do\n      name = SecureRandom.alphanumeric\n      project = Project.create!(name: name)\n      Repository.create!(project: project, name: name)\n    end\n  end\nend\n\nclass ProjectsController\n  def create\n    ProjectCreator.execute\n  end\nend\n"
-            },
-            {
-                "description": "With an application this simple, it can be hard to see the benefits of the second approach. But we already some benefits:\nCan test `Repository` creation logic separate from `Project` creation logic. Code no longer violates law of demeter ( `Repository` class doesn’t need to know `project.name` ). Clarity of invocation order. Open to change: if we decide there are some scenarios where we do not want a repository created for a project, we can create a new service class rather than needing to refactor to `Project` and `Repository` classes. Each instance of a `Project` factory does not create a second ( `Repository` ) object."
+                "example": "class Project\n  has_one :repository\nend\n\nclass Repository\n  belongs_to :project\nend\n\nclass ProjectCreator\n  def self.execute\n    ApplicationRecord.transaction do\n      name = SecureRandom.alphanumeric\n      project = Project.create!(name: name)\n      Repository.create!(project: project, name: name)\n    end\n  end\nend\n\nclass ProjectsController\n  def create\n    ProjectCreator.execute\n  end\nend\n",
+                "appendix": "With an application this simple, it can be hard to see the benefits of the second approach. But we already some benefits:\nCan test `Repository` creation logic separate from `Project` creation logic. Code no longer violates law of demeter ( `Repository` class doesn’t need to know `project.name` ). \nClarity of invocation order. \nOpen to change: if we decide there are some scenarios where we do not want a repository created for a project, we can create a new service class rather than needing to refactor to `Project` and `Repository` classes. \nEach instance of a `Project` factory does not create a second ( `Repository` ) object."
             }
         ]
     },
@@ -137,7 +133,7 @@
         "belongs to": "Styles we have no opinion on/Functional patterns",
         "cases": [
             {
-                "description": "Although Ruby and especially Rails are primarily based on object-oriented programming patterns, Ruby is a very flexible language and supports functional programming patterns as well.\nFunctional programming patterns, especially in domain logic, can often result in more readable, maintainable, and bug-resistant code while still using idiomatic and familiar Ruby patterns. However, functional programming patterns should be used carefully because some patterns would cause confusion and should be avoided even if they’re directly supported by Ruby. The curry method is a likely example.\nFor more information, see:\nFunctional patterns \nRailway-oriented programming and the Result class"
+                "description": "Although Ruby and especially Rails are primarily based on object-oriented programming patterns, Ruby is a very flexible language and supports functional programming patterns as well.\nFunctional programming patterns, especially in domain logic, can often result in more readable, maintainable, and bug-resistant code while still using idiomatic and familiar Ruby patterns. However, functional programming patterns should be used carefully because some patterns would cause confusion and should be avoided even if they’re directly supported by Ruby. The curry\n \n method is a likely example.\nFor more information, see:\nFunctional patterns \nRailway-oriented programming and the\n \n Result\n \n class"
             }
         ]
     },

@@ -124,7 +124,16 @@ def save_example(parents, nodes, data: list):
             buf = {}
 
     if buf:
-        merged.append(buf)
+        if buf.get("example") is None:
+            if len(merged) > 0:
+                if merged[-1].get("appendix") is None:
+                    merged[-1]["appendix"] = buf['description']
+                else:
+                    merged[-1]["appendix"] += f"\n{buf['description']}"
+            else:
+                merged.append(buf)
+        else:
+            merged.append(buf)
     current["cases"] = merged
     data.append(current)
 

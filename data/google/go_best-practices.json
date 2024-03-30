@@ -86,10 +86,8 @@
         "cases": [
             {
                 "description": "Suppose you want to create a package that contains test doubles for another. We’ll use `packagecreditcard` (from above) for this example:\nOne approach is to introduce a new Go package based on the production one for testing. A safe choice is to append the word `test` to the original package name (“creditcard” + “test”):",
-                "example": "// Good:\npackage creditcardtest\n"
-            },
-            {
-                "description": "Unless stated explicitly otherwise, all examples in the sections below are in `packagecreditcardtest` ."
+                "example": "// Good:\npackage creditcardtest\n",
+                "appendix": "Unless stated explicitly otherwise, all examples in the sections below are in `packagecreditcardtest` ."
             }
         ]
     },
@@ -103,10 +101,8 @@
             },
             {
                 "description": "This is strictly preferable to a naming choice like `StubService` or the very poor `StubCreditCardService` , because the base package name and its domain types imply what `creditcardtest.Stub` is.\nFinally, if the package is built with Bazel, make sure the new `go_library` rule for the package is marked as `testonly` :",
-                "example": "# Good:\ngo_library(\n    name = \"creditcardtest\",\n    srcs = [\"creditcardtest.go\"],\n    deps = [\n        \":creditcard\",\n        \":money\",\n    ],\n    testonly = True,\n)\n"
-            },
-            {
-                "description": "The approach above is conventional and will be reasonably well understood by other engineers.\nSee also:\nGo Tip #42: Authoring a Stub for Testing"
+                "example": "# Good:\ngo_library(\n    name = \"creditcardtest\",\n    srcs = [\"creditcardtest.go\"],\n    deps = [\n        \":creditcard\",\n        \":money\",\n    ],\n    testonly = True,\n)\n",
+                "appendix": "The approach above is conventional and will be reasonably well understood by other engineers.\nSee also:\nGo Tip #42: Authoring a Stub for Testing"
             }
         ]
     },
@@ -216,10 +212,8 @@
             },
             {
                 "description": "If there is only a single proto used by a package or the package is tied closely to that proto, the prefix can be omitted:\nimport ( pb “path/to/package/foo_service_go_proto” grpc “path/to/package/foo_service_go_grpc” )\nIf the symbols in the proto are generic or are not very self-descriptive, or if shortening the package name with an acronym is unclear, a short word can suffice as the prefix:",
-                "example": "// Good:\nimport (\n    mapspb \"path/to/package/maps_go_proto\"\n)\n"
-            },
-            {
-                "description": "In this case `mapspb.Address` might be clearer than `mpb.Address` if the code in question is not already clearly related to maps."
+                "example": "// Good:\nimport (\n    mapspb \"path/to/package/maps_go_proto\"\n)\n",
+                "appendix": "In this case `mapspb.Address` might be clearer than `mpb.Address` if the code in question is not already clearly related to maps."
             }
         ]
     },
@@ -259,10 +253,8 @@
             },
             {
                 "description": "Do not attempt to distinguish errors based on their string form. (See Go Tip #13: Designing Errors for Checking for more.)",
-                "example": "// Bad:\nfunc handlePet(...) {\n    err := process(an)\n    if regexp.MatchString(`duplicate`, err.Error()) {...}\n    if regexp.MatchString(`marsupial`, err.Error()) {...}\n}\n"
-            },
-            {
-                "description": "If there is extra information in the error that the caller needs programmatically, it should ideally be presented structurally. For example, the os.PathError type is documented to place the pathname of the failing operation in a struct field which the caller can easily access.\nOther error structures can be used as appropriate, for example a project struct containing an error code and detail string. Package\n \n status is a common encapsulation; if you choose this approach (which you are not obligated to do), use canonical codes . See Go Tip #89: When to Use Canonical Status Codes as Errors to know if using status codes is the right choice."
+                "example": "// Bad:\nfunc handlePet(...) {\n    err := process(an)\n    if regexp.MatchString(`duplicate`, err.Error()) {...}\n    if regexp.MatchString(`marsupial`, err.Error()) {...}\n}\n",
+                "appendix": "If there is extra information in the error that the caller needs programmatically, it should ideally be presented structurally. For example, the os.PathError type is documented to place the pathname of the failing operation in a struct field which the caller can easily access.\nOther error structures can be used as appropriate, for example a project struct containing an error code and detail string. Package\n \n status is a common encapsulation; if you choose this approach (which you are not obligated to do), use canonical codes . See Go Tip #89: When to Use Canonical Status Codes as Errors to know if using status codes is the right choice."
             }
         ]
     },
@@ -288,10 +280,8 @@
             },
             {
                 "description": "Code directly at system boundaries (typically RPC, IPC, storage, and similar) should report errors using the canonical error space. It is the responsibility of code here to handle domain-specific errors and represent them canonically. For example:",
-                "example": "// Bad:\nfunc (*FortuneTeller) SuggestFortune(context.Context, *pb.SuggestionRequest) (*pb.SuggestionResponse, error) {\n    // ...\n    if err != nil {\n        return nil, fmt.Errorf(\"couldn't find remote file: %w\", err)\n    }\n}\n\n// Good:\nimport (\n    \"google.golang.org/grpc/codes\"\n    \"google.golang.org/grpc/status\"\n)\nfunc (*FortuneTeller) SuggestFortune(context.Context, *pb.SuggestionRequest) (*pb.SuggestionResponse, error) {\n    // ...\n    if err != nil {\n        // Or use fmt.Errorf with the %w verb if deliberately wrapping an\n        // error which the caller is meant to unwrap.\n        return nil, status.Errorf(codes.Internal, \"couldn't find fortune database\", status.ErrInternal)\n    }\n}\n"
-            },
-            {
-                "description": "See also:\nError Documentation Conventions"
+                "example": "// Bad:\nfunc (*FortuneTeller) SuggestFortune(context.Context, *pb.SuggestionRequest) (*pb.SuggestionResponse, error) {\n    // ...\n    if err != nil {\n        return nil, fmt.Errorf(\"couldn't find remote file: %w\", err)\n    }\n}\n\n// Good:\nimport (\n    \"google.golang.org/grpc/codes\"\n    \"google.golang.org/grpc/status\"\n)\nfunc (*FortuneTeller) SuggestFortune(context.Context, *pb.SuggestionRequest) (*pb.SuggestionResponse, error) {\n    // ...\n    if err != nil {\n        // Or use fmt.Errorf with the %w verb if deliberately wrapping an\n        // error which the caller is meant to unwrap.\n        return nil, status.Errorf(codes.Internal, \"couldn't find fortune database\", status.ErrInternal)\n    }\n}\n",
+                "appendix": "See also:\nError Documentation Conventions"
             }
         ]
     },
@@ -309,10 +299,8 @@
             },
             {
                 "description": "Regardless of where the `%w` verb is placed, the error returned always represents the front of the error chain, and the `%w` is the next child. Similarly, `Unwrap()error` always traverses the error chain from newest to oldest error.\nPlacement of the `%w` verb does, however, affect whether the error chain is printed newest to oldest, oldest to newest, or neither:",
-                "example": "// Good:\nerr1 := fmt.Errorf(\"err1\")\nerr2 := fmt.Errorf(\"err2: %w\", err1)\nerr3 := fmt.Errorf(\"err3: %w\", err2)\nfmt.Println(err3) // err3: err2: err1\n// err3 is a newest-to-oldest error chain, that prints newest-to-oldest.\n\n// Bad:\nerr1 := fmt.Errorf(\"err1\")\nerr2 := fmt.Errorf(\"%w: err2\", err1)\nerr3 := fmt.Errorf(\"%w: err3\", err2)\nfmt.Println(err3) // err1: err2: err3\n// err3 is a newest-to-oldest error chain, that prints oldest-to-newest.\n\n// Bad:\nerr1 := fmt.Errorf(\"err1\")\nerr2 := fmt.Errorf(\"err2-1 %w err2-2\", err1)\nerr3 := fmt.Errorf(\"err3-1 %w err3-2\", err2)\nfmt.Println(err3) // err3-1 err2-1 err1 err2-2 err3-2\n// err3 is a newest-to-oldest error chain, that neither prints newest-to-oldest\n// nor oldest-to-newest.\n"
-            },
-            {
-                "description": "Therefore, in order for error text to mirror error chain structure, prefer placing the `%w` verb at the end with the form `[...]:%w` ."
+                "example": "// Good:\nerr1 := fmt.Errorf(\"err1\")\nerr2 := fmt.Errorf(\"err2: %w\", err1)\nerr3 := fmt.Errorf(\"err3: %w\", err2)\nfmt.Println(err3) // err3: err2: err1\n// err3 is a newest-to-oldest error chain, that prints newest-to-oldest.\n\n// Bad:\nerr1 := fmt.Errorf(\"err1\")\nerr2 := fmt.Errorf(\"%w: err2\", err1)\nerr3 := fmt.Errorf(\"%w: err3\", err2)\nfmt.Println(err3) // err1: err2: err3\n// err3 is a newest-to-oldest error chain, that prints oldest-to-newest.\n\n// Bad:\nerr1 := fmt.Errorf(\"err1\")\nerr2 := fmt.Errorf(\"err2-1 %w err2-2\", err1)\nerr3 := fmt.Errorf(\"err3-1 %w err3-2\", err2)\nfmt.Println(err3) // err3-1 err2-1 err1 err2-2 err3-2\n// err3 is a newest-to-oldest error chain, that neither prints newest-to-oldest\n// nor oldest-to-newest.\n",
+                "appendix": "Therefore, in order for error text to mirror error chain structure, prefer placing the `%w` verb at the end with the form `[...]:%w` ."
             }
         ]
     },
@@ -359,10 +347,8 @@
         "cases": [
             {
                 "description": "The standard library panics on API misuse. For example, reflect issues a panic in many cases where a value is accessed in a way that suggests it was misinterpreted. This is analogous to the panics on core language bugs such as accessing an element of a slice that is out of bounds. Code review and tests should discover such bugs, which are not expected to appear in production code. These panics act as invariant checks that do not depend on a library, as the standard library does not have access to the levelled\n \n log package that the Google codebase uses.\nAnother case in which panics can be useful, though uncommon, is as an internal implementation detail of a package which always has a matching recover in the callchain. Parsers and similar deeply nested, tightly coupled internal function groups can benefit from this design, where plumbing error returns adds complexity without value. The key attribute of this design is that these panics are never allowed to escape across package boundaries and do not form part of the package’s API. This is typically accomplished with a top-level deferred recover that translates a propagating panic into a returned error at the public API surfaces.\nPanic is also used when the compiler cannot identify unreachable code, for example when using a function like `log.Fatal` that will not return:",
-                "example": "// Good:\nfunc answer(i int) string {\n    switch i {\n    case 42:\n        return \"yup\"\n    case 54:\n        return \"base 13, huh\"\n    default:\n        log.Fatalf(\"Sorry, %d is not the answer.\", i)\n        panic(\"unreachable\")\n    }\n}\n"
-            },
-            {
-                "description": "Do not call\n \n log\n \n functions before flags have been parsed. If you must die in an `init` func, a panic is acceptable in place of the logging call."
+                "example": "// Good:\nfunc answer(i int) string {\n    switch i {\n    case 42:\n        return \"yup\"\n    case 54:\n        return \"base 13, huh\"\n    default:\n        log.Fatalf(\"Sorry, %d is not the answer.\", i)\n        panic(\"unreachable\")\n    }\n}\n",
+                "appendix": "Do not call\n \n log\n \n functions before flags have been parsed. If you must die in an `init` func, a panic is acceptable in place of the logging call."
             }
         ]
     },
@@ -390,10 +376,8 @@
             },
             {
                 "description": "However, this snippet demonstrates a code scenario similar to the previous where the commentary instead states something non-obvious or materially helpful to the reader:",
-                "example": "// Good:\n// Sprintf formats according to a format specifier and returns the resulting\n// string.\n//\n// The provided data is used to interpolate the format string. If the data does\n// not match the expected format verbs or the amount of data does not satisfy\n// the format specification, the function will inline warnings about formatting\n// errors into the output string as described by the Format errors section\n// above.\nfunc Sprintf(format string, data ...any) string\n"
-            },
-            {
-                "description": "Consider your likely audience in choosing what to document and at what depth. Maintainers, newcomers to the team, external users, and even yourself six months in the future may appreciate slightly different information from what is on your mind when you first come to write your docs.\nSee also:\nGoTip #41: Identify Function Call Parameters \nGoTip #51: Patterns for Configuration"
+                "example": "// Good:\n// Sprintf formats according to a format specifier and returns the resulting\n// string.\n//\n// The provided data is used to interpolate the format string. If the data does\n// not match the expected format verbs or the amount of data does not satisfy\n// the format specification, the function will inline warnings about formatting\n// errors into the output string as described by the Format errors section\n// above.\nfunc Sprintf(format string, data ...any) string\n",
+                "appendix": "Consider your likely audience in choosing what to document and at what depth. Maintainers, newcomers to the team, external users, and even yourself six months in the future may appreciate slightly different information from what is on your mind when you first come to write your docs.\nSee also:\nGoTip #41: Identify Function Call Parameters \nGoTip #51: Patterns for Configuration"
             }
         ]
     },
@@ -461,10 +445,8 @@
             },
             {
                 "description": "If it is potentially unclear how to clean up the resources, explain how:",
-                "example": "// Good:\n// Get issues a GET to the specified URL.\n//\n// When err is nil, resp always contains a non-nil resp.Body.\n// Caller should close resp.Body when done reading from it.\n//\n//    resp, err := http.Get(\"http://example.com/\")\n//    if err != nil {\n//        // handle error\n//    }\n//    defer resp.Body.Close()\n//    body, err := io.ReadAll(resp.Body)\nfunc (c *Client) Get(url string) (resp *Response, err error)\n"
-            },
-            {
-                "description": "See also:\nGoTip #110: Don’t Mix Exit With Defer"
+                "example": "// Good:\n// Get issues a GET to the specified URL.\n//\n// When err is nil, resp always contains a non-nil resp.Body.\n// Caller should close resp.Body when done reading from it.\n//\n//    resp, err := http.Get(\"http://example.com/\")\n//    if err != nil {\n//        // handle error\n//    }\n//    defer resp.Body.Close()\n//    body, err := io.ReadAll(resp.Body)\nfunc (c *Client) Get(url string) (resp *Response, err error)\n",
+                "appendix": "See also:\nGoTip #110: Don’t Mix Exit With Defer"
             }
         ]
     },
@@ -482,10 +464,8 @@
             },
             {
                 "description": "Documenting whether the values returned are pointer receivers enables callers to correctly compare the errors using errors.Is , errors.As , and package cmp . This is because a non-pointer value is not equivalent to a pointer value.\nNote: In the `Chdir` example, the return type is written as `error` rather than `*PathError` due to how nil interface values work .\nDocument overall error conventions in the package’s documentation when the behavior is applicable to most errors found in the package:",
-                "example": "// Good:\n// Package os provides a platform-independent interface to operating system\n// functionality.\n//\n// Often, more information is available within the error. For example, if a\n// call that takes a file name fails, such as Open or Stat, the error will\n// include the failing file name when printed and will be of type *PathError,\n// which may be unpacked for more information.\npackage os\n"
-            },
-            {
-                "description": "Thoughtful application of these approaches can add extra information to errors without much effort and help callers avoid adding redundant annotations.\nSee also:\nGo Tip #106: Error Naming Conventions \nGo Tip #89: When to Use Canonical Status Codes as Errors"
+                "example": "// Good:\n// Package os provides a platform-independent interface to operating system\n// functionality.\n//\n// Often, more information is available within the error. For example, if a\n// call that takes a file name fails, such as Open or Stat, the error will\n// include the failing file name when printed and will be of type *PathError,\n// which may be unpacked for more information.\npackage os\n",
+                "appendix": "Thoughtful application of these approaches can add extra information to errors without much effort and help callers avoid adding redundant annotations.\nSee also:\nGo Tip #106: Error Naming Conventions \nGo Tip #89: When to Use Canonical Status Codes as Errors"
             }
         ]
     },
@@ -534,10 +514,8 @@
             },
             {
                 "description": "You can instead “boost” the signal of the conditional by adding a comment:",
-                "example": "// Good:\nif err := doSomething(); err == nil { // if NO error\n    // ...\n}\n"
-            },
-            {
-                "description": "The comment draws attention to the difference in the conditional."
+                "example": "// Good:\nif err := doSomething(); err == nil { // if NO error\n    // ...\n}\n",
+                "appendix": "The comment draws attention to the difference in the conditional."
             }
         ]
     },
@@ -582,10 +560,8 @@
             },
             {
                 "description": "This is because `*pb.Something` satisfies proto.Message while `pb.Something` does not.",
-                "example": "// Bad:\nfunc NewCounter(name string) *Counter {\n    var c Counter\n    registerCounter(name, &c)\n    return &c\n}\n\nvar myMsg = pb.Bar{}\n"
-            },
-            {
-                "description": "Important: Map types must be explicitly initialized before they can be modified. However, reading from zero-value maps is perfectly fine. \nFor map and slice types, if the code is particularly performance sensitive and if you know the sizes in advance, see the size hints section."
+                "example": "// Bad:\nfunc NewCounter(name string) *Counter {\n    var c Counter\n    registerCounter(name, &c)\n    return &c\n}\n\nvar myMsg = pb.Bar{}\n",
+                "appendix": "Important: Map types must be explicitly initialized before they can be modified. However, reading from zero-value maps is perfectly fine. \nFor map and slice types, if the code is particularly performance sensitive and if you know the sizes in advance, see the size hints section."
             }
         ]
     },
@@ -609,10 +585,8 @@
         "cases": [
             {
                 "description": "The following are declarations that take advantage of size hints in order to preallocate capacity:",
-                "example": "// Good:\nvar (\n    // Preferred buffer size for target filesystem: st_blksize.\n    buf = make([]byte, 131072)\n    // Typically process up to 8-10 elements per run (16 is a safe assumption).\n    q = make([]Node, 0, 16)\n    // Each shard processes shardSize (typically 32000+) elements.\n    seen = make(map[string]bool, shardSize)\n)\n"
-            },
-            {
-                "description": "Size hints and preallocation are important steps when combined with empirical analysis of the code and its integrations , to create performance-sensitive and resource-efficient code.\nMost code does not need a size hint or preallocation, and can allow the runtime to grow the slice or map as necessary. It is acceptable to preallocate when the final size is known (e.g. when converting between a map and a slice) but this is not a readability requirement, and may not be worth the clutter in small cases.\nWarning: Preallocating more memory than you need can waste memory in the fleet or even harm performance. When in doubt, see GoTip #3: Benchmarking Go Code and default to a zero initialization or a composite literal declaration ."
+                "example": "// Good:\nvar (\n    // Preferred buffer size for target filesystem: st_blksize.\n    buf = make([]byte, 131072)\n    // Typically process up to 8-10 elements per run (16 is a safe assumption).\n    q = make([]Node, 0, 16)\n    // Each shard processes shardSize (typically 32000+) elements.\n    seen = make(map[string]bool, shardSize)\n)\n",
+                "appendix": "Size hints and preallocation are important steps when combined with empirical analysis of the code and its integrations , to create performance-sensitive and resource-efficient code.\nMost code does not need a size hint or preallocation, and can allow the runtime to grow the slice or map as necessary. It is acceptable to preallocate when the final size is known (e.g. when converting between a map and a slice) but this is not a readability requirement, and may not be worth the clutter in small cases.\nWarning: Preallocating more memory than you need can waste memory in the fleet or even harm performance. When in doubt, see GoTip #3: Benchmarking Go Code and default to a zero initialization or a composite literal declaration ."
             }
         ]
     },
@@ -626,10 +600,8 @@
             },
             {
                 "description": "This prevents casual programming errors that are possible without specification:",
-                "example": "// Bad:\nfunc sum(values chan int) (out int) {\n    for v := range values {\n        out += v\n    }\n    // values must already be closed for this code to be reachable, which means\n    // a second close triggers a panic.\n    close(values)\n}\n"
-            },
-            {
-                "description": "When the direction is specified, the compiler catches simple errors like this. It also helps to convey a measure of ownership to the type.\nSee also Bryan Mills’ talk “Rethinking Classical Concurrency Patterns”: slides \nvideo ."
+                "example": "// Bad:\nfunc sum(values chan int) (out int) {\n    for v := range values {\n        out += v\n    }\n    // values must already be closed for this code to be reachable, which means\n    // a second close triggers a panic.\n    close(values)\n}\n",
+                "appendix": "When the direction is specified, the compiler catches simple errors like this. It also helps to convey a measure of ownership to the type.\nSee also Bryan Mills’ talk “Rethinking Classical Concurrency Patterns”: slides \nvideo ."
             }
         ]
     },
@@ -656,10 +628,8 @@
             },
             {
                 "description": "The function can then be called in a different package:",
-                "example": "// Good:\nfunc foo(ctx context.Context) {\n    // Complex call:\n    storage.EnableReplication(ctx, storage.ReplicationOptions{\n        Config:              config,\n        PrimaryRegions:      []string{\"us-east1\", \"us-central2\", \"us-west3\"},\n        ReadonlyRegions:     []string{\"us-east5\", \"us-central6\"},\n        OverwritePolicies:   true,\n        ReplicationInterval: 1 * time.Hour,\n        CopyWorkers:         100,\n        HealthWatcher:       watcher,\n    })\n\n    // Simple call:\n    storage.EnableReplication(ctx, storage.ReplicationOptions{\n        Config:         config,\n        PrimaryRegions: []string{\"us-east1\", \"us-central2\", \"us-west3\"},\n    })\n}\n"
-            },
-            {
-                "description": "Note: \nContexts are never included in option structs .\nThis option is often preferred when some of the following apply:\nAll callers need to specify one or more of the options. \nA large number of callers need to provide many options. \nThe options are shared between multiple functions that the user will call."
+                "example": "// Good:\nfunc foo(ctx context.Context) {\n    // Complex call:\n    storage.EnableReplication(ctx, storage.ReplicationOptions{\n        Config:              config,\n        PrimaryRegions:      []string{\"us-east1\", \"us-central2\", \"us-west3\"},\n        ReadonlyRegions:     []string{\"us-east5\", \"us-central6\"},\n        OverwritePolicies:   true,\n        ReplicationInterval: 1 * time.Hour,\n        CopyWorkers:         100,\n        HealthWatcher:       watcher,\n    })\n\n    // Simple call:\n    storage.EnableReplication(ctx, storage.ReplicationOptions{\n        Config:         config,\n        PrimaryRegions: []string{\"us-east1\", \"us-central2\", \"us-west3\"},\n    })\n}\n",
+                "appendix": "Note: \nContexts are never included in option structs .\nThis option is often preferred when some of the following apply:\nAll callers need to specify one or more of the options. \nA large number of callers need to provide many options. \nThe options are shared between multiple functions that the user will call."
             }
         ]
     },
@@ -677,10 +647,8 @@
             },
             {
                 "description": "The function can then be called in a different package:",
-                "example": "// Good:\nfunc foo(ctx context.Context) {\n    // Complex call:\n    storage.EnableReplication(ctx, config, []string{\"po\", \"is\", \"ea\"},\n        storage.ReadonlyCells(\"ix\", \"gg\"),\n        storage.OverwritePolicies(true),\n        storage.ReplicationInterval(1*time.Hour),\n        storage.CopyWorkers(100),\n        storage.HealthWatcher(watcher),\n    )\n\n    // Simple call:\n    storage.EnableReplication(ctx, config, []string{\"po\", \"is\", \"ea\"})\n}\n"
-            },
-            {
-                "description": "Prefer this option when many of the following apply:\nMost callers will not need to specify any options. \nMost options are used infrequently. \nThere are a large number of options. \nOptions require arguments. \nOptions could fail or be set incorrectly (in which case the option function returns an `error` ). \nOptions require a lot of documentation that can be hard to fit in a struct. \nUsers or other packages can provide custom options.\nOptions in this style should accept parameters rather than using presence to signal their value; the latter can make dynamic composition of arguments much more difficult. For example, binary settings should accept a boolean (e.g. `rpc.FailFast(enablebool)` is preferable to `rpc.EnableFailFast()` ). An enumerated option should accept an enumerated constant (e.g. `log.Format(log.Capacitor)` is preferable to `log.CapacitorFormat()` ). The alternative makes it much more difficult for users who must programmatically choose which options to pass; such users are forced to change the actual composition of the parameters rather than simply changing the arguments to the options. Don’t assume that all users will know the full set of options statically.\nIn general, options should be processed in order. If there is a conflict or if a non-cumulative option is passed multiple times, the last argument should win.\nThe parameter to the option function is generally unexported in this pattern, to restrict the options to being defined only within the package itself. This is a good default, though there may be times when it is appropriate to allow other packages to define options.\nSee Rob Pike’s original blog post and Dave Cheney’s talk for a more in-depth look at how these options can be used."
+                "example": "// Good:\nfunc foo(ctx context.Context) {\n    // Complex call:\n    storage.EnableReplication(ctx, config, []string{\"po\", \"is\", \"ea\"},\n        storage.ReadonlyCells(\"ix\", \"gg\"),\n        storage.OverwritePolicies(true),\n        storage.ReplicationInterval(1*time.Hour),\n        storage.CopyWorkers(100),\n        storage.HealthWatcher(watcher),\n    )\n\n    // Simple call:\n    storage.EnableReplication(ctx, config, []string{\"po\", \"is\", \"ea\"})\n}\n",
+                "appendix": "Prefer this option when many of the following apply:\nMost callers will not need to specify any options. \nMost options are used infrequently. \nThere are a large number of options. \nOptions require arguments. \nOptions could fail or be set incorrectly (in which case the option function returns an `error` ). \nOptions require a lot of documentation that can be hard to fit in a struct. \nUsers or other packages can provide custom options.\nOptions in this style should accept parameters rather than using presence to signal their value; the latter can make dynamic composition of arguments much more difficult. For example, binary settings should accept a boolean (e.g. `rpc.FailFast(enablebool)` is preferable to `rpc.EnableFailFast()` ). An enumerated option should accept an enumerated constant (e.g. `log.Format(log.Capacitor)` is preferable to `log.CapacitorFormat()` ). The alternative makes it much more difficult for users who must programmatically choose which options to pass; such users are forced to change the actual composition of the parameters rather than simply changing the arguments to the options. Don’t assume that all users will know the full set of options statically.\nIn general, options should be processed in order. If there is a conflict or if a non-cumulative option is passed multiple times, the last argument should win.\nThe parameter to the option function is generally unexported in this pattern, to restrict the options to being defined only within the package itself. This is a good default, though there may be times when it is appropriate to allow other packages to define options.\nSee Rob Pike’s original blog post and Dave Cheney’s talk for a more in-depth look at how these options can be used."
             }
         ]
     },
@@ -704,10 +672,8 @@
         "cases": [
             {
                 "description": "Go distinguishes between “test helpers” and “assertion helpers”:\nTest helpers are functions that do setup or cleanup tasks. All failures that occur in test helpers are expected to be failures of the environment (not from the code under test) — for example when a test database cannot be started because there are no more free ports on this machine. For functions like these, calling `t.Helper` is often appropriate to mark them as a test helper . See error handling in test helpers for more details. \nAssertion helpers are functions that check the correctness of a system and fail the test if an expectation is not met. Assertion helpers are not considered idiomatic in Go.\nThe purpose of a test is to report pass/fail conditions of the code under test. The ideal place to fail a test is within the `Test` function itself, as that ensures that failure messages and the test logic are clear.\nAs your testing code grows, it may become necessary to factor out some functionality to separate functions. Standard software engineering considerations still apply, as test code is still code . If the functionality does not interact with the testing framework, then all of the usual rules apply. When the common code interacts with the framework, however, some care must be taken to avoid common pitfalls that can lead to uninformative failure messages and unmaintainable tests.\nIf many separate test cases require the same validation logic, arrange the test in one of the following ways instead of using assertion helpers or complex validation functions:\nInline the logic (both the validation and the failure) in the `Test` function, even if it is repetitive. This works best in simple cases. \nIf inputs are similar, consider unifying them into a table-driven test while keeping the logic inlined in the loop. This helps to avoid repetition while keeping the validation and failure in the `Test` . \nIf there are multiple callers who need the same validation function but table tests are not suitable (typically because the inputs are not simple enough or the validation is required as part of a sequence of operations), arrange the validation function so that it returns a value (typically an `error` ) rather than taking a `testing.T` parameter and using it to fail the test. Use logic within the `Test` to decide whether to fail, and to provide useful test failures . You can also create test helpers to factor out common boilerplate setup code.\nThe design outlined in the last point maintains orthogonality. For example, package\n \n cmp is not designed to fail tests, but rather to compare (and to diff) values. It therefore does not need to know about the context in which the comparison was made, since the caller can supply that. If your common testing code provides a `cmp.Transformer` for your data type, that can often be the simplest design. For other validations, consider returning an `error` value.",
-                "example": "// Good:\n// polygonCmp returns a cmp.Option that equates s2 geometry objects up to\n// some small floating-point error.\nfunc polygonCmp() cmp.Option {\n    return cmp.Options{\n        cmp.Transformer(\"polygon\", func(p *s2.Polygon) []*s2.Loop { return p.Loops() }),\n        cmp.Transformer(\"loop\", func(l *s2.Loop) []s2.Point { return l.Vertices() }),\n        cmpopts.EquateApprox(0.00000001, 0),\n        cmpopts.EquateEmpty(),\n    }\n}\n\nfunc TestFenceposts(t *testing.T) {\n    // This is a test for a fictional function, Fenceposts, which draws a fence\n    // around some Place object. The details are not important, except that\n    // the result is some object that has s2 geometry (github.com/golang/geo/s2)\n    got := Fencepost(tomsDiner, 1*meter)\n    if diff := cmp.Diff(want, got, polygonCmp()); diff != \"\" {\n        t.Errorf(\"Fencepost(tomsDiner, 1m) returned unexpected diff (-want+got):\\n%v\", diff)\n    }\n}\n\nfunc FuzzFencepost(f *testing.F) {\n    // Fuzz test (https://go.dev/doc/fuzz) for the same.\n\n    f.Add(tomsDiner, 1*meter)\n    f.Add(school, 3*meter)\n\n    f.Fuzz(func(t *testing.T, geo Place, padding Length) {\n        got := Fencepost(geo, padding)\n        // Simple reference implementation: not used in prod, but easy to\n        // reason about and therefore useful to check against in random tests.\n        reference := slowFencepost(geo, padding)\n\n        // In the fuzz test, inputs and outputs can be large so don't\n        // bother with printing a diff. cmp.Equal is enough.\n        if !cmp.Equal(got, reference, polygonCmp()) {\n            t.Errorf(\"Fencepost returned wrong placement\")\n        }\n    })\n}\n"
-            },
-            {
-                "description": "The `polygonCmp` function is agnostic about how it’s called; it doesn’t take a concrete input type nor does it police what to do in case two objects don’t match. Therefore, more callers can make use of it.\nNote: There is an analogy between test helpers and plain library code. Code in libraries should usually not panic except in rare circumstances; code called from a test should not stop the test unless there is no point in proceeding ."
+                "example": "// Good:\n// polygonCmp returns a cmp.Option that equates s2 geometry objects up to\n// some small floating-point error.\nfunc polygonCmp() cmp.Option {\n    return cmp.Options{\n        cmp.Transformer(\"polygon\", func(p *s2.Polygon) []*s2.Loop { return p.Loops() }),\n        cmp.Transformer(\"loop\", func(l *s2.Loop) []s2.Point { return l.Vertices() }),\n        cmpopts.EquateApprox(0.00000001, 0),\n        cmpopts.EquateEmpty(),\n    }\n}\n\nfunc TestFenceposts(t *testing.T) {\n    // This is a test for a fictional function, Fenceposts, which draws a fence\n    // around some Place object. The details are not important, except that\n    // the result is some object that has s2 geometry (github.com/golang/geo/s2)\n    got := Fencepost(tomsDiner, 1*meter)\n    if diff := cmp.Diff(want, got, polygonCmp()); diff != \"\" {\n        t.Errorf(\"Fencepost(tomsDiner, 1m) returned unexpected diff (-want+got):\\n%v\", diff)\n    }\n}\n\nfunc FuzzFencepost(f *testing.F) {\n    // Fuzz test (https://go.dev/doc/fuzz) for the same.\n\n    f.Add(tomsDiner, 1*meter)\n    f.Add(school, 3*meter)\n\n    f.Fuzz(func(t *testing.T, geo Place, padding Length) {\n        got := Fencepost(geo, padding)\n        // Simple reference implementation: not used in prod, but easy to\n        // reason about and therefore useful to check against in random tests.\n        reference := slowFencepost(geo, padding)\n\n        // In the fuzz test, inputs and outputs can be large so don't\n        // bother with printing a diff. cmp.Equal is enough.\n        if !cmp.Equal(got, reference, polygonCmp()) {\n            t.Errorf(\"Fencepost returned wrong placement\")\n        }\n    })\n}\n",
+                "appendix": "The `polygonCmp` function is agnostic about how it’s called; it doesn’t take a concrete input type nor does it police what to do in case two objects don’t match. Therefore, more callers can make use of it.\nNote: There is an analogy between test helpers and plain library code. Code in libraries should usually not panic except in rare circumstances; code called from a test should not stop the test unless there is no point in proceeding ."
             }
         ]
     },
@@ -726,10 +692,8 @@
         "cases": [
             {
                 "description": "Such testing is referred to as acceptance testing . The premise of this kind of testing is that the person using the test does not know every last detail of what goes on in the test; they just hand the inputs over to the testing facility to do the work. This can be thought of as a form of inversion of control .\nIn a typical Go test, the test function controls the program flow, and the no assert and test functions guidance encourages you to keep it that way. This section explains how to author support for these tests in a way that is consistent with Go style.\nBefore diving into how, consider an example from io/fs , excerpted below:",
-                "example": "type FS interface {\n    Open(name string) (File, error)\n}\n"
-            },
-            {
-                "description": "While there exist well-known implementations of `fs.FS` , a Go developer may be expected to author one. To help validate the user-implemented `fs.FS` is correct, a generic library has been provided in testing/fstest called fstest.TestFS . This API treats the implementation as a blackbox to make sure it upholds the most basic parts of the `io/fs` contract."
+                "example": "type FS interface {\n    Open(name string) (File, error)\n}\n",
+                "appendix": "While there exist well-known implementations of `fs.FS` , a Go developer may be expected to author one. To help validate the user-implemented `fs.FS` is correct, a generic library has been provided in testing/fstest called fstest.TestFS . This API treats the implementation as a blackbox to make sure it upholds the most basic parts of the `io/fs` contract."
             }
         ]
     },
@@ -795,10 +759,8 @@
             },
             {
                 "description": "Here is an example of this output when run. Note the highlighted text and how it differs:",
-                "example": "=== RUN   TestBad\n    paint_test.go:15: Could not paint the house under test: no \"taupe\" paint today\n--- FAIL: TestBad (0.00s)\n=== RUN   TestGood\n    paint_test.go:32: Could not paint the house under test: no \"lilac\" paint today\n--- FAIL: TestGood (0.00s)\nFAIL\n"
-            },
-            {
-                "description": "The error with `paint_test.go:15` refers to the line of the setup function that failed in `badSetup` :\n`t.Fatalf(\"Couldnotpaintthehouseundertest:%v\",err)`\nWhereas `paint_test.go:32` refers to the line of the test that failed in `TestGood` :\n`goodSetup(t)`\nCorrectly using `(*testing.T).Helper` attributes the location of the failure much better when:\nthe helper functions grow \nthe helper functions call other helpers \nthe amount of helper usage in the test functions grow\nTip: If a helper calls `(*testing.T).Error` or `(*testing.T).Fatal` , provide some context in the format string to help determine what went wrong and why.\nTip: If nothing a helper does can cause a test to fail, it doesn’t need to call `t.Helper` . Simplify its signature by removing `t` from the function parameter list."
+                "example": "=== RUN   TestBad\n    paint_test.go:15: Could not paint the house under test: no \"taupe\" paint today\n--- FAIL: TestBad (0.00s)\n=== RUN   TestGood\n    paint_test.go:32: Could not paint the house under test: no \"lilac\" paint today\n--- FAIL: TestGood (0.00s)\nFAIL\n",
+                "appendix": "The error with `paint_test.go:15` refers to the line of the setup function that failed in `badSetup` :\n`t.Fatalf(\"Couldnotpaintthehouseundertest:%v\",err)`\nWhereas `paint_test.go:32` refers to the line of the test that failed in `TestGood` :\n`goodSetup(t)`\nCorrectly using `(*testing.T).Helper` attributes the location of the failure much better when:\nthe helper functions grow \nthe helper functions call other helpers \nthe amount of helper usage in the test functions grow\nTip: If a helper calls `(*testing.T).Error` or `(*testing.T).Fatal` , provide some context in the format string to help determine what went wrong and why.\nTip: If nothing a helper does can cause a test to fail, it doesn’t need to call `t.Helper` . Simplify its signature by removing `t` from the function parameter list."
             }
         ]
     },
@@ -808,10 +770,8 @@
         "cases": [
             {
                 "description": "As documented in package testing , it is incorrect to call `t.FailNow` , `t.Fatal` , etc. from any goroutine but the one running the Test function (or the subtest). If your test starts new goroutines, they must not call these functions from inside these goroutines.\nTest helpers usually don’t signal failure from new goroutines, and therefore it is all right for them to use `t.Fatal` . If in doubt, call `t.Error` and return instead.",
-                "example": "// Good:\nfunc TestRevEngine(t *testing.T) {\n    engine, err := Start()\n    if err != nil {\n        t.Fatalf(\"Engine failed to start: %v\", err)\n    }\n\n    num := 11\n    var wg sync.WaitGroup\n    wg.Add(num)\n    for i := 0; i < num; i++ {\n        go func() {\n            defer wg.Done()\n            if err := engine.Vroom(); err != nil {\n                // This cannot be t.Fatalf.\n                t.Errorf(\"No vroom left on engine: %v\", err)\n                return\n            }\n            if rpm := engine.Tachometer(); rpm > 1e6 {\n                t.Errorf(\"Inconceivable engine rate: %d\", rpm)\n            }\n        }()\n    }\n    wg.Wait()\n\n    if seen := engine.NumVrooms(); seen != num {\n        t.Errorf(\"engine.NumVrooms() = %d, want %d\", seen, num)\n    }\n}\n"
-            },
-            {
-                "description": "Adding `t.Parallel` to a test or subtest does not make it unsafe to call `t.Fatal` .\nWhen all calls to the `testing` API are in the test function , it is usually easy to spot incorrect usage because the `go` keyword is plain to see. Passing `testing.T` arguments around makes tracking such usage harder. Typically, the reason for passing these arguments is to introduce a test helper, and those should not depend on the system under test. Therefore, if a test helper registers a fatal test failure , it can and should do so from the test’s goroutine."
+                "example": "// Good:\nfunc TestRevEngine(t *testing.T) {\n    engine, err := Start()\n    if err != nil {\n        t.Fatalf(\"Engine failed to start: %v\", err)\n    }\n\n    num := 11\n    var wg sync.WaitGroup\n    wg.Add(num)\n    for i := 0; i < num; i++ {\n        go func() {\n            defer wg.Done()\n            if err := engine.Vroom(); err != nil {\n                // This cannot be t.Fatalf.\n                t.Errorf(\"No vroom left on engine: %v\", err)\n                return\n            }\n            if rpm := engine.Tachometer(); rpm > 1e6 {\n                t.Errorf(\"Inconceivable engine rate: %d\", rpm)\n            }\n        }()\n    }\n    wg.Wait()\n\n    if seen := engine.NumVrooms(); seen != num {\n        t.Errorf(\"engine.NumVrooms() = %d, want %d\", seen, num)\n    }\n}\n",
+                "appendix": "Adding `t.Parallel` to a test or subtest does not make it unsafe to call `t.Fatal` .\nWhen all calls to the `testing` API are in the test function , it is usually easy to spot incorrect usage because the `go` keyword is plain to see. Passing `testing.T` arguments around makes tracking such usage harder. Typically, the reason for passing these arguments is to introduce a test helper, and those should not depend on the system under test. Therefore, if a test helper registers a fatal test failure , it can and should do so from the test’s goroutine."
             }
         ]
     },
@@ -853,10 +813,8 @@
         "cases": [
             {
                 "description": "If all tests in the package require common setup and the setup requires teardown , you can use a custom testmain entrypoint . This can happen if the resource the test cases require is especially expensive to setup, and the cost should be amortized. Typically you have extracted any unrelated tests from the test suite at that point. It is typically only used for functional tests .\nUsing a custom `TestMain` \nshould not be your first choice due the amount of care that should be taken for correct use. Consider first whether the solution in the amortizing common test setup section or an ordinary test helper is sufficient for your needs.",
-                "example": "// Good:\nvar db *sql.DB\n\nfunc TestInsert(t *testing.T) { /* omitted */ }\n\nfunc TestSelect(t *testing.T) { /* omitted */ }\n\nfunc TestUpdate(t *testing.T) { /* omitted */ }\n\nfunc TestDelete(t *testing.T) { /* omitted */ }\n\n// runMain sets up the test dependencies and eventually executes the tests.\n// It is defined as a separate function to enable the setup stages to clearly\n// defer their teardown steps.\nfunc runMain(ctx context.Context, m *testing.M) (code int, err error) {\n    ctx, cancel := context.WithCancel(ctx)\n    defer cancel()\n\n    d, err := setupDatabase(ctx)\n    if err != nil {\n        return 0, err\n    }\n    defer d.Close() // Expressly clean up database.\n    db = d          // db is defined as a package-level variable.\n\n    // m.Run() executes the regular, user-defined test functions.\n    // Any defer statements that have been made will be run after m.Run()\n    // completes.\n    return m.Run(), nil\n}\n\nfunc TestMain(m *testing.M) {\n    code, err := runMain(context.Background(), m)\n    if err != nil {\n        // Failure messages should be written to STDERR, which log.Fatal uses.\n        log.Fatal(err)\n    }\n    // NOTE: defer statements do not run past here due to os.Exit\n    //       terminating the process.\n    os.Exit(code)\n}\n"
-            },
-            {
-                "description": "Ideally a test case is hermetic between invocations of itself and between other test cases.\nAt the very least, ensure that individual test cases reset any global state they have modified if they have done so (for instance, if the tests are working with an external database)."
+                "example": "// Good:\nvar db *sql.DB\n\nfunc TestInsert(t *testing.T) { /* omitted */ }\n\nfunc TestSelect(t *testing.T) { /* omitted */ }\n\nfunc TestUpdate(t *testing.T) { /* omitted */ }\n\nfunc TestDelete(t *testing.T) { /* omitted */ }\n\n// runMain sets up the test dependencies and eventually executes the tests.\n// It is defined as a separate function to enable the setup stages to clearly\n// defer their teardown steps.\nfunc runMain(ctx context.Context, m *testing.M) (code int, err error) {\n    ctx, cancel := context.WithCancel(ctx)\n    defer cancel()\n\n    d, err := setupDatabase(ctx)\n    if err != nil {\n        return 0, err\n    }\n    defer d.Close() // Expressly clean up database.\n    db = d          // db is defined as a package-level variable.\n\n    // m.Run() executes the regular, user-defined test functions.\n    // Any defer statements that have been made will be run after m.Run()\n    // completes.\n    return m.Run(), nil\n}\n\nfunc TestMain(m *testing.M) {\n    code, err := runMain(context.Background(), m)\n    if err != nil {\n        // Failure messages should be written to STDERR, which log.Fatal uses.\n        log.Fatal(err)\n    }\n    // NOTE: defer statements do not run past here due to os.Exit\n    //       terminating the process.\n    os.Exit(code)\n}\n",
+                "appendix": "Ideally a test case is hermetic between invocations of itself and between other test cases.\nAt the very least, ensure that individual test cases reset any global state they have modified if they have done so (for instance, if the tests are working with an external database)."
             }
         ]
     },
@@ -870,10 +828,8 @@
             },
             {
                 "description": "When `mustLoadDataset` is used in multiple test functions, its cost is amortized:",
-                "example": "// Good:\nfunc TestParseData(t *testing.T) {\n    data := mustLoadDataset(t)\n\n    // As documented above.\n}\n\nfunc TestListContents(t *testing.T) {\n    data := mustLoadDataset(t)\n\n    // As documented above.\n}\n\nfunc TestRegression682831(t *testing.T) {\n    if got, want := guessOS(\"zpc79.example.com\"), \"grhat\"; got != want {\n        t.Errorf(`guessOS(\"zpc79.example.com\") = %q, want %q`, got, want)\n    }\n}\n"
-            },
-            {
-                "description": "The reason that common teardown is tricky is there is no uniform place to register cleanup routines. If the setup function (in this case `loadDataset` ) relies on a context, `sync.Once` may be problematic. This is because the second of two racing calls to the setup function would need to wait for the first call to finish before returning. This period of waiting cannot be easily made to respect the context’s cancellation."
+                "example": "// Good:\nfunc TestParseData(t *testing.T) {\n    data := mustLoadDataset(t)\n\n    // As documented above.\n}\n\nfunc TestListContents(t *testing.T) {\n    data := mustLoadDataset(t)\n\n    // As documented above.\n}\n\nfunc TestRegression682831(t *testing.T) {\n    if got, want := guessOS(\"zpc79.example.com\"), \"grhat\"; got != want {\n        t.Errorf(`guessOS(\"zpc79.example.com\") = %q, want %q`, got, want)\n    }\n}\n",
+                "appendix": "The reason that common teardown is tricky is there is no uniform place to register cleanup routines. If the setup function (in this case `loadDataset` ) relies on a context, `sync.Once` may be problematic. This is because the second of two racing calls to the setup function would need to wait for the first call to finish before returning. This period of waiting cannot be easily made to respect the context’s cancellation."
             }
         ]
     },
@@ -902,10 +858,8 @@
         "cases": [
             {
                 "description": "Prefer using `fmt.Sprintf` when building a complex string with formatting. Using many “+” operators may obscure the end result.",
-                "example": "// Good:\nstr := fmt.Sprintf(\"%s [%s:%d]-> %s\", src, qos, mtu, dst)\n\n// Bad:\nbad := src.String() + \" [\" + qos.String() + \":\" + strconv.Itoa(mtu) + \"]-> \" + dst.String()\n"
-            },
-            {
-                "description": "Best Practice: When the output of the string-building operation is an `io.Writer` , don’t construct a temporary string with `fmt.Sprintf` just to send it to the Writer. Instead, use `fmt.Fprintf` to emit to the Writer directly.\nWhen the formatting is even more complex, prefer text/template or safehtml/template as appropriate."
+                "example": "// Good:\nstr := fmt.Sprintf(\"%s [%s:%d]-> %s\", src, qos, mtu, dst)\n\n// Bad:\nbad := src.String() + \" [\" + qos.String() + \":\" + strconv.Itoa(mtu) + \"]-> \" + dst.String()\n",
+                "appendix": "Best Practice: When the output of the string-building operation is an `io.Writer` , don’t construct a temporary string with `fmt.Sprintf` just to send it to the Writer. Instead, use `fmt.Fprintf` to emit to the Writer directly.\nWhen the formatting is even more complex, prefer text/template or safehtml/template as appropriate."
             }
         ]
     },
@@ -915,10 +869,8 @@
         "cases": [
             {
                 "description": "Prefer using `strings.Builder` when building a string bit-by-bit. `strings.Builder` takes amortized linear time, whereas “+” and `fmt.Sprintf` take quadratic time when called sequentially to form a larger string.",
-                "example": "// Good:\nb := new(strings.Builder)\nfor i, d := range digitsOfPi {\n    fmt.Fprintf(b, \"the %d digit of pi is: %d\\n\", i, d)\n}\nstr := b.String()\n"
-            },
-            {
-                "description": "Note: For more discussion, see GoTip #29: Building Strings Efficiently ."
+                "example": "// Good:\nb := new(strings.Builder)\nfor i, d := range digitsOfPi {\n    fmt.Fprintf(b, \"the %d digit of pi is: %d\\n\", i, d)\n}\nstr := b.String()\n",
+                "appendix": "Note: For more discussion, see GoTip #29: Building Strings Efficiently ."
             }
         ]
     },
@@ -950,10 +902,8 @@
             },
             {
                 "description": "Consider what happens in the case of tests exercising code that transitively relies on a sidecar for cloud logging.",
-                "example": "// Bad:\npackage app\n\nimport (\n  \"cloudlogger\"\n  \"sidecar\"\n  \"testing\"\n)\n\nfunc TestEndToEnd(t *testing.T) {\n  // The system under test (SUT) relies on a sidecar for a production cloud\n  // logger already being registered.\n  ... // Exercise SUT and check invariants.\n}\n\nfunc TestRegression_NetworkUnavailability(t *testing.T) {\n  // We had an outage because of a network partition that rendered the cloud\n  // logger inoperative, so we added a regression test to exercise the SUT with\n  // a test double that simulates network unavailability with the logger.\n  sidecar.Register(\"cloudlogger\", cloudloggertest.UnavailableLogger)\n  ... // Exercise SUT and check invariants.\n}\n\nfunc TestRegression_InvalidUser(t *testing.T) {\n  // The system under test (SUT) relies on a sidecar for a production cloud\n  // logger already being registered.\n  //\n  // Oops. cloudloggertest.UnavailableLogger is still registered from the\n  // previous test.\n  ... // Exercise SUT and check invariants.\n}\n"
-            },
-            {
-                "description": "Go tests are executed sequentially by default, so the tests above run as:\n`TestEndToEnd` \n`TestRegression_NetworkUnavailability` , which overrides the default value of cloudlogger \n`TestRegression_InvalidUser` , which requires the default value of cloudlogger registered in `packagesidecar`\nThis creates an order-dependent test case, which breaks running with test filters, and prevents tests from running in parallel or being sharded.\nUsing global state poses problems that lack easy answers for you and the API’s clients:\nWhat happens if a client needs to use different and separately operating sets of `Plugin` s (for example, to support multiple servers) in the same process space? \nWhat happens if a client wants to replace a registered `Plugin` with an alternative implementation in a test, like a test double ? \nWhat happens if a client’s tests require hermeticity between instances of a `Plugin` , or between all of the plugins registered? \nWhat happens if multiple clients `Register` a `Plugin` under the same name? Which one wins, if any? \nHow should errors be handled ? If the code panics or calls `log.Fatal` , will that always be appropriate for all places in which API would be called ? Can a client verify it doesn’t do something bad before doing so? \nAre there certain stages in a program’s startup phases or lifetime during which `Register` can be called and when it can’t? \nWhat happens if `Register` is called at the wrong time? A client could call `Register` in func init , before flags are parsed, or after `main` . The stage at which a function is called affects error handling. If the author of an API assumes the API is only called during program initialization without the requirement that it is, the assumption may nudge the author to design error handling to abort the program by modeling the API as a `Must` -like function. Aborting is not appropriate for general-purpose library functions that can be used at any stage. \nWhat if the client’s and the designer’s concurrency needs are mismatched?\nSee also:\nGo Tip #36: Enclosing Package-Level State \nGo Tip #71: Reducing Parallel Test Flakiness \nGo Tip #80: Dependency Injection Principles \nError Handling: Look Before You Leap versus Easier to Ask for Forgiveness than Permission \nUnit Testing Practices on Public APIs\nGlobal state has cascading effects on the health of the Google codebase . Global state should be approached with extreme scrutiny .\nGlobal state comes in several forms , and you can use a few litmus tests to identify when it is safe ."
+                "example": "// Bad:\npackage app\n\nimport (\n  \"cloudlogger\"\n  \"sidecar\"\n  \"testing\"\n)\n\nfunc TestEndToEnd(t *testing.T) {\n  // The system under test (SUT) relies on a sidecar for a production cloud\n  // logger already being registered.\n  ... // Exercise SUT and check invariants.\n}\n\nfunc TestRegression_NetworkUnavailability(t *testing.T) {\n  // We had an outage because of a network partition that rendered the cloud\n  // logger inoperative, so we added a regression test to exercise the SUT with\n  // a test double that simulates network unavailability with the logger.\n  sidecar.Register(\"cloudlogger\", cloudloggertest.UnavailableLogger)\n  ... // Exercise SUT and check invariants.\n}\n\nfunc TestRegression_InvalidUser(t *testing.T) {\n  // The system under test (SUT) relies on a sidecar for a production cloud\n  // logger already being registered.\n  //\n  // Oops. cloudloggertest.UnavailableLogger is still registered from the\n  // previous test.\n  ... // Exercise SUT and check invariants.\n}\n",
+                "appendix": "Go tests are executed sequentially by default, so the tests above run as:\n`TestEndToEnd` \n`TestRegression_NetworkUnavailability` , which overrides the default value of cloudlogger \n`TestRegression_InvalidUser` , which requires the default value of cloudlogger registered in `packagesidecar`\nThis creates an order-dependent test case, which breaks running with test filters, and prevents tests from running in parallel or being sharded.\nUsing global state poses problems that lack easy answers for you and the API’s clients:\nWhat happens if a client needs to use different and separately operating sets of `Plugin` s (for example, to support multiple servers) in the same process space? \nWhat happens if a client wants to replace a registered `Plugin` with an alternative implementation in a test, like a test double ? \nWhat happens if a client’s tests require hermeticity between instances of a `Plugin` , or between all of the plugins registered? \nWhat happens if multiple clients `Register` a `Plugin` under the same name? Which one wins, if any? \nHow should errors be handled ? If the code panics or calls `log.Fatal` , will that always be appropriate for all places in which API would be called ? Can a client verify it doesn’t do something bad before doing so? \nAre there certain stages in a program’s startup phases or lifetime during which `Register` can be called and when it can’t? \nWhat happens if `Register` is called at the wrong time? A client could call `Register` in func init , before flags are parsed, or after `main` . The stage at which a function is called affects error handling. If the author of an API assumes the API is only called during program initialization without the requirement that it is, the assumption may nudge the author to design error handling to abort the program by modeling the API as a `Must` -like function. Aborting is not appropriate for general-purpose library functions that can be used at any stage. \nWhat if the client’s and the designer’s concurrency needs are mismatched?\nSee also:\nGo Tip #36: Enclosing Package-Level State \nGo Tip #71: Reducing Parallel Test Flakiness \nGo Tip #80: Dependency Injection Principles \nError Handling: Look Before You Leap versus Easier to Ask for Forgiveness than Permission \nUnit Testing Practices on Public APIs\nGlobal state has cascading effects on the health of the Google codebase . Global state should be approached with extreme scrutiny .\nGlobal state comes in several forms , and you can use a few litmus tests to identify when it is safe ."
             }
         ]
     },
@@ -971,10 +921,8 @@
             },
             {
                 "description": "Thick-Client singletons for things like backends, storage, data access layers, and other system resources. These often pose additional problems with service reliability.",
-                "example": "// Bad:\npackage useradmin\n\nvar client pb.UserAdminServiceClientInterface\n\nfunc Client() *pb.UserAdminServiceClient {\n    if client == nil {\n        client = ...  // Set up client.\n    }\n    return client\n}\n"
-            },
-            {
-                "description": "Note: Many legacy APIs in the Google codebase do not follow this guidance; in fact, some Go standard libraries allow for configuration via global values. Nevertheless, the legacy API’s contravention of this guidance \nshould not be used as precedent \nfor continuing the pattern. \nIt is better to invest in proper API design today than pay for redesigning later."
+                "example": "// Bad:\npackage useradmin\n\nvar client pb.UserAdminServiceClientInterface\n\nfunc Client() *pb.UserAdminServiceClient {\n    if client == nil {\n        client = ...  // Set up client.\n    }\n    return client\n}\n",
+                "appendix": "Note: Many legacy APIs in the Google codebase do not follow this guidance; in fact, some Go standard libraries allow for configuration via global values. Nevertheless, the legacy API’s contravention of this guidance \nshould not be used as precedent \nfor continuing the pattern. \nIt is better to invest in proper API design today than pay for redesigning later."
             }
         ]
     },
@@ -994,10 +942,7 @@
             {
                 "description": "While not recommended, it is acceptable to provide a simplified API that uses package level state if you need to maximize convenience for the user.\nFollow the litmus tests with these guidelines in such cases:\nThe package must offer clients the ability to create isolated instances of package types as described above . \nThe public APIs that use global state must be a thin proxy to the previous API. A good example of this is http.Handle internally calling (*http.ServeMux).Handle on the package variable http.DefaultServeMux . \nThis package-level API must only be used by binary build targets , not libraries , unless the libraries are undertaking a refactoring to support dependency passing. Infrastructure libraries that can be imported by other packages must not rely on package-level state of the packages they import. \nFor example, an infrastructure provider implementing a sidecar that is to be shared with other teams using the API from the top should offer an API to accommodate this:",
                 "example": "// Good:\npackage cloudlogger\n\nfunc New() *Logger { ... }\n\nfunc Register(r *sidecar.Registry, l *Logger) {\n  r.Register(\"Cloud Logging\", l)\n}\n",
-                "appendix": "This package-level API must document and enforce its invariants (for example, at which stage in the program’s life it can be called, whether it can be used concurrently). Further, it must provide an API to reset global state to a known-good default (for example, to facilitate testing)."
-            },
-            {
-                "description": "See also:\nGo Tip #36: Enclosing Package-Level State \nGo Tip #80: Dependency Injection Principles\nThis site is open source. Improve this page ."
+                "appendix": "This package-level API must document and enforce its invariants (for example, at which stage in the program’s life it can be called, whether it can be used concurrently). Further, it must provide an API to reset global state to a known-good default (for example, to facilitate testing).\nSee also:\nGo Tip #36: Enclosing Package-Level State \nGo Tip #80: Dependency Injection Principles\nThis site is open source. Improve this page ."
             }
         ]
     }

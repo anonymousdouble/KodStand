@@ -67,10 +67,8 @@
             },
             {
                 "description": "Prefer `pylint:disable` to the deprecated older form `pylint:disable-msg` .\nUnused argument warnings can be suppressed by deleting the variables at the beginning of the function. Always include a comment explaining why you are deleting it. “Unused.” is sufficient. For example:",
-                "example": "def viking_cafe_order(spam: str, beans: str, eggs: str | None = None) -> str:\n    del beans, eggs  # Unused by vikings.\n    return spam + spam + spam\n"
-            },
-            {
-                "description": "Other common forms of suppressing this warning include using ‘ `_` ’ as the identifier for the unused argument or prefixing the argument name with ‘ `unused_` ’, or assigning them to ‘ `_` ’. These forms are allowed but no longer encouraged. These break callers that pass arguments by name and do not enforce that the arguments are actually unused."
+                "example": "def viking_cafe_order(spam: str, beans: str, eggs: str | None = None) -> str:\n    del beans, eggs  # Unused by vikings.\n    return spam + spam + spam\n",
+                "appendix": "Other common forms of suppressing this warning include using ‘ `_` ’ as the identifier for the unused argument or prefixing the argument name with ‘ `unused_` ’, or assigning them to ‘ `_` ’. These forms are allowed but no longer encouraged. These break callers that pass arguments by name and do not enforce that the arguments are actually unused."
             }
         ]
     },
@@ -116,10 +114,8 @@
         "cases": [
             {
                 "description": "Use `importx` for importing packages and modules. \nUse `fromximporty` where `x` is the package prefix and `y` is the module name with no prefix. \nUse `fromximportyasz` in any of the following circumstances: \nTwo modules named `y` are to be imported. \n`y` conflicts with a top-level name defined in the current module. \n`y` conflicts with a common parameter name that is part of the public API (e.g., `features` ). \n`y` is an inconveniently long name. \n`y` is too generic in the context of your code (e.g., `fromstorage.file_systemimportoptionsasfs_options` ). \nUse `importyasz` only when `z` is a standard abbreviation (e.g., `importnumpyasnp` ).\nFor example the module `sound.effects.echo` may be imported as follows:",
-                "example": "from sound.effects import echo\n...\necho.EchoFilter(input, output, delay=0.7, atten=4)\n"
-            },
-            {
-                "description": "Do not use relative names in imports. Even if the module is in the same package, use the full package name. This helps prevent unintentionally importing a package twice."
+                "example": "from sound.effects import echo\n...\necho.EchoFilter(input, output, delay=0.7, atten=4)\n",
+                "appendix": "Do not use relative names in imports. Even if the module is in the same package, use the full package name. This helps prevent unintentionally importing a package twice."
             }
         ]
     },
@@ -169,10 +165,8 @@
             },
             {
                 "description": "(assume this file lives in `doctor/who/` where `jodie.py` also exists)",
-                "example": "No:\n  # Unclear what module the author wanted and what will be imported.  The actual\n  # import behavior depends on external factors controlling sys.path.\n  # Which possible jodie module did the author intend to import?\n  import jodie\n"
-            },
-            {
-                "description": "The directory the main binary is located in should not be assumed to be in `sys.path` despite that happening in some environments. This being the case, code should assume that `importjodie` refers to a third-party or top-level package named `jodie` , not a local `jodie.py` ."
+                "example": "No:\n  # Unclear what module the author wanted and what will be imported.  The actual\n  # import behavior depends on external factors controlling sys.path.\n  # Which possible jodie module did the author intend to import?\n  import jodie\n",
+                "appendix": "The directory the main binary is located in should not be assumed to be in `sys.path` despite that happening in some environments. This being the case, code should assume that `importjodie` refers to a third-party or top-level package named `jodie` , not a local `jodie.py` ."
             }
         ]
     },
@@ -713,10 +707,8 @@
         "cases": [
             {
                 "description": "Can lead to confusing bugs, such as this example based on PEP-0227 :",
-                "example": "i = 4\ndef foo(x: Iterable[int]):\n    def bar():\n        print(i, end='')\n    # ...\n    # A bunch of code here\n    # ...\n    for i in x:  # Ah, i *is* local to foo, so this is what bar sees\n        print(i, end='')\n    bar()\n"
-            },
-            {
-                "description": "So `foo([1,2,3])` will print `1233` , not `1234` ."
+                "example": "i = 4\ndef foo(x: Iterable[int]):\n    def bar():\n        print(i, end='')\n    # ...\n    # A bunch of code here\n    # ...\n    for i in x:  # Ah, i *is* local to foo, so this is what bar sees\n        print(i, end='')\n    bar()\n",
+                "appendix": "So `foo([1,2,3])` will print `1233` , not `1234` ."
             }
         ]
     },
@@ -880,10 +872,8 @@
         "cases": [
             {
                 "description": "Use of `from__future__import` statements is encouraged. It allows a given source file to start using more modern Python syntax features today. Once you no longer need to run on a version where the features are hidden behind a `__future__` import, feel free to remove those lines.\nIn code that may execute on versions as old as 3.5 rather than >= 3.7, import:",
-                "example": "from __future__ import generator_stop\n"
-            },
-            {
-                "description": "For more information read the Python future statement definitions documentation.\nPlease don’t remove these imports until you are confident the code is only ever used in a sufficiently modern environment. Even if you do not currently use the feature a specific future import enables in your code today, keeping it in place in the file prevents later modifications of the code from inadvertently depending on the older behavior.\nUse other `from__future__` import statements as you see fit."
+                "example": "from __future__ import generator_stop\n",
+                "appendix": "For more information read the Python future statement definitions documentation.\nPlease don’t remove these imports until you are confident the code is only ever used in a sufficiently modern environment. Even if you do not currently use the feature a specific future import enables in your code today, keeping it in place in the file prevents later modifications of the code from inadvertently depending on the older behavior.\nUse other `from__future__` import statements as you see fit."
             }
         ]
     },
@@ -969,10 +959,8 @@
             },
             {
                 "description": "Within comments, put long URLs on their own line if necessary.",
-                "example": "Yes:  # See details at\n      # http://www.example.com/us/developer/documentation/api/content/v2.0/csv_file_name_extension_full_specification.html\n\nNo:  # See details at\n     # http://www.example.com/us/developer/documentation/api/content/\\\n     # v2.0/csv_file_name_extension_full_specification.html\n"
-            },
-            {
-                "description": "Make note of the indentation of the elements in the line continuation examples above; see the indentation section for explanation.\nIn all other cases where a line exceeds 80 characters, and the Black or Pyink auto-formatter does not help bring the line below the limit, the line is allowed to exceed this maximum. Authors are encouraged to manually break the line up per the notes above when it is sensible."
+                "example": "Yes:  # See details at\n      # http://www.example.com/us/developer/documentation/api/content/v2.0/csv_file_name_extension_full_specification.html\n\nNo:  # See details at\n     # http://www.example.com/us/developer/documentation/api/content/\\\n     # v2.0/csv_file_name_extension_full_specification.html\n",
+                "appendix": "Make note of the indentation of the elements in the line continuation examples above; see the indentation section for explanation.\nIn all other cases where a line exceeds 80 characters, and the Black or Pyink auto-formatter does not help bring the line below the limit, the line is allowed to exceed this maximum. Authors are encouraged to manually break the line up per the notes above when it is sensible."
             }
         ]
     },
@@ -1175,10 +1163,8 @@
             },
             {
                 "description": "Prefer `\"\"\"` for multi-line strings rather than `'''` . Projects may choose to use `'''` for all non-docstring multi-line strings if and only if they also use `'` for regular strings. Docstrings must use `\"\"\"` regardless.\nMulti-line strings do not flow with the indentation of the rest of the program. If you need to avoid embedding extra space in the string, use either concatenated single-line strings or a multi-line string with textwrap.dedent() to remove the initial space on each line:",
-                "example": "  No:\n  long_string = \"\"\"This is pretty ugly.\nDon't do this.\n\"\"\"\n\n  Yes:\n  long_string = \"\"\"This is fine if your use case can accept\n      extraneous leading spaces.\"\"\"\n\n  Yes:\n  long_string = (\"And this is fine if you cannot accept\\n\" +\n                 \"extraneous leading spaces.\")\n\n  Yes:\n  long_string = (\"And this too is fine if you cannot accept\\n\"\n                 \"extraneous leading spaces.\")\n\n  Yes:\n  import textwrap\n\n  long_string = textwrap.dedent(\"\"\"\\\n      This is also fine, because textwrap.dedent()\n      will collapse common leading spaces in each line.\"\"\")\n"
-            },
-            {
-                "description": "Note that using a backslash here does not violate the prohibition against explicit line continuation ; in this case, the backslash is escaping a newline in a string literal."
+                "example": "  No:\n  long_string = \"\"\"This is pretty ugly.\nDon't do this.\n\"\"\"\n\n  Yes:\n  long_string = \"\"\"This is fine if your use case can accept\n      extraneous leading spaces.\"\"\"\n\n  Yes:\n  long_string = (\"And this is fine if you cannot accept\\n\" +\n                 \"extraneous leading spaces.\")\n\n  Yes:\n  long_string = (\"And this too is fine if you cannot accept\\n\"\n                 \"extraneous leading spaces.\")\n\n  Yes:\n  import textwrap\n\n  long_string = textwrap.dedent(\"\"\"\\\n      This is also fine, because textwrap.dedent()\n      will collapse common leading spaces in each line.\"\"\")\n",
+                "appendix": "Note that using a backslash here does not violate the prohibition against explicit line continuation ; in this case, the backslash is escaping a newline in a string literal."
             }
         ]
     },
@@ -1212,10 +1198,8 @@
             },
             {
                 "description": "For file-like objects that do not support the `with` statement, use `contextlib.closing()` :",
-                "example": "import contextlib\n\nwith contextlib.closing(urllib.urlopen(\"http://www.python.org/\")) as front_page:\n    for line in front_page:\n        print(line)\n"
-            },
-            {
-                "description": "In rare cases where context-based resource management is infeasible, code documentation must explain clearly how resource lifetime is managed."
+                "example": "import contextlib\n\nwith contextlib.closing(urllib.urlopen(\"http://www.python.org/\")) as front_page:\n    for line in front_page:\n        print(line)\n",
+                "appendix": "In rare cases where context-based resource management is infeasible, code documentation must explain clearly how resource lifetime is managed."
             }
         ]
     },
@@ -1233,10 +1217,8 @@
             },
             {
                 "description": "Avoid adding TODOs that refer to an individual or team as the context:",
-                "example": "# TODO: @yourusername - File an issue and use a '*' for repetition.\n"
-            },
-            {
-                "description": "If your `TODO` is of the form “At a future date do something” make sure that you either include a very specific date (“Fix by November 2009”) or a very specific event (“Remove this code when all clients can handle XML responses.”) that future code maintainers will comprehend. Issues are ideal for tracking this."
+                "example": "# TODO: @yourusername - File an issue and use a '*' for repetition.\n",
+                "appendix": "If your `TODO` is of the form “At a future date do something” make sure that you either include a very specific date (“Fix by November 2009”) or a very specific event (“Remove this code when all clients can handle XML responses.”) that future code maintainers will comprehend. Issues are ideal for tracking this."
             }
         ]
     },
@@ -1358,10 +1340,8 @@
             },
             {
                 "description": "Otherwise, use:",
-                "example": "def main():\n    ...\n\nif __name__ == '__main__':\n    main()\n"
-            },
-            {
-                "description": "All code at the top level will be executed when the module is imported. Be careful not to call functions, create objects, or perform other operations that should not be executed when the file is being `pydoc` ed."
+                "example": "def main():\n    ...\n\nif __name__ == '__main__':\n    main()\n",
+                "appendix": "All code at the top level will be executed when the module is imported. Be careful not to call functions, create objects, or perform other operations that should not be executed when the file is being `pydoc` ed."
             }
         ]
     },
@@ -1526,10 +1506,8 @@
         "cases": [
             {
                 "description": "Do not use `typing.Text` in new code. It’s only for Python 2/3 compatibility.\nUse `str` for string/text data. For code that deals with binary data, use `bytes` .",
-                "example": "def deals_with_text_data(x: str) -> str:\n  ...\ndef deals_with_binary_data(x: bytes) -> bytes:\n  ...\n"
-            },
-            {
-                "description": "If all the string types of a function are always the same, for example if the return type is the same as the argument type in the code above, use AnyStr ."
+                "example": "def deals_with_text_data(x: str) -> str:\n  ...\ndef deals_with_binary_data(x: bytes) -> bytes:\n  ...\n",
+                "appendix": "If all the string types of a function are always the same, for example if the return type is the same as the argument type in the code above, use AnyStr ."
             }
         ]
     },

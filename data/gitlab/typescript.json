@@ -4,7 +4,7 @@
         "belongs to": "History with GitLab",
         "cases": [
             {
-                "description": "TypeScript has been considered , discussed, promoted, and rejected for years at GitLab. The general conclusion is that we are unable to integrate TypeScript into the main project because the costs outweigh the benefits.\nThe main project has a lot of pre-existing code that is not strongly typed. The main contributors to the main project are not all familiar with TypeScript.\nApart from the main project, TypeScript has been profitably employed in a handful of satellite projects."
+                "description": "TypeScript has been considered , discussed, promoted, and rejected for years at GitLab. The general conclusion is that we are unable to integrate TypeScript into the main project because the costs outweigh the benefits.\nThe main project has a lot of pre-existing code that is not strongly typed. \nThe main contributors to the main project are not all familiar with TypeScript.\nApart from the main project, TypeScript has been profitably employed in a handful of satellite projects."
             }
         ]
     },
@@ -27,7 +27,7 @@
         "belongs to": "Recommendations/Setup ESLint and TypeScript configuration",
         "cases": [
             {
-                "description": "When setting up a new TypeScript project, configure strict type-safety rules for ESLint and TypeScript. This ensures that the project remains as type-safe as possible.\nThe GitLab Workflow Extension project is a good model for a TypeScript project’s boilerplate and configuration. Consider copying the `tsconfig.json` and `.eslintrc.json` from there.\nFor `tsconfig.json` :\nUse \"strict\": true . This enforces the strongest type-checking capabilities in the project and prohibits overriding type-safety. Use \"skipLibCheck\": true . This improves compile time by only checking references `.d.ts` files as opposed to all `.d.ts` files in `node_modules` .\nFor `.eslintrc.json` (or `.eslintrc.js` ):\nMake sure that TypeScript-specific parsing and linting are placed in an `overrides` for `**/*.ts` files. This way, linting regular `.js` files remains unaffected by the TypeScript-specific rules. Extend from plugin:@typescript-eslint/recommended which has some very sensible defaults, such as: \n\"@typescript-eslint/no-explicit-any\": \"error\" \n\"@typescript-eslint/no-unsafe-assignment\": \"error\" \n\"@typescript-eslint/no-unsafe-return\": \"error\""
+                "description": "When setting up a new TypeScript project, configure strict type-safety rules for ESLint and TypeScript. This ensures that the project remains as type-safe as possible.\nThe GitLab Workflow Extension project is a good model for a TypeScript project’s boilerplate and configuration. Consider copying the `tsconfig.json` and `.eslintrc.json` from there.\nFor `tsconfig.json` :\nUse \"strict\": true . This enforces the strongest type-checking capabilities in the project and prohibits overriding type-safety. \nUse \"skipLibCheck\": true . This improves compile time by only checking references `.d.ts` files as opposed to all `.d.ts` files in `node_modules` .\nFor `.eslintrc.json` (or `.eslintrc.js` ):\nMake sure that TypeScript-specific parsing and linting are placed in an `overrides` for `**/*.ts` files. This way, linting regular `.js` files remains unaffected by the TypeScript-specific rules. \nExtend from plugin:@typescript-eslint/recommended which has some very sensible defaults, such as: \n\"@typescript-eslint/no-explicit-any\": \"error\" \n\"@typescript-eslint/no-unsafe-assignment\": \"error\" \n\"@typescript-eslint/no-unsafe-return\": \"error\""
             }
         ]
     },
@@ -47,10 +47,8 @@
         "cases": [
             {
                 "description": "Avoid casting with `<>` or `as` as much as possible.\nType casting explicitly circumvents type-safety. Consider using type predicates .",
-                "example": "// Bad :(\nfunction handler(data: unknown) {\n  console.log((data as StuffContainer).stuff);\n}\n\n// Good :)\nfunction hasStuff(data: unknown): data is StuffContainer {\n  if (data && typeof data === 'object') {\n    return 'stuff' in data;\n  }\n\n  return false;\n}\n\nfunction handler(data: unknown) {\n  if (hasStuff(data)) {\n    // No casting needed :)\n    console.log(data.stuff);\n  }\n  throw new Error('Expected data to have stuff. Catastrophic consequences might follow...');\n}\n\n"
-            },
-            {
-                "description": "There’s some rare cases this might be acceptable (consider this test utility ). However, 99% of the time, there’s a better way."
+                "example": "// Bad :(\nfunction handler(data: unknown) {\n  console.log((data as StuffContainer).stuff);\n}\n\n// Good :)\nfunction hasStuff(data: unknown): data is StuffContainer {\n  if (data && typeof data === 'object') {\n    return 'stuff' in data;\n  }\n\n  return false;\n}\n\nfunction handler(data: unknown) {\n  if (hasStuff(data)) {\n    // No casting needed :)\n    console.log(data.stuff);\n  }\n  throw new Error('Expected data to have stuff. Catastrophic consequences might follow...');\n}\n\n",
+                "appendix": "There’s some rare cases this might be acceptable (consider this test utility ). However, 99% of the time, there’s a better way."
             }
         ]
     },
@@ -60,10 +58,8 @@
         "cases": [
             {
                 "description": "Prefer declaring a new `interface` over declaring a new `type` alias when defining new structures.\nInterfaces and type aliases have a lot of cross-over, but only interfaces can be used with the `implements` keyword. A class is not able to `implement` a `type` (only an `interface` ), so using `type` would restrict the usability of the structure.",
-                "example": "// Bad :(\ntype Fooer = {\n  foo: () => string;\n}\n\n// Good :)\ninterface Fooer {\n  foo: () => string;\n}\n"
-            },
-            {
-                "description": "From the TypeScript guide :\nIf you would like a heuristic, use `interface` until you need to use features from `type` ."
+                "example": "// Bad :(\ntype Fooer = {\n  foo: () => string;\n}\n\n// Good :)\ninterface Fooer {\n  foo: () => string;\n}\n",
+                "appendix": "From the TypeScript guide :\nIf you would like a heuristic, use `interface` until you need to use features from `type` ."
             }
         ]
     },

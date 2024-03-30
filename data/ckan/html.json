@@ -1,20 +1,18 @@
 [
     {
-        "title": "Formatting¶",
-        "belongs to": "Formatting¶",
+        "title": "Formatting ¶",
+        "belongs to": "Formatting ¶",
         "cases": [
             {
                 "description": "All HTML documents must use two spaces for indentation and there should be no trailing whitespace. HTML5 syntax must be used and all attributes must use double quotes around attributes.",
-                "example": "<video autoplay=\"autoplay\" poster=\"poster_image.jpg\">\n  <source src=\"foo.ogg\" type=\"video/ogg\">\n</video>\n"
-            },
-            {
-                "description": "HTML5 elements should be used where appropriate reserving `<div>` and `<span>` elements for situations where there is no semantic value (such as wrapping elements to provide styling hooks)."
+                "example": "<video autoplay=\"autoplay\" poster=\"poster_image.jpg\">\n  <source src=\"foo.ogg\" type=\"video/ogg\">\n</video>\n",
+                "appendix": "HTML5 elements should be used where appropriate reserving `<div>` and `<span>` elements for situations where there is no semantic value (such as wrapping elements to provide styling hooks)."
             }
         ]
     },
     {
-        "title": "Doctype and layout¶",
-        "belongs to": "Doctype and layout¶",
+        "title": "Doctype and layout ¶",
+        "belongs to": "Doctype and layout ¶",
         "cases": [
             {
                 "description": "All documents must be using the HTML5 doctype and the `<html>` element should have a `\"lang\"` attribute. The `<head>` should also at a minimum include `\"viewport\"` and `\"charset\"` meta tags.",
@@ -23,8 +21,8 @@
         ]
     },
     {
-        "title": "Forms¶",
-        "belongs to": "Forms¶",
+        "title": "Forms ¶",
+        "belongs to": "Forms ¶",
         "cases": [
             {
                 "description": "Form fields must always include a `<label>` element with a `\"for\"` attribute matching the `\"id\"` on the input. This helps accessibility by focusing the input when the label is clicked, it also helps screen readers match labels to their respective inputs.",
@@ -32,16 +30,14 @@
             },
             {
                 "description": "Each `<input>` should have an `\"id\"` that is unique to the page. It does not have to match the `\"name\"` attribute.\nForms should take advantage of the new HTML5 input types where they make sense to do so, placeholder attributes should also be included where relevant. Including these can provided enhancements in browsers that support them such as tailored inputs and keyboards.",
-                "example": "<div>\n  <label for=\"field-email\">Email</label>\n  <input type=\"email\" id=\"field-email\" name=\"email\" value=\"name@example.com\">\n</div>\n<div>\n  <label for=\"field-phone\">Phone</label>\n  <input type=\"phone\" id=\"field-phone\" name=\"phone\" value=\"\" placeholder=\"+44 077 12345 678\">\n</div>\n<div>\n  <label for=\"field-url\">Homepage</label>\n  <input type=\"url\" id=\"field-url\" name=\"url\" value=\"\" placeholder=\"http://example.com\">\n</div>\n"
-            },
-            {
-                "description": "Wufoo provides an excellent reference for these attributes."
+                "example": "<div>\n  <label for=\"field-email\">Email</label>\n  <input type=\"email\" id=\"field-email\" name=\"email\" value=\"name@example.com\">\n</div>\n<div>\n  <label for=\"field-phone\">Phone</label>\n  <input type=\"phone\" id=\"field-phone\" name=\"phone\" value=\"\" placeholder=\"+44 077 12345 678\">\n</div>\n<div>\n  <label for=\"field-url\">Homepage</label>\n  <input type=\"url\" id=\"field-url\" name=\"url\" value=\"\" placeholder=\"http://example.com\">\n</div>\n",
+                "appendix": "Wufoo provides an excellent reference for these attributes."
             }
         ]
     },
     {
-        "title": "Including meta data¶",
-        "belongs to": "Including meta data¶",
+        "title": "Including meta data ¶",
+        "belongs to": "Including meta data ¶",
         "cases": [
             {
                 "description": "Classes should ideally only be used as styling hooks. If you need to include additional data in the HTML document, for example to pass data to JavaScript, then the HTML5 `data-` attributes should be used.",
@@ -57,16 +53,14 @@
             },
             {
                 "description": "Will become:",
-                "example": "jQuery('.btn').data('fileFormat'); //=> \"csv\"\njQuery('.btn').data(); => {fileFormat: \"csv\"}\n"
-            },
-            {
-                "description": "Ideally you should be using CKAN’s JavaScript module format for defining how JavaScript is initiated and interacts with the DOM."
+                "example": "jQuery('.btn').data('fileFormat'); //=> \"csv\"\njQuery('.btn').data(); => {fileFormat: \"csv\"}\n",
+                "appendix": "Ideally you should be using CKAN’s JavaScript module format for defining how JavaScript is initiated and interacts with the DOM."
             }
         ]
     },
     {
-        "title": "Targeting Internet Explorer¶",
-        "belongs to": "Targeting Internet Explorer¶",
+        "title": "Targeting Internet Explorer ¶",
+        "belongs to": "Targeting Internet Explorer ¶",
         "cases": [
             {
                 "description": "Targeting lower versions of Internet Explorer (IE), those below version 9, should be handled by the stylesheets. Small fixes should be provided inline using the `.ie` specific class names. Larger fixes may require a separate stylesheet but try to avoid this if at all possible.\nAdding IE specific classes:",
@@ -79,8 +73,8 @@
         ]
     },
     {
-        "title": "i18n¶",
-        "belongs to": "i18n¶",
+        "title": "i18n ¶",
+        "belongs to": "i18n ¶",
         "cases": [
             {
                 "description": "Don’t include line breaks within `<p>` blocks. ie do this:",
