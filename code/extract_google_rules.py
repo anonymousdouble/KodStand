@@ -51,59 +51,81 @@ def is_child(node1: Tag, node2: Tag):
         return None
     return titles.index(node1.name) > titles.index(node2.name)
 
-
 def save_example(parents, nodes, data: list):
     current = {}
     p = []
     for parent in parents:
         p.append(parent.text.strip(' \n'))
     title:str = p[-1]
-    # if "Test double packages and types" in title:
-    #     stoptheworld = 1
     current["title"] = title.strip(' \n')
     current["belongs to"] = "/".join(p)
     current["cases"] = []
-    cur_case = {"description": "", "example": []}
-    record = False
+    cur_case = {}
     for node in nodes:
-        # fp.write(f"{node.text}")
-        if record == True or node.name == "pre":
-            cur_case["example"].append(node.text)
-            current["cases"].append(cur_case)
-            cur_case = {"description": "", "example": []}
-            record = False
-            continue
-        case1 = "Example:".lower() in node.text.lower()
-        case2 = "Examples:".lower() in node.text.lower()
-        if case1 or case2:
-            record = True
-        if record:
-            # 截取"Example"之后的内容
-            if case1:
-                if "Example:" in node.text:
-                    text = node.text.split("Example:", 1)[1]
+        sdata = []
+        dfs_collect_content(node,sdata)
+        cur_node_buf = []
+        for n,dat in sdata:
+            if n != 'pre':
+                # 描述节点
+                if cur_case.get("description") is None:
+                    cur_case["description"] = dat
                 else:
-                    text = node.text.split("example:", 1)[1]
+                    cur_case["description"] += dat
             else:
-                if "Examples:" in node.text:
-                    text = node.text.split("Examples:", 1)[1]
+                # 代码节点
+                if cur_case.get("description") is not None:
+                    cur_case["description"] = re.sub(' +',' ',cur_case["description"].strip(" \n"))
+                    cur_case["description"] = re.sub('\n +','\n',cur_case["description"])
+                cur_case["example"] = dat
+                cur_node_buf.append(cur_case)
+                cur_case = {}
+        if cur_case.get("description") is not None and cur_case.get("example") is None:
+            cur_case["description"] = re.sub(' +',' ',cur_case["description"].strip(" \n"))
+            cur_case["description"] = re.sub('\n +','\n',cur_case["description"])
+            if cur_case.get("description")!="":
+                
+                if len(cur_node_buf) > 0:
+                    cur_node_buf[-1]["appendix"] = cur_case["description"]
                 else:
-                    text = node.text.split("examples:", 1)[1]
-            # 判断 text中是否包含字母
-            if len(re.findall("\w", text)) > 0:
-                cur_case["example"].append(text)
-                desc = node.text.split(text, 1)[0]
-                cur_case["description"] += desc
-                current["cases"].append(cur_case)
-                cur_case = {"description": "", "example": []}
-                record = False
+                    cur_node_buf.append(cur_case)
+            cur_case = {}
+        current["cases"].extend(cur_node_buf)
+    
+    merged = []
+    buf = {}
+    for c in current["cases"]:
+        if c.get("example") is None:
+
+            if buf.get("description") is None:
+                buf["description"] = c["description"]
             else:
-                cur_case["description"] += node.text
+                buf["description"] += f"\n{c['description']}"
+
         else:
-            cur_case["description"] += node.text
-    # 判断cur_case是否为{}
-    if cur_case:
-        current["cases"].append(cur_case)
+            if c.get("description"):
+                if buf.get("description") is None:
+                    buf["description"] = c["description"]
+                else:
+                    buf["description"] += f"\n{c['description']}"
+            else:
+                # 向上合并
+                if len(merged) > 0 and buf.get("description") is None:
+                    if merged[-1].get("appendix") is None:
+                        merged[-1]["example"] += f"\n{c['example']}"
+                        if c.get("appendix"):
+                            merged[-1]["appendix"] = c["appendix"]
+                        buf = {}
+                        continue
+            buf["example"] = c['example']
+            if c.get("appendix"):
+                buf["appendix"] = c["appendix"]
+            merged.append(buf)
+            buf = {}
+
+    if buf:
+        merged.append(buf)
+    current["cases"] = merged
     data.append(current)
 
 
@@ -146,6 +168,27 @@ def parse_html(file: str, output_path, root_level="h2"):
             fp.write(soup.prettify())
 
 
+def dfs_collect_content(node: Tag, data: list):
+    if type(node) is not Tag:
+        # print(type(node))
+        processed_text = node.strip("\n ")
+        if processed_text != "":
+            processed_text = f"{processed_text} "
+            data.append(("string",processed_text))
+        else:
+            data.append(("string",'\n'))
+        return
+    if node.name == "pre":
+        data.append((node.name,node.text))
+        return
+    if node.name == "code":
+        processed_text = node.text.replace("\n", "").replace("\t", "").replace(" ", "")
+        processed_text = f" `{processed_text}`"
+        data.append((node.name,processed_text))
+        return
+    for child in node.children:
+        dfs_collect_content(child,data)
+
 def extract_and_parse(input_path, output_path):
     os.makedirs(output_path, exist_ok=True)
     for root, dirs, files in os.walk(input_path):
@@ -155,6 +198,7 @@ def extract_and_parse(input_path, output_path):
 
 if __name__ == "__main__":
     # 遍历google文件夹
-    input_path = "data/google/google_go_out"
+    input_path = "data/google/google_output"
     output_path = "data/google/google_go_out"
-    extract_and_parse(input_path, output_path)
+    extract_and_parse(input_path, input_path)
+    # extract_and_parse(output_path, output_path)
