@@ -55,7 +55,7 @@ def save_example(parents, nodes, data: list):
     current = {}
     p = []
     for parent in parents:
-        p.append(re.sub('[[\n]* ]+',' ',parent.text.strip(' \n')))
+        p.append(re.sub('[\n* ]+',' ',parent.text.strip(' \n')))
     title:str = p[-1]
     current["title"] = title.strip(' \n')
     current["belongs to"] = "/".join(p)
@@ -75,14 +75,14 @@ def save_example(parents, nodes, data: list):
             else:
                 # 代码节点
                 if cur_case.get("description") is not None:
-                    cur_case["description"] = re.sub(' +',' ',cur_case["description"].strip(" \n"))
-                    cur_case["description"] = re.sub('\n +','\n',cur_case["description"])
+                    cur_case["description"] = re.sub('[ ]+',' ',cur_case["description"].strip(" \n"))
+                    cur_case["description"] = re.sub('[\n]+','\n',cur_case["description"])
                 cur_case["example"] = dat
                 cur_node_buf.append(cur_case)
                 cur_case = {}
         if cur_case.get("description") is not None and cur_case.get("example") is None:
-            cur_case["description"] = re.sub(' +',' ',cur_case["description"].strip(" \n"))
-            cur_case["description"] = re.sub('\n +','\n',cur_case["description"])
+            cur_case["description"] = re.sub('[ ]+',' ',cur_case["description"].strip(" \n"))
+            cur_case["description"] = re.sub('[\n]+','\n',cur_case["description"])
             if cur_case.get("description")!="":
                 
                 if len(cur_node_buf) > 0:
@@ -173,6 +173,7 @@ def dfs_collect_content(node: Tag, data: list):
         # print(type(node))
         processed_text = node.strip("\n ")
         if processed_text != "":
+            processed_text = re.sub('[\n]+',' ',processed_text)
             processed_text = f"{processed_text} "
             data.append(("string",processed_text))
         else:
@@ -181,9 +182,15 @@ def dfs_collect_content(node: Tag, data: list):
     if node.name == "pre":
         data.append((node.name,node.text))
         return
+    if node.name == "a":
+        processed_text = node.text.strip("\n ")
+        if processed_text != "":
+            processed_text = f"{processed_text} "
+            data.append(("a_string",processed_text))
+        return
     if node.name == "code":
-        processed_text = node.text.replace("\n", "").replace("\t", "").replace(" ", "")
-        processed_text = f" `{processed_text}`"
+        processed_text = node.text.strip("\n ").replace("\n", "").replace("\t", "").replace(" ", "")
+        processed_text = f"`{processed_text}` "
         data.append((node.name,processed_text))
         return
     for child in node.children:
