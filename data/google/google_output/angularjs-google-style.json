@@ -2,12 +2,7 @@
     {
         "title": "1 Angular Language Rules",
         "belongs to": "1 Angular Language Rules",
-        "cases": [
-            {
-                "description": "",
-                "example": []
-            }
-        ]
+        "cases": []
     },
     {
         "title": "Manage dependencies with Closure's goog.require and goog.provide",
@@ -15,13 +10,10 @@
         "cases": [
             {
                 "description": "Choose a namespace for your project, and use goog.provide and goog.require.",
-                "example": [
-                    "\ngoog.provide('hello.about.AboutCtrl');\ngoog.provide('hello.versions.Versions');\n"
-                ]
+                "example": "\ngoog.provide('hello.about.AboutCtrl');\ngoog.provide('hello.versions.Versions');\n"
             },
             {
-                "description": "Why?\n    Google BUILD rules integrate nicely with closure provide/require.",
-                "example": []
+                "description": "Why? Google BUILD rules integrate nicely with closure provide/require."
             }
         ]
     },
@@ -30,24 +22,20 @@
         "belongs to": "1 Angular Language Rules/Modules",
         "cases": [
             {
-                "description": "Your main application module should be in your root client directory. A module should never be\n    altered other than the one where it is defined.Modules may either be defined in the same file as their components (this works well for a module\n    that contains exactly one service) or in a separate file for wiring pieces together.Why?\n    A module should be consistent for anyone that wants to include it as a reusable component.\n    If a module can mean different things depending on which files are included, it is not consistent.\n",
-                "example": []
+                "description": "Your main application module should be in your root client directory. A module should never be\naltered other than the one where it is defined.\nModules may either be defined in the same file as their components (this works well for a module\nthat contains exactly one service) or in a separate file for wiring pieces together.\nWhy? A module should be consistent for anyone that wants to include it as a reusable component.\nIf a module can mean different things depending on which files are included, it is not consistent."
             }
         ]
     },
     {
-        "title": "\n    Modules should reference other modules using the Angular Module's \"name\" property\n",
-        "belongs to": "1 Angular Language Rules/\n    Modules should reference other modules using the Angular Module's \"name\" property\n",
+        "title": "Modules should reference other modules using the Angular Module's \"name\" property",
+        "belongs to": "1 Angular Language Rules/Modules should reference other modules using the Angular Module's \"name\" property",
         "cases": [
             {
                 "description": "For example:",
-                "example": [
-                    "\n// file submodulea.js:\n  goog.provide('my.submoduleA');\n\n  my.submoduleA = angular.module('my.submoduleA', []);\n  // ...\n\n// file app.js\n  goog.require('my.submoduleA');\n\n  Yes: my.application.module = angular.module('hello', [my.submoduleA.name]);\n  \n      No: my.application.module = angular.module('hello', ['my.submoduleA']);\n  "
-                ]
+                "example": "\n// file submodulea.js:\n  goog.provide('my.submoduleA');\n\n  my.submoduleA = angular.module('my.submoduleA', []);\n  // ...\n\n// file app.js\n  goog.require('my.submoduleA');\n\n  Yes: my.application.module = angular.module('hello', [my.submoduleA.name]);\n  \n      No: my.application.module = angular.module('hello', ['my.submoduleA']);\n  "
             },
             {
-                "description": "Why?\n    Using a property of my.submoduleA prevents Closure presubmit failures complaining that the file is\n    required but never used. Using the .name property avoids duplicating strings.",
-                "example": []
+                "description": "Why? Using a property of my.submoduleA prevents Closure presubmit failures complaining that the file is\nrequired but never used. Using the .name property avoids duplicating strings."
             }
         ]
     },
@@ -56,8 +44,7 @@
         "belongs to": "1 Angular Language Rules/Use a common externs file",
         "cases": [
             {
-                "description": "This maximally allows the JS compiler to enforce type safety in the presence of externally\n    provided types from Angular, and means you don't have to worry about Angular vars being obfuscated\n    in a confusing way. Note to readers outside Google: the current externs file is located in an internal-to-Google\n    directory, but an example can be found on github \n        here.",
-                "example": []
+                "description": "This maximally allows the JS compiler to enforce type safety in the presence of externally\nprovided types from Angular, and means you don't have to worry about Angular vars being obfuscated\nin a confusing way.\nNote to readers outside Google: the current externs file is located in an internal-to-Google\ndirectory, but an example can be found on github here ."
             }
         ]
     },
@@ -66,20 +53,12 @@
         "belongs to": "1 Angular Language Rules/JSCompiler Flags",
         "cases": [
             {
-                "description": "Reminder: According to the JS style guide, customer facing code must be compiled.Recommended: Use the JSCompiler (the closure compiler that works with js_binary by\n    default) and ANGULAR_COMPILER_FLAGS_FULL from //javascript/angular/build_defs/build_defs for\n    your base flags.\nNote - if you are using @export for methods, you will need to add the compiler flag",
-                "example": [
-                    "\n\"--generate_exports\",\n"
-                ]
+                "description": "Reminder : According to the JS style guide, customer facing code must be compiled.\nRecommended : Use the JSCompiler (the closure compiler that works with js_binary by\ndefault) and ANGULAR_COMPILER_FLAGS_FULL from //javascript/angular/build_defs/build_defs for\nyour base flags.\nNote - if you are using @export for methods, you will need to add the compiler flag",
+                "example": "\n\"--generate_exports\",\n"
             },
             {
                 "description": "If you are using @export for properties, you will need to add the flags:",
-                "example": [
-                    "\n\"--generate_exports\",\n\"--remove_unused_prototype_props_in_externs=false\",\n\"--export_local_property_definitions\",\n"
-                ]
-            },
-            {
-                "description": "",
-                "example": []
+                "example": "\n\"--generate_exports\",\n\"--remove_unused_prototype_props_in_externs=false\",\n\"--export_local_property_definitions\",\n"
             }
         ]
     },
@@ -88,32 +67,23 @@
         "belongs to": "1 Angular Language Rules/Controllers and Scopes",
         "cases": [
             {
-                "description": "Controllers are classes. Methods should be defined on MyCtrl.prototype.Google Angular applications should use the 'controller as' style to export the controller\n    onto the scope. This is fully implemented in Angular 1.2 and can be mimicked in pre-Angular 1.2\n    builds.\nPre Angular 1.2, this looks like:",
-                "example": [
-                    "\n/**\n * Home controller.\n *\n * @param {!angular.Scope} $scope\n * @constructor\n * @ngInject\n * @export\n */\nhello.mainpage.HomeCtrl = function($scope) {\n  /** @export */\n  $scope.homeCtrl = this; // This is a bridge until Angular 1.2 controller-as\n\n  /**\n   * @type {string}\n   * @export\n   */\n  this.myColor = 'blue';\n};\n\n\n/**\n * @param {number} a\n * @param {number} b\n * @export\n */\nhello.mainpage.HomeCtrl.prototype.add = function(a, b) {\n  return a + b;\n};\n"
-                ]
+                "description": "Controllers are classes. Methods should be defined on MyCtrl.prototype.\nGoogle Angular applications should use the 'controller as' style to export the controller\nonto the scope. This is fully implemented in Angular 1.2 and can be mimicked in pre-Angular 1.2\nbuilds.\nPre Angular 1.2, this looks like:",
+                "example": "\n/**\n * Home controller.\n *\n * @param {!angular.Scope} $scope\n * @constructor\n * @ngInject\n * @export\n */\nhello.mainpage.HomeCtrl = function($scope) {\n  /** @export */\n  $scope.homeCtrl = this; // This is a bridge until Angular 1.2 controller-as\n\n  /**\n   * @type {string}\n   * @export\n   */\n  this.myColor = 'blue';\n};\n\n\n/**\n * @param {number} a\n * @param {number} b\n * @export\n */\nhello.mainpage.HomeCtrl.prototype.add = function(a, b) {\n  return a + b;\n};\n"
             },
             {
                 "description": "And the template:",
-                "example": [
-                    "\n<div ng-controller=\"hello.mainpage.HomeCtrl\"/>\n  <span ng-class=\"homeCtrl.myColor\">I'm in a color!</span>\n  <span>{{homeCtrl.add(5, 6)}}</span>\n</div>\n"
-                ]
+                "example": "\n<div ng-controller=\"hello.mainpage.HomeCtrl\"/>\n  <span ng-class=\"homeCtrl.myColor\">I'm in a color!</span>\n  <span>{{homeCtrl.add(5, 6)}}</span>\n</div>\n"
             },
             {
                 "description": "After Angular 1.2, this looks like:",
-                "example": [
-                    "\n/**\n * Home controller.\n *\n * @constructor\n * @ngInject\n * @export\n */\nhello.mainpage.HomeCtrl = function() {\n  /**\n   * @type {string}\n   * @export\n   */\n  this.myColor = 'blue';\n};\n\n\n/**\n * @param {number} a\n * @param {number} b\n * @export\n */\nhello.mainpage.HomeCtrl.prototype.add = function(a, b) {\n  return a + b;\n};\n"
-                ]
+                "example": "\n/**\n * Home controller.\n *\n * @constructor\n * @ngInject\n * @export\n */\nhello.mainpage.HomeCtrl = function() {\n  /**\n   * @type {string}\n   * @export\n   */\n  this.myColor = 'blue';\n};\n\n\n/**\n * @param {number} a\n * @param {number} b\n * @export\n */\nhello.mainpage.HomeCtrl.prototype.add = function(a, b) {\n  return a + b;\n};\n"
             },
             {
-                "description": "If you are compiling with property renaming, expose properties and methods using the @export\n    annotation. Remember to @export the constructor as well.And in the template:",
-                "example": [
-                    "\n<div ng-controller=\"hello.mainpage.HomeCtrl as homeCtrl\"/>\n  <span ng-class=\"homeCtrl.myColor\">I'm in a color!</span>\n  <span>{{homeCtrl.add(5, 6)}}</span>\n</div>\n"
-                ]
+                "description": "If you are compiling with property renaming, expose properties and methods using the @export\nannotation. Remember to @export the constructor as well.\nAnd in the template:",
+                "example": "\n<div ng-controller=\"hello.mainpage.HomeCtrl as homeCtrl\"/>\n  <span ng-class=\"homeCtrl.myColor\">I'm in a color!</span>\n  <span>{{homeCtrl.add(5, 6)}}</span>\n</div>\n"
             },
             {
-                "description": "Why?\n    Putting methods and properties directly onto the controller, instead of building up a scope\n    object, fits better with the Google Closure class style. Additionally, using 'controller as'\n    makes it obvious which controller you are accessing when multiple controllers apply to an element.\n    Since there is always a '.' in the bindings, you don't have to worry about prototypal inheritance\n    masking primitives.",
-                "example": []
+                "description": "Why? Putting methods and properties directly onto the controller, instead of building up a scope\nobject, fits better with the Google Closure class style. Additionally, using 'controller as'\nmakes it obvious which controller you are accessing when multiple controllers apply to an element.\nSince there is always a '.' in the bindings, you don't have to worry about prototypal inheritance\nmasking primitives."
             }
         ]
     },
@@ -122,14 +92,11 @@
         "belongs to": "1 Angular Language Rules/Directives",
         "cases": [
             {
-                "description": "All DOM manipulation should be done inside directives. Directives should be kept small and use\n    composition. Files defining directives should goog.provide a static function which returns the\n    directive definition object.",
-                "example": [
-                    "\ngoog.provide('hello.pane.paneDirective');\n\n/**\n * Description and usage\n * @return {angular.Directive} Directive definition object.\n */\nhello.pane.paneDirective = function() {\n  // ...\n};\n"
-                ]
+                "description": "All DOM manipulation should be done inside directives. Directives should be kept small and use\ncomposition. Files defining directives should goog.provide a static function which returns the\ndirective definition object.",
+                "example": "\ngoog.provide('hello.pane.paneDirective');\n\n/**\n * Description and usage\n * @return {angular.Directive} Directive definition object.\n */\nhello.pane.paneDirective = function() {\n  // ...\n};\n"
             },
             {
-                "description": "Exception: DOM manipulation may occur in services for DOM elements disconnected from the\n    rest of the view, e.g. dialogs or keyboard shortcuts.",
-                "example": []
+                "description": "Exception : DOM manipulation may occur in services for DOM elements disconnected from the\nrest of the view, e.g. dialogs or keyboard shortcuts."
             }
         ]
     },
@@ -138,52 +105,34 @@
         "belongs to": "1 Angular Language Rules/Services",
         "cases": [
             {
-                "description": "Services registered on the module with module.service are classes.\n    Use module.service instead of module.provider or\n    module.factory unless you need to do initialization beyond just creating a\n    new instance of the class.",
-                "example": [
-                    "\n/**\n * @param {!angular.$http} $http The Angular http service.\n * @constructor\n */\nhello.request.Request = function($http) {\n  /** @type {!angular.$http} */\n  this.http_ = $http;\n};\n\nhello.request.Request.prototype.get = function() {/*...*/};\n"
-                ]
+                "description": "Services registered on the module with `module.service`are classes.\nUse `module.service`instead of `module.provider`or `module.factory`unless you need to do initialization beyond just creating a\nnew instance of the class.",
+                "example": "\n/**\n * @param {!angular.$http} $http The Angular http service.\n * @constructor\n */\nhello.request.Request = function($http) {\n  /** @type {!angular.$http} */\n  this.http_ = $http;\n};\n\nhello.request.Request.prototype.get = function() {/*...*/};\n"
             },
             {
                 "description": "In the module:",
-                "example": [
-                    "\nmodule.service('request', hello.request.Request);\n"
-                ]
-            },
-            {
-                "description": "",
-                "example": []
+                "example": "\nmodule.service('request', hello.request.Request);\n"
             }
         ]
     },
     {
         "title": "2 Angular Style Rules",
         "belongs to": "2 Angular Style Rules",
-        "cases": [
-            {
-                "description": "",
-                "example": []
-            }
-        ]
+        "cases": []
     },
     {
         "title": "Reserve $ for Angular properties and services",
         "belongs to": "2 Angular Style Rules/Reserve $ for Angular properties and services",
         "cases": [
             {
-                "description": "Do not use $ to prepend your own object properties and service identifiers. Consider this style\n    of naming reserved by AngularJS and jQuery.Yes:",
-                "example": [
-                    "\n  $scope.myModel = { value: 'foo' }\n  myModule.service('myService', function() { /*...*/ });\n  var MyCtrl = function($http) {this.http_ = $http;};\n"
-                ]
+                "description": "Do not use $ to prepend your own object properties and service identifiers. Consider this style\nof naming reserved by AngularJS and jQuery.\nYes:",
+                "example": "\n  $scope.myModel = { value: 'foo' }\n  myModule.service('myService', function() { /*...*/ });\n  var MyCtrl = function($http) {this.http_ = $http;};\n"
             },
             {
                 "description": "No:",
-                "example": [
-                    "\n  $scope.$myModel = { value: 'foo' } // BAD\n  $scope.myModel = { $value: 'foo' } // BAD\n  myModule.service('$myService', function() { ... }); // BAD\n  var MyCtrl = function($http) {this.$http_ = $http;}; // BAD\n"
-                ]
+                "example": "\n  $scope.$myModel = { value: 'foo' } // BAD\n  $scope.myModel = { $value: 'foo' } // BAD\n  myModule.service('$myService', function() { ... }); // BAD\n  var MyCtrl = function($http) {this.$http_ = $http;}; // BAD\n"
             },
             {
-                "description": "Why?\n    It's useful to distinguish between Angular / jQuery builtins and things you add yourself.\n    In addition, $ is not an acceptable character for variables names in the JS style guide.\n",
-                "example": []
+                "description": "Why? It's useful to distinguish between Angular / jQuery builtins and things you add yourself.\nIn addition, $ is not an acceptable character for variables names in the JS style guide."
             }
         ]
     },
@@ -192,8 +141,7 @@
         "belongs to": "2 Angular Style Rules/Custom elements",
         "cases": [
             {
-                "description": "For custom elements (e.g. <ng-include src=\"template\"></ng-include>), IE8\n    requires special support (html5shiv-like hacks) to enable css styling.  Be aware of this\n    restriction in apps targeting old versions of IE.",
-                "example": []
+                "description": "For custom elements (e.g. `<ng-includesrc=\"template\"></ng-include>`), IE8\nrequires special support (html5shiv-like hacks) to enable css styling. Be aware of this\nrestriction in apps targeting old versions of IE."
             }
         ]
     },
@@ -202,8 +150,7 @@
         "belongs to": "3 Angular Tips, Tricks, and Best Practices",
         "cases": [
             {
-                "description": "These are not strict style guide rules, but are placed here as reference for folks getting\n    started with Angular at Google.",
-                "example": []
+                "description": "These are not strict style guide rules, but are placed here as reference for folks getting\nstarted with Angular at Google."
             }
         ]
     },
@@ -212,8 +159,7 @@
         "belongs to": "3 Angular Tips, Tricks, and Best Practices/Testing",
         "cases": [
             {
-                "description": "Angular is designed for test-driven development.The recommended unit testing setup is Jasmine + Karma (though you could use closure tests\n    or js_test)Angular provides easy adapters to load modules and use the injector in Jasmine tests.\n\nmodule\ninject\n\n",
-                "example": []
+                "description": "Angular is designed for test-driven development.\nThe recommended unit testing setup is Jasmine + Karma (though you could use closure tests\nor js_test)\nAngular provides easy adapters to load modules and use the injector in Jasmine tests. \n\nmodule \n\ninject"
             }
         ]
     },
@@ -222,8 +168,7 @@
         "belongs to": "3 Angular Tips, Tricks, and Best Practices/Consider using the Best Practices for App Structure",
         "cases": [
             {
-                "description": "\n    This  directory structure doc describes how to structure your application with controllers in\n    nested subdirectories and all components (e.g. services and directives) in a 'components' dir.\n",
-                "example": []
+                "description": "This directory structure doc describes how to structure your application with controllers in\nnested subdirectories and all components (e.g. services and directives) in a 'components' dir."
             }
         ]
     },
@@ -232,8 +177,7 @@
         "belongs to": "3 Angular Tips, Tricks, and Best Practices/Be aware of how scope inheritance works",
         "cases": [
             {
-                "description": "See \n    The Nuances of Scope Prototypal Inheritance",
-                "example": []
+                "description": "See The Nuances of Scope Prototypal Inheritance"
             }
         ]
     },
@@ -242,14 +186,8 @@
         "belongs to": "3 Angular Tips, Tricks, and Best Practices/Use @ngInject for easy dependency injection compilation",
         "cases": [
             {
-                "description": "This removes the need to add myCtrl['$inject'] = ... to prevent minification from\n    messing up Angular's dependency injection.Usage:",
-                "example": [
-                    "\n/**\n * My controller.\n * @param {!angular.$http} $http\n * @param {!my.app.myService} myService\n * @constructor\n * @export\n * @ngInject\n */\nmy.app.MyCtrl = function($http, myService) {\n  //...\n};\n"
-                ]
-            },
-            {
-                "description": "",
-                "example": []
+                "description": "This removes the need to add `myCtrl['$inject']=...`to prevent minification from\nmessing up Angular's dependency injection.\nUsage:",
+                "example": "\n/**\n * My controller.\n * @param {!angular.$http} $http\n * @param {!my.app.myService} myService\n * @constructor\n * @export\n * @ngInject\n */\nmy.app.MyCtrl = function($http, myService) {\n  //...\n};\n"
             }
         ]
     },
@@ -258,8 +196,7 @@
         "belongs to": "4 Best practices links and docs",
         "cases": [
             {
-                "description": "\n\n        Best Practices from Angular on GitHub\n\n        Meetup video (not Google specific)\n\n    Last modified Feb 07 2013\n",
-                "example": []
+                "description": "Best Practices from Angular on GitHub \n\nMeetup video (not Google specific)\nLast modified Feb 07 2013"
             }
         ]
     }
