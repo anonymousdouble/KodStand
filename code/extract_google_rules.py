@@ -55,7 +55,7 @@ def save_example(parents, nodes, data: list):
     current = {}
     p = []
     for parent in parents:
-        p.append(parent.text.strip(' \n'))
+        p.append(re.sub('[[\n]* ]+',' ',parent.text.strip(' \n')))
     title:str = p[-1]
     current["title"] = title.strip(' \n')
     current["belongs to"] = "/".join(p)
@@ -198,7 +198,7 @@ def extract_and_parse(input_path, output_path):
 
 if __name__ == "__main__":
     # 遍历google文件夹
-    input_path = "data/google/google_output"
-    output_path = "data/google/google_go_out"
-    extract_and_parse(input_path, input_path)
-    # extract_and_parse(output_path, output_path)
+    google_path = "data/google/google_output"
+    go_path = "data/google/google_go_out"
+    extract_and_parse(google_path, google_path)
+    extract_and_parse(go_path, go_path)
