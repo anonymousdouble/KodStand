@@ -1,0 +1,785 @@
+[
+    {
+        "title": "Principles",
+        "belongs to": "Principles",
+        "cases": []
+    },
+    {
+        "title": "Optimize for the reader, not the writer",
+        "belongs to": "Principles/Optimize for the reader, not the writer",
+        "cases": [
+            {
+                "description": "Codebases often have extended lifetimes and more time is spent reading the code than writing it. We explicitly choose to optimize for the experience of our average software engineer reading, maintaining, and debugging code in our codebase rather than the ease of writing said code. For example, when something surprising or unusual is happening in a snippet of code, leaving textual hints for the reader is valuable."
+            }
+        ]
+    },
+    {
+        "title": "Be consistent",
+        "belongs to": "Principles/Be consistent",
+        "cases": [
+            {
+                "description": "When the style guide allows multiple options it is preferable to pick one option over mixed usage of multiple options. Using one style consistently throughout a codebase lets engineers focus on other (more important) issues. Consistency also enables better automation because consistent code allows more efficient development and operation of tools that format or refactor code. In many cases, rules that are attributed to “Be Consistent” boil down to “Just pick one and stop worrying about it”; the potential value of allowing flexibility on these points is outweighed by the cost of having people argue over them."
+            }
+        ]
+    },
+    {
+        "title": "Be consistent with Apple SDKs",
+        "belongs to": "Principles/Be consistent with Apple SDKs",
+        "cases": [
+            {
+                "description": "Consistency with the way Apple SDKs use Objective-C has value for the same reasons as consistency within our code base. If an Objective-C feature solves a problem that’s an argument for using it. However, sometimes language features and idioms are flawed, or were just designed with assumptions that are not universal. In those cases it is appropriate to constrain or ban language features or idioms."
+            }
+        ]
+    },
+    {
+        "title": "Style rules should pull their weight",
+        "belongs to": "Principles/Style rules should pull their weight",
+        "cases": [
+            {
+                "description": "The benefit of a style rule must be large enough to justify asking engineers to remember it. The benefit is measured relative to the codebase we would get without the rule, so a rule against a very harmful practice may still have a small benefit if people are unlikely to do it anyway. This principle mostly explains the rules we don’t have, rather than the rules we do: for example, goto contravenes many of the following principles, but is not discussed due to its extreme rarity."
+            }
+        ]
+    },
+    {
+        "title": "Example",
+        "belongs to": "Example",
+        "cases": [
+            {
+                "description": "They say an example is worth a thousand words, so let’s start off with an example that should give you a feel for the style, spacing, naming, and so on.\nHere is an example header file, demonstrating the correct commenting and spacing for an `@interface` declaration.",
+                "example": "// GOOD:\n\n#import <Foundation/Foundation.h>\n\n@class Bar;\n\n/**\n * A sample class demonstrating good Objective-C style. All interfaces,\n * categories, and protocols (read: all non-trivial top-level declarations\n * in a header) MUST be commented. Comments must also be adjacent to the\n * object they're documenting.\n */\n@interface Foo : NSObject\n\n/** The retained Bar. */\n@property(nonatomic) Bar *bar;\n\n/** The current drawing attributes. */\n@property(nonatomic, copy) NSDictionary<NSString *, NSNumber *> *attributes;\n\n/**\n * Convenience creation method.\n * See -initWithBar: for details about @c bar.\n *\n * @param bar The string for fooing.\n * @return An instance of Foo.\n */\n+ (instancetype)fooWithBar:(Bar *)bar;\n\n/**\n * Initializes and returns a Foo object using the provided Bar instance.\n *\n * @param bar A string that represents a thing that does a thing.\n */\n- (instancetype)initWithBar:(Bar *)bar NS_DESIGNATED_INITIALIZER;\n\n/**\n * Does some work with @c blah.\n *\n * @param blah\n * @return YES if the work was completed; NO otherwise.\n */\n- (BOOL)doWorkWithBlah:(NSString *)blah;\n\n@end\n"
+            },
+            {
+                "description": "An example source file, demonstrating the correct commenting and spacing for the `@implementation` of an interface.",
+                "example": "// GOOD:\n\n#import \"Shared/Util/Foo.h\"\n\n@implementation Foo {\n  /** The string used for displaying \"hi\". */\n  NSString *_string;\n}\n\n+ (instancetype)fooWithBar:(Bar *)bar {\n  return [[self alloc] initWithBar:bar];\n}\n\n- (instancetype)init {\n  // Classes with a custom designated initializer should always override\n  // the superclass's designated initializer.\n  return [self initWithBar:nil];\n}\n\n- (instancetype)initWithBar:(Bar *)bar {\n  self = [super init];\n  if (self) {\n    _bar = [bar copy];\n    _string = [[NSString alloc] initWithFormat:@\"hi %d\", 3];\n    _attributes = @{\n      @\"color\" : [UIColor blueColor],\n      @\"hidden\" : @NO\n    };\n  }\n  return self;\n}\n\n- (BOOL)doWorkWithBlah:(NSString *)blah {\n  // Work should be done here.\n  return NO;\n}\n\n@end\n"
+            }
+        ]
+    },
+    {
+        "title": "Naming",
+        "belongs to": "Naming",
+        "cases": [
+            {
+                "description": "Names should be as descriptive as possible, within reason. Follow standard Objective-C naming\nrules .\nAvoid non-standard abbreviations (including non-standard acronyms and initialisms). Don’t worry about saving horizontal space as it is far more important to make your code immediately understandable by a new reader. For example:",
+                "example": "// GOOD:\n\n// Good names.\nint numberOfErrors = 0;\nint completedConnectionsCount = 0;\ntickets = [[NSMutableArray alloc] init];\nuserInfo = [someObject object];\nport = [network port];\nNSDate *gAppLaunchDate;\n\n// AVOID:\n\n// Names to avoid.\nint w;\nint nerr;\nint nCompConns;\ntix = [[NSMutableArray alloc] init];\nobj = [someObject object];\np = [network port];\n"
+            },
+            {
+                "description": "Any class, category, method, function, or variable name should use all capitals for acronyms and initialisms within the name. This follows Apple’s standard of using all capitals within a name for acronyms such as URL, ID, TIFF, and EXIF.\nNames of C functions and typedefs should be capitalized and use camel case as appropriate for the surrounding code."
+            }
+        ]
+    },
+    {
+        "title": "File Names",
+        "belongs to": "Naming/File Names",
+        "cases": [
+            {
+                "description": "File names should reflect the name of the class implementation that they contain—including case.\nFollow the convention that your project uses. File extensions should be as follows:\nExtension \nType \n.h \nC/C++/Objective-C header file \n.m \nObjective-C implementation file \n.mm \nObjective-C++ implementation file \n.cc \nPure C++ implementation file \n.c \nC implementation file\nFiles containing code that may be shared across projects or used in a large project should have a clearly unique name, typically including the project or class prefix .\nFile names for categories should include the name of the class being extended, like GTMNSString+Utils.h or NSTextView+GTMAutocomplete.h"
+            }
+        ]
+    },
+    {
+        "title": "Prefixes",
+        "belongs to": "Naming/Prefixes",
+        "cases": [
+            {
+                "description": "Prefixes are commonly required in Objective-C to avoid naming collisions in a global namespace. Classes, protocols, global functions, and global constants should generally be named with a prefix that begins with a capital letter followed by one or more capital letters or numbers.\nWARNING: Apple reserves two-letter prefixes—see Conventions in Programming with Objective-C —so prefixes with a minimum of three characters are considered best practice.",
+                "example": "// GOOD:\n\n/** An example error domain. */\nextern NSString *GTMExampleErrorDomain;\n\n/** Gets the default time zone. */\nextern NSTimeZone *GTMGetDefaultTimeZone(void);\n\n/** An example delegate. */\n@protocol GTMExampleDelegate <NSObject>\n@end\n\n/** An example class. */\n@interface GTMExample : NSObject\n@end\n\n"
+            }
+        ]
+    },
+    {
+        "title": "Class Names",
+        "belongs to": "Naming/Class Names",
+        "cases": [
+            {
+                "description": "Class names (along with category and protocol names) should start as uppercase and use mixed case to delimit words.\nClasses and protocols in code shared across multiple applications must have an appropriate prefix (e.g. GTMSendMessage). Prefixes are recommended, but not required, for other classes and protocols."
+            }
+        ]
+    },
+    {
+        "title": "Category Naming",
+        "belongs to": "Naming/Category Naming",
+        "cases": [
+            {
+                "description": "Category names should start with an appropriate prefix identifying the category as part of a project or open for general use.\nCategory source file names should begin with the class being extended followed by a plus sign and the name of the category, e.g., `NSString+GTMParsing.h` . Methods in a category should be prefixed with a lowercase version of the prefix used for the category name followed by an underscore (e.g., `gtm_myCategoryMethodOnAString:` ) in order to prevent collisions in Objective-C’s global namespace.\nThere should be a single space between the class name and the opening parenthesis of the category.",
+                "example": "// GOOD:\n\n// UIViewController+GTMCrashReporting.h\n\n/** A category that adds metadata to include in crash reports to UIViewController. */\n@interface UIViewController (GTMCrashReporting)\n\n/** A unique identifier to represent the view controller in crash reports. */\n@property(nonatomic, setter=gtm_setUniqueIdentifier:) int gtm_uniqueIdentifier;\n\n/** Returns an encoded representation of the view controller's current state. */\n- (nullable NSData *)gtm_encodedState;\n\n@end\n"
+            },
+            {
+                "description": "If a class is not shared with other projects, categories extending it may omit name prefixes and method name prefixes.",
+                "example": "// GOOD:\n\n/** This category extends a class that is not shared with other projects. */\n@interface XYZDataObject (Storage)\n- (NSString *)storageIdentifier;\n@end\n"
+            }
+        ]
+    },
+    {
+        "title": "Objective-C Method Names",
+        "belongs to": "Naming/Objective-C Method Names",
+        "cases": [
+            {
+                "description": "Method and parameter names typically start as lowercase and then use mixed case.\nProper capitalization should be respected, including at the beginning of names.",
+                "example": "// GOOD:\n\n+ (NSURL *)URLWithString:(NSString *)URLString;\n"
+            },
+            {
+                "description": "The method name should read like a sentence if possible, meaning you should choose parameter names that flow with the method name. Objective-C method names tend to be very long, but this has the benefit that a block of code can almost read like prose, thus rendering many implementation comments unnecessary.\nUse prepositions and conjunctions like “with”, “from”, and “to” in the second and later parameter names only where necessary to clarify the meaning or behavior of the method.",
+                "example": "// GOOD:\n\n- (void)addTarget:(id)target action:(SEL)action;                          // GOOD; no conjunction needed\n- (CGPoint)convertPoint:(CGPoint)point fromView:(UIView *)view;           // GOOD; conjunction clarifies parameter\n- (void)replaceCharactersInRange:(NSRange)aRange\n            withAttributedString:(NSAttributedString *)attributedString;  // GOOD.\n"
+            },
+            {
+                "description": "A method that returns an object should have a name beginning with a noun identifying the object returned:",
+                "example": "// GOOD:\n\n- (Sandwich *)sandwich;      // GOOD.\n\n// AVOID:\n\n- (Sandwich *)makeSandwich;  // AVOID.\n"
+            },
+            {
+                "description": "An accessor method should be named the same as the object it’s getting, but it should not be prefixed with the word `get` . For example:",
+                "example": "// GOOD:\n\n- (id)delegate;     // GOOD.\n\n// AVOID:\n\n- (id)getDelegate;  // AVOID.\n"
+            },
+            {
+                "description": "Accessors that return the value of boolean adjectives have method names beginning with `is` , but property names for those methods omit the `is` .\nDot notation is used only with property names, not with method names.",
+                "example": "// GOOD:\n\n@property(nonatomic, getter=isGlorious) BOOL glorious;\n- (BOOL)isGlorious;\n\nBOOL isGood = object.glorious;      // GOOD.\nBOOL isGood = [object isGlorious];  // GOOD.\n\n// AVOID:\n\nBOOL isGood = object.isGlorious;    // AVOID.\n\n// GOOD:\n\nNSArray<Frog *> *frogs = [NSArray<Frog *> arrayWithObject:frog];\nNSEnumerator *enumerator = [frogs reverseObjectEnumerator];  // GOOD.\n\n// AVOID:\n\nNSEnumerator *enumerator = frogs.reverseObjectEnumerator;    // AVOID.\n"
+            },
+            {
+                "description": "See Apple’s Guide to Naming\nMethods for more details on Objective-C naming.\nThese guidelines are for Objective-C methods only. C++ method names continue to follow the rules set in the C++ style guide."
+            }
+        ]
+    },
+    {
+        "title": "Function Names",
+        "belongs to": "Naming/Function Names",
+        "cases": [
+            {
+                "description": "Function names should start with a capital letter and have a capital letter for each new word (a.k.a. “ camel case ” or “Pascal case”).",
+                "example": "// GOOD:\n\nstatic void AddTableEntry(NSString *tableEntry);\nstatic BOOL DeleteFile(const char *filename);\n"
+            },
+            {
+                "description": "Because Objective-C does not provide namespacing, non-static functions should have a prefix that minimizes the chance of a name collision.",
+                "example": "// GOOD:\n\nextern NSTimeZone *GTMGetDefaultTimeZone(void);\nextern NSString *GTMGetURLScheme(NSURL *URL);\n"
+            }
+        ]
+    },
+    {
+        "title": "Variable Names",
+        "belongs to": "Naming/Variable Names",
+        "cases": [
+            {
+                "description": "Variable names typically start with a lowercase and use mixed case to delimit words.\nInstance variables have leading underscores. File scope or global variables have a prefix `g` . For example: `myLocalVariable` , `_myInstanceVariable` , `gMyGlobalVariable` ."
+            }
+        ]
+    },
+    {
+        "title": "Common Variable Names",
+        "belongs to": "Naming/Variable Names/Common Variable Names",
+        "cases": [
+            {
+                "description": "Readers should be able to infer the variable type from the name, but do not use Hungarian notation for syntactic attributes, such as the static type of a variable (int or pointer).\nFile scope or global variables (as opposed to constants) declared outside the scope of a method or function should be rare, and should have the prefix g.",
+                "example": "// GOOD:\n\nstatic int gGlobalCounter;\n"
+            }
+        ]
+    },
+    {
+        "title": "Instance Variables",
+        "belongs to": "Naming/Variable Names/Instance Variables",
+        "cases": [
+            {
+                "description": "Instance variable names are mixed case and should be prefixed with an underscore, like `_usernameTextField` .\nNOTE: Google’s previous convention for Objective-C ivars was a trailing underscore. Existing projects may opt to continue using trailing underscores in new code in order to maintain consistency within the project codebase. Consistency of prefix or suffix underscores should be maintained within each class."
+            }
+        ]
+    },
+    {
+        "title": "Constants",
+        "belongs to": "Naming/Variable Names/Constants",
+        "cases": [
+            {
+                "description": "Constant symbols (const global and static variables and constants created with #define) should use mixed case to delimit words.\nGlobal and file scope constants should have an appropriate prefix .",
+                "example": "// GOOD:\n\nextern NSString *const GTLServiceErrorDomain;\n\ntypedef NS_ENUM(NSInteger, GTLServiceError) {\n  GTLServiceErrorQueryResultMissing = -3000,\n  GTLServiceErrorWaitTimedOut       = -3001,\n};\n"
+            },
+            {
+                "description": "Because Objective-C does not provide namespacing, constants with external linkage should have a prefix that minimizes the chance of a name collision, typically like `ClassNameConstantName` or `ClassNameEnumName` .\nFor interoperability with Swift code, enumerated values should have names that extend the typedef name:",
+                "example": "// GOOD:\n\ntypedef NS_ENUM(NSInteger, DisplayTinge) {\n  DisplayTingeGreen = 1,\n  DisplayTingeBlue = 2,\n};\n"
+            },
+            {
+                "description": "A lowercase k can be used as a standalone prefix for constants of static storage duration declared within implementation files:",
+                "example": "// GOOD:\n\nstatic const int kFileCount = 12;\nstatic NSString *const kUserKey = @\"kUserKey\";\n"
+            },
+            {
+                "description": "NOTE: Previous convention was for public constant names to begin with a lowercase k followed by a project-specific prefix . This practice is no longer recommended."
+            }
+        ]
+    },
+    {
+        "title": "Types and Declarations",
+        "belongs to": "Types and Declarations",
+        "cases": []
+    },
+    {
+        "title": "Method Declarations",
+        "belongs to": "Types and Declarations/Method Declarations",
+        "cases": [
+            {
+                "description": "As shown in the example , the recommended order for declarations in an `@interface` declaration are: properties, class methods, initializers, and then finally instance methods. The class methods section should begin with any convenience constructors."
+            }
+        ]
+    },
+    {
+        "title": "Local Variables",
+        "belongs to": "Types and Declarations/Local Variables",
+        "cases": [
+            {
+                "description": "Declare variables in the narrowest practical scopes, and close to their use. Initialize variables in their declarations.",
+                "example": "// GOOD:\n\nCLLocation *location = [self lastKnownLocation];\nfor (int meters = 1; meters < 10; meters++) {\n  reportFrogsWithinRadius(location, meters);\n}\n"
+            },
+            {
+                "description": "Occasionally, efficiency will make it more appropriate to declare a variable outside the scope of its use. This example declares meters separate from initialization, and needlessly sends the lastKnownLocation message each time through the loop:",
+                "example": "// AVOID:\n\nint meters;                                         // AVOID.\nfor (meters = 1; meters < 10; meters++) {\n  CLLocation *location = [self lastKnownLocation];  // AVOID.\n  reportFrogsWithinRadius(location, meters);\n}\n"
+            },
+            {
+                "description": "Under Automatic Reference Counting, strong and weak pointers to Objective-C objects are automatically initialized to `nil` , so explicit initialization to `nil` is not required for those common cases. However, automatic initialization does not occur for many Objective-C pointer types, including object pointers declared with the `__unsafe_unretained` ownership qualifier and CoreFoundation object pointer types. When in doubt, prefer to initialize all Objective-C local variables."
+            }
+        ]
+    },
+    {
+        "title": "Unsigned Integers",
+        "belongs to": "Types and Declarations/Unsigned Integers",
+        "cases": [
+            {
+                "description": "Avoid unsigned integers except when matching types used by system interfaces.\nSubtle errors crop up when doing math or counting down to zero using unsigned integers. Rely only on signed integers in math expressions except when matching NSUInteger in system interfaces.",
+                "example": "// GOOD:\n\nNSUInteger numberOfObjects = array.count;\nfor (NSInteger counter = numberOfObjects - 1; counter > 0; --counter)\n\n// AVOID:\n\nfor (NSUInteger counter = numberOfObjects - 1; counter > 0; --counter)  // AVOID.\n"
+            },
+            {
+                "description": "Unsigned integers may be used for flags and bitmasks, though often NS_OPTIONS or NS_ENUM will be more appropriate."
+            }
+        ]
+    },
+    {
+        "title": "Types with Inconsistent Sizes",
+        "belongs to": "Types and Declarations/Types with Inconsistent Sizes",
+        "cases": [
+            {
+                "description": "Due to sizes that differ in 32- and 64-bit builds, avoid types long, NSInteger, NSUInteger, and CGFloat except when matching system interfaces.\nTypes long, NSInteger, NSUInteger, and CGFloat vary in size between 32- and 64-bit builds. Use of these types is appropriate when handling values exposed by system interfaces, but they should be avoided for most other computations.",
+                "example": "// GOOD:\n\nint32_t scalar1 = proto.intValue;\n\nint64_t scalar2 = proto.longValue;\n\nNSUInteger numberOfObjects = array.count;\n\nCGFloat offset = view.bounds.origin.x;\n\n// AVOID:\n\nNSInteger scalar2 = proto.longValue;  // AVOID.\n"
+            },
+            {
+                "description": "File and buffer sizes often exceed 32-bit limits, so they should be declared using `int64_t` , not with `long` , `NSInteger` , or `NSUInteger` ."
+            }
+        ]
+    },
+    {
+        "title": "Comments",
+        "belongs to": "Comments",
+        "cases": [
+            {
+                "description": "Comments are absolutely vital to keeping our code readable. The following rules describe what you should comment and where. But remember: while comments are important, the best code is self-documenting. Giving sensible names to types and variables is much better than using obscure names and then trying to explain them through comments.\nPay attention to punctuation, spelling, and grammar; it is easier to read well-written comments than badly written ones.\nComments should be as readable as narrative text, with proper capitalization and punctuation. In many cases, complete sentences are more readable than sentence fragments. Shorter comments, such as comments at the end of a line of code, can sometimes be less formal, but use a consistent style. When writing your comments, write for your audience: the next contributor who will need to understand your code. Be generous—the next one may be you!"
+            }
+        ]
+    },
+    {
+        "title": "File Comments",
+        "belongs to": "Comments/File Comments",
+        "cases": [
+            {
+                "description": "A file may optionally start with a description of its contents. Every file may contain the following items, in order:\nLicense boilerplate if necessary. Choose the appropriate boilerplate for the license used by the project. \nA basic description of the contents of the file if necessary.\nIf you make significant changes to a file with an author line, consider deleting the author line since revision history already provides a more detailed and accurate record of authorship."
+            }
+        ]
+    },
+    {
+        "title": "Declaration Comments",
+        "belongs to": "Comments/Declaration Comments",
+        "cases": [
+            {
+                "description": "Every non-trivial interface, public and private, should have an accompanying comment describing its purpose and how it fits into the larger picture.\nComments should be used to document classes, properties, ivars, functions, categories, protocol declarations, and enums.",
+                "example": "// GOOD:\n\n/**\n * A delegate for NSApplication to handle notifications about app\n * launch and shutdown. Owned by the main app controller.\n */\n@interface MyAppDelegate : NSObject {\n  /**\n   * The background task in progress, if any. This is initialized\n   * to the value UIBackgroundTaskInvalid.\n   */\n  UIBackgroundTaskIdentifier _backgroundTaskID;\n}\n\n/** The factory that creates and manages fetchers for the app. */\n@property(nonatomic) GTMSessionFetcherService *fetcherService;\n\n@end\n"
+            },
+            {
+                "description": "Doxygen-style comments are encouraged for interfaces as they are parsed by Xcode to display formatted documentation. There is a wide variety of Doxygen commands; use them consistently within a project.\nIf you have already described an interface in detail in the comments at the top of your file, feel free to simply state, “See comment at top of file for a complete description”, but be sure to have some sort of comment.\nAdditionally, each method should have a comment explaining its function, arguments, return value, thread or queue assumptions, and any side effects. Documentation comments should be in the header for public methods, or immediately preceding the method for non-trivial private methods.\nUse descriptive form (“Opens the file”) rather than imperative form (“Open the file”) for method and function comments. The comment describes the function; it does not tell the function what to do.\nDocument the thread usage assumptions the class, properties, or methods make, if any. If an instance of the class can be accessed by multiple threads, take extra care to document the rules and invariants surrounding multithreaded use.\nAny sentinel values for properties and ivars, such as `NULL` or `-1` , should be documented in comments.\nDeclaration comments explain how a method or function is used. Comments explaining how a method or function is implemented should be with the implementation rather than with the declaration."
+            }
+        ]
+    },
+    {
+        "title": "Implementation Comments",
+        "belongs to": "Comments/Implementation Comments",
+        "cases": [
+            {
+                "description": "Provide comments explaining tricky, subtle, or complicated sections of code.",
+                "example": "// GOOD:\n\n// Set the property to nil before invoking the completion handler to\n// avoid the risk of reentrancy leading to the callback being\n// invoked again.\nCompletionHandler handler = self.completionHandler;\nself.completionHandler = nil;\nhandler();\n"
+            },
+            {
+                "description": "When useful, also provide comments about implementation approaches that were considered or abandoned.\nEnd-of-line comments should be separated from the code by at least 2 spaces. If you have several comments on subsequent lines, it can often be more readable to line them up.",
+                "example": "// GOOD:\n\n[self doSomethingWithALongName];  // Two spaces before the comment.\n[self doSomethingShort];          // More spacing to align the comment.\n"
+            }
+        ]
+    },
+    {
+        "title": "Disambiguating Symbols",
+        "belongs to": "Comments/Disambiguating Symbols",
+        "cases": [
+            {
+                "description": "Where needed to avoid ambiguity, use backticks or vertical bars to quote variable names and symbols in comments in preference to using quotation marks or naming the symbols inline.\nIn Doxygen-style comments, prefer demarcating symbols with a monospace text command, such as `@c` .\nDemarcation helps provide clarity when a symbol is a common word that might make the sentence read like it was poorly constructed. A common example is the symbol `count` :",
+                "example": "// GOOD:\n\n// Sometimes `count` will be less than zero.\n"
+            },
+            {
+                "description": "or when quoting something which already contains quotes",
+                "example": "// GOOD:\n\n// Remember to call `StringWithoutSpaces(\"foo bar baz\")`\n"
+            },
+            {
+                "description": "Backticks or vertical bars are not needed when a symbol is self-apparent.",
+                "example": "// GOOD:\n\n// This class serves as a delegate to GTMDepthCharge.\n"
+            },
+            {
+                "description": "Doxygen formatting is also suitable for identifying symbols.",
+                "example": "// GOOD:\n\n/** @param maximum The highest value for @c count. */\n"
+            }
+        ]
+    },
+    {
+        "title": "Object Ownership",
+        "belongs to": "Comments/Object Ownership",
+        "cases": [
+            {
+                "description": "For objects not managed by ARC, make the pointer ownership model as explicit as possible when it falls outside the most common Objective-C usage idioms."
+            }
+        ]
+    },
+    {
+        "title": "Manual Reference Counting",
+        "belongs to": "Comments/Object Ownership/Manual Reference Counting",
+        "cases": [
+            {
+                "description": "Instance variables for NSObject-derived objects are presumed to be retained; if they are not retained, they should be either commented as weak or declared with the `__weak` lifetime qualifier.\nAn exception is in Mac software for instance variables labeled as `@IBOutlets` , which are presumed to not be retained.\nWhere instance variables are pointers to Core Foundation, C++, and other non-Objective-C objects, they should always be declared with strong and weak comments to indicate which pointers are and are not retained. Core Foundation and other non-Objective-C object pointers require explicit memory management, even when building for automatic reference counting.\nExamples of strong and weak declarations:",
+                "example": "// GOOD:\n\n@interface MyDelegate : NSObject\n\n@property(nonatomic) NSString *doohickey;\n@property(nonatomic, weak) NSString *parent;\n\n@end\n\n\n@implementation MyDelegate {\n  IBOutlet NSButton *_okButton;  // Normal NSControl; implicitly weak on Mac only\n\n  AnObjcObject *_doohickey;  // My doohickey\n  __weak MyObjcParent *_parent;  // To send messages back (owns this instance)\n\n  // non-NSObject pointers...\n  CWackyCPPClass *_wacky;  // Strong, some cross-platform object\n  CFDictionaryRef *_dict;  // Strong\n}\n@end\n"
+            }
+        ]
+    },
+    {
+        "title": "Automatic Reference Counting",
+        "belongs to": "Comments/Object Ownership/Automatic Reference Counting",
+        "cases": [
+            {
+                "description": "Object ownership and lifetime are explicit when using ARC, so no additional comments are required for automatically retained objects."
+            }
+        ]
+    },
+    {
+        "title": "C Language Features",
+        "belongs to": "C Language Features",
+        "cases": []
+    },
+    {
+        "title": "Macros",
+        "belongs to": "C Language Features/Macros",
+        "cases": [
+            {
+                "description": "Avoid macros, especially where `const` variables, enums, XCode snippets, or C functions may be used instead.\nMacros make the code you see different from the code the compiler sees. Modern C renders traditional uses of macros for constants and utility functions unnecessary. Macros should only be used when there is no other solution available.\nWhere a macro is needed, use a unique name to avoid the risk of a symbol collision in the compilation unit. If practical, keep the scope limited by `#undefining` the macro after its use.\nMacro names should use `SHOUTY_SNAKE_CASE` —all uppercase letters with underscores between words. Function-like macros may use C function naming practices. Do not define macros that appear to be C or Objective-C keywords.",
+                "example": "// GOOD:\n\n#define GTM_EXPERIMENTAL_BUILD ...      // GOOD\n\n// Assert unless X > Y\n#define GTM_ASSERT_GT(X, Y) ...         // GOOD, macro style.\n\n// Assert unless X > Y\n#define GTMAssertGreaterThan(X, Y) ...  // GOOD, function style.\n\n// AVOID:\n\n#define kIsExperimentalBuild ...        // AVOID\n\n#define unless(X) if(!(X))              // AVOID\n"
+            },
+            {
+                "description": "Avoid macros that expand to unbalanced C or Objective-C constructs. Avoid macros that introduce scope, or may obscure the capturing of values in blocks.\nAvoid macros that generate class, property, or method definitions in headers to be used as public API. These only make the code hard to understand, and the language already has better ways of doing this.\nAvoid macros that generate method implementations, or that generate declarations of variables that are later used outside of the macro. Macros shouldn’t make code hard to understand by hiding where and how a variable is declared.",
+                "example": "// AVOID:\n\n#define ARRAY_ADDER(CLASS) \\\n  -(void)add ## CLASS ## :(CLASS *)obj toArray:(NSMutableArray *)array\n\nARRAY_ADDER(NSString) {\n  if (array.count > 5) {              // AVOID -- where is 'array' defined?\n    ...\n  }\n}\n"
+            },
+            {
+                "description": "Examples of acceptable macro use include assertion and debug logging macros that are conditionally compiled based on build settings—often, these are not compiled into release builds."
+            }
+        ]
+    },
+    {
+        "title": "Nonstandard Extensions",
+        "belongs to": "C Language Features/Nonstandard Extensions",
+        "cases": [
+            {
+                "description": "Nonstandard extensions to C/Objective-C may not be used unless otherwise specified.\nCompilers support various extensions that are not part of standard C. Examples include compound statement expressions (e.g. `foo=({intx;Bar(&x);x})` ).\n`__attribute__` is an approved exception, as it is used in Objective-C API specifications.\nThe binary form of the conditional operator, `A?:B` , is an approved exception."
+            }
+        ]
+    },
+    {
+        "title": "Cocoa and Objective-C Features",
+        "belongs to": "Cocoa and Objective-C Features",
+        "cases": []
+    },
+    {
+        "title": "Identify Designated Initializer",
+        "belongs to": "Cocoa and Objective-C Features/Identify Designated Initializer",
+        "cases": [
+            {
+                "description": "Clearly identify your designated initializer.\nIt is important for those who might be subclassing your class that the designated initializer be clearly identified. That way, they only need to override a single initializer (of potentially several) to guarantee the initializer of their subclass is called. It also helps those debugging your class in the future understand the flow of initialization code if they need to step through it. Identify the designated initializer using comments or the `NS_DESIGNATED_INITIALIZER` macro. If you use `NS_DESIGNATED_INITIALIZER` , mark unsupported initializers with `NS_UNAVAILABLE` ."
+            }
+        ]
+    },
+    {
+        "title": "Override Designated Initializer",
+        "belongs to": "Cocoa and Objective-C Features/Override Designated Initializer",
+        "cases": [
+            {
+                "description": "When writing a subclass that requires an `init...` method, make sure you override the designated initializer of the superclass.\nIf you fail to override the designated initializer of the superclass, your initializer may not be called in all cases, leading to subtle and very difficult to find bugs."
+            }
+        ]
+    },
+    {
+        "title": "Overridden NSObject Method Placement",
+        "belongs to": "Cocoa and Objective-C Features/Overridden NSObject Method Placement",
+        "cases": [
+            {
+                "description": "Put overridden methods of NSObject at the top of an `@implementation` .\nThis commonly applies to (but is not limited to) the `init...` , `copyWithZone:` , and `dealloc` methods. The `init...` methods should be grouped together, followed by other typical `NSObject` methods such as `description` , `isEqual:` , and `hash` .\nConvenience class factory methods for creating instances may precede the `NSObject` methods."
+            }
+        ]
+    },
+    {
+        "title": "Initialization",
+        "belongs to": "Cocoa and Objective-C Features/Initialization",
+        "cases": [
+            {
+                "description": "Don’t initialize instance variables to `0` or `nil` in the `init` method; doing so is redundant.\nAll instance variables for a newly allocated object are initialized\nto \n`0` (except for isa), so don’t clutter up the init method by re-initializing variables to `0` or `nil` ."
+            }
+        ]
+    },
+    {
+        "title": "Instance Variables In Headers Should Be @protected or @private",
+        "belongs to": "Cocoa and Objective-C Features/Instance Variables In Headers Should Be @protected or @private",
+        "cases": [
+            {
+                "description": "Instance variables should typically be declared in implementation files or auto-synthesized by properties. When ivars are declared in a header file, they should be marked `@protected` or `@private` .",
+                "example": "// GOOD:\n\n@interface MyClass : NSObject {\n @protected\n  id _myInstanceVariable;\n}\n@end\n"
+            }
+        ]
+    },
+    {
+        "title": "Do Not Use +new",
+        "belongs to": "Cocoa and Objective-C Features/Do Not Use +new",
+        "cases": [
+            {
+                "description": "Do not invoke the `NSObject` class method `new` , nor override it in a subclass. `+new` is rarely used and contrasts greatly with initializer usage. Instead, use `+alloc` and `-init` methods to instantiate retained objects."
+            }
+        ]
+    },
+    {
+        "title": "Keep the Public API Simple",
+        "belongs to": "Cocoa and Objective-C Features/Keep the Public API Simple",
+        "cases": [
+            {
+                "description": "Keep your class simple; avoid “kitchen-sink” APIs. If a method doesn’t need to be public, keep it out of the public interface.\nUnlike C++, Objective-C doesn’t differentiate between public and private methods; any message may be sent to an object. As a result, avoid placing methods in the public API unless they are actually expected to be used by a consumer of the class. This helps reduce the likelihood they’ll be called when you’re not expecting it. This includes methods that are being overridden from the parent class.\nSince internal methods are not really private, it’s easy to accidentally override a superclass’s “private” method, thus making a very difficult bug to squash. In general, private methods should have a fairly unique name that will prevent subclasses from unintentionally overriding them."
+            }
+        ]
+    },
+    {
+        "title": "#import and #include",
+        "belongs to": "Cocoa and Objective-C Features/#import and #include",
+        "cases": [
+            {
+                "description": "`#import` Objective-C and Objective-C++ headers, and `#include` C/C++ headers.\nC/C++ headers include other C/C++ headers using `#include` . Using `#import` on C/C++ headers prevents future inclusions using `#include` and could result in unintended compilation behavior. C/C++ headers should provide their own `#define` guard."
+            }
+        ]
+    },
+    {
+        "title": "Order of Includes",
+        "belongs to": "Cocoa and Objective-C Features/Order of Includes",
+        "cases": [
+            {
+                "description": "The standard order for header inclusion is the related header, operating system headers, language library headers, and finally groups of headers for other dependencies.\nThe related header precedes others to ensure it has no hidden dependencies. For implementation files the related header is the header file. For test files the related header is the header containing the tested interface.\nA blank line may separate logically distinct groups of included headers.\nWithin each group the includes should be ordered alphabetically.\nImport headers using their path relative to the project’s source directory.",
+                "example": "// GOOD:\n\n#import \"ProjectX/BazViewController.h\"\n\n#import <Foundation/Foundation.h>\n\n#include <unistd.h>\n#include <vector>\n\n#include \"base/basictypes.h\"\n#include \"base/integral_types.h\"\n#include \"util/math/mathutil.h\"\n\n#import \"ProjectX/BazModel.h\"\n#import \"Shared/Util/Foo.h\"\n"
+            }
+        ]
+    },
+    {
+        "title": "Use Umbrella Headers for System Frameworks",
+        "belongs to": "Cocoa and Objective-C Features/Use Umbrella Headers for System Frameworks",
+        "cases": [
+            {
+                "description": "Import umbrella headers for system frameworks and system libraries rather than include individual files.\nWhile it may seem tempting to include individual system headers from a framework such as Cocoa or Foundation, in fact it’s less work on the compiler if you include the top-level root framework. The root framework is generally pre-compiled and can be loaded much more quickly. In addition, remember to use `@import` or `#import` rather than `#include` for Objective-C frameworks.",
+                "example": "// GOOD:\n\n@import UIKit;     // GOOD.\n#import <Foundation/Foundation.h>     // GOOD.\n\n// AVOID:\n\n#import <Foundation/NSArray.h>        // AVOID.\n#import <Foundation/NSString.h>\n...\n"
+            }
+        ]
+    },
+    {
+        "title": "Avoid Messaging the Current Object Within Initializers and -dealloc",
+        "belongs to": "Cocoa and Objective-C Features/Avoid Messaging the Current Object Within Initializers and -dealloc",
+        "cases": [
+            {
+                "description": "Code in initializers and `-dealloc` should avoid invoking instance methods.\nSuperclass initialization completes before subclass initialization. Until all classes have had a chance to initialize their instance state any method invocation on self may lead to a subclass operating on uninitialized instance state.\nA similar issue exists for `-dealloc` , where a method invocation may cause a class to operate on state that has been deallocated.\nOne case where this is less obvious is property accessors. These can be overridden just like any other selector. Whenever practical, directly assign to and release ivars in initializers and `-dealloc` , rather than rely on accessors.",
+                "example": "// GOOD:\n\n- (instancetype)init {\n  self = [super init];\n  if (self) {\n    _bar = 23;  // GOOD.\n  }\n  return self;\n}\n"
+            },
+            {
+                "description": "Beware of factoring common initialization code into helper methods:\nMethods can be overridden in subclasses, either deliberately, or accidentally due to naming collisions. \nWhen editing a helper method, it may not be obvious that the code is being run from an initializer.",
+                "example": "// AVOID:\n\n- (instancetype)init {\n  self = [super init];\n  if (self) {\n    self.bar = 23;  // AVOID.\n    [self sharedMethod];  // AVOID. Fragile to subclassing or future extension.\n  }\n  return self;\n}\n\n// GOOD:\n\n- (void)dealloc {\n  [_notifier removeObserver:self];  // GOOD.\n}\n\n// AVOID:\n\n- (void)dealloc {\n  [self removeNotifications];  // AVOID.\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Setters copy NSStrings",
+        "belongs to": "Cocoa and Objective-C Features/Setters copy NSStrings",
+        "cases": [
+            {
+                "description": "Setters taking an `NSString` should always copy the string it accepts. This is often also appropriate for collections like `NSArray` and `NSDictionary` .\nNever just retain the string, as it may be a `NSMutableString` . This avoids the caller changing it under you without your knowledge.\nCode receiving and holding collection objects should also consider that the passed collection may be mutable, and thus the collection could be more safely held as a copy or mutable copy of the original.",
+                "example": "// GOOD:\n\n@property(nonatomic, copy) NSString *name;\n\n- (void)setZigfoos:(NSArray<Zigfoo *> *)zigfoos {\n  // Ensure that we're holding an immutable collection.\n  _zigfoos = [zigfoos copy];\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Use Lightweight Generics to Document Contained Types",
+        "belongs to": "Cocoa and Objective-C Features/Use Lightweight Generics to Document Contained Types",
+        "cases": [
+            {
+                "description": "All projects compiling on Xcode 7 or newer versions should make use of the Objective-C lightweight generics notation to type contained objects.\nEvery `NSArray` , `NSDictionary` , or `NSSet` reference should be declared using lightweight generics for improved type safety and to explicitly document usage.",
+                "example": "// GOOD:\n\n@property(nonatomic, copy) NSArray<Location *> *locations;\n@property(nonatomic, copy, readonly) NSSet<NSString *> *identifiers;\n\nNSMutableArray<MyLocation *> *mutableLocations = [otherObject.locations mutableCopy];\n"
+            },
+            {
+                "description": "If the fully-annotated types become complex, consider using a typedef to preserve readability.",
+                "example": "// GOOD:\n\ntypedef NSSet<NSDictionary<NSString *, NSDate *> *> TimeZoneMappingSet;\nTimeZoneMappingSet *timeZoneMappings = [TimeZoneMappingSet setWithObjects:...];\n"
+            },
+            {
+                "description": "Use the most descriptive common superclass or protocol available. In the most generic case when nothing else is known, declare the collection to be explicitly heterogenous using id.",
+                "example": "// GOOD:\n\n@property(nonatomic, copy) NSArray<id> *unknowns;\n"
+            }
+        ]
+    },
+    {
+        "title": "Avoid Throwing Exceptions",
+        "belongs to": "Cocoa and Objective-C Features/Avoid Throwing Exceptions",
+        "cases": [
+            {
+                "description": "Don’t `@throw` Objective-C exceptions, but you should be prepared to catch them from third-party or OS calls.\nThis follows the recommendation to use error objects for error delivery in Apple’s Introduction to Exception Programming Topics for\nCocoa .\nWe do compile with `-fobjc-exceptions` (mainly so we get `@synchronized` ), but we don’t `@throw` . Use of `@try` , `@catch` , and `@finally` are allowed when required to properly use 3rd party code or libraries. If you do use them, please document exactly which methods you expect to throw."
+            }
+        ]
+    },
+    {
+        "title": "nil Checks",
+        "belongs to": "Cocoa and Objective-C Features/nil Checks",
+        "cases": [
+            {
+                "description": "Avoid `nil` pointer checks that exist only to prevent sending messages to `nil` . Sending a message to `nil` \nreliably\nreturns \n`nil` as a pointer, zero as an integer or floating-point value, structs initialized to `0` , and `_Complex` values equal to `{0,0}` .",
+                "example": "// AVOID:\n\nif (dataSource) {  // AVOID.\n  [dataSource moveItemAtIndex:1 toIndex:0];\n}\n\n// GOOD:\n\n[dataSource moveItemAtIndex:1 toIndex:0];  // GOOD.\n"
+            },
+            {
+                "description": "Note that this applies to `nil` as a message target, not as a parameter value. Individual methods may or may not safely handle `nil` parameter values.\nNote too that this is distinct from checking C/C++ pointers and block pointers against `NULL` , which the runtime does not handle and will cause your application to crash. You still need to make sure you do not dereference a `NULL` pointer."
+            }
+        ]
+    },
+    {
+        "title": "Nullability",
+        "belongs to": "Cocoa and Objective-C Features/Nullability",
+        "cases": [
+            {
+                "description": "Interfaces can be decorated with nullability annotations to describe how the interface should be used and how it behaves. Use of nullability regions (e.g., `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` ) and explicit nullability annotations are both accepted. Prefer using the `_Nullable` and `_Nonnull` keywords over the `__nullable` and `__nonnull` keywords. For Objective-C methods and properties prefer using the context-sensitive, non-underscored keywords, e.g., `nonnull` and `nullable` .",
+                "example": "// GOOD:\n\n/** A class representing an owned book. */\n@interface GTMBook : NSObject\n\n/** The title of the book. */\n@property(readonly, copy, nonnull) NSString *title;\n\n/** The author of the book, if one exists. */\n@property(readonly, copy, nullable) NSString *author;\n\n/** The owner of the book. Setting nil resets to the default owner. */\n@property(copy, null_resettable) NSString *owner;\n\n/** Initializes a book with a title and an optional author. */\n- (nonnull instancetype)initWithTitle:(nonnull NSString *)title\n                               author:(nullable NSString *)author\n    NS_DESIGNATED_INITIALIZER;\n\n/** Returns nil because a book is expected to have a title. */\n- (nullable instancetype)init;\n\n@end\n\n/** Loads books from the file specified by the given path. */\nNSArray<GTMBook *> *_Nullable GTMLoadBooksFromFile(NSString *_Nonnull path);\n\n// AVOID:\n\nNSArray<GTMBook *> *__nullable GTMLoadBooksFromTitle(NSString *__nonnull path);\n"
+            },
+            {
+                "description": "Be careful assuming that a pointer is not null based on a non-null qualifier because the compiler may not guarantee that the pointer is not null."
+            }
+        ]
+    },
+    {
+        "title": "BOOL Pitfalls",
+        "belongs to": "Cocoa and Objective-C Features/BOOL Pitfalls",
+        "cases": [
+            {
+                "description": "Be careful when converting general integral values to `BOOL` . Avoid comparing directly with `YES` .\n`BOOL` in OS X and in 32-bit iOS builds is defined as a signed `char` , so it may have values other than `YES` ( `1` ) and `NO` ( `0` ). Do not cast or convert general integral values directly to `BOOL` .\nCommon mistakes include casting or converting an array’s size, a pointer value, or the result of a bitwise logic operation to a `BOOL` that could, depending on the value of the last byte of the integer value, still result in a `NO` value. When converting a general integral value to a `BOOL` , use ternary operators to return a `YES` or `NO` value.\nYou can safely interchange and convert `BOOL` , `_Bool` and `bool` (see C++ Std 4.7.4, 4.12 and C99 Std 6.3.1.2). Use `BOOL` in Objective-C method signatures.\nUsing logical operators ( `&&` , `||` and `!` ) with `BOOL` is also valid and will return values that can be safely converted to `BOOL` without the need for a ternary operator.",
+                "example": "// AVOID:\n\n- (BOOL)isBold {\n  return [self fontTraits] & NSFontBoldTrait;  // AVOID.\n}\n- (BOOL)isValid {\n  return [self stringValue];  // AVOID.\n}\n\n// GOOD:\n\n- (BOOL)isBold {\n  return ([self fontTraits] & NSFontBoldTrait) ? YES : NO;\n}\n- (BOOL)isValid {\n  return [self stringValue] != nil;\n}\n- (BOOL)isEnabled {\n  return [self isValid] && [self isBold];\n}\n"
+            },
+            {
+                "description": "Also, don’t directly compare `BOOL` variables directly with `YES` . Not only is it harder to read for those well-versed in C, but the first point above demonstrates that return values may not always be what you expect.",
+                "example": "// AVOID:\n\nBOOL great = [foo isGreat];\nif (great == YES) {  // AVOID.\n  // ...be great!\n}\n\n// GOOD:\n\nBOOL great = [foo isGreat];\nif (great) {         // GOOD.\n  // ...be great!\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Interfaces Without Instance Variables",
+        "belongs to": "Cocoa and Objective-C Features/Interfaces Without Instance Variables",
+        "cases": [
+            {
+                "description": "Omit the empty set of braces on interfaces that do not declare any instance variables.",
+                "example": "// GOOD:\n\n@interface MyClass : NSObject\n// Does a lot of stuff.\n- (void)fooBarBam;\n@end\n\n// AVOID:\n\n@interface MyClass : NSObject {\n}\n// Does a lot of stuff.\n- (void)fooBarBam;\n@end\n"
+            }
+        ]
+    },
+    {
+        "title": "Cocoa Patterns",
+        "belongs to": "Cocoa Patterns",
+        "cases": []
+    },
+    {
+        "title": "Delegate Pattern",
+        "belongs to": "Cocoa Patterns/Delegate Pattern",
+        "cases": [
+            {
+                "description": "Delegates, target objects, and block pointers should not be retained when doing so would create a retain cycle.\nTo avoid causing a retain cycle, a delegate or target pointer should be released as soon as it is clear there will no longer be a need to message the object.\nIf there is no clear time at which the delegate or target pointer is no longer needed, the pointer should only be retained weakly.\nBlock pointers cannot be retained weakly. To avoid causing retain cycles in the client code, block pointers should be used for callbacks only where they can be explicitly released after they have been called or once they are no longer needed. Otherwise, callbacks should be done via weak delegate or target pointers."
+            }
+        ]
+    },
+    {
+        "title": "Objective-C++",
+        "belongs to": "Objective-C++",
+        "cases": []
+    },
+    {
+        "title": "Style Matches the Language",
+        "belongs to": "Objective-C++/Style Matches the Language",
+        "cases": [
+            {
+                "description": "Within an Objective-C++ source file, follow the style for the language of the function or method you’re implementing. In order to minimize clashes between the differing naming styles when mixing Cocoa/Objective-C and C++, follow the style of the method being implemented.\nFor code in an `@implementation` block, use the Objective-C naming rules. For code in a method of a C++ class, use the C++ naming rules.\nFor code in an Objective-C++ file outside of a class implementation, be consistent within the file.",
+                "example": "// GOOD:\n\n// file: cross_platform_header.h\n\nclass CrossPlatformAPI {\n public:\n  ...\n  int DoSomethingPlatformSpecific();  // impl on each platform\n private:\n  int an_instance_var_;\n};\n\n// file: mac_implementation.mm\n#include \"cross_platform_header.h\"\n\n/** A typical Objective-C class, using Objective-C naming. */\n@interface MyDelegate : NSObject {\n @private\n  int _instanceVar;\n  CrossPlatformAPI* _backEndObject;\n}\n\n- (void)respondToSomething:(id)something;\n\n@end\n\n@implementation MyDelegate\n\n- (void)respondToSomething:(id)something {\n  // bridge from Cocoa through our C++ backend\n  _instanceVar = _backEndObject->DoSomethingPlatformSpecific();\n  NSString* tempString = [NSString stringWithFormat:@\"%d\", _instanceVar];\n  NSLog(@\"%@\", tempString);\n}\n\n@end\n\n/** The platform-specific implementation of the C++ class, using C++ naming. */\nint CrossPlatformAPI::DoSomethingPlatformSpecific() {\n  NSString* temp_string = [NSString stringWithFormat:@\"%d\", an_instance_var_];\n  NSLog(@\"%@\", temp_string);\n  return [temp_string intValue];\n}\n"
+            },
+            {
+                "description": "Projects may opt to use an 80 column line length limit for consistency with Google’s C++ style guide."
+            }
+        ]
+    },
+    {
+        "title": "Spacing and Formatting",
+        "belongs to": "Spacing and Formatting",
+        "cases": []
+    },
+    {
+        "title": "Spaces vs. Tabs",
+        "belongs to": "Spacing and Formatting/Spaces vs. Tabs",
+        "cases": [
+            {
+                "description": "Use only spaces, and indent 2 spaces at a time. We use spaces for indentation. Do not use tabs in your code.\nYou should set your editor to emit spaces when you hit the tab key, and to trim trailing spaces on lines."
+            }
+        ]
+    },
+    {
+        "title": "Line Length",
+        "belongs to": "Spacing and Formatting/Line Length",
+        "cases": [
+            {
+                "description": "The maximum line length for Objective-C files is 100 columns.\nYou can make violations easier to spot by enabling Preferences > Text Editing > Page guide at column: 100 in Xcode."
+            }
+        ]
+    },
+    {
+        "title": "Method Declarations and Definitions",
+        "belongs to": "Spacing and Formatting/Method Declarations and Definitions",
+        "cases": [
+            {
+                "description": "One space should be used between the `-` or `+` and the return type, and no spacing in the parameter list except between parameters.\nMethods should look like this:",
+                "example": "// GOOD:\n\n- (void)doSomethingWithString:(NSString *)theString {\n  ...\n}\n"
+            },
+            {
+                "description": "The spacing before the asterisk is optional. When adding new code, be consistent with the surrounding file’s style.\nIf a method declaration does not fit on a single line, put each parameter on its own line. All lines except the first should be indented at least four spaces. Colons before parameters should be aligned on all lines. If the colon before the parameter on the first line of a method declaration is positioned such that colon alignment would cause indentation on a subsequent line to be less than four spaces, then colon alignment is only required for all lines except the first.",
+                "example": "// GOOD:\n\n- (void)doSomethingWithFoo:(GTMFoo *)theFoo\n                      rect:(NSRect)theRect\n                  interval:(float)theInterval {\n  ...\n}\n\n- (void)shortKeyword:(GTMFoo *)theFoo\n            longerKeyword:(NSRect)theRect\n    someEvenLongerKeyword:(float)theInterval\n                    error:(NSError **)theError {\n  ...\n}\n\n- (id<UIAdaptivePresentationControllerDelegate>)\n    adaptivePresentationControllerDelegateForViewController:(UIViewController *)viewController;\n\n- (void)presentWithAdaptivePresentationControllerDelegate:\n    (id<UIAdaptivePresentationControllerDelegate>)delegate;\n"
+            }
+        ]
+    },
+    {
+        "title": "Function Declarations and Definitions",
+        "belongs to": "Spacing and Formatting/Function Declarations and Definitions",
+        "cases": [
+            {
+                "description": "Prefer putting the return type on the same line as the function name and append all parameters on the same line if they will fit. Wrap parameter lists which do not fit on a single line as you would wrap arguments in a function\ncall .",
+                "example": "// GOOD:\n\nNSString *GTMVersionString(int majorVersion, minorVersion) {\n  ...\n}\n\nvoid GTMSerializeDictionaryToFileOnDispatchQueue(\n    NSDictionary<NSString *, NSString *> *dictionary,\n    NSString *filename,\n    dispatch_queue_t queue) {\n  ...\n}\n"
+            },
+            {
+                "description": "Function declarations and definitions should also satisfy the following conditions:\nThe opening parenthesis must always be on the same line as the function name. \nIf you cannot fit the return type and the function name on a single line, break between them and do not indent the function name. \nThere should never be a space before the opening parenthesis. \nThere should never be a space between function parentheses and parameters. \nThe open curly brace is always on the end of the last line of the function declaration, not the start of the next line. \nThe close curly brace is either on the last line by itself or on the same line as the open curly brace. \nThere should be a space between the close parenthesis and the open curly brace. \nAll parameters should be aligned if possible. \nFunction scopes should be indented 2 spaces. \nWrapped parameters should have a 4 space indent."
+            }
+        ]
+    },
+    {
+        "title": "Conditionals",
+        "belongs to": "Spacing and Formatting/Conditionals",
+        "cases": [
+            {
+                "description": "Include a space after `if` , `while` , `for` , and `switch` , and around comparison operators.",
+                "example": "// GOOD:\n\nfor (int i = 0; i < 5; ++i) {\n}\n\nwhile (test) {};\n"
+            },
+            {
+                "description": "Braces may be omitted when a loop body or conditional statement fits on a single line.",
+                "example": "// GOOD:\n\nif (hasSillyName) LaughOutLoud();\n\nfor (int i = 0; i < 10; i++) {\n  BlowTheHorn();\n}\n\n// AVOID:\n\nif (hasSillyName)\n  LaughOutLoud();               // AVOID.\n\nfor (int i = 0; i < 10; i++)\n  BlowTheHorn();                // AVOID.\n"
+            },
+            {
+                "description": "If an `if` clause has an `else` clause, both clauses should use braces.",
+                "example": "// GOOD:\n\nif (hasBaz) {\n  foo();\n} else {  // The else goes on the same line as the closing brace.\n  bar();\n}\n\n// AVOID:\n\nif (hasBaz) foo();\nelse bar();        // AVOID.\n\nif (hasBaz) {\n  foo();\n} else bar();      // AVOID.\n"
+            },
+            {
+                "description": "Intentional fall-through to the next case should be documented with a comment unless the case has no intervening code before the next case.",
+                "example": "// GOOD:\n\nswitch (i) {\n  case 1:\n    ...\n    break;\n  case 2:\n    j++;\n    // Falls through.\n  case 3: {\n    int k;\n    ...\n    break;\n  }\n  case 4:\n  case 5:\n  case 6: break;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Expressions",
+        "belongs to": "Spacing and Formatting/Expressions",
+        "cases": [
+            {
+                "description": "Use a space around binary operators and assignments. Omit a space for a unary operator. Do not add spaces inside parentheses.",
+                "example": "// GOOD:\n\nx = 0;\nv = w * x + y / z;\nv = -y * (x + z);\n"
+            },
+            {
+                "description": "Factors in an expression may omit spaces.",
+                "example": "// GOOD:\n\nv = w*x + y/z;\n"
+            }
+        ]
+    },
+    {
+        "title": "Method Invocations",
+        "belongs to": "Spacing and Formatting/Method Invocations",
+        "cases": [
+            {
+                "description": "Method invocations should be formatted much like method declarations.\nWhen there’s a choice of formatting styles, follow the convention already used in a given source file. Invocations should have all arguments on one line:",
+                "example": "// GOOD:\n\n[myObject doFooWith:arg1 name:arg2 error:arg3];\n"
+            },
+            {
+                "description": "or have one argument per line, with colons aligned:",
+                "example": "// GOOD:\n\n[myObject doFooWith:arg1\n               name:arg2\n              error:arg3];\n"
+            },
+            {
+                "description": "Don’t use any of these styles:",
+                "example": "// AVOID:\n\n[myObject doFooWith:arg1 name:arg2  // some lines with >1 arg\n              error:arg3];\n\n[myObject doFooWith:arg1\n               name:arg2 error:arg3];\n\n[myObject doFooWith:arg1\n          name:arg2  // aligning keywords instead of colons\n          error:arg3];\n"
+            },
+            {
+                "description": "As with declarations and definitions, when the first keyword is shorter than the others, indent the later lines by at least four spaces, maintaining colon alignment:",
+                "example": "// GOOD:\n\n[myObj short:arg1\n          longKeyword:arg2\n    evenLongerKeyword:arg3\n                error:arg4];\n"
+            },
+            {
+                "description": "Invocations containing multiple inlined blocks may have their parameter names left-aligned at a four space indent."
+            }
+        ]
+    },
+    {
+        "title": "Function Calls",
+        "belongs to": "Spacing and Formatting/Function Calls",
+        "cases": [
+            {
+                "description": "Function calls should include as many parameters as fit on each line, except where shorter lines are needed for clarity or documentation of the parameters.\nContinuation lines for function parameters may be indented to align with the opening parenthesis, or may have a four-space indent.",
+                "example": "// GOOD:\n\nCFArrayRef array = CFArrayCreate(kCFAllocatorDefault, objects, numberOfObjects,\n                                 &kCFTypeArrayCallBacks);\n\nNSString *string = NSLocalizedStringWithDefaultValue(@\"FEET\", @\"DistanceTable\",\n    resourceBundle,  @\"%@ feet\", @\"Distance for multiple feet\");\n\nUpdateTally(scores[x] * y + bases[x],  // Score heuristic.\n            x, y, z);\n\nTransformImage(image,\n               x1, x2, x3,\n               y1, y2, y3,\n               z1, z2, z3);\n"
+            },
+            {
+                "description": "Use local variables with descriptive names to shorten function calls and reduce nesting of calls.",
+                "example": "// GOOD:\n\ndouble scoreHeuristic = scores[x] * y + bases[x];\nUpdateTally(scoreHeuristic, x, y, z);\n"
+            }
+        ]
+    },
+    {
+        "title": "Exceptions",
+        "belongs to": "Spacing and Formatting/Exceptions",
+        "cases": [
+            {
+                "description": "Format exceptions with `@catch` and `@finally` labels on the same line as the preceding `}` . Add a space between the `@` label and the opening brace ( `{` ), as well as between the `@catch` and the caught object declaration. If you must use Objective-C exceptions, format them as follows. However, see Avoid Throwing\nExceptions for reasons why you should not be using exceptions.",
+                "example": "// GOOD:\n\n@try {\n  foo();\n} @catch (NSException *ex) {\n  bar(ex);\n} @finally {\n  baz();\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Function Length",
+        "belongs to": "Spacing and Formatting/Function Length",
+        "cases": [
+            {
+                "description": "Prefer small and focused functions.\nLong functions and methods are occasionally appropriate, so no hard limit is placed on function length. If a function exceeds about 40 lines, think about whether it can be broken up without harming the structure of the program.\nEven if your long function works perfectly now, someone modifying it in a few months may add new behavior. This could result in bugs that are hard to find. Keeping your functions short and simple makes it easier for other people to read and modify your code.\nWhen updating legacy code, consider also breaking long functions into smaller and more manageable pieces."
+            }
+        ]
+    },
+    {
+        "title": "Vertical Whitespace",
+        "belongs to": "Spacing and Formatting/Vertical Whitespace",
+        "cases": [
+            {
+                "description": "Use vertical whitespace sparingly.\nTo allow more code to be easily viewed on a screen, avoid putting blank lines just inside the braces of functions.\nLimit blank lines to one or two between functions and between logical groups of code."
+            }
+        ]
+    },
+    {
+        "title": "Objective-C Style Exceptions",
+        "belongs to": "Objective-C Style Exceptions",
+        "cases": []
+    },
+    {
+        "title": "Indicating style exceptions",
+        "belongs to": "Objective-C Style Exceptions/Indicating style exceptions",
+        "cases": [
+            {
+                "description": "Lines of code that are not expected to adhere to these style recommendations require `//NOLINT` at the end of the line or `//NOLINTNEXTLINE` at the end of the previous line. Sometimes it is required that parts of Objective-C code must ignore these style recommendations (for example code may be machine generated or code constructs are such that its not possible to style correctly).\nA `//NOLINT` comment on that line or `//NOLINTNEXTLINE` on the previous line can be used to indicate to the reader that code is intentionally ignoring style guidelines. In addition these annotations can also be picked up by automated tools such as linters and handle code correctly. Note that there is a single space between `//` and `NOLINT*` .\nThis site is open source. Improve this page ."
+            }
+        ]
+    }
+]

@@ -205,8 +205,8 @@ def extract_and_parse(input_path, output_path):
 
 if __name__ == "__main__":
     # 遍历google文件夹
-    google_path = "data/google/google_output"
-    go_path = "data/google/google_go_out"
-    extract_and_parse(google_path, google_path)
-    extract_and_parse(go_path, go_path)
+    google = "data/google"
+    ckan = "data/ckan"
+    # extract_and_parse(google, google)
+    extract_and_parse(ckan, ckan)
     #? 为什么有的json中会有' '字符 \u00a0
