@@ -209,3 +209,4 @@ if __name__ == "__main__":
     go_path = "data/google/google_go_out"
     extract_and_parse(google_path, google_path)
     extract_and_parse(go_path, go_path)
+    #? 为什么有的json中会有' '字符 \u00a0
