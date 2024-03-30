@@ -204,9 +204,10 @@ def extract_and_parse(input_path, output_path):
                 parse_html(os.path.join(root, file), output_path)
 
 if __name__ == "__main__":
-    # 遍历google文件夹
     google = "data/google"
     ckan = "data/ckan"
-    # extract_and_parse(google, google)
+    gitlab = "data/gitlab"
+    extract_and_parse(google, google)
     extract_and_parse(ckan, ckan)
+    extract_and_parse(gitlab, gitlab)
     #? 为什么有的json中会有' '字符 \u00a0

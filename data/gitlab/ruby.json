@@ -1,0 +1,149 @@
+[
+    {
+        "title": "Styles we have no rule for",
+        "belongs to": "Styles we have no rule for",
+        "cases": [
+            {
+                "description": "These styles are not backed by a RuboCop rule.\nFor every style added to this section, link the discussion from the section’s history note to provide context and serve as a reference."
+            }
+        ]
+    },
+    {
+        "title": "Instance variable access using attr_reader",
+        "belongs to": "Styles we have no rule for/Instance variable access using attr_reader",
+        "cases": [
+            {
+                "description": "History \nIntroduced in GitLab 14.1.\nInstance variables can be accessed in a variety of ways in a class:",
+                "example": "# public\nclass Foo\n  attr_reader :my_var\n\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  def do_stuff\n    puts my_var\n  end\nend\n\n# private\nclass Foo\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  private\n\n  attr_reader :my_var\n\n  def do_stuff\n    puts my_var\n  end\nend\n\n# direct\nclass Foo\n  def initialize(my_var)\n    @my_var = my_var\n  end\n\n  private\n\n  def do_stuff\n    puts @my_var\n  end\nend\n"
+            },
+            {
+                "description": "Public attributes should only be used if they are accessed outside of the class. There is not a strong opinion on what strategy is used when attributes are only accessed internally, as long as there is consistency in related code."
+            }
+        ]
+    },
+    {
+        "title": "Newlines style guide",
+        "belongs to": "Styles we have no rule for/Newlines style guide",
+        "cases": [
+            {
+                "description": "In addition to the RuboCops `Layout/EmptyLinesAroundMethodBody` and `Cop/LineBreakAroundConditionalBlock` that enforce some newline styles, we have the following guidelines that are not backed by RuboCop."
+            }
+        ]
+    },
+    {
+        "title": "Rule: separate code with newlines only to group together related logic",
+        "belongs to": "Styles we have no rule for/Newlines style guide/Rule: separate code with newlines only to group together related logic",
+        "cases": [
+            {
+                "example": "# bad\ndef method\n  issue = Issue.new\n\n  issue.save\n\n  render json: issue\nend\n\n# good\ndef method\n  issue = Issue.new\n  issue.save\n\n  render json: issue\nend\n"
+            }
+        ]
+    },
+    {
+        "title": "Rule: newline before block",
+        "belongs to": "Styles we have no rule for/Newlines style guide/Rule: newline before block",
+        "cases": [
+            {
+                "example": "# bad\ndef method\n  issue = Issue.new\n  if issue.save\n    render json: issue\n  end\nend\n\n# good\ndef method\n  issue = Issue.new\n\n  if issue.save\n    render json: issue\n  end\nend\n"
+            }
+        ]
+    },
+    {
+        "title": "Exception: no need for a newline when code block starts or ends right inside another code block",
+        "belongs to": "Styles we have no rule for/Newlines style guide/Rule: newline before block/Exception: no need for a newline when code block starts or ends right inside another code block",
+        "cases": [
+            {
+                "example": "# bad\ndef method\n  if issue\n\n    if issue.valid?\n      issue.save\n    end\n\n  end\nend\n\n# good\ndef method\n  if issue\n    if issue.valid?\n      issue.save\n    end\n  end\nend\n"
+            }
+        ]
+    },
+    {
+        "title": "Avoid ActiveRecord callbacks",
+        "belongs to": "Avoid ActiveRecord callbacks",
+        "cases": [
+            {
+                "description": "ActiveRecord callbacks allow you to “trigger logic before or after an alteration of an object’s state.”\nUse callbacks when no superior alternative exists, but employ them only if you thoroughly understand the reasons for doing so.\nWhen adding new lifecycle events for ActiveRecord objects, it is preferable to add the logic to a service class instead of a callback."
+            }
+        ]
+    },
+    {
+        "title": "Why callbacks should be avoided",
+        "belongs to": "Why callbacks should be avoided",
+        "cases": [
+            {
+                "description": "In general, callbacks should be avoided because:\nCallbacks are hard to reason about because invocation order is not obvious and they break code narrative. Callbacks are harder to locate and navigate because they rely on reflection to trigger rather than being ordinary method calls. Callbacks make it difficult to apply changes selectively to an object’s state because changes always trigger the entire callback chain. Callbacks trap logic in the ActiveRecord class. This tight coupling encourages fat models that contain too much business logic, which could instead live in service objects that are more reusable, composable, and are easier to test. Illegal state transitions of an object can be better enforced through attribute validations. Heavy use of callbacks affects factory creation speed. With some classes having hundreds of callbacks, creating an instance of that object for an automated test can be a very slow operation, resulting in slow specs.\nSome of these examples are discussed in this video from thoughtbot .\nThe GitLab codebase relies heavily on callbacks and it is hard to refactor them once added due to invisible dependencies. As a result, this guideline does not call for removing all existing callbacks."
+            }
+        ]
+    },
+    {
+        "title": "When to use callbacks",
+        "belongs to": "Why callbacks should be avoided/When to use callbacks",
+        "cases": [
+            {
+                "description": "Callbacks can be used in special cases. Some examples of cases where adding a callback makes sense:\nA dependency uses callbacks and we would like to override the callback behavior. Incrementing cache counts. Data normalization that only relates to data on the current model."
+            }
+        ]
+    },
+    {
+        "title": "Example of moving from a callback to a service",
+        "belongs to": "Why callbacks should be avoided/Example of moving from a callback to a service",
+        "cases": [
+            {
+                "description": "There is a project with the following basic data model:",
+                "example": "class Project\n  has_one :repository\nend\n\nclass Repository\n  belongs_to :project\nend\n"
+            },
+            {
+                "description": "Say we want to create a repository after a project is created and use the project name as the repository name. A developer familiar with Rails might immediately think: sounds like a job for an ActiveRecord callback! And add this code:",
+                "example": "class Project\n  has_one :repository\n\n  after_initialize :create_random_name\n  after_create :create_repository\n\n  def create_random_name\n    SecureRandom.alphanumeric\n  end\n\n  def create_repository\n    Repository.create!(project: self)\n  end\nend\n\nclass Repository\n  after_initialize :set_name\n\n  def set_name\n    name = project.name\n  end\nend\n\nclass ProjectsController\n  def create\n    Project.create! # also creates a repository and names it\n  end\nend\n"
+            },
+            {
+                "description": "While this seems pretty harmless for a baby Rails app, adding this type of logic via callbacks has many downsides once your Rails app becomes large and complex (all of which are listed in this documentation). Instead, we can add this logic to a service class:",
+                "example": "class Project\n  has_one :repository\nend\n\nclass Repository\n  belongs_to :project\nend\n\nclass ProjectCreator\n  def self.execute\n    ApplicationRecord.transaction do\n      name = SecureRandom.alphanumeric\n      project = Project.create!(name: name)\n      Repository.create!(project: project, name: name)\n    end\n  end\nend\n\nclass ProjectsController\n  def create\n    ProjectCreator.execute\n  end\nend\n"
+            },
+            {
+                "description": "With an application this simple, it can be hard to see the benefits of the second approach. But we already some benefits:\nCan test `Repository` creation logic separate from `Project` creation logic. Code no longer violates law of demeter ( `Repository` class doesn’t need to know `project.name` ). Clarity of invocation order. Open to change: if we decide there are some scenarios where we do not want a repository created for a project, we can create a new service class rather than needing to refactor to `Project` and `Repository` classes. Each instance of a `Project` factory does not create a second ( `Repository` ) object."
+            }
+        ]
+    },
+    {
+        "title": "Styles we have no opinion on",
+        "belongs to": "Styles we have no opinion on",
+        "cases": [
+            {
+                "description": "If a RuboCop rule is proposed and we choose not to add it, we should document that decision in this guide so it is more discoverable and link the relevant discussion as a reference."
+            }
+        ]
+    },
+    {
+        "title": "Quoting string literals",
+        "belongs to": "Styles we have no opinion on/Quoting string literals",
+        "cases": [
+            {
+                "description": "Due to the sheer amount of work to rectify, we do not care whether string literals are single or double-quoted.\nPrevious discussions include:\nhttps://gitlab.com/gitlab-org/gitlab-foss/-/issues/44234 \nhttps://gitlab.com/gitlab-org/gitlab-foss/-/issues/36076 \nhttps://gitlab.com/gitlab-org/gitlab/-/issues/198046"
+            }
+        ]
+    },
+    {
+        "title": "Type safety",
+        "belongs to": "Styles we have no opinion on/Type safety",
+        "cases": [
+            {
+                "description": "Now that we’ve upgraded to Ruby 3, we have more options available to enforce type safety .\nSome of these options are supported as part of the Ruby syntax and do not require the use of specific type safety tools like Sorbet or RBS . However, we might consider these tools in the future as well.\nFor more information, see Type safety in the `remote_development` domain README."
+            }
+        ]
+    },
+    {
+        "title": "Functional patterns",
+        "belongs to": "Styles we have no opinion on/Functional patterns",
+        "cases": [
+            {
+                "description": "Although Ruby and especially Rails are primarily based on object-oriented programming patterns, Ruby is a very flexible language and supports functional programming patterns as well.\nFunctional programming patterns, especially in domain logic, can often result in more readable, maintainable, and bug-resistant code while still using idiomatic and familiar Ruby patterns. However, functional programming patterns should be used carefully because some patterns would cause confusion and should be avoided even if they’re directly supported by Ruby. The curry method is a likely example.\nFor more information, see:\nFunctional patterns \nRailway-oriented programming and the Result class"
+            }
+        ]
+    },
+    {
+        "title": "Privacy Preference Center",
+        "belongs to": "Privacy Preference Center",
+        "cases": []
+    }
+]
