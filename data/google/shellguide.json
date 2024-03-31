@@ -1,0 +1,473 @@
+[
+    {
+        "title": "Table of Contents",
+        "belongs to": "Table of Contents",
+        "cases": [
+            {
+                "description": "Section \nContents \nBackground \nWhich Shell to Use - When to use Shell \nShell Files and Interpreter Invocation \nFile Extensions - SUID/SGID \nEnvironment \nSTDOUT vs STDERR \nComments \nFile Header - Function Comments - Implementation Comments - TODO Comments \nFormatting \nIndentation - Line Length and Long Strings - Pipelines - Loops - Case statement - Variable expansion - Quoting \nFeatures and Bugs \nShellCheck - Command Substitution - Test,\n \n [… ]\n \n , and\n \n [[… ]] - Testing Strings - Wildcard Expansion of Filenames - Eval - Arrays - Pipes to While - Arithmetic \nNaming Conventions \nFunction Names - Variable Names - Constants and Environment Variable Names - Source Filenames - Read-only Variables - Use Local Variables - Function Location - main \nCalling Commands \nChecking Return Values - Builtin Commands vs. External Commands \nConclusion"
+            }
+        ]
+    },
+    {
+        "title": "Background",
+        "belongs to": "Background",
+        "cases": []
+    },
+    {
+        "title": "Which Shell to Use",
+        "belongs to": "Background/Which Shell to Use",
+        "cases": [
+            {
+                "description": "Bash is the only shell scripting language permitted for executables.\nExecutables must start with `#!/bin/bash` and a minimum number of flags. Use `set` to set shell options so that calling your script as `bashscript_name` does not break its functionality.\nRestricting all executable shell scripts to bash gives us a consistent shell language that’s installed on all our machines.\nThe only exception to this is where you’re forced to by whatever you’re coding for. One example of this is Solaris SVR4 packages which require plain Bourne shell for any scripts."
+            }
+        ]
+    },
+    {
+        "title": "When to use Shell",
+        "belongs to": "Background/When to use Shell",
+        "cases": [
+            {
+                "description": "Shell should only be used for small utilities or simple wrapper scripts.\nWhile shell scripting isn’t a development language, it is used for writing various utility scripts throughout Google. This style guide is more a recognition of its use rather than a suggestion that it be used for widespread deployment.\nSome guidelines:\nIf you’re mostly calling other utilities and are doing relatively little data manipulation, shell is an acceptable choice for the task. \nIf performance matters, use something other than shell. \nIf you are writing a script that is more than 100 lines long, or that uses non-straightforward control flow logic, you should rewrite it in a more structured language now . Bear in mind that scripts grow. Rewrite your script early to avoid a more time-consuming rewrite at a later date. \nWhen assessing the complexity of your code (e.g. to decide whether to switch languages) consider whether the code is easily maintainable by people other than its author."
+            }
+        ]
+    },
+    {
+        "title": "Shell Files and Interpreter Invocation",
+        "belongs to": "Shell Files and Interpreter Invocation",
+        "cases": []
+    },
+    {
+        "title": "File Extensions",
+        "belongs to": "Shell Files and Interpreter Invocation/File Extensions",
+        "cases": [
+            {
+                "description": "Executables should have no extension (strongly preferred) or a `.sh` extension. Libraries must have a `.sh` extension and should not be executable.\nIt is not necessary to know what language a program is written in when executing it and shell doesn’t require an extension so we prefer not to use one for executables.\nHowever, for libraries it’s important to know what language it is and sometimes there’s a need to have similar libraries in different languages. This allows library files with identical purposes but different languages to be identically named except for the language-specific suffix."
+            }
+        ]
+    },
+    {
+        "title": "SUID/SGID",
+        "belongs to": "Shell Files and Interpreter Invocation/SUID/SGID",
+        "cases": [
+            {
+                "description": "SUID and SGID are forbidden on shell scripts.\nThere are too many security issues with shell that make it nearly impossible to secure sufficiently to allow SUID/SGID. While bash does make it difficult to run SUID, it’s still possible on some platforms which is why we’re being explicit about banning it.\nUse `sudo` to provide elevated access if you need it."
+            }
+        ]
+    },
+    {
+        "title": "Environment",
+        "belongs to": "Environment",
+        "cases": []
+    },
+    {
+        "title": "STDOUT vs STDERR",
+        "belongs to": "Environment/STDOUT vs STDERR",
+        "cases": [
+            {
+                "description": "All error messages should go to `STDERR` .\nThis makes it easier to separate normal status from actual issues.\nA function to print out error messages along with other status information is recommended.",
+                "example": "err() {\n  echo \"[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*\" >&2\n}\n\nif ! do_something; then\n  err \"Unable to do_something\"\n  exit 1\nfi\n"
+            }
+        ]
+    },
+    {
+        "title": "Comments",
+        "belongs to": "Comments",
+        "cases": []
+    },
+    {
+        "title": "File Header",
+        "belongs to": "Comments/File Header",
+        "cases": [
+            {
+                "description": "Start each file with a description of its contents.\nEvery file must have a top-level comment including a brief overview of its contents. A copyright notice and author information are optional.\nExample:",
+                "example": "#!/bin/bash\n#\n# Perform hot backups of Oracle databases.\n"
+            }
+        ]
+    },
+    {
+        "title": "Function Comments",
+        "belongs to": "Comments/Function Comments",
+        "cases": [
+            {
+                "description": "Any function that is not both obvious and short must be commented. Any function in a library must be commented regardless of length or complexity.\nIt should be possible for someone else to learn how to use your program or to use a function in your library by reading the comments (and self-help, if provided) without reading the code.\nAll function comments should describe the intended API behaviour using:\nDescription of the function. \nGlobals: List of global variables used and modified. \nArguments: Arguments taken. \nOutputs: Output to STDOUT or STDERR. \nReturns: Returned values other than the default exit status of the last command run.\nExample:",
+                "example": "#######################################\n# Cleanup files from the backup directory.\n# Globals:\n#   BACKUP_DIR\n#   ORACLE_SID\n# Arguments:\n#   None\n#######################################\nfunction cleanup() {\n  …\n}\n\n#######################################\n# Get configuration directory.\n# Globals:\n#   SOMEDIR\n# Arguments:\n#   None\n# Outputs:\n#   Writes location to stdout\n#######################################\nfunction get_dir() {\n  echo \"${SOMEDIR}\"\n}\n\n#######################################\n# Delete a file in a sophisticated manner.\n# Arguments:\n#   File to delete, a path.\n# Returns:\n#   0 if thing was deleted, non-zero on error.\n#######################################\nfunction del_thing() {\n  rm \"$1\"\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Implementation Comments",
+        "belongs to": "Comments/Implementation Comments",
+        "cases": [
+            {
+                "description": "Comment tricky, non-obvious, interesting or important parts of your code.\nThis follows general Google coding comment practice. Don’t comment everything. If there’s a complex algorithm or you’re doing something out of the ordinary, put a short comment in."
+            }
+        ]
+    },
+    {
+        "title": "TODO Comments",
+        "belongs to": "Comments/TODO Comments",
+        "cases": [
+            {
+                "description": "Use TODO comments for code that is temporary, a short-term solution, or good-enough but not perfect.\nThis matches the convention in the C++ Guide .\n`TODO` s should include the string `TODO` in all caps, followed by the name, e-mail address, or other identifier of the person with the best context about the problem referenced by the `TODO` . The main purpose is to have a consistent `TODO` that can be searched to find out how to get more details upon request. A `TODO` is not a commitment that the person referenced will fix the problem. Thus when you create a `TODO` , it is almost always your name that is given.\nExamples:",
+                "example": "# TODO(mrmonkey): Handle the unlikely edge cases (bug ####)\n"
+            }
+        ]
+    },
+    {
+        "title": "Formatting",
+        "belongs to": "Formatting",
+        "cases": [
+            {
+                "description": "While you should follow the style that’s already there for files that you’re modifying, the following are required for any new code."
+            }
+        ]
+    },
+    {
+        "title": "Indentation",
+        "belongs to": "Formatting/Indentation",
+        "cases": [
+            {
+                "description": "Indent 2 spaces. No tabs.\nUse blank lines between blocks to improve readability. Indentation is two spaces. Whatever you do, don’t use tabs. For existing files, stay faithful to the existing indentation."
+            }
+        ]
+    },
+    {
+        "title": "Line Length and Long Strings",
+        "belongs to": "Formatting/Line Length and Long Strings",
+        "cases": [
+            {
+                "description": "Maximum line length is 80 characters.\nIf you have to write strings that are longer than 80 characters, this should be done with a here document or an embedded newline if possible. Literal strings that have to be longer than 80 chars and can’t sensibly be split are ok, but it’s strongly preferred to find a way to make it shorter.",
+                "example": "# DO use 'here document's\ncat <<END\nI am an exceptionally long\nstring.\nEND\n\n# Embedded newlines are ok too\nlong_string=\"I am an exceptionally\nlong string.\"\n"
+            }
+        ]
+    },
+    {
+        "title": "Pipelines",
+        "belongs to": "Formatting/Pipelines",
+        "cases": [
+            {
+                "description": "Pipelines should be split one per line if they don’t all fit on one line.\nIf a pipeline all fits on one line, it should be on one line.\nIf not, it should be split at one pipe segment per line with the pipe on the newline and a 2 space indent for the next section of the pipe. This applies to a chain of commands combined using `|` as well as to logical compounds using `||` and `&&` .",
+                "example": "# All fits on one line\ncommand1 | command2\n\n# Long commands\ncommand1 \\\n  | command2 \\\n  | command3 \\\n  | command4\n"
+            }
+        ]
+    },
+    {
+        "title": "Loops",
+        "belongs to": "Formatting/Loops",
+        "cases": [
+            {
+                "description": "Put `;do` and `;then` on the same line as the `while` , `for` or `if` .\nLoops in shell are a bit different, but we follow the same principles as with braces when declaring functions. That is: `;then` and `;do` should be on the same line as the if/for/while. `else` should be on its own line and closing statements should be on their own line vertically aligned with the opening statement.\nExample:",
+                "example": "# If inside a function, consider declaring the loop variable as\n# a local to avoid it leaking into the global environment:\n# local dir\nfor dir in \"${dirs_to_cleanup[@]}\"; do\n  if [[ -d \"${dir}/${ORACLE_SID}\" ]]; then\n    log_date \"Cleaning up old files in ${dir}/${ORACLE_SID}\"\n    rm \"${dir}/${ORACLE_SID}/\"*\n    if (( $? != 0 )); then\n      error_message\n    fi\n  else\n    mkdir -p \"${dir}/${ORACLE_SID}\"\n    if (( $? != 0 )); then\n      error_message\n    fi\n  fi\ndone\n"
+            }
+        ]
+    },
+    {
+        "title": "Case statement",
+        "belongs to": "Formatting/Case statement",
+        "cases": [
+            {
+                "description": "Indent alternatives by 2 spaces. \nA one-line alternative needs a space after the close parenthesis of the pattern and before the `;;` . \nLong or multi-command alternatives should be split over multiple lines with the pattern, actions, and `;;` on separate lines.\nThe matching expressions are indented one level from the `case` and `esac` . Multiline actions are indented another level. In general, there is no need to quote match expressions. Pattern expressions should not be preceded by an open parenthesis. Avoid the `;&` and `;;&` notations.",
+                "example": "case \"${expression}\" in\n  a)\n    variable=\"…\"\n    some_command \"${variable}\" \"${other_expr}\" …\n    ;;\n  absolute)\n    actions=\"relative\"\n    another_command \"${actions}\" \"${other_expr}\" …\n    ;;\n  *)\n    error \"Unexpected expression '${expression}'\"\n    ;;\nesac\n"
+            },
+            {
+                "description": "Simple commands may be put on the same line as the pattern and \n`;;` as long as the expression remains readable. This is often appropriate for single-letter option processing. When the actions don’t fit on a single line, put the pattern on a line on its own, then the actions, then `;;` also on a line of its own. When on the same line as the actions, use a space after the close parenthesis of the pattern and another before the `;;` .",
+                "example": "verbose='false'\naflag=''\nbflag=''\nfiles=''\nwhile getopts 'abf:v' flag; do\n  case \"${flag}\" in\n    a) aflag='true' ;;\n    b) bflag='true' ;;\n    f) files=\"${OPTARG}\" ;;\n    v) verbose='true' ;;\n    *) error \"Unexpected option ${flag}\" ;;\n  esac\ndone\n"
+            }
+        ]
+    },
+    {
+        "title": "Variable expansion",
+        "belongs to": "Formatting/Variable expansion",
+        "cases": [
+            {
+                "description": "In order of precedence: Stay consistent with what you find; quote your variables; prefer `\"${var}\"` over `\"$var\"` .\nThese are strongly recommended guidelines but not mandatory regulation. Nonetheless, the fact that it’s a recommendation and not mandatory doesn’t mean it should be taken lightly or downplayed.\nThey are listed in order of precedence.\nStay consistent with what you find for existing code. \nQuote variables, see Quoting section below . \nDon’t brace-delimit single character shell specials / positional parameters, unless strictly necessary or avoiding deep confusion. \nPrefer brace-delimiting all other variables.",
+                "example": "# Section of *recommended* cases.\n\n# Preferred style for 'special' variables:\necho \"Positional: $1\" \"$5\" \"$3\"\necho \"Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \\$=$$ …\"\n\n# Braces necessary:\necho \"many parameters: ${10}\"\n\n# Braces avoiding confusion:\n# Output is \"a0b0c0\"\nset -- a b c\necho \"${1}0${2}0${3}0\"\n\n# Preferred style for other variables:\necho \"PATH=${PATH}, PWD=${PWD}, mine=${some_var}\"\nwhile read -r f; do\n  echo \"file=${f}\"\ndone < <(find /tmp)\n\n# Section of *discouraged* cases\n\n# Unquoted vars, unbraced vars, brace-delimited single letter\n# shell specials.\necho a=$avar \"b=$bvar\" \"PID=${$}\" \"${1}\"\n\n# Confusing use: this is expanded as \"${1}0${2}0${3}0\",\n# not \"${10}${20}${30}\nset -- a b c\necho \"$10$20$30\"\n",
+                "appendix": "NOTE: Using braces in `${var}` is not a form of quoting. “Double quotes” must be used as well ."
+            }
+        ]
+    },
+    {
+        "title": "Quoting",
+        "belongs to": "Formatting/Quoting",
+        "cases": [
+            {
+                "description": "Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required or it’s a shell-internal integer (see next point). \nUse arrays for safe quoting of lists of elements, especially command-line flags. See Arrays below. \nOptionally quote shell-internal, readonly special variables that are defined to be integers: `$?` , `$#` , `$$` , `$!` (man bash). Prefer quoting of “named” internal integer variables, e.g. PPID etc for consistency. \nPrefer quoting strings that are “words” (as opposed to command options or path names). \nNever quote literal integers. \nBe aware of the quoting rules for pattern matches in `[[…]]` . See the Test,\n \n [ … ]\n \n , and\n \n [[ … ]] section below. \nUse `\"$@\"` unless you have a specific reason to use `$*` , such as simply appending the arguments to a string in a message or log.",
+                "example": "# 'Single' quotes indicate that no substitution is desired.\n# \"Double\" quotes indicate that substitution is required/tolerated.\n\n# Simple examples\n\n# \"quote command substitutions\"\n# Note that quotes nested inside \"$()\" don't need escaping.\nflag=\"$(some_command and its args \"$@\" 'quoted separately')\"\n\n# \"quote variables\"\necho \"${flag}\"\n\n# Use arrays with quoted expansion for lists.\ndeclare -a FLAGS\nFLAGS=( --foo --bar='baz' )\nreadonly FLAGS\nmybinary \"${FLAGS[@]}\"\n\n# It's ok to not quote internal integer variables.\nif (( $# > 3 )); then\n  echo \"ppid=${PPID}\"\nfi\n\n# \"never quote literal integers\"\nvalue=32\n# \"quote command substitutions\", even when you expect integers\nnumber=\"$(generate_number)\"\n\n# \"prefer quoting words\", not compulsory\nreadonly USE_INTEGER='true'\n\n# \"quote shell meta characters\"\necho 'Hello stranger, and well met. Earn lots of $$$'\necho \"Process $$: Done making \\$\\$\\$.\"\n\n# \"command options or path names\"\n# ($1 is assumed to contain a value here)\ngrep -li Hugo /dev/null \"$1\"\n\n# Less simple examples\n# \"quote variables, unless proven false\": ccs might be empty\ngit send-email --to \"${reviewers}\" ${ccs:+\"--cc\" \"${ccs}\"}\n\n# Positional parameter precautions: $1 might be unset\n# Single quotes leave regex as-is.\ngrep -cP '([Ss]pecial|\\|?characters*)$' ${1:+\"$1\"}\n\n# For passing on arguments,\n# \"$@\" is right almost every time, and\n# $* is wrong almost every time:\n#\n# * $* and $@ will split on spaces, clobbering up arguments\n#   that contain spaces and dropping empty strings;\n# * \"$@\" will retain arguments as-is, so no args\n#   provided will result in no args being passed on;\n#   This is in most cases what you want to use for passing\n#   on arguments.\n# * \"$*\" expands to one argument, with all args joined\n#   by (usually) spaces,\n#   so no args provided will result in one empty string\n#   being passed on.\n# (Consult `man bash` for the nit-grits ;-)\n\n(set -- 1 \"2 two\" \"3 three tres\"; echo $#; set -- \"$*\"; echo \"$#, $@\")\n(set -- 1 \"2 two\" \"3 three tres\"; echo $#; set -- \"$@\"; echo \"$#, $@\")\n"
+            }
+        ]
+    },
+    {
+        "title": "Features and Bugs",
+        "belongs to": "Features and Bugs",
+        "cases": []
+    },
+    {
+        "title": "ShellCheck",
+        "belongs to": "Features and Bugs/ShellCheck",
+        "cases": [
+            {
+                "description": "The ShellCheck project identifies common bugs and warnings for your shell scripts. It is recommended for all scripts, large or small."
+            }
+        ]
+    },
+    {
+        "title": "Command Substitution",
+        "belongs to": "Features and Bugs/Command Substitution",
+        "cases": [
+            {
+                "description": "Use `$(command)` instead of backticks.\nNested backticks require escaping the inner ones with `\\` . The `$(command)` format doesn’t change when nested and is easier to read.\nExample:",
+                "example": "# This is preferred:\nvar=\"$(command \"$(command1)\")\"\n\n# This is not:\nvar=\"`command \\`command1\\``\"\n"
+            }
+        ]
+    },
+    {
+        "title": "Test, [ … ] , and [[ … ]]",
+        "belongs to": "Features and Bugs/Test, [ … ] , and [[ … ]]",
+        "cases": [
+            {
+                "description": "`[[…]]` is preferred over `[…]` , `test` and `/usr/bin/[` .\n`[[…]]` reduces errors as no pathname expansion or word splitting takes place between `[[` and `]]` . In addition, `[[…]]` allows for regular expression matching, while `[…]` does not.",
+                "example": "# This ensures the string on the left is made up of characters in\n# the alnum character class followed by the string name.\n# Note that the RHS should not be quoted here.\nif [[ \"filename\" =~ ^[[:alnum:]]+name ]]; then\n  echo \"Match\"\nfi\n\n# This matches the exact pattern \"f*\" (Does not match in this case)\nif [[ \"filename\" == \"f*\" ]]; then\n  echo \"Match\"\nfi\n\n# This gives a \"too many arguments\" error as f* is expanded to the\n# contents of the current directory\nif [ \"filename\" == f* ]; then\n  echo \"Match\"\nfi\n",
+                "appendix": "For the gory details, see E14 at http://tiswww.case.edu/php/chet/bash/FAQ"
+            }
+        ]
+    },
+    {
+        "title": "Testing Strings",
+        "belongs to": "Features and Bugs/Testing Strings",
+        "cases": [
+            {
+                "description": "Use quotes rather than filler characters where possible.\nBash is smart enough to deal with an empty string in a test. So, given that the code is much easier to read, use tests for empty/non-empty strings or empty strings rather than filler characters.",
+                "example": "# Do this:\nif [[ \"${my_var}\" == \"some_string\" ]]; then\n  do_something\nfi\n\n# -z (string length is zero) and -n (string length is not zero) are\n# preferred over testing for an empty string\nif [[ -z \"${my_var}\" ]]; then\n  do_something\nfi\n\n# This is OK (ensure quotes on the empty side), but not preferred:\nif [[ \"${my_var}\" == \"\" ]]; then\n  do_something\nfi\n\n# Not this:\nif [[ \"${my_var}X\" == \"some_stringX\" ]]; then\n  do_something\nfi\n"
+            },
+            {
+                "description": "To avoid confusion about what you’re testing for, explicitly use `-z` or `-n` .",
+                "example": "# Use this\nif [[ -n \"${my_var}\" ]]; then\n  do_something\nfi\n\n# Instead of this\nif [[ \"${my_var}\" ]]; then\n  do_something\nfi\n"
+            },
+            {
+                "description": "For clarity, use `==` for equality rather than `=` even though both work. The former encourages the use of `[[` and the latter can be confused with an assignment. However, be careful when using `<` and `>` in `[[…]]` which performs a lexicographical comparison. Use `((…))` or `-lt` and `-gt` for numerical comparison.",
+                "example": "# Use this\nif [[ \"${my_var}\" == \"val\" ]]; then\n  do_something\nfi\n\nif (( my_var > 3 )); then\n  do_something\nfi\n\nif [[ \"${my_var}\" -gt 3 ]]; then\n  do_something\nfi\n\n# Instead of this\nif [[ \"${my_var}\" = \"val\" ]]; then\n  do_something\nfi\n\n# Probably unintended lexicographical comparison.\nif [[ \"${my_var}\" > 3 ]]; then\n  # True for 4, false for 22.\n  do_something\nfi\n"
+            }
+        ]
+    },
+    {
+        "title": "Wildcard Expansion of Filenames",
+        "belongs to": "Features and Bugs/Wildcard Expansion of Filenames",
+        "cases": [
+            {
+                "description": "Use an explicit path when doing wildcard expansion of filenames.\nAs filenames can begin with a `-` , it’s a lot safer to expand wildcards with `./*` instead of `*` .",
+                "example": "# Here's the contents of the directory:\n# -f  -r  somedir  somefile\n\n# Incorrectly deletes almost everything in the directory by force\npsa@bilby$ rm -v *\nremoved directory: `somedir'\nremoved `somefile'\n\n# As opposed to:\npsa@bilby$ rm -v ./*\nremoved `./-f'\nremoved `./-r'\nrm: cannot remove `./somedir': Is a directory\nremoved `./somefile'\n"
+            }
+        ]
+    },
+    {
+        "title": "Eval",
+        "belongs to": "Features and Bugs/Eval",
+        "cases": [
+            {
+                "description": "`eval` should be avoided.\nEval munges the input when used for assignment to variables and can set variables without making it possible to check what those variables were.",
+                "example": "# What does this set?\n# Did it succeed? In part or whole?\neval $(set_my_variables)\n\n# What happens if one of the returned values has a space in it?\nvariable=\"$(eval some_function)\"\n"
+            }
+        ]
+    },
+    {
+        "title": "Arrays",
+        "belongs to": "Features and Bugs/Arrays",
+        "cases": [
+            {
+                "description": "Bash arrays should be used to store lists of elements, to avoid quoting complications. This particularly applies to argument lists. Arrays should not be used to facilitate more complex data structures (see When to use Shell above).\nArrays store an ordered collection of strings, and can be safely expanded into individual elements for a command or loop.\nUsing a single string for multiple command arguments should be avoided, as it inevitably leads to authors using `eval` or trying to nest quotes inside the string, which does not give reliable or readable results and leads to needless complexity.",
+                "example": "# An array is assigned using parentheses, and can be appended to\n# with +=( … ).\ndeclare -a flags\nflags=(--foo --bar='baz')\nflags+=(--greeting=\"Hello ${name}\")\nmybinary \"${flags[@]}\"\n\n# Don’t use strings for sequences.\nflags='--foo --bar=baz'\nflags+=' --greeting=\"Hello world\"'  # This won’t work as intended.\nmybinary ${flags}\n\n# Command expansions return single strings, not arrays. Avoid\n# unquoted expansion in array assignments because it won’t\n# work correctly if the command output contains special\n# characters or whitespace.\n\n# This expands the listing output into a string, then does special keyword\n# expansion, and then whitespace splitting.  Only then is it turned into a\n# list of words.  The ls command may also change behavior based on the user's\n# active environment!\ndeclare -a files=($(ls /directory))\n\n# The get_arguments writes everything to STDOUT, but then goes through the\n# same expansion process above before turning into a list of arguments.\nmybinary $(get_arguments)\n"
+            }
+        ]
+    },
+    {
+        "title": "Arrays Pros",
+        "belongs to": "Features and Bugs/Arrays/Arrays Pros",
+        "cases": [
+            {
+                "description": "Using Arrays allows lists of things without confusing quoting semantics. Conversely, not using arrays leads to misguided attempts to nest quoting inside a string. \nArrays make it possible to safely store sequences/lists of arbitrary strings, including strings containing whitespace."
+            }
+        ]
+    },
+    {
+        "title": "Arrays Cons",
+        "belongs to": "Features and Bugs/Arrays/Arrays Cons",
+        "cases": [
+            {
+                "description": "Using arrays can risk a script’s complexity growing."
+            }
+        ]
+    },
+    {
+        "title": "Arrays Decision",
+        "belongs to": "Features and Bugs/Arrays/Arrays Decision",
+        "cases": [
+            {
+                "description": "Arrays should be used to safely create and pass around lists. In particular, when building a set of command arguments, use arrays to avoid confusing quoting issues. Use quoted expansion – `\"${array[@]}\"` – to access arrays. However, if more advanced data manipulation is required, shell scripting should be avoided altogether; see above ."
+            }
+        ]
+    },
+    {
+        "title": "Pipes to While",
+        "belongs to": "Features and Bugs/Arrays/Pipes to While",
+        "cases": [
+            {
+                "description": "Use process substitution or the `readarray` builtin (bash4+) in preference to piping to `while` . Pipes create a subshell, so any variables modified within a pipeline do not propagate to the parent shell.\nThe implicit subshell in a pipe to `while` can introduce subtle bugs that are hard to track down.",
+                "example": "last_line='NULL'\nyour_command | while read -r line; do\n  if [[ -n \"${line}\" ]]; then\n    last_line=\"${line}\"\n  fi\ndone\n\n# This will always output 'NULL'!\necho \"${last_line}\"\n"
+            },
+            {
+                "description": "Using process substitution also creates a subshell. However, it allows redirecting from a subshell to a `while` without putting the `while` (or any other command) in a subshell.",
+                "example": "last_line='NULL'\nwhile read line; do\n  if [[ -n \"${line}\" ]]; then\n    last_line=\"${line}\"\n  fi\ndone < <(your_command)\n\n# This will output the last non-empty line from your_command\necho \"${last_line}\"\n"
+            },
+            {
+                "description": "Alternatively, use the `readarray` builtin to read the file into an array, then loop over the array’s contents. Notice that (for the same reason as above) you need to use a process substitution with `readarray` rather than a pipe, but with the advantage that the input generation for the loop is located before it, rather than after.",
+                "example": "last_line='NULL'\nreadarray -t lines < <(your_command)\nfor line in \"${lines[@]}\"; do\n  if [[ -n \"${line}\" ]]; then\n    last_line=\"${line}\"\n  fi\ndone\necho \"${last_line}\"\n",
+                "appendix": "Note: Be cautious using a for-loop to iterate over output, as in `forvarin$(...)` , as the output is split by whitespace, not by line. Sometimes you will know this is safe because the output can’t contain any unexpected whitespace, but where this isn’t obvious or doesn’t improve readability (such as a long command inside `$(...)` ), a `whileread` loop or `readarray` is often safer and clearer."
+            }
+        ]
+    },
+    {
+        "title": "Arithmetic",
+        "belongs to": "Features and Bugs/Arrays/Arithmetic",
+        "cases": [
+            {
+                "description": "Always use `((…))` or `$((…))` rather than `let` or `$[…]` or `expr` .\nNever use the `$[…]` syntax, the `expr` command, or the `let` built-in.\n`<` and `>` don’t perform numerical comparison inside `[[…]]` expressions (they perform lexicographical comparisons instead; see Testing Strings ). For preference, don’t use `[[…]]` \nat all for numeric comparisons, use `((…))` instead.\nIt is recommended to avoid using `((…))` as a standalone statement, and otherwise be wary of its expression evaluating to zero\nparticularly with `set-e` enabled. For example, `set-e;i=0;((i++))` will cause the shell to exit.",
+                "example": "# Simple calculation used as text - note the use of $(( … )) within\n# a string.\necho \"$(( 2 + 2 )) is 4\"\n\n# When performing arithmetic comparisons for testing\nif (( a < b )); then\n  …\nfi\n\n# Some calculation assigned to a variable.\n(( i = 10 * j + 400 ))\n\n# This form is non-portable and deprecated\ni=$[2 * 10]\n\n# Despite appearances, 'let' isn't one of the declarative keywords,\n# so unquoted assignments are subject to globbing wordsplitting.\n# For the sake of simplicity, avoid 'let' and use (( … ))\nlet i=\"2 + 2\"\n\n# The expr utility is an external program and not a shell builtin.\ni=$( expr 4 + 4 )\n\n# Quoting can be error prone when using expr too.\ni=$( expr 4 '*' 4 )\n"
+            },
+            {
+                "description": "Stylistic considerations aside, the shell’s built-in arithmetic is many times faster than `expr` .\nWhen using variables, the `${var}` (and `$var` ) forms are not required within `$((…))` . The shell knows to look up `var` for you, and omitting the `${…}` leads to cleaner code. This is slightly contrary to the previous rule about always using braces, so this is a recommendation only.",
+                "example": "# N.B.: Remember to declare your variables as integers when\n# possible, and to prefer local variables over globals.\nlocal -i hundred=$(( 10 * 10 ))\ndeclare -i five=$(( 10 / 2 ))\n\n# Increment the variable \"i\" by three.\n# Note that:\n#  - We do not write ${i} or $i.\n#  - We put a space after the (( and before the )).\n(( i += 3 ))\n\n# To decrement the variable \"i\" by five:\n(( i -= 5 ))\n\n# Do some complicated computations.\n# Note that normal arithmetic operator precedence is observed.\nhr=2\nmin=5\nsec=30\necho $(( hr * 3600 + min * 60 + sec )) # prints 7530 as expected\n"
+            }
+        ]
+    },
+    {
+        "title": "Naming Conventions",
+        "belongs to": "Naming Conventions",
+        "cases": []
+    },
+    {
+        "title": "Function Names",
+        "belongs to": "Naming Conventions/Function Names",
+        "cases": [
+            {
+                "description": "Lower-case, with underscores to separate words. Separate libraries with `::` . Parentheses are required after the function name. The keyword `function` is optional, but must be used consistently throughout a project.\nIf you’re writing single functions, use lowercase and separate words with underscore. If you’re writing a package, separate package names with `::` . Braces must be on the same line as the function name (as with other languages at Google) and no space between the function name and the parenthesis.",
+                "example": "# Single function\nmy_func() {\n  …\n}\n\n# Part of a package\nmypackage::my_func() {\n  …\n}\n",
+                "appendix": "The `function` keyword is extraneous when “()” is present after the function name, but enhances quick identification of functions."
+            }
+        ]
+    },
+    {
+        "title": "Variable Names",
+        "belongs to": "Naming Conventions/Variable Names",
+        "cases": [
+            {
+                "description": "As for function names.\nVariables names for loops should be similarly named for any variable you’re looping through.",
+                "example": "for zone in \"${zones[@]}\"; do\n  something_with \"${zone}\"\ndone\n"
+            }
+        ]
+    },
+    {
+        "title": "Constants and Environment Variable Names",
+        "belongs to": "Naming Conventions/Constants and Environment Variable Names",
+        "cases": [
+            {
+                "description": "All caps, separated with underscores, declared at the top of the file.\nConstants and anything exported to the environment should be capitalized.",
+                "example": "# Constant\nreadonly PATH_TO_FILES='/some/path'\n\n# Both constant and environment\ndeclare -xr ORACLE_SID='PROD'\n"
+            },
+            {
+                "description": "Some things become constant at their first setting (for example, via getopts). Thus, it’s OK to set a constant in getopts or based on a condition, but it should be made readonly immediately afterwards. For the sake of clarity `readonly` or `export` is recommended instead of the equivalent `declare` commands.",
+                "example": "VERBOSE='false'\nwhile getopts 'v' flag; do\n  case \"${flag}\" in\n    v) VERBOSE='true' ;;\n  esac\ndone\nreadonly VERBOSE\n"
+            }
+        ]
+    },
+    {
+        "title": "Source Filenames",
+        "belongs to": "Naming Conventions/Source Filenames",
+        "cases": [
+            {
+                "description": "Lowercase, with underscores to separate words if desired.\nThis is for consistency with other code styles in Google: `maketemplate` or `make_template` but not `make-template` ."
+            }
+        ]
+    },
+    {
+        "title": "Read-only Variables",
+        "belongs to": "Naming Conventions/Read-only Variables",
+        "cases": [
+            {
+                "description": "Use `readonly` or `declare-r` to ensure they’re read only.\nAs globals are widely used in shell, it’s important to catch errors when working with them. When you declare a variable that is meant to be read-only, make this explicit.",
+                "example": "zip_version=\"$(dpkg --status zip | grep Version: | cut -d ' ' -f 2)\"\nif [[ -z \"${zip_version}\" ]]; then\n  error_message\nelse\n  readonly zip_version\nfi\n"
+            }
+        ]
+    },
+    {
+        "title": "Use Local Variables",
+        "belongs to": "Naming Conventions/Use Local Variables",
+        "cases": [
+            {
+                "description": "Declare function-specific variables with `local` . Declaration and assignment should be on different lines.\nEnsure that local variables are only seen inside a function and its children by using `local` when declaring them. This avoids polluting the global name space and inadvertently setting variables that may have significance outside the function.\nDeclaration and assignment must be separate statements when the assignment value is provided by a command substitution; as the `local` builtin does not propagate the exit code from the command substitution.",
+                "example": "my_func2() {\n  local name=\"$1\"\n\n  # Separate lines for declaration and assignment:\n  local my_var\n  my_var=\"$(my_func)\"\n  (( $? == 0 )) || return\n\n  …\n}\n\nmy_func2() {\n  # DO NOT do this:\n  # $? will always be zero, as it contains the exit code of 'local', not my_func\n  local my_var=\"$(my_func)\"\n  (( $? == 0 )) || return\n\n  …\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Function Location",
+        "belongs to": "Naming Conventions/Function Location",
+        "cases": [
+            {
+                "description": "Put all functions together in the file just below constants. Don’t hide executable code between functions. Doing so makes the code difficult to follow and results in nasty surprises when debugging.\nIf you’ve got functions, put them all together near the top of the file. Only includes, `set` statements and setting constants may be done before declaring functions."
+            }
+        ]
+    },
+    {
+        "title": "main",
+        "belongs to": "Naming Conventions/main",
+        "cases": [
+            {
+                "description": "A function called `main` is required for scripts long enough to contain at least one other function.\nIn order to easily find the start of the program, put the main program in a function called `main` as the bottom most function. This provides consistency with the rest of the code base as well as allowing you to define more variables as `local` (which can’t be done if the main code is not a function). The last non-comment line in the file should be a call to `main` :",
+                "example": "main \"$@\"\n",
+                "appendix": "Obviously, for short scripts where it’s just a linear flow, `main` is overkill and so is not required."
+            }
+        ]
+    },
+    {
+        "title": "Calling Commands",
+        "belongs to": "Calling Commands",
+        "cases": []
+    },
+    {
+        "title": "Checking Return Values",
+        "belongs to": "Calling Commands/Checking Return Values",
+        "cases": [
+            {
+                "description": "Always check return values and give informative return values.\nFor unpiped commands, use `$?` or check directly via an `if` statement to keep it simple.\nExample:",
+                "example": "if ! mv \"${file_list[@]}\" \"${dest_dir}/\"; then\n  echo \"Unable to move ${file_list[*]} to ${dest_dir}\" >&2\n  exit 1\nfi\n\n# Or\nmv \"${file_list[@]}\" \"${dest_dir}/\"\nif (( $? != 0 )); then\n  echo \"Unable to move ${file_list[*]} to ${dest_dir}\" >&2\n  exit 1\nfi\n"
+            },
+            {
+                "description": "Bash also has the `PIPESTATUS` variable that allows checking of the return code from all parts of a pipe. If it’s only necessary to check success or failure of the whole pipe, then the following is acceptable:",
+                "example": "tar -cf - ./* | ( cd \"${dir}\" && tar -xf - )\nif (( PIPESTATUS[0] != 0 || PIPESTATUS[1] != 0 )); then\n  echo \"Unable to tar files to ${dir}\" >&2\nfi\n"
+            },
+            {
+                "description": "However, as `PIPESTATUS` will be overwritten as soon as you do any other command, if you need to act differently on errors based on where it happened in the pipe, you’ll need to assign `PIPESTATUS` to another variable immediately after running the command (don’t forget that `[` is a command and will wipe out `PIPESTATUS` ).",
+                "example": "tar -cf - ./* | ( cd \"${DIR}\" && tar -xf - )\nreturn_codes=( \"${PIPESTATUS[@]}\" )\nif (( return_codes[0] != 0 )); then\n  do_something\nfi\nif (( return_codes[1] != 0 )); then\n  do_something_else\nfi\n"
+            }
+        ]
+    },
+    {
+        "title": "Builtin Commands vs. External Commands",
+        "belongs to": "Calling Commands/Builtin Commands vs. External Commands",
+        "cases": [
+            {
+                "description": "Given the choice between invoking a shell builtin and invoking a separate process, choose the builtin.\nWe prefer the use of builtins such as the Parameter Expansion functions in `bash(1)` as it’s more robust and portable (especially when compared to things like `sed` ).\nExamples:",
+                "example": "# Prefer this:\naddition=$(( X + Y ))\nsubstitution=\"${string/#foo/bar}\"\n\n# Instead of this:\naddition=\"$(expr \"${X}\" + \"${Y}\")\"\nsubstitution=\"$(echo \"${string}\" | sed -e 's/^foo/bar/')\"\n"
+            }
+        ]
+    },
+    {
+        "title": "Conclusion",
+        "belongs to": "Conclusion",
+        "cases": [
+            {
+                "description": "Use common sense and BE CONSISTENT .\nPlease take a few minutes to read the Parting Words section at the bottom of the C++ Guide .\nRevision 2.02\nThis site is open source. Improve this page ."
+            }
+        ]
+    }
+]

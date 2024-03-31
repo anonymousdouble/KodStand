@@ -1,0 +1,480 @@
+[
+    {
+        "title": "Background",
+        "belongs to": "Background",
+        "cases": [
+            {
+                "description": "This document defines formatting and style rules for HTML and CSS. It aims at improving collaboration, code quality, and enabling supporting infrastructure. It applies to raw, working files that use HTML and CSS, including GSS files. Tools are free to obfuscate, minify, and compile as long as the general code quality is maintained."
+            }
+        ]
+    },
+    {
+        "title": "General",
+        "belongs to": "General",
+        "cases": []
+    },
+    {
+        "title": "General Style Rules",
+        "belongs to": "General/General Style Rules",
+        "cases": []
+    },
+    {
+        "title": "Protocol",
+        "belongs to": "General/General Style Rules/Protocol",
+        "cases": [
+            {
+                "description": "Use HTTPS for embedded resources where possible.\nAlways use HTTPS ( `https:` ) for images and other media files, style sheets, and scripts, unless the respective files are not available over HTTPS.",
+                "example": "<!-- Not recommended: omits the protocol -->\n<script src=\"//ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js\"></script>\n\n<!-- Not recommended: uses HTTP -->\n<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js\"></script>\n\n<!-- Recommended -->\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js\"></script>\n\n/* Not recommended: omits the protocol */\n@import '//fonts.googleapis.com/css?family=Open+Sans';\n\n/* Not recommended: uses HTTP */\n@import 'http://fonts.googleapis.com/css?family=Open+Sans';\n\n/* Recommended */\n@import 'https://fonts.googleapis.com/css?family=Open+Sans';\n"
+            }
+        ]
+    },
+    {
+        "title": "General Formatting Rules",
+        "belongs to": "General/General Style Rules/General Formatting Rules",
+        "cases": []
+    },
+    {
+        "title": "Indentation",
+        "belongs to": "General/General Style Rules/General Formatting Rules/Indentation",
+        "cases": [
+            {
+                "description": "Indent by 2 spaces at a time.\nDon’t use tabs or mix tabs and spaces for indentation.",
+                "example": "<ul>\n  <li>Fantastic\n  <li>Great\n</ul>\n\n.example {\n  color: blue;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Capitalization",
+        "belongs to": "General/General Style Rules/General Formatting Rules/Capitalization",
+        "cases": [
+            {
+                "description": "Use only lowercase.\nAll code has to be lowercase: This applies to HTML element names, attributes, attribute values (unless `text/CDATA` ), CSS selectors, properties, and property values (with the exception of strings).",
+                "example": "<!-- Not recommended -->\n<A HREF=\"/\">Home</A>\n\n<!-- Recommended -->\n<img src=\"google.png\" alt=\"Google\">\n\n/* Not recommended */\ncolor: #E5E5E5;\n\n/* Recommended */\ncolor: #e5e5e5;\n"
+            }
+        ]
+    },
+    {
+        "title": "Trailing Whitespace",
+        "belongs to": "General/General Style Rules/General Formatting Rules/Trailing Whitespace",
+        "cases": [
+            {
+                "description": "Remove trailing white spaces.\nTrailing white spaces are unnecessary and can complicate diffs.",
+                "example": "<!-- Not recommended -->\n<p>What?_\n\n<!-- Recommended -->\n<p>Yes please.\n"
+            }
+        ]
+    },
+    {
+        "title": "General Meta Rules",
+        "belongs to": "General/General Style Rules/General Formatting Rules/General Meta Rules",
+        "cases": []
+    },
+    {
+        "title": "Encoding",
+        "belongs to": "General/General Style Rules/General Formatting Rules/General Meta Rules/Encoding",
+        "cases": [
+            {
+                "description": "Use UTF-8 (no BOM).\nMake sure your editor uses UTF-8 as character encoding, without a byte order mark.\nSpecify the encoding in HTML templates and documents via `<metacharset=\"utf-8\">` . Do not specify the encoding of style sheets as these assume UTF-8.\n(More on encodings and when and how to specify them can be found in Handling character encodings in HTML and CSS .)"
+            }
+        ]
+    },
+    {
+        "title": "Comments",
+        "belongs to": "General/General Style Rules/General Formatting Rules/General Meta Rules/Comments",
+        "cases": [
+            {
+                "description": "Explain code as needed, where possible.\nUse comments to explain code: What does it cover, what purpose does it serve, why is respective solution used or preferred?\n(This item is optional as it is not deemed a realistic expectation to always demand fully documented code. Mileage may vary heavily for HTML and CSS code and depends on the project’s complexity.)"
+            }
+        ]
+    },
+    {
+        "title": "Action Items",
+        "belongs to": "General/General Style Rules/General Formatting Rules/General Meta Rules/Action Items",
+        "cases": [
+            {
+                "description": "Mark todos and action items with `TODO` .\nHighlight todos by using the keyword `TODO` only, not other common formats like `@@` .\nAppend a contact (username or mailing list) in parentheses as with the format `TODO(contact)` .\nAppend action items after a colon as in `TODO:actionitem` .",
+                "example": "{# TODO(john.doe): revisit centering #}\n<center>Test</center>\n\n<!-- TODO: remove optional tags -->\n<ul>\n  <li>Apples</li>\n  <li>Oranges</li>\n</ul>\n"
+            }
+        ]
+    },
+    {
+        "title": "HTML",
+        "belongs to": "HTML",
+        "cases": []
+    },
+    {
+        "title": "HTML Style Rules",
+        "belongs to": "HTML/HTML Style Rules",
+        "cases": []
+    },
+    {
+        "title": "Document Type",
+        "belongs to": "HTML/HTML Style Rules/Document Type",
+        "cases": [
+            {
+                "description": "Use HTML5.\nHTML5 (HTML syntax) is preferred for all HTML documents: `<!DOCTYPEhtml>` .\n(It’s recommended to use HTML, as `text/html` . Do not use XHTML. XHTML, as application/xhtml+xml , lacks both browser and infrastructure support and offers less room for optimization than HTML.)"
+            }
+        ]
+    },
+    {
+        "title": "HTML Validity",
+        "belongs to": "HTML/HTML Style Rules/HTML Validity",
+        "cases": [
+            {
+                "description": "Use valid HTML where possible.\nUse valid HTML code unless that is not possible due to otherwise unattainable performance goals regarding file size.\nUse tools such as the W3C HTML validator to test.\nUsing valid HTML is a measurable baseline quality attribute that contributes to learning about technical requirements and constraints, and that ensures proper HTML usage.",
+                "example": "<!-- Not recommended -->\n<title>Test</title>\n<article>This is only a test.\n\n<!-- Recommended -->\n<!DOCTYPE html>\n<meta charset=\"utf-8\">\n<title>Test</title>\n<article>This is only a test.</article>\n"
+            }
+        ]
+    },
+    {
+        "title": "Semantics",
+        "belongs to": "HTML/HTML Style Rules/Semantics",
+        "cases": [
+            {
+                "description": "Use HTML according to its purpose.\nUse elements (sometimes incorrectly called “tags”) for what they have been created for. For example, use heading elements for headings, `p` elements for paragraphs, `a` elements for anchors, etc.\nUsing HTML according to its purpose is important for accessibility, reuse, and code efficiency reasons.",
+                "example": "<!-- Not recommended -->\n<div onclick=\"goToRecommendations();\">All recommendations</div>\n\n<!-- Recommended -->\n<a href=\"recommendations/\">All recommendations</a>\n"
+            }
+        ]
+    },
+    {
+        "title": "Multimedia Fallback",
+        "belongs to": "HTML/HTML Style Rules/Multimedia Fallback",
+        "cases": [
+            {
+                "description": "Provide alternative contents for multimedia.\nFor multimedia, such as images, videos, animated objects via `canvas` , make sure to offer alternative access. For images that means use of meaningful alternative text ( `alt` ) and for video and audio transcripts and captions, if available.\nProviding alternative contents is important for accessibility reasons: A blind user has few cues to tell what an image is about without `@alt` , and other users may have no way of understanding what video or audio contents are about either.\n(For images whose `alt` attributes would introduce redundancy, and for images whose purpose is purely decorative which you cannot immediately use CSS for, use no alternative text, as in `alt=\"\"` .)",
+                "example": "<!-- Not recommended -->\n<img src=\"spreadsheet.png\">\n\n<!-- Recommended -->\n<img src=\"spreadsheet.png\" alt=\"Spreadsheet screenshot.\">\n"
+            }
+        ]
+    },
+    {
+        "title": "Separation of Concerns",
+        "belongs to": "HTML/HTML Style Rules/Separation of Concerns",
+        "cases": [
+            {
+                "description": "Separate structure from presentation from behavior.\nStrictly keep structure (markup), presentation (styling), and behavior (scripting) apart, and try to keep the interaction between the three to an absolute minimum.\nThat is, make sure documents and templates contain only HTML and HTML that is solely serving structural purposes. Move everything presentational into style sheets, and everything behavioral into scripts.\nIn addition, keep the contact area as small as possible by linking as few style sheets and scripts as possible from documents and templates.\nSeparating structure from presentation from behavior is important for maintenance reasons. It is always more expensive to change HTML documents and templates than it is to update style sheets and scripts.",
+                "example": "<!-- Not recommended -->\n<!DOCTYPE html>\n<title>HTML sucks</title>\n<link rel=\"stylesheet\" href=\"base.css\" media=\"screen\">\n<link rel=\"stylesheet\" href=\"grid.css\" media=\"screen\">\n<link rel=\"stylesheet\" href=\"print.css\" media=\"print\">\n<h1 style=\"font-size: 1em;\">HTML sucks</h1>\n<p>I’ve read about this on a few sites but now I’m sure:\n  <u>HTML is stupid!!1</u>\n<center>I can’t believe there’s no way to control the styling of\n  my website without doing everything all over again!</center>\n\n<!-- Recommended -->\n<!DOCTYPE html>\n<title>My first CSS-only redesign</title>\n<link rel=\"stylesheet\" href=\"default.css\">\n<h1>My first CSS-only redesign</h1>\n<p>I’ve read about this on a few sites but today I’m actually\n  doing it: separating concerns and avoiding anything in the HTML of\n  my website that is presentational.\n<p>It’s awesome!\n"
+            }
+        ]
+    },
+    {
+        "title": "Entity References",
+        "belongs to": "HTML/HTML Style Rules/Entity References",
+        "cases": [
+            {
+                "description": "Do not use entity references.\nThere is no need to use entity references like `&mdash;` , `&rdquo;` , or `&#x263a;` , assuming the same encoding (UTF-8) is used for files and editors as well as among teams.\nThe only exceptions apply to characters with special meaning in HTML (like `<` and `&` ) as well as control or “invisible” characters (like no-break spaces).",
+                "example": "<!-- Not recommended -->\nThe currency symbol for the Euro is &ldquo;&eur;&rdquo;.\n\n<!-- Recommended -->\nThe currency symbol for the Euro is “€”.\n"
+            }
+        ]
+    },
+    {
+        "title": "Optional Tags",
+        "belongs to": "HTML/HTML Style Rules/Optional Tags",
+        "cases": [
+            {
+                "description": "Omit optional tags (optional).\nFor file size optimization and scannability purposes, consider omitting optional tags. The HTML5 specification defines what tags can be omitted.\n(This approach may require a grace period to be established as a wider guideline as it’s significantly different from what web developers are typically taught. For consistency and simplicity reasons it’s best served omitting all optional tags, not just a selection.)",
+                "example": "<!-- Not recommended -->\n<!DOCTYPE html>\n<html>\n  <head>\n    <title>Spending money, spending bytes</title>\n  </head>\n  <body>\n    <p>Sic.</p>\n  </body>\n</html>\n\n<!-- Recommended -->\n<!DOCTYPE html>\n<title>Saving money, saving bytes</title>\n<p>Qed.\n"
+            }
+        ]
+    },
+    {
+        "title": "type Attributes",
+        "belongs to": "HTML/HTML Style Rules/type Attributes",
+        "cases": [
+            {
+                "description": "Omit `type` attributes for style sheets and scripts.\nDo not use `type` attributes for style sheets (unless not using CSS) and scripts (unless not using JavaScript).\nSpecifying `type` attributes in these contexts is not necessary as HTML5 implies text/css and text/javascript as defaults. This can be safely done even for older browsers.",
+                "example": "<!-- Not recommended -->\n<link rel=\"stylesheet\" href=\"https://www.google.com/css/maia.css\"\n    type=\"text/css\">\n\n<!-- Recommended -->\n<link rel=\"stylesheet\" href=\"https://www.google.com/css/maia.css\">\n\n<!-- Not recommended -->\n<script src=\"https://www.google.com/js/gweb/analytics/autotrack.js\"\n    type=\"text/javascript\"></script>\n\n<!-- Recommended -->\n<script src=\"https://www.google.com/js/gweb/analytics/autotrack.js\"></script>\n"
+            }
+        ]
+    },
+    {
+        "title": "id Attributes",
+        "belongs to": "HTML/HTML Style Rules/id Attributes",
+        "cases": [
+            {
+                "description": "Avoid unnecessary `id` attributes.\nPrefer `class` attributes for styling and `data` attributes for scripting.\nWhere `id` attributes are strictly required, always include a hyphen in the value to ensure it does not match the JavaScript identifier syntax, e.g. use `user-profile` rather than just `profile` or `userProfile` .\nWhen an element has an `id` attribute, browsers will make that available as a named property on the global\n \n window\n \n prototype , which may cause unexpected behavior. While `id` attribute values containing a hyphen are still available as property names, these cannot be referenced as global JavaScript variables.",
+                "example": "<!-- Not recommended: `window.userProfile` will resolve to reference the <div> node -->\n<div id=\"userProfile\"></div>\n\n<!-- Recommended: `id` attribute is required and its value includes a hyphen -->\n<div aria-describedby=\"user-profile\">\n  …\n  <div id=\"user-profile\"></div>\n  …\n</div>\n"
+            }
+        ]
+    },
+    {
+        "title": "HTML Formatting Rules",
+        "belongs to": "HTML/HTML Style Rules/HTML Formatting Rules",
+        "cases": []
+    },
+    {
+        "title": "General Formatting",
+        "belongs to": "HTML/HTML Style Rules/HTML Formatting Rules/General Formatting",
+        "cases": [
+            {
+                "description": "Use a new line for every block, list, or table element, and indent every such child element.\nIndependent of the styling of an element (as CSS allows elements to assume a different role per `display` property), put every block, list, or table element on a new line.\nAlso, indent them if they are child elements of a block, list, or table element.\n(If you run into issues around whitespace between list items it’s acceptable to put all `li` elements in one line. A linter is encouraged to throw a warning instead of an error.)",
+                "example": "<blockquote>\n  <p><em>Space</em>, the final frontier.</p>\n</blockquote>\n\n<ul>\n  <li>Moe\n  <li>Larry\n  <li>Curly\n</ul>\n\n<table>\n  <thead>\n    <tr>\n      <th scope=\"col\">Income\n      <th scope=\"col\">Taxes\n  <tbody>\n    <tr>\n      <td>$ 5.00\n      <td>$ 4.50\n</table>\n"
+            }
+        ]
+    },
+    {
+        "title": "HTML Line-Wrapping",
+        "belongs to": "HTML/HTML Style Rules/HTML Formatting Rules/HTML Line-Wrapping",
+        "cases": [
+            {
+                "description": "Break long lines (optional).\nWhile there is no column limit recommendation for HTML, you may consider wrapping long lines if it significantly improves readability.\nWhen line-wrapping, each continuation line should be indented to distinguish wrapped attributes from child elements. Lines should be wrapped consistently within a project, ideally enforced by automated code formatting tools.",
+                "example": "<button\n  mat-icon-button\n  color=\"primary\"\n  class=\"menu-button\"\n  (click)=\"openMenu()\"\n>\n  <mat-icon>menu</mat-icon>\n</button>\n\n<button mat-icon-button color=\"primary\" class=\"menu-button\"\n    (click)=\"openMenu()\">\n  <mat-icon>menu</mat-icon>\n</button>\n\n<button\n    mat-icon-button\n    color=\"primary\"\n    class=\"menu-button\"\n    (click)=\"openMenu()\">\n  <mat-icon>menu</mat-icon>\n</button>\n\n<button mat-icon-button\n        color=\"primary\"\n        class=\"menu-button\"\n        (click)=\"openMenu()\">\n  <mat-icon>menu</mat-icon>\n</button>\n"
+            }
+        ]
+    },
+    {
+        "title": "HTML Quotation Marks",
+        "belongs to": "HTML/HTML Style Rules/HTML Formatting Rules/HTML Quotation Marks",
+        "cases": [
+            {
+                "description": "When quoting attributes values, use double quotation marks.\nUse double ( `\"\"` ) rather than single quotation marks ( `''` ) around attribute values.",
+                "example": "<!-- Not recommended -->\n<a class='maia-button maia-button-secondary'>Sign in</a>\n\n<!-- Recommended -->\n<a class=\"maia-button maia-button-secondary\">Sign in</a>\n"
+            }
+        ]
+    },
+    {
+        "title": "CSS",
+        "belongs to": "CSS",
+        "cases": []
+    },
+    {
+        "title": "CSS Style Rules",
+        "belongs to": "CSS/CSS Style Rules",
+        "cases": []
+    },
+    {
+        "title": "CSS Validity",
+        "belongs to": "CSS/CSS Style Rules/CSS Validity",
+        "cases": [
+            {
+                "description": "Use valid CSS where possible.\nUnless dealing with CSS validator bugs or requiring proprietary syntax, use valid CSS code.\nUse tools such as the W3C CSS validator to test.\nUsing valid CSS is a measurable baseline quality attribute that allows to spot CSS code that may not have any effect and can be removed, and that ensures proper CSS usage."
+            }
+        ]
+    },
+    {
+        "title": "Class Naming",
+        "belongs to": "CSS/CSS Style Rules/Class Naming",
+        "cases": [
+            {
+                "description": "Use meaningful or generic class names.\nInstead of presentational or cryptic names, always use class names that reflect the purpose of the element in question, or that are otherwise generic.\nNames that are specific and reflect the purpose of the element should be preferred as these are most understandable and the least likely to change.\nGeneric names are simply a fallback for elements that have no particular or no meaning different from their siblings. They are typically needed as “helpers.”\nUsing functional or generic names reduces the probability of unnecessary document or template changes.",
+                "example": "/* Not recommended: meaningless */\n.yee-1901 {}\n\n/* Not recommended: presentational */\n.button-green {}\n.clear {}\n\n/* Recommended: specific */\n.gallery {}\n.login {}\n.video {}\n\n/* Recommended: generic */\n.aux {}\n.alt {}\n"
+            }
+        ]
+    },
+    {
+        "title": "Class Name Style",
+        "belongs to": "CSS/CSS Style Rules/Class Name Style",
+        "cases": [
+            {
+                "description": "Use class names that are as short as possible but as long as necessary.\nTry to convey what a class is about while being as brief as possible.\nUsing class names this way contributes to acceptable levels of understandability and code efficiency.",
+                "example": "/* Not recommended */\n.navigation {}\n.atr {}\n\n/* Recommended */\n.nav {}\n.author {}\n"
+            }
+        ]
+    },
+    {
+        "title": "Class Name Delimiters",
+        "belongs to": "CSS/CSS Style Rules/Class Name Delimiters",
+        "cases": [
+            {
+                "description": "Separate words in class names by a hyphen.\nDo not concatenate words and abbreviations in selectors by any characters (including none at all) other than hyphens, in order to improve understanding and scannability.",
+                "example": "/* Not recommended: does not separate the words “demo” and “image” */\n.demoimage {}\n\n/* Not recommended: uses underscore instead of hyphen */\n.error_status {}\n\n/* Recommended */\n.video-id {}\n.ads-sample {}\n"
+            }
+        ]
+    },
+    {
+        "title": "Prefixes",
+        "belongs to": "CSS/CSS Style Rules/Prefixes",
+        "cases": [
+            {
+                "description": "Prefix selectors with an application-specific prefix (optional).\nIn large projects as well as for code that gets embedded in other projects or on external sites use prefixes (as namespaces) for class names. Use short, unique identifiers followed by a dash.\nUsing namespaces helps preventing naming conflicts and can make maintenance easier, for example in search and replace operations.",
+                "example": ".adw-help {} /* AdWords */\n.maia-note {} /* Maia */\n"
+            }
+        ]
+    },
+    {
+        "title": "Type Selectors",
+        "belongs to": "CSS/CSS Style Rules/Type Selectors",
+        "cases": [
+            {
+                "description": "Avoid qualifying class names with type selectors.\nUnless necessary (for example with helper classes), do not use element names in conjunction with classes.\nAvoiding unnecessary ancestor selectors is useful for performance reasons .",
+                "example": "/* Not recommended */\nul.example {}\ndiv.error {}\n\n/* Recommended */\n.example {}\n.error {}\n"
+            }
+        ]
+    },
+    {
+        "title": "ID Selectors",
+        "belongs to": "CSS/CSS Style Rules/ID Selectors",
+        "cases": [
+            {
+                "description": "Avoid ID selectors.\nID attributes are expected to be unique across an entire page, which is difficult to guarantee when a page contains many components worked on by many different engineers. Class selectors should be preferred in all situations.",
+                "example": "/* Not recommended */\n#example {}\n\n/* Recommended */\n.example {}\n"
+            }
+        ]
+    },
+    {
+        "title": "Shorthand Properties",
+        "belongs to": "CSS/CSS Style Rules/Shorthand Properties",
+        "cases": [
+            {
+                "description": "Use shorthand properties where possible.\nCSS offers a variety of shorthand properties (like `font` ) that should be used whenever possible, even in cases where only one value is explicitly set.\nUsing shorthand properties is useful for code efficiency and understandability.",
+                "example": "/* Not recommended */\nborder-top-style: none;\nfont-family: palatino, georgia, serif;\nfont-size: 100%;\nline-height: 1.6;\npadding-bottom: 2em;\npadding-left: 1em;\npadding-right: 1em;\npadding-top: 0;\n\n/* Recommended */\nborder-top: 0;\nfont: 100%/1.6 palatino, georgia, serif;\npadding: 0 1em 2em;\n"
+            }
+        ]
+    },
+    {
+        "title": "0 and Units",
+        "belongs to": "CSS/CSS Style Rules/0 and Units",
+        "cases": [
+            {
+                "description": "Omit unit specification after “0” values, unless required.\nDo not use units after `0` values unless they are required.",
+                "example": "flex: 0px; /* This flex-basis component requires a unit. */\nflex: 1 1 0px; /* Not ambiguous without the unit, but needed in IE11. */\nmargin: 0;\npadding: 0;\n"
+            }
+        ]
+    },
+    {
+        "title": "Leading 0s",
+        "belongs to": "CSS/CSS Style Rules/Leading 0s",
+        "cases": [
+            {
+                "description": "Always include leading “0”s in values.\nPut `0` s in front of values or lengths between -1 and 1.",
+                "example": "font-size: 0.8em;\n"
+            }
+        ]
+    },
+    {
+        "title": "Hexadecimal Notation",
+        "belongs to": "CSS/CSS Style Rules/Hexadecimal Notation",
+        "cases": [
+            {
+                "description": "Use 3 character hexadecimal notation where possible.\nFor color values that permit it, 3 character hexadecimal notation is shorter and more succinct.",
+                "example": "/* Not recommended */\ncolor: #eebbcc;\n\n/* Recommended */\ncolor: #ebc;\n"
+            }
+        ]
+    },
+    {
+        "title": "Important Declarations",
+        "belongs to": "CSS/CSS Style Rules/Important Declarations",
+        "cases": [
+            {
+                "description": "Avoid using `!important` declarations.\nThese declarations break the natural cascade of CSS and make it difficult to reason about and compose styles. Use selector specificity to override properties instead.",
+                "example": "/* Not recommended */\n.example {\n  font-weight: bold !important;\n}\n\n/* Recommended */\n.example {\n  font-weight: bold;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Hacks",
+        "belongs to": "CSS/CSS Style Rules/Hacks",
+        "cases": [
+            {
+                "description": "Avoid user agent detection as well as CSS “hacks”—try a different approach first.\nIt’s tempting to address styling differences over user agent detection or special CSS filters, workarounds, and hacks. Both approaches should be considered last resort in order to achieve and maintain an efficient and manageable code base. Put another way, giving detection and hacks a free pass will hurt projects in the long run as projects tend to take the way of least resistance. That is, allowing and making it easy to use detection and hacks means using detection and hacks more frequently—and more frequently is too frequently."
+            }
+        ]
+    },
+    {
+        "title": "CSS Formatting Rules",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules",
+        "cases": []
+    },
+    {
+        "title": "Declaration Order",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Declaration Order",
+        "cases": [
+            {
+                "description": "Alphabetize declarations (optional).\nSort declarations consistently within a project. In the absence of tooling to automate and enforce a consistent sort order, consider putting declarations in alphabetical order in order to achieve consistent code in a way that is easy to learn, remember, and manually maintain.\nIgnore vendor-specific prefixes for sorting purposes. However, multiple vendor-specific prefixes for a certain CSS property should be kept sorted (e.g. -moz prefix comes before -webkit).",
+                "example": "background: fuchsia;\nborder: 1px solid;\n-moz-border-radius: 4px;\n-webkit-border-radius: 4px;\nborder-radius: 4px;\ncolor: black;\ntext-align: center;\ntext-indent: 2em;\n"
+            }
+        ]
+    },
+    {
+        "title": "Block Content Indentation",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Block Content Indentation",
+        "cases": [
+            {
+                "description": "Indent all block content.\nIndent all block content , that is rules within rules as well as declarations, so to reflect hierarchy and improve understanding.",
+                "example": "@media screen, projection {\n\n  html {\n    background: #fff;\n    color: #444;\n  }\n\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Declaration Stops",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Declaration Stops",
+        "cases": [
+            {
+                "description": "Use a semicolon after every declaration.\nEnd every declaration with a semicolon for consistency and extensibility reasons.",
+                "example": "/* Not recommended */\n.test {\n  display: block;\n  height: 100px\n}\n\n/* Recommended */\n.test {\n  display: block;\n  height: 100px;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Property Name Stops",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Property Name Stops",
+        "cases": [
+            {
+                "description": "Use a space after a property name’s colon.\nAlways use a single space between property and value (but no space between property and colon) for consistency reasons.",
+                "example": "/* Not recommended */\nh3 {\n  font-weight:bold;\n}\n\n/* Recommended */\nh3 {\n  font-weight: bold;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Declaration Block Separation",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Declaration Block Separation",
+        "cases": [
+            {
+                "description": "Use a space between the last selector and the declaration block.\nAlways use a single space between the last selector and the opening brace that begins the declaration block .\nThe opening brace should be on the same line as the last selector in a given rule.",
+                "example": "/* Not recommended: missing space */\n.video{\n  margin-top: 1em;\n}\n\n/* Not recommended: unnecessary line break */\n.video\n{\n  margin-top: 1em;\n}\n\n/* Recommended */\n.video {\n  margin-top: 1em;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Selector and Declaration Separation",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Selector and Declaration Separation",
+        "cases": [
+            {
+                "description": "Separate selectors and declarations by new lines.\nAlways start a new line for each selector and declaration.",
+                "example": "/* Not recommended */\na:focus, a:active {\n  position: relative; top: 1px;\n}\n\n/* Recommended */\nh1,\nh2,\nh3 {\n  font-weight: normal;\n  line-height: 1.2;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Rule Separation",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/Rule Separation",
+        "cases": [
+            {
+                "description": "Separate rules by new lines.\nAlways put a blank line (two line breaks) between rules.",
+                "example": "html {\n  background: #fff;\n}\n\nbody {\n  margin: auto;\n  width: 50%;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "CSS Quotation Marks",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/CSS Quotation Marks",
+        "cases": [
+            {
+                "description": "Use single ( `''` ) rather than double ( `\"\"` ) quotation marks for attribute selectors and property values.\nDo not use quotation marks in URI values ( `url()` ).\nException: If you do need to use the `@charset` rule, use double quotation marks— single quotation marks are not permitted .",
+                "example": "/* Not recommended */\n@import url(\"https://www.google.com/css/maia.css\");\n\nhtml {\n  font-family: \"open sans\", arial, sans-serif;\n}\n\n/* Recommended */\n@import url(https://www.google.com/css/maia.css);\n\nhtml {\n  font-family: 'open sans', arial, sans-serif;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "CSS Meta Rules",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/CSS Meta Rules",
+        "cases": []
+    },
+    {
+        "title": "Section Comments",
+        "belongs to": "CSS/CSS Style Rules/CSS Formatting Rules/CSS Meta Rules/Section Comments",
+        "cases": [
+            {
+                "description": "Group sections by a section comment (optional).\nIf possible, group style sheet sections together by using comments. Separate sections with new lines.",
+                "example": "/* Header */\n\n.adw-header {}\n\n/* Footer */\n\n.adw-footer {}\n\n/* Gallery */\n\n.adw-gallery {}\n"
+            }
+        ]
+    },
+    {
+        "title": "Parting Words",
+        "belongs to": "Parting Words",
+        "cases": [
+            {
+                "description": "Be consistent.\nIf you’re editing code, take a few minutes to look at the code around you and determine its style. If they use spaces around all their arithmetic operators, you should too. If their comments have little boxes of hash marks around them, make your comments have little boxes of hash marks around them too.\nThe point of having style guidelines is to have a common vocabulary of coding so people can concentrate on what you’re saying rather than on how you’re saying it. We present global style rules here so people know the vocabulary, but local style is also important. If code you add to a file looks drastically different from the existing code around it, it throws readers out of their rhythm when they go to read it. Avoid this."
+            }
+        ]
+    }
+]

@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://docs.ckan.org/en/2.9/contributing/javascript.html -->
+<html class="js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="en" style="">
+ <!--<![endif]-->
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   JavaScript coding standards — CKAN 2.9.11 documentation
+  </title>
+  <script src="./js_files/modernizr.min.js.下载" type="text/javascript">
+  </script>
+  <script data-url_root="../" id="documentation_options" src="./js_files/documentation_options.js.下载" type="text/javascript">
+  </script>
+  <script src="./js_files/jquery.js.下载" type="text/javascript">
+  </script>
+  <script src="./js_files/underscore.js.下载" type="text/javascript">
+  </script>
+  <script src="./js_files/doctools.js.下载" type="text/javascript">
+  </script>
+  <script src="./js_files/language_data.js.下载" type="text/javascript">
+  </script>
+  <script async="async" src="./js_files/readthedocs-doc-embed.js.下载" type="text/javascript">
+  </script>
+  <script src="./js_files/theme.js.下载" type="text/javascript">
+  </script>
+  <link href="./js_files/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="./js_files/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="./js_files/custom.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.ckan.org/en/2.9/genindex.html" rel="index" title="Index"/>
+  <link href="https://docs.ckan.org/en/2.9/search.html" rel="search" title="Search"/>
+  <link href="https://docs.ckan.org/en/2.9/contributing/python.html" rel="next" title="Python coding standards"/>
+  <link href="https://docs.ckan.org/en/2.9/contributing/html.html" rel="prev" title="HTML coding standards"/>
+  <!-- RTD Extra Head -->
+  <link href="./js_files/readthedocs-doc-embed.css" rel="stylesheet" type="text/css"/>
+  <script id="READTHEDOCS_DATA" type="application/json">
+   {"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/doc/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "contributing/javascript", "programming_language": "py", "project": "ckan", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {"ckanext-spatial": "https://docs.ckan.org/projects/ckanext-spatial/en/latest/"}, "theme": "sphinx_rtd_theme", "user_analytics_code": "UA-82993323-1", "version": "2.9"}
+  </script>
+  <!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+  <script type="text/javascript">
+   READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+  </script>
+  <script async="async" src="./js_files/readthedocs-analytics.js.下载" type="text/javascript">
+  </script>
+  <!-- end RTD <extrahead> -->
+  <script async="" id="ethicaladsjs" src="./js_files/ethicalads.min.js.下载" type="text/javascript">
+  </script>
+ </head>
+ <body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+   <nav class="wy-nav-side" data-toggle="wy-nav-shift">
+    <div class="wy-side-scroll">
+     <div class="wy-side-nav-search">
+      <a href="https://docs.ckan.org/en/2.9/contents.html">
+       <img alt="Logo" class="logo" src="./js_files/ckanlogo.webp"/>
+      </a>
+      <div class="version">
+       2.9.11
+      </div>
+      <div role="search">
+       <form action="https://docs.ckan.org/en/2.9/search.html" class="wy-form" id="rtd-search-form" method="get">
+        <input name="q" placeholder="Search docs" type="text"/>
+        <input name="check_keywords" type="hidden" value="yes"/>
+        <input name="area" type="hidden" value="default"/>
+       </form>
+      </div>
+     </div>
+     <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+      <ul class="current">
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/user-guide.html">
+         User guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/sysadmin-guide.html">
+         Sysadmin guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/maintaining/index.html">
+         Maintainer’s guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/api/index.html">
+         API guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/extensions/index.html">
+         Extending guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/theming/index.html">
+         Theming guide
+        </a>
+       </li>
+       <li class="toctree-l1 current">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/index.html">
+         <span class="toctree-expand">
+         </span>
+         Contributing guide
+        </a>
+        <ul class="">
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/issues.html">
+           Reporting issues
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/i18n.html">
+           Translating CKAN
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/test.html">
+           Testing CKAN
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/commit-messages.html">
+           Writing commit messages
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/pull-requests.html">
+           Making a pull request
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/reviewing.html">
+           Reviewing and merging a pull request
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/documentation.html">
+           Writing documentation
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/simple-code-contributions.html">
+           Projects for beginner CKAN developers
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/architecture.html">
+           CKAN code architecture
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/css.html">
+           CSS coding standards
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html">
+           HTML coding standards
+          </a>
+         </li>
+         <li class="toctree-l2 current">
+          <a class="reference internal current" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#">
+           <span class="toctree-expand">
+           </span>
+           JavaScript coding standards
+          </a>
+          <ul>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#formatting">
+             <span class="toctree-expand">
+             </span>
+             Formatting
+            </a>
+            <ul>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#white-space">
+               White space
+              </a>
+             </li>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#quotes">
+               Quotes
+              </a>
+             </li>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#variable-declarations">
+               Variable declarations
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#naming">
+             Naming
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#comments">
+             Comments
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#jshint">
+             JSHint
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#documentation">
+             Documentation
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#testing">
+             Testing
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#best-practices">
+             <span class="toctree-expand">
+             </span>
+             Best practices
+            </a>
+            <ul>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#forms">
+               Forms
+              </a>
+             </li>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#ajax">
+               Ajax
+              </a>
+             </li>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#event-handlers">
+               Event handlers
+              </a>
+             </li>
+             <li class="toctree-l4">
+              <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#templating">
+               Templating
+              </a>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/python.html">
+           Python coding standards
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/string-i18n.html">
+           String internationalization
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/unicode.html">
+           Unicode handling
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/testing.html">
+           Testing coding standards
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/frontend/index.html">
+           Frontend development guidelines
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/database-migrations.html">
+           Database migrations
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/upgrading-dependencies.html">
+           Upgrading CKAN’s dependencies
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/release-process.html">
+           Doing a CKAN release
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/changelog.html">
+         Changelog
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </nav>
+   <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+    <nav aria-label="top navigation" class="wy-nav-top">
+     <i class="fa fa-bars" data-toggle="wy-nav-top">
+     </i>
+     <a href="https://docs.ckan.org/en/2.9/contents.html">
+      CKAN
+     </a>
+    </nav>
+    <div class="wy-nav-content">
+     <div class="rst-content">
+      <div aria-label="breadcrumbs navigation" role="navigation">
+       <ul class="wy-breadcrumbs">
+        <li>
+         <a href="https://docs.ckan.org/en/2.9/contents.html">
+          Docs
+         </a>
+         »
+        </li>
+        <li>
+         <a href="https://docs.ckan.org/en/2.9/contributing/index.html">
+          Contributing guide
+         </a>
+         »
+        </li>
+        <li>
+         JavaScript coding standards
+        </li>
+        <li class="wy-breadcrumbs-aside">
+         <a class="fa fa-github" href="https://github.com/ckan/ckan/blob/2.9/doc/contributing/javascript.rst">
+          Edit on GitHub
+         </a>
+        </li>
+       </ul>
+       <hr/>
+      </div>
+      <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+       <div itemprop="articleBody">
+        <div class="section" id="javascript-coding-standards">
+         <h1>
+          JavaScript coding standards
+          <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#javascript-coding-standards" title="Permalink to this headline">
+           ¶
+          </a>
+         </h1>
+         <div class="admonition seealso">
+          <p class="first admonition-title">
+           See also
+          </p>
+          <dl class="last docutils">
+           <dt>
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/string-i18n.html">
+             <span class="doc">
+              String internationalization
+             </span>
+            </a>
+           </dt>
+           <dd>
+            How to mark strings for translation.
+           </dd>
+          </dl>
+         </div>
+         <div class="section" id="formatting">
+          <h2>
+           Formatting
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#formatting" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           All JavaScript documents must use
+           <strong>
+            two spaces
+           </strong>
+           for indentation. This is
+contrary to the
+           <a class="reference external" href="http://wiki.okfn.org/Coding_Standards#Javascript">
+            OKFN Coding Standards
+           </a>
+           but matches what’s in use in the
+current code base.
+          </p>
+          <p>
+           Coding style must follow the
+           <a class="reference external" href="https://github.com/rwldrn/idiomatic.js/">
+            idiomatic.js
+           </a>
+           style but with the following
+exceptions.
+          </p>
+          <div class="admonition note">
+           <p class="first admonition-title">
+            Note
+           </p>
+           <p class="last">
+            Idiomatic is heavily based upon
+            <a class="reference external" href="http://javascript.crockford.com/code.html">
+             Douglas Crockford’s
+            </a>
+            style
+guide which is recommended by the
+            <a class="reference external" href="http://wiki.okfn.org/Coding_Standards#Javascript">
+             OKFN Coding Standards
+            </a>
+            .
+           </p>
+          </div>
+          <div class="section" id="white-space">
+           <h3>
+            White space
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#white-space" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <p>
+            Two spaces must be used for indentation at all times. Unlike in idiomatic
+whitespace must not be used _inside_ parentheses between the parentheses
+and their Contents.
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="o">//</span> <span class="n">BAD</span><span class="p">:</span> <span class="n">Too</span> <span class="n">much</span> <span class="n">whitespace</span><span class="o">.</span>
+<span class="n">function</span> <span class="n">getUrl</span><span class="p">(</span> <span class="n">full</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">url</span> <span class="o">=</span> <span class="s1">'/styleguide/javascript/'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">full</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'http://okfn.github.com/ckan'</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">url</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">GOOD</span><span class="p">:</span>
+<span class="n">function</span> <span class="n">getUrl</span><span class="p">(</span><span class="n">full</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">url</span> <span class="o">=</span> <span class="s1">'/styleguide/javascript/'</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">full</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'http://okfn.github.com/ckan'</span> <span class="o">+</span> <span class="n">url</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">url</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+            </div>
+           </div>
+           <div class="admonition note">
+            <p class="first admonition-title">
+             Note
+            </p>
+            <p class="last">
+             See section 2.D.1.1 of idiomatic for more examples of this syntax.
+            </p>
+           </div>
+          </div>
+          <div class="section" id="quotes">
+           <h3>
+            Quotes
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#quotes" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <p>
+            Single quotes should be used everywhere unless writing JSON or the string
+contains them. This makes it easier to create strings containing HTML.
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="n">jQuery</span><span class="p">(</span><span class="s1">'&lt;div id="my-div" /&gt;'</span><span class="p">)</span><span class="o">.</span><span class="n">appendTo</span><span class="p">(</span><span class="s1">'body'</span><span class="p">);</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            Object properties need not be quoted unless required by the interpreter.
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="n">var</span> <span class="nb">object</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">name</span><span class="p">:</span> <span class="s1">'bill'</span><span class="p">,</span>
+  <span class="s1">'class'</span><span class="p">:</span> <span class="s1">'user-name'</span>
+<span class="p">};</span>
+</pre>
+            </div>
+           </div>
+          </div>
+          <div class="section" id="variable-declarations">
+           <h3>
+            Variable declarations
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#variable-declarations" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <p>
+            One
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              var
+             </span>
+            </code>
+            statement must be used per variable assignment. These must be
+declared at the top of the function in which they are being used.
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="o">//</span> <span class="n">GOOD</span><span class="p">:</span>
+<span class="n">var</span> <span class="n">good</span> <span class="o">=</span> <span class="s1">'string'</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">alsoGood</span> <span class="o">=</span> <span class="s1">'another'</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">GOOD</span><span class="p">:</span>
+<span class="n">var</span> <span class="n">good</span> <span class="o">=</span> <span class="s1">'string'</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">okay</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">'hmm'</span><span class="p">,</span> <span class="s1">'a bit'</span><span class="p">,</span> <span class="s1">'better'</span>
+<span class="p">];</span>
+
+<span class="o">//</span> <span class="n">BAD</span><span class="p">:</span>
+<span class="n">var</span> <span class="n">good</span> <span class="o">=</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="n">iffy</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">'hmm'</span><span class="p">,</span> <span class="s1">'not'</span><span class="p">,</span> <span class="s1">'great'</span>
+<span class="p">];</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            Declare variables at the top of the function in which they are first used. This
+avoids issues with variable hoisting. If a variable is not assigned a value
+until later in the function then it it okay to define more than one per
+statement.
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="o">//</span> <span class="n">BAD</span><span class="p">:</span> <span class="n">contrived</span> <span class="n">example</span><span class="o">.</span>
+<span class="n">function</span> <span class="n">lowercaseNames</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">name</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="n">names</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">toLowerCase</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="n">var</span> <span class="nb">sorted</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">();</span>
+  <span class="k">return</span> <span class="nb">sorted</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">GOOD</span><span class="p">:</span>
+<span class="n">function</span> <span class="n">lowercaseNames</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="n">var</span> <span class="n">index</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">,</span> <span class="n">name</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="n">names</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">toLowerCase</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="nb">sorted</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">();</span>
+  <span class="k">return</span> <span class="nb">sorted</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="section" id="naming">
+          <h2>
+           Naming
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#naming" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           All properties, functions and methods must use lowercase camelCase:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">var</span> <span class="n">myUsername</span> <span class="o">=</span> <span class="s1">'bill'</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">getSomething</span><span class="p">:</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{}</span>
+<span class="p">};</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Constructor functions must use uppercase CamelCase:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">function</span> <span class="n">DatasetSearchView</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Constants must be uppercase with spaces delimited by underscores:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">var</span> <span class="n">env</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">PRODUCTION</span><span class="p">:</span>  <span class="s1">'production'</span><span class="p">,</span>
+  <span class="n">DEVELOPMENT</span><span class="p">:</span> <span class="s1">'development'</span><span class="p">,</span>
+  <span class="n">TESTING</span><span class="p">:</span>     <span class="s1">'testing'</span>
+<span class="p">};</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Event handlers and callback functions should be prefixed with “on”:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">function</span> <span class="n">onDownloadClick</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="n">jQuery</span><span class="p">(</span><span class="s1">'.download'</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">onDownloadClick</span><span class="p">);</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Boolean variables or methods returning boolean functions should prefix
+the variable name with “is”:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">function</span> <span class="n">isAdmin</span><span class="p">()</span> <span class="p">{}</span>
+
+<span class="n">var</span> <span class="n">canEdit</span> <span class="o">=</span> <span class="n">isUser</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">isAdmin</span><span class="p">();</span>
+</pre>
+           </div>
+          </div>
+          <div class="admonition note">
+           <p class="first admonition-title">
+            Note
+           </p>
+           <p class="last">
+            Alternatives are “has”, “can” and “should” if they make more sense
+           </p>
+          </div>
+          <p>
+           Private methods should be prefixed with an underscore:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">View</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>
+  <span class="s2">"click"</span><span class="p">:</span> <span class="s2">"_onClick"</span><span class="p">,</span>
+  <span class="n">_onClick</span><span class="p">:</span> <span class="n">function</span> <span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Functions should be declared as named functions rather than assigning an
+anonymous function to a variable.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">//</span> <span class="n">GOOD</span><span class="p">:</span>
+<span class="n">function</span> <span class="n">getName</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">BAD</span><span class="p">:</span>
+<span class="n">var</span> <span class="n">getName</span> <span class="o">=</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="p">};</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Named functions are generally easier to debug as they appear named in the
+debugger.
+          </p>
+         </div>
+         <div class="section" id="comments">
+          <h2>
+           Comments
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#comments" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           Comments should be used to explain anything that may be unclear when you return
+to it in six months time. Single line comments should be used for all inline
+comments that do not form part of the documentation.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">//</span> <span class="n">Export</span> <span class="n">the</span> <span class="n">function</span> <span class="n">to</span> <span class="n">either</span> <span class="n">the</span> <span class="n">exports</span> <span class="ow">or</span> <span class="k">global</span> <span class="nb">object</span> <span class="n">depending</span>
+<span class="o">//</span> <span class="n">on</span> <span class="n">the</span> <span class="n">current</span> <span class="n">environment</span><span class="o">.</span> <span class="n">This</span> <span class="n">can</span> <span class="n">be</span> <span class="n">either</span> <span class="n">an</span> <span class="n">AMD</span> <span class="n">module</span><span class="p">,</span> <span class="n">CommonJS</span>
+<span class="o">//</span> <span class="n">module</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">browser</span><span class="o">.</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">typeof</span> <span class="n">module</span><span class="o">.</span><span class="n">define</span> <span class="o">===</span> <span class="s1">'function'</span> <span class="o">&amp;&amp;</span> <span class="n">module</span><span class="o">.</span><span class="n">define</span><span class="o">.</span><span class="n">amd</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">module</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s1">'broadcast'</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Broadcast</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">exports</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">module</span><span class="o">.</span><span class="n">exports</span> <span class="o">=</span> <span class="n">Broadcast</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">module</span><span class="o">.</span><span class="n">Broadcast</span> <span class="o">=</span> <span class="n">Broadcast</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+           </div>
+          </div>
+         </div>
+         <div class="section" id="jshint">
+          <h2>
+           JSHint
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#jshint" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           All JavaScript should pass
+           <a class="reference external" href="http://www.jshint.com/">
+            JSHint
+           </a>
+           before being committed. This can
+be installed using
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             npm
+            </span>
+           </code>
+           (which is bundled with
+           <a class="reference external" href="http://nodejs.org/">
+            node
+           </a>
+           ) by running:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span>$ npm -g install jshint
+</pre>
+           </div>
+          </div>
+          <p>
+           Each project should include a jshint.json file with appropriate configuration
+options for the tool. Most text editors can also be configured to read from
+this file.
+          </p>
+         </div>
+         <div class="section" id="documentation">
+          <h2>
+           Documentation
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#documentation" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           For documentation we use a simple markup format to document all methods. The
+documentation should provide enough information to show the reader what the
+method does, arguments it accepts and a general example of usage. Also
+for API’s and third party libraries, providing links to external documentation
+is encouraged.
+          </p>
+          <p>
+           The formatting is as follows:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">/*</span> <span class="n">My</span> <span class="n">method</span> <span class="n">description</span><span class="o">.</span> <span class="n">Should</span> <span class="n">describe</span> <span class="n">what</span> <span class="n">the</span> <span class="n">method</span> <span class="n">does</span> <span class="ow">and</span> <span class="n">where</span>
+ <span class="o">*</span> <span class="n">it</span> <span class="n">should</span> <span class="n">be</span> <span class="n">used</span><span class="o">.</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">param1</span> <span class="o">-</span> <span class="n">The</span> <span class="n">method</span> <span class="n">params</span><span class="p">,</span> <span class="n">one</span> <span class="n">per</span> <span class="n">line</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">null</span><span class="p">)</span>
+ <span class="o">*</span> <span class="n">param2</span> <span class="o">-</span> <span class="n">A</span> <span class="n">default</span> <span class="n">can</span> <span class="n">be</span> <span class="n">provided</span> <span class="ow">in</span> <span class="n">brackets</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span><span class="o">.</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">Example</span>
+ <span class="o">*</span>
+ <span class="o">*</span>   <span class="o">//</span> <span class="n">Indented</span> <span class="n">two</span> <span class="n">spaces</span><span class="o">.</span> <span class="n">Should</span> <span class="n">give</span> <span class="n">a</span> <span class="n">common</span> <span class="n">example</span> <span class="n">of</span> <span class="n">use</span><span class="o">.</span>
+ <span class="o">*</span>   <span class="n">client</span><span class="o">.</span><span class="n">getTemplate</span><span class="p">(</span><span class="s1">'index.html'</span><span class="p">,</span> <span class="p">{</span><span class="n">limit</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">function</span> <span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="p">{</span>
+ <span class="o">*</span>     <span class="n">module</span><span class="o">.</span><span class="n">el</span><span class="o">.</span><span class="n">html</span><span class="p">(</span><span class="n">html</span><span class="p">);</span>
+ <span class="o">*</span>   <span class="p">});</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">Returns</span> <span class="n">describes</span> <span class="n">what</span> <span class="n">the</span> <span class="nb">object</span> <span class="n">returns</span><span class="o">.</span>
+ <span class="o">*/</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           For example:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">/*</span> <span class="n">Loads</span> <span class="n">an</span> <span class="n">HTML</span> <span class="n">template</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">CKAN</span> <span class="n">snippet</span> <span class="n">API</span> <span class="n">endpoint</span><span class="o">.</span> <span class="n">Template</span>
+ <span class="o">*</span> <span class="n">variables</span> <span class="n">can</span> <span class="n">be</span> <span class="n">passed</span> <span class="n">through</span> <span class="n">the</span> <span class="n">API</span> <span class="n">using</span> <span class="n">the</span> <span class="n">params</span> <span class="nb">object</span><span class="o">.</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">Optional</span> <span class="n">success</span> <span class="ow">and</span> <span class="n">error</span> <span class="n">callbacks</span> <span class="n">can</span> <span class="n">be</span> <span class="n">provided</span> <span class="ow">or</span> <span class="n">these</span> <span class="n">can</span>
+ <span class="o">*</span> <span class="n">be</span> <span class="n">attached</span> <span class="n">using</span> <span class="n">the</span> <span class="n">returns</span> <span class="n">jQuery</span> <span class="n">promise</span> <span class="nb">object</span><span class="o">.</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">filename</span> <span class="o">-</span> <span class="n">The</span> <span class="n">filename</span> <span class="n">of</span> <span class="n">the</span> <span class="n">template</span> <span class="n">to</span> <span class="n">load</span><span class="o">.</span>
+ <span class="o">*</span> <span class="n">params</span>   <span class="o">-</span> <span class="n">An</span> <span class="n">optional</span> <span class="nb">object</span> <span class="n">containing</span> <span class="n">key</span><span class="o">/</span><span class="n">value</span> <span class="n">arguments</span> <span class="n">to</span> <span class="n">be</span>
+ <span class="o">*</span>            <span class="n">passed</span> <span class="n">into</span> <span class="n">the</span> <span class="n">template</span><span class="o">.</span>
+ <span class="o">*</span> <span class="n">success</span>  <span class="o">-</span> <span class="n">An</span> <span class="n">optional</span> <span class="n">success</span> <span class="n">callback</span> <span class="n">to</span> <span class="n">be</span> <span class="n">called</span> <span class="n">on</span> <span class="n">load</span><span class="o">.</span> <span class="n">This</span> <span class="n">will</span>
+ <span class="o">*</span>            <span class="n">recieve</span> <span class="n">the</span> <span class="n">HTML</span> <span class="n">string</span> <span class="k">as</span> <span class="n">the</span> <span class="n">first</span> <span class="n">argument</span><span class="o">.</span>
+ <span class="o">*</span> <span class="n">error</span>    <span class="o">-</span> <span class="n">An</span> <span class="n">optional</span> <span class="n">error</span> <span class="n">callback</span> <span class="n">to</span> <span class="n">be</span> <span class="n">called</span> <span class="k">if</span> <span class="n">the</span> <span class="n">request</span> <span class="n">fails</span><span class="o">.</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">Example</span>
+ <span class="o">*</span>
+ <span class="o">*</span>   <span class="n">client</span><span class="o">.</span><span class="n">getTemplate</span><span class="p">(</span><span class="s1">'index.html'</span><span class="p">,</span> <span class="p">{</span><span class="n">limit</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">function</span> <span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="p">{</span>
+ <span class="o">*</span>     <span class="n">module</span><span class="o">.</span><span class="n">el</span><span class="o">.</span><span class="n">html</span><span class="p">(</span><span class="n">html</span><span class="p">);</span>
+ <span class="o">*</span>   <span class="p">});</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">Returns</span> <span class="n">a</span> <span class="n">jqXHR</span> <span class="n">promise</span> <span class="nb">object</span> <span class="n">that</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">attach</span> <span class="n">callbacks</span><span class="o">.</span>
+ <span class="o">*/</span>
+</pre>
+           </div>
+          </div>
+         </div>
+         <div class="section" id="testing">
+          <h2>
+           Testing
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#testing" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           For testing we use
+           <a class="reference external" href="https://www.cypress.io/">
+            Cypress
+           </a>
+           .
+          </p>
+          <p>
+           Tests are run from the cypress directory. We use the BDD interface
+(
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             describe()
+            </span>
+           </code>
+           ,
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             it()
+            </span>
+           </code>
+           etc.).
+          </p>
+          <p>
+           Generally we try and have the core functionality of all libraries and modules
+unit tested.
+          </p>
+         </div>
+         <div class="section" id="best-practices">
+          <h2>
+           Best practices
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#best-practices" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <div class="section" id="forms">
+           <h3>
+            Forms
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#forms" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <p>
+            All forms should work without JavaScript enabled. This means that they must
+submit
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              application/x-www-form-urlencoded
+             </span>
+            </code>
+            data to the server and receive an
+appropriate response. The server should check for the
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              X-Requested-With:
+             </span>
+             <span class="pre">
+              XMLHTTPRequest
+             </span>
+            </code>
+            header to determine if the request is an ajax one. If so it
+can return an appropriate format, otherwise it should issue a 303 redirect.
+           </p>
+           <p>
+            The one exception to this rule is if a form or button is injected with
+JavaScript after the page has loaded. It’s then not part of the HTML document
+and can submit any data format it pleases.
+           </p>
+          </div>
+          <div class="section" id="ajax">
+           <h3>
+            Ajax
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#ajax" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <div class="admonition note">
+            <p class="first admonition-title">
+             Note
+            </p>
+            <p class="last">
+             Calls to the CKAN API from JavaScript should be done through the
+             <a class="reference external" href="https://docs.ckan.org/en/2.9/contributing/frontend/index.html#client">
+              CKAN client
+             </a>
+             .
+            </p>
+           </div>
+           <p>
+            Ajax requests can be used to improve the experience of submitting forms and
+other actions that require server interactions. Nearly all requests will
+go through the following states.
+           </p>
+           <ol class="arabic simple">
+            <li>
+             User clicks button.
+            </li>
+            <li>
+             JavaScript intercepts the click and disables the button (add
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               disabled
+              </span>
+             </code>
+             attr).
+            </li>
+            <li>
+             A loading indicator is displayed (add class
+             <code class="docutils literal notranslate">
+              <span class="pre">
+               .loading
+              </span>
+             </code>
+             to button).
+            </li>
+            <li>
+             The request is made to the server.
+            </li>
+            <li>
+             <ol class="first loweralpha">
+              <li>
+               On success the interface is updated.
+              </li>
+              <li>
+               On error a message is displayed to the user if there is no other way to
+resolve the issue.
+              </li>
+             </ol>
+            </li>
+            <li>
+             The loading indicator is removed.
+            </li>
+            <li>
+             The button is re-enabled.
+            </li>
+           </ol>
+           <p>
+            Here’s a possible example for submitting a search form using jQuery.
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span>jQuery('#search-form').submit(function (event) {
+  var form = $(this);
+  var button = $('[type=submit]', form);
+
+  // Prevent the browser submitting the form.
+  event.preventDefault();
+
+  button.prop('disabled', true).addClass('loading');
+
+  jQuery.ajax({
+    type: this.method,
+    data: form.serialize(),
+    success: function (results) {
+      updatePageWithResults(results);
+    },
+    error: function () {
+      showSearchError('Sorry we were unable to complete this search');
+    },
+    complete: function () {
+      button.prop('disabled', false).removeClass('loading');
+    }
+  });
+});
+</pre>
+            </div>
+           </div>
+           <p>
+            This covers possible issues that might arise from submitting the form as well
+as providing the user with adequate feedback that the page is doing something.
+Disabling the button prevents the form being submitted twice and the error
+feedback should hopefully offer a solution for the error that occurred.
+           </p>
+          </div>
+          <div class="section" id="event-handlers">
+           <h3>
+            Event handlers
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#event-handlers" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <p>
+            When using event handlers to listen for browser events it’s a common
+requirement to want to cancel the default browser action. This should be
+done by calling the
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              event.preventDefault()
+             </span>
+            </code>
+            method:
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="n">jQuery</span><span class="p">(</span><span class="s1">'button'</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">event</span><span class="o">.</span><span class="n">preventDefault</span><span class="p">();</span>
+<span class="p">});</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            It is also possible to return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              false
+             </span>
+            </code>
+            from the callback function. Avoid doing
+this as it also calls the
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              event.stopPropagation()
+             </span>
+            </code>
+            method which prevents the
+event from bubbling up the DOM tree. This prevents other handlers listening
+for the same event. For example an analytics click handler attached to the
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              &lt;body&gt;
+             </span>
+            </code>
+            element.
+           </p>
+           <p>
+            Also jQuery (1.7+) now provides the
+            <a class="reference external" href="http://api.jquery.com/on/">
+             .on()
+            </a>
+            and
+            <a class="reference external" href="http://api.jquery.com/off/">
+             .off()
+            </a>
+            methods as
+alternatives to
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              .bind()
+             </span>
+            </code>
+            ,
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              .unbind()
+             </span>
+            </code>
+            ,
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              .delegate()
+             </span>
+            </code>
+            and
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              .undelegate()
+             </span>
+            </code>
+            and they should be preferred for all tasks.
+           </p>
+          </div>
+          <div class="section" id="templating">
+           <h3>
+            Templating
+            <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/javascript.html#templating" title="Permalink to this headline">
+             ¶
+            </a>
+           </h3>
+           <p>
+            Small templates that will not require customisation by the instance can be
+placed inline. If you need to create multi-line templates use an array rather
+than escaping newlines within a string:
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="n">var</span> <span class="n">template</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">'&lt;li&gt;'</span><span class="p">,</span>
+  <span class="s1">'&lt;span&gt;&lt;/span&gt;'</span><span class="p">,</span>
+  <span class="s1">'&lt;/li&gt;'</span>
+<span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            Always
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/string-i18n.html#javascript-i18n">
+             <span class="std std-ref">
+              localise text strings
+             </span>
+            </a>
+            within your template. If
+you are including them inline this can be done with jQuery:
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="n">jQuery</span><span class="p">(</span><span class="n">template</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'span'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">_</span><span class="p">(</span><span class="s1">'This is my text string'</span><span class="p">));</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            Larger templates can be loaded in using the CKAN snippet API. Modules get
+access to this functionality via the
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              sandbox.client
+             </span>
+            </code>
+            object:
+           </p>
+           <div class="highlight-default notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="n">initialize</span><span class="p">:</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="n">var</span> <span class="n">el</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">el</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">sandbox</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">getTemplate</span><span class="p">(</span><span class="s1">'dataset.html'</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">html</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">el</span><span class="o">.</span><span class="n">html</span><span class="p">(</span><span class="n">html</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            The primary benefits of this is that the localisation can be done by the server
+and it keeps the JavaScript modules free from large strings.
+           </p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <footer>
+       <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+        <a class="btn btn-neutral float-right" href="https://docs.ckan.org/en/2.9/contributing/python.html" title="Python coding standards">
+         Next
+         <span class="icon fa-arrow-circle-right">
+         </span>
+        </a>
+        <a class="btn btn-neutral" href="https://docs.ckan.org/en/2.9/contributing/html.html" title="HTML coding standards">
+         <span class="icon fa-arrow-circle-left">
+         </span>
+         Previous
+        </a>
+       </div>
+       <hr/>
+       <div>
+        <div class="ethical-rtd" data-ea-manual="true" data-ea-publisher="readthedocs" data-ea-style="stickybox" data-ea-type="image" id="rtd-sidebar">
+        </div>
+       </div>
+       <p>
+        Support the
+        <a href="http://ckan.org/">
+         CKAN Association
+        </a>
+        .
+       </p>
+       <p class="copyright">
+        © 2009-2018
+        <a href="https://okfn.org/">
+         Open Knowledge Foundation
+        </a>
+        and
+        <a href="https://github.com/ckan/ckan/graphs/contributors">
+         contributors
+        </a>
+        .
+    Licensed under
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">
+         Creative Commons
+    Attribution ShareAlike (Unported) v3.0 License
+        </a>
+        .
+        <br/>
+        <img alt="CC License Logo" src="./js_files/80x15.png"/>
+        <a href="https://opendefinition.org/">
+         <img alt="{{ _('Open Content') }}" border="0" src="./js_files/oc_80x15_blue.png"/>
+        </a>
+       </p>
+       <p>
+        <a href="https://github.com/ckan/ckan">
+         Source
+        </a>
+        —
+        <a href="https://github.com/ckan/ckan/issues">
+         Issues
+        </a>
+        —
+        <a href="http://lists.okfn.org/mailman/listinfo/ckan-dev">
+         Mailing List
+        </a>
+        —
+        <a href="http://twitter.com/CKANProject">
+         Twitter @CKANProject
+        </a>
+       </p>
+       <p>
+        Related Projects:
+        <a href="http://datacatalogs.org/">
+         DataCatalogs.org
+        </a>
+        —
+        <a href="http://openspending.org/">
+         OpenSpending.org
+        </a>
+        —
+        <a href="http://opendatahandbook.org/">
+         Open Data Handbook
+        </a>
+       </p>
+       <a href="https://github.com/snide/sphinx_rtd_theme">
+        Sphinx theme
+       </a>
+       provided by
+       <a href="https://readthedocs.org/">
+        Read the Docs
+       </a>
+      </footer>
+     </div>
+    </div>
+   </section>
+  </div>
+  <div aria-label="versions" class="rst-versions" data-toggle="rst-versions" role="note">
+   <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book">
+     Read the Docs
+    </span>
+    v: 2.9
+    <span class="fa fa-caret-down">
+    </span>
+   </span>
+   <div class="rst-other-versions">
+    <!-- Inserted RTD Footer -->
+    <div class="injected">
+     <dl>
+      <dt>
+       版本
+      </dt>
+      <dd>
+       <a href="https://docs.ckan.org/en/latest/contributing/javascript.html">
+        latest
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.10/contributing/javascript.html">
+        2.10
+       </a>
+      </dd>
+      <dd class="rtd-current-item">
+       <a href="https://docs.ckan.org/en/2.9/contributing/javascript.html">
+        2.9
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.8/contributing/javascript.html">
+        2.8
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.7/contributing/javascript.html">
+        2.7
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.6/contributing/javascript.html">
+        2.6
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.5/contributing/javascript.html">
+        2.5
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.4.9/contributing/javascript.html">
+        ckan-2.4.9
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.3.5/contributing/javascript.html">
+        ckan-2.3.5
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.2.3/contributing/javascript.html">
+        ckan-2.2.3
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.1.5/contributing/javascript.html">
+        ckan-2.1.5
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       下载
+      </dt>
+      <dd>
+       <a href="https://docs.ckan.org/_/downloads/en/2.9/pdf/">
+        PDF
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/_/downloads/en/2.9/htmlzip/">
+        HTML
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/_/downloads/en/2.9/epub/">
+        Epub
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <!-- These are kept as relative links for internal installs that are http -->
+      <dt>
+       在 Read the Docs 上
+      </dt>
+      <dd>
+       <a href="https://readthedocs.org/projects/ckan/">
+        项目主页
+       </a>
+      </dd>
+      <dd>
+       <a href="https://readthedocs.org/projects/ckan/builds/">
+        构建
+       </a>
+      </dd>
+      <dd>
+       <a href="https://readthedocs.org/projects/ckan/downloads/">
+        下载
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       在 GitHub 上
+      </dt>
+      <dd>
+       <a href="https://github.com/ckan/ckan/blob/2.9/doc/contributing/javascript.rst">
+        查看
+       </a>
+      </dd>
+      <dd>
+       <a href="https://github.com/ckan/ckan/edit/2.9/doc/contributing/javascript.rst">
+        编辑
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       搜索
+      </dt>
+      <dd>
+       <div style="padding: 6px;">
+        <form action="https://readthedocs.org/projects/ckan/search/" class="wy-form" id="flyout-search-form" method="get" target="_blank">
+         <input aria-label="搜索文档" name="q" placeholder="搜索文档" type="text"/>
+        </form>
+       </div>
+      </dd>
+     </dl>
+     <hr/>
+     <small>
+      <span>
+       托管于
+       <a href="https://readthedocs.org/">
+        Read the Docs
+       </a>
+      </span>
+      <span>
+       ·
+      </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">
+       隐私政策
+      </a>
+     </small>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ </body>
+</html>

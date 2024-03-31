@@ -1,0 +1,41 @@
+title,belongs to,description,example,appendix
+Avoid using shell scripts,Avoid using shell scripts,"caution 
+This is a must-read section.
+Having said all of the above, we recommend staying away from shell scripts as much as possible. A language like Ruby or Python (if required for consistency with codebases that we leverage) is almost always a better choice. The high-level interpreted languages have more readable syntax, offer much more mature capabilities for unit-testing, linting, and error reporting.
+Use shell scripts only if there’s a strong restriction on project’s dependencies size or any other requirements that are more important in a particular case.",,
+Scope of this guide,Scope of this guide,"According to the GitLab installation requirements , this guide covers only those shells that are used by supported Linux distributions , that is:
+POSIX Shell 
+Bash",,
+Shell language choice,Shell language choice,"When you need to reduce the dependencies list, use what’s provided by the environment. For example, for Docker images it’s `sh` from `alpine` which is the base image for most of our tool images. 
+Everywhere else, use `bash` if possible. It’s more powerful than `sh` but still a widespread shell.",,
+Code style and format,Code style and format,"This section describes the tools that should be made a mandatory part of a project’s CI pipeline if it contains shell scripts. These tools automate shell code formatting, checking for errors or vulnerabilities, etc.",,
+Linting,Code style and format/Linting,"We’re using the ShellCheck utility in its default configuration to lint our shell scripts.
+All projects with shell scripts should use this GitLab CI/CD job:","shell check:
+  image: koalaman/shellcheck-alpine:stable
+  stage: test
+  before_script:
+    - shellcheck --version
+  script:
+    - shellcheck scripts/**/*.sh  # path to your shell scripts
+","note 
+By default, ShellCheck uses the shell detection to determine the shell dialect in use. If the shell file is out of your control and ShellCheck cannot detect the dialect, use `-s` flag to specify it: `-ssh` or `-sbash` ."
+Formatting,Code style and format/Formatting,"It’s recommended to use the shfmt tool to maintain consistent formatting. We format shell scripts according to the Google Shell Style Guide , so the following `shfmt` invocation should be applied to the project’s script files:","shfmt -i 2 -ci -w scripts/**/*.sh
+",
+Formatting,Code style and format/Formatting,"In addition to the Linting GitLab CI/CD job, all projects with shell scripts should also use this job:","shfmt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -d scripts  # path to your shell scripts
+","note 
+By default, shfmt uses the shell detection similar to one of ShellCheck and ignore files starting with a period. To override this, use `-ln` flag to specify the shell dialect: `-lnposix` or `-lnbash` ."
+Testing,Testing,"note 
+This is a work in progress.
+It is an ongoing effort to evaluate different tools for the automated testing of shell scripts (like BATS ).",,
+Code Review,Code Review,"The code review should be performed according to:
+ShellCheck Checks list 
+Google Shell Style Guide 
+Shfmt formatting caveats
+However, the recommended course of action is to use the aforementioned tools and address reported offenses. This should eliminate the need for code review.
+Return to Development documentation .",,

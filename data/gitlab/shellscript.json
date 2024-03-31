@@ -1,0 +1,87 @@
+[
+    {
+        "title": "Avoid using shell scripts",
+        "belongs to": "Avoid using shell scripts",
+        "cases": [
+            {
+                "description": "caution \nThis is a must-read section.\nHaving said all of the above, we recommend staying away from shell scripts as much as possible. A language like Ruby or Python (if required for consistency with codebases that we leverage) is almost always a better choice. The high-level interpreted languages have more readable syntax, offer much more mature capabilities for unit-testing, linting, and error reporting.\nUse shell scripts only if there’s a strong restriction on project’s dependencies size or any other requirements that are more important in a particular case."
+            }
+        ]
+    },
+    {
+        "title": "Scope of this guide",
+        "belongs to": "Scope of this guide",
+        "cases": [
+            {
+                "description": "According to the GitLab installation requirements , this guide covers only those shells that are used by supported Linux distributions , that is:\nPOSIX Shell \nBash"
+            }
+        ]
+    },
+    {
+        "title": "Shell language choice",
+        "belongs to": "Shell language choice",
+        "cases": [
+            {
+                "description": "When you need to reduce the dependencies list, use what’s provided by the environment. For example, for Docker images it’s `sh` from `alpine` which is the base image for most of our tool images. \nEverywhere else, use `bash` if possible. It’s more powerful than `sh` but still a widespread shell."
+            }
+        ]
+    },
+    {
+        "title": "Code style and format",
+        "belongs to": "Code style and format",
+        "cases": [
+            {
+                "description": "This section describes the tools that should be made a mandatory part of a project’s CI pipeline if it contains shell scripts. These tools automate shell code formatting, checking for errors or vulnerabilities, etc."
+            }
+        ]
+    },
+    {
+        "title": "Linting",
+        "belongs to": "Code style and format/Linting",
+        "cases": [
+            {
+                "description": "We’re using the ShellCheck utility in its default configuration to lint our shell scripts.\nAll projects with shell scripts should use this GitLab CI/CD job:",
+                "example": "shell check:\n  image: koalaman/shellcheck-alpine:stable\n  stage: test\n  before_script:\n    - shellcheck --version\n  script:\n    - shellcheck scripts/**/*.sh  # path to your shell scripts\n",
+                "appendix": "note \nBy default, ShellCheck uses the shell detection to determine the shell dialect in use. If the shell file is out of your control and ShellCheck cannot detect the dialect, use `-s` flag to specify it: `-ssh` or `-sbash` ."
+            }
+        ]
+    },
+    {
+        "title": "Formatting",
+        "belongs to": "Code style and format/Formatting",
+        "cases": [
+            {
+                "description": "It’s recommended to use the shfmt tool to maintain consistent formatting. We format shell scripts according to the Google Shell Style Guide , so the following `shfmt` invocation should be applied to the project’s script files:",
+                "example": "shfmt -i 2 -ci -w scripts/**/*.sh\n"
+            },
+            {
+                "description": "In addition to the Linting GitLab CI/CD job, all projects with shell scripts should also use this job:",
+                "example": "shfmt:\n  image: mvdan/shfmt:v3.2.0-alpine\n  stage: test\n  before_script:\n    - shfmt -version\n  script:\n    - shfmt -i 2 -ci -d scripts  # path to your shell scripts\n",
+                "appendix": "note \nBy default, shfmt uses the shell detection similar to one of ShellCheck and ignore files starting with a period. To override this, use `-ln` flag to specify the shell dialect: `-lnposix` or `-lnbash` ."
+            }
+        ]
+    },
+    {
+        "title": "Testing",
+        "belongs to": "Testing",
+        "cases": [
+            {
+                "description": "note \nThis is a work in progress.\nIt is an ongoing effort to evaluate different tools for the automated testing of shell scripts (like BATS )."
+            }
+        ]
+    },
+    {
+        "title": "Code Review",
+        "belongs to": "Code Review",
+        "cases": [
+            {
+                "description": "The code review should be performed according to:\nShellCheck Checks list \nGoogle Shell Style Guide \nShfmt formatting caveats\nHowever, the recommended course of action is to use the aforementioned tools and address reported offenses. This should eliminate the need for code review.\nReturn to Development documentation ."
+            }
+        ]
+    },
+    {
+        "title": "Privacy Preference Center",
+        "belongs to": "Privacy Preference Center",
+        "cases": []
+    }
+]
