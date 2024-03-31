@@ -5,7 +5,8 @@ import json
 import os
 import shutil
 import requests
-
+#csv处理包
+import csv
 titles = ["h1", "h2", "h3", "h4", "h5", "h6", "h7"]
 
 
@@ -137,7 +138,6 @@ def save_example(parents, nodes, data: list):
     current["cases"] = merged
     data.append(current)
 
-
 def parse_html(file: str, output_path, root_level="h2"):
     # 解析html文件
     with open(file, "r", encoding="utf-8") as f:
@@ -168,14 +168,22 @@ def parse_html(file: str, output_path, root_level="h2"):
             if len(current_data) > 0:
                 save_example(parents, current_data, data)
         # data作为 json 存储
-        fname = file.replace(".html", ".json").split(os.sep)[-1]
-        with open(os.path.join(output_path,fname), "w", encoding="utf-8") as fp:
+        json_name = file.replace(".html", ".json").split(os.sep)[-1]
+        with open(os.path.join(output_path,json_name), "w", encoding="utf-8") as fp:
             print(f"writing {file.replace('.html','.json')}")
             json.dump(data, fp, ensure_ascii=False, indent=4)
+        # data作为 csv 存储
+        csv_name = file.replace(".html", ".csv").split(os.sep)[-1]
+        with open(os.path.join(output_path,csv_name), "w", encoding="utf-8", newline="") as fp:
+            print(f"writing {file.replace('.html','.csv')}")
+            writer = csv.writer(fp)
+            writer.writerow(["title", "belongs to", "description", "example", "appendix"])
+            for d in data:
+                for c in d["cases"]:
+                    writer.writerow([d["title"], d["belongs to"], c.get("description", ""), c.get("example", ""), c.get("appendix", "")])
         # 将原始html文件存储到output_path
         with open(os.path.join(output_path, file.split(os.sep)[-1]), "w", encoding="utf-8") as fp:
             fp.write(soup.prettify())
-
 
 def dfs_collect_content(node: Tag, data: list):
     if type(node) is not Tag:
