@@ -8,7 +8,7 @@ parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
 # Append the parent directory to sys.path
 sys.path.append(parent_dir)
 import util
-import github_util
+import code.github_util as github_util
 '''
 4. Clone project based on filtered projects
 '''
@@ -48,10 +48,14 @@ def clone_repo(pro_root, repo_info_items):
         print("exist count: ", exist_count, len(repo_list), len(set(repo_list)))  # 850,1000
 
 if __name__ == '__main__':
-    language ='javaScript'#'java'#'python' # 'javaScript'#
-    repo_data=util.load_json(util.data_root, language+ "_repo_metadata_sample")
-    pro_root = util.data_root + language+"repos/"
-    clone_repo(pro_root, repo_data[:100])
+    language ="javaScript"#'java'#'python' # 'javaScript'#
+    data_root = "c:\\users\\shuli\\workspace\\KodStand\\data"
+    for l in ["java","python"]:
+
+        file_name = os.path.join(data_root, l + "_repo_metadata_sample")
+        repo_data=util.load_json(file_name,"")
+        pro_root = os.path.join(data_root, l + "repos/")
+        clone_repo(pro_root, repo_data[:100])
     pass
 # while i < len(self.__op):
 #     if self.__op[i] == command[0:6] and self.__op[i] != '000000':
