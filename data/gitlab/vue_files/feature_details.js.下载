@@ -1,1 +1,0 @@
-!function(){"use strict";document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".admonition-wrapper.details").forEach((function(n){n.querySelectorAll("strong").forEach((function(n,e){e>0&&n.insertAdjacentHTML("beforebegin","<br>")})),n.nextElementSibling.classList.contains("introduced-in")||n.classList.add("gl-mb-5")}))}))}();

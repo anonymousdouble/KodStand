@@ -9,9 +9,9 @@ def crawl_page(url, start_url, depth, visited, max_depth, dir):
         return
     if url in visited:
         return
-    tmp_url = url.removeprefix(start_url)
-    tmp_url.strip()
+    tmp_url = url.removeprefix(start_url).strip()
     if tmp_url != "" and not ("#" in tmp_url):
+    # if tmp_url != "":
         tmp_url = tmp_url.replace("/", "_")
         path = os.path.join(dir, tmp_url)
         if not url.endswith(".html") and not url.endswith(".xml"):
@@ -26,7 +26,11 @@ def crawl_page(url, start_url, depth, visited, max_depth, dir):
             soup = BeautifulSoup(response.text, "html.parser")
             for link in soup.find_all("a"):
                 next_url = link.get("href")
+                # next_url 可能是相对路径
+                rt = "https://www.oracle.com"
+                next_url = rt + next_url
                 if next_url and start_url in next_url:
+                    print(next_url)
                     crawl_page(next_url, start_url, depth + 1, visited, max_depth, dir)
     except Exception as e:
         print("Error crawling:", url)
@@ -34,11 +38,12 @@ def crawl_page(url, start_url, depth, visited, max_depth, dir):
 
 
 if __name__ == "__main__":
-    start_url = "https://google.github.io/styleguide/go"
-    tmp_url = "https://google.github.io/styleguide/go"
+    # https://airbnb.io/javascript/
+    start_url = "https://www.oracle.com/java/technologies/javase/codeconventions-contents.html"
+    tmp_url = "https://www.oracle.com/java/technologies/javase"
     max_depth = 10
     visited = set()
     dir = "data/input/next"
     shutil.rmtree(dir, ignore_errors=True)
     os.makedirs(dir, exist_ok=True)
-    crawl_page(start_url, start_url, 0, visited, max_depth, dir)
+    crawl_page(start_url, tmp_url, 0, visited, max_depth, dir)

@@ -8,7 +8,7 @@ import requests
 #csv处理包
 import csv
 titles = ["h1", "h2", "h3", "h4", "h5", "h6", "h7"]
-
+escapes = ["\\nCopy"]
 
 def crawl_page(url, start_url, depth, visited, max_depth, dir):
     if depth > max_depth:
@@ -221,10 +221,17 @@ def extract_and_parse(input_path, output_path):
                 parse_html(os.path.join(root, file), output_path)
 
 if __name__ == "__main__":
-    google = "data/google"
-    ckan = "data/ckan"
-    gitlab = "data/gitlab"
-    extract_and_parse(google, google)
-    extract_and_parse(ckan, ckan)
-    extract_and_parse(gitlab, gitlab)
+
+    # google = "data/google"
+    # ckan = "data/ckan"
+    # gitlab = "data/gitlab"
+    # extract_and_parse(google, google)
+    # extract_and_parse(ckan, ckan)
+    # extract_and_parse(gitlab, gitlab)
+
+    # airbnb = "data/airbnb"
+    # extract_and_parse(airbnb, airbnb)
+
+    oracle = "data/oracle"
+    extract_and_parse(oracle, oracle)
     #? 为什么有的json中会有' '字符 \u00a0
