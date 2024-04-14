@@ -5,9 +5,11 @@ import json
 import os
 import shutil
 import requests
-#csv处理包
 import csv
+
 titles = ["h1", "h2", "h3", "h4", "h5", "h6", "h7"]
+
+# 某些界面会有垃圾字符...
 escapes = ["\\nCopy"]
 
 def crawl_page(url, start_url, depth, visited, max_depth, dir):
@@ -78,12 +80,16 @@ def save_example(parents, nodes, data: list):
                 if cur_case.get("description") is not None:
                     cur_case["description"] = re.sub('[ ]+',' ',cur_case["description"].strip(" \n"))
                     cur_case["description"] = re.sub('[\n]+','\n',cur_case["description"])
+                    for escape in escapes:
+                        cur_case["description"] = cur_case["description"].strip(escape)
                 cur_case["example"] = dat
                 cur_node_buf.append(cur_case)
                 cur_case = {}
         if cur_case.get("description") is not None and cur_case.get("example") is None:
             cur_case["description"] = re.sub('[ ]+',' ',cur_case["description"].strip(" \n"))
             cur_case["description"] = re.sub('[\n]+','\n',cur_case["description"])
+            for escape in escapes:
+                cur_case["description"] = cur_case["description"].strip(escape)
             if cur_case.get("description")!="":
                 
                 if len(cur_node_buf) > 0:
@@ -221,17 +227,20 @@ def extract_and_parse(input_path, output_path):
                 parse_html(os.path.join(root, file), output_path)
 
 if __name__ == "__main__":
-
+    in_root = "C:\\Users\\shuli\\workspace\\codestandard_data"
     # google = "data/google"
     # ckan = "data/ckan"
     # gitlab = "data/gitlab"
-    # extract_and_parse(google, google)
-    # extract_and_parse(ckan, ckan)
-    # extract_and_parse(gitlab, gitlab)
+    # extract_and_parse(os.path.join(in_root,google), google)
+    # extract_and_parse(os.path.join(in_root,ckan), ckan)
+    # extract_and_parse(os.path.join(in_root,gitlab), gitlab)
 
     # airbnb = "data/airbnb"
-    # extract_and_parse(airbnb, airbnb)
+    # extract_and_parse(os.path.join(in_root,airbnb), airbnb)
 
-    oracle = "data/oracle"
-    extract_and_parse(oracle, oracle)
+    # oracle = "data/oracle"
+    # extract_and_parse(os.path.join(in_root,oracle), oracle)
+
+    pep8 = "data/pep8"
+    extract_and_parse(os.path.join(in_root,pep8), pep8)
     #? 为什么有的json中会有' '字符 \u00a0
