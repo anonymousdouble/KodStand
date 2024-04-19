@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Code Conventions for the Java Programming Language",
+        "belongs to": "Code Conventions for the Java Programming Language",
+        "cases": []
+    },
+    {
+        "title": "1 - Introduction",
+        "belongs to": "Code Conventions for the Java Programming Language/1 - Introduction",
+        "cases": []
+    },
+    {
+        "title": "1.1 Why Have Code Conventions",
+        "belongs to": "Code Conventions for the Java Programming Language/1.1 Why Have Code Conventions",
+        "cases": [
+            {
+                "description": "Code conventions are important to programmers for a number of reasons:\n80% of the lifetime cost of a piece of software goes to maintenance. \nHardly any software is maintained for its whole life by the original author. \nCode conventions improve the readability of the software, allowing engineers to understand new code more quickly and thoroughly. \nIf you ship your source code as a product, you need to make sure it is as well packaged and clean as any other product you create."
+            }
+        ]
+    },
+    {
+        "title": "1.2 Acknowledgments",
+        "belongs to": "Code Conventions for the Java Programming Language/1.2 Acknowledgments",
+        "cases": [
+            {
+                "description": "This document reflects the Java language coding standards presented in the \nJava Language Specification \n, from Sun Microsystems, Inc. Major contributions are from Peter King, Patrick Naughton, Mike DeMoney, Jonni Kanerva, Kathy Walrath, and Scott Hommel.\n  \n1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10 \n11 \n "
+            }
+        ]
+    }
+]

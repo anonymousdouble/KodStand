@@ -1,0 +1,84 @@
+[
+    {
+        "title": "Installation",
+        "belongs to": "Installation",
+        "cases": [
+            {
+                "description": "There are several ways of installing Python on your system. To be able to use the same version we use in production, we suggest you use pyenv . It works and behaves similarly to its counterpart in the Ruby world: rbenv ."
+            }
+        ]
+    },
+    {
+        "title": "macOS",
+        "belongs to": "Installation/macOS",
+        "cases": [
+            {
+                "description": "To install `pyenv` on macOS, you can use Homebrew with:",
+                "example": "brew install pyenv\n"
+            }
+        ]
+    },
+    {
+        "title": "Windows",
+        "belongs to": "Installation/Windows",
+        "cases": [
+            {
+                "description": "`pyenv` does not officially support Windows and does not work in Windows outside the Windows Subsystem for Linux. If you are a Windows user, you can use `pyenv-win` .\nTo install `pyenv-win` on Windows, run the following PowerShell command:",
+                "example": "Invoke-WebRequest -UseBasicParsing -Uri \"https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1\" -OutFile \"./install-pyenv-win.ps1\"; &\"./install-pyenv-win.ps1\"\n",
+                "appendix": "Learn more about\n \n pyenv-win ."
+            }
+        ]
+    },
+    {
+        "title": "Linux",
+        "belongs to": "Installation/Linux",
+        "cases": [
+            {
+                "description": "To install `pyenv` on Linux, you can run the command below:",
+                "example": "curl \"https://pyenv.run\" | bash\n",
+                "appendix": "Alternatively, you may find `pyenv` available as a system package via your distribution’s package manager.\nYou can read more about it in the\n \n pyenv\n \n prerequisites ."
+            }
+        ]
+    },
+    {
+        "title": "Shell integration",
+        "belongs to": "Installation/Shell integration",
+        "cases": [
+            {
+                "description": "`Pyenv` installation adds required changes to Bash. If you use a different shell, check for any additional steps required for it.\nFor Fish, you can install a plugin for Fisher :",
+                "example": "fisher add fisherman/pyenv\n"
+            },
+            {
+                "description": "Or for Oh My Fish :",
+                "example": "omf install pyenv\n"
+            }
+        ]
+    },
+    {
+        "title": "Dependency management",
+        "belongs to": "Dependency management",
+        "cases": [
+            {
+                "description": "While GitLab doesn’t directly contain any Python scripts, because we depend on Python to render reStructuredText markup, we need to keep track on dependencies on the main project level, so we can run that on our development machines.\nRecently, an equivalent to the `Gemfile` and the Bundler project has been introduced to Python: `Pipfile` and Pipenv .\nA `Pipfile` with the dependencies now exists in the root folder. To install them, run:",
+                "example": "pipenv install\n",
+                "appendix": "Running this command installs both the required Python version as well as required pip dependencies."
+            }
+        ]
+    },
+    {
+        "title": "Use instructions",
+        "belongs to": "Use instructions",
+        "cases": [
+            {
+                "description": "To run any Python code under the Pipenv environment, you need to first start a `virtualenv` based on the dependencies of the application. With Pipenv, this is a simple as running:",
+                "example": "pipenv shell\n",
+                "appendix": "After running that command, you can run GitLab on the same shell and it uses the Python and dependencies installed from the `pipenvinstall` command."
+            }
+        ]
+    },
+    {
+        "title": "Privacy Preference Center",
+        "belongs to": "Privacy Preference Center",
+        "cases": []
+    }
+]

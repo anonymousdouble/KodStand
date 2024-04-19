@@ -5,7 +5,10 @@
 /httpRequests/
 # Datasource local storage ignored files
 /dataSources/
-/data
+/data/repo
+/data/result
 /dataSources.local.xml
 *.pyc
+*/.pyc
 .DS_Store
+*/.DS_Store

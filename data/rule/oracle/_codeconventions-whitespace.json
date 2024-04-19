@@ -1,0 +1,35 @@
+[
+    {
+        "title": "8 - White Space",
+        "belongs to": "8 - White Space",
+        "cases": []
+    },
+    {
+        "title": "8.1 Blank Lines",
+        "belongs to": "8 - White Space/8.1 Blank Lines",
+        "cases": [
+            {
+                "description": "Blank lines improve readability by setting off sections of code that are logically related.\nTwo blank lines should always be used in the following circumstances:\nBetween sections of a source file \nBetween class and interface definitions\nOne blank line should always be used in the following circumstances:\nBetween methods \nBetween the local variables in a method and its first statement \nBefore a block (see section 5.1.1) or single-line (see section 5.1.2) comment \nBetween logical sections inside a method to improve readabilit"
+            }
+        ]
+    },
+    {
+        "title": "8.2 Blank Spaces",
+        "belongs to": "8 - White Space/8.2 Blank Spaces",
+        "cases": [
+            {
+                "description": "Blank spaces should be used in the following circumstances:\nA keyword followed by a parenthesis should be separated by a space. Example:",
+                "example": "\n\n        while (true) {\n           ...\n       }\n\n"
+            },
+            {
+                "description": "Note that a blank space should not be used between a method name and its opening parenthesis. This helps to distinguish keywords from method calls.\nA blank space should appear after commas in argument lists. \nAll binary operators except `.` should be separated from their operands by spaces. Blank spaces should never separate unary operators such as unary minus, increment (\"++\"), and decrement (\"--\") from their operands. Example:",
+                "example": "\n\n    a += c + d;\n    a = (a + b) / (c * d);\n    \n    while (d++ = s++) {\n        n++;\n    }\n    printSize(\"size is \" + foo + \"\\n\");\n\n"
+            },
+            {
+                "description": "The expressions in a `for` statement should be separated by blank spaces. Example:\nfor (expr1; expr2; expr3)\nasts should be followed by a blank space. Examples:",
+                "example": "\n\nmyMethod((byte) aNum, (Object) x);\nmyMethod((int) (cp + 5), ((int) (i + 3)) \n                                  + 1);\n",
+                "appendix": "1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10 \n11"
+            }
+        ]
+    }
+]

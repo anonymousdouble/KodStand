@@ -1,0 +1,17 @@
+[
+    {
+        "title": "11 - Code Examples",
+        "belongs to": "11 - Code Examples",
+        "cases": []
+    },
+    {
+        "title": "11.1 Java Source File Example",
+        "belongs to": "11 - Code Examples/11.1 Java Source File Example",
+        "cases": [
+            {
+                "description": "The following example shows how to format a Java source file containing a single public class. Interfaces are formatted similarly. For more information, see \"Class and Interface Declarations\" on page 4 and \"Documentation Comments\" on page 9",
+                "example": "\n\n/*\n * @(#)Blah.java        1.82 99/03/18\n *\n * Copyright (c) 1994-1999 Sun Microsystems, Inc.\n * 901 San Antonio Road, Palo Alto, California, 94303, U.S.A.\n * All rights reserved.\n *\n * This software is the confidential and proprietary information of Sun\n * Microsystems, Inc. (\"Confidential Information\").  You shall not\n * disclose such Confidential Information and shall use it only in\n * accordance with the terms of the license agreement you entered into\n * with Sun.\n */\n\n\npackage java.blah;\n\nimport java.blah.blahdy.BlahBlah;\n\n/**\n *  \n        Class description goes here.\n *\n * @version      \n        1.82 18 Mar 1999  * @author          \n        Firstname Lastname  */\npublic class Blah extends SomeClass {\n  \n           /* A class implementation comment can go here. */ \n    /**  \n        classVar1 documentation comment */\n    public static int classVar1;\n\n    /** \n  \n            *  \n        classVar2 documentation comment that happens to be      *  \n        more than one line long      */\n    private static Object classVar2;\n\n    /**  \n        instanceVar1 documentation comment */\n    public Object instanceVar1;\n\n    /**  \n        instanceVar2 documentation comment */\n    protected int instanceVar2;\n\n    /**  \n        instanceVar3 documentation comment */\n    private Object[] instanceVar3;\n\n    /** \n     * ...\n        constructor Blah documentation comment...      */\n    public Blah() {\n  \n              // ...implementation goes here...     }\n\n    /**\n     * ...\n        method doSomething documentation comment...      */\n    public void doSomething() {\n  \n               // ...implementation goes here...      }\n\n    /**\n     * ...method doSomethingElse  \n        documentation comment...      * @param someParam  \n        description      */\n    public void doSomethingElse(Object someParam) {\n  \n               // ...implementation goes here...      }\n}\n\n"
+            }
+        ]
+    }
+]

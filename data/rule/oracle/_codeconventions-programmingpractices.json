@@ -1,0 +1,84 @@
+[
+    {
+        "title": "10 - Programming Practices",
+        "belongs to": "10 - Programming Practices",
+        "cases": []
+    },
+    {
+        "title": "10.1 Providing Access to Instance and Class Variables",
+        "belongs to": "10 - Programming Practices/10.1 Providing Access to Instance and Class Variables",
+        "cases": [
+            {
+                "description": "Don't make any instance or class variable public without good reason. Often, instance variables don't need to be explicitly set or gotten-often that happens as a side effect of method calls.\nOne example of appropriate public instance variables is the case where the class is essentially a data structure, with no behavior. In other words, if you would have used a `struct` instead of a class (if Java supported `struct)` , then it's appropriate to make the class's instance variables public."
+            }
+        ]
+    },
+    {
+        "title": "10.2 Referring to Class Variables and Methods",
+        "belongs to": "10 - Programming Practices/10.2 Referring to Class Variables and Methods",
+        "cases": [
+            {
+                "description": "Avoid using an object to access a class (static) variable or method. Use a class name instead. For example:",
+                "example": "\n\nclassMethod();             //OK\nAClass.classMethod();      //OK\nanObject.classMethod();    //AVOID!\n"
+            }
+        ]
+    },
+    {
+        "title": "10.3 Constants",
+        "belongs to": "10 - Programming Practices/10.3 Constants",
+        "cases": [
+            {
+                "description": "Numerical constants (literals) should not be coded directly, except for -1, 0, and 1, which can appear in a `for` loop as counter values."
+            }
+        ]
+    },
+    {
+        "title": "10.4 Variable Assignments",
+        "belongs to": "10 - Programming Practices/10.4 Variable Assignments",
+        "cases": [
+            {
+                "description": "Avoid assigning several variables to the same value in a single statement. It is hard to read. Example:\nfooBar.fChar = barFoo.lchar = 'c'; // AVOID!\nDo not use the assignment operator in a place where it can be easily confused with the equality operator. Example:",
+                "example": "\n\nif (c++ = d++) {        // AVOID! (Java disallows)\n    ...\n}\n\n"
+            },
+            {
+                "description": "should be written as",
+                "example": "\n\n  \tif ((c++ = d++) != 0) {\n    ...\n}\n"
+            },
+            {
+                "description": "Do not use embedded assignments in an attempt to improve run-time performance. This is the job of the compiler. Example:\nd = (a = b + c) + r; // AVOID!\nshould be written as",
+                "example": "\n\na = b + c;\nd = a + r;\n"
+            }
+        ]
+    },
+    {
+        "title": "10.5 Miscellaneous Practices",
+        "belongs to": "10 - Programming Practices/10.5 Miscellaneous Practices",
+        "cases": [
+            {
+                "description": "10.5.1 Parentheses\nIt is generally a good idea to use parentheses liberally in expressions involving mixed operators to avoid operator precedence problems. Even if the operator precedence seems clear to you, it might not be to others-you shouldn't assume that other programmers know precedence as well as you do.",
+                "example": "\n\nif (a == b && c == d)     // AVOID!\nif ((a == b) && (c == d)) // RIGHT\n"
+            },
+            {
+                "description": "10.5.2 Returning Values\nTry to make the structure of your program match the intent. Example:",
+                "example": "\n\nif (\n             booleanExpression) {\n    return true;\n} else {\n    return false;\n}\n"
+            },
+            {
+                "description": "should instead be written as",
+                "example": "\n\nreturn  \n             booleanExpression;\n"
+            },
+            {
+                "description": "Similarly,",
+                "example": "\n\n  \tif (condition) {\n    return x;\n}\nreturn y;\n"
+            },
+            {
+                "description": "should be written as",
+                "example": "\n\nreturn (condition ? x : y);\n"
+            },
+            {
+                "description": "10.5.3 Expressions before `?' in the Conditional Operator\nIf an expression containing a binary operator appears before the `?` in the ternary `?:` operator, it should be parenthesized. Example:",
+                "example": "\n\n  \t(x >= 0) ? x : -x;\n",
+                "appendix": "10.5.4 Special Comments\nUse `XXX` in a comment to flag something that is bogus but works. Use `FIXME` to flag something that is bogus and broken.\n1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10 \n11"
+            }
+        ]
+    }
+]

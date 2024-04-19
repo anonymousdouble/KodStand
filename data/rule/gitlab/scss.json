@@ -1,0 +1,130 @@
+[
+    {
+        "title": "Utility Classes",
+        "belongs to": "Utility Classes",
+        "cases": [
+            {
+                "description": "note \nPlease do not use any utilities that are prefixed with `gl-deprecated-` , instead use a Tailwind utility.\nIn order to reduce the generation of more CSS as our site grows, prefer the use of utility classes over adding new CSS. In complex cases, CSS can be addressed by adding component classes."
+            }
+        ]
+    },
+    {
+        "title": "Tailwind CSS",
+        "belongs to": "Utility Classes/Tailwind CSS",
+        "cases": [
+            {
+                "description": "We are in the process of migrating our CSS utility class setup to Tailwind CSS . See the Tailwind CSS blueprint for motivation, proposal, and implementation details."
+            }
+        ]
+    },
+    {
+        "title": "Building the Tailwind CSS bundle",
+        "belongs to": "Utility Classes/Tailwind CSS/Building the Tailwind CSS bundle",
+        "cases": [
+            {
+                "description": "When using Vite or Webpack with the GitLab Development Kit, Tailwind CSS watches for file changes to build detected utilities on the fly.\nTo build a fresh Tailwind CSS bundle, run `yarntailwindcss:build` . This is the script that gets called internally when building production assets with `bundleexecrakegitlab:assets:compile` .\nHowever the bundle gets built, the output is saved to `app/assets/builds/tailwind.css` ."
+            }
+        ]
+    },
+    {
+        "title": "Where are utility classes defined?",
+        "belongs to": "Utility Classes/Tailwind CSS/Where are utility classes defined?",
+        "cases": [
+            {
+                "description": "Prefer the use of utility classes defined in GitLab UI .\nAn easy list of classes can also be seen on Unpkg .\nOr using an extension like CSS Class completion .\nClasses in utilities.scss and common.scss are being deprecated. Classes in common.scss that use non-design-system values should be avoided. Use classes with conforming values instead.\nAvoid Bootstrap’s Utility Classes .\nnote \nWhile migrating Bootstrap’s Utility Classes to the GitLab UI utility classes, note both the classes for margin and padding differ. The size scale used at GitLab differs from the scale used in the Bootstrap library. For a Bootstrap padding or margin utility, you may need to double the size of the applied utility to achieve the same visual result (such as `ml-1` becoming `gl-ml-2` )."
+            }
+        ]
+    },
+    {
+        "title": "Where should you put new utility classes?",
+        "belongs to": "Utility Classes/Tailwind CSS/Where should you put new utility classes?",
+        "cases": [
+            {
+                "description": "Because we are in the process of migrating to Tailwind the utility class you need may already be available from Tailwind. The IntelliSense for VS Code plugin will tell you what utility classes are available. If the utility class you need is not available from Tailwind, you should continue to use the utility classes defined in GitLab UI which can be seen on Unpkg . If the utility class is still not available we need to enable a new core plugin in Tailwind. Find the relevant core plugin and open a MR to add the core plugin to the `corePlugins` array in tailwind.defaults.js ."
+            }
+        ]
+    },
+    {
+        "title": "When should you create component classes?",
+        "belongs to": "Utility Classes/Tailwind CSS/When should you create component classes?",
+        "cases": [
+            {
+                "description": "We recommend a “utility-first” approach.\nStart with utility classes. \nIf composing utility classes into a component class removes code duplication and encapsulates a clear responsibility, do it.\nThis encourages an organic growth of component classes and prevents the creation of one-off non-reusable classes. Also, the kind of classes that emerge from “utility-first” tend to be design-centered (for example, `.button` , `.alert` , `.card` ) rather than domain-centered (for example, `.security-report-widget` , `.commit-header-icon` ).\nInspiration:\nhttps://tailwindcss.com/docs/utility-first \nhttps://tailwindcss.com/docs/extracting-components"
+            }
+        ]
+    },
+    {
+        "title": "Utility mixins",
+        "belongs to": "Utility Classes/Tailwind CSS/Utility mixins",
+        "cases": [
+            {
+                "description": "We are currently in the process of migrating to Tailwind . The migration removes utility mixins so please do not add any new usages of utility mixins. Instead use pre-defined CSS keywords with SCSS variables.",
+                "example": "// Bad\n.my-class {\n  @include gl-mt-3;\n}\n\n// Very bad\n.my-class {\n  @include gl-deprecated-mt-3;\n}\n\n// Bad\n.my-class {\n  margin-top: 0.5rem;\n}\n\n// Good\n.my-class {\n  margin-top: $gl-spacing-scale-3;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Naming",
+        "belongs to": "Naming",
+        "cases": [
+            {
+                "description": "Filenames should use `snake_case` .\nCSS classes should use the `lowercase-hyphenated` format rather than `snake_case` or `camelCase` .",
+                "example": "// Bad\n.class_name {\n  color: #fff;\n}\n\n// Bad\n.className {\n  color: #fff;\n}\n\n// Good\n.class-name {\n  color: #fff;\n}\n"
+            },
+            {
+                "description": "Avoid making compound class names with SCSS `&` features. It makes searching for usages harder, and provides limited benefit.",
+                "example": "// Bad\n.class {\n  &-name {\n    color: orange;\n  }\n}\n\n// Good\n.class-name {\n  color: #fff;\n}\n"
+            },
+            {
+                "description": "Class names should be used instead of tag name selectors. Using tag name selectors is discouraged because they can affect unintended elements in the hierarchy.",
+                "example": "// Bad\nul {\n  color: #fff;\n}\n\n// Good\n.class-name {\n  color: #fff;\n}\n\n// Best\n// prefer an existing utility class over adding existing styles\n"
+            },
+            {
+                "description": "Class names are also preferable to IDs. Rules that use IDs are not-reusable, as there can only be one affected element on the page.",
+                "example": "// Bad\n#my-element {\n  padding: 0;\n}\n\n// Good\n.my-element {\n  padding: 0;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Nesting",
+        "belongs to": "Nesting",
+        "cases": [
+            {
+                "description": "Avoid unnecessary nesting. The extra specificity of a wrapper component makes things harder to override.",
+                "example": "// Bad\n.component-container {\n  .component-header {\n    /* ... */\n  }\n\n  .component-body {\n    /* ... */\n  }\n}\n\n// Good\n.component-container {\n  /* ... */\n}\n\n.component-header {\n  /* ... */\n}\n\n.component-body {\n  /* ... */\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Selectors with a js- Prefix",
+        "belongs to": "Selectors with a js- Prefix",
+        "cases": [
+            {
+                "description": "Do not use any selector prefixed with `js-` for styling purposes. These selectors are intended for use only with JavaScript to allow for removal or renaming without breaking styling."
+            }
+        ]
+    },
+    {
+        "title": "Using extend at-rule",
+        "belongs to": "Using extend at-rule",
+        "cases": [
+            {
+                "description": "Usage of the `extend` at-rule is prohibited due to memory leaks and the rule doesn’t work as it should ."
+            }
+        ]
+    },
+    {
+        "title": "Linting",
+        "belongs to": "Linting",
+        "cases": [
+            {
+                "description": "We use stylelint to check for style guide conformity. It uses the ruleset in `.stylelintrc` and rules from our SCSS configuration . `.stylelintrc` is located in the home directory of the project.\nTo check if any warnings are produced by your changes, run `yarnlint:stylelint` in the GitLab directory. Stylelint also runs in GitLab CI/CD to catch any warnings.\nIf the Rake task is throwing warnings you don’t understand, SCSS Lint’s documentation includes a full list of their rules ."
+            }
+        ]
+    },
+    {
+        "title": "Privacy Preference Center",
+        "belongs to": "Privacy Preference Center",
+        "cases": []
+    }
+]

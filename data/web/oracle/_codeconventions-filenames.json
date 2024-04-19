@@ -1,0 +1,29 @@
+[
+    {
+        "title": "2 - File Names",
+        "belongs to": "2 - File Names",
+        "cases": [
+            {
+                "description": "This section lists commonly used file suffixes and names."
+            }
+        ]
+    },
+    {
+        "title": "2.1 File Suffixes",
+        "belongs to": "2 - File Names/2.1 File Suffixes",
+        "cases": [
+            {
+                "description": "Java Software uses the following file suffixes:\nFile Type \nSuffix \nJava source \n`.java` \nJava bytecode \n`.class`"
+            }
+        ]
+    },
+    {
+        "title": "2.2 Common File Names",
+        "belongs to": "2 - File Names/2.2 Common File Names",
+        "cases": [
+            {
+                "description": "Frequently used file names include:\nFile Name \nUse \n`GNUmakefile` \nThe preferred name for makefiles. We use `gnumake` to build our software. \n`README` \nThe preferred name for the file that summarizes the contents of a particular directory.\n  \n1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10 \n11 \n "
+            }
+        ]
+    }
+]

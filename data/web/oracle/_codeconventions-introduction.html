@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+ <head>
+  <title>
+   Code Conventions for the Java Programming Language: 1. Introduction
+  </title>
+  <meta content="Code Conventions for the Java Programming Language: 1. Introduction" name="Title"/>
+  <meta content="Code Conventions for the Java Programming Language: 1. Introduction" name="Description"/>
+  <meta content="Code Conventions for the Java Programming Language: 1. Introduction" name="Keywords"/>
+  <!-- Container/Display Start -->
+  <!-- _Raw-Text -->
+  <!-- css / js files start -->
+  <script>
+   !function(){
+var d=document.documentElement;d.className=d.className.replace(/no-js/,'js');
+if(document.location.href.indexOf('betamode=') > -1) document.write('<script src="https://www.oracle.com/asset/web/js/ocom-betamode.js"><\/script>');
+}();
+  </script>
+  <link data-wscss="" href="https://www.oracle.com/asset/web/css/ocom-v1-base.css" rel="stylesheet"/>
+  <link as="style" data-wscss="" href="https://www.oracle.com/asset/web/css/ocom-v1-styles.css" onerror="this.rel='stylesheet'" onload="this.rel='stylesheet'" rel="preload"/>
+  <noscript>
+   <link href="https://www.oracle.com/asset/web/css/ocom-v1-styles.css" rel="stylesheet"/>
+  </noscript>
+  <link as="script" data-reqjq="" data-wsjs="" href="https://www.oracle.com/asset/web/js/ocom-v1-base.js" rel="preload"/>
+  <link as="script" data-reqjq="" data-wsjs="" href="https://www.oracle.com/asset/web/js/ocom-v1-lib.js" rel="preload"/>
+  <script async="" data-wsjs="" onload="$('head link[data-reqjq][rel=preload]').each(function(){var a = document.createElement('script');a.async=false;a.src=$(this).attr('href');this.parentNode.insertBefore(a, this);});$(function(){$('script[data-reqjq][data-src]').each(function(){this.async=true;this.src=$(this).data('src');});});" src="https://www.oracle.com/asset/web/js/jquery-min.js">
+  </script>
+  <!-- end css / js files start -->
+  <!-- / _Raw-Text -->
+  <!-- Container/Display end -->
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="us" name="siteid"/>
+  <meta content="US" name="countryid"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="United States" name="country"/>
+  <meta content="en" name="Language"/>
+  <meta content="2018-04-19T19:17:32Z" name="Updated Date"/>
+  <script type="text/javascript">
+   var pageData = pageData || {};
+//page info
+pageData.pageInfo = pageData.pageInfo || {};
+pageData.pageInfo.language = "en";
+pageData.pageInfo.country = "United States";
+pageData.pageInfo.pageTitle = "Code Conventions for the Java Programming Language: 1. Introduction";
+pageData.pageInfo.description = "Code Conventions for the Java Programming Language: 1. Introduction";
+pageData.pageInfo.keywords = "Code Conventions for the Java Programming Language: 1. Introduction";
+pageData.pageInfo.siteId = "us";
+pageData.pageInfo.countryId = "US";
+pageData.pageInfo.updatedDate = "2018-04-19T19:17:32Z";
+  </script>
+  <!-- start : ocom/common/global/components/seo-taxonomy-meta-data-->
+  <script type="text/javascript">
+   var pageData = pageData || {};
+//taxonmy
+pageData.taxonomy = pageData.taxonomy || {};
+pageData.taxonomy.productServices = [];
+pageData.taxonomy.industry = [];
+pageData.taxonomy.region = [];
+pageData.taxonomy.contentType = [];
+pageData.taxonomy.buyersJourney = [];
+pageData.taxonomy.revenue = [];
+pageData.taxonomy.title = [];
+pageData.taxonomy.audience = [];
+pageData.taxonomy.persona = [];
+  </script>
+  <!-- end : ocom/common/global/components/seo-taxonomy-meta-data-->
+  <!-- start : ocom/common/global/components/social-media-meta-tags -->
+  <!-- end : ocom/common/global/components/social-media-meta-tags -->
+  <!-- start : ocom/common/global/components/seo-hreflang-meta-tags -->
+  <link href="https://www.oracle.com/java/technologies/javase/codeconventions-introduction.html" rel="canonical">
+   <link href="https://www.oracle.com/java/technologies/javase/codeconventions-introduction.html" hreflang="en-US" rel="alternate">
+    <!-- end : ocom/common/global/components/seo-hreflang-meta-tags -->
+    <!-- Container/Display Start -->
+    <!-- _Raw-Text -->
+    <!-- www-us HeadAdminContainer -->
+    <link href="https://www.oracle.com/asset/web/favicons/favicon-32.png" rel="icon" sizes="32x32"/>
+    <link href="https://www.oracle.com/asset/web/favicons/favicon-128.png" rel="icon" sizes="128x128"/>
+    <link href="https://www.oracle.com/asset/web/favicons/favicon-192.png" rel="icon" sizes="192x192"/>
+    <link href="https://www.oracle.com/asset/web/favicons/favicon-120.png" rel="apple-touch-icon" sizes="120x120"/>
+    <link href="https://www.oracle.com/asset/web/favicons/favicon-152.png" rel="apple-touch-icon" sizes="152x152"/>
+    <link href="https://www.oracle.com/asset/web/favicons/favicon-180.png" rel="apple-touch-icon" sizes="180x180"/>
+    <meta content="#fcfbfa" name="msapplication-TileColor">
+     <meta content="favicon-128.png" name="msapplication-square70x70logo">
+      <meta content="favicon-270.png" name="msapplication-square150x150logo">
+       <meta content="favicon-270.png" name="msapplication-TileImage">
+        <meta content="none" name="msapplication-config">
+         <meta content="no-referrer-when-downgrade" name="referrer">
+          <script async="async" crossorigin="" src="//consent.truste.com/notice?domain=oracle.com&amp;c=teconsent&amp;js=bb¬iceType=bb&amp;text=true&gt;m=1&amp;cdn=1&amp;pcookie" type="text/javascript">
+          </script>
+          <style>
+           #oReactiveChatContainer1 { display:none;}
+          </style>
+          <!-- Truste for RU -->
+          <script type="text/javascript">
+           if (location.pathname.indexOf("/ru/") == 0){
+document.write('\x3Cscript async="async" src=//consent.truste.com/notice?domain=oracleru.com&c=teconsent&js=bb&noticeType=bb&text=true&gtm=1&cdn=1&pcookie crossorigin="">\x3C/script>');
+}
+          </script>
+          <!--Tealium embed code -->
+          <script src="https://tms.oracle.com/main/prod/utag.sync.js">
+          </script>
+          <!-- Loading script asynchronously -->
+          <script type="text/javascript">
+           (function(a,b,c,d){
+if(location.href.indexOf("tealium=dev") == -1) {
+a='https://tms.oracle.com/main/prod/utag.js';
+} else {
+a='https://tms.oracle.com/main/dev/utag.js';
+}
+b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+})();
+          </script>
+          <!--End-->
+          <!-- / _Raw-Text -->
+          <!-- Container/Display end -->
+          <script>
+           (window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch"}]);
+          </script>
+          <script>
+           !function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="DXNLE-YBWWY-AR74T-WMD99-77VRA",function(){function e(){if(!o){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,i.parentNode.appendChild(e),o=!0}}function t(e){o=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(i.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",i.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"DXNLE-YBWWY-AR74T-WMD99-77VRA";var i=document.currentScript||document.getElementsByTagName("script")[0],o=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!o)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),i.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="w7iymlg7o72ukzq27dja-f-59df50f09-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"37","ak.cp":"82485","ak.ai":parseInt("604074",10),"ak.ol":"0","ak.cr":203,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"3093a77c","ak.r":31829,"ak.a2":n,"ak.m":"dscx","ak.n":"essl","ak.bpcip":"183.209.134.0","ak.cport":12158,"ak.gh":"223.119.248.23","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.csrc":"-","ak.acc":"reno","ak.t":"1713043666","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==CiHev475f/4/SayJlyldZJWoLj9X4KLlITs/W2z9spXupHoEcxd5/2jpc/9DJ5tqaXMHhZNkGONIBtsIdvn/eABagq9Blu9lcsOqIzsGpQ4mzz8gyXDOmmXg1nnZ3KASdLW8rL+t6pLdMG2WX80wls2dGLC/LJ5QdPY3Ds/PvpaS3uosffv55qpHkKU6yfFWnw+fYxjmtCaQ6Bo4dcVw9DYMN8rbuyMTF6J7UF1fQw/ospRCOvZxcuqdrmG0muRZTP0msa6MagtaePMM0hzo+Fh0pL9ci0jyN0l56m0JAhieX4vwba0EtxJgl++PDbmlyC5DrRsPmBeCUZLdvNSbIKmkljJ3rrxKBHpYj8kLs+cbWjQYsaOOyA2EleNZu4aV08jnkgNJUADd0dmptC28evt7JCDOP8xFjObCxxvepeU=","ak.pv":"461","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);
+          </script>
+         </meta>
+        </meta>
+       </meta>
+      </meta>
+     </meta>
+    </meta>
+   </link>
+  </link>
+ </head>
+ <body class="f11 f11v6">
+  <div class="f11w1">
+   <!-- start Common/Header -->
+   <!-- Dispatcher:null -->
+   <!-- BEGIN: oWidget_C/_Raw-Text/Display -->
+   <!-- U30v3 -->
+   <style>
+    #u30{opacity:1 !important;filter:opacity(100%) !important;position:sticky;top:0}
+.u30v3{background:#3a3632;height:50px;overflow:hidden;border-top:5px solid #3a3632;border-bottom:5px solid #3a3632}
+#u30nav,#u30tools{visibility:hidden}
+.u30v3 #u30logo {width:121px;height: 44px;display: inline-flex;justify-content: flex-start;}
+#u30:not(.u30mobile) .u30-oicn-mobile,#u30.u30mobile .u30-oicn{display:none}
+#u30logo svg{height:auto;align-self:center}
+.u30brand{height:50px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;max-width:1344px;padding:0 48px;margin:0 auto}
+.u30brandw1{display:flex;flex-direction:row;color:#fff;text-decoration:none;align-items:center}
+@media (max-width:1024px){.u30brand{padding:0 24px}}
+#u30skip2,#u30skip2content{transform:translateY(-100%);position:fixed}
+.rtl #u30{direction:rtl}
+   </style>
+   <section class="u30 u30v3 pause searchv2" data-trackas="header" id="u30">
+    <div id="u30skip2">
+     <ul>
+      <li>
+       <a href="#maincontent" id="u30skip2c">
+        Skip to content
+       </a>
+      </li>
+      <li>
+       <a href="https://www.oracle.com/corporate/accessibility/" id="u30acc">
+        Accessibility Policy
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="u30w1 cwidth" id="u30w1">
+     <div class="u30brand" id="u30brand">
+      <div class="u30brandw1">
+       <a aria-label="Home" data-lbl="logo" href="https://www.oracle.com/" id="u30btitle">
+        <div id="u30logo">
+         <svg class="u30-oicn-mobile" height="21" viewbox="0 0 32 21" width="32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.9,20.1c-5.5,0-9.9-4.4-9.9-9.9c0-5.5,4.4-9.9,9.9-9.9h11.6c5.5,0,9.9,4.4,9.9,9.9c0,5.5-4.4,9.9-9.9,9.9H9.9 M21.2,16.6c3.6,0,6.4-2.9,6.4-6.4c0-3.6-2.9-6.4-6.4-6.4h-11c-3.6,0-6.4,2.9-6.4,6.4s2.9,6.4,6.4,6.4H21.2" fill="#C74634">
+          </path>
+         </svg>
+         <svg class="u30-oicn" height="30" preserveaspectratio="xMinYMid" viewbox="0 0 231 30" width="231" xmlns="http://www.w3.org/2000/svg">
+          <path d="M99.61,19.52h15.24l-8.05-13L92,30H85.27l18-28.17a4.29,4.29,0,0,1,7-.05L128.32,30h-6.73l-3.17-5.25H103l-3.36-5.23m69.93,5.23V0.28h-5.72V27.16a2.76,2.76,0,0,0,.85,2,2.89,2.89,0,0,0,2.08.87h26l3.39-5.25H169.54M75,20.38A10,10,0,0,0,75,.28H50V30h5.71V5.54H74.65a4.81,4.81,0,0,1,0,9.62H58.54L75.6,30h8.29L72.43,20.38H75M14.88,30H32.15a14.86,14.86,0,0,0,0-29.71H14.88a14.86,14.86,0,1,0,0,29.71m16.88-5.23H15.26a9.62,9.62,0,0,1,0-19.23h16.5a9.62,9.62,0,1,1,0,19.23M140.25,30h17.63l3.34-5.23H140.64a9.62,9.62,0,1,1,0-19.23h16.75l3.38-5.25H140.25a14.86,14.86,0,1,0,0,29.71m69.87-5.23a9.62,9.62,0,0,1-9.26-7h24.42l3.36-5.24H200.86a9.61,9.61,0,0,1,9.26-7h16.76l3.35-5.25h-20.5a14.86,14.86,0,0,0,0,29.71h17.63l3.35-5.23h-20.6" fill="#C74634" transform="translate(-0.02 0)">
+          </path>
+         </svg>
+        </div>
+       </a>
+      </div>
+     </div>
+     <div class="u30nav" data-closetxt="Close Menu" data-trackas="menu" id="u30nav">
+      <nav aria-label="Oracle website" id="u30navw1">
+       <button aria-controls="products" aria-expanded="false" class="u30navitem" data-navtarget="products">
+        Products
+       </button>
+       <button aria-controls="industries" aria-expanded="false" class="u30navitem" data-navtarget="industries">
+        Industries
+       </button>
+       <button aria-controls="resources" aria-expanded="false" class="u30navitem" data-navtarget="resources">
+        Resources
+       </button>
+       <button aria-controls="customers" aria-expanded="false" class="u30navitem" data-navtarget="customers">
+        Customers
+       </button>
+       <button aria-controls="partners" aria-expanded="false" class="u30navitem" data-navtarget="partners">
+        Partners
+       </button>
+       <button aria-controls="developers" aria-expanded="false" class="u30navitem" data-navtarget="developers">
+        Developers
+       </button>
+       <button aria-controls="company" aria-expanded="false" class="u30navitem" data-navtarget="company">
+        Company
+       </button>
+      </nav>
+     </div>
+     <div class="u30tools" id="u30tools">
+      <div id="u30search">
+       <div id="u30searchw1">
+        <div id="u30searchw2">
+         <form action="https://search.oracle.com/results" data-contentpaths="/content/Web/Shared/Auto-Suggest Panel Event" id="u30searchForm" method="get" name="u30searchForm">
+          <div class="u30s1">
+           <button aria-label="Close Search" id="u30closesearch" type="button">
+            <span>
+             Close Search
+            </span>
+            <svg fill="none" height="14" viewbox="0 0 9 14" width="9" xmlns="http://www.w3.org/2000/svg">
+             <path d="M8 13L2 7L8 1" stroke="#161513" stroke-width="2">
+             </path>
+            </svg>
+           </button>
+           <span class="u30input">
+            <div class="u30inputw1">
+             <input aria-autocomplete="both" aria-controls="u30searchw3" aria-expanded="false" aria-haspopup="listbox" aria-label="Search Oracle.com" autocomplete="off" id="u30input" name="q" placeholder="Search" role="combobox" type="text" value=""/>
+            </div>
+            <input name="size" type="hidden" value="10"/>
+            <input name="page" type="hidden" value="1"/>
+            <input name="tab" type="hidden" value="all"/>
+            <span class="u30visually-hidden" id="u30searchw3title">
+             Search Oracle.com
+            </span>
+            <div aria-labelledby="u30searchw3title" data-allresultstxt="All results for" data-allsearchpath="https://search.oracle.com/results?q=u30searchterm&amp;size=10&amp;page=1&amp;tab=all" data-autosuggesttitle="SUGGESTED SEARCHES" data-pagestitle="SUGGESTED LINKS" id="u30searchw3" role="listbox">
+             <ul aria-labelledby="u30quicklinks-title" class="autocomplete-items" id="u30quicklinks" role="group">
+              <li class="u30auto-title" id="u30quicklinks-title" role="presentation">
+               QUICK LINKS
+              </li>
+              <li role="option">
+               <a data-lbl="quick-links:oci" href="/cloud/">
+                Oracle Cloud Infrastructure
+               </a>
+              </li>
+              <li role=" option">
+               <a data-lbl="quick-links:applications" href="/applications/">
+                Oracle Fusion Cloud Applications
+               </a>
+              </li>
+              <li role="option">
+               <a data-lbl="quick-links:database" href="/database/technologies/">
+                Oracle Database
+               </a>
+              </li>
+              <li role="option">
+               <a data-lbl="quick-links:download-java" href="/java/technologies/downloads/">
+                Download Java
+               </a>
+              </li>
+              <li role="option">
+               <a data-lbl="quick-links:careers" href="/careers/">
+                Careers at Oracle
+               </a>
+              </li>
+             </ul>
+            </div>
+            <span class="u30submit">
+             <input class="u30searchbttn" type="submit" value="Submit Search"/>
+            </span>
+            <button aria-label="Clear Search" id="u30clear" type="reset">
+             <svg aria-hidden="true" fill="none" height="20" viewbox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 7L13 13M7 13L13 7M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#161513" stroke-width="2">
+              </path>
+             </svg>
+            </button>
+           </span>
+          </div>
+         </form>
+         <div aria-live="polite" class="u30visually-hidden" data-alerttxt="suggestions found to navigate use up and down arrows" id="u30announce">
+         </div>
+        </div>
+       </div>
+       <button aria-expanded="false" aria-label="Open Search Field" class="u30searchBtn" id="u30searchBtn" type="button">
+        <span>
+         Search
+        </span>
+        <svg height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M15,15l6,6M17,10a7,7,0,1,1-7-7A7,7,0,0,1,17,10Z">
+         </path>
+        </svg>
+       </button>
+      </div>
+      <span id="ac-flag">
+       <a class="flag-focus" data-ajax="true" href="/countries-list.html#countries" rel="lightbox" role="button">
+        <span class="sr-only">
+         Country
+        </span>
+        <img alt="" class="flag-image" src=""/>
+        <svg alt="Country" class="default-globe" fill="none" height="20" viewbox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+         <rect fill="url(#pattern0)" height="20" width="20">
+         </rect>
+         <defs>
+          <pattern height="1" id="pattern0" patterncontentunits="objectBoundingBox" width="1">
+           <use transform="translate(-0.166667 -0.166667) scale(0.0138889)" xlink:href="#image0_1_1830">
+           </use>
+          </pattern>
+          <image alt="" height="96" id="image0_1_1830" width="96" xlink:href="data:image/png;base64,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"/>
+         </defs>
+        </svg>
+       </a>
+      </span>
+      <div class="u30-profile" id="u30-profile">
+       <button aria-expanded="false" data-lbl="sign-in-account" id="u30-flyout">
+        <svg height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M17,19.51A3,3,0,0,0,14,17H10a3,3,0,0,0-3,2.51m9.92,0a9,9,0,1,0-9.92,0m9.92,0a9,9,0,0,1-9.92,0M15,10a3,3,0,1,1-3-3A3,3,0,0,1,15,10Z">
+         </path>
+        </svg>
+        <span class="acttxt">
+         View Accounts
+        </span>
+       </button>
+       <div id="u30-profilew1">
+        <button aria-label="close account flyout" id="u30actbck">
+         <span class="u30actbcktxt">
+          Back
+         </span>
+        </button>
+        <div class="u30-profilew2">
+         <span class="u30acttitle">
+          Cloud Account
+         </span>
+         <a class="u30darkcta u30cloudbg" data-lbl="sign-in-to-cloud" href="/cloud/sign-in.html">
+          Sign in to Cloud
+         </a>
+         <a class="u30lightcta" data-lbl="try-free-cloud-trial" href="/cloud/free/">
+          Sign Up for Free Cloud Tier
+         </a>
+        </div>
+        <span class="u30acttitle">
+         Oracle Account
+        </span>
+        <ul class="u30l-out">
+         <li>
+          <a class="u30darkcta" data-lbl="profile:sign-in-account" href="https://www.oracle.com/webapps/redirect/signon?nexturl=">
+           Sign-In
+          </a>
+         </li>
+         <li>
+          <a class="u30lightcta" data-lbl="profile:create-account" href="https://profile.oracle.com/myprofile/account/create-account.jspx">
+           Create an Account
+          </a>
+         </li>
+        </ul>
+        <ul class="u30l-in">
+         <li>
+          <a data-lbl="help" href="/corporate/contact/help.html">
+           Help
+          </a>
+         </li>
+         <li>
+          <a data-lbl="signout" href="javascript:sso_sign_out();" id="u30pfile-sout">
+           Sign Out
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="u30-contact">
+       <a data-lbl="contact-us" href="/corporate/contact/" title="Contact Sales">
+        <span>
+         Contact Sales
+        </span>
+       </a>
+      </div>
+      <a aria-controls="u30navw1" aria-expanded="false" aria-haspopup="true" href="/global-menu-v2/" id="u30ham" role="button">
+       <svg height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <title>
+         Menu
+        </title>
+        <path class="p1" d="M16,4 L2,4">
+        </path>
+        <path class="p2" d="M2,12 L22,12">
+        </path>
+        <path class="p3" d="M2,20 L16,20">
+        </path>
+        <path class="p4" d="M0,12 L24,12">
+        </path>
+        <path class="p5" d="M0,12 L24,12">
+        </path>
+       </svg>
+       <span>
+        Menu
+       </span>
+      </a>
+     </div>
+    </div>
+    <script>
+     var u30min = [722,352,0,0];
+var u30brsz = new ResizeObserver(u30 => {
+document.getElementById('u30').classList.remove('u30mobile','u30tablet','u30notitle');
+let u30b = document.getElementById('u30brand').offsetWidth,
+u30t = document.getElementById('u30tools').offsetWidth ;
+u30v = document.getElementById('u30navw1');
+u30w = document.getElementById('u30w1').offsetWidth - 48;
+if((u30b + u30t) > u30min[0]){
+u30min[2] = ((u30b + u30t) > 974) ? u30b + u30t + 96 : u30b + u30t + 48;
+}else{
+u30min[2] = u30min[0];
+}
+u30min[3] = ((u30b + 112) > u30min[1]) ? u30min[3] = u30b + 112 : u30min[3] = u30min[1];
+u30v.classList.add('u30navchk');
+u30min[2] = (u30v.lastElementChild.getBoundingClientRect().right > u30min[2]) ? Math.ceil(u30v.lastElementChild.getBoundingClientRect().right) : u30min[2];
+u30v.classList.remove('u30navchk');
+if(u30w <= u30min[3]){
+document.getElementById('u30').classList.add('u30notitle');
+}
+if(u30w <= u30min[2]){
+document.getElementById('u30').classList.add('u30mobile');
+}
+});
+var u30wrsz = new ResizeObserver(u30 => {
+let u30n = document.getElementById('u30navw1').getBoundingClientRect().height,
+u30h = u30[0].contentRect.height;
+let u30c = document.getElementById('u30').classList,
+u30w = document.getElementById('u30w1').offsetWidth - 48,
+u30m = 'u30mobile',
+u30t = 'u30tablet';
+if(u30c.contains('navexpand') && u30c.contains(u30m) && u30w > u30min[2]){
+if(!document.querySelector('button.u30navitem.active')){
+document.getElementById('u30ham').click();
+}
+u30c.remove(u30m);
+if(document.getElementById('u30').getBoundingClientRect().height > 80){
+u30c.add(u30t);
+}else{
+u30c.remove(u30t);
+}
+}else if(u30w <= u30min[2]){
+if(getComputedStyle(document.getElementById('u30tools')).visibility != "hidden"){
+u30c.add(u30m);
+u30c.remove(u30t);
+}
+}else if(u30n < 30 && u30h > 80){
+u30c.add(u30t);
+u30c.remove(u30m);
+}else if(u30n > 30){
+u30c.add(u30m);
+u30c.remove(u30t);
+}else if(u30n < 30 && u30h <= 80){
+u30c.remove(u30m);
+if(document.getElementById('u30').getBoundingClientRect().height > 80){
+u30c.add(u30t);
+}else{
+u30c.remove(u30t);
+}
+}
+});
+u30brsz.observe(document.getElementById('u30btitle'));
+u30wrsz.observe(document.getElementById('u30'));
+    </script>
+   </section>
+   <!-- /U30v3 -->
+   <!-- END: oWidget_C/_Raw-Text/Display -->
+   <!-- end Common/Header -->
+   <!-- U03v5 -->
+   <nav class="u03 u03v5 u03bttns" data-ocomid="u03" data-trackas="breadcrumb">
+    <div class="cwidth">
+     <div class="u03w1">
+      <ul>
+       <li>
+        <a href="/java/">
+         Java
+        </a>
+       </li>
+       <li>
+        <a href="/java/technologies/">
+         Technologies
+        </a>
+       </li>
+       <li>
+        <a href="/java/technologies/java-se-glance.html">
+         Java SE
+        </a>
+       </li>
+      </ul>
+      <h1>
+       1. Introduction
+      </h1>
+     </div>
+    </div>
+    <script type="text/javascript">
+     var pageData = pageData || {};
+//page info
+pageData.pageInfo = pageData.pageInfo || {};
+pageData.pageInfo.breadCrumbs = "Java / Technologies / Java SE";
+    </script>
+    <script type="application/ld+json">
+     {
+"@context": "https://schema.org",
+"@type": "BreadcrumbList",
+"itemListElement":
+[
+{ "@type": "ListItem", "position": 1, "name": "Java", "item": "https://www.oracle.com/java/" },	{ "@type": "ListItem", "position": 2, "name": "Technologies", "item": "https://www.oracle.com/java/technologies/" },	{ "@type": "ListItem", "position": 3, "name": "Java SE", "item": "https://www.oracle.com/java/technologies/java-se-glance.html" }
+]
+}
+    </script>
+   </nav>
+   <!-- _Raw-Text -->
+   <section class="cc01 cc01v0 cpad">
+    <div class="cc01w1 cwidth">
+     <!-- CN15v0 -->
+     <div class="cn15 cn15v0">
+      <div class="cn15w1">
+       <ul>
+        <li class="cn15l cn15end">
+         <a href="#">
+         </a>
+        </li>
+        <li class="cn15active">
+         <a href="/java/technologies/javase/codeconventions-introduction.html
+">
+          1
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-filenames.html
+">
+          2
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-fileorganization.html
+">
+          3
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-indentation.html">
+          4
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-comments.html
+">
+          5
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-declarations.html
+">
+          6
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-statements.html
+">
+          7
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-whitespace.html
+">
+          8
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-namingconventions.html
+">
+          9
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-programmingpractices.html
+">
+          10
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-codeexamples.html
+">
+          11
+         </a>
+        </li>
+        <li class="cn15r">
+         <a href="/java/technologies/javase/codeconventions-filenames.html">
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <!-- /CN15v0 -->
+     <div class="otable otable-scrolling otable-bordered">
+      <div class="otable-w1">
+       <table class="otable-w2 bglightorange">
+        <tbody>
+         <tr>
+          <td>
+           <p>
+            The information on this page is for Archive Purposes Only
+           </p>
+           This page is not being actively maintained. Links within the documentation may not work and the information itself may no longer be valid. The last revision to this document was made on April 20, 1999
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <h2>
+      Code Conventions for the Java Programming Language
+     </h2>
+     <a id="18407" name="18407">
+     </a>
+     <h4>
+      1 - Introduction
+     </h4>
+     <a id="16712" name="16712">
+     </a>
+     <h4>
+      1.1 Why Have Code Conventions
+     </h4>
+     <p>
+      <a id="33900" name="33900">
+      </a>
+      Code conventions are important to programmers for a number of reasons:
+     </p>
+     <ul class="obullets">
+      <li>
+       80% of the lifetime cost of a piece of software goes to maintenance.
+       <a id="16716" name="16716">
+       </a>
+      </li>
+      <li>
+       Hardly any software is maintained for its whole life by the original author.
+       <a id="16717" name="16717">
+       </a>
+      </li>
+      <li>
+       Code conventions improve the readability of the software, allowing engineers to understand new code more quickly and thoroughly.
+       <a id="33919" name="33919">
+       </a>
+      </li>
+      <li>
+       If you ship your source code as a product, you need to make sure it is as well packaged and clean as any other product you create.
+       <p>
+        <a id="16720" name="16720">
+        </a>
+       </p>
+      </li>
+     </ul>
+     <a id="16729" name="16729">
+     </a>
+     <h4>
+      1.2 Acknowledgments
+     </h4>
+     <p>
+      <a id="16730" name="16730">
+      </a>
+      This document reflects the Java language coding standards presented in the
+      <em>
+       <a href="http://docs.oracle.com/javase/specs/">
+        Java Language Specification
+       </a>
+      </em>
+      , from Sun Microsystems, Inc. Major contributions are from Peter King, Patrick Naughton, Mike DeMoney, Jonni Kanerva, Kathy Walrath, and Scott Hommel.
+     </p>
+     <!-- CN15v0 -->
+     <div class="cn15 cn15v0">
+      <div class="cn15w1">
+       <ul>
+        <li class="cn15l cn15end">
+         <a href="#">
+         </a>
+        </li>
+        <li class="cn15active">
+         <a href="/java/technologies/javase/codeconventions-introduction.html
+">
+          1
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-filenames.html
+">
+          2
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-fileorganization.html
+">
+          3
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-indentation.html">
+          4
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-comments.html
+">
+          5
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-declarations.html
+">
+          6
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-statements.html
+">
+          7
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-whitespace.html
+">
+          8
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-namingconventions.html
+">
+          9
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-programmingpractices.html
+">
+          10
+         </a>
+        </li>
+        <li>
+         <a href="/java/technologies/javase/codeconventions-codeexamples.html
+">
+          11
+         </a>
+        </li>
+        <li class="cn15r">
+         <a href="/java/technologies/javase/codeconventions-filenames.html">
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <!-- /CN15v0 -->
+    </div>
+   </section>
+   <!-- / _Raw-Text -->
+   <!-- U10v0 -->
+   <!-- Dispatcher:null -->
+   <!-- BEGIN: oWidget_C/_Raw-Text/Display -->
+   <!-- U10v0 -->
+   <footer class="u10 u10v6" data-a11y="true" data-ocomid="u10" data-trackas="footer" id="u10" type="redwood">
+    <nav aria-label="Footer" class="u10w1">
+     <div class="u10w2">
+      <div class="u10w3">
+       <div class="u10ttl">
+        Resources for
+       </div>
+       <ul>
+        <li>
+         <a data-lbl="resources-for:career" href="/careers/">
+          Careers
+         </a>
+        </li>
+        <li>
+         <a data-lbl="resources-for:developers" href="https://developer.oracle.com/">
+          Developers
+         </a>
+        </li>
+        <li>
+         <a data-lbl="resources-for:investors" href="https://investor.oracle.com/home/default.aspx">
+          Investors
+         </a>
+        </li>
+        <li>
+         <a data-lbl="resources-for:partners" href="/partner/">
+          Partners
+         </a>
+        </li>
+        <li>
+         <a data-lbl="resources-for:researchers" href="/research/">
+          Researchers
+         </a>
+        </li>
+        <li>
+         <a data-lbl="resources-for:students-educators" href="https://academy.oracle.com/en/oa-web-overview.html">
+          Students and Educators
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="u10w2">
+      <div class="u10w3">
+       <div class="u10ttl">
+        Why Oracle
+       </div>
+       <ul>
+        <li>
+         <a data-lbl="why-oracle:analyst-reports" href="/corporate/analyst-reports/">
+          Analyst Reports
+         </a>
+        </li>
+        <li>
+         <a data-lbl="why-oracle:gartner-mq-erp-cloud" href="/erp/what-is-erp/best-erp/">
+          Best cloud-based
+ERP
+         </a>
+        </li>
+        <li>
+         <a data-lbl="why-oracle:cloud-economics" href="/cloud/economics/">
+          Cloud Economics
+         </a>
+        </li>
+        <li>
+         <a data-lbl="why-oracle:corporate-responsibility" href="/social-impact/">
+          Corporate
+Responsibility
+         </a>
+        </li>
+        <li>
+         <a data-lbl="why-oracle:diversity-inclusion" href="/careers/diversity-inclusion/">
+          Diversity and Inclusion
+         </a>
+        </li>
+        <li>
+         <a data-lbl="why-oracle:security-pracitices" href="/corporate/security-practices/">
+          Security
+Practices
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="u10w2">
+      <div class="u10w3">
+       <div class="u10ttl">
+        Learn
+       </div>
+       <ul>
+        <li>
+         <a data-lbl="learn:cloud-computing" href="/cloud/what-is-cloud-computing/">
+          What is cloud
+computing?
+         </a>
+        </li>
+        <li>
+         <a data-lbl="learn:crm" href="/cx/what-is-crm/">
+          What is CRM?
+         </a>
+        </li>
+        <li>
+         <a data-lbl="learn:docker" href="/cloud/cloud-native/container-registry/what-is-docker/">
+          What is
+Docker?
+         </a>
+        </li>
+        <li>
+         <a data-lbl="learn:kubernetes" href="/cloud/cloud-native/container-engine-kubernetes/what-is-kubernetes/">
+          What is
+Kubernetes?
+         </a>
+        </li>
+        <li>
+         <a data-lbl="learn:python" href="https://developer.oracle.com/python/what-is-python/">
+          What is
+Python?
+         </a>
+        </li>
+        <li>
+         <a data-lbl="learn:saas" href="/applications/what-is-saas/">
+          What is SaaS?
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="u10w2">
+      <div class="u10w3">
+       <div class="u10ttl">
+        News and Events
+       </div>
+       <ul>
+        <li>
+         <a data-lbl="newsandevents:news" href="/news/">
+          News
+         </a>
+        </li>
+        <li>
+         <a data-lbl="newsandevents:oracle-cloudworld" href="/cloudworld/">
+          Oracle CloudWorld
+         </a>
+        </li>
+        <li>
+         <a data-lbl="newsandevents:oracle-cloudworld-tour" href="/cloudworld-tour/">
+          Oracle CloudWorld Tour
+         </a>
+        </li>
+        <li>
+         <a data-lbl="newsandevents:oracle-health-summit" href="/health/health-summit/">
+          Oracle Health Summit
+         </a>
+        </li>
+        <li>
+         <a data-lbl="newsandevents:devlive" href="/developer/devlive/">
+          Oracle DevLive
+         </a>
+        </li>
+        <li>
+         <a data-lbl="newsandevents:search-all-events" href="https://search.oracle.com/events?q=&amp;lang=english">
+          Search all events
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="u10w2">
+      <div class="u10w3">
+       <div class="u10ttl">
+        Contact Us
+       </div>
+       <ul>
+        <li>
+         <a href="tel:18006330738">
+          US Sales: +1.800.633.0738
+         </a>
+        </li>
+        <li>
+         <a data-lbl="contact-us:how-can-we-help" href="/corporate/contact/">
+          How can we help?
+         </a>
+        </li>
+        <li>
+         <a data-lbl="contact-us:subscribe-to-emails" href="https://go.oracle.com/subscriptions">
+          Subscribe to emails
+         </a>
+        </li>
+        <li>
+         <a data-lbl="contact-us:integrity-helpline" href="https://secure.ethicspoint.com/domain/media/en/gui/31053/index.html">
+          Integrity Helpline
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="u10w4">
+      <hr/>
+     </div>
+    </nav>
+    <div class="u10w11">
+     <ul class="u10-cr">
+      <li class="u10mtool" id="u10cmenu">
+       <a class="u10ticon u10regn" data-lbl="country-region" href="/universal-menu/#u10countrymenu">
+        Country/Region
+       </a>
+      </li>
+     </ul>
+     <nav aria-label="Site info" class="u10w5 u10w10">
+      <ul class="u10-links">
+       <li>
+       </li>
+       <li>
+        <a data-lbl="copyright" href="/legal/copyright.html">
+         © 2024 Oracle
+        </a>
+       </li>
+       <li>
+        <a data-lbl="privacy" href="/legal/privacy/">
+         Privacy
+        </a>
+        <span>
+         /
+        </span>
+        <a data-lbl="do-not-sell-my-info" href="/legal/privacy/privacy-choices.html">
+         Do Not Sell My
+Info
+        </a>
+       </li>
+       <li>
+        <div id="teconsent">
+        </div>
+       </li>
+       <li>
+        <a data-lbl="ad-choices" href="/legal/privacy/advertising-privacy-policy.html#adchoices">
+         Ad
+Choices
+        </a>
+       </li>
+       <li>
+        <a data-lbl="careers" href="/corporate/careers/">
+         Careers
+        </a>
+       </li>
+      </ul>
+     </nav>
+     <nav aria-label="Social media links" class="u10scl">
+      <ul class="scl-icons">
+       <li class="scl-facebook">
+        <a data-lbl="scl-icon:facebook" href="https://www.facebook.com/Oracle/" target="_blank" title="Oracle on Facebook">
+        </a>
+       </li>
+       <li class="scl-twitter">
+        <a data-lbl="scl-icon:twitter" href="https://twitter.com/oracle" target="_blank" title="Follow Oracle on Twitter">
+        </a>
+       </li>
+       <li class="scl-linkedin">
+        <a data-lbl="scl-icon:linkedin" href="https://www.linkedin.com/company/oracle/" target="_blank" title="Oracle on LinkedIn">
+        </a>
+       </li>
+       <li class="scl-youtube">
+        <a data-lbl="scl-icon:you-tube" href="https://www.youtube.com/oracle/" target="_blank" title="Watch Oracle on YouTube">
+        </a>
+       </li>
+      </ul>
+     </nav>
+    </div>
+   </footer>
+   <!-- /U10v6 -->
+   <!-- END: oWidget_C/_Raw-Text/Display -->
+   <!-- /U10v0 -->
+  </div>
+  <!-- Container/Display Start -->
+  <!-- _Raw-Text -->
+  <!-- www-us EndBodyAdminContainer -->
+  <!-- Start SiteCatalyst code -->
+  <script language="JavaScript" src="https://www.oracle.com/us/assets/metrics/ora_ocom.js">
+  </script>
+  <!-- End SiteCatalyst code -->
+  <!-- www-us EndBodyAdminContainer -->
+  <!-- / _Raw-Text -->
+  <!-- Container/Display end -->
+ </body>
+</html>

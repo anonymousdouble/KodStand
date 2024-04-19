@@ -1,0 +1,137 @@
+[
+    {
+        "title": "Formatting ¶",
+        "belongs to": "Formatting ¶",
+        "cases": [
+            {
+                "description": "All JavaScript documents must use two spaces for indentation. This is contrary to the OKFN Coding Standards but matches what’s in use in the current code base.\nCoding style must follow the idiomatic.js style but with the following exceptions.\nNote \nIdiomatic is heavily based upon Douglas Crockford’s style guide which is recommended by the OKFN Coding Standards .\nWhite space ¶ \nTwo spaces must be used for indentation at all times. Unlike in idiomatic whitespace must not be used _inside_ parentheses between the parentheses and their Contents.",
+                "example": "// BAD: Too much whitespace.\nfunction getUrl( full ) {\n  var url = '/styleguide/javascript/';\n  if ( full ) {\n    url = 'http://okfn.github.com/ckan' + url;\n  }\n  return url;\n}\n\n// GOOD:\nfunction getUrl(full) {\n  var url = '/styleguide/javascript/';\n  if (full) {\n    url = 'http://okfn.github.com/ckan' + url;\n  }\n  return url;\n}\n",
+                "appendix": "Note \nSee section 2.D.1.1 of idiomatic for more examples of this syntax."
+            },
+            {
+                "description": "Quotes ¶ \nSingle quotes should be used everywhere unless writing JSON or the string contains them. This makes it easier to create strings containing HTML.",
+                "example": "jQuery('<div id=\"my-div\" />').appendTo('body');\n"
+            },
+            {
+                "description": "Object properties need not be quoted unless required by the interpreter.",
+                "example": "var object = {\n  name: 'bill',\n  'class': 'user-name'\n};\n"
+            },
+            {
+                "description": "Variable declarations ¶ \nOne `var` statement must be used per variable assignment. These must be declared at the top of the function in which they are being used.",
+                "example": "// GOOD:\nvar good = 'string';\nvar alsoGood = 'another';\n\n// GOOD:\nvar good = 'string';\nvar okay = [\n  'hmm', 'a bit', 'better'\n];\n\n// BAD:\nvar good = 'string',\n    iffy = [\n  'hmm', 'not', 'great'\n];\n"
+            },
+            {
+                "description": "Declare variables at the top of the function in which they are first used. This avoids issues with variable hoisting. If a variable is not assigned a value until later in the function then it it okay to define more than one per statement.",
+                "example": "// BAD: contrived example.\nfunction lowercaseNames(names) {\n  var names = [];\n\n  for (var index = 0, length = names.length; index < length; index += 1) {\n    var name = names[index];\n    names.push(name.toLowerCase());\n  }\n\n  var sorted = names.sort();\n  return sorted;\n}\n\n// GOOD:\nfunction lowercaseNames(names) {\n  var names = [];\n  var index, sorted, name;\n\n  for (index = 0, length = names.length; index < length; index += 1) {\n    name = names[index];\n    names.push(name.toLowerCase());\n  }\n\n  sorted = names.sort();\n  return sorted;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "Naming ¶",
+        "belongs to": "Naming ¶",
+        "cases": [
+            {
+                "description": "All properties, functions and methods must use lowercase camelCase:",
+                "example": "var myUsername = 'bill';\nvar methods = {\n  getSomething: function () {}\n};\n"
+            },
+            {
+                "description": "Constructor functions must use uppercase CamelCase:",
+                "example": "function DatasetSearchView() {\n}\n"
+            },
+            {
+                "description": "Constants must be uppercase with spaces delimited by underscores:",
+                "example": "var env = {\n  PRODUCTION:  'production',\n  DEVELOPMENT: 'development',\n  TESTING:     'testing'\n};\n"
+            },
+            {
+                "description": "Event handlers and callback functions should be prefixed with “on”:",
+                "example": "function onDownloadClick(event) {}\n\njQuery('.download').click(onDownloadClick);\n"
+            },
+            {
+                "description": "Boolean variables or methods returning boolean functions should prefix the variable name with “is”:",
+                "example": "function isAdmin() {}\n\nvar canEdit = isUser() && isAdmin();\n"
+            },
+            {
+                "description": "Note \nAlternatives are “has”, “can” and “should” if they make more sense\nPrivate methods should be prefixed with an underscore:",
+                "example": "View.extend({\n  \"click\": \"_onClick\",\n  _onClick: function (event) {\n  }\n});\n"
+            },
+            {
+                "description": "Functions should be declared as named functions rather than assigning an anonymous function to a variable.",
+                "example": "// GOOD:\nfunction getName() {\n}\n\n// BAD:\nvar getName = function () {\n};\n",
+                "appendix": "Named functions are generally easier to debug as they appear named in the debugger."
+            }
+        ]
+    },
+    {
+        "title": "Comments ¶",
+        "belongs to": "Comments ¶",
+        "cases": [
+            {
+                "description": "Comments should be used to explain anything that may be unclear when you return to it in six months time. Single line comments should be used for all inline comments that do not form part of the documentation.",
+                "example": "// Export the function to either the exports or global object depending\n// on the current environment. This can be either an AMD module, CommonJS\n// module or a browser.\nif (typeof module.define === 'function' && module.define.amd) {\n  module.define('broadcast', function () {\n    return Broadcast;\n  });\n} else if (module.exports) {\n  module.exports = Broadcast;\n} else {\n  module.Broadcast = Broadcast;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "JSHint ¶",
+        "belongs to": "JSHint ¶",
+        "cases": [
+            {
+                "description": "All JavaScript should pass JSHint before being committed. This can be installed using `npm` (which is bundled with node ) by running:",
+                "example": "$ npm -g install jshint\n",
+                "appendix": "Each project should include a jshint.json file with appropriate configuration options for the tool. Most text editors can also be configured to read from this file."
+            }
+        ]
+    },
+    {
+        "title": "Documentation ¶",
+        "belongs to": "Documentation ¶",
+        "cases": [
+            {
+                "description": "For documentation we use a simple markup format to document all methods. The documentation should provide enough information to show the reader what the method does, arguments it accepts and a general example of usage. Also for API’s and third party libraries, providing links to external documentation is encouraged.\nThe formatting is as follows:",
+                "example": "/* My method description. Should describe what the method does and where\n * it should be used.\n *\n * param1 - The method params, one per line (default: null)\n * param2 - A default can be provided in brackets at the end.\n *\n * Example\n *\n *   // Indented two spaces. Should give a common example of use.\n *   client.getTemplate('index.html', {limit: 1}, function (html) {\n *     module.el.html(html);\n *   });\n *\n * Returns describes what the object returns.\n */\n"
+            },
+            {
+                "description": "For example:",
+                "example": "/* Loads an HTML template from the CKAN snippet API endpoint. Template\n * variables can be passed through the API using the params object.\n *\n * Optional success and error callbacks can be provided or these can\n * be attached using the returns jQuery promise object.\n *\n * filename - The filename of the template to load.\n * params   - An optional object containing key/value arguments to be\n *            passed into the template.\n * success  - An optional success callback to be called on load. This will\n *            recieve the HTML string as the first argument.\n * error    - An optional error callback to be called if the request fails.\n *\n * Example\n *\n *   client.getTemplate('index.html', {limit: 1}, function (html) {\n *     module.el.html(html);\n *   });\n *\n * Returns a jqXHR promise object that can be used to attach callbacks.\n */\n"
+            }
+        ]
+    },
+    {
+        "title": "Testing ¶",
+        "belongs to": "Testing ¶",
+        "cases": [
+            {
+                "description": "For testing we use Cypress .\nTests are run from the cypress directory. We use the BDD interface ( `describe()` , `it()` etc.).\nGenerally we try and have the core functionality of all libraries and modules unit tested."
+            }
+        ]
+    },
+    {
+        "title": "Best practices ¶",
+        "belongs to": "Best practices ¶",
+        "cases": [
+            {
+                "description": "Forms ¶ \nAll forms should work without JavaScript enabled. This means that they must submit `application/x-www-form-urlencoded` data to the server and receive an appropriate response. The server should check for the `X-Requested-With:XMLHTTPRequest` header to determine if the request is an ajax one. If so it can return an appropriate format, otherwise it should issue a 303 redirect. \nThe one exception to this rule is if a form or button is injected with JavaScript after the page has loaded. It’s then not part of the HTML document and can submit any data format it pleases.\nAjax ¶ \nNote \nCalls to the CKAN API from JavaScript should be done through the CKAN client . \nAjax requests can be used to improve the experience of submitting forms and other actions that require server interactions. Nearly all requests will go through the following states. \nUser clicks button. \nJavaScript intercepts the click and disables the button (add `disabled` attr). \nA loading indicator is displayed (add class `.loading` to button). \nThe request is made to the server. \nOn success the interface is updated. \nOn error a message is displayed to the user if there is no other way to resolve the issue. \nThe loading indicator is removed. \nThe button is re-enabled. \nHere’s a possible example for submitting a search form using jQuery.",
+                "example": "jQuery('#search-form').submit(function (event) {\n  var form = $(this);\n  var button = $('[type=submit]', form);\n\n  // Prevent the browser submitting the form.\n  event.preventDefault();\n\n  button.prop('disabled', true).addClass('loading');\n\n  jQuery.ajax({\n    type: this.method,\n    data: form.serialize(),\n    success: function (results) {\n      updatePageWithResults(results);\n    },\n    error: function () {\n      showSearchError('Sorry we were unable to complete this search');\n    },\n    complete: function () {\n      button.prop('disabled', false).removeClass('loading');\n    }\n  });\n});\n",
+                "appendix": "This covers possible issues that might arise from submitting the form as well as providing the user with adequate feedback that the page is doing something. Disabling the button prevents the form being submitted twice and the error feedback should hopefully offer a solution for the error that occurred."
+            },
+            {
+                "description": "Event handlers ¶ \nWhen using event handlers to listen for browser events it’s a common requirement to want to cancel the default browser action. This should be done by calling the `event.preventDefault()` method:",
+                "example": "jQuery('button').click(function (event) {\n  event.preventDefault();\n});\n",
+                "appendix": "It is also possible to return `false` from the callback function. Avoid doing this as it also calls the `event.stopPropagation()` method which prevents the event from bubbling up the DOM tree. This prevents other handlers listening for the same event. For example an analytics click handler attached to the `<body>` element. \nAlso jQuery (1.7+) now provides the .on() and .off() methods as alternatives to `.bind()` , `.unbind()` , `.delegate()` and `.undelegate()` and they should be preferred for all tasks."
+            },
+            {
+                "description": "Templating ¶ \nSmall templates that will not require customisation by the instance can be placed inline. If you need to create multi-line templates use an array rather than escaping newlines within a string:",
+                "example": "var template = [\n  '<li>',\n  '<span></span>',\n  '</li>'\n].join('');\n"
+            },
+            {
+                "description": "Always localise text strings within your template. If you are including them inline this can be done with jQuery:",
+                "example": "jQuery(template).find('span').text(this._('This is my text string'));\n"
+            },
+            {
+                "description": "Larger templates can be loaded in using the CKAN snippet API. Modules get access to this functionality via the `sandbox.client` object:",
+                "example": "initialize: function () {\n  var el = this.el;\n  this.sandbox.client.getTemplate('dataset.html', function (html) {\n    el.html(html);\n  });\n}\n",
+                "appendix": "The primary benefits of this is that the localisation can be done by the server and it keeps the JavaScript modules free from large strings."
+            }
+        ]
+    }
+]

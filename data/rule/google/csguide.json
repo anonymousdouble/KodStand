@@ -1,0 +1,292 @@
+[
+    {
+        "title": "Formatting guidelines",
+        "belongs to": "Formatting guidelines",
+        "cases": []
+    },
+    {
+        "title": "Naming rules",
+        "belongs to": "Formatting guidelines/Naming rules",
+        "cases": [
+            {
+                "description": "Naming rules follow Microsoft’s C# naming guidelines . Where Microsoft’s naming guidelines are unspecified (e.g. private and local variables), rules are taken from the CoreFX C# coding guidelines\nRule summary:"
+            }
+        ]
+    },
+    {
+        "title": "Code",
+        "belongs to": "Formatting guidelines/Naming rules/Code",
+        "cases": [
+            {
+                "description": "Names of classes, methods, enumerations, public fields, public properties, namespaces: `PascalCase` . \nNames of local variables, parameters: `camelCase` . \nNames of private, protected, internal and protected internal fields and properties: `_camelCase` . \nNaming convention is unaffected by modifiers such as const, static, readonly, etc. \nFor casing, a “word” is anything written without internal spaces, including acronyms. For example, `MyRpc` instead of \n`MyRPC` \n. \nNames of interfaces start with `I` , e.g. `IInterface` ."
+            }
+        ]
+    },
+    {
+        "title": "Files",
+        "belongs to": "Formatting guidelines/Naming rules/Files",
+        "cases": [
+            {
+                "description": "Filenames and directory names are `PascalCase` , e.g. `MyFile.cs` . \nWhere possible the file name should be the same as the name of the main class in the file, e.g. `MyClass.cs` . \nIn general, prefer one core class per file."
+            }
+        ]
+    },
+    {
+        "title": "Organization",
+        "belongs to": "Formatting guidelines/Naming rules/Organization",
+        "cases": [
+            {
+                "description": "Modifiers occur in the following order: `publicprotectedinternalprivatenewabstractvirtualoverridesealedstaticreadonlyexternunsafevolatileasync` . \nNamespace `using` declarations go at the top, before any namespaces. `using` import order is alphabetical, apart from `System` imports which always go first. \nClass member ordering: \nGroup class members in the following order: \nNested classes, enums, delegates and events. \nStatic, const and readonly fields. \nFields and properties. \nConstructors and finalizers. \nMethods. \nWithin each group, elements should be in the following order: \nPublic. \nInternal. \nProtected internal. \nProtected. \nPrivate. \nWhere possible, group interface implementations together."
+            }
+        ]
+    },
+    {
+        "title": "Whitespace rules",
+        "belongs to": "Formatting guidelines/Naming rules/Whitespace rules",
+        "cases": [
+            {
+                "description": "Developed from Google Java style.\nA maximum of one statement per line. \nA maximum of one assignment per statement. \nIndentation of 2 spaces, no tabs. \nColumn limit: 100. \nNo line break before opening brace. \nNo line break between closing brace and `else` . \nBraces used even when optional. \nSpace after `if` / `for` / `while` etc., and after commas. \nNo space after an opening parenthesis or before a closing parenthesis. \nNo space between a unary operator and its operand. One space between the operator and each operand of all other operators. \nLine wrapping developed from Google C++ style guidelines, with minor modifications for compatibility with Microsoft’s C# formatting tools: \nIn general, line continuations are indented 4 spaces. \nLine breaks with braces (e.g. list initializers, lambdas, object initializers, etc) do not count as continuations. \nFor function definitions and calls, if the arguments do not all fit on one line they should be broken up onto multiple lines, with each subsequent line aligned with the first argument. If there is not enough room for this, arguments may instead be placed on subsequent lines with a four space indent. The code example below illustrates this."
+            }
+        ]
+    },
+    {
+        "title": "Example",
+        "belongs to": "Formatting guidelines/Naming rules/Example",
+        "cases": [
+            {
+                "example": "using System;                                       // `using` goes at the top, outside the\n                                                    // namespace.\n\nnamespace MyNamespace {                             // Namespaces are PascalCase.\n                                                    // Indent after namespace.\n  public interface IMyInterface {                   // Interfaces start with 'I'\n    public int Calculate(float value, float exp);   // Methods are PascalCase\n                                                    // ...and space after comma.\n  }\n\n  public enum MyEnum {                              // Enumerations are PascalCase.\n    Yes,                                            // Enumerators are PascalCase.\n    No,\n  }\n\n  public class MyClass {                            // Classes are PascalCase.\n    public int Foo = 0;                             // Public member variables are\n                                                    // PascalCase.\n    public bool NoCounting = false;                 // Field initializers are encouraged.\n    private class Results {\n      public int NumNegativeResults = 0;\n      public int NumPositiveResults = 0;\n    }\n    private Results _results;                       // Private member variables are\n                                                    // _camelCase.\n    public static int NumTimesCalled = 0;\n    private const int _bar = 100;                   // const does not affect naming\n                                                    // convention.\n    private int[] _someTable = {                    // Container initializers use a 2\n      2, 3, 4,                                      // space indent.\n    }\n\n    public MyClass() {\n      _results = new Results {\n        NumNegativeResults = 1,                     // Object initializers use a 2 space\n        NumPositiveResults = 1,                     // indent.\n      };\n    }\n\n    public int CalculateValue(int mulNumber) {      // No line break before opening brace.\n      var resultValue = Foo * mulNumber;            // Local variables are camelCase.\n      NumTimesCalled++;\n      Foo += _bar;\n\n      if (!NoCounting) {                            // No space after unary operator and\n                                                    // space after 'if'.\n        if (resultValue < 0) {                      // Braces used even when optional and\n                                                    // spaces around comparison operator.\n          _results.NumNegativeResults++;\n        } else if (resultValue > 0) {               // No newline between brace and else.\n          _results.NumPositiveResults++;\n        }\n      }\n\n      return resultValue;\n    }\n\n    public void ExpressionBodies() {\n      // For simple lambdas, fit on one line if possible, no brackets or braces required.\n      Func<int, int> increment = x => x + 1;\n\n      // Closing brace aligns with first character on line that includes the opening brace.\n      Func<int, int, long> difference1 = (x, y) => {\n        long diff = (long)x - y;\n        return diff >= 0 ? diff : -diff;\n      };\n\n      // If defining after a continuation line break, indent the whole body.\n      Func<int, int, long> difference2 =\n          (x, y) => {\n            long diff = (long)x - y;\n            return diff >= 0 ? diff : -diff;\n          };\n\n      // Inline lambda arguments also follow these rules. Prefer a leading newline before\n      // groups of arguments if they include lambdas.\n      CallWithDelegate(\n          (x, y) => {\n            long diff = (long)x - y;\n            return diff >= 0 ? diff : -diff;\n          });\n    }\n\n    void DoNothing() {}                             // Empty blocks may be concise.\n\n    // If possible, wrap arguments by aligning newlines with the first argument.\n    void AVeryLongFunctionNameThatCausesLineWrappingProblems(int longArgumentName,\n                                                             int p1, int p2) {}\n\n    // If aligning argument lines with the first argument doesn't fit, or is difficult to\n    // read, wrap all arguments on new lines with a 4 space indent.\n    void AnotherLongFunctionNameThatCausesLineWrappingProblems(\n        int longArgumentName, int longArgumentName2, int longArgumentName3) {}\n\n    void CallingLongFunctionName() {\n      int veryLongArgumentName = 1234;\n      int shortArg = 1;\n      // If possible, wrap arguments by aligning newlines with the first argument.\n      AnotherLongFunctionNameThatCausesLineWrappingProblems(shortArg, shortArg,\n                                                            veryLongArgumentName);\n      // If aligning argument lines with the first argument doesn't fit, or is difficult to\n      // read, wrap all arguments on new lines with a 4 space indent.\n      AnotherLongFunctionNameThatCausesLineWrappingProblems(\n          veryLongArgumentName, veryLongArgumentName, veryLongArgumentName);\n    }\n  }\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "C# coding guidelines",
+        "belongs to": "C# coding guidelines",
+        "cases": []
+    },
+    {
+        "title": "Constants",
+        "belongs to": "C# coding guidelines/Constants",
+        "cases": [
+            {
+                "description": "Variables and fields that can be made `const` should always be made `const` . \nIf `const` isn’t possible, `readonly` can be a suitable alternative. \nPrefer named constants to magic numbers."
+            }
+        ]
+    },
+    {
+        "title": "IEnumerable vs IList vs IReadOnlyList",
+        "belongs to": "C# coding guidelines/IEnumerable vs IList vs IReadOnlyList",
+        "cases": [
+            {
+                "description": "For inputs use the most restrictive collection type possible, for example `IReadOnlyCollection` / `IReadOnlyList` / `IEnumerable` as inputs to methods when the inputs should be immutable. \nFor outputs, if passing ownership of the returned container to the owner, prefer `IList` over `IEnumerable` . If not transferring ownership, prefer the most restrictive option."
+            }
+        ]
+    },
+    {
+        "title": "Generators vs containers",
+        "belongs to": "C# coding guidelines/Generators vs containers",
+        "cases": [
+            {
+                "description": "Use your best judgement, bearing in mind: \nGenerator code is often less readable than filling in a container. \nGenerator code can be more performant if the results are going to be processed lazily, e.g. when not all the results are needed. \nGenerator code that is directly turned into a container via `ToList()` will be less performant than filling in a container directly. \nGenerator code that is called multiple times will be considerably slower than iterating over a container multiple times."
+            }
+        ]
+    },
+    {
+        "title": "Property styles",
+        "belongs to": "C# coding guidelines/Property styles",
+        "cases": [
+            {
+                "description": "For single line read-only properties, prefer expression body properties ( `=>` ) when possible. \nFor everything else, use the older `{get;set;}` syntax."
+            }
+        ]
+    },
+    {
+        "title": "Expression body syntax",
+        "belongs to": "C# coding guidelines/Expression body syntax",
+        "cases": [
+            {
+                "description": "For example:",
+                "example": "int SomeProperty => _someProperty\n",
+                "appendix": "Judiciously use expression body syntax in lambdas and properties. \nDon’t use on method definitions. This will be reviewed when C# 7 is live, which uses this syntax heavily. \nAs with methods and other scoped blocks of code, align the closing with the first character of the line that includes the opening brace. See sample code for examples."
+            }
+        ]
+    },
+    {
+        "title": "Structs and classes:",
+        "belongs to": "C# coding guidelines/Structs and classes:",
+        "cases": [
+            {
+                "description": "Structs are very different from classes: \nStructs are always passed and returned by value. \nAssigning a value to a member of a returned struct doesn’t modify the original - e.g. `transform.position.x=10` doesn’t set the transform’s position.x to 10; `position` here is a property that returns a `Vector3` by value, so this just sets the x parameter of a copy of the original. \nAlmost always use a class. \nConsider struct when the type can be treated like other value types - for example, if instances of the type are small and commonly short-lived or are commonly embedded in other objects. Good examples include Vector3, Quaternion and Bounds. \nNote that this guidance may vary from team to team where, for example, performance issues might force the use of structs."
+            }
+        ]
+    },
+    {
+        "title": "Lambdas vs named methods",
+        "belongs to": "C# coding guidelines/Lambdas vs named methods",
+        "cases": [
+            {
+                "description": "If a lambda is non-trivial (e.g. more than a couple of statements, excluding declarations), or is reused in multiple places, it should probably be a named method."
+            }
+        ]
+    },
+    {
+        "title": "Field initializers",
+        "belongs to": "C# coding guidelines/Field initializers",
+        "cases": [
+            {
+                "description": "Field initializers are generally encouraged."
+            }
+        ]
+    },
+    {
+        "title": "Extension methods",
+        "belongs to": "C# coding guidelines/Extension methods",
+        "cases": [
+            {
+                "description": "Only use an extension method when the source of the original class is not available, or else when changing the source is not feasible. \nOnly use an extension method if the functionality being added is a ‘core’ general feature that would be appropriate to add to the source of the original class. \nNote - if we have the source to the class being extended, and the maintainer of the original class does not want to add the function, prefer not using an extension method. \nOnly put extension methods into core libraries that are available everywhere - extensions that are only available in some code will become a readability issue. \nBe aware that using extension methods always obfuscates the code, so err on the side of not adding them."
+            }
+        ]
+    },
+    {
+        "title": "ref and out",
+        "belongs to": "C# coding guidelines/ref and out",
+        "cases": [
+            {
+                "description": "Use `out` for returns that are not also inputs. \nPlace `out` parameters after all other parameters in the method definition. \n`ref` should be used rarely, when mutating an input is necessary. \nDo not use `ref` as an optimisation for passing structs. \nDo not use `ref` to pass a modifiable container into a method. `ref` is only required when the supplied container needs be replaced with an entirely different container instance."
+            }
+        ]
+    },
+    {
+        "title": "LINQ",
+        "belongs to": "C# coding guidelines/LINQ",
+        "cases": [
+            {
+                "description": "In general, prefer single line LINQ calls and imperative code, rather than long chains of LINQ. Mixing imperative code and heavily chained LINQ is often hard to read. \nPrefer member extension methods over SQL-style LINQ keywords - e.g. prefer `myList.Where(x)` to `myListwherex` . \nAvoid `Container.ForEach(...)` for anything longer than a single statement."
+            }
+        ]
+    },
+    {
+        "title": "Array vs List",
+        "belongs to": "C# coding guidelines/Array vs List",
+        "cases": [
+            {
+                "description": "In general, prefer `List<>` over arrays for public variables, properties, and return types (keeping in mind the guidance on `IList` / `IEnumerable` / `IReadOnlyList` above). \nPrefer `List<>` when the size of the container can change. \nPrefer arrays when the size of the container is fixed and known at construction time. \nPrefer array for multidimensional arrays. \nNote: \narray and `List<>` both represent linear, contiguous containers. \nSimilar to C++ arrays vs `std::vector` , arrays are of fixed capacity, whereas `List<>` can be added to. \nIn some cases arrays are more performant, but in general `List<>` is more flexible."
+            }
+        ]
+    },
+    {
+        "title": "Folders and file locations",
+        "belongs to": "C# coding guidelines/Folders and file locations",
+        "cases": [
+            {
+                "description": "Be consistent with the project. \nPrefer a flat structure where possible."
+            }
+        ]
+    },
+    {
+        "title": "Use of tuple as a return type",
+        "belongs to": "C# coding guidelines/Use of tuple as a return type",
+        "cases": [
+            {
+                "description": "In general, prefer a named class type over `Tuple<>` , particularly when returning complex types."
+            }
+        ]
+    },
+    {
+        "title": "String interpolation vs String.Format() vs String.Concat vs operator+",
+        "belongs to": "C# coding guidelines/String interpolation vs String.Format() vs String.Concat vs operator+",
+        "cases": [
+            {
+                "description": "In general, use whatever is easiest to read, particularly for logging and assert messages. \nBe aware that chained `operator+` concatenations will be slower and cause significant memory churn. \nIf performance is a concern, `StringBuilder` will be faster for multiple string concatenations."
+            }
+        ]
+    },
+    {
+        "title": "using",
+        "belongs to": "C# coding guidelines/using",
+        "cases": [
+            {
+                "description": "Generally, don’t alias long typenames with `using` . Often this is a sign that a `Tuple<>` needs to be turned into a class. \ne.g. `usingRecordList=List<Tuple<int,float>>` should probably be a named class instead. \nBe aware that `using` statements are only file scoped and so of limited use. Type aliases will not be available for external users."
+            }
+        ]
+    },
+    {
+        "title": "Object Initializer syntax",
+        "belongs to": "C# coding guidelines/Object Initializer syntax",
+        "cases": [
+            {
+                "description": "For example:",
+                "example": "var x = new SomeClass {\n  Property1 = value1,\n  Property2 = value2,\n};\n",
+                "appendix": "Object Initializer Syntax is fine for ‘plain old data’ types. \nAvoid using this syntax for classes or structs with constructors. \nIf splitting across multiple lines, indent one block level."
+            }
+        ]
+    },
+    {
+        "title": "Namespace naming",
+        "belongs to": "C# coding guidelines/Namespace naming",
+        "cases": [
+            {
+                "description": "In general, namespaces should be no more than 2 levels deep. \nDon’t force file/folder layout to match namespaces. \nFor shared library/module code, use namespaces. For leaf ‘application’ code, such as `unity_app` , namespaces are not necessary. \nNew top-level namespace names must be globally unique and recognizable."
+            }
+        ]
+    },
+    {
+        "title": "Default values/null returns for structs",
+        "belongs to": "C# coding guidelines/Default values/null returns for structs",
+        "cases": [
+            {
+                "description": "Prefer returning a ‘success’ boolean value and a struct `out` value. \nWhere performance isn’t a concern and the resulting code significantly more readable (e.g. chained null conditional operators vs deeply nested if statements) nullable structs are acceptable. \nNotes: \nNullable structs are convenient, but reinforce the general ‘null is failure’ pattern Google prefers to avoid. We will investigate a `StatusOr` equivalent in the future, if there is enough demand."
+            }
+        ]
+    },
+    {
+        "title": "Removing from containers while iterating",
+        "belongs to": "C# coding guidelines/Removing from containers while iterating",
+        "cases": [
+            {
+                "description": "C# (like many other languages) does not provide an obvious mechanism for removing items from containers while iterating. There are a couple of options:\nIf all that is required is to remove items that satisfy some condition, `someList.RemoveAll(somePredicate)` is recommended. \nIf other work needs to be done in the iteration, `RemoveAll` may not be sufficient. A common alternative pattern is to create a new container outside of the loop, insert items to keep in the new container, and swap the original container with the new one at the end of iteration."
+            }
+        ]
+    },
+    {
+        "title": "Calling delegates",
+        "belongs to": "C# coding guidelines/Calling delegates",
+        "cases": [
+            {
+                "description": "When calling a delegate, use `Invoke()` and use the null conditional operator - e.g. `SomeDelegate?.Invoke()` . This clearly marks the call at the callsite as ‘a delegate that is being called’. The null check is concise and robust against threading race conditions."
+            }
+        ]
+    },
+    {
+        "title": "The var keyword",
+        "belongs to": "C# coding guidelines/The var keyword",
+        "cases": [
+            {
+                "description": "Use of `var` is encouraged if it aids readability by avoiding type names that are noisy, obvious, or unimportant. \nEncouraged: \nWhen the type is obvious - e.g. `varapple=newApple();` , or `varrequest=Factory.Create<HttpRequest>();` \nFor transient variables that are only passed directly to other methods - e.g. `varitem=GetItem();ProcessItem(item);` \nDiscouraged: \nWhen working with basic types - e.g. `varsuccess=true;` \nWhen working with compiler-resolved built-in numeric types - e.g. `varnumber=12*ReturnsFloat();` \nWhen users would clearly benefit from knowing the type - e.g. `varlistOfItems=GetList();`"
+            }
+        ]
+    },
+    {
+        "title": "Attributes",
+        "belongs to": "C# coding guidelines/Attributes",
+        "cases": [
+            {
+                "description": "Attributes should appear on the line above the field, property, or method they are associated with, separated from the member by a newline. \nMultiple attributes should be separated by newlines. This allows for easier adding and removing of attributes, and ensures each attribute is easy to search for."
+            }
+        ]
+    },
+    {
+        "title": "Argument Naming",
+        "belongs to": "C# coding guidelines/Argument Naming",
+        "cases": [
+            {
+                "description": "Derived from the Google C++ style guide.\nWhen the meaning of a function argument is nonobvious, consider one of the following remedies:\nIf the argument is a literal constant, and the same constant is used in multiple function calls in a way that tacitly assumes they’re the same, use a named constant to make that constraint explicit, and to guarantee that it holds. \nConsider changing the function signature to replace a `bool` argument with an `enum` argument. This will make the argument values self-describing. \nReplace large or complex nested expressions with named variables. \nConsider using Named Arguments to clarify argument meanings at the call site. \nFor functions that have several configuration options, consider defining a single class or struct to hold all the options and pass an instance of that. This approach has several advantages. Options are referenced by name at the call site, which clarifies their meaning. It also reduces function argument count, which makes function calls easier to read and write. As an added benefit, call sites don’t need to be changed when another option is added.\nConsider the following example:",
+                "example": "// Bad - what are these arguments?\nDecimalNumber product = CalculateProduct(values, 7, false, null);\n"
+            },
+            {
+                "description": "versus:",
+                "example": "// Good\nProductOptions options = new ProductOptions();\noptions.PrecisionDecimals = 7;\noptions.UseCache = CacheUsage.DontUseCache;\nDecimalNumber product = CalculateProduct(values, options, completionDelegate: null);\n",
+                "appendix": "This site is open source. Improve this page ."
+            }
+        ]
+    }
+]

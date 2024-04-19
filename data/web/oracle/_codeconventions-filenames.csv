@@ -1,0 +1,29 @@
+title,belongs to,description,example,appendix
+2 - File Names,2 - File Names,This section lists commonly used file suffixes and names.,,
+2.1 File Suffixes,2 - File Names/2.1 File Suffixes,"Java Software uses the following file suffixes:
+File Type 
+Suffix 
+Java source 
+`.java` 
+Java bytecode 
+`.class`",,
+2.2 Common File Names,2 - File Names/2.2 Common File Names,"Frequently used file names include:
+File Name 
+Use 
+`GNUmakefile` 
+The preferred name for makefiles. We use `gnumake` to build our software. 
+`README` 
+The preferred name for the file that summarizes the contents of a particular directory.
+  
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+ ",,

@@ -1,0 +1,2008 @@
+[
+    {
+        "title": "1 Introduction",
+        "belongs to": "1 Introduction",
+        "cases": [
+            {
+                "description": "This document serves as the complete definition of Google’s coding standards for source code in the JavaScript programming language. A JavaScript source file is described as being in Google Style if and only if it adheres to the rules herein.\nLike other programming style guides, the issues covered span not only aesthetic issues of formatting, but other types of conventions or coding standards as well. However, this document focuses primarily on the hard-and-fast rules that we follow universally, and avoids giving advice that isn't clearly enforceable (whether by human or tool)."
+            }
+        ]
+    },
+    {
+        "title": "1.1 Terminology notes",
+        "belongs to": "1 Introduction/1.1 Terminology notes",
+        "cases": [
+            {
+                "description": "In this document, unless otherwise clarified:\nThe term comment always refers to implementation comments. We do not use the phrase documentation comments , instead using the common term “JSDoc” for both human-readable text and machine-readable annotations within `/**…*/` . \nThis Style Guide uses RFC 2119 terminology when using the phrases must , must not , should , should not , and may . The terms prefer and avoid correspond to should and should not , respectively. Imperative and declarative statements are prescriptive and correspond to must .\nOther terminology notes will appear occasionally throughout the document."
+            }
+        ]
+    },
+    {
+        "title": "1.2 Guide notes",
+        "belongs to": "1 Introduction/1.2 Guide notes",
+        "cases": [
+            {
+                "description": "Example code in this document is non-normative . That is, while the examples are in Google Style, they may not illustrate the only stylish way to represent the code. Optional formatting choices made in examples must not be enforced as rules."
+            }
+        ]
+    },
+    {
+        "title": "2 Source file basics",
+        "belongs to": "2 Source file basics",
+        "cases": []
+    },
+    {
+        "title": "2.1 File name",
+        "belongs to": "2 Source file basics/2.1 File name",
+        "cases": [
+            {
+                "description": "File names must be all lowercase and may include underscores ( `_` ) or dashes ( `-` ), but no additional punctuation. Follow the convention that your project uses. Filenames’ extension must be `.js` ."
+            }
+        ]
+    },
+    {
+        "title": "2.2 File encoding: UTF-8",
+        "belongs to": "2 Source file basics/2.2 File encoding: UTF-8",
+        "cases": [
+            {
+                "description": "Source files are encoded in UTF-8 ."
+            }
+        ]
+    },
+    {
+        "title": "2.3 Special characters",
+        "belongs to": "2 Source file basics/2.3 Special characters",
+        "cases": []
+    },
+    {
+        "title": "2.3.1 Whitespace characters",
+        "belongs to": "2 Source file basics/2.3 Special characters/2.3.1 Whitespace characters",
+        "cases": [
+            {
+                "description": "Aside from the line terminator sequence, the ASCII horizontal space character (0x20) is the only whitespace character that appears anywhere in a source file. This implies that\nAll other whitespace characters in string literals are escaped, and \nTab characters are not used for indentation."
+            }
+        ]
+    },
+    {
+        "title": "2.3.2 Special escape sequences",
+        "belongs to": "2 Source file basics/2.3 Special characters/2.3.2 Special escape sequences",
+        "cases": [
+            {
+                "description": "For any character that has a special escape sequence ( `\\'` , `\\\"` , `\\\\` , `\\b` , `\\f` , `\\n` , `\\r` , `\\t` , `\\v` ), that sequence is used rather than the corresponding numeric escape (e.g `\\x0a` , `\\u000a` , or `\\u{a}` ). Legacy octal escapes are never used."
+            }
+        ]
+    },
+    {
+        "title": "2.3.3 Non-ASCII characters",
+        "belongs to": "2 Source file basics/2.3 Special characters/2.3.3 Non-ASCII characters",
+        "cases": [
+            {
+                "description": "For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent hex or Unicode escape (e.g. `\\u221e` ) is used, depending only on which makes the code easier to read and understand .\nTip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.",
+                "example": "/* Best: perfectly clear even without a comment. */\nconst units = 'μs';\n\n/* Allowed: but unnecessary as μ is a printable character. */\nconst units = '\\u03bcs'; // 'μs'\n\n/* Good: use escapes for non-printable characters with a comment for clarity. */\nreturn '\\ufeff' + content;  // Prepend a byte order mark.\n\n/* Poor: the reader has no idea what character this is. */\nconst units = '\\u03bcs';\n",
+                "appendix": "Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that happens, those programs are broken and they must be fixed ."
+            }
+        ]
+    },
+    {
+        "title": "3 Source file structure",
+        "belongs to": "3 Source file structure",
+        "cases": [
+            {
+                "description": "All new source files should either be a `goog.module` file (a file containing a `goog.module` call) or an ECMAScript (ES) module (uses `import` and `export` statements). Files consist of the following, in order :\nLicense or copyright information, if present \n`@fileoverview` JSDoc, if present \n`goog.module` statement, if a `goog.module` file \nES `import` statements, if an ES module \n`goog.require` and `goog.requireType` statements \nThe file’s implementation\nExactly one blank line separates each section that is present, except the file's implementation, which may be preceded by 1 or 2 blank lines."
+            }
+        ]
+    },
+    {
+        "title": "3.1 License or copyright information, if present",
+        "belongs to": "3 Source file structure/3.1 License or copyright information, if present",
+        "cases": [
+            {
+                "description": "If license or copyright information belongs in a file, it belongs here."
+            }
+        ]
+    },
+    {
+        "title": "3.2 @fileoverview JSDoc, if present",
+        "belongs to": "3 Source file structure/3.2 @fileoverview JSDoc, if present",
+        "cases": [
+            {
+                "description": "See ?? for formatting rules."
+            }
+        ]
+    },
+    {
+        "title": "3.3 goog.module statement",
+        "belongs to": "3 Source file structure/3.3 goog.module statement",
+        "cases": [
+            {
+                "description": "All `goog.module` files must declare exactly one `goog.module` name on a single line: lines containing a `goog.module` declaration must not be wrapped, and are therefore an exception to the 80-column limit.\nThe entire argument to goog.module is what defines a namespace. It is the package name (an identifier that reflects the fragment of the directory structure where the code lives) plus, optionally, the main class/enum/interface that it defines concatenated to the end.\nExample",
+                "example": "goog.module('search.urlHistory.UrlHistoryService');\n"
+            }
+        ]
+    },
+    {
+        "title": "3.3.1 Hierarchy",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.3.1 Hierarchy",
+        "cases": [
+            {
+                "description": "Module namespaces may never be named as a direct child of another module's namespace.\nDisallowed:",
+                "example": "goog.module('foo.bar');   // 'foo.bar.qux' would be fine, though\ngoog.module('foo.bar.baz');\n",
+                "appendix": "The directory hierarchy reflects the namespace hierarchy, so that deeper-nested children are subdirectories of higher-level parent directories. Note that this implies that owners of “parent” namespace groups are necessarily aware of all child namespaces, since they exist in the same directory."
+            }
+        ]
+    },
+    {
+        "title": "3.3.2 goog.module.declareLegacyNamespace",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.3.2 goog.module.declareLegacyNamespace",
+        "cases": [
+            {
+                "description": "The single `goog.module` statement may optionally be followed by a call to `goog.module.declareLegacyNamespace();` . Avoid `goog.module.declareLegacyNamespace()` when possible.\nExample:",
+                "example": "goog.module('my.test.helpers');\ngoog.module.declareLegacyNamespace();\ngoog.setTestOnly();\n",
+                "appendix": "`goog.module.declareLegacyNamespace` exists to ease the transition from traditional object hierarchy-based namespaces but comes with some naming restrictions. As the child module name must be created after the parent namespace, this name must not be a child or parent of any other `goog.module` (for example, `goog.module('parent');` and `goog.module('parent.child');` cannot both exist safely, nor can `goog.module('parent');` and `goog.module('parent.child.grandchild');` )."
+            }
+        ]
+    },
+    {
+        "title": "3.3.3 goog.module Exports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.3.3 goog.module Exports",
+        "cases": [
+            {
+                "description": "Classes, enums, functions, constants, and other symbols are exported using the `exports` object. Exported symbols may be defined directly on the `exports` object, or else declared locally and exported separately. Symbols are only exported if they are meant to be used outside the module. Non-exported module-local symbols are not declared `@private` nor do their names end with an underscore. There is no prescribed ordering for exported and module-local symbols.\nExamples:",
+                "example": "const /** !Array<number> */ exportedArray = [1, 2, 3];\n\nconst /** !Array<number> */ moduleLocalArray = [4, 5, 6];\n\n/** @return {number} */\nfunction moduleLocalFunction() {\n  return moduleLocalArray.length;\n}\n\n/** @return {number} */\nfunction exportedFunction() {\n  return moduleLocalFunction() * 2;\n}\n\nexports = {exportedArray, exportedFunction};\n\n/** @const {number} */\nexports.CONSTANT_ONE = 1;\n\n/** @const {string} */\nexports.CONSTANT_TWO = 'Another constant';\n"
+            },
+            {
+                "description": "Do not annotate the `exports` object as `@const` as it is already treated as a constant by the compiler.",
+                "example": "/** @const */\nexports = {exportedFunction};\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4 ES modules",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules",
+        "cases": []
+    },
+    {
+        "title": "3.4.1 Imports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports",
+        "cases": [
+            {
+                "description": "Import statements must not be line wrapped and are therefore an exception to the 80-column limit."
+            }
+        ]
+    },
+    {
+        "title": "3.4.1.1 Import paths",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths",
+        "cases": [
+            {
+                "description": "ES module files must use the `import` statement to import other ES module files. Do not `goog.require` another ES module.",
+                "example": "import './sideeffects.js';\n\nimport * as goog from '../closure/goog/goog.js';\nimport * as parent from '../parent.js';\n\nimport {name} from './sibling.js';\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.1.1.1 File extensions in import paths",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.1.1 File extensions in import paths",
+        "cases": [
+            {
+                "description": "The `.js` file extension is not optional in import paths and must always be included.",
+                "example": "import '../directory/file';\n\nimport '../directory/file.js';\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.1.2 Importing the same file multiple times",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.2 Importing the same file multiple times",
+        "cases": [
+            {
+                "description": "Do not import the same file multiple times. This can make it hard to determine the aggregate imports of a file.",
+                "example": "// Imports have the same path, but since it doesn't align it can be hard to see.\nimport {short} from './long/path/to/a/file.js';\nimport {aLongNameThatBreaksAlignment} from './long/path/to/a/file.js';\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.1.3 Naming imports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports",
+        "cases": []
+    },
+    {
+        "title": "3.4.1.3.1 Naming module imports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.1.3.1 Naming module imports",
+        "cases": [
+            {
+                "description": "Module import names ( `import*asname` ) are `lowerCamelCase` names that are derived from the imported file name.",
+                "example": "import * as fileOne from '../file-one.js';\nimport * as fileTwo from '../file_two.js';\nimport * as fileThree from '../filethree.js';\n\nimport * as libString from './lib/string.js';\nimport * as math from './math/math.js';\nimport * as vectorMath from './vector/math.js';\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.1.3.2 Naming default imports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.1.3.2 Naming default imports",
+        "cases": [
+            {
+                "description": "Default import names are derived from the imported file name and follow the rules in ?? .",
+                "example": "import MyClass from '../my-class.js';\nimport myFunction from '../my_function.js';\nimport SOME_CONSTANT from '../someconstant.js';\n",
+                "appendix": "Note: In general this should not happen as default exports are banned by this style guide, see ?? . Default imports are only used to import modules that do not conform to this style guide."
+            }
+        ]
+    },
+    {
+        "title": "3.4.1.3.3 Naming named imports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.1.3.3 Naming named imports",
+        "cases": [
+            {
+                "description": "In general symbols imported via the named import ( `import{name}` ) should keep the same name. Avoid aliasing imports ( `import{SomeThingasSomeOtherThing}` ). Prefer fixing name collisions by using a module import ( `import*` ) or renaming the exports themselves.",
+                "example": "import * as bigAnimals from './biganimals.js';\nimport * as domesticatedAnimals from './domesticatedanimals.js';\n\nnew bigAnimals.Cat();\nnew domesticatedAnimals.Cat();\n"
+            },
+            {
+                "description": "If renaming a named import is needed then use components of the imported module's file name or path in the resulting alias.",
+                "example": "import {Cat as BigCat} from './biganimals.js';\nimport {Cat as DomesticatedCat} from './domesticatedanimals.js';\n\nnew BigCat();\nnew DomesticatedCat();\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.2 Exports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports",
+        "cases": [
+            {
+                "description": "Symbols are only exported if they are meant to be used outside the module. Non-exported module-local symbols are not declared `@private` nor do their names end with an underscore. There is no prescribed ordering for exported and module-local symbols."
+            }
+        ]
+    },
+    {
+        "title": "3.4.2.1 Named vs default exports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.2.1 Named vs default exports",
+        "cases": [
+            {
+                "description": "Use named exports in all code. You can apply the `export` keyword to a declaration, or use the `export{name};` syntax.\nDo not use default exports. Importing modules must give a name to these values, which can lead to inconsistencies in naming across modules.",
+                "example": "// Do not use default exports:\nexport default class Foo { ... } // BAD!\n\n// Use named exports:\nexport class Foo { ... }\n\n// Alternate style named exports:\nclass Foo { ... }\n\nexport {Foo};\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.2.2 Exporting static container classes and objects",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.2.2 Exporting static container classes and objects",
+        "cases": [
+            {
+                "description": "Do not export container classes or objects with static methods or properties for the sake of namespacing.",
+                "example": "// container.js\n// Bad: Container is an exported class that has only static methods and fields.\nexport class Container {\n  /** @return {number} */\n  static bar() {\n    return 1;\n  }\n}\n\n/** @const {number} */\nContainer.FOO = 1;\n"
+            },
+            {
+                "description": "Instead, export individual constants and functions:",
+                "example": "/** @return {number} */\nexport function bar() {\n  return 1;\n}\n\nexport const /** number */ FOO = 1;\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.2.3 Mutability of exports",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.2.3 Mutability of exports",
+        "cases": [
+            {
+                "description": "Exported variables must not be mutated outside of module initialization.\nThere are alternatives if mutation is needed, including exporting a constant reference to an object that has mutable fields or exporting accessor functions for mutable data.",
+                "example": "// Bad: both foo and mutateFoo are exported and mutated.\nexport let /** number */ foo = 0;\n\n/**\n * Mutates foo.\n */\nexport function mutateFoo() {\n  ++foo;\n}\n\n/**\n * @param {function(number): number} newMutateFoo\n */\nexport function setMutateFoo(newMutateFoo) {\n  // Exported classes and functions can be mutated!\n  mutateFoo = () => {\n    foo = newMutateFoo(foo);\n  };\n}\n\n// Good: Rather than export the mutable variables foo and mutateFoo directly,\n// instead make them module scoped and export a getter for foo and a wrapper for\n// mutateFooFunc.\nlet /** number */ foo = 0;\nlet /** function(number): number */ mutateFooFunc = foo => foo + 1;\n\n/** @return {number} */\nexport function getFoo() {\n  return foo;\n}\n\nexport function mutateFoo() {\n  foo = mutateFooFunc(foo);\n}\n\n/** @param {function(number): number} mutateFoo */\nexport function setMutateFoo(mutateFoo) {\n  mutateFooFunc = mutateFoo;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.2.4 export from",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.2.4 export from",
+        "cases": [
+            {
+                "description": "`exportfrom` statements must not be line wrapped and are therefore an exception to the 80-column limit. This applies to both `exportfrom` flavors.",
+                "example": "export {specificName} from './other.js';\nexport * from './another.js';\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.3 Circular Dependencies in ES modules",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.3 Circular Dependencies in ES modules",
+        "cases": [
+            {
+                "description": "Do not create cycles between ES modules, even though the ECMAScript specification allows this. Note that it is possible to create cycles with both the `import` and `export` statements.",
+                "example": "// a.js\nimport './b.js';\n\n// b.js\nimport './a.js';\n\n// `export from` can cause circular dependencies too!\nexport {x} from './c.js';\n\n// c.js\nimport './b.js';\n\nexport let x;\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.4 Interoperating with Closure",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure",
+        "cases": []
+    },
+    {
+        "title": "3.4.4.1 Referencing goog",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure/3.4.4.1 Referencing goog",
+        "cases": [
+            {
+                "description": "To reference the Closure `goog` namespace, import Closure's `goog.js` .",
+                "example": "import * as goog from '../closure/goog/goog.js';\n\nconst name = goog.require('a.name');\n\nexport const CONSTANT = name.compute();\n",
+                "appendix": "`goog.js` exports only a subset of properties from the global `goog` that can be used in ES modules."
+            }
+        ]
+    },
+    {
+        "title": "3.4.4.2 goog.require in ES modules",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure/3.4.4.2 goog.require in ES modules",
+        "cases": [
+            {
+                "description": "`goog.require` in ES modules works as it does in `goog.module` files. You can require any Closure namespace symbol (i.e., symbols created by `goog.provide` or `goog.module` ) and `goog.require` will return the value.",
+                "example": "import * as goog from '../closure/goog/goog.js';\nimport * as anEsModule from './anEsModule.js';\n\nconst GoogPromise = goog.require('goog.Promise');\nconst myNamespace = goog.require('my.namespace');\n"
+            }
+        ]
+    },
+    {
+        "title": "3.4.4.3 Declaring Closure Module IDs in ES modules",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure/3.4.4.3 Declaring Closure Module IDs in ES modules",
+        "cases": [
+            {
+                "description": "`goog.declareModuleId` can be used within ES modules to declare a `goog.module` -like module ID. This means that this module ID can be `goog.require` d, `goog.module.get` d, `goog.forwardDeclare` 'd, etc. as if it were a `goog.module` that did not call `goog.module.declareLegacyNamespace` . It does not create the module ID as a globally available JavaScript symbol.\nA `goog.require` (or `goog.module.get` ) for a module ID from `goog.declareModuleId` will always return the module object (as if it was `import*` 'd). As a result, the argument to `goog.declareModuleId` should always end with a `lowerCamelCaseName` .\nNote: It is an error to call `goog.module.declareLegacyNamespace` in an ES module, it can only be called from `goog.module` files. There is no direct way to associate a legacy namespace with an ES module.\n`goog.declareModuleId` should only be used to upgrade Closure files to ES modules in place, where named exports are used.",
+                "example": "import * as goog from '../closure/goog.js';\n\ngoog.declareModuleId('my.esm');\n\nexport class Class {};\n"
+            }
+        ]
+    },
+    {
+        "title": "3.5 goog.setTestOnly",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure/3.5 goog.setTestOnly",
+        "cases": [
+            {
+                "description": "In a `goog.module` file the `goog.module` statement may optionally be followed by a call to `goog.setTestOnly()` .\nIn an ES module the `import` statements may optionally be followed by a call to `goog.setTestOnly()` ."
+            }
+        ]
+    },
+    {
+        "title": "3.6 goog.require and goog.requireType statements",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure/3.6 goog.require and goog.requireType statements",
+        "cases": [
+            {
+                "description": "Imports are done with `goog.require` and `goog.requireType` statements. The names imported by a `goog.require` statement may be used both in code and in type annotations, while those imported by a `goog.requireType` may be used in type annotations only.\nThe `goog.require` and `goog.requireType` statements form a contiguous block with no empty lines. This block follows the `goog.module` declaration separated by a single empty line . The entire argument to `goog.require` or `goog.requireType` is a namespace defined by a `goog.module` in a separate file. `goog.require` and `goog.requireType` statements may not appear anywhere else in the file.\nEach `goog.require` or `goog.requireType` is assigned to a single constant alias, or else destructured into several constant aliases. These aliases are the only acceptable way to refer to dependencies in type annotations or code. Fully qualified namespaces must not be used anywhere, except as an argument to `goog.require` or `goog.requireType` .\nException : Types, variables, and functions declared in externs files have to use their fully qualified name in type annotations and code.\nAliases must match the final dot-separated component of the imported module's namespace.\nException : In certain cases, additional components of the namespace can be used to form a longer alias. The resulting alias must retain the original identifier's casing such that it still correctly identifies its type. Longer aliases may be used to disambiguate otherwise identical aliases, or if it significantly improves readability. In addition, a longer alias must be used to prevent masking native types such as `Element` , `Event` , `Error` , `Map` , and `Promise` (for a more complete list, see Standard Built-in Objects and Web\nAPIs at MDN). When renaming destructured aliases, a space must follow the colon as required in ?? .\nA file should not contain both a `goog.require` and a `goog.requireType` statement for the same namespace. If the imported name is used both in code and in type annotations, it should be imported by a single `goog.require` statement.\nIf a module is imported only for its side effects, the call must be a `goog.require` (not a `goog.requireType` ) and assignment may be omitted. A comment is required to explain why this is needed and suppress a compiler warning.\nThe lines are sorted according to the following rules: All requires with a name on the left hand side come first, sorted alphabetically by those names. Then destructuring requires, again sorted by the names on the left hand side. Finally, any require calls that are standalone (generally these are for modules imported just for their side effects).\nTip: There’s no need to memorize this order and enforce it manually. You can rely on your IDE to report requires that are not sorted correctly.\nIf a long alias or module name would cause a line to exceed the 80-column limit, it must not be wrapped: require lines are an exception to the 80-column limit.\nExample:",
+                "example": "// Standard alias style.\nconst MyClass = goog.require('some.package.MyClass');\nconst MyType = goog.requireType('some.package.MyType');\n// Namespace-based alias used to disambiguate.\nconst NsMyClass = goog.require('other.ns.MyClass');\n// Namespace-based alias used to prevent masking native type.\nconst RendererElement = goog.require('web.renderer.Element');\n// Out of sequence namespace-based aliases used to improve readability.\n// Also, require lines longer than 80 columns must not be wrapped.\nconst SomeDataStructureModel = goog.requireType('identical.package.identifiers.models.SomeDataStructure');\nconst SomeDataStructureProto = goog.require('proto.identical.package.identifiers.SomeDataStructure');\n// Standard alias style.\nconst asserts = goog.require('goog.asserts');\n// Namespace-based alias used to disambiguate.\nconst testingAsserts = goog.require('goog.testing.asserts');\n// Standard destructuring into aliases.\nconst {clear, clone} = goog.require('goog.array');\nconst {Rgb} = goog.require('goog.color');\n// Namespace-based destructuring into aliases in order to disambiguate.\nconst {SomeType: FooSomeType} = goog.requireType('foo.types');\nconst {clear: objectClear, clone: objectClone} = goog.require('goog.object');\n// goog.require without an alias in order to trigger side effects.\n/** @suppress {extraRequire} Initializes MyFramework. */\ngoog.require('my.framework.initialization');\n"
+            },
+            {
+                "description": "Discouraged:",
+                "example": "// If necessary to disambiguate, prefer PackageClass over SomeClass as it is\n// closer to the format of the module name.\nconst SomeClass = goog.require('some.package.Class');\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "// Extra terms must come from the namespace.\nconst MyClassForBizzing = goog.require('some.package.MyClass');\n// Alias must include the entire final namespace component.\nconst MyClass = goog.require('some.package.MyClassForBizzing');\n// Alias must not mask native type (should be `const JspbMap` here).\nconst Map = goog.require('jspb.Map');\n// Don't break goog.require lines over 80 columns.\nconst SomeDataStructure =\n    goog.require('proto.identical.package.identifiers.SomeDataStructure');\n// Alias must be based on the namespace.\nconst randomName = goog.require('something.else');\n// Missing a space after the colon.\nconst {Foo:FooProto} = goog.require('some.package.proto.Foo');\n// goog.requireType without an alias.\ngoog.requireType('some.package.with.a.Type');\n\n\n/**\n * @param {!some.unimported.Dependency} param All external types used in JSDoc\n *     annotations must be goog.require'd, unless declared in externs.\n */\nfunction someFunction(param) {\n  // goog.require lines must be at the top level before any other code.\n  const alias = goog.require('my.long.name.alias');\n  // ...\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "3.7 The file’s implementation",
+        "belongs to": "3 Source file structure/3.3 goog.module statement/3.4 ES modules/3.4.1 Imports/3.4.1.1 Import paths/3.4.1.3 Naming imports/3.4.2 Exports/3.4.4 Interoperating with Closure/3.7 The file’s implementation",
+        "cases": [
+            {
+                "description": "The actual implementation follows after all dependency information is declared (separated by at least one blank line).\nThis may consist of any module-local declarations (constants, variables, classes, functions, etc), as well as any exported symbols."
+            }
+        ]
+    },
+    {
+        "title": "4 Formatting",
+        "belongs to": "4 Formatting",
+        "cases": [
+            {
+                "description": "Terminology Note : block-like construct refers to the body of a class, function, method, or brace-delimited block of code. Note that, by ?? and ?? , any array or object literal may optionally be treated as if it were a block-like construct.\nTip: Use `clang-format` . The JavaScript community has invested effort to make sure clang-format does the right thing on JavaScript files. `clang-format` has integration with several popular editors."
+            }
+        ]
+    },
+    {
+        "title": "4.1 Braces",
+        "belongs to": "4 Formatting/4.1 Braces",
+        "cases": []
+    },
+    {
+        "title": "4.1.1 Braces are used for all control structures",
+        "belongs to": "4 Formatting/4.1 Braces/4.1.1 Braces are used for all control structures",
+        "cases": [
+            {
+                "description": "Braces are required for all control structures (i.e. `if` , `else` , `for` , `do` , `while` , as well as any others), even if the body contains only a single statement. The first statement of a non-empty block must begin on its own line.\nDisallowed:",
+                "example": "if (someVeryLongCondition())\n  doSomething();\n\nfor (let i = 0; i < foo.length; i++) bar(foo[i]);\n"
+            },
+            {
+                "description": "Exception : A simple if statement that can fit entirely on a single line with no wrapping (and that doesn’t have an else) may be kept on a single line with no braces when it improves readability. This is the only case in which a control structure may omit braces and newlines.",
+                "example": "if (shortCondition()) foo();\n"
+            }
+        ]
+    },
+    {
+        "title": "4.1.2 Nonempty blocks: K&R style",
+        "belongs to": "4 Formatting/4.1 Braces/4.1.2 Nonempty blocks: K&R style",
+        "cases": [
+            {
+                "description": "Braces follow the Kernighan and Ritchie style ( \nEgyptian brackets \n) for nonempty blocks and block-like constructs:\nNo line break before the opening brace. \nLine break after the opening brace. \nLine break before the closing brace. \nLine break after the closing brace if that brace terminates a statement or the body of a function or class statement, or a class method. Specifically, there is no line break after the brace if it is followed by `else` , `catch` , `while` , or a comma, semicolon, or right-parenthesis.\nExample:",
+                "example": "class InnerClass {\n  constructor() {}\n\n  /** @param {number} foo */\n  method(foo) {\n    if (condition(foo)) {\n      try {\n        // Note: this might fail.\n        something();\n      } catch (err) {\n        recover();\n      }\n    }\n  }\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "4.1.3 Empty blocks: may be concise",
+        "belongs to": "4 Formatting/4.1 Braces/4.1.3 Empty blocks: may be concise",
+        "cases": [
+            {
+                "description": "An empty block or block-like construct may be closed immediately after it is opened, with no characters, space, or line break in between (i.e. `{}` ), unless it is a part of a multi-block statement (one that directly contains multiple blocks: `if` / `else` or `try` / `catch` / `finally` ).\nExample:",
+                "example": "function doNothing() {}\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "if (condition) {\n  // …\n} else if (otherCondition) {} else {\n  // …\n}\n\ntry {\n  // …\n} catch (e) {}\n"
+            }
+        ]
+    },
+    {
+        "title": "4.2 Block indentation: +2 spaces",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces",
+        "cases": [
+            {
+                "description": "Each time a new block or block-like construct is opened, the indent increases by two spaces. When the block ends, the indent returns to the previous indent level. The indent level applies to both code and comments throughout the block. (See the example in ?? )."
+            }
+        ]
+    },
+    {
+        "title": "4.2.1 Array literals: optionally block-like",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.2.1 Array literals: optionally block-like",
+        "cases": [
+            {
+                "description": "Any array literal may optionally be formatted as if it were a “block-like construct.” For example, the following are all valid ( not an exhaustive list):",
+                "example": "const a = [\n  0,\n  1,\n  2,\n];\n\nconst b =\n    [0, 1, 2];\n\n\nconst c = [0, 1, 2];\n\nsomeMethod(foo, [\n  0, 1, 2,\n], bar);\n",
+                "appendix": "Other combinations are allowed, particularly when emphasizing semantic groupings between elements, but should not be used only to reduce the vertical size of larger arrays."
+            }
+        ]
+    },
+    {
+        "title": "4.2.2 Object literals: optionally block-like",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.2.2 Object literals: optionally block-like",
+        "cases": [
+            {
+                "description": "Any object literal may optionally be formatted as if it were a “block-like construct.” The same examples apply as ?? . For example, the following are all valid ( not an exhaustive list):",
+                "example": "const a = {\n  a: 0,\n  b: 1,\n};\n\nconst b =\n    {a: 0, b: 1};\n\nconst c = {a: 0, b: 1};\n\nsomeMethod(foo, {\n  a: 0, b: 1,\n}, bar);\n"
+            }
+        ]
+    },
+    {
+        "title": "4.2.3 Class literals",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.2.3 Class literals",
+        "cases": [
+            {
+                "description": "Class literals (whether declarations or expressions) are indented as blocks. Do not add semicolons after methods, or after the closing brace of a class declaration (statements—such as assignments—that contain class expressions are still terminated with a semicolon). Use the `extends` keyword, but not the `@extends` JSDoc annotation unless the class extends a templatized type.\nExample:",
+                "example": "class Foo {\n  constructor() {\n    /** @type {number} */\n    this.x = 42;\n  }\n\n  /** @return {number} */\n  method() {\n    return this.x;\n  }\n}\nFoo.Empty = class {};\n\n/** @extends {Foo<string>} */\nfoo.Bar = class extends Foo {\n  /** @override */\n  method() {\n    return super.method() / 2;\n  }\n};\n\n/** @interface */\nclass Frobnicator {\n  /** @param {string} message */\n  frobnicate(message) {}\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "4.2.4 Function expressions",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.2.4 Function expressions",
+        "cases": [
+            {
+                "description": "When declaring an anonymous function in the list of arguments for a function call, the body of the function is indented two spaces more than the preceding indentation depth.\nExample:",
+                "example": "prefix.something.reallyLongFunctionName('whatever', (a1, a2) => {\n  // Indent the function body +2 relative to indentation depth\n  // of the 'prefix' statement one line above.\n  if (a1.equals(a2)) {\n    someOtherLongFunctionName(a1);\n  } else {\n    andNowForSomethingCompletelyDifferent(a2.parrot);\n  }\n});\n\nsome.reallyLongFunctionCall(arg1, arg2, arg3)\n    .thatsWrapped()\n    .then((result) => {\n      // Indent the function body +2 relative to the indentation depth\n      // of the '.then()' call.\n      if (result) {\n        result.use();\n      }\n    });\n"
+            }
+        ]
+    },
+    {
+        "title": "4.2.5 Switch statements",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.2.5 Switch statements",
+        "cases": [
+            {
+                "description": "As with any other block, the contents of a switch block are indented +2.\nAfter a switch label, a newline appears, and the indentation level is increased +2, exactly as if a block were being opened. An explicit block may be used if required by lexical scoping. The following switch label returns to the previous indentation level, as if a block had been closed.\nA blank line is optional between a `break` and the following case.\nExample:",
+                "example": "switch (animal) {\n  case Animal.BANDERSNATCH:\n    handleBandersnatch();\n    break;\n\n  case Animal.JABBERWOCK:\n    handleJabberwock();\n    break;\n\n  default:\n    throw new Error('Unknown animal');\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "4.3 Statements",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements",
+        "cases": []
+    },
+    {
+        "title": "4.3.1 One statement per line",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.3.1 One statement per line",
+        "cases": [
+            {
+                "description": "Each statement is followed by a line-break."
+            }
+        ]
+    },
+    {
+        "title": "4.3.2 Semicolons are required",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.3.2 Semicolons are required",
+        "cases": [
+            {
+                "description": "Every statement must be terminated with a semicolon. Relying on automatic semicolon insertion is forbidden."
+            }
+        ]
+    },
+    {
+        "title": "4.4 Column limit: 80",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.4 Column limit: 80",
+        "cases": [
+            {
+                "description": "JavaScript code has a column limit of 80 characters. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in ?? .\nExceptions:\n`goog.module` , `goog.require` and `goog.requireType` statements (see ?? and ?? ). \nES module `import` and `exportfrom` statements (see ?? and ?? ). \nLines where obeying the column limit is not possible or would hinder discoverability. Examples include: \nA long URL which should be clickable in source. \nA shell command intended to be copied-and-pasted. \nA long string literal which may need to be copied or searched for wholly (e.g., a long file path)."
+            }
+        ]
+    },
+    {
+        "title": "4.5 Line-wrapping",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping",
+        "cases": [
+            {
+                "description": "Terminology Note : Line wrapping is breaking a chunk of code into multiple lines to obey column limit, where the chunk could otherwise legally fit in a single line.\nThere is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.\nNote: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.\nTip: Extracting a method or local variable may solve the problem without the need to line-wrap."
+            }
+        ]
+    },
+    {
+        "title": "4.5.1 Where to break",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.5.1 Where to break",
+        "cases": [
+            {
+                "description": "The prime directive of line-wrapping is: prefer to break at a higher syntactic level .\nPreferred:",
+                "example": "currentEstimate =\n    calc(currentEstimate + x * currentEstimate) /\n        2.0;\n"
+            },
+            {
+                "description": "Discouraged:",
+                "example": "currentEstimate = calc(currentEstimate + x *\n    currentEstimate) / 2.0;\n",
+                "appendix": "In the preceding example, the syntactic levels from highest to lowest are as follows: assignment, division, function call, parameters, number constant.\nOperators are wrapped as follows:\nWhen a line is broken at an operator the break comes after the symbol. (Note that this is not the same practice used in Google style for Java.) \nThis does not apply to the dot ( `.` ), which is not actually an operator. \nA method or constructor name stays attached to the open parenthesis ( `(` ) that follows it. \nA comma ( `,` ) stays attached to the token that precedes it.\nNote: The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines."
+            }
+        ]
+    },
+    {
+        "title": "4.5.2 Indent continuation lines at least +4 spaces",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.5.2 Indent continuation lines at least +4 spaces",
+        "cases": [
+            {
+                "description": "When line-wrapping, each line after the first (each continuation line ) is indented at least +4 from the original line, unless it falls under the rules of block indentation.\nWhen there are multiple continuation lines, indentation may be varied beyond +4 as appropriate. In general, continuation lines at a deeper syntactic level are indented by larger multiples of 4, and two lines use the same indentation level if and only if they begin with syntactically parallel elements.\n?? addresses the discouraged practice of using a variable number of spaces to align certain tokens with previous lines."
+            }
+        ]
+    },
+    {
+        "title": "4.6 Whitespace",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace",
+        "cases": []
+    },
+    {
+        "title": "4.6.1 Vertical whitespace",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.6.1 Vertical whitespace",
+        "cases": [
+            {
+                "description": "A single blank line appears:\nBetween consecutive methods in a class or object literal \nException: A blank line between two consecutive properties definitions in an object literal (with no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. \nWithin method bodies, sparingly to create logical groupings of statements. Blank lines at the start or end of a function body are not allowed. \nOptionally before the first or after the last method in a class or object literal (neither encouraged nor discouraged). \nAs required by other sections of this document (e.g. ?? ).\nMultiple consecutive blank lines are permitted, but never required (nor encouraged)."
+            }
+        ]
+    },
+    {
+        "title": "4.6.2 Horizontal whitespace",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.6.2 Horizontal whitespace",
+        "cases": [
+            {
+                "description": "Use of horizontal whitespace depends on location, and falls into three broad categories: leading (at the start of a line), trailing (at the end of a line), and internal . Leading whitespace (i.e., indentation) is addressed elsewhere. Trailing whitespace is forbidden.\nBeyond where required by the language or other style rules, and apart from literals, comments, and JSDoc, a single internal ASCII space also appears in the following places only .\nSeparating any reserved word (such as `if` , `for` , or `catch` ) except for `function` and `super` , from an open parenthesis ( `(` ) that follows it on that line. \nSeparating any reserved word (such as `else` or `catch` ) from a closing curly brace ( `}` ) that precedes it on that line. \nBefore any open curly brace ( `{` ), with two exceptions: \nBefore an object literal that is the first argument of a function or the first element in an array literal (e.g. `foo({a:[{c:d}]})` ). \nIn a template expansion, as it is forbidden by the language (e.g. valid: ``ab${1+2}cd`` , invalid: ``xy${3}z`` ). \nOn both sides of any binary or ternary operator. \nAfter a comma ( `,` ) or semicolon ( `;` ). Note that spaces are never allowed before these characters. \nAfter the colon ( `:` ) in an object literal. \nOn both sides of the double slash ( `//` ) that begins an end-of-line comment. Here, multiple spaces are allowed, but not required. \nAfter an open-block comment character and on both sides of close characters (e.g. for short-form type declarations, casts, and parameter name comments: `this.foo=/**@type{number}*/(bar)` ; or `function(/**string*/foo){` ; or `baz(/*buzz=*/true)` )."
+            }
+        ]
+    },
+    {
+        "title": "4.6.3 Horizontal alignment: discouraged",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.6.3 Horizontal alignment: discouraged",
+        "cases": [
+            {
+                "description": "Terminology Note : Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.\nThis practice is permitted, but it is generally discouraged by Google Style. It is not even required to maintain horizontal alignment in places where it was already used.\nHere is an example without alignment, followed by one with alignment. Both are allowed, but the latter is discouraged:",
+                "example": "{\n  tiny: 42, // this is great\n  longer: 435, // this too\n};\n\n{\n  tiny:   42,  // permitted, but future edits\n  longer: 435, // may leave it unaligned\n};\n",
+                "appendix": "Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed. More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a blast radius. This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts."
+            }
+        ]
+    },
+    {
+        "title": "4.6.4 Function arguments",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.6.4 Function arguments",
+        "cases": [
+            {
+                "description": "Prefer to put all function arguments on the same line as the function name. If doing so would exceed the 80-column limit, the arguments must be line-wrapped in a readable way. To save space, you may wrap as close to 80 as possible, or put each argument on its own line to enhance readability. Indentation should be four spaces. Aligning to the parenthesis is allowed, but discouraged. Below are the most common patterns for argument wrapping:",
+                "example": "// Arguments start on a new line, indented four spaces. Preferred when the\n// arguments don't fit on the same line with the function name (or the keyword\n// \"function\") but fit entirely on the second line. Works with very long\n// function names, survives renaming without reindenting, low on space.\ndoSomething(\n    descriptiveArgumentOne, descriptiveArgumentTwo, descriptiveArgumentThree) {\n  // …\n}\n\n// If the argument list is longer, wrap at 80. Uses less vertical space,\n// but violates the rectangle rule and is thus not recommended.\ndoSomething(veryDescriptiveArgumentNumberOne, veryDescriptiveArgumentTwo,\n    tableModelEventHandlerProxy, artichokeDescriptorAdapterIterator) {\n  // …\n}\n\n// Four-space, one argument per line.  Works with long function names,\n// survives renaming, and emphasizes each argument.\ndoSomething(\n    veryDescriptiveArgumentNumberOne,\n    veryDescriptiveArgumentTwo,\n    tableModelEventHandlerProxy,\n    artichokeDescriptorAdapterIterator) {\n  // …\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "4.7 Grouping parentheses: recommended",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.7 Grouping parentheses: recommended",
+        "cases": [
+            {
+                "description": "Optional grouping parentheses are omitted only when the author and reviewer agree that there is no reasonable chance that the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire operator precedence table memorized.\nDo not use unnecessary parentheses around the entire expression following `delete` , `typeof` , `void` , `return` , `throw` , `case` , `in` , `of` , or `yield` .\nParentheses are required for type casts: `/**@type{!Foo}*/(foo)` ."
+            }
+        ]
+    },
+    {
+        "title": "4.8 Comments",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.8 Comments",
+        "cases": [
+            {
+                "description": "This section addresses implementation comments . JSDoc is addressed separately in ?? ."
+            }
+        ]
+    },
+    {
+        "title": "4.8.1 Block comment style",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.8 Comments/4.8.1 Block comment style",
+        "cases": [
+            {
+                "description": "Block comments are indented at the same level as the surrounding code. They may be in `/*…*/` or `//` -style. For multi-line `/*…*/` comments, subsequent lines must start with * aligned with the `*` on the previous line, to make comments obvious with no extra context.",
+                "example": "/*\n * This is\n * okay.\n */\n\n// And so\n// is this.\n\n/* This is fine, too. */\n",
+                "appendix": "Comments are not enclosed in boxes drawn with asterisks or other characters.\nDo not use JSDoc ( `/**…*/` ) for implementation comments."
+            }
+        ]
+    },
+    {
+        "title": "4.8.2 Parameter Name Comments",
+        "belongs to": "4 Formatting/4.1 Braces/4.2 Block indentation: +2 spaces/4.3 Statements/4.5 Line-wrapping/4.6 Whitespace/4.8 Comments/4.8.2 Parameter Name Comments",
+        "cases": [
+            {
+                "description": "“Parameter name” comments should be used whenever the value and method name do not sufficiently convey the meaning, and refactoring the method to be clearer is infeasible . Their preferred format is before the value with = :",
+                "example": "someFunction(obviousParam, /* shouldRender= */ true, /* name= */ 'hello');\n"
+            },
+            {
+                "description": "For consistency with surrounding code you may put them after the value without = :",
+                "example": "someFunction(obviousParam, true /* shouldRender */, 'hello' /* name */);\n"
+            }
+        ]
+    },
+    {
+        "title": "5 Language features",
+        "belongs to": "5 Language features",
+        "cases": [
+            {
+                "description": "JavaScript includes many dubious (and even dangerous) features. This section delineates which features may or may not be used, and any additional constraints on their use."
+            }
+        ]
+    },
+    {
+        "title": "5.1 Local variable declarations",
+        "belongs to": "5 Language features/5.1 Local variable declarations",
+        "cases": []
+    },
+    {
+        "title": "5.1.1 Use const and let",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.1.1 Use const and let",
+        "cases": [
+            {
+                "description": "Declare all local variables with either `const` or `let` . Use const by default, unless a variable needs to be reassigned. The `var` keyword must not be used."
+            }
+        ]
+    },
+    {
+        "title": "5.1.2 One variable per declaration",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.1.2 One variable per declaration",
+        "cases": [
+            {
+                "description": "Every local variable declaration declares only one variable: declarations such as `leta=1,b=2;` are not used."
+            }
+        ]
+    },
+    {
+        "title": "5.1.3 Declared when needed, initialized as soon as possible",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.1.3 Declared when needed, initialized as soon as possible",
+        "cases": [
+            {
+                "description": "Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope."
+            }
+        ]
+    },
+    {
+        "title": "5.1.4 Declare types as needed",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.1.4 Declare types as needed",
+        "cases": [
+            {
+                "description": "JSDoc type annotations may be added either on the line above the declaration, or else inline before the variable name if no other JSDoc is present.\nExample:",
+                "example": "const /** !Array<number> */ data = [];\n\n/**\n * Some description.\n * @type {!Array<number>}\n */\nconst data = [];\n"
+            },
+            {
+                "description": "Mixing inline and JSDoc styles is not allowed: the compiler will only process the first JsDoc and the inline annotations will be lost.",
+                "example": "/** Some description. */\nconst /** !Array<number> */ data = [];\n",
+                "appendix": "Tip: There are many cases where the compiler can infer a templatized type but not its parameters. This is particularly the case when the initializing literal or constructor call does not include any values of the template parameter type (e.g., empty arrays, objects, `Map` s, or `Set` s), or if the variable is modified in a closure. Local variable type annotations are particularly helpful in these cases since otherwise the compiler will infer the template parameter as unknown."
+            }
+        ]
+    },
+    {
+        "title": "5.2 Array literals",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals",
+        "cases": []
+    },
+    {
+        "title": "5.2.1 Use trailing commas",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.2.1 Use trailing commas",
+        "cases": [
+            {
+                "description": "Include a trailing comma whenever there is a line break between the final element and the closing bracket.\nExample:",
+                "example": "const values = [\n  'first value',\n  'second value',\n];\n"
+            }
+        ]
+    },
+    {
+        "title": "5.2.2 Do not use the variadic Array constructor",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.2.2 Do not use the variadic Array constructor",
+        "cases": [
+            {
+                "description": "The constructor is error-prone if arguments are added or removed. Use a literal instead.\nDisallowed:",
+                "example": "const a1 = new Array(x1, x2, x3);\nconst a2 = new Array(x1, x2);\nconst a3 = new Array(x1);\nconst a4 = new Array();\n"
+            },
+            {
+                "description": "This works as expected except for the third case: if `x1` is a whole number then `a3` is an array of size `x1` where all elements are `undefined` . If `x1` is any other number, then an exception will be thrown, and if it is anything else then it will be a single-element array.\nInstead, write",
+                "example": "const a1 = [x1, x2, x3];\nconst a2 = [x1, x2];\nconst a3 = [x1];\nconst a4 = [];\n",
+                "appendix": "Explicitly allocating an array of a given length using `newArray(length)` is allowed when appropriate."
+            }
+        ]
+    },
+    {
+        "title": "5.2.3 Non-numeric properties",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.2.3 Non-numeric properties",
+        "cases": [
+            {
+                "description": "Do not define or use non-numeric properties on an array (other than `length` ). Use a `Map` (or `Object` ) instead."
+            }
+        ]
+    },
+    {
+        "title": "5.2.4 Destructuring",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.2.4 Destructuring",
+        "cases": [
+            {
+                "description": "Array literals may be used on the left-hand side of an assignment to perform destructuring (such as when unpacking multiple values from a single array or iterable). A final rest element may be included (with no space between the `...` and the variable name). Elements should be omitted if they are unused.",
+                "example": "const [a, b, c, ...rest] = generateResults();\nlet [, b,, d] = someArray;\n"
+            },
+            {
+                "description": "Destructuring may also be used for function parameters (note that a parameter name is required but ignored). Always specify `[]` as the default value if a destructured array parameter is optional, and provide default values on the left hand side:",
+                "example": "/** @param {!Array<number>=} param1 */\nfunction optionalDestructuring([a = 4, b = 2] = []) { … };\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "function badDestructuring([a, b] = [4, 2]) { … };\n",
+                "appendix": "Tip: For (un)packing multiple values into a function’s parameter or return, prefer object destructuring to array destructuring when possible, as it allows naming the individual elements and specifying a different type for each."
+            }
+        ]
+    },
+    {
+        "title": "5.2.5 Spread operator",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.2.5 Spread operator",
+        "cases": [
+            {
+                "description": "Array literals may include the spread operator ( `...` ) to flatten elements out of one or more other iterables. The spread operator should be used instead of more awkward constructs with `Array.prototype` . There is no space after the `...` .\nExample:",
+                "example": "[...foo]   // preferred over Array.prototype.slice.call(foo)\n[...foo, ...bar]   // preferred over foo.concat(bar)\n"
+            }
+        ]
+    },
+    {
+        "title": "5.3 Object literals",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals",
+        "cases": []
+    },
+    {
+        "title": "5.3.1 Use trailing commas",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.1 Use trailing commas",
+        "cases": [
+            {
+                "description": "Include a trailing comma whenever there is a line break between the final property and the closing brace."
+            }
+        ]
+    },
+    {
+        "title": "5.3.2 Do not use the Object constructor",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.2 Do not use the Object constructor",
+        "cases": [
+            {
+                "description": "While `Object` does not have the same problems as `Array` , it is still disallowed for consistency. Use an object literal ( `{}` or `{a:0,b:1,c:2}` ) instead."
+            }
+        ]
+    },
+    {
+        "title": "5.3.3 Do not mix quoted and unquoted keys",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.3 Do not mix quoted and unquoted keys",
+        "cases": [
+            {
+                "description": "Object literals may represent either structs (with unquoted keys and/or symbols) or dicts (with quoted and/or computed keys). Do not mix these key types in a single object literal.\nDisallowed:",
+                "example": "{\n  width: 42, // struct-style unquoted key\n  'maxWidth': 43, // dict-style quoted key\n}\n"
+            },
+            {
+                "description": "This also extends to passing the property name to functions, like `hasOwnProperty` . In particular, doing so will break in compiled code because the compiler cannot rename/obfuscate the string literal.\nDisallowed:",
+                "example": "/** @type {{width: number, maxWidth: (number|undefined)}} */\nconst o = {width: 42};\nif (o.hasOwnProperty('maxWidth')) {\n  ...\n}\n"
+            },
+            {
+                "description": "This is best implemented as:",
+                "example": "/** @type {{width: number, maxWidth: (number|undefined)}} */\nconst o = {width: 42};\nif (o.maxWidth != null) {\n  ...\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.3.4 Computed property names",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.4 Computed property names",
+        "cases": [
+            {
+                "description": "Computed property names (e.g., `{['key'+foo()]:42}` ) are allowed, and are considered dict-style (quoted) keys (i.e., must not be mixed with non-quoted keys) unless the computed property is a symbol (e.g., `[Symbol.iterator]` ). Enum values may also be used for computed keys, but should not be mixed with non-enum keys in the same literal."
+            }
+        ]
+    },
+    {
+        "title": "5.3.5 Method shorthand",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.5 Method shorthand",
+        "cases": [
+            {
+                "description": "Methods can be defined on object literals using the method shorthand ( `{method(){…}}` ) in place of a colon immediately followed by a `function` or arrow function literal.\nExample:",
+                "example": "return {\n  stuff: 'candy',\n  method() {\n    return this.stuff;  // Returns 'candy'\n  },\n};\n"
+            },
+            {
+                "description": "Note that `this` in a method shorthand or `function` refers to the object literal itself whereas `this` in an arrow function refers to the scope outside the object literal.\nExample:",
+                "example": "class {\n  getObjectLiteral() {\n    this.stuff = 'fruit';\n    return {\n      stuff: 'candy',\n      method: () => this.stuff,  // Returns 'fruit'\n    };\n  }\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.3.6 Shorthand properties",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.6 Shorthand properties",
+        "cases": [
+            {
+                "description": "Shorthand properties are allowed on object literals.\nExample:",
+                "example": "const foo = 1;\nconst bar = 2;\nconst obj = {\n  foo,\n  bar,\n  method() { return this.foo + this.bar; },\n};\nassertEquals(3, obj.method());\n"
+            }
+        ]
+    },
+    {
+        "title": "5.3.7 Destructuring",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.7 Destructuring",
+        "cases": [
+            {
+                "description": "Object destructuring patterns may be used on the left-hand side of an assignment to perform destructuring and unpack multiple values from a single object.\nDestructured objects may also be used as function parameters, but should be kept as simple as possible: a single level of unquoted shorthand properties. Deeper levels of nesting and computed properties may not be used in parameter destructuring. Specify any default values in the left-hand-side of the destructured parameter ( `{str='somedefault'}={}` , rather than `{str}={str:'somedefault'}` ), and if a destructured object is itself optional, it must default to `{}` . The JSDoc for the destructured parameter may be given any name (the name is unused but is required by the compiler).\nExample:",
+                "example": "/**\n * @param {string} ordinary\n * @param {{num: (number|undefined), str: (string|undefined)}=} param1\n *     num: The number of times to do something.\n *     str: A string to do stuff to.\n */\nfunction destructured(ordinary, {num, str = 'some default'} = {})\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "/** @param {{x: {num: (number|undefined), str: (string|undefined)}}} param1 */\nfunction nestedTooDeeply({x: {num, str}}) {};\n/** @param {{num: (number|undefined), str: (string|undefined)}=} param1 */\nfunction nonShorthandProperty({num: a, str: b} = {}) {};\n/** @param {{a: number, b: number}} param1 */\nfunction computedKey({a, b, [a + b]: c}) {};\n/** @param {{a: number, b: string}=} param1 */\nfunction nontrivialDefault({a, b} = {a: 2, b: 4}) {};\n",
+                "appendix": "Destructuring may also be used for `goog.require` statements, and in this case must not be wrapped: the entire statement occupies one line, regardless of how long it is (see ?? )."
+            }
+        ]
+    },
+    {
+        "title": "5.3.8 Enums",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.3.8 Enums",
+        "cases": [
+            {
+                "description": "Enumerations are defined by adding the `@enum` annotation to an object literal. Additional properties may not be added to an enum after it is defined. Enums must be constant, and all enum values must be deeply immutable.",
+                "example": "/**\n * Supported temperature scales.\n * @enum {string}\n */\nconst TemperatureScale = {\n  CELSIUS: 'celsius',\n  FAHRENHEIT: 'fahrenheit',\n};\n\n/**\n * An enum with two options.\n * @enum {number}\n */\nconst Option = {\n  /** The option used shall have been the first. */\n  FIRST_OPTION: 1,\n  /** The second among two options. */\n  SECOND_OPTION: 2,\n};\n"
+            }
+        ]
+    },
+    {
+        "title": "5.4 Classes",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes",
+        "cases": []
+    },
+    {
+        "title": "5.4.1 Constructors",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.1 Constructors",
+        "cases": [
+            {
+                "description": "Constructors are optional. Subclass constructors must call `super()` before setting any fields or otherwise accessing `this` . Interfaces should declare non-method properties in the constructor."
+            }
+        ]
+    },
+    {
+        "title": "5.4.2 Fields",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.2 Fields",
+        "cases": [
+            {
+                "description": "Set all of a concrete object’s fields (i.e. all properties other than methods) in the constructor. Annotate fields that are never reassigned with `@const` (these need not be deeply immutable). Annotate non-public fields with the proper visibility annotation ( `@private` , `@protected` , `@package` ), and end all `@private` fields' names with an underscore. Fields are never set on a concrete class' `prototype` .\nExample:",
+                "example": "class Foo {\n  constructor() {\n    /** @private @const {!Bar} */\n    this.bar_ = computeBar();\n\n    /** @protected @const {!Baz} */\n    this.baz = computeBaz();\n  }\n}\n",
+                "appendix": "Tip: Properties should never be added to or removed from an instance after the constructor is finished, since it significantly hinders VMs’ ability to optimize. If necessary, fields that are initialized later should be explicitly set to `undefined` in the constructor to prevent later shape changes. Adding `@struct` to an object will check that undeclared properties are not added/accessed. Classes have this added by default."
+            }
+        ]
+    },
+    {
+        "title": "5.4.3 Computed properties",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.3 Computed properties",
+        "cases": [
+            {
+                "description": "Computed properties may only be used in classes when the property is a symbol. Dict-style properties (that is, quoted or computed non-symbol keys, as defined in ?? ) are not allowed. A `[Symbol.iterator]` method should be defined for any classes that are logically iterable. Beyond this, `Symbol` should be used sparingly.\nTip: be careful of using any other built-in symbols (e.g., `Symbol.isConcatSpreadable` ) as they are not polyfilled by the compiler and will therefore not work in older browsers."
+            }
+        ]
+    },
+    {
+        "title": "5.4.4 Static methods",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.4 Static methods",
+        "cases": [
+            {
+                "description": "Where it does not interfere with readability, prefer module-local functions over private static methods.\nStatic methods should only be called on the base class itself. Static methods should not be called on variables containing a dynamic instance that may be either the constructor or a subclass constructor (and must be defined with `@nocollapse` if this is done), and must not be called directly on a subclass that doesn’t define the method itself.\nDisallowed:",
+                "example": "class Base { /** @nocollapse */ static foo() {} }\nclass Sub extends Base {}\nfunction callFoo(cls) { cls.foo(); }  // discouraged: don't call static methods dynamically\nSub.foo();  // Disallowed: don't call static methods on subclasses that don't define it themselves\n"
+            }
+        ]
+    },
+    {
+        "title": "5.4.5 Old-style class declarations",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.5 Old-style class declarations",
+        "cases": [
+            {
+                "description": "While ES6 classes are preferred, there are cases where ES6 classes may not be feasible. For example:\nIf there exist or will exist subclasses, including frameworks that create subclasses, that cannot be immediately changed to use ES6 class syntax. If such a class were to use ES6 syntax, all downstream subclasses not using ES6 class syntax would need to be modified. \nFrameworks that require a known `this` value before calling the superclass constructor, since constructors with ES6 super classes do not have access to the instance `this` value until the call to `super` returns.\nIn all other ways the style guide still applies to this code: `let` , `const` , default parameters, rest, and arrow functions should all be used when appropriate.\n`goog.defineClass` allows for a class-like definition similar to ES6 class syntax:",
+                "example": "let C = goog.defineClass(S, {\n  /**\n   * @param {string} value\n   */\n  constructor(value) {\n    S.call(this, 2);\n    /** @const */\n    this.prop = value;\n  },\n\n  /**\n   * @param {string} param\n   * @return {number}\n   */\n  method(param) {\n    return 0;\n  },\n});\n"
+            },
+            {
+                "description": "Alternatively, while `goog.defineClass` should be preferred for all new code, more traditional syntax is also allowed.",
+                "example": "/**\n  * @constructor @extends {S}\n  * @param {string} value\n  */\nfunction C(value) {\n  S.call(this, 2);\n  /** @const */\n  this.prop = value;\n}\ngoog.inherits(C, S);\n\n/**\n * @param {string} param\n * @return {number}\n */\nC.prototype.method = function(param) {\n  return 0;\n};\n",
+                "appendix": "Per-instance properties should be defined in the constructor after the call to the super class constructor, if there is a super class. Methods should be defined on the prototype of the constructor.\nDefining constructor prototype hierarchies correctly is harder than it first appears! For that reason, it is best to use `goog.inherits` from the Closure Library ."
+            }
+        ]
+    },
+    {
+        "title": "5.4.6 Do not manipulate prototype s directly",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.6 Do not manipulate prototype s directly",
+        "cases": [
+            {
+                "description": "The `class` keyword allows clearer and more readable class definitions than defining `prototype` properties. Ordinary implementation code has no business manipulating these objects, though they are still useful for defining classes as defined in ?? . Mixins and modifying the prototypes of builtin objects are explicitly forbidden.\nException : Framework code (such as Polymer, or Angular) may need to use `prototype` s, and should not resort to even-worse workarounds to avoid doing so."
+            }
+        ]
+    },
+    {
+        "title": "5.4.7 Getters and Setters",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.7 Getters and Setters",
+        "cases": [
+            {
+                "description": "Do not use JavaScript getter and setter properties . They are potentially surprising and difficult to reason about, and have limited support in the compiler. Provide ordinary methods instead.\nException : there are situations where defining a getter or setter is unavoidable (e.g. data binding frameworks such as Angular and Polymer, or for compatibility with external APIs that cannot be adjusted). In these cases only, getters and setters may be used with caution , provided they are defined with the `get` and `set` shorthand method keywords or `Object.defineProperties` (not `Object.defineProperty` , which interferes with property renaming). Getters must not change observable state.\nDisallowed:",
+                "example": "class Foo {\n  get next() { return this.nextId++; }\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.4.8 Overriding toString",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.8 Overriding toString",
+        "cases": [
+            {
+                "description": "The `toString` method may be overridden, but must always succeed and never have visible side effects.\nTip: Beware, in particular, of calling other methods from toString, since exceptional conditions could lead to infinite loops."
+            }
+        ]
+    },
+    {
+        "title": "5.4.9 Interfaces",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.9 Interfaces",
+        "cases": [
+            {
+                "description": "Interfaces may be declared with `@interface` or `@record` . Interfaces declared with `@record` can be explicitly (i.e. via `@implements` ) or implicitly implemented by a class or object literal.\nAll non-static method bodies on an interface must be empty blocks. Fields must be declared as uninitialized members in the class constructor.\nExample:",
+                "example": "/**\n * Something that can frobnicate.\n * @record\n */\nclass Frobnicator {\n  constructor() {\n    /** @type {number} The number of attempts before giving up. */\n    this.attempts;\n  }\n\n  /**\n   * Performs the frobnication according to the given strategy.\n   * @param {!FrobnicationStrategy} strategy\n   */\n  frobnicate(strategy) {}\n}\n\n"
+            }
+        ]
+    },
+    {
+        "title": "5.4.10 Abstract Classes",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.4.10 Abstract Classes",
+        "cases": [
+            {
+                "description": "Use abstract classes when appropriate. Abstract classes and methods must be annotated with `@abstract` . Do not use `goog.abstractMethod` . See abstract\nclasses and methods ."
+            }
+        ]
+    },
+    {
+        "title": "5.5 Functions",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions",
+        "cases": []
+    },
+    {
+        "title": "5.5.1 Top-level functions",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.1 Top-level functions",
+        "cases": [
+            {
+                "description": "Top-level functions may be defined directly on the `exports` object, or else declared locally and optionally exported. See ?? for more on exports.\nExamples:",
+                "example": "/** @param {string} str */\nexports.processString = (str) => {\n  // Process the string.\n};\n\n/** @param {string} str */\nconst processString = (str) => {\n  // Process the string.\n};\n\nexports = {processString};\n"
+            }
+        ]
+    },
+    {
+        "title": "5.5.2 Nested functions and closures",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.2 Nested functions and closures",
+        "cases": [
+            {
+                "description": "Functions may contain nested function definitions. If it is useful to give the function a name, it should be assigned to a local `const` ."
+            }
+        ]
+    },
+    {
+        "title": "5.5.3 Arrow functions",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.3 Arrow functions",
+        "cases": [
+            {
+                "description": "Arrow functions provide a concise function syntax and simplify scoping `this` for nested functions. Prefer arrow functions over the `function` keyword, particularly for nested functions (but see ?? ).\nPrefer arrow functions over other `this` scoping approaches such as `f.bind(this)` , `goog.bind(f,this)` , and `constself=this` . Arrow functions are particularly useful for calling into callbacks as they permit explicitly specifying which parameters to pass to the callback whereas binding will blindly pass along all parameters.\nThe left-hand side of the arrow contains zero or more parameters. Parentheses around the parameters are optional if there is only a single non-destructured parameter. When parentheses are used, inline parameter types may be specified (see ?? ).\nTip: Always using parentheses even for single-parameter arrow functions can avoid situations where adding parameters, but forgetting to add parentheses, may result in parseable code which no longer works as intended.\nThe right-hand side of the arrow contains the body of the function. By default the body is a block statement (zero or more statements surrounded by curly braces). The body may also be an implicitly returned single expression if either: the program logic requires returning a value, or the `void` operator precedes a single function or method call (using `void` ensures `undefined` is returned, prevents leaking values, and communicates intent). The single expression form is preferred if it improves readability (e.g., for short or simple expressions).\nExamples:",
+                "example": "/**\n * Arrow functions can be documented just like normal functions.\n * @param {number} numParam A number to add.\n * @param {string} strParam Another number to add that happens to be a string.\n * @return {number} The sum of the two parameters.\n */\nconst moduleLocalFunc = (numParam, strParam) => numParam + Number(strParam);\n\n// Uses the single expression syntax with `void` because the program logic does\n// not require returning a value.\ngetValue((result) => void alert(`Got ${result}`));\n\nclass CallbackExample {\n  constructor() {\n    /** @private {number} */\n    this.cachedValue_ = 0;\n\n    // For inline callbacks, you can use inline typing for parameters.\n    // Uses a block statement because the value of the single expression should\n    // not be returned and the expression is not a single function call.\n    getNullableValue((/** ?number */ result) => {\n      this.cachedValue_ = result == null ? 0 : result;\n    });\n  }\n}\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "/**\n * A function with no params and no returned value.\n * This single expression body usage is illegal because the program logic does\n * not require returning a value and we're missing the `void` operator.\n */\nconst moduleLocalFunc = () => anotherFunction();\n"
+            }
+        ]
+    },
+    {
+        "title": "5.5.4 Generators",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.4 Generators",
+        "cases": [
+            {
+                "description": "Generators enable a number of useful abstractions and may be used as needed.\nWhen defining generator functions, attach the `*` to the `function` keyword when present, and separate it with a space from the name of the function. When using delegating yields, attach the `*` to the `yield` keyword.\nExample:",
+                "example": "/** @return {!Iterator<number>} */\nfunction* gen1() {\n  yield 42;\n}\n\n/** @return {!Iterator<number>} */\nconst gen2 = function*() {\n  yield* gen1();\n}\n\nclass SomeClass {\n  /** @return {!Iterator<number>} */\n  * gen() {\n    yield 42;\n  }\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.5.5 Parameter and return types",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types",
+        "cases": [
+            {
+                "description": "Function parameters and return types should usually be documented with JSDoc annotations. See ?? for more information."
+            }
+        ]
+    },
+    {
+        "title": "5.5.5.1 Default parameters",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.5.5.1 Default parameters",
+        "cases": [
+            {
+                "description": "Optional parameters are permitted using the equals operator in the parameter list. Optional parameters must include spaces on both sides of the equals operator, be named exactly like required parameters (i.e., not prefixed with `opt_` ), use the `=` suffix in their JSDoc type, come after required parameters, and not use initializers that produce observable side effects. All optional parameters for concrete functions must have default values, even if that value is `undefined` . In contrast to concrete functions, abstract and interface methods must omit default parameter values.\nExample:",
+                "example": "/**\n * @param {string} required This parameter is always needed.\n * @param {string=} optional This parameter can be omitted.\n * @param {!Node=} node Another optional parameter.\n */\nfunction maybeDoSomething(required, optional = '', node = undefined) {}\n\n/** @interface */\nclass MyInterface {\n  /**\n   * Interface and abstract methods must omit default parameter values.\n   * @param {string=} optional\n   */\n  someMethod(optional) {}\n}\n",
+                "appendix": "Use default parameters sparingly. Prefer destructuring (as in ?? ) to create readable APIs when there are more than a small handful of optional parameters that do not have a natural order.\nNote: Unlike Python's default parameters, it is okay to use initializers that return new mutable objects (such as `{}` or `[]` ) because the initializer is evaluated each time the default value is used, so a single object won't be shared across invocations.\nTip: While arbitrary expressions including function calls may be used as initializers, these should be kept as simple as possible. Avoid initializers that expose shared mutable state, as that can easily introduce unintended coupling between function calls."
+            }
+        ]
+    },
+    {
+        "title": "5.5.5.2 Rest parameters",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.5.5.2 Rest parameters",
+        "cases": [
+            {
+                "description": "Use a rest parameter instead of accessing `arguments` . Rest parameters are typed with a `...` prefix in their JSDoc. The rest parameter must be the last parameter in the list. There is no space between the `...` and the parameter name. Do not name the rest parameter `var_args` . Never name a local variable or parameter `arguments` , which confusingly shadows the built-in name.\nExample:",
+                "example": "/**\n * @param {!Array<string>} array This is an ordinary parameter.\n * @param {...number} numbers The remainder of arguments are all numbers.\n */\nfunction variadic(array, ...numbers) {}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.5.6 Generics",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.5.6 Generics",
+        "cases": [
+            {
+                "description": "Declare generic functions and methods when necessary with `@templateTYPE` in the JSDoc above the function or method definition."
+            }
+        ]
+    },
+    {
+        "title": "5.5.7 Spread operator",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.5.7 Spread operator",
+        "cases": [
+            {
+                "description": "Function calls may use the spread operator ( `...` ). Prefer the spread operator to `Function.prototype.apply` when an array or iterable is unpacked into multiple parameters of a variadic function. There is no space after the `...` .\nExample:",
+                "example": "function myFunction(...elements) {}\nmyFunction(...array, ...iterable, ...generator());\n"
+            }
+        ]
+    },
+    {
+        "title": "5.6 String literals",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals",
+        "cases": []
+    },
+    {
+        "title": "5.6.1 Use single quotes",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.6.1 Use single quotes",
+        "cases": [
+            {
+                "description": "Ordinary string literals are delimited with single quotes ( `'` ), rather than double quotes ( `\"` ).\nTip: if a string contains a single quote character, consider using a template string to avoid having to escape the quote.\nOrdinary string literals may not span multiple lines."
+            }
+        ]
+    },
+    {
+        "title": "5.6.2 Template literals",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.6.2 Template literals",
+        "cases": [
+            {
+                "description": "Use template literals (delimited with ``` ) over complex string concatenation, particularly if multiple string literals are involved. Template literals may span multiple lines.\nIf a template literal spans multiple lines, it does not need to follow the indentation of the enclosing block, though it may if the added whitespace does not matter.\nExample:",
+                "example": "function arithmetic(a, b) {\n  return `Here is a table of arithmetic operations:\n${a} + ${b} = ${a + b}\n${a} - ${b} = ${a - b}\n${a} * ${b} = ${a * b}\n${a} / ${b} = ${a / b}`;\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.6.3 No line continuations",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.6.3 No line continuations",
+        "cases": [
+            {
+                "description": "Do not use line continuations (that is, ending a line inside a string literal with a backslash) in either ordinary or template string literals. Even though ES5 allows this, it can lead to tricky errors if any trailing whitespace comes after the slash, and is less obvious to readers.\nDisallowed:",
+                "example": "const longString = 'This is a very long string that far exceeds the 80 \\\n    column limit. It unfortunately contains long stretches of spaces due \\\n    to how the continued lines are indented.';\n"
+            },
+            {
+                "description": "Instead, write",
+                "example": "const longString = 'This is a very long string that far exceeds the 80 ' +\n    'column limit. It does not contain long stretches of spaces since ' +\n    'the concatenated strings are cleaner.';\n"
+            }
+        ]
+    },
+    {
+        "title": "5.7 Number literals",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.7 Number literals",
+        "cases": [
+            {
+                "description": "Numbers may be specified in decimal, hex, octal, or binary. Use exactly `0x` , `0o` , and `0b` prefixes, with lowercase letters, for hex, octal, and binary, respectively. Never include a leading zero unless it is immediately followed by `x` , `o` , or `b` ."
+            }
+        ]
+    },
+    {
+        "title": "5.8 Control structures",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures",
+        "cases": []
+    },
+    {
+        "title": "5.8.1 For loops",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.1 For loops",
+        "cases": [
+            {
+                "description": "With ES6, the language now has three different kinds of `for` loops. All may be used, though `for` - `of` loops should be preferred when possible.\n`for` - `in` loops may only be used on dict-style objects (see ?? ), and should not be used to iterate over an array. `Object.prototype.hasOwnProperty` should be used in `for` - `in` loops to exclude unwanted prototype properties. Prefer `for` - `of` and `Object.keys` over `for` - `in` when possible."
+            }
+        ]
+    },
+    {
+        "title": "5.8.2 Exceptions",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions",
+        "cases": [
+            {
+                "description": "Exceptions are an important part of the language and should be used whenever exceptional cases occur. Always throw `Error` s or subclasses of `Error` : never throw string literals or other objects. Always use `new` when constructing an `Error` .\nThis treatment extends to `Promise` rejection values as `Promise.reject(obj)` is equivalent to `throwobj;` in async functions.\nCustom exceptions provide a great way to convey additional error information from functions. They should be defined and used wherever the native `Error` type is insufficient.\nPrefer throwing exceptions over ad-hoc error-handling approaches (such as passing an error container reference type, or returning an object with an error property)."
+            }
+        ]
+    },
+    {
+        "title": "5.8.2.1 Empty catch blocks",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.2.1 Empty catch blocks",
+        "cases": [
+            {
+                "description": "It is very rarely correct to do nothing in response to a caught exception. When it truly is appropriate to take no action whatsoever in a catch block, the reason this is justified is explained in a comment.",
+                "example": "try {\n  return handleNumericResponse(response);\n} catch (ok) {\n  // it's not numeric; that's fine, just continue\n}\nreturn handleTextResponse(response);\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "  try {\n    shouldFail();\n    fail('expected an error');\n  } catch (expected) {\n  }\n",
+                "appendix": "Tip: Unlike in some other languages, patterns like the above simply don’t work since this will catch the error thrown by `fail` . Use `assertThrows()` instead."
+            }
+        ]
+    },
+    {
+        "title": "5.8.3 Switch statements",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements",
+        "cases": [
+            {
+                "description": "Terminology Note: Inside the braces of a switch block are one or more statement groups. Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements."
+            }
+        ]
+    },
+    {
+        "title": "5.8.3.1 Fall-through: commented",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.8.3.1 Fall-through: commented",
+        "cases": [
+            {
+                "description": "Within a switch block, each statement group either terminates abruptly (with a `break` , `return` or `throw` n exception), or is marked with a comment to indicate that execution will or might continue into the next statement group. Any comment that communicates the idea of fall-through is sufficient (typically `//fallthrough` ). This special comment is not required in the last statement group of the switch block.\nExample:",
+                "example": "switch (input) {\n  case 1:\n  case 2:\n    prepareOneOrTwo();\n  // fall through\n  case 3:\n    handleOneTwoOrThree();\n    break;\n  default:\n    handleLargeNumber(input);\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.8.3.2 The default case is present",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.8.3.2 The default case is present",
+        "cases": [
+            {
+                "description": "Each switch statement includes a `default` statement group, even if it contains no code. The `default` statement group must be last."
+            }
+        ]
+    },
+    {
+        "title": "5.9 this",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.9 this",
+        "cases": [
+            {
+                "description": "Only use `this` in class constructors and methods, in arrow functions defined within class constructors and methods, or in functions that have an explicit `@this` declared in the immediately-enclosing function’s JSDoc.\nNever use `this` to refer to the global object, the context of an `eval` , the target of an event, or unnecessarily `call()` ed or `apply()` ed functions."
+            }
+        ]
+    },
+    {
+        "title": "5.10 Equality Checks",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks",
+        "cases": [
+            {
+                "description": "Use identity operators ( `===` / `!==` ) except in the cases documented below."
+            }
+        ]
+    },
+    {
+        "title": "5.10.1 Exceptions Where Coercion is Desirable",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.10.1 Exceptions Where Coercion is Desirable",
+        "cases": [
+            {
+                "description": "Catching both `null` and `undefined` values:",
+                "example": "if (someObjectOrPrimitive == null) {\n  // Checking for null catches both null and undefined for objects and\n  // primitives, but does not catch other falsy values like 0 or the empty\n  // string.\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "5.11 Disallowed features",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features",
+        "cases": []
+    },
+    {
+        "title": "5.11.1 with",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.1 with",
+        "cases": [
+            {
+                "description": "Do not use the `with` keyword. It makes your code harder to understand and has been banned in strict mode since ES5."
+            }
+        ]
+    },
+    {
+        "title": "5.11.2 Dynamic code evaluation",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.2 Dynamic code evaluation",
+        "cases": [
+            {
+                "description": "Do not use `eval` or the `Function(...string)` constructor (except for code loaders). These features are potentially dangerous and simply do not work in CSP environments."
+            }
+        ]
+    },
+    {
+        "title": "5.11.3 Automatic semicolon insertion",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.3 Automatic semicolon insertion",
+        "cases": [
+            {
+                "description": "Always terminate statements with semicolons (except function and class declarations, as noted above)."
+            }
+        ]
+    },
+    {
+        "title": "5.11.4 Non-standard features",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.4 Non-standard features",
+        "cases": [
+            {
+                "description": "Do not use non-standard features. This includes old features that have been removed (e.g., `WeakMap.clear` ), new features that are not yet standardized (e.g., the current TC39 working draft, proposals at any stage, or proposed but not-yet-complete web standards), or proprietary features that are only implemented in some browsers. Use only features defined in the current ECMA-262 or WHATWG standards. (Note that projects writing against specific APIs, such as Chrome extensions or Node.js, can obviously use those APIs). Non-standard language “extensions” (such as those provided by some external transpilers) are forbidden."
+            }
+        ]
+    },
+    {
+        "title": "5.11.5 Wrapper objects for primitive types",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.5 Wrapper objects for primitive types",
+        "cases": [
+            {
+                "description": "Never use `new` on the primitive object wrappers ( `Boolean` , `Number` , `String` , `Symbol` ), nor include them in type annotations.\nDisallowed:",
+                "example": "const /** Boolean */ x = new Boolean(false);\nif (x) alert(typeof x);  // alerts 'object' - WAT?\n"
+            },
+            {
+                "description": "The wrappers may be called as functions for coercing (which is preferred over using `+` or concatenating the empty string) or creating symbols.\nExample:",
+                "example": "const /** boolean */ x = Boolean(0);\nif (!x) alert(typeof x);  // alerts 'boolean', as expected\n"
+            }
+        ]
+    },
+    {
+        "title": "5.11.6 Modifying builtin objects",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.6 Modifying builtin objects",
+        "cases": [
+            {
+                "description": "Never modify builtin types, either by adding methods to their constructors or to their prototypes. Avoid depending on libraries that do this. Note that the JSCompiler’s runtime library will provide standards-compliant polyfills where possible; nothing else may modify builtin objects.\nDo not add symbols to the global object unless absolutely necessary (e.g. required by a third-party API)."
+            }
+        ]
+    },
+    {
+        "title": "5.11.7 Omitting () when invoking a constructor",
+        "belongs to": "5 Language features/5.1 Local variable declarations/5.2 Array literals/5.3 Object literals/5.4 Classes/5.5 Functions/5.5.5 Parameter and return types/5.6 String literals/5.8 Control structures/5.8.2 Exceptions/5.8.3 Switch statements/5.10 Equality Checks/5.11 Disallowed features/5.11.7 Omitting () when invoking a constructor",
+        "cases": [
+            {
+                "description": "Never invoke a constructor in a `new` statement without using parentheses `()` .\nDisallowed:",
+                "example": "new Foo;\n"
+            },
+            {
+                "description": "Use instead:",
+                "example": "new Foo();\n"
+            },
+            {
+                "description": "Omitting parentheses can lead to subtle mistakes. These two lines are not equivalent:",
+                "example": "new Foo().Bar();\nnew Foo.Bar();\n"
+            }
+        ]
+    },
+    {
+        "title": "6 Naming",
+        "belongs to": "6 Naming",
+        "cases": []
+    },
+    {
+        "title": "6.1 Rules common to all identifiers",
+        "belongs to": "6 Naming/6.1 Rules common to all identifiers",
+        "cases": [
+            {
+                "description": "Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores and very rarely (when required by frameworks like Angular) dollar signs.\nGive as descriptive a name as possible, within reason. Do not worry about saving horizontal space as it is far more important to make your code immediately understandable by a new reader. Do not use abbreviations that are ambiguous or unfamiliar to readers outside your project, and do not abbreviate by deleting letters within a word.",
+                "example": "errorCount          // No abbreviation.\ndnsConnectionIndex  // Most people know what \"DNS\" stands for.\nreferrerUrl         // Ditto for \"URL\".\ncustomerId          // \"Id\" is both ubiquitous and unlikely to be misunderstood.\n"
+            },
+            {
+                "description": "Disallowed:",
+                "example": "n                   // Meaningless.\nnErr                // Ambiguous abbreviation.\nnCompConns          // Ambiguous abbreviation.\nwgcConnections      // Only your group knows what this stands for.\npcReader            // Lots of things can be abbreviated \"pc\".\ncstmrId             // Deletes internal letters.\nkSecondsPerDay      // Do not use Hungarian notation.\n"
+            }
+        ]
+    },
+    {
+        "title": "6.2 Rules by identifier type",
+        "belongs to": "6 Naming/6.2 Rules by identifier type",
+        "cases": []
+    },
+    {
+        "title": "6.2.1 Package names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.1 Package names",
+        "cases": [
+            {
+                "description": "Package names are all `lowerCamelCase` . For example, `my.exampleCode.deepSpace` , but not `my.examplecode.deepspace` or `my.example_code.deep_space` ."
+            }
+        ]
+    },
+    {
+        "title": "6.2.2 Class names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.2 Class names",
+        "cases": [
+            {
+                "description": "Class, interface, record, and typedef names are written in `UpperCamelCase` . Unexported classes are simply locals: they are not marked `@private` and therefore are not named with a trailing underscore.\nType names are typically nouns or noun phrases. For example, `Request` , `ImmutableList` , or `VisibilityMode` . Additionally, interface names may sometimes be adjectives or adjective phrases instead (for example, `Readable` )."
+            }
+        ]
+    },
+    {
+        "title": "6.2.3 Method names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.3 Method names",
+        "cases": [
+            {
+                "description": "Method names are written in `lowerCamelCase` . Names for `@private` methods must end with a trailing underscore.\nMethod names are typically verbs or verb phrases. For example, `sendMessage` or `stop_` . Getter and setter methods for properties are never required, but if they are used they should be named `getFoo` (or optionally `isFoo` or `hasFoo` for booleans), or `setFoo(value)` for setters.\nUnderscores may also appear in JsUnit test method names to separate logical components of the name. One typical pattern is `test<MethodUnderTest>_<state>_<expectedOutcome>` , for example `testPop_emptyStack_throws` . There is no One Correct Way to name test methods."
+            }
+        ]
+    },
+    {
+        "title": "6.2.4 Enum names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.4 Enum names",
+        "cases": [
+            {
+                "description": "Enum names are written in `UpperCamelCase` , similar to classes, and should generally be singular nouns. Individual items within the enum are named in `CONSTANT_CASE` ."
+            }
+        ]
+    },
+    {
+        "title": "6.2.5 Constant names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names",
+        "cases": [
+            {
+                "description": "Constant names use `CONSTANT_CASE` : all uppercase letters, with words separated by underscores. There is no reason for a constant to be named with a trailing underscore, since private static properties can be replaced by (implicitly private) module locals."
+            }
+        ]
+    },
+    {
+        "title": "6.2.5.1 Definition of “constant”",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.5.1 Definition of “constant”",
+        "cases": [
+            {
+                "description": "Every constant is a `@const` static property or a module-local `const` declaration, but not all `@const` static properties and module-local `const` s are constants. Before choosing constant case, consider whether the field really feels like a deeply immutable constant. For example, if any of that instance's observable state can change, it is almost certainly not a constant. Merely intending to never mutate the object is generally not enough.\nExamples:",
+                "example": "// Constants\nconst NUMBER = 5;\n/** @const */ exports.NAMES = ImmutableList.of('Ed', 'Ann');\n/** @enum */ exports.SomeEnum = { ENUM_CONSTANT: 'value' };\n\n// Not constants\nlet letVariable = 'non-const';\nclass MyClass { constructor() { /** @const {string} */ this.nonStatic = 'non-static'; } };\n/** @type {string} */ MyClass.staticButMutable = 'not @const, can be reassigned';\nconst /** Set<string> */ mutableCollection = new Set();\nconst /** ImmutableSet<SomeMutableType> */ mutableElements = ImmutableSet.of(mutable);\nconst Foo = goog.require('my.Foo');  // mirrors imported name\nconst logger = log.getLogger('loggers.are.not.immutable');\n",
+                "appendix": "Constants’ names are typically nouns or noun phrases."
+            }
+        ]
+    },
+    {
+        "title": "6.2.5.2 Local aliases",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.5.2 Local aliases",
+        "cases": [
+            {
+                "description": "Local aliases should be used whenever they improve readability over fully-qualified names. Follow the same rules as `goog.require` s ( ?? ), maintaining the last part of the aliased name. Aliases may also be used within functions. Aliases must be `const` .\nExamples:",
+                "example": "const staticHelper = importedNamespace.staticHelper;\nconst CONSTANT_NAME = ImportedClass.CONSTANT_NAME;\nconst {assert, assertInstanceof} = asserts;\n"
+            }
+        ]
+    },
+    {
+        "title": "6.2.6 Non-constant field names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.6 Non-constant field names",
+        "cases": [
+            {
+                "description": "Non-constant field names (static or otherwise) are written in `lowerCamelCase` , with a trailing underscore for private fields.\nThese names are typically nouns or noun phrases. For example, `computedValues` or `index_` ."
+            }
+        ]
+    },
+    {
+        "title": "6.2.7 Parameter names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.7 Parameter names",
+        "cases": [
+            {
+                "description": "Parameter names are written in `lowerCamelCase` . Note that this applies even if the parameter expects a constructor.\nOne-character parameter names should not be used in public methods.\nException : When required by a third-party framework, parameter names may begin with a `$` . This exception does not apply to any other identifiers (e.g. local variables or properties)."
+            }
+        ]
+    },
+    {
+        "title": "6.2.8 Local variable names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.8 Local variable names",
+        "cases": [
+            {
+                "description": "Local variable names are written in `lowerCamelCase` , except for module-local (top-level) constants, as described above. Constants in function scopes are still named in `lowerCamelCase` . Note that `lowerCamelCase` is used even if the variable holds a constructor."
+            }
+        ]
+    },
+    {
+        "title": "6.2.9 Template parameter names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.9 Template parameter names",
+        "cases": [
+            {
+                "description": "Template parameter names should be concise, single-word or single-letter identifiers, and must be all-caps, such as `TYPE` or `THIS` ."
+            }
+        ]
+    },
+    {
+        "title": "6.2.10 Module-local names",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.2.10 Module-local names",
+        "cases": [
+            {
+                "description": "Module-local names that are not exported are implicitly private. They are not marked `@private` and do not end in an underscore. This applies to classes, functions, variables, constants, enums, and other module-local identifiers."
+            }
+        ]
+    },
+    {
+        "title": "6.3 Camel case: defined",
+        "belongs to": "6 Naming/6.2 Rules by identifier type/6.2.5 Constant names/6.3 Camel case: defined",
+        "cases": [
+            {
+                "description": "Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like IPv6 or iOS are present. To improve predictability, Google Style specifies the following (nearly) deterministic scheme.\nBeginning with the prose form of the name:\nConvert the phrase to plain ASCII and remove any apostrophes. For example, Müller's algorithm might become Muellers algorithm . \nDivide this result into words, splitting on spaces and any remaining punctuation (typically hyphens). \nRecommended: if any word already has a conventional camel case appearance in common usage, split this into its constituent parts (e.g., AdWords becomes ad words ). Note that a word such as iOS is not really in camel case per se; it defies any convention, so this recommendation does not apply. \nNow lowercase everything (including acronyms), then uppercase only the first character of: \n… each word, to yield upper camel case, or \n… each word except the first, to yield lower camel case \nFinally, join all the words into a single identifier.\nNote that the casing of the original words is almost entirely disregarded.\nExamples:\nProse form \nCorrect \nIncorrect \nXML HTTP request \nXmlHttpRequest \nXMLHTTPRequest \nnew customer ID \nnewCustomerId \nnewCustomerID \ninner stopwatch \ninnerStopwatch \ninnerStopWatch \nsupports IPv6 on iOS? \nsupportsIpv6OnIos \nsupportsIPv6OnIOS \nYouTube importer \nYouTubeImporter \nYoutubeImporter*\n*Acceptable, but not recommended.\nNote: Some words are ambiguously hyphenated in the English language: for example nonempty and non-empty are both correct, so the method names checkNonempty and checkNonEmpty are likewise both correct."
+            }
+        ]
+    },
+    {
+        "title": "7 JSDoc",
+        "belongs to": "7 JSDoc",
+        "cases": [
+            {
+                "description": "JSDoc is used on all classes, fields, and methods."
+            }
+        ]
+    },
+    {
+        "title": "7.1 General form",
+        "belongs to": "7 JSDoc/7.1 General form",
+        "cases": [
+            {
+                "description": "The basic formatting of JSDoc blocks is as seen in this example:",
+                "example": "/**\n * Multiple lines of JSDoc text are written here,\n * wrapped normally.\n * @param {number} arg A number to do something to.\n */\nfunction doSomething(arg) { … }\n"
+            },
+            {
+                "description": "or in this single-line example:",
+                "example": "/** @const @private {!Foo} A short bit of JSDoc. */\nthis.foo_ = foo;\n",
+                "appendix": "If a single-line comment overflows into multiple lines, it must use the multi-line style with `/**` and `*/` on their own lines.\nMany tools extract metadata from JSDoc comments to perform code validation and optimization. As such, these comments must be well-formed."
+            }
+        ]
+    },
+    {
+        "title": "7.2 Markdown",
+        "belongs to": "7 JSDoc/7.2 Markdown",
+        "cases": [
+            {
+                "description": "JSDoc is written in Markdown, though it may include HTML when necessary.\nNote that tools that automatically extract JSDoc (e.g. JsDossier ) will often ignore plain text formatting, so if you did this:",
+                "example": "/**\n * Computes weight based on three factors:\n *   items sent\n *   items received\n *   last timestamp\n */\n"
+            },
+            {
+                "description": "it would come out like this:",
+                "example": "Computes weight based on three factors: items sent items received last timestamp\n"
+            },
+            {
+                "description": "Instead, write a Markdown list:",
+                "example": "/**\n * Computes weight based on three factors:\n *\n *  - items sent\n *  - items received\n *  - last timestamp\n */\n"
+            }
+        ]
+    },
+    {
+        "title": "7.3 JSDoc tags",
+        "belongs to": "7 JSDoc/7.3 JSDoc tags",
+        "cases": [
+            {
+                "description": "Google style allows a subset of JSDoc tags. See ?? for the complete list. Most tags must occupy their own line, with the tag at the beginning of the line.\nDisallowed:",
+                "example": "/**\n * The \"param\" tag must occupy its own line and may not be combined.\n * @param {number} left @param {number} right\n */\nfunction add(left, right) { ... }\n"
+            },
+            {
+                "description": "Simple tags that do not require any additional data (such as `@private` , `@const` , `@final` , `@export` ) may be combined onto the same line, along with an optional type when appropriate.",
+                "example": "/**\n * Place more complex annotations (like \"implements\" and \"template\")\n * on their own lines.  Multiple simple tags (like \"export\" and \"final\")\n * may be combined in one line.\n * @export @final\n * @implements {Iterable<TYPE>}\n * @template TYPE\n */\nclass MyClass {\n  /**\n   * @param {!ObjType} obj Some object.\n   * @param {number=} num An optional number.\n   */\n  constructor(obj, num = 42) {\n    /** @private @const {!Array<!ObjType|number>} */\n    this.data_ = [obj, num];\n  }\n}\n",
+                "appendix": "There is no hard rule for when to combine tags, or in which order, but be consistent.\nFor general information about annotating types in JavaScript see Annotating JavaScript for the Closure Compiler and Types in the Closure Type\nSystem ."
+            }
+        ]
+    },
+    {
+        "title": "7.4 Line wrapping",
+        "belongs to": "7 JSDoc/7.4 Line wrapping",
+        "cases": [
+            {
+                "description": "Line-wrapped block tags are indented four spaces. Wrapped description text may be lined up with the description on previous lines, but this horizontal alignment is discouraged.",
+                "example": "/**\n * Illustrates line wrapping for long param/return descriptions.\n * @param {string} foo This is a param with a description too long to fit in\n *     one line.\n * @return {number} This returns something that has a description too long to\n *     fit in one line.\n */\nexports.method = function(foo) {\n  return 5;\n};\n",
+                "appendix": "Do not indent when wrapping a `@desc` or `@fileoverview` description."
+            }
+        ]
+    },
+    {
+        "title": "7.5 Top/file-level comments",
+        "belongs to": "7 JSDoc/7.5 Top/file-level comments",
+        "cases": [
+            {
+                "description": "A file may have a top-level file overview. A copyright notice , author information, and default visibility level are optional. File overviews are generally recommended whenever a file consists of more than a single class definition. The top level comment is designed to orient readers unfamiliar with the code to what is in this file. If present, it may provide a description of the file's contents and any dependencies or compatibility information. Wrapped lines are not indented.\nExample:",
+                "example": "/**\n * @fileoverview Description of file, its uses and information\n * about its dependencies.\n * @package\n */\n"
+            }
+        ]
+    },
+    {
+        "title": "7.6 Class comments",
+        "belongs to": "7 JSDoc/7.6 Class comments",
+        "cases": [
+            {
+                "description": "Classes, interfaces and records must be documented with a description and any template parameters, implemented interfaces, visibility, or other appropriate tags. The class description should provide the reader with enough information to know how and when to use the class, as well as any additional considerations necessary to correctly use the class. Textual descriptions may be omitted on the constructor. `@constructor` and `@extends` annotations are not used with the `class` keyword unless the class is being used to declare an `@interface` or it extends a generic class.",
+                "example": "/**\n * A fancier event target that does cool things.\n * @implements {Iterable<string>}\n */\nclass MyFancyTarget extends EventTarget {\n  /**\n   * @param {string} arg1 An argument that makes this more interesting.\n   * @param {!Array<number>} arg2 List of numbers to be processed.\n   */\n  constructor(arg1, arg2) {\n    // ...\n  }\n};\n\n/**\n * Records are also helpful.\n * @extends {Iterator<TYPE>}\n * @record\n * @template TYPE\n */\nclass Listable {\n  /** @return {TYPE} The next item in line to be returned. */\n  next() {}\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "7.7 Enum and typedef comments",
+        "belongs to": "7 JSDoc/7.7 Enum and typedef comments",
+        "cases": [
+            {
+                "description": "All enums and typedefs must be documented with appropriate JSDoc tags ( `@typedef` or `@enum` ) on the preceding line. Public enums and typedefs must also have a description. Individual enum items may be documented with a JSDoc comment on the preceding line.",
+                "example": "/**\n * A useful type union, which is reused often.\n * @typedef {!Bandersnatch|!BandersnatchType}\n */\nlet CoolUnionType;\n\n\n/**\n * Types of bandersnatches.\n * @enum {string}\n */\nconst BandersnatchType = {\n  /** This kind is really frumious. */\n  FRUMIOUS: 'frumious',\n  /** The less-frumious kind. */\n  MANXOME: 'manxome',\n};\n",
+                "appendix": "Typedefs are useful for defining short record types, or aliases for unions, complex functions, or generic types. Typedefs should be avoided for record types with many fields, since they do not allow documenting individual fields, nor using templates or recursive references. For large record types, prefer `@record` ."
+            }
+        ]
+    },
+    {
+        "title": "7.8 Method and function comments",
+        "belongs to": "7 JSDoc/7.8 Method and function comments",
+        "cases": [
+            {
+                "description": "In methods and named functions, parameter and return types must be documented, except in the case of same-signature `@override` s, where all types are omitted. The `this` type should be documented when necessary. Return type may be omitted if the function has no non-empty `return` statements.\nMethod, parameter, and return descriptions (but not types) may be omitted if they are obvious from the rest of the method’s JSDoc or from its signature.\nMethod descriptions begin with a verb phrase that describes what the method does. This phrase is not an imperative sentence, but instead is written in the third person, as if there is an implied This method ... before it.\nIf a method overrides a superclass method, it must include an `@override` annotation. Overridden methods inherit all JSDoc annotations from the super class method (including visibility annotations) and they should be omitted in the overridden method. However, if any type is refined in type annotations, all `@param` and `@return` annotations must be specified explicitly.",
+                "example": "/** A class that does something. */\nclass SomeClass extends SomeBaseClass {\n  /**\n   * Operates on an instance of MyClass and returns something.\n   * @param {!MyClass} obj An object that for some reason needs detailed\n   *     explanation that spans multiple lines.\n   * @param {!OtherClass} obviousOtherClass\n   * @return {boolean} Whether something occurred.\n   */\n  someMethod(obj, obviousOtherClass) { ... }\n\n  /** @override */\n  overriddenMethod(param) { ... }\n}\n\n/**\n * Demonstrates how top-level functions follow the same rules.  This one\n * makes an array.\n * @param {TYPE} arg\n * @return {!Array<TYPE>}\n * @template TYPE\n */\nfunction makeArray(arg) { ... }\n"
+            },
+            {
+                "description": "If you only need to document the param and return types of a function, you may optionally use inline JSDocs in the function's signature. These inline JSDocs specify the return and param types without tags.",
+                "example": "function /** string */ foo(/** number */ arg) {...}\n"
+            },
+            {
+                "description": "If you need descriptions or tags, use a single JSDoc comment above the method. For example, methods which return values need a `@return` tag.",
+                "example": "class MyClass {\n  /**\n   * @param {number} arg\n   * @return {string}\n   */\n  bar(arg) {...}\n}\n\n// Illegal inline JSDocs.\n\nclass MyClass {\n  /** @return {string} */ foo() {...}\n}\n\n/** Function description. */ bar() {...}\n"
+            },
+            {
+                "description": "In anonymous functions annotations are generally optional. If the automatic type inference is insufficient or explicit annotation improves readability, then annotate param and return types like this:",
+                "example": "promise.then(\n    /** @return {string} */\n    (/** !Array<string> */ items) => {\n      doSomethingWith(items);\n      return items[0];\n    });\n",
+                "appendix": "For function type expressions, see ?? ."
+            }
+        ]
+    },
+    {
+        "title": "7.9 Property comments",
+        "belongs to": "7 JSDoc/7.9 Property comments",
+        "cases": [
+            {
+                "description": "Property types must be documented. The description may be omitted for private properties, if name and type provide enough documentation for understanding the code.\nPublicly exported constants are commented the same way as properties.",
+                "example": "/** My class. */\nclass MyClass {\n  /** @param {string=} someString */\n  constructor(someString = 'default string') {\n    /** @private @const {string} */\n    this.someString_ = someString;\n\n    /** @private @const {!OtherType} */\n    this.someOtherThing_ = functionThatReturnsAThing();\n\n    /**\n     * Maximum number of things per pane.\n     * @type {number}\n     */\n    this.someProperty = 4;\n  }\n}\n\n/**\n * The number of times we'll try before giving up.\n * @const {number}\n */\nMyClass.RETRY_COUNT = 33;\n"
+            }
+        ]
+    },
+    {
+        "title": "7.10 Type annotations",
+        "belongs to": "7 JSDoc/7.10 Type annotations",
+        "cases": [
+            {
+                "description": "Type annotations are found on `@param` , `@return` , `@this` , and `@type` tags, and optionally on `@const` , `@export` , and any visibility tags. Type annotations attached to JSDoc tags must always be enclosed in braces."
+            }
+        ]
+    },
+    {
+        "title": "7.10.1 Nullability",
+        "belongs to": "7 JSDoc/7.10 Type annotations/7.10.1 Nullability",
+        "cases": [
+            {
+                "description": "The type system defines modifiers `!` and `?` for non-null and nullable, respectively. These modifiers must precede the type.\nNullability modifiers have different requirements for different types, which fall into two broad categories:\nType annotations for primitives ( `string` , `number` , `boolean` , `symbol` , `undefined` , `null` ) and literals ( `{function(...):...}` and `{{foo:string...}}` ) are always non-nullable by default. Use the `?` modifier to make it nullable, but omit the redundant `!` . \nReference types (generally, anything in `UpperCamelCase` , including `some.namespace.ReferenceType` ) refer to a class, enum, record, or typedef defined elsewhere. Since these types may or may not be nullable, it is impossible to tell from the name alone whether it is nullable or not. Always use explicit `?` and `!` modifiers for these types to prevent ambiguity at use sites.\nBad:",
+                "example": "const /** MyObject */ myObject = null; // Non-primitive types must be annotated.\nconst /** !number */ someNum = 5; // Primitives are non-nullable by default.\nconst /** number? */ someNullableNum = null; // ? should precede the type.\nconst /** !{foo: string, bar: number} */ record = ...; // Already non-nullable.\nconst /** MyTypeDef */ def = ...; // Not sure if MyTypeDef is nullable.\n\n// Not sure if object (nullable), enum (non-nullable, unless otherwise\n// specified), or typedef (depends on definition).\nconst /** SomeCamelCaseName */ n = ...;\n"
+            },
+            {
+                "description": "Good:",
+                "example": "const /** ?MyObject */ myObject = null;\nconst /** number */ someNum = 5;\nconst /** ?number */ someNullableNum = null;\nconst /** {foo: string, bar: number} */ record = ...;\nconst /** !MyTypeDef */ def = ...;\nconst /** ?SomeCamelCaseName */ n = ...;\n"
+            }
+        ]
+    },
+    {
+        "title": "7.10.2 Type Casts",
+        "belongs to": "7 JSDoc/7.10 Type annotations/7.10.2 Type Casts",
+        "cases": [
+            {
+                "description": "In cases where the compiler doesn't accurately infer the type of an expression, and the assertion functions in goog.asserts cannot remedy it , it is possible to tighten the type by adding a type annotation comment and enclosing the expression in parentheses. Note that the parentheses are required.",
+                "example": "/** @type {number} */ (x)\n"
+            }
+        ]
+    },
+    {
+        "title": "7.10.3 Template Parameter Types",
+        "belongs to": "7 JSDoc/7.10 Type annotations/7.10.3 Template Parameter Types",
+        "cases": [
+            {
+                "description": "Always specify template parameters. This way compiler can do a better job and it makes it easier for readers to understand what code does.\nBad:",
+                "example": "const /** !Object */ users = {};\nconst /** !Array */ books = [];\nconst /** !Promise */ response = ...;\n"
+            },
+            {
+                "description": "Good:",
+                "example": "const /** !Object<string, !User> */ users = {};\nconst /** !Array<string> */ books = [];\nconst /** !Promise<!Response> */ response = ...;\n\nconst /** !Promise<undefined> */ thisPromiseReturnsNothingButParameterIsStillUseful = ...;\nconst /** !Object<string, *> */ mapOfEverything = {};\n",
+                "appendix": "Cases when template parameters should not be used:\n`Object` is used for type hierarchy and not as map-like structure."
+            }
+        ]
+    },
+    {
+        "title": "7.10.4 Function type expressions",
+        "belongs to": "7 JSDoc/7.10 Type annotations/7.10.4 Function type expressions",
+        "cases": [
+            {
+                "description": "Terminology Note : function type expression refers to a type annotation for function types with the keyword `function` in the annotation (see examples below).\nWhere the function definition is given, do not use a function type expression. Specify parameter and return types with `@param` and `@return` , or with inline annotations (see ?? ). This includes anonymous functions and functions defined and assigned to a const (where the function jsdoc appears above the whole assignment expression).\nFunction type expressions are needed, for example, inside `@typedef` , `@param` or `@return` . Use it also for variables or properties of function type, if they are not immediately initialized with the function definition.",
+                "example": "  /** @private {function(string): string} */\n  this.idGenerator_ = googFunctions.identity;\n"
+            },
+            {
+                "description": "When using a function type expression, always specify the return type explicitly. Otherwise the default return type is unknown ( `?` ), which leads to strange and unexpected behavior, and is rarely what is actually desired.\nBad - type error, but no warning given:",
+                "example": "/** @param {function()} generateNumber */\nfunction foo(generateNumber) {\n  const /** number */ x = generateNumber();  // No compile-time type error here.\n}\n\nfoo(() => 'clearly not a number');\n"
+            },
+            {
+                "description": "Good:",
+                "example": "/**\n * @param {function(): *} inputFunction1 Can return any type.\n * @param {function(): undefined} inputFunction2 Definitely doesn't return\n *      anything.\n * NOTE: the return type of `foo` itself is safely implied to be {undefined}.\n */\nfunction foo(inputFunction1, inputFunction2) {...}\n"
+            }
+        ]
+    },
+    {
+        "title": "7.10.5 Whitespace",
+        "belongs to": "7 JSDoc/7.10 Type annotations/7.10.5 Whitespace",
+        "cases": [
+            {
+                "description": "Within a type annotation, a single space or line break is required after each comma or colon. Additional line breaks may be inserted to improve readability or avoid exceeding the column limit. These breaks should be chosen and indented following the applicable guidelines (e.g. ?? and ?? ). No other whitespace is allowed in type annotations.\nGood:",
+                "example": "/** @type {function(string): number} */\n\n/** @type {{foo: number, bar: number}} */\n\n/** @type {number|string} */\n\n/** @type {!Object<string, string>} */\n\n/** @type {function(this: Object<string, string>, number): string} */\n\n/**\n * @type {function(\n *     !SuperDuperReallyReallyLongTypedefThatForcesTheLineBreak,\n *     !OtherVeryLongTypedef): string}\n */\n\n/**\n * @type {!SuperDuperReallyReallyLongTypedefThatForcesTheLineBreak|\n *     !OtherVeryLongTypedef}\n */\n"
+            },
+            {
+                "description": "Bad:",
+                "example": "// Only put a space after the colon\n/** @type {function(string) : number} */\n\n// Put spaces after colons and commas\n/** @type {{foo:number,bar:number}} */\n\n// No space in union types\n/** @type {number | string} */\n"
+            }
+        ]
+    },
+    {
+        "title": "7.11 Visibility annotations",
+        "belongs to": "7 JSDoc/7.10 Type annotations/7.11 Visibility annotations",
+        "cases": [
+            {
+                "description": "Visibility annotations ( `@private` , `@package` , `@protected` ) may be specified in a `@fileoverview` block, or on any exported symbol or property. Do not specify visibility for local variables, whether within a function or at the top level of a module. All `@private` names must end with an underscore."
+            }
+        ]
+    },
+    {
+        "title": "8 Policies",
+        "belongs to": "8 Policies",
+        "cases": []
+    },
+    {
+        "title": "8.1 Issues unspecified by Google Style: Be Consistent!",
+        "belongs to": "8 Policies/8.1 Issues unspecified by Google Style: Be Consistent!",
+        "cases": [
+            {
+                "description": "For any style question that isn't settled definitively by this specification, prefer to do what the other code in the same file is already doing. If that doesn't resolve the question, consider emulating the other files in the same package."
+            }
+        ]
+    },
+    {
+        "title": "8.2 Compiler warnings",
+        "belongs to": "8 Policies/8.2 Compiler warnings",
+        "cases": []
+    },
+    {
+        "title": "8.2.1 Use a standard warning set",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.2.1 Use a standard warning set",
+        "cases": [
+            {
+                "description": "As far as possible projects should use `--warning_level=VERBOSE` ."
+            }
+        ]
+    },
+    {
+        "title": "8.2.2 How to handle a warning",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.2.2 How to handle a warning",
+        "cases": [
+            {
+                "description": "Before doing anything, make sure you understand exactly what the warning is telling you. If you're not positive why a warning is appearing, ask for help .\nOnce you understand the warning, attempt the following solutions in order:\nFirst, fix it or work around it. Make a strong attempt to actually address the warning, or find another way to accomplish the task that avoids the situation entirely. \nOtherwise, determine if it's a false alarm. If you are convinced that the warning is invalid and that the code is actually safe and correct, add a comment to convince the reader of this fact and apply the `@suppress` annotation. \nOtherwise, leave a TODO comment. This is a last resort . If you do this, do not suppress the warning. The warning should be visible until it can be taken care of properly."
+            }
+        ]
+    },
+    {
+        "title": "8.2.3 Suppress a warning at the narrowest reasonable scope",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.2.3 Suppress a warning at the narrowest reasonable scope",
+        "cases": [
+            {
+                "description": "Warnings are suppressed at the narrowest reasonable scope, usually that of a single local variable or very small method. Often a variable or method is extracted for that reason alone.\nExample",
+                "example": "/** @suppress {uselessCode} Unrecognized 'use asm' declaration */\nfunction fn() {\n  'use asm';\n  return 0;\n}\n",
+                "appendix": "Even a large number of suppressions in a class is still better than blinding the entire class to this type of warning."
+            }
+        ]
+    },
+    {
+        "title": "8.3 Deprecation",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.3 Deprecation",
+        "cases": [
+            {
+                "description": "Mark deprecated methods, classes or interfaces with `@deprecated` annotations. A deprecation comment must include simple, clear directions for people to fix their call sites."
+            }
+        ]
+    },
+    {
+        "title": "8.4 Code not in Google Style",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.4 Code not in Google Style",
+        "cases": [
+            {
+                "description": "You will occasionally encounter files in your codebase that are not in proper Google Style. These may have come from an acquisition, or may have been written before Google Style took a position on some issue, or may be in non-Google Style for any other reason."
+            }
+        ]
+    },
+    {
+        "title": "8.4.1 Reformatting existing code",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.4 Code not in Google Style/8.4.1 Reformatting existing code",
+        "cases": [
+            {
+                "description": "When updating the style of existing code, follow these guidelines.\nIt is not required to change all existing code to meet current style guidelines. Reformatting existing code is a trade-off between code churn and consistency. Style rules evolve over time and these kinds of tweaks to maintain compliance would create unnecessary churn. However, if significant changes are being made to a file it is expected that the file will be in Google Style. \nBe careful not to allow opportunistic style fixes to muddle the focus of a CL. If you find yourself making a lot of style changes that aren’t critical to the central focus of a CL, promote those changes to a separate CL."
+            }
+        ]
+    },
+    {
+        "title": "8.4.2 Newly added code: use Google Style",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.4 Code not in Google Style/8.4.2 Newly added code: use Google Style",
+        "cases": [
+            {
+                "description": "Brand new files use Google Style, regardless of the style choices of other files in the same package.\nWhen adding new code to a file that is not in Google Style, reformatting the existing code first is recommended, subject to the advice in ?? .\nIf this reformatting is not done, then new code should be as consistent as possible with existing code in the same file, but must not violate the style guide."
+            }
+        ]
+    },
+    {
+        "title": "8.5 Local style rules",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.4 Code not in Google Style/8.5 Local style rules",
+        "cases": [
+            {
+                "description": "Teams and projects may adopt additional style rules beyond those in this document, but must accept that cleanup changes may not abide by these additional rules, and must not block such cleanup changes due to violating any additional rules. Beware of excessive rules which serve no purpose. The style guide does not seek to define style in every possible scenario and neither should you."
+            }
+        ]
+    },
+    {
+        "title": "8.6 Generated code: mostly exempt",
+        "belongs to": "8 Policies/8.2 Compiler warnings/8.4 Code not in Google Style/8.6 Generated code: mostly exempt",
+        "cases": [
+            {
+                "description": "Source code generated by the build process is not required to be in Google Style. However, any generated identifiers that will be referenced from hand-written source code must follow the naming requirements. As a special exception, such identifiers are allowed to contain underscores, which may help to avoid conflicts with hand-written identifiers."
+            }
+        ]
+    },
+    {
+        "title": "9 Appendices",
+        "belongs to": "9 Appendices",
+        "cases": []
+    },
+    {
+        "title": "9.1 JSDoc tag reference",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference",
+        "cases": [
+            {
+                "description": "JSDoc serves multiple purposes in JavaScript. In addition to being used to generate documentation it is also used to control tooling. The best known are the Closure Compiler type annotations."
+            }
+        ]
+    },
+    {
+        "title": "9.1.1 Type annotations and other Closure Compiler annotations",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.1.1 Type annotations and other Closure Compiler annotations",
+        "cases": [
+            {
+                "description": "Documentation for JSDoc used by the Closure Compiler is described in Annotating JavaScript for the Closure Compiler and Types in the Closure Type\nSystem ."
+            }
+        ]
+    },
+    {
+        "title": "9.1.2 Documentation annotations",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.1.2 Documentation annotations",
+        "cases": [
+            {
+                "description": "In addition to the JSDoc described in Annotating JavaScript for the Closure\nCompiler the following tags are common and well supported by various documentation generation tools (such as JsDossier ) for purely documentation purposes.\nYou may also see other types of JSDoc annotations in third-party code. These annotations appear in the JSDoc Toolkit Tag Reference but are not considered part of valid Google style.\n9.1.2.1 `@author` or `@owner` - Not recommended. \nNot recommended. \nSyntax: `@authorusername@google.com(FirstLast)`",
+                "example": "/**\n * @fileoverview Utilities for handling textareas.\n * @author kuth@google.com (Uthur Pendragon)\n */\n",
+                "appendix": "Documents the author of a file or the owner of a test, generally only used in the `@fileoverview` comment. The `@owner` tag is used by the unit test dashboard to determine who owns the test results."
+            },
+            {
+                "description": "9.1.2.2 `@bug` \nSyntax: `@bugbugnumber`",
+                "example": "/** @bug 1234567 */\nfunction testSomething() {\n  // …\n}\n\n/**\n * @bug 1234568\n * @bug 1234569\n */\nfunction testTwoBugs() {\n  // …\n}\n",
+                "appendix": "Indicates what bugs the given test function regression tests. \nMultiple bugs should each have their own `@bug` line, to make searching for regression tests as easy as possible."
+            },
+            {
+                "description": "9.1.2.3 `@code` - Deprecated. Do not use. \nDeprecated. Do not use. Use Markdown backticks instead. \nSyntax: `{@code...}` \nHistorically, ``BatchItem`` was written as `{@codeBatchItem}` .",
+                "example": "/** Processes pending `BatchItem` instances. */\nfunction processBatchItems() {}\n",
+                "appendix": "Indicates that a term in a JSDoc description is code so it may be correctly formatted in generated documentation."
+            },
+            {
+                "description": "9.1.2.4 `@desc` \nSyntax: `@descMessagedescription`",
+                "example": "/** @desc Notifying a user that their account has been created. */\nexports.MSG_ACCOUNT_CREATED = goog.getMsg(\n    'Your account has been successfully created.');\n"
+            },
+            {
+                "description": "9.1.2.5 `@link` \nSyntax: `{@link...}` \nThis tag is used to generate cross-reference links within generated documentation.",
+                "example": "/** Processes pending {@link BatchItem} instances. */\nfunction processBatchItems() {}\n"
+            },
+            {
+                "description": "Historical note: @link tags have also been used to create external links in generated documentation. For external links, always use Markdown's link syntax instead:",
+                "example": "/**\n * This class implements a useful subset of the\n * [native Event interface](https://dom.spec.whatwg.org/#event).\n */\nclass ApplicationEvent {}\n"
+            },
+            {
+                "description": "9.1.2.6 `@see` \nSyntax: `@seeLink`",
+                "example": "/**\n * Adds a single item, recklessly.\n * @see #addSafely\n * @see goog.Collect\n * @see goog.RecklessAdder#add\n */\n",
+                "appendix": "Reference a lookup to another class function or method."
+            },
+            {
+                "description": "9.1.2.7 `@supported` \nSyntax: `@supportedDescription`",
+                "example": "/**\n * @fileoverview Event Manager\n * Provides an abstracted interface to the browsers' event systems.\n * @supported IE10+, Chrome, Safari\n */\n",
+                "appendix": "Used in a fileoverview to indicate what browsers are supported by the file."
+            }
+        ]
+    },
+    {
+        "title": "9.1.3 Framework specific annotations",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.1.3 Framework specific annotations",
+        "cases": [
+            {
+                "description": "The following annotations are specific to a particular framework.\n9.1.3.1 `@ngInject` for Angular 1\n9.1.3.2 `@polymerBehavior` for Polymer \nhttps://github.com/google/closure-compiler/wiki/Polymer-Pass"
+            }
+        ]
+    },
+    {
+        "title": "9.1.4 Notes about standard Closure Compiler annotations",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.1.4 Notes about standard Closure Compiler annotations",
+        "cases": [
+            {
+                "description": "The following tags used to be standard but are now deprecated.\n9.1.4.1 `@expose` - Deprecated. Do not use. \nDeprecated. Do not use. Use `@export` and/or `@nocollapse` instead.\n9.1.4.2 `@inheritDoc` - Deprecated. Do not use. \nDeprecated. Do not use. Use `@override` instead."
+            }
+        ]
+    },
+    {
+        "title": "9.2 Commonly misunderstood style rules",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.2 Commonly misunderstood style rules",
+        "cases": [
+            {
+                "description": "Here is a collection of lesser-known or commonly misunderstood facts about Google Style for JavaScript. (The following are true statements; this is not a list of myths. )\nNeither a copyright statement nor `@author` credit is required in a source file. (Neither is explicitly recommended, either.) \nThere is no hard and fast rule governing how to order the members of a class ( ?? ). \nEmpty blocks can usually be represented concisely as `{}` , as detailed in ( ?? ). \nThe prime directive of line-wrapping is: prefer to break at a higher syntactic level ( ?? ). \nNon-ASCII characters are allowed in string literals, comments and JSDoc, and in fact are recommended when they make the code easier to read than the equivalent Unicode escape would ( ?? )."
+            }
+        ]
+    },
+    {
+        "title": "9.3 Style-related tools",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools",
+        "cases": [
+            {
+                "description": "The following tools exist to support various aspects of Google Style."
+            }
+        ]
+    },
+    {
+        "title": "9.3.1 Closure Compiler",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.3.1 Closure Compiler",
+        "cases": [
+            {
+                "description": "This program performs type checking and other checks, optimizations and other transformations (such as ECMAScript 6 to ECMAScript 5 code lowering)."
+            }
+        ]
+    },
+    {
+        "title": "9.3.2 clang-format",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.3.2 clang-format",
+        "cases": [
+            {
+                "description": "This program reformats JavaScript source code into Google Style, and also follows a number of non-required but frequently readability-enhancing formatting practices. The output produced by `clang-format` is compliant with the style guide.\n`clang-format` is not required. Authors are allowed to change its output, and reviewers are allowed to ask for such changes; disputes are worked out in the usual way. However, subtrees may choose to opt in to such enforcement locally."
+            }
+        ]
+    },
+    {
+        "title": "9.3.3 Closure compiler linter",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.3.3 Closure compiler linter",
+        "cases": [
+            {
+                "description": "This program checks for a variety of missteps and anti-patterns."
+            }
+        ]
+    },
+    {
+        "title": "9.3.4 Conformance framework",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.3.4 Conformance framework",
+        "cases": [
+            {
+                "description": "The JS Conformance Framework is a tool that is part of the Closure Compiler that provides developers a simple means to specify a set of additional checks to be run against their code base above the standard checks. Conformance checks can, for example, forbid access to a certain property, or calls to a certain function, or missing type information (unknowns).\nThese rules are commonly used to enforce critical restrictions (such as defining globals, which could break the codebase) and security patterns (such as using `eval` or assigning to `innerHTML` ), or more loosely to improve code quality.\nFor additional information see the official documentation for the JS Conformance Framework ."
+            }
+        ]
+    },
+    {
+        "title": "9.4 Exceptions for legacy platforms",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms",
+        "cases": []
+    },
+    {
+        "title": "9.4.1 Overview",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.1 Overview",
+        "cases": [
+            {
+                "description": "This section describes exceptions and additional rules to be followed when modern ECMAScript 6 syntax is not available to the code authors. Exceptions to the recommended style are required when ECMAScript 6 syntax is not possible and are outlined here:\nUse of `var` declarations is allowed \nUse of `arguments` is allowed \nOptional parameters without default values are allowed"
+            }
+        ]
+    },
+    {
+        "title": "9.4.2 Use var",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var",
+        "cases": []
+    },
+    {
+        "title": "9.4.2.1 var declarations are NOT block-scoped",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.2.1 var declarations are NOT block-scoped",
+        "cases": [
+            {
+                "description": "`var` declarations are scoped to the beginning of the nearest enclosing function, script or module, which can cause unexpected behavior, especially with function closures that reference `var` declarations inside of loops. The following code gives an example:",
+                "example": "for (var i = 0; i < 3; ++i) {\n  var iteration = i;\n  setTimeout(function() { console.log(iteration); }, i*1000);\n}\n\n// logs 2, 2, 2 -- NOT 0, 1, 2\n// because `iteration` is function-scoped, not local to the loop.\n\n"
+            }
+        ]
+    },
+    {
+        "title": "9.4.2.2 Declare variables as close as possible to first use",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.2.2 Declare variables as close as possible to first use",
+        "cases": [
+            {
+                "description": "Even though `var` declarations are scoped to the beginning of the enclosing function, `var` declarations should be as close as possible to their first use, for readability purposes. However, do not put a `var` declaration inside a block if that variable is referenced outside the block. For example:",
+                "example": "function sillyFunction() {\n  var count = 0;\n  for (var x in y) {\n    // \"count\" could be declared here, but don't do that.\n    count++;\n  }\n  console.log(count + ' items in y');\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "9.4.2.3 Use @const for constants variables",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.2.3 Use @const for constants variables",
+        "cases": [
+            {
+                "description": "For global declarations where the `const` keyword would be used, if it were available, annotate the `var` declaration with @const instead (this is optional for local variables)."
+            }
+        ]
+    },
+    {
+        "title": "9.4.3 Do not use block scoped functions declarations",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.3 Do not use block scoped functions declarations",
+        "cases": [
+            {
+                "description": "Do not do this:",
+                "example": "if (x) {\n  function foo() {}\n}\n"
+            },
+            {
+                "description": "While most JavaScript VMs implemented before ECMAScript 6 support function declarations within blocks it was not standardized. Implementations were inconsistent with each other and with the now-standard ECMAScript 6 behavior for block scoped function declaration. ECMAScript 5 and prior only allow for function declarations in the root statement list of a script or function and explicitly ban them in block scopes in strict mode.\nTo get consistent behavior, instead use a `var` initialized with a function expression to define a function within a block:",
+                "example": "if (x) {\n  var foo = function() {};\n}\n"
+            }
+        ]
+    },
+    {
+        "title": "9.4.4 Dependency management with goog.provide / goog.require",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.4 Dependency management with goog.provide / goog.require",
+        "cases": []
+    },
+    {
+        "title": "9.4.4.1 Summary",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.4 Dependency management with goog.provide / goog.require/9.4.4.1 Summary",
+        "cases": [
+            {
+                "description": "WARNING: `goog.provide` dependency management is deprecated. All new files, even in projects using `goog.provide` for older files, should use goog.module . The following rules are for pre-existing `goog.provide` files only.\nPlace all `goog.provide` s first, `goog.require` s second. Separate provides from requires with an empty line. \nSort the entries alphabetically (uppercase first). \nDon't wrap `goog.provide` and `goog.require` statements. Exceed 80 columns if necessary. \nOnly provide top-level symbols.\n`goog.provide` statements should be grouped together and placed first. All `goog.require` statements should follow. The two lists should be separated with an empty line.\nSimilar to import statements in other languages, `goog.provide` and `goog.require` statements should be written in a single line, even if they exceed the 80 column line length limit.\nThe lines should be sorted alphabetically, with uppercase letters coming first:",
+                "example": "goog.provide('namespace.MyClass');\ngoog.provide('namespace.helperFoo');\n\ngoog.require('an.extremelyLongNamespace.thatSomeoneThought.wouldBeNice.andNowItIsLonger.Than80Columns');\ngoog.require('goog.dom');\ngoog.require('goog.dom.TagName');\ngoog.require('goog.dom.classes');\ngoog.require('goog.dominoes');\n\n"
+            },
+            {
+                "description": "All members defined on a class should be in the same file. Only top-level classes should be provided in a file that contains multiple members defined on the same class (e.g. enums, inner classes, etc).\nDo this:",
+                "example": "goog.provide('namespace.MyClass');\n"
+            },
+            {
+                "description": "Not this:",
+                "example": "goog.provide('namespace.MyClass');\ngoog.provide('namespace.MyClass.CONSTANT');\ngoog.provide('namespace.MyClass.Enum');\ngoog.provide('namespace.MyClass.InnerClass');\ngoog.provide('namespace.MyClass.TypeDef');\ngoog.provide('namespace.MyClass.staticMethod');\n"
+            },
+            {
+                "description": "Members on namespaces may also be provided:",
+                "example": "goog.provide('foo.bar');\ngoog.provide('foo.bar.CONSTANT');\ngoog.provide('foo.bar.method');\n"
+            }
+        ]
+    },
+    {
+        "title": "9.4.4.2 Aliasing with goog.scope",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.4 Dependency management with goog.provide / goog.require/9.4.4.2 Aliasing with goog.scope",
+        "cases": [
+            {
+                "description": "WARNING: `goog.scope` is deprecated. New files should not use `goog.scope` even in projects with existing `goog.scope` usage.\n`goog.scope` may be used to shorten references to namespaced symbols in code using `goog.provide` / `goog.require` dependency management.\nOnly one `goog.scope` invocation may be added per file. Always place it in the global scope.\nThe opening `goog.scope(function(){` invocation must be preceded by exactly one blank line and follow any `goog.provide` statements, `goog.require` statements, or top-level comments. The invocation must be closed on the last line in the file. Append `//goog.scope` to the closing statement of the scope. Separate the comment from the semicolon by two spaces.\nSimilar to C++ namespaces, do not indent under `goog.scope` declarations. Instead, continue from the 0 column.\nOnly make aliases for names that will not be re-assigned to another object (e.g., most constructors, enums, and namespaces). Do not do this (see below for how to alias a constructor):",
+                "example": "goog.scope(function() {\nvar Button = goog.ui.Button;\n\nButton = function() { ... };\n...\n"
+            },
+            {
+                "description": "Names must be the same as the last property of the global that they are aliasing.",
+                "example": "goog.provide('my.module.SomeType');\n\ngoog.require('goog.dom');\ngoog.require('goog.ui.Button');\n\ngoog.scope(function() {\nvar Button = goog.ui.Button;\nvar dom = goog.dom;\n\n// Alias new types after the constructor declaration.\nmy.module.SomeType = function() { ... };\nvar SomeType = my.module.SomeType;\n\n// Declare methods on the prototype as usual:\nSomeType.prototype.findButton = function() {\n  // Button as aliased above.\n  this.button = new Button(dom.getElement('my-button'));\n};\n...\n});  // goog.scope\n"
+            }
+        ]
+    },
+    {
+        "title": "9.4.4.3 goog.forwardDeclare",
+        "belongs to": "9 Appendices/9.1 JSDoc tag reference/9.3 Style-related tools/9.4 Exceptions for legacy platforms/9.4.2 Use var/9.4.4 Dependency management with goog.provide / goog.require/9.4.4.3 goog.forwardDeclare",
+        "cases": [
+            {
+                "description": "Prefer to use `goog.requireType` instead of `goog.forwardDeclare` to break circular dependencies between files in the same library. Unlike `goog.require` , a `goog.requireType` statement is allowed to import a namespace before it is defined.\n`goog.forwardDeclare` may still be used in legacy code to break circular references spanning across library boundaries, but newer code should be structured to avoid it.\n`goog.forwardDeclare` statements must follow the same style rules as `goog.require` and `goog.requireType` . The entire block of `goog.forwardDeclare` , `goog.require` and `goog.requireType` statements is sorted alphabetically."
+            }
+        ]
+    }
+]

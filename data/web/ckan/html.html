@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://docs.ckan.org/en/2.9/contributing/html.html -->
+<html class="js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" lang="en" style="">
+ <!--<![endif]-->
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   HTML coding standards — CKAN 2.9.11 documentation
+  </title>
+  <script src="./html_files/modernizr.min.js.下载" type="text/javascript">
+  </script>
+  <script data-url_root="../" id="documentation_options" src="./html_files/documentation_options.js.下载" type="text/javascript">
+  </script>
+  <script src="./html_files/jquery.js.下载" type="text/javascript">
+  </script>
+  <script src="./html_files/underscore.js.下载" type="text/javascript">
+  </script>
+  <script src="./html_files/doctools.js.下载" type="text/javascript">
+  </script>
+  <script src="./html_files/language_data.js.下载" type="text/javascript">
+  </script>
+  <script async="async" src="./html_files/readthedocs-doc-embed.js.下载" type="text/javascript">
+  </script>
+  <script src="./html_files/theme.js.下载" type="text/javascript">
+  </script>
+  <link href="./html_files/theme.css" rel="stylesheet" type="text/css"/>
+  <link href="./html_files/pygments.css" rel="stylesheet" type="text/css"/>
+  <link href="./html_files/custom.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.ckan.org/en/2.9/genindex.html" rel="index" title="Index"/>
+  <link href="https://docs.ckan.org/en/2.9/search.html" rel="search" title="Search"/>
+  <link href="https://docs.ckan.org/en/2.9/contributing/javascript.html" rel="next" title="JavaScript coding standards"/>
+  <link href="https://docs.ckan.org/en/2.9/contributing/css.html" rel="prev" title="CSS coding standards"/>
+  <!-- RTD Extra Head -->
+  <link href="./html_files/readthedocs-doc-embed.css" rel="stylesheet" type="text/css"/>
+  <script id="READTHEDOCS_DATA" type="application/json">
+   {"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/doc/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "contributing/html", "programming_language": "py", "project": "ckan", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {"ckanext-spatial": "https://docs.ckan.org/projects/ckanext-spatial/en/latest/"}, "theme": "sphinx_rtd_theme", "user_analytics_code": "UA-82993323-1", "version": "2.9"}
+  </script>
+  <!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+  <script type="text/javascript">
+   READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+  </script>
+  <script async="async" src="./html_files/readthedocs-analytics.js.下载" type="text/javascript">
+  </script>
+  <!-- end RTD <extrahead> -->
+  <script async="" id="ethicaladsjs" src="./html_files/ethicalads.min.js.下载" type="text/javascript">
+  </script>
+ </head>
+ <body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+   <nav class="wy-nav-side" data-toggle="wy-nav-shift">
+    <div class="wy-side-scroll">
+     <div class="wy-side-nav-search">
+      <a href="https://docs.ckan.org/en/2.9/contents.html">
+       <img alt="Logo" class="logo" src="./html_files/ckanlogo.webp"/>
+      </a>
+      <div class="version">
+       2.9.11
+      </div>
+      <div role="search">
+       <form action="https://docs.ckan.org/en/2.9/search.html" class="wy-form" id="rtd-search-form" method="get">
+        <input name="q" placeholder="Search docs" type="text"/>
+        <input name="check_keywords" type="hidden" value="yes"/>
+        <input name="area" type="hidden" value="default"/>
+       </form>
+      </div>
+     </div>
+     <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+      <ul class="current">
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/user-guide.html">
+         User guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/sysadmin-guide.html">
+         Sysadmin guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/maintaining/index.html">
+         Maintainer’s guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/api/index.html">
+         API guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/extensions/index.html">
+         Extending guide
+        </a>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/theming/index.html">
+         Theming guide
+        </a>
+       </li>
+       <li class="toctree-l1 current">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/index.html">
+         <span class="toctree-expand">
+         </span>
+         Contributing guide
+        </a>
+        <ul class="">
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/issues.html">
+           Reporting issues
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/i18n.html">
+           Translating CKAN
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/test.html">
+           Testing CKAN
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/commit-messages.html">
+           Writing commit messages
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/pull-requests.html">
+           Making a pull request
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/reviewing.html">
+           Reviewing and merging a pull request
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/documentation.html">
+           Writing documentation
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/simple-code-contributions.html">
+           Projects for beginner CKAN developers
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/architecture.html">
+           CKAN code architecture
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/css.html">
+           CSS coding standards
+          </a>
+         </li>
+         <li class="toctree-l2 current">
+          <a class="reference internal current" href="https://docs.ckan.org/en/2.9/contributing/html.html#">
+           <span class="toctree-expand">
+           </span>
+           HTML coding standards
+          </a>
+          <ul>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html#formatting">
+             Formatting
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html#doctype-and-layout">
+             Doctype and layout
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html#forms">
+             Forms
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html#including-meta-data">
+             Including meta data
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html#targeting-internet-explorer">
+             Targeting Internet Explorer
+            </a>
+           </li>
+           <li class="toctree-l3">
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/html.html#i18n">
+             i18n
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/javascript.html">
+           JavaScript coding standards
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/python.html">
+           Python coding standards
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/string-i18n.html">
+           String internationalization
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/unicode.html">
+           Unicode handling
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/testing.html">
+           Testing coding standards
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/frontend/index.html">
+           Frontend development guidelines
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/database-migrations.html">
+           Database migrations
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/upgrading-dependencies.html">
+           Upgrading CKAN’s dependencies
+          </a>
+         </li>
+         <li class="toctree-l2">
+          <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/release-process.html">
+           Doing a CKAN release
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l1">
+        <a class="reference internal" href="https://docs.ckan.org/en/2.9/changelog.html">
+         Changelog
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </nav>
+   <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+    <nav aria-label="top navigation" class="wy-nav-top">
+     <i class="fa fa-bars" data-toggle="wy-nav-top">
+     </i>
+     <a href="https://docs.ckan.org/en/2.9/contents.html">
+      CKAN
+     </a>
+    </nav>
+    <div class="wy-nav-content">
+     <div class="rst-content">
+      <div aria-label="breadcrumbs navigation" role="navigation">
+       <ul class="wy-breadcrumbs">
+        <li>
+         <a href="https://docs.ckan.org/en/2.9/contents.html">
+          Docs
+         </a>
+         »
+        </li>
+        <li>
+         <a href="https://docs.ckan.org/en/2.9/contributing/index.html">
+          Contributing guide
+         </a>
+         »
+        </li>
+        <li>
+         HTML coding standards
+        </li>
+        <li class="wy-breadcrumbs-aside">
+         <a class="fa fa-github" href="https://github.com/ckan/ckan/blob/2.9/doc/contributing/html.rst">
+          Edit on GitHub
+         </a>
+        </li>
+       </ul>
+       <hr/>
+      </div>
+      <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+       <div itemprop="articleBody">
+        <div class="section" id="html-coding-standards">
+         <h1>
+          HTML coding standards
+          <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#html-coding-standards" title="Permalink to this headline">
+           ¶
+          </a>
+         </h1>
+         <div class="admonition seealso">
+          <p class="first admonition-title">
+           See also
+          </p>
+          <dl class="last docutils">
+           <dt>
+            <a class="reference internal" href="https://docs.ckan.org/en/2.9/contributing/string-i18n.html">
+             <span class="doc">
+              String internationalization
+             </span>
+            </a>
+           </dt>
+           <dd>
+            How to mark strings for translation.
+           </dd>
+          </dl>
+         </div>
+         <div class="section" id="formatting">
+          <h2>
+           Formatting
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#formatting" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           All HTML documents must use
+           <strong>
+            two spaces
+           </strong>
+           for indentation and there should be
+no trailing whitespace. HTML5 syntax must be used and all attributes must use
+double quotes around attributes.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">video</span> <span class="n">autoplay</span><span class="o">=</span><span class="s2">"autoplay"</span> <span class="n">poster</span><span class="o">=</span><span class="s2">"poster_image.jpg"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">source</span> <span class="n">src</span><span class="o">=</span><span class="s2">"foo.ogg"</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"video/ogg"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">video</span><span class="o">&gt;</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           HTML5 elements should be used where appropriate reserving
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;div&gt;
+            </span>
+           </code>
+           and
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;span&gt;
+            </span>
+           </code>
+           elements for situations where there is no semantic value (such as
+wrapping elements to provide styling hooks).
+          </p>
+         </div>
+         <div class="section" id="doctype-and-layout">
+          <h2>
+           Doctype and layout
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#doctype-and-layout" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           All documents must be using the HTML5 doctype and the
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;html&gt;
+            </span>
+           </code>
+           element should
+have a
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "lang"
+            </span>
+           </code>
+           attribute. The
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;head&gt;
+            </span>
+           </code>
+           should also at a minimum include
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "viewport"
+            </span>
+           </code>
+           and
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "charset"
+            </span>
+           </code>
+           meta tags.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Example Site&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+           </div>
+          </div>
+         </div>
+         <div class="section" id="forms">
+          <h2>
+           Forms
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#forms" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           Form fields must always include a
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;label&gt;
+            </span>
+           </code>
+           element with a
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "for"
+            </span>
+           </code>
+           attribute
+matching the
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "id"
+            </span>
+           </code>
+           on the input. This helps accessibility by focusing the
+input when the label is clicked, it also helps screen readers match labels to
+their respective inputs.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"field-email"</span><span class="o">&gt;</span><span class="n">email</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"email"</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"field-email"</span> <span class="n">name</span><span class="o">=</span><span class="s2">"email"</span> <span class="n">value</span><span class="o">=</span><span class="s2">""</span> <span class="o">/&gt;</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Each
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;input&gt;
+            </span>
+           </code>
+           should have an
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "id"
+            </span>
+           </code>
+           that is unique to the page. It does not
+have to match the
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "name"
+            </span>
+           </code>
+           attribute.
+          </p>
+          <p>
+           Forms should take advantage of the new HTML5 input types where they make sense
+to do so, placeholder attributes should also be included where relevant.
+Including these can provided enhancements in browsers that support them such as
+tailored inputs and keyboards.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"field-email"</span><span class="o">&gt;</span><span class="n">Email</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"email"</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"field-email"</span> <span class="n">name</span><span class="o">=</span><span class="s2">"email"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"name@example.com"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"field-phone"</span><span class="o">&gt;</span><span class="n">Phone</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"phone"</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"field-phone"</span> <span class="n">name</span><span class="o">=</span><span class="s2">"phone"</span> <span class="n">value</span><span class="o">=</span><span class="s2">""</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">"+44 077 12345 678"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">"field-url"</span><span class="o">&gt;</span><span class="n">Homepage</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"url"</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"field-url"</span> <span class="n">name</span><span class="o">=</span><span class="s2">"url"</span> <span class="n">value</span><span class="o">=</span><span class="s2">""</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">"http://example.com"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Wufoo provides an
+           <a class="reference external" href="http://wufoo.com/html5/">
+            excellent reference
+           </a>
+           for these attributes.
+          </p>
+         </div>
+         <div class="section" id="including-meta-data">
+          <h2>
+           Including meta data
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#including-meta-data" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           Classes should ideally only be used as styling hooks. If you need to include
+additional data in the HTML document, for example to pass data to JavaScript,
+then the HTML5
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             data-
+            </span>
+           </code>
+           attributes should be used.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">a</span> <span class="n">class</span><span class="o">=</span><span class="s2">"btn"</span> <span class="n">data</span><span class="o">-</span><span class="nb">format</span><span class="o">=</span><span class="s2">"csv"</span><span class="o">&gt;</span><span class="n">Download</span> <span class="n">CSV</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           These can then be accessed easily via jQuery using the
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             .data()
+            </span>
+           </code>
+           method.
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">jQuery</span><span class="p">(</span><span class="s1">'.btn'</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s1">'format'</span><span class="p">);</span> <span class="o">//=&gt;</span> <span class="s2">"csv"</span>
+
+<span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">contents</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">data</span> <span class="n">attributes</span><span class="o">.</span>
+<span class="n">jQuery</span><span class="p">(</span><span class="s1">'.btn'</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">();</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nb">format</span><span class="p">:</span> <span class="s2">"csv"</span><span class="p">}</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           One thing to note is that the JavaScript API for datasets will convert all
+attribute names into camelCase. So
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             "data-file-format"
+            </span>
+           </code>
+           will become
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             fileFormat
+            </span>
+           </code>
+           .
+          </p>
+          <p>
+           For example:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">a</span> <span class="n">class</span><span class="o">=</span><span class="s2">"btn"</span> <span class="n">data</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="nb">format</span><span class="o">=</span><span class="s2">"csv"</span><span class="o">&gt;</span><span class="n">Download</span> <span class="n">CSV</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Will become:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">jQuery</span><span class="p">(</span><span class="s1">'.btn'</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s1">'fileFormat'</span><span class="p">);</span> <span class="o">//=&gt;</span> <span class="s2">"csv"</span>
+<span class="n">jQuery</span><span class="p">(</span><span class="s1">'.btn'</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">();</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="n">fileFormat</span><span class="p">:</span> <span class="s2">"csv"</span><span class="p">}</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           Ideally you should be using
+           <a class="reference external" href="https://docs.ckan.org/en/2.9/contributing/frontend/javascript-module-tutorial.html">
+            CKAN’s JavaScript module
+           </a>
+           format for defining
+how JavaScript is initiated and interacts with the DOM.
+          </p>
+         </div>
+         <div class="section" id="targeting-internet-explorer">
+          <h2>
+           Targeting Internet Explorer
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#targeting-internet-explorer" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           Targeting lower versions of Internet Explorer (IE), those below version 9,
+should be handled by the stylesheets. Small fixes should be provided inline
+using the
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             .ie
+            </span>
+           </code>
+           specific class names. Larger fixes may require a separate
+stylesheet but try to avoid this if at all possible.
+          </p>
+          <p>
+           Adding IE specific classes:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;!--[if lt IE 7]&gt; &lt;html lang="en" class="ie ie6"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 7]&gt;    &lt;html lang="en" class="ie ie7"&gt; &lt;![endif]--&gt;
+&lt;!--[if IE 8]&gt;    &lt;html lang="en" class="ie ie8"&gt; &lt;![endif]--&gt;
+&lt;!--[if gt IE 8]&gt;&lt;!--&gt; &lt;html lang="en"&gt; &lt;!--&lt;![endif]--&gt;
+</pre>
+           </div>
+          </div>
+          <div class="admonition note">
+           <p class="first admonition-title">
+            Note
+           </p>
+           <p class="last">
+            Only add lines for classes that are actually being used.
+           </p>
+          </div>
+          <p>
+           These can then be used within the CSS:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">.</span><span class="n">clear</span><span class="p">:</span><span class="n">before</span><span class="p">,</span>
+<span class="o">.</span><span class="n">clear</span><span class="p">:</span><span class="n">after</span> <span class="p">{</span>
+    <span class="n">content</span><span class="p">:</span> <span class="s2">""</span><span class="p">;</span>
+    <span class="n">display</span><span class="p">:</span> <span class="n">table</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">.</span><span class="n">clear</span><span class="p">:</span><span class="n">after</span> <span class="p">{</span>
+    <span class="n">clear</span><span class="p">:</span> <span class="n">both</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">.</span><span class="n">ie7</span> <span class="o">.</span><span class="n">clear</span> <span class="p">{</span>
+    <span class="n">zoom</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="o">/*</span> <span class="n">For</span> <span class="n">IE</span> <span class="mi">6</span><span class="o">/</span><span class="mi">7</span> <span class="p">(</span><span class="n">trigger</span> <span class="n">hasLayout</span><span class="p">)</span> <span class="o">*/</span>
+<span class="p">}</span>
+</pre>
+           </div>
+          </div>
+         </div>
+         <div class="section" id="i18n">
+          <h2>
+           i18n
+           <a class="headerlink" href="https://docs.ckan.org/en/2.9/contributing/html.html#i18n" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           Don’t include line breaks within
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             &lt;p&gt;
+            </span>
+           </code>
+           blocks.  ie do this:
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Blah</span> <span class="n">foo</span> <span class="n">blah</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">New</span> <span class="n">paragraph</span><span class="p">,</span> <span class="n">blah</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           And
+           <strong>
+            not
+           </strong>
+           :
+          </p>
+          <div class="highlight-default notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Blah</span> <span class="n">foo</span> <span class="n">blah</span>
+   <span class="n">New</span> <span class="n">paragraph</span><span class="p">,</span> <span class="n">blah</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</pre>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <footer>
+       <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+        <a class="btn btn-neutral float-right" href="https://docs.ckan.org/en/2.9/contributing/javascript.html" title="JavaScript coding standards">
+         Next
+         <span class="icon fa-arrow-circle-right">
+         </span>
+        </a>
+        <a class="btn btn-neutral" href="https://docs.ckan.org/en/2.9/contributing/css.html" title="CSS coding standards">
+         <span class="icon fa-arrow-circle-left">
+         </span>
+         Previous
+        </a>
+       </div>
+       <hr/>
+       <div>
+        <div class="ethical-rtd" data-ea-manual="true" data-ea-publisher="readthedocs" data-ea-style="stickybox" data-ea-type="image" id="rtd-sidebar">
+        </div>
+       </div>
+       <p>
+        Support the
+        <a href="http://ckan.org/">
+         CKAN Association
+        </a>
+        .
+       </p>
+       <p class="copyright">
+        © 2009-2018
+        <a href="https://okfn.org/">
+         Open Knowledge Foundation
+        </a>
+        and
+        <a href="https://github.com/ckan/ckan/graphs/contributors">
+         contributors
+        </a>
+        .
+    Licensed under
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">
+         Creative Commons
+    Attribution ShareAlike (Unported) v3.0 License
+        </a>
+        .
+        <br/>
+        <img alt="CC License Logo" src="./html_files/80x15.png"/>
+        <a href="https://opendefinition.org/">
+         <img alt="{{ _('Open Content') }}" border="0" src="./html_files/oc_80x15_blue.png"/>
+        </a>
+       </p>
+       <p>
+        <a href="https://github.com/ckan/ckan">
+         Source
+        </a>
+        —
+        <a href="https://github.com/ckan/ckan/issues">
+         Issues
+        </a>
+        —
+        <a href="http://lists.okfn.org/mailman/listinfo/ckan-dev">
+         Mailing List
+        </a>
+        —
+        <a href="http://twitter.com/CKANProject">
+         Twitter @CKANProject
+        </a>
+       </p>
+       <p>
+        Related Projects:
+        <a href="http://datacatalogs.org/">
+         DataCatalogs.org
+        </a>
+        —
+        <a href="http://openspending.org/">
+         OpenSpending.org
+        </a>
+        —
+        <a href="http://opendatahandbook.org/">
+         Open Data Handbook
+        </a>
+       </p>
+       <a href="https://github.com/snide/sphinx_rtd_theme">
+        Sphinx theme
+       </a>
+       provided by
+       <a href="https://readthedocs.org/">
+        Read the Docs
+       </a>
+      </footer>
+     </div>
+    </div>
+   </section>
+  </div>
+  <div aria-label="versions" class="rst-versions" data-toggle="rst-versions" role="note">
+   <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book">
+     Read the Docs
+    </span>
+    v: 2.9
+    <span class="fa fa-caret-down">
+    </span>
+   </span>
+   <div class="rst-other-versions">
+    <!-- Inserted RTD Footer -->
+    <div class="injected">
+     <dl>
+      <dt>
+       版本
+      </dt>
+      <dd>
+       <a href="https://docs.ckan.org/en/latest/contributing/html.html">
+        latest
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.10/contributing/html.html">
+        2.10
+       </a>
+      </dd>
+      <dd class="rtd-current-item">
+       <a href="https://docs.ckan.org/en/2.9/contributing/html.html">
+        2.9
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.8/contributing/html.html">
+        2.8
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.7/contributing/html.html">
+        2.7
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.6/contributing/html.html">
+        2.6
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/2.5/contributing/html.html">
+        2.5
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.4.9/contributing/html.html">
+        ckan-2.4.9
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.3.5/contributing/html.html">
+        ckan-2.3.5
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.2.3/contributing/html.html">
+        ckan-2.2.3
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/en/ckan-2.1.5/contributing/html.html">
+        ckan-2.1.5
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       下载
+      </dt>
+      <dd>
+       <a href="https://docs.ckan.org/_/downloads/en/2.9/pdf/">
+        PDF
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/_/downloads/en/2.9/htmlzip/">
+        HTML
+       </a>
+      </dd>
+      <dd>
+       <a href="https://docs.ckan.org/_/downloads/en/2.9/epub/">
+        Epub
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <!-- These are kept as relative links for internal installs that are http -->
+      <dt>
+       在 Read the Docs 上
+      </dt>
+      <dd>
+       <a href="https://readthedocs.org/projects/ckan/">
+        项目主页
+       </a>
+      </dd>
+      <dd>
+       <a href="https://readthedocs.org/projects/ckan/builds/">
+        构建
+       </a>
+      </dd>
+      <dd>
+       <a href="https://readthedocs.org/projects/ckan/downloads/">
+        下载
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       在 GitHub 上
+      </dt>
+      <dd>
+       <a href="https://github.com/ckan/ckan/blob/2.9/doc/contributing/html.rst">
+        查看
+       </a>
+      </dd>
+      <dd>
+       <a href="https://github.com/ckan/ckan/edit/2.9/doc/contributing/html.rst">
+        编辑
+       </a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       搜索
+      </dt>
+      <dd>
+       <div style="padding: 6px;">
+        <form action="https://readthedocs.org/projects/ckan/search/" class="wy-form" id="flyout-search-form" method="get" target="_blank">
+         <input aria-label="搜索文档" name="q" placeholder="搜索文档" type="text"/>
+        </form>
+       </div>
+      </dd>
+     </dl>
+     <hr/>
+     <small>
+      <span>
+       托管于
+       <a href="https://readthedocs.org/">
+        Read the Docs
+       </a>
+      </span>
+      <span>
+       ·
+      </span>
+      <a href="https://docs.readthedocs.io/page/privacy-policy.html">
+       隐私政策
+      </a>
+     </small>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ </body>
+</html>

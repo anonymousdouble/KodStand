@@ -1,0 +1,115 @@
+[
+    {
+        "title": "7 - Statements",
+        "belongs to": "7 - Statements",
+        "cases": []
+    },
+    {
+        "title": "7.1 Simple Statements",
+        "belongs to": "7 - Statements/7.1 Simple Statements",
+        "cases": [
+            {
+                "description": "Each line should contain at most one statement. Example:\nCopy",
+                "example": "argv++;         // Correct\n\nargc--;         // Correct  \nargv++; argc--; // AVOID!\n\n"
+            }
+        ]
+    },
+    {
+        "title": "7.2 Compound Statements",
+        "belongs to": "7 - Statements/7.2 Compound Statements",
+        "cases": [
+            {
+                "description": "Compound statements are statements that contain lists of statements enclosed in braces \" `{statements}` \". See the following sections for examples.\nThe enclosed statements should be indented one more level than the compound statement. \nThe opening brace should be at the end of the line that begins the compound statement; the closing brace should begin a line and be indented to the beginning of the compound statement. \nBraces are used around all statements, even single statements, when they are part of a control structure, such as an `if-else` or `for` statement. This makes it easier to add statements without accidentally introducing bugs due to forgetting to add braces."
+            }
+        ]
+    },
+    {
+        "title": "7.3 return Statements",
+        "belongs to": "7 - Statements/7.3 return Statements",
+        "cases": [
+            {
+                "description": "A `return` statement with a value should not use parentheses unless they make the return value more obvious in some way. Example:\nCopy",
+                "example": "return;return myDisk.size();\nreturn (size ? size : defaultSize);\n"
+            }
+        ]
+    },
+    {
+        "title": "7.4 if, if-else, if else-if else Statements",
+        "belongs to": "7 - Statements/7.4 if, if-else, if else-if else Statements",
+        "cases": [
+            {
+                "description": "The `if-else` class of statements should have the following form:\nCopy",
+                "example": "if (condition) {statements;\n}\nif (condition) {\nstatements;\n} else {\nstatements;\n}\nif (condition) {\nstatements;\n} else if (condition) {\nstatements;\n} else {\nstatements;\n}\n"
+            },
+            {
+                "description": "Note: \n`if` statements always use braces, `{}` . Avoid the following error-prone form:\nCopy",
+                "example": "if (condition) //AVOID! THIS OMITS THE BRACES {}!statement;\n"
+            }
+        ]
+    },
+    {
+        "title": "7.5 for Statements",
+        "belongs to": "7 - Statements/7.5 for Statements",
+        "cases": [
+            {
+                "description": "A `for` statement should have the following form:\nCopy",
+                "example": "for (initialization; condition; update) {statements;\n}\n"
+            },
+            {
+                "description": "An empty `for` statement (one in which all the work is done in the initialization, condition, and update clauses) should have the following form:\nCopy",
+                "example": "for (initialization; condition; update);",
+                "appendix": "When using the comma operator in the initialization or update clause of a `for` statement, avoid the complexity of using more than three variables. If needed, use separate statements before the `for` loop (for the initialization clause) or at the end of the loop (for the update clause)."
+            }
+        ]
+    },
+    {
+        "title": "7.6 while Statements",
+        "belongs to": "7 - Statements/7.6 while Statements",
+        "cases": [
+            {
+                "description": "A `while` statement should have the following form:\nCopy",
+                "example": "while (condition) {statements;\n}\n"
+            },
+            {
+                "description": "An empty `while` statement should have the following form:\nCopy",
+                "example": "while (condition);"
+            }
+        ]
+    },
+    {
+        "title": "7.7 do-while Statements",
+        "belongs to": "7 - Statements/7.7 do-while Statements",
+        "cases": [
+            {
+                "description": "A `do-while` statement should have the following form:\nCopy",
+                "example": "do {statements;\n} while (condition);\n"
+            }
+        ]
+    },
+    {
+        "title": "7.8 switch Statements",
+        "belongs to": "7 - Statements/7.8 switch Statements",
+        "cases": [
+            {
+                "description": "A `switch` statement should have the following form:\nCopy",
+                "example": "switch (condition) {case ABC:\nstatements;\n/* falls through */\ncase DEF:\nstatements;\nbreak;\ncase XYZ:\nstatements;\nbreak;\ndefault:\nstatements;\nbreak;\n}\n",
+                "appendix": "Every time a case falls through (doesn't include a `break` statement), add a comment where the `break` statement would normally be. This is shown in the preceding code example with the `/*fallsthrough*/` comment.\nEvery `switch` statement should include a default case. The `break` in the default case is redundant, but it prevents a fall-through error if later another `case` is added."
+            }
+        ]
+    },
+    {
+        "title": "7.9 try-catch Statements",
+        "belongs to": "7 - Statements/7.9 try-catch Statements",
+        "cases": [
+            {
+                "description": "A `try-catch` statement should have the following format:\nCopy",
+                "example": "try {statements;\n} catch (ExceptionClass e) {\nstatements;\n}\n"
+            },
+            {
+                "description": "A `try-catch` statement may also be followed by `finally` , which executes regardless of whether or not the `try` block has completed successfully.\nCopy",
+                "example": "try {statements;\n} catch (ExceptionClass e) {\nstatements;\n} finally {\nstatements;\n}\n",
+                "appendix": "  \n1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10 \n11 \n "
+            }
+        ]
+    }
+]
