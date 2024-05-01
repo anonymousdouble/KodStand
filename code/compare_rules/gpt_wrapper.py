@@ -1,7 +1,12 @@
 # encoding=utf-8
+"""
+requires openai == 1.25.0
 
-# requires openai > 1.0.0
-# reference: https://github.com/openai/openai-python
+references:
+- https://github.com/openai/openai-python
+- https://flowus.cn/share/bf106afc-6e3c-4b52-b7e4-bf23b3ec758
+
+"""
 from openai import OpenAI
 import httpx
 import re
