@@ -1,4 +1,3 @@
-from collections import defaultdict
 import subprocess
 import os
 import shutil
@@ -36,6 +35,7 @@ def check_project(proj_root, save_root):
     print(f"finished {proj_root} in {time.time()-t} seconds")
 
 def analyze(root, analyze_fpath, file_path):
+    root = "data\\config\\eslint"
     print(f"checking {file_path}")
     cmd = f"eslint {file_path} -f json -o {analyze_fpath}"
     p = subprocess.Popen(cmd, shell=True, cwd=root)
@@ -53,7 +53,7 @@ def rename_remove_space(proj_root):
 
     for root, dirs, files in os.walk(proj_root):
         for file in files:
-            if file.endswith(".js") or file.endswith(".mjs"):
+            if file.endswith(".js"):
                 file_path = os.path.join(root, file)
                 if " " in file_path:
                     new_file_path = os.path.join(root, file.replace(" ", "_"))
@@ -62,18 +62,22 @@ def rename_remove_space(proj_root):
                     os.rename(file_path, new_file_path)
 
 def check_repositories():
-    repository = "C:\\Users\\shuli\\workspace\\codestandard_data\\javaScriptrepos"
+    repository = "D:\\Work\\Dataset\\codestandard_data\\javaScriptrepos"
     # get current project root
     project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     save_root = os.path.join(project_root, "data","result", "eslint_google_result")
     if not os.path.exists(save_root):
         os.makedirs(save_root)
+    cnt = 0
     for proj in os.listdir(repository):
         proj_root = os.path.join(repository, proj)
         save_proj_root = os.path.join(save_root, proj)
         print(f"start check proj: {proj}")
         check_project(proj_root, save_proj_root)
         # break
+        cnt+=1
+        if cnt == 3:
+            break
 
 def rm_cofig(repository):
     for proj in os.listdir(repository):
@@ -83,8 +87,12 @@ def rm_cofig(repository):
                 if file == "eslint.config.json":
                     os.remove(os.path.join(root, file))
 
-def result_stat(errors,result_path):
+def result_stat(errors, examples, result_path):
+    """
+    分析单个json文件，统计错误信息
+    """
     local_errors = {}
+    local_examples = {}
     with open(result_path, "r",encoding='utf-8') as f:
         data = json.load(f)
         messages = data[0]["messages"]
@@ -93,8 +101,8 @@ def result_stat(errors,result_path):
                 continue
             if msg["ruleId"] not in local_errors:
                 local_errors[msg["ruleId"]] = 0
+                local_examples[msg["ruleId"]] = msg["message"]
             local_errors[msg["ruleId"]] += 1
-
     local_errors = sorted(local_errors.items(), key=lambda x: x[1], reverse=True)
     csv_path = result_path.replace(".json", ".csv")
     with open(csv_path, "w",encoding='utf-8') as f:
@@ -105,25 +113,42 @@ def result_stat(errors,result_path):
         if k not in errors:
             errors[k] = 0
         errors[k] += v
-    return errors
+    for k,v in local_examples.items():
+        if k not in examples:
+            examples[k] = v
+    return errors, examples
 
 def proj_result_stat(proj_root):
+    """
+    分析项目的所有json文件，统计错误信息
+    """
     print(f"start stat proj: {proj_root}")
     proj_errors = {}
+    proj_examples = {}
     for root, dirs, files in os.walk(proj_root):
         for file in files:
             if file.endswith(".json"):
-                proj_errors = result_stat(proj_errors, os.path.join(root, file))
+                proj_errors, examples = result_stat(proj_errors, proj_examples, os.path.join(root, file))
     proj_errors = sorted(proj_errors.items(), key=lambda x: x[1], reverse=True)
     cnt = sum([v for _,v in proj_errors])
     with open(os.path.join(proj_root, "result.csv"), "w", encoding='utf-8') as f:
         f.write("rule,instance,percentage\n")
         for k,v in proj_errors:
             f.write(f"{k},{v},{v/cnt*100:.2f}\n")
+    with open(os.path.join(proj_root, "examples.md"), "w", encoding='utf-8') as f:
+        for k,v in proj_examples.items():
+            f.write(f"# {k}\n\n")
+            f.write(f"## example message\n\n")
+            f.write(f"{v}\n")
+            f.write(f"## corresponding rule\n\n")
+            f.write(f"\n")
     print(f"finished stat proj: {proj_root}")
     return proj_errors
 
 def stat_all_repositories(data_root):
+    """
+    分析所有项目的错误信息
+    """
     pool = Pool(24)
     tasks = []
     for proj in os.listdir(data_root):
@@ -134,7 +159,9 @@ def stat_all_repositories(data_root):
     print("finished all repos")
 
 def get_corresponding_code(json_path,rule):
-
+    """
+    根据错误信息获取对应的代码
+    """
     with open(json_path, "r",encoding='utf-8') as f:
         data = json.load(f)
         code = data[0]["source"]
@@ -160,12 +187,16 @@ def get_corresponding_code(json_path,rule):
             print(f"error: {error['message']}")
             print("code:")
             print(detail_code)
+
 if __name__ == '__main__':
+    google_path = "data\\result\\eslint_google_result"
+    example_json_path = "data\\result\\eslint_google_result\\311-data\\public\\duckdb-browser-mvp.worker.json"
+    example_rule = "no-await-in-loop"
+    example_repo = "data\\result\\eslint_google_result\\311-data"
+
     # check_repositories()
-    # rm_cofig("data\\result\\eslint_google_result")
-
-    # result_stat({},"data\\result\\eslint_google_result\\311-data\\components\\main\\desktop\\councilselector\\index.json")
-    # corresponding_code("data\\result\\eslint_google_result\\311-data\\public\\duckdb-browser-mvp.worker.json", "no-await-in-loop")
-    # proj_result_stat("data\\result\\eslint_google_result\\311-data")
-
-    stat_all_repositories("C:\\Users\\shuli\\workspace\\kodstand\\data\\result\\eslint_google_result")
+    # rm_cofig(google_path)
+    # result_stat({},example_json_path)
+    # corresponding_code(example_json_path, example_rule)
+    # proj_result_stat(example_repo)
+    stat_all_repositories(google_path)

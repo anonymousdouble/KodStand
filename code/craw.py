@@ -27,8 +27,9 @@ def crawl_page(url, start_url, depth, visited, max_depth, dir):
             for link in soup.find_all("a"):
                 next_url = link.get("href")
                 # next_url 可能是相对路径
-                rt = "https://www.oracle.com"
+                rt = "https://eslint.org"
                 next_url = rt + next_url
+                print(next_url)
                 if next_url and start_url in next_url:
                     print(next_url)
                     crawl_page(next_url, start_url, depth + 1, visited, max_depth, dir)
@@ -39,8 +40,8 @@ def crawl_page(url, start_url, depth, visited, max_depth, dir):
 
 if __name__ == "__main__":
     # https://airbnb.io/javascript/
-    start_url = "https://www.oracle.com/java/technologies/javase/codeconventions-contents.html"
-    tmp_url = "https://www.oracle.com/java/technologies/javase"
+    start_url = "https://eslint.org/docs/v8.x/rules"
+    tmp_url = "https://eslint.org/docs/v8.x/rules"
     max_depth = 10
     visited = set()
     dir = "data/input/next"
