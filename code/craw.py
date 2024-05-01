@@ -24,8 +24,12 @@ def crawl_page(url, start_url, depth, visited, max_depth, dir):
         response = requests.get(url)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
-            for link in soup.find_all("a"):
-                next_url = link.get("href")
+            for node in soup.find_all("a"):
+                link = node.get("href")
+                if "/docs/v8.x/rules/" in link:
+                    print(node.get("href"))
+                continue
+                next_url = node.get("href")
                 # next_url 可能是相对路径
                 rt = "https://eslint.org"
                 next_url = rt + next_url

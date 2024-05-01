@@ -1,0 +1,71 @@
+
+# symbol-description
+## Overview
+Require symbol descriptions
+
+
+
+The `Symbol` function may have an optional description:
+
+```json
+var foo = Symbol("some description");
+
+var someString = "some description";
+var bar = Symbol(someString);
+```
+Using `description` promotes easier debugging: when a symbol is logged the description is used:
+
+```json
+var foo = Symbol("some description");
+
+> console.log(foo);
+// Symbol(some description)
+```
+It may facilitate identifying symbols when one is observed during debugging.
+## Rule Details
+This rules requires a description when creating symbols.
+## Examples
+Examples of incorrect code for this rule:
+
+
+```json
+/*eslint symbol-description: "error"*/
+/*eslint-env es6*/
+
+var foo = Symbol();
+```
+Examples of correct code for this rule:
+
+
+```json
+/*eslint symbol-description: "error"*/
+/*eslint-env es6*/
+
+var foo = Symbol("some description");
+
+var someString = "some description";
+var bar = Symbol(someString);
+```
+## When Not To Use It
+This rule should not be used in ES3/5 environments.
+In addition, this rule can be safely turned off if you don’t want to enforce presence of `description` when creating Symbols.
+## Version
+This rule was introduced in ESLint v3.4.0.
+## Further Reading
+
+
+
+
+
+ECMAScript 2015 Language Specification – ECMA-262 6th Edition 
+ www.ecma-international.org
+
+
+
+
+
+## Resources
+
+Rule source 
+Tests source 
+
