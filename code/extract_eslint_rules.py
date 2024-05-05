@@ -17,3 +17,20 @@ Google JavaScript style
 eslint-config-google-master/index.js
 https://github.com/google/eslint-config-google/blob/master/index.js
 '''
+
+import os,json
+data = []
+with open("manual.txt","r",encoding="utf-8") as f:
+    data = f.read().split("\n")
+res = []
+for line in data:
+    eslint_rule,google_rule,comment = line.split(",")
+    eslint_rule = eslint_rule.strip("\"")
+    google_rule = google_rule.strip("\"")
+    res.append({
+        "eslint_rule":eslint_rule,
+        "google_rule":google_rule,
+        "comment":comment
+    })
+with open("manual.json","w",encoding="utf-8") as f:
+    json.dump(res,f,indent=4,ensure_ascii=False)

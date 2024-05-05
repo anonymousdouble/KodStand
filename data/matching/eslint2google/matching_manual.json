@@ -1,0 +1,322 @@
+[
+    {
+        "eslint_rule": "no-cond-assign",
+        "google_rule": null,
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-irregular-whitespace",
+        "google_rule": "2.3.1 Whitespace characters",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-unexpected-multiline",
+        "google_rule": "4.5.1 Where to break",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "valid-jsdoc",
+        "google_rule": "7 JSDoc",
+        "comment": "太宽泛了"
+    },
+    {
+        "eslint_rule": "curly",
+        "google_rule": "4.1 Braces",
+        "comment": "对应两条规则"
+    },
+    {
+        "eslint_rule": "guard-for-in",
+        "google_rule": "5.8.1 For loops",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-caller",
+        "google_rule": null,
+        "comment": "google guide 未提到caller"
+    },
+    {
+        "eslint_rule": "no-extend-native",
+        "google_rule": "5.4.6 Do not manipulate prototypes directly",
+        "comment": "相似规则：5.11.6 Modifying builtin objects"
+    },
+    {
+        "eslint_rule": "no-extra-bind",
+        "google_rule": null,
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-invalid-this",
+        "google_rule": "5.9 this",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-multi-spaces",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-multi-str",
+        "google_rule": ".6.3 No line continuations",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-new-wrappers",
+        "google_rule": "5.11.5 Wrapper objects for primitive types",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-throw-literal",
+        "google_rule": "5.8.2 Exceptions",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-with",
+        "google_rule": "5.11.1 with",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "prefer-promise-reject-errors",
+        "google_rule": "5.8.2 Exceptions",
+        "comment": "多条规则对应到同一条规则中"
+    },
+    {
+        "eslint_rule": "no-unused-vars",
+        "google_rule": "9.4.2.2 Declare variables as close as possible to first use",
+        "comment": "概念上来说， \"5.1.3 Declared when needed, initialized as soon as possible\"更接近，但是这条规则是针对var类型的"
+    },
+    {
+        "eslint_rule": "array-bracket-newline",
+        "google_rule": "4.5.1 Where to break",
+        "comment": "关于换行的规则很模糊，这条关注括号和其中元素之间的换行"
+    },
+    {
+        "eslint_rule": "array-bracket-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": "这个可以设置多种选项，可配置成google guide的要求"
+    },
+    {
+        "eslint_rule": "array-element-newline",
+        "google_rule": "4.5.1 Where to break",
+        "comment": "相比于\"array-element-newline\"，这条关注括号内元素之间的换行"
+    },
+    {
+        "eslint_rule": "block-spacing",
+        "google_rule": "4.1.2 Nonempty blocks: K&R style",
+        "comment": "也涉及到\"4.6.1 Vertical whitespace\""
+    },
+    {
+        "eslint_rule": "brace-style",
+        "google_rule": "4.1.2 Nonempty blocks: K&R style",
+        "comment": "和\"block-spacing\"很接近"
+    },
+    {
+        "eslint_rule": "camelcase",
+        "google_rule": "6.3 Camel case: defined",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "comma-dangle",
+        "google_rule": "5.2.1 Use trailing commas\"+\"5.3.1 Use trailing commas",
+        "comment": "分别针对Array literals和Object literals"
+    },
+    {
+        "eslint_rule": "comma-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "comma-style",
+        "google_rule": "5.2.1 Use trailing commas\"+\"5.3.1 Use trailing commas\"+\"4.6.2 Horizontal whitespace",
+        "comment": "几条规则都相关"
+    },
+    {
+        "eslint_rule": "computed-property-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": "google guide虽然没有指定要在变量前后加空格，但可认为默认不用加空格。直接将规则交由GPT判断也是此结论"
+    },
+    {
+        "eslint_rule": "eol-last",
+        "google_rule": null,
+        "comment": ""
+    },
+    {
+        "eslint_rule": "func-call-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "indent",
+        "google_rule": "4.5.2 Indent continuation lines at least +4 spaces",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "key-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "keyword-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "max-len",
+        "google_rule": "4.4 Column limit: 80",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "new-cap",
+        "google_rule": "6.2.2 Class names",
+        "comment": "js中用new调用的方法都可看作是构造函数。eslint说是构造函数要首字母大写，而js中可能只有构造函数没有类定义，在这种情况下，构造函数名称和类名作用是相同的。个人理这两个规则是对应的。"
+    },
+    {
+        "eslint_rule": "no-array-constructor",
+        "google_rule": "5.2.2 Do not use the variadic Array constructor",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-mixed-spaces-and-tabs",
+        "google_rule": "2.3.1 Whitespace characters",
+        "comment": "google guide禁用tab，eslint则禁止混用，前者对后者是包含关系"
+    },
+    {
+        "eslint_rule": "no-multiple-empty-lines",
+        "google_rule": "4.6.1 Vertical whitespace",
+        "comment": "google guide不鼓励连续多个空行，但并不禁止"
+    },
+    {
+        "eslint_rule": "no-new-object",
+        "google_rule": "5.3.2 Do not use the Object constructor",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-tabs",
+        "google_rule": "2.3.1 Whitespace characters",
+        "comment": "这个和\"no-mixed-spaces-and-tabs\"是包含关系"
+    },
+    {
+        "eslint_rule": "no-trailing-spaces",
+        "google_rule": "4.6.1 Vertical whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "object-curly-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "one-var",
+        "google_rule": "9.4.1 Overview",
+        "comment": "这个说的很隐晦"
+    },
+    {
+        "eslint_rule": "operator-linebreak",
+        "google_rule": "4.5.1 Where to break",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "padded-blocks",
+        "google_rule": "4.6.1 Vertical whitespace",
+        "comment": "google guide列举vertical space的时候不包含这种情况，所以默认不使用padded block"
+    },
+    {
+        "eslint_rule": "quote-props",
+        "google_rule": "5.3.3 Do not mix quoted and unquoted keys",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "quotes",
+        "google_rule": "5.6.1 use single quotes",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "require-jsdoc",
+        "google_rule": "7.8 Method and function comments",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "semi",
+        "google_rule": "4.3.2 Semicolons are required",
+        "comment": "相关google guide规则为\"5.11.3 Automatic semicolon insertion\""
+    },
+    {
+        "eslint_rule": "semi-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "space-before-blocks",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "space-before-function-paren",
+        "google_rule": null,
+        "comment": "这个不确定符合不符合\"4.6.2 Horizontal whitespace\""
+    },
+    {
+        "eslint_rule": "spaced-comment",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "switch-colon-spacing",
+        "google_rule": "4.6.2 Horizontal whitespace",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "arrow-parens",
+        "google_rule": "5.5.3 Arrow functions",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "constructor-super",
+        "google_rule": "5.4.1 Constructors",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "generator-star-spacing",
+        "google_rule": "5.5.4 Generators",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "no-new-symbol",
+        "google_rule": "5.11.5 Wrapper objects for primitive types",
+        "comment": "为什么不和array/object一起处理"
+    },
+    {
+        "eslint_rule": "no-this-before-super",
+        "google_rule": "5.4.1 Constructors",
+        "comment": "google guide被拆分成两个规则实现"
+    },
+    {
+        "eslint_rule": "no-var",
+        "google_rule": "5.1.1 Use const and let",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "prefer-const",
+        "google_rule": "5.1.1 Use const and let",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "prefer-rest-params",
+        "google_rule": "5.5.5.2 Rest parameters",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "prefer-spread",
+        "google_rule": "5.5.7 Spread operator",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "rest-spread-spacing",
+        "google_rule": "5.5.5.2 Rest parameters\"+\"5.5.7 Spread operator",
+        "comment": ""
+    },
+    {
+        "eslint_rule": "yield-star-spacing",
+        "google_rule": "5.5.4 Generators",
+        "comment": ""
+    }
+]

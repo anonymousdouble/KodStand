@@ -1,0 +1,64 @@
+"no-cond-assign",null,
+"no-irregular-whitespace","2.3.1 Whitespace characters",
+"no-unexpected-multiline","4.5.1 Where to break",
+"valid-jsdoc","7 JSDoc",太宽泛了
+"curly","4.1 Braces",对应两条规则
+"guard-for-in","5.8.1 For loops",
+"no-caller",null,google guide 未提到caller
+"no-extend-native","5.4.6 Do not manipulate prototypes directly",相似规则：5.11.6 Modifying builtin objects
+"no-extra-bind",null,
+"no-invalid-this","5.9 this",
+"no-multi-spaces","4.6.2 Horizontal whitespace",
+"no-multi-str",".6.3 No line continuations",
+"no-new-wrappers","5.11.5 Wrapper objects for primitive types",
+"no-throw-literal","5.8.2 Exceptions",
+"no-with","5.11.1 with",
+"prefer-promise-reject-errors","5.8.2 Exceptions",多条规则对应到同一条规则中
+"no-unused-vars","9.4.2.2 Declare variables as close as possible to first use",概念上来说， "5.1.3 Declared when needed, initialized as soon as possible"更接近，但是这条规则是针对var类型的
+"array-bracket-newline","4.5.1 Where to break",关于换行的规则很模糊，这条关注括号和其中元素之间的换行
+"array-bracket-spacing","4.6.2 Horizontal whitespace",这个可以设置多种选项，可配置成google guide的要求
+"array-element-newline","4.5.1 Where to break",相比于"array-element-newline"，这条关注括号内元素之间的换行
+"block-spacing","4.1.2 Nonempty blocks: K&R style",也涉及到"4.6.1 Vertical whitespace"
+"brace-style","4.1.2 Nonempty blocks: K&R style",和"block-spacing"很接近
+"camelcase","6.3 Camel case: defined",
+"comma-dangle","5.2.1 Use trailing commas"+"5.3.1 Use trailing commas",分别针对Array literals和Object literals
+"comma-spacing","4.6.2 Horizontal whitespace",
+"comma-style","5.2.1 Use trailing commas"+"5.3.1 Use trailing commas"+"4.6.2 Horizontal whitespace",几条规则都相关
+"computed-property-spacing","4.6.2 Horizontal whitespace",google guide虽然没有指定要在变量前后加空格，但可认为默认不用加空格。直接将规则交由GPT判断也是此结论
+"eol-last",null,
+"func-call-spacing","4.6.2 Horizontal whitespace",
+"indent","4.5.2 Indent continuation lines at least +4 spaces",
+"key-spacing","4.6.2 Horizontal whitespace",
+"keyword-spacing","4.6.2 Horizontal whitespace",
+"max-len","4.4 Column limit: 80",
+"new-cap","6.2.2 Class names",js中用new调用的方法都可看作是构造函数。eslint说是构造函数要首字母大写，而js中可能只有构造函数没有类定义，在这种情况下，构造函数名称和类名作用是相同的。个人理这两个规则是对应的。
+"no-array-constructor","5.2.2 Do not use the variadic Array constructor",
+"no-mixed-spaces-and-tabs","2.3.1 Whitespace characters",google guide禁用tab，eslint则禁止混用，前者对后者是包含关系
+"no-multiple-empty-lines","4.6.1 Vertical whitespace",google guide不鼓励连续多个空行，但并不禁止
+"no-new-object","5.3.2 Do not use the Object constructor",
+"no-tabs","2.3.1 Whitespace characters",这个和"no-mixed-spaces-and-tabs"是包含关系
+"no-trailing-spaces","4.6.1 Vertical whitespace",
+"object-curly-spacing","4.6.2 Horizontal whitespace",
+"one-var","9.4.1 Overview",这个说的很隐晦
+"operator-linebreak","4.5.1 Where to break",
+"padded-blocks","4.6.1 Vertical whitespace",google guide列举vertical space的时候不包含这种情况，所以默认不使用padded block
+"quote-props","5.3.3 Do not mix quoted and unquoted keys",
+"quotes","5.6.1 use single quotes",
+"require-jsdoc","7.8 Method and function comments",
+"semi","4.3.2 Semicolons are required",相关google guide规则为"5.11.3 Automatic semicolon insertion"
+"semi-spacing","4.6.2 Horizontal whitespace",
+"space-before-blocks","4.6.2 Horizontal whitespace",
+"space-before-function-paren",null,这个不确定符合不符合"4.6.2 Horizontal whitespace"
+"spaced-comment","4.6.2 Horizontal whitespace",
+"switch-colon-spacing","4.6.2 Horizontal whitespace",
+"arrow-parens","5.5.3 Arrow functions",
+"constructor-super","5.4.1 Constructors",
+"generator-star-spacing","5.5.4 Generators",
+"no-new-symbol","5.11.5 Wrapper objects for primitive types",为什么不和array/object一起处理
+"no-this-before-super","5.4.1 Constructors",google guide被拆分成两个规则实现
+"no-var","5.1.1 Use const and let",
+"prefer-const","5.1.1 Use const and let",
+"prefer-rest-params","5.5.5.2 Rest parameters",
+"prefer-spread","5.5.7 Spread operator",
+"rest-spread-spacing","5.5.5.2 Rest parameters"+"5.5.7 Spread operator",
+"yield-star-spacing","5.5.4 Generators",

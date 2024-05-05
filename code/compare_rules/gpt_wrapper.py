@@ -4,7 +4,7 @@ requires openai == 1.25.0
 
 references:
 - https://github.com/openai/openai-python
-- https://flowus.cn/share/bf106afc-6e3c-4b52-b7e4-bf23b3ec758
+- https://api.xty.app
 
 """
 from openai import OpenAI
@@ -26,11 +26,13 @@ class GPTWrapper:
         )
 
     def ask(self, content, cot_pattern=[]):
-        messages = cot_pattern
+        messages = cot_pattern.copy()
         messages.append({"role": "user", "content": content})
         completion = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-3.5-turbo-0125",
             messages=messages,
+            response_format={"type": "json_object"},
+            temperature=0,
         )
         return completion.choices[0].message.content
 
