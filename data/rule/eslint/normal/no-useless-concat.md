@@ -1,22 +1,28 @@
 
+
 # no-useless-concat
 ## Overview
+
 Disallow unnecessary concatenation of literals or template literals
 
-
-
 It’s unnecessary to concatenate two strings together, such as:
+
 
 ```json
 var foo = "a" + "b";
 ```
+
 This code is likely the result of refactoring where a variable was removed from the concatenation (such as `"a" + b + "b"`). In such a case, the concatenation isn’t important and the code can be rewritten as:
+
 
 ```json
 var foo = "ab";
 ```
+
 ## Rule Details
+
 This rule aims to flag the concatenation of 2 literals when they could be combined into a single literal. Literals can be strings or template literals.
+
 Examples of incorrect code for this rule:
 
 
@@ -32,6 +38,7 @@ var a = '1' + `0`;
 var a = `1` + '0';
 var a = `1` + `0`;
 ```
+
 Examples of correct code for this rule:
 
 
@@ -47,12 +54,19 @@ var c = 1 - 2;
 var c = "foo" +
     "bar";
 ```
+
 ## When Not To Use It
+
 If you don’t want to be notified about unnecessary string concatenation, you can safely disable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v1.3.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

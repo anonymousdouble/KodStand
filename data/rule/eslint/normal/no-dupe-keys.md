@@ -1,16 +1,12 @@
 
+
 # no-dupe-keys
 ## Overview
+
 Disallow duplicate keys in object literals
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 Multiple properties with the same key in object literals can cause unexpected behavior in your application.
+
 
 ```json
 var foo = {
@@ -18,8 +14,11 @@ var foo = {
     bar: "qux"
 };
 ```
+
 ## Rule Details
+
 This rule disallows duplicate keys in object literals.
+
 Examples of incorrect code for this rule:
 
 
@@ -41,6 +40,7 @@ var foo = {
     1: "qux"
 };
 ```
+
 Examples of correct code for this rule:
 
 
@@ -53,14 +53,21 @@ var foo = {
 };
 ```
 
+
 ## Handled by TypeScript
+
 
                 It is safe to disable this rule when using TypeScript because TypeScript's compiler enforces this check.
             
+
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,17 +1,14 @@
 
+
 # no-compare-neg-zero
 ## Overview
+
 Disallow comparing against -0
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 ## Rule Details
+
 The rule should warn against code that tries to compare against `-0`, since that will not work as intended. That is, code like `x === -0` will pass for both `+0` and `-0`. The author probably intended `Object.is(x, -0)`.
+
 Examples of incorrect code for this rule:
 
 
@@ -22,6 +19,7 @@ if (x === -0) {
     // doSomething()...
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -34,6 +32,7 @@ if (x === 0) {
 ```
 
 
+
 ```json
 /* eslint no-compare-neg-zero: "error" */
 
@@ -42,10 +41,15 @@ if (Object.is(x, -0)) {
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v3.17.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

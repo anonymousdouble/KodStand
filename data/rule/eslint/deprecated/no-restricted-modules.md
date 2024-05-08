@@ -1,28 +1,39 @@
 
+
 # no-restricted-modules
 ## Overview
+
 Disallow specified modules when loaded by `require`
 
-
-
 This rule was deprecated in ESLint v7.0.0. Please use the corresponding rule in eslint-plugin-n .
+
 A module in Node.js is a simple or complex functionality organized in a JavaScript file which can be reused throughout the Node.js
 application. The keyword `require` is used in Node.js/CommonJS to import modules into an application. This way you can have dynamic loading where the loaded module name isn’t predefined /static, or where you conditionally load a module only if it’s “truly required”.
+
 Why would you want to restrict a module?
+
 Disallowing usage of specific Node.js modules can be useful if you want to limit the available methods a developer can use. For example, you can block usage of the `fs` module if you want to disallow file system access.
+
 ## Rule Details
+
 This rule allows you to specify modules that you don’t want to use in your application.
+
 ## Options
+
 The rule takes one or more strings as options: the names of restricted modules.
+
 
 ```json
 "no-restricted-modules": ["error", "foo-module", "bar-module"]
 ```
+
 It can also take an object with lists of `paths` and gitignore-style `patterns` strings.
+
 
 ```json
 "no-restricted-modules": ["error", { "paths": ["foo-module", "bar-module"] }]
 ```
+
 
 ```json
 "no-restricted-modules": ["error", {
@@ -30,7 +41,9 @@ It can also take an object with lists of `paths` and gitignore-style `patterns` 
     "patterns": ["foo-module/private/*", "bar-module/*","!baz-module/good"]
 }]
 ```
+
 You may also specify a custom message for any paths you want to restrict as follows:
+
 
 ```json
 "no-restricted-modules": ["error", {
@@ -39,7 +52,9 @@ You may also specify a custom message for any paths you want to restrict as foll
   }
 ]
 ```
+
 or like this:
+
 
 ```json
 "no-restricted-modules": ["error",{
@@ -49,8 +64,11 @@ or like this:
   }]
 }]
 ```
+
 The custom message will be appended to the default error message. Please note that you may not specify custom error messages for restricted patterns as a particular module may match more than one pattern.
+
 To restrict the use of all Node.js core modules (via https://github.com/nodejs/node/tree/master/lib ):
+
 
 ```json
 {
@@ -59,7 +77,9 @@ To restrict the use of all Node.js core modules (via https://github.com/nodejs/n
     ]
 }
 ```
+
 ## Examples
+
 Examples of incorrect code for this rule  with sample `"fs", "cluster", "lodash"` restricted modules:
 
 
@@ -71,6 +91,7 @@ var cluster = require('cluster');
 ```
 
 
+
 ```json
 /*eslint no-restricted-modules: ["error", {"paths": ["cluster"] }]*/
 
@@ -78,11 +99,13 @@ var cluster = require('cluster');
 ```
 
 
+
 ```json
 /*eslint no-restricted-modules: ["error", { "patterns": ["lodash/*"] }]*/
 
 var pick = require('lodash/pick');
 ```
+
 Examples of correct code for this rule with sample `"fs", "cluster", "lodash"` restricted modules:
 
 
@@ -91,6 +114,7 @@ Examples of correct code for this rule with sample `"fs", "cluster", "lodash"` r
 
 var crypto = require('crypto');
 ```
+
 
 
 ```json
@@ -103,10 +127,15 @@ var crypto = require('crypto');
 var pick = require('lodash/pick');
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.6.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

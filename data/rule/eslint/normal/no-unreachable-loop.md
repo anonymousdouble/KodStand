@@ -1,11 +1,12 @@
 
+
 # no-unreachable-loop
 ## Overview
+
 Disallow loops with a body that allows only one iteration
 
-
-
 A loop that can never reach the second iteration is a possible error in the code.
+
 
 ```json
 for (let i = 0; i < arr.length; i++) {
@@ -16,11 +17,17 @@ for (let i = 0; i < arr.length; i++) {
     break;
 }
 ```
+
 In rare cases where only one iteration (or at most one iteration) is intended behavior, the code should be refactored to use `if` conditionals instead of `while`, `do-while` and `for` loops. It’s considered a best practice to avoid using loop constructs for such cases.
+
 ## Rule Details
+
 This rule aims to detect and disallow loops that can have at most one iteration, by performing static code path analysis on loop bodies.
+
 In particular, this rule will disallow a loop with a body that exits the loop in all code paths. If all code paths in the loop’s body will end with either a `break`, `return` or a `throw` statement, the second iteration of such loop is certainly unreachable, regardless of the loop’s condition.
+
 This rule checks `while`, `do-while`, `for`, `for-in` and `for-of` loops. You can optionally disable checks for each of these constructs.
+
 Examples of incorrect code for this rule:
 
 
@@ -70,6 +77,7 @@ for (foo of bar) {
     break;
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -119,7 +127,9 @@ for (foo of bar) {
     }
 }
 ```
+
 Please note that this rule is not designed to check loop conditions, and will not warn in cases such as the following examples.
+
 Examples of additional correct code for this rule:
 
 
@@ -138,19 +148,28 @@ for (const a of [1]) {
     doSomething(a);
 }
 ```
+
 ## Options
+
 This rule has an object option, with one option:
 
-`"ignore"` - an optional array of loop types that will be ignored by this rule.
+
+- `"ignore"` - an optional array of loop types that will be ignored by this rule.
 
 ### ignore
+
 You can specify up to 5 different elements in the `"ignore"` array:
 
-`"WhileStatement"` - to ignore all `while` loops.
-`"DoWhileStatement"` - to ignore all `do-while` loops.
-`"ForStatement"` - to ignore all `for` loops (does not apply to `for-in` and `for-of` loops).
-`"ForInStatement"` - to ignore all `for-in` loops.
-`"ForOfStatement"` - to ignore all `for-of` loops.
+
+- `"WhileStatement"` - to ignore all `while` loops.
+
+- `"DoWhileStatement"` - to ignore all `do-while` loops.
+
+- `"ForStatement"` - to ignore all `for` loops (does not apply to `for-in` and `for-of` loops).
+
+- `"ForInStatement"` - to ignore all `for-in` loops.
+
+- `"ForOfStatement"` - to ignore all `for-of` loops.
 
 Examples of correct code for this rule with the `"ignore"` option:
 
@@ -165,8 +184,11 @@ for (var key in obj) {
 
 for (const a of b) break;
 ```
+
 ## Known Limitations
+
 Static code path analysis, in general, does not evaluate conditions. Due to this fact, this rule might miss reporting cases such as the following:
+
 
 ```json
 for (let i = 0; i < 10; i++) {
@@ -177,22 +199,30 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
+
 ## Related Rules
 
 
+- 
 no-unreachable 
 
+- 
 no-constant-condition 
 
+- 
 no-unmodified-loop-condition 
 
+- 
 for-direction 
 
-
 ## Version
+
 This rule was introduced in ESLint v7.3.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

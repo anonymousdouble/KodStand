@@ -1,31 +1,36 @@
 
+
 # arrow-body-style
 ## Overview
+
 Require braces around arrow function bodies
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 Arrow functions have two syntactic forms for their function bodies.  They may be defined with a block body (denoted by curly braces) `() => { ... }` or with a single expression `() => ...`, whose value is implicitly returned.
+
 ## Rule Details
+
 This rule can enforce or disallow the use of braces around arrow function body.
+
 ## Options
+
 The rule takes one or two options. The first is a string, which can be:
 
-`"always"` enforces braces around the function body
-`"as-needed"` enforces no braces where they can be omitted (default)
-`"never"` enforces no braces around the function body (constrains arrow functions to the role of returning an expression)
+
+- `"always"` enforces braces around the function body
+
+- `"as-needed"` enforces no braces where they can be omitted (default)
+
+- `"never"` enforces no braces around the function body (constrains arrow functions to the role of returning an expression)
 
 The second one is an object for more fine-grained configuration when the first option is `"as-needed"`. Currently, the only available option is `requireReturnForObjectLiteral`, a boolean property. It’s `false` by default. If set to `true`, it requires braces and an explicit return for object literals.
+
 
 ```json
 "arrow-body-style": ["error", "always"]
 ```
+
 ### always
+
 Examples of incorrect code for this rule with the `"always"` option:
 
 
@@ -35,6 +40,7 @@ Examples of incorrect code for this rule with the `"always"` option:
 
 let foo = () => 0;
 ```
+
 Examples of correct code for this rule with the `"always"` option:
 
 
@@ -50,7 +56,9 @@ let bar = (retv, name) => {
     return retv;
 };
 ```
+
 ### as-needed
+
 Examples of incorrect code for this rule with the default `"as-needed"` option:
 
 
@@ -70,6 +78,7 @@ let bar = () => {
     };
 };
 ```
+
 Examples of correct code for this rule with the default `"as-needed"` option:
 
 
@@ -96,6 +105,7 @@ let foo7 = () => {
 };
 let foo8 = () => ({ bar: 0 });
 ```
+
 #### requireReturnForObjectLiteral
 
 This option is only applicable when used in conjunction with the `"as-needed"` option.
@@ -109,6 +119,7 @@ Examples of incorrect code for this rule with the `{ "requireReturnForObjectLite
 let foo = () => ({});
 let bar = () => ({ bar: 0 });
 ```
+
 Examples of correct code for this rule with the `{ "requireReturnForObjectLiteral": true }` option:
 
 
@@ -119,7 +130,9 @@ Examples of correct code for this rule with the `{ "requireReturnForObjectLitera
 let foo = () => {};
 let bar = () => { return { bar: 0 }; };
 ```
+
 ### never
+
 Examples of incorrect code for this rule with the `"never"` option:
 
 
@@ -135,6 +148,7 @@ let bar = (retv, name) => {
     return retv;
 };
 ```
+
 Examples of correct code for this rule with the `"never"` option:
 
 
@@ -146,10 +160,15 @@ let foo = () => 0;
 let bar = () => ({ foo: 0 });
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v1.8.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

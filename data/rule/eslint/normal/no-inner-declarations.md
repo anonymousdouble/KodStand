@@ -1,16 +1,12 @@
 
+
 # no-inner-declarations
 ## Overview
+
 Disallow variable or `function` declarations in nested blocks
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 In JavaScript, prior to ES6, a function declaration is only allowed in the first level of a program or the body of another function, though parsers sometimes erroneously accept them elsewhere . This only applies to function declarations; named or anonymous function expressions can occur anywhere an expression is permitted.
+
 
 ```json
 // Good
@@ -34,7 +30,9 @@ function anotherThing() {
     }
 }
 ```
+
 A variable declaration is permitted anywhere a statement can go, even nested deeply inside other blocks. This is often undesirable due to variable hoisting, and moving declarations to the root of the program or function body can increase clarity. Note that block bindings  (`let`, `const`) are not hoisted and therefore they are not affected by this rule.
+
 
 ```json
 /*eslint-env es6*/
@@ -62,15 +60,22 @@ function doSomething() {
     }
 }
 ```
+
 ## Rule Details
+
 This rule requires that function declarations and, optionally, variable declarations be in the root of a program, or in the root of the body of a function, or in the root of the body of a class static block.
+
 ## Options
+
 This rule has a string option:
 
-`"functions"` (default) disallows `function` declarations in nested blocks
-`"both"` disallows `function` and `var` declarations in nested blocks
+
+- `"functions"` (default) disallows `function` declarations in nested blocks
+
+- `"both"` disallows `function` and `var` declarations in nested blocks
 
 ### functions
+
 Examples of incorrect code for this rule with the default `"functions"` option:
 
 
@@ -97,6 +102,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with the default `"functions"` option:
 
 
@@ -126,7 +132,9 @@ if (test) {
 
 if (foo) var a;
 ```
+
 ### both
+
 Examples of incorrect code for this rule with the `"both"` option:
 
 
@@ -155,6 +163,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with the `"both"` option:
 
 
@@ -177,12 +186,19 @@ class C {
     }
 }
 ```
+
 ## When Not To Use It
+
 The function declaration portion rule will be rendered obsolete when block-scoped functions  land in ES6, but until then, it should be left on to enforce valid constructions. Disable checking variable declarations when using block-scoped-var  or if declaring variables in nested blocks is acceptable despite hoisting.
+
 ## Version
+
 This rule was introduced in ESLint v0.6.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,20 +1,20 @@
 
+
 # capitalized-comments
 ## Overview
+
 Enforce or disallow capitalization of the first letter of a comment
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 Comments are useful for leaving information for future developers. In order for that information to be useful and not distracting, it is sometimes desirable for comments to follow a particular style. One element of comment formatting styles is whether the first word of a comment should be capitalized or lowercase.
+
 In general, no comment style is any more or less valid than any others, but many developers would agree that a consistent style can improve a project’s maintainability.
+
 ## Rule Details
+
 This rule aims to enforce a consistent style of comments across your codebase, specifically by either requiring or disallowing a capitalized letter as the first word character in a comment. This rule will not issue warnings when non-cased letters are used.
+
 By default, this rule will require a non-lowercase letter at the beginning of comments.
+
 Examples of incorrect code for this rule:
 
 
@@ -24,6 +24,7 @@ Examples of incorrect code for this rule:
 // lowercase comment
 
 ```
+
 Examples of correct code for this rule:
 
 
@@ -51,19 +52,26 @@ Examples of correct code for this rule:
 // https://github.com
 
 ```
+
 ### Options
+
 This rule has two options: a string value `"always"` or `"never"` which determines whether capitalization of the first word of a comment should be required or forbidden, and optionally an object containing more configuration parameters for the rule.
+
 Here are the supported object options:
 
-`ignorePattern`: A string representing a regular expression pattern of words that should be ignored by this rule. If the first word of a comment matches the pattern, this rule will not report that comment.
 
-Note that the following words are always ignored by this rule: `["jscs", "jshint", "eslint", "istanbul", "global", "globals", "exported"]`.
+- `ignorePattern`: A string representing a regular expression pattern of words that should be ignored by this rule. If the first word of a comment matches the pattern, this rule will not report that comment.
 
 
-`ignoreInlineComments`: If this is `true`, the rule will not report on comments in the middle of code. By default, this is `false`.
-`ignoreConsecutiveComments`: If this is `true`, the rule will not report on a comment which violates the rule, as long as the comment immediately follows another comment. By default, this is `false`.
+- Note that the following words are always ignored by this rule: `["jscs", "jshint", "eslint", "istanbul", "global", "globals", "exported"]`.
+
+
+- `ignoreInlineComments`: If this is `true`, the rule will not report on comments in the middle of code. By default, this is `false`.
+
+- `ignoreConsecutiveComments`: If this is `true`, the rule will not report on a comment which violates the rule, as long as the comment immediately follows another comment. By default, this is `false`.
 
 Here is an example configuration:
+
 
 ```json
 {
@@ -77,9 +85,13 @@ Here is an example configuration:
     ]
 }
 ```
+
 #### "always"
+
 Using the `"always"` option means that this rule will report any comments which start with a lowercase letter. This is the default configuration for this rule.
+
 Note that configuration comments and comments which start with URLs are never reported.
+
 Examples of incorrect code for this rule:
 
 
@@ -89,6 +101,7 @@ Examples of incorrect code for this rule:
 // lowercase comment
 
 ```
+
 Examples of correct code for this rule:
 
 
@@ -116,8 +129,11 @@ Examples of correct code for this rule:
 // https://github.com
 
 ```
+
 #### "never"
+
 Using the `"never"` option means that this rule will report any comments which start with an uppercase letter.
+
 Examples of incorrect code with the `"never"` option:
 
 
@@ -127,6 +143,7 @@ Examples of incorrect code with the `"never"` option:
 // Capitalized comment
 
 ```
+
 Examples of correct code with the `"never"` option:
 
 
@@ -140,8 +157,11 @@ Examples of correct code with the `"never"` option:
 // 丈 Non-Latin character at beginning of comment
 
 ```
+
 #### ignorePattern
+
 The `ignorePattern` object takes a string value, which is used as a regular expression applied to the first word of a comment.
+
 Examples of correct code with the `"ignorePattern"` option set to `"pragma"`:
 
 
@@ -153,8 +173,11 @@ function foo() {
 }
 
 ```
+
 #### ignoreInlineComments
+
 Setting the `ignoreInlineComments` option to `true` means that comments in the middle of code (with a token on the same line as the beginning of the comment, and another token on the same line as the end of the comment) will not be reported by this rule.
+
 Examples of correct code with the `"ignoreInlineComments"` option set to `true`:
 
 
@@ -165,8 +188,11 @@ function foo(/* ignored */ a) {
 }
 
 ```
+
 #### ignoreConsecutiveComments
+
 If the `ignoreConsecutiveComments` option is set to `true`, then comments which otherwise violate the rule will not be reported as long as they immediately follow another comment. This can be applied more than once.
+
 Examples of correct code with `ignoreConsecutiveComments` set to `true`:
 
 
@@ -185,6 +211,7 @@ bar();
  * in fact, even if any of these are multi-line, that is fine too.
  */
 ```
+
 Examples of incorrect code with `ignoreConsecutiveComments` set to `true`:
 
 
@@ -195,8 +222,11 @@ foo();
 // this comment is invalid, but only on this line.
 // this comment does NOT get reported, since it is a consecutive comment.
 ```
+
 ### Using Different Options for Line and Block Comments
+
 If you wish to have a different configuration for line comments and block comments, you can do so by using two different object configurations (note that the capitalization option will be enforced consistently for line and block comments):
+
 
 ```json
 {
@@ -215,6 +245,7 @@ If you wish to have a different configuration for line comments and block commen
     ]
 }
 ```
+
 Examples of incorrect code with different line and block comment configuration:
 
 
@@ -225,6 +256,7 @@ Examples of incorrect code with different line and block comment configuration:
 /* lowercased block comment, this is incorrect too */
 
 ```
+
 Examples of correct code with different line and block comment configuration:
 
 
@@ -235,17 +267,26 @@ Examples of correct code with different line and block comment configuration:
 /* blockignore lowercase block comment, this is correct due to ignorePattern */
 
 ```
+
 ## When Not To Use It
+
 This rule can be disabled if you do not care about the grammatical style of comments in your codebase.
+
 ## Compatibility
 
-JSCS: requireCapitalizedComments 
-JSCS: disallowCapitalizedComments 
+
+- JSCS: requireCapitalizedComments 
+
+- JSCS: disallowCapitalizedComments 
 
 ## Version
+
 This rule was introduced in ESLint v3.11.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

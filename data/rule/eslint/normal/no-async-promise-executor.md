@@ -1,16 +1,12 @@
 
+
 # no-async-promise-executor
 ## Overview
+
 Disallow using an async function as a Promise executor
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 The `new Promise` constructor accepts an executor function as an argument, which has `resolve` and `reject` parameters that can be used to control the state of the created Promise. For example:
+
 
 ```json
 const result = new Promise(function executor(resolve, reject) {
@@ -23,13 +19,18 @@ const result = new Promise(function executor(resolve, reject) {
   });
 });
 ```
+
 The executor function can also be an `async function`. However, this is usually a mistake, for a few reasons:
 
-If an async executor function throws an error, the error will be lost and won’t cause the newly-constructed `Promise` to reject. This could make it difficult to debug and handle some errors.
-If a Promise executor function is using `await`, this is usually a sign that it is not actually necessary to use the `new Promise` constructor, or the scope of the `new Promise` constructor can be reduced.
+
+- If an async executor function throws an error, the error will be lost and won’t cause the newly-constructed `Promise` to reject. This could make it difficult to debug and handle some errors.
+
+- If a Promise executor function is using `await`, this is usually a sign that it is not actually necessary to use the `new Promise` constructor, or the scope of the `new Promise` constructor can be reduced.
 
 ## Rule Details
+
 This rule aims to disallow async Promise executor functions.
+
 Examples of incorrect code for this rule:
 
 
@@ -50,6 +51,7 @@ const result = new Promise(async (resolve, reject) => {
   resolve(await foo);
 });
 ```
+
 Examples of correct code for this rule:
 
 
@@ -68,12 +70,19 @@ const foo = new Promise((resolve, reject) => {
 
 const result = Promise.resolve(foo);
 ```
+
 ## When Not To Use It
+
 If your codebase doesn’t support async function syntax, there’s no need to enable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v5.3.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

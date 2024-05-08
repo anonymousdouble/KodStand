@@ -1,17 +1,21 @@
 
+
 # global-require
 ## Overview
+
 Require `require()` calls to be placed at top-level module scope
 
-
-
 This rule was deprecated in ESLint v7.0.0. Please use the corresponding rule in eslint-plugin-n .
+
 In Node.js, module dependencies are included using the `require()` function, such as:
+
 
 ```json
 var fs = require("fs");
 ```
+
 While `require()` may be called anywhere in code, some style guides prescribe that it should be called only in the top level of a module to make it easier to identify dependencies. For instance, it’s arguably harder to identify dependencies when they are deeply nested inside of functions and other statements:
+
 
 ```json
 function foo() {
@@ -20,10 +24,15 @@ function foo() {
     }
 }
 ```
+
 Since `require()` does a synchronous load, it can cause performance problems when used in other locations.
+
 Further, ES6 modules mandate that `import` and `export` statements can only occur in the top level of the module’s body.
+
 ## Rule Details
+
 This rule requires all calls to `require()` to be at the top level of the module, similar to ES6 `import` and `export` statements, which also can occur only at the top level.
+
 Examples of incorrect code for this rule:
 
 
@@ -64,6 +73,7 @@ try {
     console.log(e);
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -91,12 +101,19 @@ function doSomethingB() {}
 var x = require("x"),
     z = require("z");
 ```
+
 ## When Not To Use It
+
 If you have a module that must be initialized with information that comes from the file-system or if a module is only used in very rare situations and will cause significant overhead to load it may make sense to disable the rule. If you need to `require()` an optional dependency inside of a `try`/`catch`, you can disable this rule for just that dependency using the `// eslint-disable-line global-require` comment.
+
 ## Version
+
 This rule was introduced in ESLint v1.4.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

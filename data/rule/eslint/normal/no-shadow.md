@@ -1,11 +1,12 @@
 
+
 # no-shadow
 ## Overview
+
 Disallow variable declarations from shadowing variables declared in the outer scope
 
-
-
 Shadowing is the process by which a local variable shares the same name as a variable in its containing scope. For example:
+
 
 ```json
 var a = 3;
@@ -13,9 +14,13 @@ function b() {
     var a = 10;
 }
 ```
+
 In this case, the variable `a` inside of `b()` is shadowing the variable `a` in the global scope. This can cause confusion while reading the code and it’s impossible to access the global variable.
+
 ## Rule Details
+
 This rule aims to eliminate shadowed variable declarations.
+
 Examples of incorrect code for this rule:
 
 
@@ -41,17 +46,23 @@ if (true) {
     let a = 5;
 }
 ```
+
 ## Options
+
 This rule takes one option, an object, with properties `"builtinGlobals"`, `"hoist"`, `"allow"` and `"ignoreOnInitialization"`.
+
 
 ```json
 {
     "no-shadow": ["error", { "builtinGlobals": false, "hoist": "functions", "allow": [], "ignoreOnInitialization": false }]
 }
 ```
+
 ### builtinGlobals
+
 The `builtinGlobals` option is `false` by default.
 If it is `true`, the rule prevents shadowing of built-in global variables: `Object`, `Array`, `Number`, and so on.
+
 Examples of incorrect code for the `{ "builtinGlobals": true }` option:
 
 
@@ -62,14 +73,20 @@ function foo() {
     var Object = 0;
 }
 ```
+
 ### hoist
+
 The `hoist` option has three settings:
 
-`functions` (by default) - reports shadowing before the outer functions are defined.
-`all` - reports all shadowing before the outer variables/functions are defined.
-`never` - never report shadowing before the outer variables/functions are defined.
+
+- `functions` (by default) - reports shadowing before the outer functions are defined.
+
+- `all` - reports all shadowing before the outer variables/functions are defined.
+
+- `never` - never report shadowing before the outer variables/functions are defined.
 
 #### hoist: functions
+
 Examples of incorrect code for the default `{ "hoist": "functions" }` option:
 
 
@@ -83,7 +100,9 @@ if (true) {
 
 function b() {}
 ```
+
 Although `let b` in the `if` statement is before the function declaration in the outer scope, it is incorrect.
+
 Examples of correct code for the default `{ "hoist": "functions" }` option:
 
 
@@ -97,8 +116,11 @@ if (true) {
 
 let a = 5;
 ```
+
 Because `let a` in the `if` statement is before the variable declaration in the outer scope, it is correct.
+
 #### hoist: all
+
 Examples of incorrect code for the `{ "hoist": "all" }` option:
 
 
@@ -114,7 +136,9 @@ if (true) {
 let a = 5;
 function b() {}
 ```
+
 #### hoist: never
+
 Examples of correct code for the `{ "hoist": "never" }` option:
 
 
@@ -130,9 +154,13 @@ if (true) {
 let a = 5;
 function b() {}
 ```
+
 Because `let a` and `let b` in the `if` statement are before the declarations in the outer scope, they are correct.
+
 ### allow
+
 The `allow` option is an array of identifier names for which shadowing is allowed. For example, `"resolve"`, `"reject"`, `"done"`, `"cb"`.
+
 Examples of correct code for the `{ "allow": ["done"] }` option:
 
 
@@ -152,9 +180,13 @@ foo(function (err, result) {
   console.log({ err, result });
 });
 ```
+
 ### ignoreOnInitialization
+
 The `ignoreOnInitialization` option is `false` by default. If it is `true`, it prevents reporting shadowing of variables in their initializers when the shadowed variable is presumably still uninitialized.
+
 The shadowed variable must be on the left side. The shadowing variable must be on the right side and declared in a callback function or in an IIFE.
+
 Examples of incorrect code for the `{ "ignoreOnInitialization": "true" }` option:
 
 
@@ -163,7 +195,9 @@ Examples of incorrect code for the `{ "ignoreOnInitialization": "true" }` option
 
 var x = x => x;
 ```
+
 Because the shadowing variable `x` will shadow the already initialized shadowed variable `x`.
+
 Examples of correct code for the `{ "ignoreOnInitialization": true }` option:
 
 
@@ -174,30 +208,28 @@ var x = foo(x => x)
 
 var y = (y => y)()
 ```
+
 The rationale for callback functions is the assumption that they will be called during the initialization, so that at the time when the shadowing variable will be used, the shadowed variable has not yet been initialized.
+
 ## Related Rules
 
 
+- 
 no-shadow-restricted-names 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Further Reading
-
-
-
-
 
 Variable shadowing - Wikipedia 
  en.wikipedia.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

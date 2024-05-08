@@ -1,18 +1,16 @@
 
+
 # no-duplicate-case
 ## Overview
+
 Disallow duplicate case labels
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 If a `switch` statement has duplicate test expressions in `case` clauses, it is likely that a programmer copied a `case` clause but forgot to change the test expression.
+
 ## Rule Details
+
 This rule disallows duplicate test expressions in `case` clauses of `switch` statements.
+
 Examples of incorrect code for this rule:
 
 
@@ -55,6 +53,7 @@ switch (a) {
         break;
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -97,8 +96,11 @@ switch (a) {
         break;
 }
 ```
+
 ## When Not To Use It
+
 In rare cases where identical test expressions in `case` clauses produce different values, which necessarily means that the expressions are causing and relying on side effects, you will have to disable this rule.
+
 
 ```json
 switch (a) {
@@ -111,10 +113,15 @@ switch (a) {
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.17.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

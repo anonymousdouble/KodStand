@@ -1,18 +1,16 @@
 
+
 # no-useless-return
 ## Overview
+
 Disallow redundant return statements
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 A `return;` statement with nothing after it is redundant, and has no effect on the runtime behavior of a function. This can be confusing, so it’s better to disallow these redundant statements.
+
 ## Rule Details
+
 This rule aims to report redundant `return` statements.
+
 Examples of incorrect code for this rule:
 
 
@@ -46,6 +44,7 @@ var foo = function() {
 }
 
 ```
+
 Examples of correct code for this rule:
 
 
@@ -85,12 +84,19 @@ var foo = function() {
 }
 
 ```
+
 ## When Not To Use It
+
 If you don’t care about disallowing redundant return statements, you can turn off this rule.
+
 ## Version
+
 This rule was introduced in ESLint v3.9.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

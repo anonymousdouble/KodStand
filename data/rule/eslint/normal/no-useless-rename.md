@@ -1,46 +1,54 @@
 
+
 # no-useless-rename
 ## Overview
+
 Disallow renaming import, export, and destructured assignments to the same name
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 ES2015 allows for the renaming of references in import and export statements as well as destructuring assignments. This gives programmers a concise syntax for performing these operations while renaming these references:
+
 
 ```json
 import { foo as bar } from "baz";
 export { foo as bar };
 let { foo: bar } = baz;
 ```
+
 With this syntax, it is possible to rename a reference to the same name. This is a completely redundant operation, as this is the same as not renaming at all. For example, this:
+
 
 ```json
 import { foo as foo } from "bar";
 export { foo as foo };
 let { foo: foo } = bar;
 ```
+
 is the same as:
+
 
 ```json
 import { foo } from "bar";
 export { foo };
 let { foo } = bar;
 ```
+
 ## Rule Details
+
 This rule disallows the renaming of import, export, and destructured assignments to the same name.
+
 ## Options
+
 This rule allows for more fine-grained control with the following options:
 
-`ignoreImport`: When set to `true`, this rule does not check imports
-`ignoreExport`: When set to `true`, this rule does not check exports
-`ignoreDestructuring`: When set to `true`, this rule does not check destructuring assignments
+
+- `ignoreImport`: When set to `true`, this rule does not check imports
+
+- `ignoreExport`: When set to `true`, this rule does not check exports
+
+- `ignoreDestructuring`: When set to `true`, this rule does not check destructuring assignments
 
 By default, all options are set to `false`:
+
 
 ```json
 "no-useless-rename": ["error", {
@@ -49,6 +57,7 @@ By default, all options are set to `false`:
     "ignoreExport": false
 }]
 ```
+
 Examples of incorrect code for this rule by default:
 
 
@@ -66,6 +75,7 @@ let { 'foo4': foo4 } = bar;
 function foo({ bar: bar }) {}
 ({ foo: foo }) => {}
 ```
+
 Examples of correct code for this rule by default:
 
 
@@ -93,6 +103,7 @@ function foo4({ bar: baz }) {}
 ({ foo }) => {}
 ({ foo: bar }) => {}
 ```
+
 Examples of correct code for this rule with `{ ignoreImport: true }`:
 
 
@@ -101,6 +112,7 @@ Examples of correct code for this rule with `{ ignoreImport: true }`:
 
 import { foo as foo } from "bar";
 ```
+
 Examples of correct code for this rule with `{ ignoreExport: true }`:
 
 
@@ -111,6 +123,7 @@ const foo = 1;
 export { foo as foo };
 export { bar as bar } from "bar";
 ```
+
 Examples of correct code for this rule with `{ ignoreDestructuring: true }`:
 
 
@@ -121,22 +134,30 @@ let { foo: foo } = bar;
 function baz({ bar: bar }) {}
 ({ foo: foo }) => {}
 ```
+
 ## When Not To Use It
+
 You can safely disable this rule if you do not care about redundantly renaming import, export, and destructuring assignments.
+
 ## Compatibility
 
-JSCS: disallowIdenticalDestructuringNames 
+
+- JSCS: disallowIdenticalDestructuringNames 
 
 ## Related Rules
 
 
+- 
 object-shorthand 
 
-
 ## Version
+
 This rule was introduced in ESLint v2.11.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

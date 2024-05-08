@@ -1,15 +1,19 @@
 
+
 # no-throw-literal
 ## Overview
+
 Disallow throwing literals as exceptions
-
-
 
 It is considered good practice to only `throw` the `Error` object itself or an object using the `Error` object as base objects for user-defined exceptions.
 The fundamental benefit of `Error` objects is that they automatically keep track of where they were built and originated.
+
 This rule restricts what can be thrown as an exception.  When it was first created, it only prevented literals from being thrown (hence the name), but it has now been expanded to only allow expressions which have a possibility of being an `Error` object.
+
 ## Rule Details
+
 This rule is aimed at maintaining consistency when throwing exception by disallowing to throw literals and other expressions which cannot possibly be an `Error` object.
+
 Examples of incorrect code for this rule:
 
 
@@ -33,6 +37,7 @@ var err = new Error();
 throw `${err}`
 
 ```
+
 Examples of correct code for this rule:
 
 
@@ -52,8 +57,11 @@ try {
     throw e;
 }
 ```
+
 ## Known Limitations
+
 Due to the limits of static analysis, this rule cannot guarantee that you will only throw `Error` objects.
+
 Examples of correct code for this rule, but which do not throw an `Error` object:
 
 
@@ -76,10 +84,15 @@ var baz = {
 throw baz.bar;
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.15.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,15 +1,20 @@
 
+
 # max-lines-per-function
 ## Overview
+
 Enforce a maximum number of lines of code in a function
 
-
-
 Some people consider large functions a code smell. Large functions tend to do a lot of things and can make it hard following what’s going on. Many coding style guides dictate a limit of the number of lines that a function can comprise of. This rule can help enforce that style.
+
 ## Rule Details
+
 This rule enforces a maximum number of lines per function, in order to aid in maintainability and reduce complexity.
+
 ### Why not use max-statements or other complexity measurement rules instead?
+
 Nested long method chains like the below example are often broken onto separate lines for readability:
+
 
 ```json
 function() {
@@ -30,38 +35,52 @@ function() {
 }
 ```
 
-`max-statements` will only report this as 1 statement, despite being 16 lines of code.
-`complexity` will only report a complexity of 1
-`max-nested-callbacks` will only report 1
-`max-depth` will report a depth of 0
+
+
+- `max-statements` will only report this as 1 statement, despite being 16 lines of code.
+
+- `complexity` will only report a complexity of 1
+
+- `max-nested-callbacks` will only report 1
+
+- `max-depth` will report a depth of 0
 
 ## Options
+
 This rule has the following options that can be specified using an object:
 
 
+- 
 `"max"` (default `50`) enforces a maximum number of lines in a function.
 
 
+- 
 `"skipBlankLines"` (default `false`) ignore lines made up purely of whitespace.
 
 
+- 
 `"skipComments"` (default `false`) ignore lines containing just comments.
 
 
+- 
 `"IIFEs"` (default `false`) include any code included in IIFEs.
 
-
 Alternatively, you may specify a single integer for the `max` option:
+
 
 ```json
 "max-lines-per-function": ["error", 20]
 ```
+
 is equivalent to
+
 
 ```json
 "max-lines-per-function": ["error", { "max": 20 }]
 ```
+
 ### code
+
 Examples of incorrect code for this rule with a particular max value:
 
 
@@ -73,6 +92,7 @@ function foo() {
 ```
 
 
+
 ```json
 /*eslint max-lines-per-function: ["error", 3]*/
 function foo() {
@@ -80,6 +100,7 @@ function foo() {
     var x = 0;
 }
 ```
+
 
 
 ```json
@@ -90,6 +111,7 @@ function foo() {
     var x = 0;
 }
 ```
+
 Examples of correct code for this rule with a particular max value:
 
 
@@ -101,6 +123,7 @@ function foo() {
 ```
 
 
+
 ```json
 /*eslint max-lines-per-function: ["error", 4]*/
 function foo() {
@@ -108,6 +131,7 @@ function foo() {
     var x = 0;
 }
 ```
+
 
 
 ```json
@@ -118,7 +142,9 @@ function foo() {
     var x = 0;
 }
 ```
+
 ### skipBlankLines
+
 Examples of incorrect code for this rule with the `{ "skipBlankLines": true }` option:
 
 
@@ -129,6 +155,7 @@ function foo() {
     var x = 0;
 }
 ```
+
 Examples of correct code for this rule with the `{ "skipBlankLines": true }` option:
 
 
@@ -139,7 +166,9 @@ function foo() {
     var x = 0;
 }
 ```
+
 ### skipComments
+
 Examples of incorrect code for this rule with the `{ "skipComments": true }` option:
 
 
@@ -150,6 +179,7 @@ function foo() {
     var x = 0;
 }
 ```
+
 Examples of correct code for this rule with the `{ "skipComments": true }` option:
 
 
@@ -160,7 +190,9 @@ function foo() {
     var x = 0;
 }
 ```
+
 ### IIFEs
+
 Examples of incorrect code for this rule with the `{ "IIFEs": true }` option:
 
 
@@ -174,6 +206,7 @@ Examples of incorrect code for this rule with the `{ "IIFEs": true }` option:
     var x = 0;
 })();
 ```
+
 Examples of correct code for this rule with the `{ "IIFEs": true }` option:
 
 
@@ -187,30 +220,43 @@ Examples of correct code for this rule with the `{ "IIFEs": true }` option:
     var x = 0;
 })();
 ```
+
 ## When Not To Use It
+
 You can turn this rule off if you are not concerned with the number of lines in your functions.
+
 ## Related Rules
 
 
+- 
 complexity 
 
+- 
 max-depth 
 
+- 
 max-lines 
 
+- 
 max-nested-callbacks 
 
+- 
 max-params 
 
+- 
 max-statements 
 
+- 
 max-statements-per-line 
 
-
 ## Version
+
 This rule was introduced in ESLint v5.0.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

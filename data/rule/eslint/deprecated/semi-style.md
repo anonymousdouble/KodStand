@@ -1,20 +1,20 @@
 
+
 # semi-style
 ## Overview
+
 Enforce location of semicolons
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 Generally, semicolons are at the end of lines. However, in semicolon-less style, semicolons are at the beginning of lines. This rule enforces that semicolons are at the configured location.
+
 ## Rule Details
+
 This rule reports line terminators around semicolons.
+
 This rule has an option.
+
 
 ```json
 {
@@ -22,8 +22,11 @@ This rule has an option.
 }
 ```
 
-`"last"` (Default) enforces that semicolons are at the end of statements.
-`"first"` enforces that semicolons are at the beginning of statements. Semicolons of `for` loop heads (`for(a;b;c){}`) should be at the end of lines even if you use this option.
+
+
+- `"last"` (Default) enforces that semicolons are at the end of statements.
+
+- `"first"` enforces that semicolons are at the beginning of statements. Semicolons of `for` loop heads (`for(a;b;c){}`) should be at the end of lines even if you use this option.
 
 Examples of incorrect code for this rule with `"last"` option:
 
@@ -49,6 +52,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with `"last"` option:
 
 
@@ -73,6 +77,7 @@ class C {
     }
 }
 ```
+
 Examples of incorrect code for this rule with `"first"` option:
 
 
@@ -97,6 +102,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with `"first"` option:
 
 
@@ -121,22 +127,31 @@ class C {
     }
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to notify the location of semicolons, then it’s safe to disable this rule.
+
 ## Related Rules
 
 
+- 
 no-extra-semi 
 
+- 
 semi 
 
+- 
 semi-spacing 
 
-
 ## Version
+
 This rule was introduced in ESLint v4.0.0-beta.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

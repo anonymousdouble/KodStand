@@ -1,14 +1,18 @@
 
+
 # no-use-before-define
 ## Overview
+
 Disallow the use of variables before they are defined
 
-
-
 In JavaScript, prior to ES6, variable and function declarations are hoisted to the top of a scope, so it’s possible to use identifiers before their formal declarations in code. This can be confusing and some believe it is best to always declare variables and functions before using them.
+
 In ES6, block-level bindings (`let` and `const`) introduce a “temporal dead zone” where a `ReferenceError` will be thrown with any attempt to access the variable before its declaration.
+
 ## Rule Details
+
 This rule will warn when it encounters a reference to an identifier that has not yet been declared.
+
 Examples of incorrect code for this rule:
 
 
@@ -59,6 +63,7 @@ var b = 1;
 export { foo };
 const foo = 1;
 ```
+
 Examples of correct code for this rule:
 
 
@@ -111,7 +116,9 @@ function g() {
 const foo = 1;
 export { foo };
 ```
+
 ## Options
+
 
 ```json
 {
@@ -124,31 +131,38 @@ export { foo };
 }
 ```
 
-`functions` (`boolean`) -
+
+
+- `functions` (`boolean`) -
 The flag which shows whether or not this rule checks function declarations.
 If this is `true`, this rule warns every reference to a function before the function declaration.
 Otherwise, ignores those references.
 Function declarations are hoisted, so it’s safe.
 Default is `true`.
-`classes` (`boolean`) -
+
+- `classes` (`boolean`) -
 The flag which shows whether or not this rule checks class declarations of upper scopes.
 If this is `true`, this rule warns every reference to a class before the class declaration.
 Otherwise, ignores those references if the declaration is in upper function scopes.
 Class declarations are not hoisted, so it might be danger.
 Default is `true`.
-`variables` (`boolean`) -
+
+- `variables` (`boolean`) -
 This flag determines whether or not the rule checks variable declarations in upper scopes.
 If this is `true`, the rule warns every reference to a variable before the variable declaration.
 Otherwise, the rule ignores a reference if the declaration is in an upper scope, while still reporting the reference if it’s in the same scope as the declaration.
 Default is `true`.
-`allowNamedExports` (`boolean`) -
+
+- `allowNamedExports` (`boolean`) -
 If this flag is set to `true`, the rule always allows references in `export {};` declarations.
 These references are safe even if the variables are declared later in the code.
 Default is `false`.
 
 This rule accepts `"nofunc"` string as an option.
 `"nofunc"` is the same as `{ "functions": false, "classes": true, "variables": true, "allowNamedExports": false }`.
+
 ### functions
+
 Examples of correct code for the `{ "functions": false }` option:
 
 
@@ -158,8 +172,11 @@ Examples of correct code for the `{ "functions": false }` option:
 f();
 function f() {}
 ```
+
 This option allows references to function declarations. For function expressions and arrow functions, please see the variables  option.
+
 ### classes
+
 Examples of incorrect code for the `{ "classes": false }` option:
 
 
@@ -195,6 +212,7 @@ class A {
     class D {}
 }
 ```
+
 Examples of correct code for the `{ "classes": false }` option:
 
 
@@ -208,7 +226,9 @@ function foo() {
 class A {
 }
 ```
+
 ### variables
+
 Examples of incorrect code for the `{ "variables": false }` option:
 
 
@@ -246,6 +266,7 @@ const g = function() {};
     const foo = 1;
 }
 ```
+
 Examples of correct code for the `{ "variables": false }` option:
 
 
@@ -272,7 +293,9 @@ const g = function() {}
     const foo = 1;
 }
 ```
+
 ### allowNamedExports
+
 Examples of correct code for the `{ "allowNamedExports": true }` option:
 
 
@@ -289,6 +312,7 @@ function f () {}
 
 class C {}
 ```
+
 Examples of incorrect code for the `{ "allowNamedExports": true }` option:
 
 
@@ -307,10 +331,15 @@ export function foo() {
 const d = 1;
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

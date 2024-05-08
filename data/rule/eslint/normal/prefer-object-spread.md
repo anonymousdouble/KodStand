@@ -1,18 +1,16 @@
 
+
 # prefer-object-spread
 ## Overview
+
 Disallow using Object.assign with an object literal as the first argument and prefer the use of object spread instead
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 When Object.assign is called using an object literal as the first argument, this rule requires using the object spread syntax instead. This rule also warns on cases where an `Object.assign` call is made using a single argument that is an object literal, in this case, the `Object.assign` call is not needed.
+
 Introduced in ES2018, object spread is a declarative alternative which may perform better than the more dynamic, imperative `Object.assign`.
+
 ## Rule Details
+
 Examples of incorrect code for this rule:
 
 
@@ -34,6 +32,7 @@ Object.assign({});
 
 Object.assign({ foo: bar });
 ```
+
 Examples of correct code for this rule:
 
 
@@ -53,12 +52,19 @@ Object.assign(foo, { bar, baz });
 
 Object.assign(foo, { ...baz });
 ```
+
 ## When Not To Use It
+
 This rule should not be used unless ES2018 is supported in your codebase.
+
 ## Version
+
 This rule was introduced in ESLint v5.0.0-alpha.3.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

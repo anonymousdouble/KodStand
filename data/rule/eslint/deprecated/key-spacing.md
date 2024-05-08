@@ -1,52 +1,65 @@
 
+
 # key-spacing
 ## Overview
+
 Enforce consistent spacing between keys and values in object literal properties
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 This rule enforces spacing around the colon in object literal properties. It can verify each property individually, or it can ensure horizontal alignment of adjacent properties in an object literal.
+
 ## Rule Details
+
 This rule enforces consistent spacing between keys and values in object literal properties. In the case of long lines, it is acceptable to add a new line wherever whitespace is allowed.
+
 ## Options
+
 This rule has an object option:
 
-`"beforeColon": false (default) | true`
 
-`false`: disallows spaces between the key and the colon in object literals.
-`true`: requires at least one space between the key and the colon in object literals.
+- `"beforeColon": false (default) | true`
 
 
-`"afterColon": true (default) | false`
+- `false`: disallows spaces between the key and the colon in object literals.
 
-`true`: requires at least one space between the colon and the value in object literals.
-`false`: disallows spaces between the colon and the value in object literals.
-
-
-`"mode": "strict" (default) | "minimum"`
-
-`"strict"`: enforces exactly one space before or after colons in object literals.
-`"minimum"`: enforces one or more spaces before or after colons in object literals.
+- `true`: requires at least one space between the key and the colon in object literals.
 
 
-`"align": "value" | "colon"`
-
-`"value"`: enforces horizontal alignment of values in object literals.
-`"colon"` enforces horizontal alignment of both colons and values in object literals.
+- `"afterColon": true (default) | false`
 
 
-`"align"` with an object value allows for fine-grained spacing when values are being aligned in object literals.
-`"singleLine"` specifies a spacing style for single-line object literals.
-`"multiLine"` specifies a spacing style for multi-line object literals.
+- `true`: requires at least one space between the colon and the value in object literals.
+
+- `false`: disallows spaces between the colon and the value in object literals.
+
+
+- `"mode": "strict" (default) | "minimum"`
+
+
+- `"strict"`: enforces exactly one space before or after colons in object literals.
+
+- `"minimum"`: enforces one or more spaces before or after colons in object literals.
+
+
+- `"align": "value" | "colon"`
+
+
+- `"value"`: enforces horizontal alignment of values in object literals.
+
+- `"colon"` enforces horizontal alignment of both colons and values in object literals.
+
+
+- `"align"` with an object value allows for fine-grained spacing when values are being aligned in object literals.
+
+- `"singleLine"` specifies a spacing style for single-line object literals.
+
+- `"multiLine"` specifies a spacing style for multi-line object literals.
 
 Please note that you can either use the top-level options or the grouped options (`singleLine` and `multiLine`) but not both.
+
 ### beforeColon
+
 Examples of incorrect code for this rule with the default `{ "beforeColon": false }` option:
 
 
@@ -55,6 +68,7 @@ Examples of incorrect code for this rule with the default `{ "beforeColon": fals
 
 var obj = { "foo" : 42 };
 ```
+
 Examples of correct code for this rule with the default `{ "beforeColon": false }` option:
 
 
@@ -63,6 +77,7 @@ Examples of correct code for this rule with the default `{ "beforeColon": false 
 
 var obj = { "foo": 42 };
 ```
+
 Examples of incorrect code for this rule with the `{ "beforeColon": true }` option:
 
 
@@ -71,6 +86,7 @@ Examples of incorrect code for this rule with the `{ "beforeColon": true }` opti
 
 var obj = { "foo": 42 };
 ```
+
 Examples of correct code for this rule with the `{ "beforeColon": true }` option:
 
 
@@ -79,7 +95,9 @@ Examples of correct code for this rule with the `{ "beforeColon": true }` option
 
 var obj = { "foo" : 42 };
 ```
+
 ### afterColon
+
 Examples of incorrect code for this rule with the default `{ "afterColon": true }` option:
 
 
@@ -88,6 +106,7 @@ Examples of incorrect code for this rule with the default `{ "afterColon": true 
 
 var obj = { "foo":42 };
 ```
+
 Examples of correct code for this rule with the default `{ "afterColon": true }` option:
 
 
@@ -96,6 +115,7 @@ Examples of correct code for this rule with the default `{ "afterColon": true }`
 
 var obj = { "foo": 42 };
 ```
+
 Examples of incorrect code for this rule with the `{ "afterColon": false }` option:
 
 
@@ -104,6 +124,7 @@ Examples of incorrect code for this rule with the `{ "afterColon": false }` opti
 
 var obj = { "foo": 42 };
 ```
+
 Examples of correct code for this rule with the `{ "afterColon": false }` option:
 
 
@@ -112,7 +133,9 @@ Examples of correct code for this rule with the `{ "afterColon": false }` option
 
 var obj = { "foo":42 };
 ```
+
 ### mode
+
 Examples of incorrect code for this rule with the default `{ "mode": "strict" }` option:
 
 
@@ -124,6 +147,7 @@ call({
     bat:    2 * 2
 });
 ```
+
 Examples of correct code for this rule with the default `{ "mode": "strict" }` option:
 
 
@@ -135,6 +159,7 @@ call({
     bat: 2 * 2
 });
 ```
+
 Examples of correct code for this rule with the `{ "mode": "minimum" }` option:
 
 
@@ -146,7 +171,9 @@ call({
     bat:    2 * 2
 });
 ```
+
 ### align
+
 Examples of incorrect code for this rule with the `{ "align": "value" }` option:
 
 
@@ -159,6 +186,7 @@ var obj = {
     fg :   foo()
 };
 ```
+
 Examples of correct code for this rule with the `{ "align": "value" }` option:
 
 
@@ -178,6 +206,7 @@ var obj = {
 
 var obj = { a: "foo", longPropertyName: "bar" };
 ```
+
 Examples of incorrect code for this rule with the `{ "align": "colon" }` option:
 
 
@@ -189,6 +218,7 @@ call({
     bat:    2 * 2
 });
 ```
+
 Examples of correct code for this rule with the `{ "align": "colon" }` option:
 
 
@@ -200,9 +230,13 @@ call({
     bat   : 2 * 2
 });
 ```
+
 ### align
+
 The `align` option can take additional configuration through the `beforeColon`, `afterColon`, `mode`, and `on` options.
+
 If `align` is defined as an object, but not all of the parameters are provided, undefined parameters will default to the following:
+
 
 ```json
 // Defaults
@@ -213,6 +247,7 @@ align: {
     "mode": "strict"
 }
 ```
+
 Examples of correct code for this rule with sample `{ "align": { } }` options:
 
 
@@ -232,6 +267,7 @@ var obj = {
 ```
 
 
+
 ```json
 /*eslint key-spacing: ["error", {
     "align": {
@@ -246,9 +282,13 @@ var obj = {
     "seven":7
 }
 ```
+
 ### align and multiLine
+
 The `multiLine` and `align` options can differ, which allows for fine-tuned control over the `key-spacing` of your files.  `align` will not inherit from `multiLine` if `align` is configured as an object.
+
 `multiLine` is used any time  an object literal spans multiple lines.  The `align` configuration is used when there is a group of properties in the same object. For example:
+
 
 ```json
 var myObj = {
@@ -261,6 +301,7 @@ var myObj = {
 }
 
 ```
+
 Examples of incorrect code for this rule with sample `{ "align": { }, "multiLine": { } }` options:
 
 
@@ -285,6 +326,7 @@ var obj = {
     "seven"           : 7
 }
 ```
+
 Examples of correct code for this rule with sample `{ "align": { }, "multiLine": { } }` options:
 
 
@@ -311,7 +353,9 @@ var obj = {
     "seven" : 7 // `one` and `seven` are in their own group, and therefore aligned
 }
 ```
+
 ### singleLine and multiLine
+
 Examples of correct code for this rule with sample `{ "singleLine": { }, "multiLine": { } }` options:
 
 
@@ -333,12 +377,19 @@ var obj2 = {
     three : 3
 };
 ```
+
 ## When Not To Use It
+
 If you have another convention for property spacing that might not be consistent with the available options, or if you want to permit multiple styles concurrently you can safely disable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v0.9.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

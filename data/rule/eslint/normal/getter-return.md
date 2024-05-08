@@ -1,16 +1,12 @@
 
+
 # getter-return
 ## Overview
+
 Enforce `return` statements in getters
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 The get syntax binds an object property to a function that will be called when that property is looked up. It was first introduced in ECMAScript 5:
+
 
 ```json
 var p = {
@@ -25,9 +21,13 @@ Object.defineProperty(p, "age", {
     }
 });
 ```
+
 Note that every `getter` is expected to return a value.
+
 ## Rule Details
+
 This rule enforces that a return statement is present in property getters.
+
 Examples of incorrect code for this rule:
 
 
@@ -52,6 +52,7 @@ class P{
     }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -76,10 +77,13 @@ class P{
     }
 }
 ```
+
 ## Options
+
 This rule has an object option:
 
-`"allowImplicit": false` (default) disallows implicitly returning `undefined` with a `return` statement.
+
+- `"allowImplicit": false` (default) disallows implicitly returning `undefined` with a `return` statement.
 
 Examples of correct code for the `{ "allowImplicit": true }` option:
 
@@ -92,41 +96,33 @@ p = {
     }
 };
 ```
+
 ## When Not To Use It
+
 If your project will not be using ES5 property getters you do not need this rule.
+
 ## Handled by TypeScript
+
 
                 It is safe to disable this rule when using TypeScript because TypeScript's compiler enforces this check.
             
+
 ## Version
+
 This rule was introduced in ESLint v4.2.0.
+
 ## Further Reading
-
-
-
-
 
 getter - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
-
-
-
-
-
 Read Understanding ECMAScript 6 | Leanpub 
  leanpub.com
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,43 +1,63 @@
 
+
 # no-invalid-this
 ## Overview
+
 Disallow use of `this` in contexts where the value of `this` is `undefined`
 
-
-
 Under the strict mode, `this` keywords outside of classes or class-like objects might be `undefined` and raise a `TypeError`.
+
 ## Rule Details
+
 This rule aims to flag usage of `this` keywords in contexts where the value of `this` is `undefined`.
+
 Top-level `this` in scripts is always considered valid because it refers to the global object regardless of the strict mode.
+
 Top-level `this` in ECMAScript modules is always considered invalid because its value is `undefined`.
+
 For `this` inside functions, this rule basically checks whether or not the function containing `this` keyword is a constructor or a method. Note that arrow functions have lexical `this`, and that therefore this rule checks their enclosing contexts.
+
 This rule judges from following conditions whether or not the function is a constructor:
 
-The name of the function starts with uppercase.
-The function is assigned to a variable which starts with an uppercase letter.
-The function is a constructor of ES2015 Classes.
+
+- The name of the function starts with uppercase.
+
+- The function is assigned to a variable which starts with an uppercase letter.
+
+- The function is a constructor of ES2015 Classes.
 
 This rule judges from following conditions whether or not the function is a method:
 
-The function is on an object literal.
-The function is assigned to a property.
-The function is a method/getter/setter of ES2015 Classes.
+
+- The function is on an object literal.
+
+- The function is assigned to a property.
+
+- The function is a method/getter/setter of ES2015 Classes.
 
 And this rule allows `this` keywords in functions below:
 
-The `call/apply/bind` method of the function is called directly.
-The function is a callback of array methods (such as `.forEach()`) if `thisArg` is given.
-The function has `@this` tag in its JSDoc comment.
+
+- The `call/apply/bind` method of the function is called directly.
+
+- The function is a callback of array methods (such as `.forEach()`) if `thisArg` is given.
+
+- The function has `@this` tag in its JSDoc comment.
 
 And this rule always allows `this` keywords in the following contexts:
 
-At the top level of scripts.
-In class field initializers.
-In class static blocks.
+
+- At the top level of scripts.
+
+- In class field initializers.
+
+- In class static blocks.
 
 Otherwise are considered problems.
+
 This rule applies only in strict mode.
 With `"parserOptions": { "sourceType": "module" }` in the ESLint configuration, your code is in strict mode even without a `"use strict"` directive.
+
 Examples of incorrect code for this rule in strict mode:
 
 
@@ -82,6 +102,7 @@ foo.forEach(function() {
     baz(() => this);
 });
 ```
+
 Examples of correct code for this rule in strict mode:
 
 
@@ -212,14 +233,20 @@ function foo() {
     this.a = 0;
 }
 ```
+
 ## Options
+
 This rule has an object option, with one option:
 
-`"capIsConstructor": false` (default `true`) disables the assumption that a function which name starts with an uppercase is a constructor.
+
+- `"capIsConstructor": false` (default `true`) disables the assumption that a function which name starts with an uppercase is a constructor.
 
 ### capIsConstructor
+
 By default, this rule always allows the use of `this` in functions which name starts with an uppercase and anonymous functions that are assigned to a variable which name starts with an uppercase, assuming that those functions are used as constructor functions.
+
 Set `"capIsConstructor"` to `false` if you want those functions to be treated as ‘regular’ functions.
+
 Examples of incorrect code for this rule with `"capIsConstructor"` option set to `false`:
 
 
@@ -244,6 +271,7 @@ Baz = function() {
     this.a = 0;
 };
 ```
+
 Examples of correct code for this rule with `"capIsConstructor"` option set to `false`:
 
 
@@ -257,9 +285,13 @@ obj.Foo = function Foo() {
     this.a = 0;
 };
 ```
+
 ## When Not To Use It
+
 If you don’t want to be notified about usage of `this` keyword outside of classes or class-like objects, you can safely disable this rule.
+
 ## Handled by TypeScript
+
 
                 It is safe to disable this rule when using TypeScript because TypeScript's compiler enforces this check.
             
@@ -267,9 +299,13 @@ If you don’t want to be notified about usage of `this` keyword outside of clas
 Note that, technically, TypeScript will only catch this if you have the `strict` or `noImplicitThis` flags enabled. These are enabled in most TypeScript projects, since they are considered to be best practice.
 
 ## Version
+
 This rule was introduced in ESLint v1.0.0-rc-2.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

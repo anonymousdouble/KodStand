@@ -1,18 +1,15 @@
 
+
 # array-bracket-spacing
 ## Overview
+
 Enforce consistent spacing inside array brackets
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 A number of style guides require or disallow spaces between array brackets and other tokens. This rule
 applies to both array literals and destructuring assignments (ECMAScript 6).
+
 
 ```json
 /*eslint-env es6*/
@@ -23,32 +20,47 @@ var [ x, y ] = z;
 var arr = ['foo', 'bar'];
 var [x,y] = z;
 ```
+
 ## Rule Details
+
 This rule enforces consistent spacing inside array brackets.
+
 ## Options
+
 This rule has a string option:
 
-`"never"` (default) disallows spaces inside array brackets
-`"always"` requires one or more spaces or newlines inside array brackets
+
+- `"never"` (default) disallows spaces inside array brackets
+
+- `"always"` requires one or more spaces or newlines inside array brackets
 
 This rule has an object option for exceptions to the `"never"` option:
 
-`"singleValue": true` requires one or more spaces or newlines inside brackets of array literals that contain a single element
-`"objectsInArrays": true` requires one or more spaces or newlines between brackets of array literals and braces of their object literal elements `[ {` or `} ]`
-`"arraysInArrays": true` requires one or more spaces or newlines between brackets of array literals and brackets of their array literal elements `[ [` or `] ]`
+
+- `"singleValue": true` requires one or more spaces or newlines inside brackets of array literals that contain a single element
+
+- `"objectsInArrays": true` requires one or more spaces or newlines between brackets of array literals and braces of their object literal elements `[ {` or `} ]`
+
+- `"arraysInArrays": true` requires one or more spaces or newlines between brackets of array literals and brackets of their array literal elements `[ [` or `] ]`
 
 This rule has an object option for exceptions to the `"always"` option:
 
-`"singleValue": false` disallows spaces inside brackets of array literals that contain a single element
-`"objectsInArrays": false` disallows spaces between brackets of array literals and braces of their object literal elements `[{` or `}]`
-`"arraysInArrays": false` disallows spaces between brackets of array literals and brackets of their array literal elements `[[` or `]]`
+
+- `"singleValue": false` disallows spaces inside brackets of array literals that contain a single element
+
+- `"objectsInArrays": false` disallows spaces between brackets of array literals and braces of their object literal elements `[{` or `}]`
+
+- `"arraysInArrays": false` disallows spaces between brackets of array literals and brackets of their array literal elements `[[` or `]]`
 
 This rule has built-in exceptions:
 
-`"never"` (and also the exceptions to the `"always"` option) allows newlines inside array brackets, because this is a common pattern
-`"always"` does not require spaces or newlines in empty array literals `[]`
+
+- `"never"` (and also the exceptions to the `"always"` option) allows newlines inside array brackets, because this is a common pattern
+
+- `"always"` does not require spaces or newlines in empty array literals `[]`
 
 ### never
+
 Examples of incorrect code for this rule with the default `"never"` option:
 
 
@@ -68,6 +80,7 @@ var [ x,y ] = z;
 var [ x, ...y ] = z;
 var [ ,,x, ] = z;
 ```
+
 Examples of correct code for this rule with the default `"never"` option:
 
 
@@ -95,7 +108,9 @@ var [x,y] = z;
 var [x, ...y] = z;
 var [,,x,] = z;
 ```
+
 ### always
+
 Examples of incorrect code for this rule with the `"always"` option:
 
 
@@ -118,6 +133,7 @@ var [x,y] = z;
 var [x, ...y] = z;
 var [,,x,] = z;
 ```
+
 Examples of correct code for this rule with the `"always"` option:
 
 
@@ -145,7 +161,9 @@ var [ x,y ] = z;
 var [ x, ...y ] = z;
 var [ ,,x, ] = z;
 ```
+
 ### singleValue
+
 Examples of incorrect code for this rule with the `"always", { "singleValue": false }` options:
 
 
@@ -161,6 +179,7 @@ var foo = [1 ];
 var foo = [ [ 1, 2 ] ];
 var foo = [ { 'foo': 'bar' } ];
 ```
+
 Examples of correct code for this rule with the `"always", { "singleValue": false }` options:
 
 
@@ -172,7 +191,9 @@ var foo = [1];
 var foo = [[ 1, 1 ]];
 var foo = [{ 'foo': 'bar' }];
 ```
+
 ### objectsInArrays
+
 Examples of incorrect code for this rule with the `"always", { "objectsInArrays": false }` options:
 
 
@@ -184,6 +205,7 @@ var arr = [ {
   'foo': 'bar'
 } ]
 ```
+
 Examples of correct code for this rule with the `"always", { "objectsInArrays": false }` options:
 
 
@@ -195,7 +217,9 @@ var arr = [{
   'foo': 'bar'
 }];
 ```
+
 ### arraysInArrays
+
 Examples of incorrect code for this rule with the `"always", { "arraysInArrays": false }` options:
 
 
@@ -205,6 +229,7 @@ Examples of incorrect code for this rule with the `"always", { "arraysInArrays":
 var arr = [ [ 1, 2 ], 2, 3, 4 ];
 var arr = [ [ 1, 2 ], 2, [ 3, 4 ] ];
 ```
+
 Examples of correct code for this rule with the `"always", { "arraysInArrays": false }` options:
 
 
@@ -214,22 +239,31 @@ Examples of correct code for this rule with the `"always", { "arraysInArrays": f
 var arr = [[ 1, 2 ], 2, 3, 4 ];
 var arr = [[ 1, 2 ], 2, [ 3, 4 ]];
 ```
+
 ## When Not To Use It
+
 You can turn this rule off if you are not concerned with the consistency of spacing between array brackets.
+
 ## Related Rules
 
 
+- 
 space-in-parens 
 
+- 
 object-curly-spacing 
 
+- 
 computed-property-spacing 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.24.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

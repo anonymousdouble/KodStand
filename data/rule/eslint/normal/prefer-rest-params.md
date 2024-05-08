@@ -1,16 +1,21 @@
 
+
 # prefer-rest-params
 ## Overview
+
 Require rest parameters instead of `arguments`
-
-
 
 There are rest parameters in ES2015.
 We can use that feature for variadic functions instead of the `arguments` variable.
+
 `arguments` does not have methods of `Array.prototype`, so it’s a bit of an inconvenience.
+
 ## Rule Details
+
 This rule is aimed to flag usage of `arguments` variables.
+
 ## Examples
+
 Examples of incorrect code for this rule:
 
 
@@ -31,6 +36,7 @@ function foo(action) {
     action.apply(null, args);
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -54,19 +60,27 @@ function foo() {
     console.log(arguments); // This is a local variable.
 }
 ```
+
 ## When Not To Use It
+
 This rule should not be used in ES3/5 environments.
+
 In ES2015 (ES6) or later, if you don’t want to be notified about `arguments` variables, then it’s safe to disable this rule.
+
 ## Related Rules
 
 
+- 
 prefer-spread 
 
-
 ## Version
+
 This rule was introduced in ESLint v2.0.0-alpha-1.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

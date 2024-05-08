@@ -1,25 +1,24 @@
 
+
 # prefer-regex-literals
 ## Overview
+
 Disallow use of the `RegExp` constructor in favor of regular expression literals
-
-
-💡 hasSuggestions
-
-            Some problems reported by this rule are manually fixable by editor suggestions 
-
-
 
 There are two ways to create a regular expression:
 
-Regular expression literals, e.g., `/abc/u`.
-The `RegExp` constructor function, e.g., `new RegExp("abc", "u")` or `RegExp("abc", "u")`.
+
+- Regular expression literals, e.g., `/abc/u`.
+
+- The `RegExp` constructor function, e.g., `new RegExp("abc", "u")` or `RegExp("abc", "u")`.
 
 The constructor function is particularly useful when you want to dynamically generate the pattern,
 because it takes string arguments.
+
 When using the constructor function with string literals, don’t forget that the string escaping rules still apply.
 If you want to put a backslash in the pattern, you need to escape it in the string literal.
 Thus, the following are equivalent:
+
 
 ```json
 new RegExp("^\\d\\.$");
@@ -28,22 +27,30 @@ new RegExp("^\\d\\.$");
 
 // matches "0.", "1.", "2." ... "9."
 ```
+
 In the above example, the regular expression literal is easier to read and reason about.
 Also, it’s a common mistake to omit the extra `\` in the string literal, which would produce a completely different regular expression:
+
 
 ```json
 new RegExp("^\d\.$");
 
 // equivalent to /^d.$/, matches "d1", "d2", "da", "db" ...
 ```
+
 When a regular expression is known in advance, it is considered a best practice to avoid the string literal notation on top
 of the regular expression notation, and use regular expression literals instead of the constructor function.
+
 ## Rule Details
+
 This rule disallows the use of the `RegExp` constructor function with string literals as its arguments.
+
 This rule also disallows the use of the `RegExp` constructor function with template literals without expressions
 and `String.raw` tagged template literals without expressions.
+
 The rule does not disallow all use of the `RegExp` constructor. It should be still used for
 dynamically generated regular expressions.
+
 Examples of incorrect code for this rule:
 
 
@@ -64,6 +71,7 @@ RegExp(`^\\d\\.$`);
 
 new RegExp(String.raw`^\d\.$`);
 ```
+
 Examples of correct code for this rule:
 
 
@@ -90,13 +98,18 @@ RegExp(`${prefix}abc`);
 
 new RegExp(String.raw`^\d\. ${suffix}`);
 ```
+
 ## Options
+
 This rule has an object option:
 
-`disallowRedundantWrapping` set to `true` additionally checks for unnecessarily wrapped regex literals (Default `false`).
+
+- `disallowRedundantWrapping` set to `true` additionally checks for unnecessarily wrapped regex literals (Default `false`).
 
 ### disallowRedundantWrapping
+
 By default, this rule doesn’t check when a regex literal is unnecessarily wrapped in a `RegExp` constructor call. When the option `disallowRedundantWrapping` is set to `true`, the rule will also disallow such unnecessary patterns.
+
 Examples of `incorrect` code for `{ "disallowRedundantWrapping": true }`
 
 
@@ -107,6 +120,7 @@ new RegExp(/abc/);
 
 new RegExp(/abc/, 'u');
 ```
+
 Examples of `correct` code for `{ "disallowRedundantWrapping": true }`
 
 
@@ -120,35 +134,23 @@ Examples of `correct` code for `{ "disallowRedundantWrapping": true }`
 new RegExp(/abc/, flags);
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v6.4.0.
+
 ## Further Reading
-
-
-
-
 
 Regular expressions - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
-
-
-
-
-
 RegExp - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

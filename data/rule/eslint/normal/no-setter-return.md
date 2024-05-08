@@ -1,25 +1,28 @@
 
+
 # no-setter-return
 ## Overview
+
 Disallow returning values from setters
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 Setters cannot return values.
+
 While returning a value from a setter does not produce an error, the returned value is being ignored. Therefore, returning a value from a setter is either unnecessary or a possible error, since the returned value cannot be used.
+
 ## Rule Details
+
 This rule disallows returning values from setters and reports `return` statements in setter functions.
+
 Only `return` without a value is allowed, as it’s a control flow statement.
+
 This rule checks setters in:
 
-Object literals.
-Class declarations and class expressions.
-Property descriptors in `Object.create`, `Object.defineProperty`, `Object.defineProperties`, and `Reflect.defineProperty` methods of the global objects.
+
+- Object literals.
+
+- Class declarations and class expressions.
+
+- Property descriptors in `Object.create`, `Object.defineProperty`, `Object.defineProperties`, and `Reflect.defineProperty` methods of the global objects.
 
 Examples of incorrect code for this rule:
 
@@ -60,6 +63,7 @@ Object.defineProperty(foo, "bar", {
     }
 });
 ```
+
 Examples of correct code for this rule:
 
 
@@ -98,33 +102,32 @@ Object.defineProperty(foo, "bar", {
 });
 ```
 
+
 ## Handled by TypeScript
+
 
                 It is safe to disable this rule when using TypeScript because TypeScript's compiler enforces this check.
             
+
 ## Related Rules
 
 
+- 
 getter-return 
 
-
 ## Version
+
 This rule was introduced in ESLint v6.7.0.
+
 ## Further Reading
-
-
-
-
 
 setter - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

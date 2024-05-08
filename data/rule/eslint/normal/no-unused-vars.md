@@ -1,26 +1,29 @@
 
+
 # no-unused-vars
 ## Overview
+
 Disallow unused variables
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
+
 ## Rule Details
+
 This rule is aimed at eliminating unused variables, functions, and function parameters.
+
 A variable `foo` is considered to be used if any of the following are true:
 
-It is called (`foo()`) or constructed (`new foo()`)
-It is read (`var bar = foo`)
-It is passed into a function as an argument (`doSomething(foo)`)
-It is read inside of a function that is passed to another function (`doSomething(function() { foo(); })`)
+
+- It is called (`foo()`) or constructed (`new foo()`)
+
+- It is read (`var bar = foo`)
+
+- It is passed into a function as an argument (`doSomething(foo)`)
+
+- It is read inside of a function that is passed to another function (`doSomething(function() { foo(); })`)
 
 A variable is not considered to be used if it is only ever declared (`var foo = 5`) or assigned to (`foo = 7`).
+
 Examples of incorrect code for this rule:
 
 
@@ -58,6 +61,7 @@ function getY([x, y]) {
 }
 getY(["a", "b"]);
 ```
+
 Examples of correct code for this rule:
 
 
@@ -88,21 +92,29 @@ function getY([, y]) {
 }
 getY(["a", "b"]);
 ```
+
 ### exported
+
 In environments outside of CommonJS or ECMAScript modules, you may use `var` to create a global variable that may be used by other scripts. You can use the `/* exported variableName */` comment block to indicate that this variable is being exported and therefore should not be considered unused.
+
 Note that `/* exported */` has no effect for any of the following:
 
-when the environment is `node` or `commonjs`
-when `parserOptions.sourceType` is `module`
-when `ecmaFeatures.globalReturn` is `true`
+
+- when the environment is `node` or `commonjs`
+
+- when `parserOptions.sourceType` is `module`
+
+- when `ecmaFeatures.globalReturn` is `true`
 
 The line comment `// exported variableName` will not work as `exported` is not line-specific.
+
 
 ```json
 /* exported global_var */
 
 var global_var = 42;
 ```
+
 Examples of correct code for `/* exported variableName */` operation with `no-unused-vars`:
 
 
@@ -112,9 +124,13 @@ Examples of correct code for `/* exported variableName */` operation with `no-un
 
 var global_var = 42;
 ```
+
 ## Options
+
 This rule takes one argument which can be a string or an object. The string settings are the same as those of the `vars` property (explained below).
+
 By default this rule is enabled with `all` option for variables and `after-used` for arguments.
+
 
 ```json
 {
@@ -123,13 +139,18 @@ By default this rule is enabled with `all` option for variables and `after-used`
     }
 }
 ```
+
 ### vars
+
 The `vars` option has two settings:
 
-`all` checks all variables for usage, including those in the global scope. This is the default setting.
-`local` checks only that locally-declared variables are used but will allow global variables to be unused.
+
+- `all` checks all variables for usage, including those in the global scope. This is the default setting.
+
+- `local` checks only that locally-declared variables are used but will allow global variables to be unused.
 
 #### vars: local
+
 Examples of correct code for the `{ "vars": "local" }` option:
 
 
@@ -139,8 +160,11 @@ Examples of correct code for the `{ "vars": "local" }` option:
 
 some_unused_var = 42;
 ```
+
 ### varsIgnorePattern
+
 The `varsIgnorePattern` option specifies exceptions not to check for usage: variables whose names match a regexp pattern. For example, variables whose names contain `ignored` or `Ignored`.
+
 Examples of correct code for the `{ "varsIgnorePattern": "[iI]gnored" }` option:
 
 
@@ -151,14 +175,20 @@ var firstVarIgnored = 1;
 var secondVar = 2;
 console.log(secondVar);
 ```
+
 ### args
+
 The `args` option has three settings:
 
-`after-used` - unused positional arguments that occur before the last used argument will not be checked, but all named arguments and all positional arguments after the last used argument will be checked.
-`all` - all named arguments must be used.
-`none` - do not check arguments.
+
+- `after-used` - unused positional arguments that occur before the last used argument will not be checked, but all named arguments and all positional arguments after the last used argument will be checked.
+
+- `all` - all named arguments must be used.
+
+- `none` - do not check arguments.
 
 #### args: after-used
+
 Examples of incorrect code for the default `{ "args": "after-used" }` option:
 
 
@@ -172,6 +202,7 @@ Examples of incorrect code for the default `{ "args": "after-used" }` option:
     return bar;
 })();
 ```
+
 Examples of correct code for the default `{ "args": "after-used" }` option:
 
 
@@ -182,7 +213,9 @@ Examples of correct code for the default `{ "args": "after-used" }` option:
     return qux;
 })();
 ```
+
 #### args: all
+
 Examples of incorrect code for the `{ "args": "all" }` option:
 
 
@@ -196,7 +229,9 @@ Examples of incorrect code for the `{ "args": "all" }` option:
     return bar;
 })();
 ```
+
 #### args: none
+
 Examples of correct code for the `{ "args": "none" }` option:
 
 
@@ -207,8 +242,11 @@ Examples of correct code for the `{ "args": "none" }` option:
     return bar;
 })();
 ```
+
 ### argsIgnorePattern
+
 The `argsIgnorePattern` option specifies exceptions not to check for usage: arguments whose names match a regexp pattern. For example, variables whose names begin with an underscore.
+
 Examples of correct code for the `{ "argsIgnorePattern": "^_" }` option:
 
 
@@ -220,15 +258,22 @@ function foo(x, _y) {
 }
 foo();
 ```
+
 ### caughtErrors
+
 The `caughtErrors` option is used for `catch` block arguments validation.
+
 It has two settings:
 
-`none` - do not check error objects. This is the default setting.
-`all` - all named arguments must be used.
+
+- `none` - do not check error objects. This is the default setting.
+
+- `all` - all named arguments must be used.
 
 #### caughtErrors: none
+
 Not specifying this rule is equivalent of assigning it to `none`.
+
 Examples of correct code for the `{ "caughtErrors": "none" }` option:
 
 
@@ -241,7 +286,9 @@ try {
     console.error("errors");
 }
 ```
+
 #### caughtErrors: all
+
 Examples of incorrect code for the `{ "caughtErrors": "all" }` option:
 
 
@@ -256,8 +303,11 @@ try {
     console.error("errors");
 }
 ```
+
 ### caughtErrorsIgnorePattern
+
 The `caughtErrorsIgnorePattern` option specifies exceptions not to check for usage: catch arguments whose names match a regexp pattern. For example, variables whose names begin with a string ‘ignore’.
+
 Examples of correct code for the `{ "caughtErrorsIgnorePattern": "^ignore" }` option:
 
 
@@ -270,8 +320,11 @@ try {
     console.error("errors");
 }
 ```
+
 ### destructuredArrayIgnorePattern
+
 The `destructuredArrayIgnorePattern` option specifies exceptions not to check for usage: elements of array destructuring patterns whose names match a regexp pattern. For example, variables whose names begin with an underscore.
+
 Examples of correct code for the `{ "destructuredArrayIgnorePattern": "^_" }` option:
 
 
@@ -305,8 +358,11 @@ _o = 1;
 [_o, p] = foo;
 p;
 ```
+
 ### ignoreRestSiblings
+
 The `ignoreRestSiblings` option is a boolean (default: `false`). Using a Rest Property  it is possible to “omit” properties from an object, but by default the sibling properties are marked as “unused”. With this option enabled the rest property’s siblings are ignored.
+
 Examples of correct code for the `{ "ignoreRestSiblings": true }` option:
 
 
@@ -322,12 +378,19 @@ console.log(rest);
 var bar;
 ({ bar, ...rest } = data);
 ```
+
 ## When Not To Use It
+
 If you don’t want to be notified about unused variables or function arguments, you can safely turn this rule off.
+
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

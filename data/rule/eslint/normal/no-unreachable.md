@@ -1,16 +1,12 @@
 
+
 # no-unreachable
 ## Overview
+
 Disallow unreachable code after `return`, `throw`, `continue`, and `break` statements
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 Because the `return`, `throw`, `break`, and `continue` statements unconditionally exit a block of code, any statements after them cannot be executed. Unreachable statements are usually a mistake.
+
 
 ```json
 function fn() {
@@ -19,7 +15,9 @@ function fn() {
     x = 3; // this will never execute
 }
 ```
+
 Another kind of mistake is defining instance fields in a subclass whose constructor doesn’t call `super()`. Instance fields of a subclass are only added to the instance after `super()`. If there are no `super()` calls, their definitions are never applied and therefore are unreachable code.
+
 
 ```json
 class C extends B {
@@ -30,8 +28,11 @@ class C extends B {
     }
 }
 ```
+
 ## Rule Details
+
 This rule disallows unreachable code after `return`, `throw`, `continue`, and `break` statements. This rule also flags definitions of instance fields in subclasses whose constructors don’t have `super()` calls.
+
 Examples of incorrect code for this rule:
 
 
@@ -68,6 +69,7 @@ function baz() {
 for (;;) {}
 console.log("done");
 ```
+
 Examples of correct code for this rule, because of JavaScript function and variable hoisting:
 
 
@@ -92,6 +94,7 @@ switch (foo) {
         var x;
 }
 ```
+
 Examples of additional incorrect code for this rule:
 
 
@@ -109,6 +112,7 @@ class C extends B {
     }
 }
 ```
+
 Examples of additional correct code for this rule:
 
 
@@ -147,14 +151,21 @@ class F extends B {
 }
 ```
 
+
 ## Handled by TypeScript
+
 
                 It is safe to disable this rule when using TypeScript because TypeScript's compiler enforces this check.
             
+
 ## Version
+
 This rule was introduced in ESLint v0.0.6.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

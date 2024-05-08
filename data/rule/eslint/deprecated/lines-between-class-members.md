@@ -1,18 +1,16 @@
 
+
 # lines-between-class-members
 ## Overview
+
 Require or disallow an empty line between class members
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 This rule improves readability by enforcing lines between class members. It will not check empty lines before the first member and after the last member, since that is already taken care of by padded-blocks.
+
 ## Rule Details
+
 Examples of incorrect code for this rule:
 
 
@@ -28,6 +26,7 @@ class MyClass {
   }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -45,6 +44,7 @@ class MyClass {
   }
 }
 ```
+
 Examples of additional correct code for this rule:
 
 
@@ -56,28 +56,36 @@ class MyClass {
   ;in = 2
 }
 ```
+
 ### Options
+
 This rule has two options, first option can be string or object, second option is object.
+
 First option can be string `"always"` or `"never"` or an object with a property named `enforce`:
 
-`"always"`(default) require an empty line after class members
-`"never"` disallows an empty line after class members
-`Object`: An object with a property named `enforce`. The enforce property should be an array of objects, each specifying the configuration for enforcing empty lines between specific pairs of class members.
 
-enforce: You can supply any number of configurations. If a member pair matches multiple configurations, the last matched configuration will be used. If a member pair does not match any configurations, it will be ignored. Each object should have the following properties:
+- `"always"`(default) require an empty line after class members
 
-blankLine: Can be set to either `"always"` or `"never"`, indicating whether a blank line should be required or disallowed between the specified members.
-prev: Specifies the type of the preceding class member. It can be `"method"` for class methods, `"field"` for class fields, or `"*"` for any class member.
-next: Specifies the type of the following class member. It follows the same options as `prev`.
+- `"never"` disallows an empty line after class members
+
+- `Object`: An object with a property named `enforce`. The enforce property should be an array of objects, each specifying the configuration for enforcing empty lines between specific pairs of class members.
 
 
+- enforce: You can supply any number of configurations. If a member pair matches multiple configurations, the last matched configuration will be used. If a member pair does not match any configurations, it will be ignored. Each object should have the following properties:
 
 
+- blankLine: Can be set to either `"always"` or `"never"`, indicating whether a blank line should be required or disallowed between the specified members.
+
+- prev: Specifies the type of the preceding class member. It can be `"method"` for class methods, `"field"` for class fields, or `"*"` for any class member.
+
+- next: Specifies the type of the following class member. It follows the same options as `prev`.
 
 Second option is an object with a property named `exceptAfterSingleLine`:
 
-`"exceptAfterSingleLine": false`(default) do not skip checking empty lines after single-line class members
-`"exceptAfterSingleLine": true` skip checking empty lines after single-line class members
+
+- `"exceptAfterSingleLine": false`(default) do not skip checking empty lines after single-line class members
+
+- `"exceptAfterSingleLine": true` skip checking empty lines after single-line class members
 
 Examples of incorrect code for this rule with the string option:
 
@@ -92,6 +100,7 @@ class Foo{
 ```
 
 
+
 ```json
 /* eslint lines-between-class-members: ["error", "never"]*/
 class Bar{
@@ -102,6 +111,7 @@ class Bar{
   baz(){}
 }
 ```
+
 Examples of correct code for this rule with the string option:
 
 
@@ -117,6 +127,7 @@ class Foo{
 ```
 
 
+
 ```json
 /* eslint lines-between-class-members: ["error", "never"]*/
 class Bar{
@@ -125,6 +136,7 @@ class Bar{
   baz(){}
 }
 ```
+
 Examples of incorrect code for this rule with the array of configurations option:
 
 
@@ -159,6 +171,7 @@ class MyClass {
 ```
 
 
+
 ```json
 // requires blank lines around fields, disallows blank lines between methods
 /*eslint lines-between-class-members: [
@@ -188,6 +201,7 @@ class MyClass {
   method2() {}
 }
 ```
+
 Examples of correct code for this rule with the array of configurations option:
 
 
@@ -221,6 +235,7 @@ class MyClass {
 ```
 
 
+
 ```json
 // requires blank lines around fields, disallows blank lines between methods
 /*eslint lines-between-class-members: [
@@ -251,6 +266,7 @@ class MyClass {
   method2() {}
 }
 ```
+
 Examples of correct code for this rule with the object option:
 
 
@@ -266,6 +282,7 @@ class Foo{
   qux(){}
 }
 ```
+
 
 
 ```json
@@ -297,25 +314,35 @@ class MyClass {
   method2() {}
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to enforce empty lines between class members, you can disable this rule.
+
 ## Compatibility
 
-requirePaddingNewLinesAfterBlocks 
-disallowPaddingNewLinesAfterBlocks 
+
+- requirePaddingNewLinesAfterBlocks 
+
+- disallowPaddingNewLinesAfterBlocks 
 
 ## Related Rules
 
 
+- 
 padded-blocks 
 
+- 
 padding-line-between-statements 
 
-
 ## Version
+
 This rule was introduced in ESLint v4.9.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

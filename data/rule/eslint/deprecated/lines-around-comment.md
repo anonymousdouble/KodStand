@@ -1,40 +1,56 @@
 
+
 # lines-around-comment
 ## Overview
+
 Require empty lines around comments
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 Many style guides require empty lines before or after comments. The primary goal
 of these rules is to make the comments easier to read and improve readability of the code.
+
 ## Rule Details
+
 This rule requires empty lines before and/or after comments. It can be enabled separately for both block (`/*`) and line (`//`) comments. This rule does not apply to comments that appear on the same line as code and does not require empty lines at the beginning or end of a file.
+
 ## Options
+
 This rule has an object option:
 
-`"beforeBlockComment": true` (default) requires an empty line before block comments
-`"afterBlockComment": true` requires an empty line after block comments
-`"beforeLineComment": true` requires an empty line before line comments
-`"afterLineComment": true` requires an empty line after line comments
-`"allowBlockStart": true` allows comments to appear at the start of block statements, function bodies, classes, switch statements, and class static blocks
-`"allowBlockEnd": true` allows comments to appear at the end of block statements, function bodies, classes, switch statements, and class static blocks
-`"allowObjectStart": true` allows comments to appear at the start of object literals
-`"allowObjectEnd": true` allows comments to appear at the end of object literals
-`"allowArrayStart": true` allows comments to appear at the start of array literals
-`"allowArrayEnd": true` allows comments to appear at the end of array literals
-`"allowClassStart": true` allows comments to appear at the start of classes
-`"allowClassEnd": true` allows comments to appear at the end of classes
-`"applyDefaultIgnorePatterns"` enables or disables the default comment patterns to be ignored by the rule
-`"ignorePattern"` custom patterns to be ignored by the rule
-`"afterHashbangComment": true` requires an empty line after hashbang comments
+
+- `"beforeBlockComment": true` (default) requires an empty line before block comments
+
+- `"afterBlockComment": true` requires an empty line after block comments
+
+- `"beforeLineComment": true` requires an empty line before line comments
+
+- `"afterLineComment": true` requires an empty line after line comments
+
+- `"allowBlockStart": true` allows comments to appear at the start of block statements, function bodies, classes, switch statements, and class static blocks
+
+- `"allowBlockEnd": true` allows comments to appear at the end of block statements, function bodies, classes, switch statements, and class static blocks
+
+- `"allowObjectStart": true` allows comments to appear at the start of object literals
+
+- `"allowObjectEnd": true` allows comments to appear at the end of object literals
+
+- `"allowArrayStart": true` allows comments to appear at the start of array literals
+
+- `"allowArrayEnd": true` allows comments to appear at the end of array literals
+
+- `"allowClassStart": true` allows comments to appear at the start of classes
+
+- `"allowClassEnd": true` allows comments to appear at the end of classes
+
+- `"applyDefaultIgnorePatterns"` enables or disables the default comment patterns to be ignored by the rule
+
+- `"ignorePattern"` custom patterns to be ignored by the rule
+
+- `"afterHashbangComment": true` requires an empty line after hashbang comments
 
 ### beforeBlockComment
+
 Examples of incorrect code for this rule with the default `{ "beforeBlockComment": true }` option:
 
 
@@ -45,6 +61,7 @@ var night = "long";
 /* what a great and wonderful day */
 var day = "great"
 ```
+
 Examples of correct code for this rule with the default `{ "beforeBlockComment": true }` option:
 
 
@@ -56,7 +73,9 @@ var night = "long";
 /* what a great and wonderful day */
 var day = "great"
 ```
+
 ### afterBlockComment
+
 Examples of incorrect code for this rule with the `{ "afterBlockComment": true }` option:
 
 
@@ -68,6 +87,7 @@ var night = "long";
 /* what a great and wonderful day */
 var day = "great"
 ```
+
 Examples of correct code for this rule with the `{ "afterBlockComment": true }` option:
 
 
@@ -80,7 +100,9 @@ var night = "long";
 
 var day = "great"
 ```
+
 ### beforeLineComment
+
 Examples of incorrect code for this rule with the `{ "beforeLineComment": true }` option:
 
 
@@ -91,6 +113,7 @@ var night = "long";
 // what a great and wonderful day
 var day = "great"
 ```
+
 Examples of correct code for this rule with the `{ "beforeLineComment": true }` option:
 
 
@@ -102,7 +125,9 @@ var night = "long";
 // what a great and wonderful day
 var day = "great"
 ```
+
 ### afterLineComment
+
 Examples of incorrect code for this rule with the `{ "afterLineComment": true }` option:
 
 
@@ -113,6 +138,7 @@ var night = "long";
 // what a great and wonderful day
 var day = "great"
 ```
+
 Examples of correct code for this rule with the `{ "afterLineComment": true }` option:
 
 
@@ -124,7 +150,9 @@ var night = "long";
 
 var day = "great"
 ```
+
 ### allowBlockStart
+
 Examples of correct code for this rule with the `{ "beforeLineComment": true, "allowBlockStart": true }` options:
 
 
@@ -156,6 +184,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with the `{ "beforeBlockComment": true, "allowBlockStart": true }` options:
 
 
@@ -195,7 +224,9 @@ switch (foo) {
     break;
 }
 ```
+
 ### allowBlockEnd
+
 Examples of correct code for this rule with the `{ "afterLineComment": true, "allowBlockEnd": true }` option:
 
 
@@ -228,6 +259,7 @@ class C {
     // what a great and wonderful day
 }
 ```
+
 Examples of correct code for this rule with the `{ "afterBlockComment": true, "allowBlockEnd": true }` option:
 
 
@@ -272,7 +304,9 @@ switch (foo) {
   /* what a great and wonderful day */
 }
 ```
+
 ### allowClassStart
+
 Examples of incorrect code for this rule with the `{ "beforeLineComment": true, "allowClassStart": false }` option:
 
 
@@ -284,6 +318,7 @@ class foo {
     day() {}
 };
 ```
+
 Examples of correct code for this rule with the `{ "beforeLineComment": true, "allowClassStart": false }` option:
 
 
@@ -296,6 +331,7 @@ class foo {
     day() {}
 };
 ```
+
 Examples of correct code for this rule with the `{ "beforeLineComment": true, "allowClassStart": true }` option:
 
 
@@ -307,6 +343,7 @@ class foo {
     day() {}
 };
 ```
+
 Examples of incorrect code for this rule with the `{ "beforeBlockComment": true, "allowClassStart": false }` option:
 
 
@@ -318,6 +355,7 @@ class foo {
     day() {}
 };
 ```
+
 Examples of correct code for this rule with the `{ "beforeBlockComment": true, "allowClassStart": false }` option:
 
 
@@ -330,6 +368,7 @@ class foo {
     day() {}
 };
 ```
+
 Examples of correct code for this rule with the `{ "beforeBlockComment": true, "allowClassStart": true }` option:
 
 
@@ -341,7 +380,9 @@ class foo {
     day() {}
 };
 ```
+
 ### allowClassEnd
+
 Examples of correct code for this rule with the `{ "afterLineComment": true, "allowClassEnd": true }` option:
 
 
@@ -353,6 +394,7 @@ class foo {
     // what a great and wonderful day
 };
 ```
+
 Examples of correct code for this rule with the `{ "afterBlockComment": true, "allowClassEnd": true }` option:
 
 
@@ -365,7 +407,9 @@ class foo {
     /* what a great and wonderful day */
 };
 ```
+
 ### allowObjectStart
+
 Examples of correct code for this rule with the `{ "beforeLineComment": true, "allowObjectStart": true }` option:
 
 
@@ -387,6 +431,7 @@ const {
     day
 } = {day: "great"};
 ```
+
 Examples of correct code for this rule with the `{ "beforeBlockComment": true, "allowObjectStart": true }` option:
 
 
@@ -408,7 +453,9 @@ const {
     day
 } = {day: "great"};
 ```
+
 ### allowObjectEnd
+
 Examples of correct code for this rule with the `{ "afterLineComment": true, "allowObjectEnd": true }` option:
 
 
@@ -430,6 +477,7 @@ const {
     // what a great and wonderful day
 } = {day: "great"};
 ```
+
 Examples of correct code for this rule with the `{ "afterBlockComment": true, "allowObjectEnd": true }` option:
 
 
@@ -454,7 +502,9 @@ const {
     /* what a great and wonderful day */
 } = {day: "great"};
 ```
+
 ### allowArrayStart
+
 Examples of correct code for this rule with the `{ "beforeLineComment": true, "allowArrayStart": true }` option:
 
 
@@ -472,6 +522,7 @@ const [
     someDay
 ] = ["great", "not great"];
 ```
+
 Examples of correct code for this rule with the `{ "beforeBlockComment": true, "allowArrayStart": true }` option:
 
 
@@ -489,7 +540,9 @@ const [
     someDay
 ] = ["great", "not great"];
 ```
+
 ### allowArrayEnd
+
 Examples of correct code for this rule with the `{ "afterLineComment": true, "allowArrayEnd": true }` option:
 
 
@@ -507,6 +560,7 @@ const [
     // what a great and wonderful day
 ] = ["great", "not great"];
 ```
+
 Examples of correct code for this rule with the `{ "afterBlockComment": true, "allowArrayEnd": true }` option:
 
 
@@ -526,8 +580,11 @@ const [
     /* what a great and wonderful day */
 ] = ["great", "not great"];
 ```
+
 ### ignorePattern
+
 By default this rule ignores comments starting with the following words: `eslint`, `jshint`, `jslint`, `istanbul`, `global`, `exported`, `jscs`. To ignore more comments in addition to the defaults, set the `ignorePattern` option to a string pattern that will be passed to the RegExp constructor .
+
 Examples of correct code for the `ignorePattern` option:
 
 
@@ -543,6 +600,7 @@ bar();
 foo();
 /* a valid comment using pragma in it */
 ```
+
 Examples of incorrect code for the `ignorePattern` option:
 
 
@@ -552,8 +610,11 @@ Examples of incorrect code for the `ignorePattern` option:
 1 + 1;
 /* something else */
 ```
+
 ### applyDefaultIgnorePatterns
+
 Default ignore patterns are applied even when `ignorePattern` is provided. If you want to omit default patterns, set this option to `false`.
+
 Examples of correct code for the `{ "applyDefaultIgnorePatterns": false }` option:
 
 
@@ -563,6 +624,7 @@ Examples of correct code for the `{ "applyDefaultIgnorePatterns": false }` optio
 foo();
 /* a valid comment using pragma in it */
 ```
+
 Examples of incorrect code for the `{ "applyDefaultIgnorePatterns": false }` option:
 
 
@@ -573,7 +635,9 @@ foo();
 /* eslint mentioned in comment */
 
 ```
+
 ### afterHashbangComment
+
 Examples of incorrect code for this rule with the `{ "afterHashbangComment": true }` option:
 
 
@@ -583,6 +647,7 @@ var day = "great"
 
 /*eslint lines-around-comment: ["error", { "afterHashbangComment": true }] */
 ```
+
 Examples of correct code for this rule with the `{ "afterHashbangComment": true }` option:
 
 
@@ -593,20 +658,28 @@ var day = "great"
 
 /*eslint lines-around-comment: ["error", { "afterHashbangComment": true }] */
 ```
+
 ## When Not To Use It
+
 Many people enjoy a terser code style and don’t mind comments bumping up against code. If you fall into that category this rule is not for you.
+
 ## Related Rules
 
 
+- 
 space-before-blocks 
 
+- 
 spaced-comment 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.22.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,16 +1,19 @@
 
+
 # require-await
 ## Overview
+
 Disallow async functions which have no `await` expression
-
-
 
 Asynchronous functions in JavaScript behave differently than other functions in two important ways:
 
-The return value is always a `Promise`.
-You can use the `await` operator inside of them.
+
+- The return value is always a `Promise`.
+
+- You can use the `await` operator inside of them.
 
 The primary reason to use asynchronous functions is typically to use the `await` operator, such as this:
+
 
 ```json
 async function fetchData(processDataItem) {
@@ -20,10 +23,15 @@ async function fetchData(processDataItem) {
     return data.map(processDataItem);
 }
 ```
+
 Asynchronous functions that don’t use `await` might not need to be asynchronous functions and could be the unintentional result of refactoring.
+
 Note: this rule ignores async generator functions. This is because generators yield rather than return a value and async generators might yield all the values of another async generator without ever actually needing to use await.
+
 ## Rule Details
+
 This rule warns async functions which have no `await` expression.
+
 Examples of incorrect code for this rule:
 
 
@@ -38,6 +46,7 @@ bar(async () => {
     doSomething();
 });
 ```
+
 Examples of correct code for this rule:
 
 
@@ -63,8 +72,11 @@ bar(() => {
 // Allow empty functions.
 async function noop() {}
 ```
+
 ## When Not To Use It
+
 Asynchronous functions are designed to work with promises such that throwing an error will cause a promise’s rejection handler (such as `catch()`) to be called. For example:
+
 
 ```json
 async function fail() {
@@ -75,18 +87,25 @@ fail().catch(error => {
     console.log(error.message);
 });
 ```
+
 In this case, the `fail()` function throws an error that is intended to be caught by the `catch()` handler assigned later. Converting the `fail()` function into a synchronous function would require the call to `fail()` to be refactored to use a `try-catch` statement instead of a promise.
+
 If you are throwing an error inside of an asynchronous function for this purpose, then you may want to disable this rule.
+
 ## Related Rules
 
 
+- 
 require-yield 
 
-
 ## Version
+
 This rule was introduced in ESLint v3.11.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,30 +1,37 @@
 
+
 # function-paren-newline
 ## Overview
+
 Enforce consistent line breaks inside function parentheses
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 Many style guides require or disallow newlines inside of function parentheses.
+
 ## Rule Details
+
 This rule enforces consistent line breaks inside parentheses of function parameters or arguments.
+
 ### Options
+
 This rule has a single option, which can either be a string or an object.
 
-`"always"` requires line breaks inside all function parentheses.
-`"never"` disallows line breaks inside all function parentheses.
-`"multiline"` (default) requires linebreaks inside function parentheses if any of the parameters/arguments have a line break between them. Otherwise, it disallows linebreaks.
-`"multiline-arguments"` works like `multiline` but allows linebreaks inside function parentheses if there is only one parameter/argument.
-`"consistent"` requires consistent usage of linebreaks for each pair of parentheses. It reports an error if one parenthesis in the pair has a linebreak inside it and the other parenthesis does not.
-`{ "minItems": value }` requires linebreaks inside function parentheses if the number of parameters/arguments is at least `value`. Otherwise, it disallows linebreaks.
+
+- `"always"` requires line breaks inside all function parentheses.
+
+- `"never"` disallows line breaks inside all function parentheses.
+
+- `"multiline"` (default) requires linebreaks inside function parentheses if any of the parameters/arguments have a line break between them. Otherwise, it disallows linebreaks.
+
+- `"multiline-arguments"` works like `multiline` but allows linebreaks inside function parentheses if there is only one parameter/argument.
+
+- `"consistent"` requires consistent usage of linebreaks for each pair of parentheses. It reports an error if one parenthesis in the pair has a linebreak inside it and the other parenthesis does not.
+
+- `{ "minItems": value }` requires linebreaks inside function parentheses if the number of parameters/arguments is at least `value`. Otherwise, it disallows linebreaks.
 
 Example configurations:
+
 
 ```json
 {
@@ -34,6 +41,7 @@ Example configurations:
 }
 ```
 
+
 ```json
 {
   "rules": {
@@ -41,6 +49,7 @@ Example configurations:
   }
 }
 ```
+
 Examples of incorrect code for this rule with the `"always"` option:
 
 
@@ -55,6 +64,7 @@ var qux = (bar, baz) => {};
 
 foo(bar, baz);
 ```
+
 Examples of correct code for this rule with the `"always"` option:
 
 
@@ -80,6 +90,7 @@ foo(
   baz
 );
 ```
+
 Examples of incorrect code for this rule with the `"never"` option:
 
 
@@ -105,6 +116,7 @@ foo(
   baz
 );
 ```
+
 Examples of correct code for this rule with the `"never"` option:
 
 
@@ -125,6 +137,7 @@ foo(bar, baz);
 foo(bar,
   baz);
 ```
+
 Examples of incorrect code for this rule with the default `"multiline"` option:
 
 
@@ -152,6 +165,7 @@ foo(
   }
 );
 ```
+
 Examples of correct code for this rule with the default `"multiline"` option:
 
 
@@ -179,6 +193,7 @@ foo(function() {
   return baz;
 });
 ```
+
 Examples of incorrect code for this rule with the `"consistent"` option:
 
 
@@ -206,6 +221,7 @@ foo(
     return baz;
   });
 ```
+
 Examples of correct code for this rule with the `"consistent"` option:
 
 
@@ -232,6 +248,7 @@ foo(
   }
 );
 ```
+
 Examples of incorrect code for this rule with the `"multiline-arguments"` option:
 
 
@@ -259,6 +276,7 @@ foo(
   baz
 );
 ```
+
 Examples of correct code for this rule with the consistent `"multiline-arguments"` option:
 
 
@@ -282,6 +300,7 @@ foo(
   }
 );
 ```
+
 Examples of incorrect code for this rule with the `{ "minItems": 3 }` option:
 
 
@@ -309,6 +328,7 @@ foo(
   baz
 );
 ```
+
 Examples of correct code for this rule with the `{ "minItems": 3 }` option:
 
 
@@ -333,12 +353,19 @@ foo(
   bar, baz, qux
 );
 ```
+
 ## When Not To Use It
+
 If don’t want to enforce consistent linebreaks inside function parentheses, do not turn on this rule.
+
 ## Version
+
 This rule was introduced in ESLint v4.6.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

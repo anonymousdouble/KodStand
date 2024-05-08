@@ -1,18 +1,20 @@
 
+
 # no-unmodified-loop-condition
 ## Overview
+
 Disallow unmodified loop conditions
-
-
 
 Variables in a loop condition often are modified in the loop.
 If not, it’s possibly a mistake.
+
 
 ```json
 while (node) {
     doSomething(node);
 }
 ```
+
 
 ```json
 while (node) {
@@ -20,13 +22,17 @@ while (node) {
     node = node.parent;
 }
 ```
+
 ## Rule Details
+
 This rule finds references which are inside of loop conditions, then checks the
 variables of those references are modified in the loop.
+
 If a reference is inside of a binary expression or a ternary expression, this rule checks the result of
 the expression instead.
 If a reference is inside of a dynamic expression (e.g. `CallExpression`,
 `YieldExpression`, …), this rule ignores it.
+
 Examples of incorrect code for this rule:
 
 
@@ -48,6 +54,7 @@ while (node !== root) {
     doSomething(node);
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -86,12 +93,19 @@ while (check(obj)) {
     doSomething(obj);
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to notified about references inside of loop conditions, then it’s safe to disable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v2.0.0-alpha-2.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

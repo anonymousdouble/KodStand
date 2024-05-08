@@ -1,20 +1,17 @@
 
+
 # keyword-spacing
 ## Overview
+
 Enforce consistent spacing before and after keywords
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 Keywords are syntax elements of JavaScript, such as `try` and `if`.
 These keywords have special meaning to the language and so often appear in a different color in code editors.
 As an important part of the language, style guides often refer to the spacing that should be used around keywords.
 For example, you might have a style guide that says keywords should be always surrounded by spaces, which would mean `if-else` statements must look like this:
+
 
 ```json
 if (foo) {
@@ -23,20 +20,32 @@ if (foo) {
     // ...
 }
 ```
+
 Of course, you could also have a style guide that disallows spaces around keywords.
+
 However, if you want to enforce the style of spacing between the `function` keyword and the following opening parenthesis, please refer to space-before-function-paren .
+
 ## Rule Details
+
 This rule enforces consistent spacing around keywords and keyword-like tokens: `as` (in module declarations), `async` (of async functions), `await` (of await expressions), `break`, `case`, `catch`, `class`, `const`, `continue`, `debugger`, `default`, `delete`, `do`, `else`, `export`, `extends`, `finally`, `for`, `from` (in module declarations), `function`, `get` (of getters), `if`, `import`, `in` (in for-in statements), `let`, `new`, `of` (in for-of statements), `return`, `set` (of setters), `static`, `super`, `switch`, `this`, `throw`, `try`, `typeof`, `var`, `void`, `while`, `with`, and `yield`. This rule is designed carefully not to conflict with other spacing rules: it does not apply to spacing where other rules report problems.
+
 ## Options
+
 This rule has an object option:
 
-`"before": true` (default) requires at least one space before keywords
-`"before": false` disallows spaces before keywords
-`"after": true` (default) requires at least one space after keywords
-`"after": false` disallows spaces after keywords
-`"overrides"` allows overriding spacing style for specified keywords
+
+- `"before": true` (default) requires at least one space before keywords
+
+- `"before": false` disallows spaces before keywords
+
+- `"after": true` (default) requires at least one space after keywords
+
+- `"after": false` disallows spaces after keywords
+
+- `"overrides"` allows overriding spacing style for specified keywords
 
 ### before
+
 Examples of incorrect code for this rule with the default `{ "before": true }` option:
 
 
@@ -51,6 +60,7 @@ if (foo) {
     //...
 }
 ```
+
 Examples of correct code for this rule with the default `{ "before": true }` option:
 
 
@@ -106,6 +116,7 @@ if (10+this.foo<= this.bar) {}
 // Avoid conflict with `jsx-curly-spacing`
 let f = <A foo={this.foo} bar={function(){}} />
 ```
+
 Examples of incorrect code for this rule with the `{ "before": false }` option:
 
 
@@ -120,6 +131,7 @@ if (foo) {
     //...
 }
 ```
+
 Examples of correct code for this rule with the `{ "before": false }` option:
 
 
@@ -134,7 +146,9 @@ if (foo) {
     //...
 }
 ```
+
 ### after
+
 Examples of incorrect code for this rule with the default `{ "after": true }` option:
 
 
@@ -149,6 +163,7 @@ if(foo) {
     //...
 }
 ```
+
 Examples of correct code for this rule with the default `{ "after": true }` option:
 
 
@@ -216,6 +231,7 @@ function* qux(a) {
 // Avoid conflict with `jsx-curly-spacing`
 let e = <A foo={this.foo} bar={function(){}} />
 ```
+
 Examples of incorrect code for this rule with the `{ "after": false }` option:
 
 
@@ -230,6 +246,7 @@ if (foo) {
     //...
 }
 ```
+
 Examples of correct code for this rule with the `{ "after": false }` option:
 
 
@@ -244,7 +261,9 @@ if(foo) {
     //...
 }
 ```
+
 ### overrides
+
 Examples of correct code for this rule with the `{ "overrides": { "if": { "after": false }, "for": { "after": false }, "while": { "after": false }, "static": { "after": false }, "as": { "after": false } } }` option:
 
 
@@ -279,12 +298,19 @@ class C {
 
 export { C as"my class" };
 ```
+
 ## When Not To Use It
+
 If you don’t want to enforce consistency on keyword spacing, then it’s safe to disable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v2.0.0-beta.1.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,32 +1,36 @@
 
+
 # curly
 ## Overview
+
 Enforce consistent brace style for all control statements
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 JavaScript allows the omission of curly braces when a block contains only one statement. However, it is considered by many to be best practice to never omit curly braces around blocks, even when they are optional, because it can lead to bugs and reduces code clarity. So the following:
+
 
 ```json
 if (foo) foo++;
 ```
+
 Can be rewritten as:
+
 
 ```json
 if (foo) {
     foo++;
 }
 ```
+
 There are, however, some who prefer to only use braces when there is more than one statement to be executed.
+
 ## Rule Details
+
 This rule is aimed at preventing bugs and increasing code clarity by ensuring that block statements are wrapped in curly braces. It will warn when it encounters blocks that omit curly braces.
+
 ## Options
+
 ### all
+
 Examples of incorrect code for the default `"all"` option:
 
 
@@ -42,6 +46,7 @@ if (foo) {
     baz();
 } else qux();
 ```
+
 Examples of correct code for the default `"all"` option:
 
 
@@ -62,8 +67,11 @@ if (foo) {
     qux();
 }
 ```
+
 ### multi
+
 By default, this rule warns whenever `if`, `else`, `for`, `while`, or `do` are used without block statements as their body. However, you can specify that block statements should be used only when there are multiple statements in the block and warn when there is only one statement in the block.
+
 Examples of incorrect code for the `"multi"` option:
 
 
@@ -87,6 +95,7 @@ for (var i=0; i < items.length; i++) {
     doSomething();
 }
 ```
+
 Examples of correct code for the `"multi"` option:
 
 
@@ -102,8 +111,11 @@ while (true) {
     doSomethingElse();
 }
 ```
+
 ### multi-line
+
 Alternatively, you can relax the rule to allow brace-less single-line `if`, `else if`, `else`, `for`, `while`, or `do`, while still enforcing the use of curly braces for other instances.
+
 Examples of incorrect code for the `"multi-line"` option:
 
 
@@ -119,6 +131,7 @@ if (foo) foo(
   bar,
   baz);
 ```
+
 Examples of correct code for the `"multi-line"` option:
 
 
@@ -148,8 +161,11 @@ while (true) {
     doSomethingElse();
 }
 ```
+
 ### multi-or-nest
+
 You can use another configuration that forces brace-less `if`, `else if`, `else`, `for`, `while`, or `do` if their body contains only one single-line statement. And forces braces in all other cases.
+
 Examples of incorrect code for the `"multi-or-nest"` option:
 
 
@@ -180,6 +196,7 @@ for (var i = 0; foo; i++) {
     doSomething();
 }
 ```
+
 Examples of correct code for the `"multi-or-nest"` option:
 
 
@@ -209,7 +226,9 @@ while (true)
 for (var i = 0; foo; i++)
     doSomething();
 ```
+
 For single-line statements preceded by a comment, braces are allowed but not required.
+
 Examples of additional correct code for the `"multi-or-nest"` option:
 
 
@@ -225,9 +244,12 @@ if (foo) {
     bar();
 }
 ```
+
 ### consistent
+
 When using any of the `multi*` options, you can add an option to enforce all bodies of a `if`,
 `else if` and `else` chain to be with or without braces.
+
 Examples of incorrect code for the `"multi", "consistent"` options:
 
 
@@ -259,6 +281,7 @@ if (foo) {
     foo++;
 }
 ```
+
 Examples of correct code for the `"multi", "consistent"` options:
 
 
@@ -290,12 +313,19 @@ if (foo)
     foo++;
 
 ```
+
 ## When Not To Use It
+
 If you have no strict conventions about when to use block statements and when not to, you can safely disable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v0.0.2.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

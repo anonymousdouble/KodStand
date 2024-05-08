@@ -1,28 +1,34 @@
 
+
 # no-empty-function
 ## Overview
+
 Disallow empty functions
-
-
 
 Empty functions can reduce readability because readers need to guess whether it’s intentional or not.
 So writing a clear comment for empty functions is a good practice.
+
 
 ```json
 function foo() {
     // do nothing.
 }
 ```
+
 Especially, the empty block of arrow functions might be confusing developers.
 It’s very similar to an empty object literal.
+
 
 ```json
 list.map(() => {});   // This is a block, would return undefined.
 list.map(() => ({})); // This is an empty object.
 ```
+
 ## Rule Details
+
 This rule is aimed at eliminating empty functions.
 A function will not be considered a problem if it contains a comment.
+
 Examples of incorrect code for this rule:
 
 
@@ -74,6 +80,7 @@ class A {
     static set foo(value) {}
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -165,25 +172,37 @@ class A {
     }
 }
 ```
+
 ## Options
+
 This rule has an option to allow specific kinds of functions to be empty.
 
-`allow` (`string[]`) - A list of kind to allow empty functions. List items are some of the following strings. An empty array (`[]`) by default.
 
-`"functions"` - Normal functions.
-`"arrowFunctions"` - Arrow functions.
-`"generatorFunctions"` - Generator functions.
-`"methods"` - Class methods and method shorthands of object literals.
-`"generatorMethods"` - Class methods and method shorthands of object literals with generator.
-`"getters"` - Getters.
-`"setters"` - Setters.
-`"constructors"` - Class constructors.
-`"asyncFunctions"` - Async functions.
-`"asyncMethods"` - Async class methods and method shorthands of object literals.
+- `allow` (`string[]`) - A list of kind to allow empty functions. List items are some of the following strings. An empty array (`[]`) by default.
 
 
+- `"functions"` - Normal functions.
+
+- `"arrowFunctions"` - Arrow functions.
+
+- `"generatorFunctions"` - Generator functions.
+
+- `"methods"` - Class methods and method shorthands of object literals.
+
+- `"generatorMethods"` - Class methods and method shorthands of object literals with generator.
+
+- `"getters"` - Getters.
+
+- `"setters"` - Setters.
+
+- `"constructors"` - Class constructors.
+
+- `"asyncFunctions"` - Async functions.
+
+- `"asyncMethods"` - Async class methods and method shorthands of object literals.
 
 ### allow: functions
+
 Examples of correct code for the `{ "allow": ["functions"] }` option:
 
 
@@ -198,7 +217,9 @@ var obj = {
     foo: function() {}
 };
 ```
+
 ### allow: arrowFunctions
+
 Examples of correct code for the `{ "allow": ["arrowFunctions"] }` option:
 
 
@@ -208,7 +229,9 @@ Examples of correct code for the `{ "allow": ["arrowFunctions"] }` option:
 
 var foo = () => {};
 ```
+
 ### allow: generatorFunctions
+
 Examples of correct code for the `{ "allow": ["generatorFunctions"] }` option:
 
 
@@ -224,7 +247,9 @@ var obj = {
     foo: function*() {}
 };
 ```
+
 ### allow: methods
+
 Examples of correct code for the `{ "allow": ["methods"] }` option:
 
 
@@ -241,7 +266,9 @@ class A {
     static foo() {}
 }
 ```
+
 ### allow: generatorMethods
+
 Examples of correct code for the `{ "allow": ["generatorMethods"] }` option:
 
 
@@ -258,7 +285,9 @@ class A {
     static *foo() {}
 }
 ```
+
 ### allow: getters
+
 Examples of correct code for the `{ "allow": ["getters"] }` option:
 
 
@@ -275,7 +304,9 @@ class A {
     static get foo() {}
 }
 ```
+
 ### allow: setters
+
 Examples of correct code for the `{ "allow": ["setters"] }` option:
 
 
@@ -292,7 +323,9 @@ class A {
     static set foo(value) {}
 }
 ```
+
 ### allow: constructors
+
 Examples of correct code for the `{ "allow": ["constructors"] }` option:
 
 
@@ -304,7 +337,9 @@ class A {
     constructor() {}
 }
 ```
+
 ### allow: asyncFunctions
+
 Examples of correct code for the `{ "allow": ["asyncFunctions"] }` options:
 
 
@@ -314,7 +349,9 @@ Examples of correct code for the `{ "allow": ["asyncFunctions"] }` options:
 
 async function a(){}
 ```
+
 ### allow: asyncMethods
+
 Examples of correct code for the `{ "allow": ["asyncMethods"] }` options:
 
 
@@ -331,18 +368,25 @@ class A {
     static async foo() {}
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to be notified about empty functions, then it’s safe to disable this rule.
+
 ## Related Rules
 
 
+- 
 no-empty 
 
-
 ## Version
+
 This rule was introduced in ESLint v2.0.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

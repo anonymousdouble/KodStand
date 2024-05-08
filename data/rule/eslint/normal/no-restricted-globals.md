@@ -1,19 +1,25 @@
 
+
 # no-restricted-globals
 ## Overview
+
 Disallow specified global variables
-
-
 
 Disallowing usage of specific global variables can be useful if you want to allow a set of global
 variables by enabling an environment, but still want to disallow some of those.
+
 For instance, early Internet Explorer versions exposed the current DOM event as a global variable
 `event`, but using this variable has been considered as a bad practice for a long time. Restricting
 this will make sure this variable isn’t used in browser code.
+
 ## Rule Details
+
 This rule allows you to specify global variable names that you don’t want to use in your application.
+
 ## Options
+
 This rule takes a list of strings, where each string is a global to be restricted:
+
 
 ```json
 {
@@ -22,7 +28,9 @@ This rule takes a list of strings, where each string is a global to be restricte
     }
 }
 ```
+
 Alternatively, the rule also accepts objects, where the global name and an optional custom message are specified:
+
 
 ```json
 {
@@ -41,6 +49,7 @@ Alternatively, the rule also accepts objects, where the global name and an optio
     }
 }
 ```
+
 Examples of incorrect code for sample `"event", "fdescribe"` global variable names:
 
 
@@ -55,6 +64,7 @@ function onClick() {
 fdescribe("foo", function() {
 });
 ```
+
 Examples of correct code for a sample `"event"` global variable name:
 
 
@@ -66,12 +76,14 @@ import event from "event-module";
 ```
 
 
+
 ```json
 /*global event*/
 /*eslint no-restricted-globals: ["error", "event"]*/
 
 var event = 1;
 ```
+
 Examples of incorrect code for a sample `"event"` global variable name, along with a custom error message:
 
 
@@ -84,18 +96,24 @@ function onClick() {
 }
 ```
 
+
 ## Related Rules
 
 
+- 
 no-restricted-properties 
 
+- 
 no-restricted-syntax 
 
-
 ## Version
+
 This rule was introduced in ESLint v2.3.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,17 +1,21 @@
 
+
 # no-alert
 ## Overview
+
 Disallow the use of `alert`, `confirm`, and `prompt`
 
-
-
 JavaScript’s `alert`, `confirm`, and `prompt` functions are widely considered to be obtrusive as UI elements and should be replaced by a more appropriate custom UI implementation. Furthermore, `alert` is often used while debugging code, which should be removed before deployment to production.
+
 
 ```json
 alert("here!");
 ```
+
 ## Rule Details
+
 This rule is aimed at catching debugging code that should be removed and popup UI elements that should be replaced with less obtrusive, custom UIs. As such, it will warn when it encounters `alert`, `prompt`, and `confirm` function calls which are not shadowed.
+
 Examples of incorrect code for this rule:
 
 
@@ -24,6 +28,7 @@ confirm("Are you sure?");
 
 prompt("What's your name?", "John Doe");
 ```
+
 Examples of correct code for this rule:
 
 
@@ -42,18 +47,24 @@ function foo() {
 }
 ```
 
+
 ## Related Rules
 
 
+- 
 no-console 
 
+- 
 no-debugger 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.0.5.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

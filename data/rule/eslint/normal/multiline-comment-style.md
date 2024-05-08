@@ -1,26 +1,29 @@
 
+
 # multiline-comment-style
 ## Overview
+
 Enforce a particular style for multiline comments
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 Many style guides require a particular style for comments that span multiple lines. For example, some style guides prefer the use of a single block comment for multiline comments, whereas other style guides prefer consecutive line comments.
+
 ## Rule Details
+
 This rule aims to enforce a particular style for multiline comments.
+
 ### Options
+
 This rule has a string option, which can have one of the following values:
 
-`"starred-block"` (default): Disallows consecutive line comments in favor of block comments. Additionally, requires block comments to have an aligned `*` character before each line.
-`"bare-block"`: Disallows consecutive line comments in favor of block comments, and disallows block comments from having a `"*"` character before each line. This option ignores JSDoc comments.
-`"separate-lines"`: Disallows block comments in favor of consecutive line comments. By default, this option ignores JSDoc comments. To also apply this rule to JSDoc comments, set the `checkJSDoc` option to `true`.
+
+- `"starred-block"` (default): Disallows consecutive line comments in favor of block comments. Additionally, requires block comments to have an aligned `*` character before each line.
+
+- `"bare-block"`: Disallows consecutive line comments in favor of block comments, and disallows block comments from having a `"*"` character before each line. This option ignores JSDoc comments.
+
+- `"separate-lines"`: Disallows block comments in favor of consecutive line comments. By default, this option ignores JSDoc comments. To also apply this rule to JSDoc comments, set the `checkJSDoc` option to `true`.
 
 The rule always ignores directive comments such as `/* eslint-disable */`.
+
 Examples of incorrect code for this rule with the default `"starred-block"` option:
 
 
@@ -53,6 +56,7 @@ foo();
 */
 
 ```
+
 Examples of correct code for this rule with the default `"starred-block"` option:
 
 
@@ -67,6 +71,7 @@ foo();
 
 // single-line comment
 ```
+
 Examples of incorrect code for this rule with the `"bare-block"` option:
 
 
@@ -83,6 +88,7 @@ foo();
  */
 foo();
 ```
+
 Examples of correct code for this rule with the `"bare-block"` option:
 
 
@@ -93,6 +99,7 @@ Examples of correct code for this rule with the `"bare-block"` option:
    calls foo() */
 foo();
 ```
+
 Examples of incorrect code for this rule with the `"separate-lines"` option:
 
 
@@ -111,6 +118,7 @@ foo();
 foo();
 
 ```
+
 Examples of correct code for this rule with the `"separate-lines"` option:
 
 
@@ -122,6 +130,7 @@ Examples of correct code for this rule with the `"separate-lines"` option:
 foo();
 
 ```
+
 Examples of incorrect code for this rule with the `"separate-lines"` option and `checkJSDoc` set to `true`:
 
 
@@ -136,6 +145,7 @@ Examples of incorrect code for this rule with the `"separate-lines"` option and 
 foo();
 
 ```
+
 Examples of correct code for this rule with the `"separate-lines"` option and `checkJSDoc` set to `true`:
 
 
@@ -147,12 +157,19 @@ Examples of correct code for this rule with the `"separate-lines"` option and `c
 foo();
 
 ```
+
 ## When Not To Use It
+
 If you don’t want to enforce a particular style for multiline comments, you can disable the rule.
+
 ## Version
+
 This rule was introduced in ESLint v4.10.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

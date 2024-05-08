@@ -1,13 +1,16 @@
 
+
 # sort-keys
 ## Overview
+
 Require object keys to be sorted
 
-
-
 When declaring multiple properties, some developers prefer to sort property names alphabetically to more easily find and/or diff necessary properties at a later time. Others feel that it adds complexity and becomes burden to maintain.
+
 ## Rule Details
+
 This rule checks all property definitions of object expressions and verifies that all variables are sorted alphabetically.
+
 Examples of incorrect code for this rule:
 
 
@@ -30,6 +33,7 @@ const S = Symbol("s")
 let obj5 = {a: 1, ["c"]: 3, b: 2};
 let obj6 = {a: 1, [S]: 3, b: 2};
 ```
+
 Examples of correct code for this rule:
 
 
@@ -59,39 +63,52 @@ let obj10 = {a: 1, [tag`c`]: 3, b: 2};
 // This rule does not report unsorted properties that are separated by a spread property.
 let obj11 = {b: 1, ...c, a: 2};
 ```
+
 ## Options
+
 
 ```json
 {
     "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false, "minKeys": 2}]
 }
 ```
+
 The 1st option is `"asc"` or `"desc"`.
 
-`"asc"` (default) - enforce properties to be in ascending order.
-`"desc"` - enforce properties to be in descending order.
+
+- `"asc"` (default) - enforce properties to be in ascending order.
+
+- `"desc"` - enforce properties to be in descending order.
 
 The 2nd option is an object which has 3 properties.
 
-`caseSensitive` - if `true`, enforce properties to be in case-sensitive order. Default is `true`.
-`minKeys` - Specifies the minimum number of keys that an object should have in order for the object’s unsorted keys to produce an error. Default is `2`, which means by default all objects with unsorted keys will result in lint errors.
-`natural` - if `true`, enforce properties to be in natural order. Default is `false`. Natural Order compares strings containing combination of letters and numbers in the way a human being would sort. It basically sorts numerically, instead of sorting alphabetically. So the number 10 comes after the number 3 in Natural Sorting.
-`allowLineSeparatedGroups` - if `true`, the rule allows to group object keys through line breaks. In other words, a blank line after a property will reset the sorting of keys. Default is `false`.
+
+- `caseSensitive` - if `true`, enforce properties to be in case-sensitive order. Default is `true`.
+
+- `minKeys` - Specifies the minimum number of keys that an object should have in order for the object’s unsorted keys to produce an error. Default is `2`, which means by default all objects with unsorted keys will result in lint errors.
+
+- `natural` - if `true`, enforce properties to be in natural order. Default is `false`. Natural Order compares strings containing combination of letters and numbers in the way a human being would sort. It basically sorts numerically, instead of sorting alphabetically. So the number 10 comes after the number 3 in Natural Sorting.
+
+- `allowLineSeparatedGroups` - if `true`, the rule allows to group object keys through line breaks. In other words, a blank line after a property will reset the sorting of keys. Default is `false`.
 
 Example for a list:
+
 With `natural` as true, the ordering would be
 1
 3
 6
 8
 10
+
 With `natural` as false, the ordering would be
 1
 10
 3
 6
 8
+
 ### desc
+
 Examples of incorrect code for the `"desc"` option:
 
 
@@ -108,6 +125,7 @@ let obj3 = {C: 1, b: 3, a: 2};
 // Non-natural order by default.
 let obj4 = {10: b, 2: c, 1: a};
 ```
+
 Examples of correct code for the `"desc"` option:
 
 
@@ -124,7 +142,9 @@ let obj3 = {b: 3, a: 2, C: 1};
 // Non-natural order by default.
 let obj4 = {2: c, 10: b, 1: a};
 ```
+
 ### insensitive
+
 Examples of incorrect code for the `{caseSensitive: false}` option:
 
 
@@ -135,6 +155,7 @@ Examples of incorrect code for the `{caseSensitive: false}` option:
 let obj1 = {a: 1, c: 3, C: 4, b: 2};
 let obj2 = {a: 1, C: 3, c: 4, b: 2};
 ```
+
 Examples of correct code for the `{caseSensitive: false}` option:
 
 
@@ -145,7 +166,9 @@ Examples of correct code for the `{caseSensitive: false}` option:
 let obj1 = {a: 1, b: 2, c: 3, C: 4};
 let obj2 = {a: 1, b: 2, C: 3, c: 4};
 ```
+
 ### natural
+
 Examples of incorrect code for the `{natural: true}` option:
 
 
@@ -155,6 +178,7 @@ Examples of incorrect code for the `{natural: true}` option:
 
 let obj = {1: a, 10: c, 2: b};
 ```
+
 Examples of correct code for the `{natural: true}` option:
 
 
@@ -164,7 +188,9 @@ Examples of correct code for the `{natural: true}` option:
 
 let obj = {1: a, 2: b, 10: c};
 ```
+
 ### minKeys
+
 Examples of incorrect code for the `{minKeys: 4}` option:
 
 
@@ -189,6 +215,7 @@ let obj2 = {
     5: 'e',
 };
 ```
+
 Examples of correct code for the `{minKeys: 4}` option:
 
 
@@ -209,7 +236,9 @@ let obj2 = {
     1: 'a',
 };
 ```
+
 ### allowLineSeparatedGroups
+
 Examples of incorrect code for the `{allowLineSeparatedGroups: true}` option:
 
 
@@ -252,6 +281,7 @@ let obj4 = {
     , a: 2
 };
 ```
+
 Examples of correct code for the `{allowLineSeparatedGroups: true}` option:
 
 
@@ -322,24 +352,33 @@ var obj7 = {
     c: 3
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to notify about properties’ order, then it’s safe to disable this rule.
+
 ## Compatibility
 
-JSCS: validateOrderInObjectKeys 
+
+- JSCS: validateOrderInObjectKeys 
 
 ## Related Rules
 
 
+- 
 sort-imports 
 
+- 
 sort-vars 
 
-
 ## Version
+
 This rule was introduced in ESLint v3.3.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

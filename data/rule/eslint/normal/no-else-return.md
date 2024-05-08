@@ -1,16 +1,12 @@
 
+
 # no-else-return
 ## Overview
+
 Disallow `else` blocks after `return` statements in `if` statements
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 If an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
+
 
 ```json
 function foo() {
@@ -21,15 +17,22 @@ function foo() {
     }
 }
 ```
+
 ## Rule Details
+
 This rule is aimed at highlighting an unnecessary block of code following an `if` containing a return statement. As such, it will warn when it encounters an `else` following a chain of `if`s, all of them containing a `return` statement.
+
 ## Options
+
 This rule has an object option:
 
-`allowElseIf: true` (default) allows `else if` blocks after a return
-`allowElseIf: false` disallows `else if` blocks after a return
+
+- `allowElseIf: true` (default) allows `else if` blocks after a return
+
+- `allowElseIf: false` disallows `else if` blocks after a return
 
 ### allowElseIf: true
+
 Examples of incorrect code for this rule:
 
 
@@ -87,6 +90,7 @@ function foo5() {
     }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -129,7 +133,9 @@ function foo4() {
     }
 }
 ```
+
 ### allowElseIf: false
+
 Examples of incorrect code for this rule:
 
 
@@ -144,6 +150,7 @@ function foo() {
     }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -161,10 +168,15 @@ function foo() {
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,19 +1,18 @@
 
+
 # prefer-const
 ## Overview
+
 Require `const` declarations for variables that are never reassigned after declared
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 If a variable is never reassigned, using the `const` declaration is better.
+
 `const` declaration tells readers, “this variable is never reassigned,” reducing cognitive load and improving maintainability.
+
 ## Rule Details
+
 This rule is aimed at flagging variables that are declared using `let` keyword, but never reassigned after the initial assignment.
+
 Examples of incorrect code for this rule:
 
 
@@ -46,6 +45,7 @@ for (let a of [1, 2, 3]) {
     console.log(a);
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -114,7 +114,9 @@ const h = {};
 var i = 3;
 console.log(i);
 ```
+
 ## Options
+
 
 ```json
 {
@@ -124,12 +126,16 @@ console.log(i);
     }]
 }
 ```
+
 ### destructuring
+
 The kind of the way to address variables in destructuring.
 There are 2 values:
 
-`"any"` (default) - If any variables in destructuring should be `const`, this rule warns for those variables.
-`"all"` - If all variables in destructuring should be `const`, this rule warns the variables. Otherwise, ignores them.
+
+- `"any"` (default) - If any variables in destructuring should be `const`, this rule warns for those variables.
+
+- `"all"` - If all variables in destructuring should be `const`, this rule warns the variables. Otherwise, ignores them.
 
 Examples of incorrect code for the default `{"destructuring": "any"}` option:
 
@@ -141,6 +147,7 @@ Examples of incorrect code for the default `{"destructuring": "any"}` option:
 let {a, b} = obj;    /*error 'b' is never reassigned, use 'const' instead.*/
 a = a + 1;
 ```
+
 Examples of correct code for the default `{"destructuring": "any"}` option:
 
 
@@ -157,6 +164,7 @@ let {c, d} = obj;
 c = c + 1;
 d = d + 1;
 ```
+
 Examples of incorrect code for the `{"destructuring": "all"}` option:
 
 
@@ -168,6 +176,7 @@ Examples of incorrect code for the `{"destructuring": "all"}` option:
 let {a, b} = obj;    /*error 'a' is never reassigned, use 'const' instead.
                              'b' is never reassigned, use 'const' instead.*/
 ```
+
 Examples of correct code for the `{"destructuring": "all"}` option:
 
 
@@ -179,10 +188,13 @@ Examples of correct code for the `{"destructuring": "all"}` option:
 let {a, b} = obj;
 a = a + 1;
 ```
+
 ### ignoreReadBeforeAssign
+
 This is an option to avoid conflicting with `no-use-before-define` rule (without `"nofunc"` option).
 If `true` is specified, this rule will ignore variables that are read between the declaration and the first assignment.
 Default is `false`.
+
 Examples of correct code for the `{"ignoreReadBeforeAssign": true}` option:
 
 
@@ -198,6 +210,7 @@ function initialize() {
 }
 timer = setInterval(initialize, 100);
 ```
+
 Examples of correct code for the default `{"ignoreReadBeforeAssign": false}` option:
 
 
@@ -212,20 +225,28 @@ function initialize() {
     }
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to be notified about variables that are never reassigned after initial assignment, you can safely disable this rule.
+
 ## Related Rules
 
 
+- 
 no-var 
 
+- 
 no-use-before-define 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.23.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

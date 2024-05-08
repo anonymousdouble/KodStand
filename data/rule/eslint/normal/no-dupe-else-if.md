@@ -1,16 +1,12 @@
 
+
 # no-dupe-else-if
 ## Overview
+
 Disallow duplicate conditions in if-else-if chains
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 `if-else-if` chains are commonly used when there is a need to execute only one branch (or at most one branch) out of several possible branches, based on certain conditions.
+
 
 ```json
 if (a) {
@@ -21,7 +17,9 @@ if (a) {
     baz();
 }
 ```
+
 Two identical test conditions in the same chain are almost always a mistake in the code. Unless there are side effects in the expressions, a duplicate will evaluate to the same `true` or `false` value as the identical expression earlier in the chain, meaning that its branch can never execute.
+
 
 ```json
 if (a) {
@@ -32,9 +30,13 @@ if (a) {
     baz();
 }
 ```
+
 In the above example, `baz()` can never execute. Obviously, `baz()` could be executed only when `b` evaluates to `true`, but in that case `bar()` would be executed instead, since it’s earlier in the chain.
+
 ## Rule Details
+
 This rule disallows duplicate conditions in the same `if-else-if` chain.
+
 Examples of incorrect code for this rule:
 
 
@@ -71,6 +73,7 @@ if (n === 1) {
     quuux();
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -107,7 +110,9 @@ if (n === 1) {
     quuux();
 }
 ```
+
 This rule can also detect some cases where the conditions are not identical, but the branch can never execute due to the logic of `||` and `&&` operators.
+
 Examples of additional incorrect code for this rule:
 
 
@@ -154,7 +159,9 @@ if (a) {
     baz();
 }
 ```
+
 Please note that this rule does not compare conditions from the chain with conditions inside statements, and will not warn in the cases such as follows:
+
 
 ```json
 if (a) {
@@ -171,20 +178,28 @@ if (a) {
     }
 }
 ```
+
 ## When Not To Use It
+
 In rare cases where you really need identical test conditions in the same chain, which necessarily means that the expressions in the chain are causing and relying on side effects, you will have to turn this rule off.
+
 ## Related Rules
 
 
+- 
 no-duplicate-case 
 
+- 
 no-lonely-if 
 
-
 ## Version
+
 This rule was introduced in ESLint v6.7.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

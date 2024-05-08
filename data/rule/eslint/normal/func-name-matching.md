@@ -1,12 +1,14 @@
 
+
 # func-name-matching
 ## Overview
+
 Require function names to match the name of the variable or property to which they are assigned
 
-
-
 ## Rule Details
+
 This rule requires function names to match the name of the variable or property to which they are assigned. The rule will ignore property assignments where the property name is a literal that is not a valid identifier in the ECMAScript version specified in your configuration (default ES5).
+
 Examples of incorrect code for this rule:
 
 
@@ -26,6 +28,7 @@ class C {
 ```
 
 
+
 ```json
 /*eslint func-name-matching: ["error", "never"] */
 
@@ -40,6 +43,7 @@ class C {
     foo = function foo() {};
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -87,6 +91,7 @@ module['exports'] = function foo(name) {};
 ```
 
 
+
 ```json
 /*eslint func-name-matching: ["error", "never"] */
 /*eslint-env es6*/
@@ -128,10 +133,15 @@ class D {
 module.exports = function foo(name) {};
 module['exports'] = function foo(name) {};
 ```
+
 ## Options
+
 This rule takes an optional string of `"always"` or `"never"` (when omitted, it defaults to `"always"`), and an optional options object with two properties `considerPropertyDescriptor` and `includeCommonJSModuleExports`.
+
 ### considerPropertyDescriptor
+
 A boolean value that defaults to `false`. If `considerPropertyDescriptor` is set to true, the check will take into account the use of `Object.create`, `Object.defineProperty`, `Object.defineProperties`, and `Reflect.defineProperty`.
+
 Examples of correct code for the `{ considerPropertyDescriptor: true }` option:
 
 
@@ -144,6 +154,7 @@ Object.defineProperty(obj, 'bar', {value: function bar() {}});
 Object.defineProperties(obj, {baz:{value: function baz() {} }});
 Reflect.defineProperty(obj, 'foo', {value: function foo() {}});
 ```
+
 Examples of incorrect code for the `{ considerPropertyDescriptor: true }` option:
 
 
@@ -156,8 +167,11 @@ Object.defineProperty(obj, 'bar', {value: function baz() {}});
 Object.defineProperties(obj, {baz:{value: function foo() {} }});
 Reflect.defineProperty(obj, 'foo', {value: function value() {}});
 ```
+
 ### includeCommonJSModuleExports
+
 A boolean value that defaults to `false`. If `includeCommonJSModuleExports` is set to true, `module.exports` and `module["exports"]` will be checked by this rule.
+
 Examples of incorrect code for the `{ includeCommonJSModuleExports: true }` option:
 
 
@@ -168,16 +182,24 @@ Examples of incorrect code for the `{ includeCommonJSModuleExports: true }` opti
 module.exports = function foo(name) {};
 module['exports'] = function foo(name) {};
 ```
+
 ## When Not To Use It
+
 Do not use this rule if you want to allow named functions to have different names from the variable or property to which they are assigned.
+
 ## Compatibility
 
-JSCS: requireMatchingFunctionName 
+
+- JSCS: requireMatchingFunctionName 
 
 ## Version
+
 This rule was introduced in ESLint v3.8.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,26 +1,28 @@
 
+
 # no-extra-parens
 ## Overview
+
 Disallow unnecessary parentheses
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 This rule restricts the use of parentheses to only where they are necessary.
+
 ## Rule Details
+
 This rule always ignores extra parentheses around the following:
 
-RegExp literals such as `(/abc/).test(var)` to avoid conflicts with the wrap-regex  rule
-immediately-invoked function expressions (also known as IIFEs) such as `var x = (function () {})();` and `var x = (function () {}());` to avoid conflicts with the wrap-iife  rule
-arrow function arguments to avoid conflicts with the arrow-parens  rule
+
+- RegExp literals such as `(/abc/).test(var)` to avoid conflicts with the wrap-regex  rule
+
+- immediately-invoked function expressions (also known as IIFEs) such as `var x = (function () {})();` and `var x = (function () {}());` to avoid conflicts with the wrap-iife  rule
+
+- arrow function arguments to avoid conflicts with the arrow-parens  rule
 
 Problems reported by this rule can be fixed automatically, except when removing the parentheses would create a new directive, because that could change the semantics of the code.
 For example, the following script prints `object` to the console, but if the parentheses around `"use strict"` were removed, it would print `undefined` instead.
+
 
 ```json
 <!--
@@ -35,27 +37,43 @@ function test() {
 
 test();
 ```
+
 In this case, the rule will not try to remove the parentheses around `"use strict"` but will still report them as a problem.
+
 ## Options
+
 This rule has a string option:
 
-`"all"` (default) disallows unnecessary parentheses around any expression
-`"functions"` disallows unnecessary parentheses only around function expressions
+
+- `"all"` (default) disallows unnecessary parentheses around any expression
+
+- `"functions"` disallows unnecessary parentheses only around function expressions
 
 This rule has an object option for exceptions to the `"all"` option:
 
-`"conditionalAssign": false` allows extra parentheses around assignments in conditional test expressions
-`"returnAssign": false` allows extra parentheses around assignments in `return` statements
-`"nestedBinaryExpressions": false` allows extra parentheses in nested binary expressions
-`"ternaryOperandBinaryExpressions": false` allows extra parentheses around binary expressions that are operands of ternary `?:`
-`"ignoreJSX": "none|all|multi-line|single-line"` allows extra parentheses around no/all/multi-line/single-line JSX components. Defaults to `none`.
-`"enforceForArrowConditionals": false` allows extra parentheses around ternary expressions which are the body of an arrow function
-`"enforceForSequenceExpressions": false` allows extra parentheses around sequence expressions
-`"enforceForNewInMemberExpressions": false` allows extra parentheses around `new` expressions in member expressions
-`"enforceForFunctionPrototypeMethods": false` allows extra parentheses around immediate `.call` and `.apply` method calls on function expressions and around function expressions in the same context.
-`"allowParensAfterCommentPattern": "any-string-pattern"` allows extra parentheses preceded by a comment that matches a regular expression.
+
+- `"conditionalAssign": false` allows extra parentheses around assignments in conditional test expressions
+
+- `"returnAssign": false` allows extra parentheses around assignments in `return` statements
+
+- `"nestedBinaryExpressions": false` allows extra parentheses in nested binary expressions
+
+- `"ternaryOperandBinaryExpressions": false` allows extra parentheses around binary expressions that are operands of ternary `?:`
+
+- `"ignoreJSX": "none|all|multi-line|single-line"` allows extra parentheses around no/all/multi-line/single-line JSX components. Defaults to `none`.
+
+- `"enforceForArrowConditionals": false` allows extra parentheses around ternary expressions which are the body of an arrow function
+
+- `"enforceForSequenceExpressions": false` allows extra parentheses around sequence expressions
+
+- `"enforceForNewInMemberExpressions": false` allows extra parentheses around `new` expressions in member expressions
+
+- `"enforceForFunctionPrototypeMethods": false` allows extra parentheses around immediate `.call` and `.apply` method calls on function expressions and around function expressions in the same context.
+
+- `"allowParensAfterCommentPattern": "any-string-pattern"` allows extra parentheses preceded by a comment that matches a regular expression.
 
 ### all
+
 Examples of incorrect code for this rule with the default `"all"` option:
 
 
@@ -84,6 +102,7 @@ class B {
     x = (y + z);
 }
 ```
+
 Examples of correct code for this rule with the default `"all"` option:
 
 
@@ -114,7 +133,9 @@ class B {
     x = y + z;
 }
 ```
+
 ### conditionalAssign
+
 Examples of correct code for this rule with the `"all"` and `{ "conditionalAssign": false }` options:
 
 
@@ -129,7 +150,9 @@ do; while ((foo = bar()))
 
 for (;(a = b););
 ```
+
 ### returnAssign
+
 Examples of correct code for this rule with the `"all"` and `{ "returnAssign": false }` options:
 
 
@@ -148,7 +171,9 @@ b => (b = 1);
 
 b => b ? (c = d) : (c = e);
 ```
+
 ### nestedBinaryExpressions
+
 Examples of correct code for this rule with the `"all"` and `{ "nestedBinaryExpressions": false }` options:
 
 
@@ -159,7 +184,9 @@ x = a || (b && c);
 x = a + (b * c);
 x = (a * b) / c;
 ```
+
 ### ternaryOperandBinaryExpressions
+
 Examples of correct code for this rule with the `"all"` and `{ "ternaryOperandBinaryExpressions": false }` options:
 
 
@@ -174,7 +201,9 @@ foo ? (bar || baz) : qux;
 
 foo ? bar : (baz || qux);
 ```
+
 ### ignoreJSX
+
 Examples of correct code for this rule with the `all` and `{ "ignoreJSX": "all" }` options:
 
 
@@ -187,6 +216,7 @@ const ThatComponent = (
     />
 )
 ```
+
 Examples of incorrect code for this rule with the `all` and `{ "ignoreJSX": "multi-line" }` options:
 
 
@@ -195,6 +225,7 @@ Examples of incorrect code for this rule with the `all` and `{ "ignoreJSX": "mul
 const ThisComponent = (<div />)
 const ThatComponent = (<div><p /></div>)
 ```
+
 Examples of correct code for this rule with the `all` and `{ "ignoreJSX": "multi-line" }` options:
 
 
@@ -211,6 +242,7 @@ const ThatComponent = (
     />
 )
 ```
+
 Examples of incorrect code for this rule with the `all` and `{ "ignoreJSX": "single-line" }` options:
 
 
@@ -227,6 +259,7 @@ const ThatComponent = (
     />
 )
 ```
+
 Examples of correct code for this rule with the `all` and `{ "ignoreJSX": "single-line" }` options:
 
 
@@ -235,7 +268,9 @@ Examples of correct code for this rule with the `all` and `{ "ignoreJSX": "singl
 const ThisComponent = (<div />)
 const ThatComponent = (<div><p /></div>)
 ```
+
 ### enforceForArrowConditionals
+
 Examples of correct code for this rule with the `"all"` and `{ "enforceForArrowConditionals": false }` options:
 
 
@@ -245,7 +280,9 @@ Examples of correct code for this rule with the `"all"` and `{ "enforceForArrowC
 const b = a => 1 ? 2 : 3;
 const d = c => (1 ? 2 : 3);
 ```
+
 ### enforceForSequenceExpressions
+
 Examples of correct code for this rule with the `"all"` and `{ "enforceForSequenceExpressions": false }` options:
 
 
@@ -258,7 +295,9 @@ if ((val = foo(), val < 10)) {}
 
 while ((val = foo(), val < 10));
 ```
+
 ### enforceForNewInMemberExpressions
+
 Examples of correct code for this rule with the `"all"` and `{ "enforceForNewInMemberExpressions": false }` options:
 
 
@@ -271,7 +310,9 @@ const quux = (new Bar())[baz];
 
 (new Bar()).doSomething();
 ```
+
 ### enforceForFunctionPrototypeMethods
+
 Examples of correct code for this rule with the `"all"` and `{ "enforceForFunctionPrototypeMethods": false }` options:
 
 
@@ -286,8 +327,11 @@ const baz = (function () {}.call());
 
 const quux = (function () {}.apply());
 ```
+
 ### allowParensAfterCommentPattern
+
 To make this rule allow extra parentheses preceded by specific comments, set this option to a string pattern that will be passed to the RegExp constructor .
+
 Examples of correct code for this rule with the `"all"` and `{ "allowParensAfterCommentPattern": "@type" }` options:
 
 
@@ -308,7 +352,9 @@ if (foo) {
     (bar).prop = false;
 }
 ```
+
 ### functions
+
 Examples of incorrect code for this rule with the `"functions"` option:
 
 
@@ -319,6 +365,7 @@ Examples of incorrect code for this rule with the `"functions"` option:
 
 var y = (function () {return 1;});
 ```
+
 Examples of correct code for this rule with the `"functions"` option:
 
 
@@ -342,33 +389,32 @@ a = (b * c);
 typeof (a);
 ```
 
+
 ## Related Rules
 
 
+- 
 arrow-parens 
 
+- 
 no-cond-assign 
 
+- 
 no-return-assign 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.1.4.
+
 ## Further Reading
-
-
-
-
 
 Operator precedence - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

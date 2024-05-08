@@ -1,19 +1,25 @@
 
+
 # id-length
 ## Overview
+
 Enforce minimum and maximum identifier lengths
 
-
-
 Very short identifier names like `e`, `x`, `_t` or very long ones like `hashGeneratorResultOutputContainerObject` can make code harder to read and potentially less maintainable. To prevent this, one may enforce a minimum and/or maximum identifier length.
+
 
 ```json
 var x = 5; // too short; difficult to understand its purpose without context
 ```
+
 ## Rule Details
+
 This rule enforces a minimum and/or maximum identifier length convention.
+
 This rule counts graphemes  instead of using String length .
+
 ## Options
+
 Examples of incorrect code for this rule with the default options:
 
 
@@ -45,6 +51,7 @@ var { x } = {};
 var { prop: a} = {};
 ({ prop: obj.x } = {});
 ```
+
 Examples of correct code for this rule with the default options:
 
 
@@ -83,16 +90,24 @@ var { a: prop } = {};
 var data = { "x": 1 };  // excused because of quotes
 data["y"] = 3;  // excused because of calculated property access
 ```
+
 This rule has an object option:
 
-`"min"` (default: 2) enforces a minimum identifier length
-`"max"` (default: Infinity) enforces a maximum identifier length
-`"properties": always` (default) enforces identifier length convention for property names
-`"properties": never` ignores identifier length convention for property names
-`"exceptions"` allows an array of specified identifier names
-`"exceptionPatterns"` array of strings representing regular expression patterns, allows identifiers that match any of the patterns.
+
+- `"min"` (default: 2) enforces a minimum identifier length
+
+- `"max"` (default: Infinity) enforces a maximum identifier length
+
+- `"properties": always` (default) enforces identifier length convention for property names
+
+- `"properties": never` ignores identifier length convention for property names
+
+- `"exceptions"` allows an array of specified identifier names
+
+- `"exceptionPatterns"` array of strings representing regular expression patterns, allows identifiers that match any of the patterns.
 
 ### min
+
 Examples of incorrect code for this rule with the `{ "min": 4 }` option:
 
 
@@ -119,6 +134,7 @@ var [x] = arr;
 var { prop: [x]} = {};
 ({ prop: obj.x } = {});
 ```
+
 Examples of correct code for this rule with the `{ "min": 4 }` option:
 
 
@@ -149,7 +165,9 @@ var { a: longName } = {};
 var data = { "x": 1 };  // excused because of quotes
 data["y"] = 3;  // excused because of calculated property access
 ```
+
 ### max
+
 Examples of incorrect code for this rule with the `{ "max": 10 }` option:
 
 
@@ -169,6 +187,7 @@ try {
 (reallyLongArgName) => { return !reallyLongArgName; };
 var [reallyLongFirstElementName] = arr;
 ```
+
 Examples of correct code for this rule with the `{ "max": 10 }` option:
 
 
@@ -188,7 +207,9 @@ try {
 (arg) => { return !arg; };
 var [first] = arr;
 ```
+
 ### properties
+
 Examples of correct code for this rule with the `{ "properties": "never" }` option:
 
 
@@ -200,7 +221,9 @@ var myObj = { a: 1 };
 ({ a: obj.x.y.z } = {});
 ({ prop: obj.i } = {});
 ```
+
 ### exceptions
+
 Examples of additional correct code for this rule with the `{ "exceptions": ["x", "y", "z", "ζ"] }` option:
 
 
@@ -222,7 +245,9 @@ var [x] = arr;
 const { z } = foo;
 const { a: ζ } = foo;
 ```
+
 ### exceptionPatterns
+
 Examples of additional correct code for this rule with the `{ "exceptionPatterns": ["E|S", "[x-z]"] }` option:
 
 
@@ -245,22 +270,30 @@ const { y } = foo;
 const { a: z } = foo;
 ```
 
+
 ## Related Rules
 
 
+- 
 max-len 
 
+- 
 new-cap 
 
+- 
 func-names 
 
+- 
 camelcase 
 
-
 ## Version
+
 This rule was introduced in ESLint v1.0.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

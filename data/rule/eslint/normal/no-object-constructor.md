@@ -1,19 +1,17 @@
 
+
 # no-object-constructor
 ## Overview
+
 Disallow calls to the `Object` constructor without an argument
-
-
-💡 hasSuggestions
-
-            Some problems reported by this rule are manually fixable by editor suggestions 
-
-
 
 Use of the `Object` constructor to construct a new empty object is generally discouraged in favor of object literal notation because of conciseness and because the `Object` global may be redefined.
 The exception is when the `Object` constructor is used to intentionally wrap a specified value which is passed as an argument.
+
 ## Rule Details
+
 This rule disallows calling the `Object` constructor without an argument.
+
 Examples of incorrect code for this rule:
 
 
@@ -24,6 +22,7 @@ Object();
 
 new Object();
 ```
+
 Examples of correct code for this rule:
 
 
@@ -38,20 +37,28 @@ const isObject = value => value === Object(value);
 
 const createObject = Object => new Object();
 ```
+
 ## When Not To Use It
+
 If you wish to allow the use of the `Object` constructor, you can safely turn this rule off.
+
 ## Related Rules
 
 
+- 
 no-array-constructor 
 
+- 
 no-new-wrappers 
 
-
 ## Version
+
 This rule was introduced in ESLint v8.50.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

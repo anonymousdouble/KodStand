@@ -1,38 +1,52 @@
 
+
 # func-names
 ## Overview
+
 Require or disallow named `function` expressions
 
-
-
 A pattern that’s becoming more common is to give function expressions names to aid in debugging. For example:
+
 
 ```json
 Foo.prototype.bar = function bar() {};
 ```
+
 Adding the second `bar` in the above example is optional.  If you leave off the function name then when the function throws an exception you are likely to get something similar to `anonymous function` in the stack trace.  If you provide the optional name for a function expression then you will get the name of the function expression in the stack trace.
+
 ## Rule Details
+
 This rule can enforce or disallow the use of named function expressions.
+
 ## Options
+
 This rule has a string option:
 
-`"always"` (default) requires function expressions to have a name
-`"as-needed"` requires function expressions to have a name, if the name isn’t assigned automatically per the ECMAScript specification.
-`"never"` disallows named function expressions, except in recursive functions, where a name is needed
+
+- `"always"` (default) requires function expressions to have a name
+
+- `"as-needed"` requires function expressions to have a name, if the name isn’t assigned automatically per the ECMAScript specification.
+
+- `"never"` disallows named function expressions, except in recursive functions, where a name is needed
 
 This rule has an object option:
 
-`"generators": "always" | "as-needed" | "never"`
 
-`"always"` require named generators
-`"as-needed"` require named generators if the name isn’t assigned automatically per the ECMAScript specification.
-`"never"` disallow named generators where possible.
+- `"generators": "always" | "as-needed" | "never"`
 
 
+- `"always"` require named generators
+
+- `"as-needed"` require named generators if the name isn’t assigned automatically per the ECMAScript specification.
+
+- `"never"` disallow named generators where possible.
 
 When a value for `generators` is not provided the behavior for generator functions falls back to the base option.
+
 Please note that `"always"` and `"as-needed"` require function expressions and function declarations in `export default` declarations to have a name.
+
 ### always
+
 Examples of incorrect code for this rule with the default `"always"` option:
 
 
@@ -51,6 +65,7 @@ const cat = {
 
 export default function() {}
 ```
+
 Examples of correct code for this rule with the default `"always"` option:
 
 
@@ -69,8 +84,11 @@ const cat = {
 
 export default function foo() {}
 ```
+
 ### as-needed
+
 ECMAScript 6 introduced a `name` property on all functions. The value of `name` is determined by evaluating the code around the function to see if a name can be inferred. For example, a function assigned to a variable will automatically have a `name` property equal to the name of the variable. The value of `name` is then used in stack traces for easier debugging.
+
 Examples of incorrect code for this rule with the `"as-needed"` option:
 
 
@@ -85,6 +103,7 @@ Foo.prototype.bar = function() {};
 
 export default function() {}
 ```
+
 Examples of correct code for this rule with the `"as-needed"` option:
 
 
@@ -110,7 +129,9 @@ quux ??= function() {};
 
 export default function foo() {}
 ```
+
 ### never
+
 Examples of incorrect code for this rule with the `"never"` option:
 
 
@@ -123,6 +144,7 @@ Foo.prototype.bar = function bar() {};
     // ...
 }())
 ```
+
 Examples of correct code for this rule with the `"never"` option:
 
 
@@ -135,7 +157,9 @@ Foo.prototype.bar = function() {};
     // ...
 }())
 ```
+
 ### generators
+
 Examples of incorrect code for this rule with the `"always", { "generators": "as-needed" }` options:
 
 
@@ -146,6 +170,7 @@ Examples of incorrect code for this rule with the `"always", { "generators": "as
     // ...
 }())
 ```
+
 Examples of correct code for this rule with the `"always", { "generators": "as-needed" }` options:
 
 
@@ -154,6 +179,7 @@ Examples of correct code for this rule with the `"always", { "generators": "as-n
 
 var foo = function*() {};
 ```
+
 Examples of incorrect code for this rule with the `"always", { "generators": "never" }` options:
 
 
@@ -162,6 +188,7 @@ Examples of incorrect code for this rule with the `"always", { "generators": "ne
 
 var foo = bar(function *baz() {});
 ```
+
 Examples of correct code for this rule with the `"always", { "generators": "never" }` options:
 
 
@@ -170,6 +197,7 @@ Examples of correct code for this rule with the `"always", { "generators": "neve
 
 var foo = bar(function *() {});
 ```
+
 Examples of incorrect code for this rule with the `"as-needed", { "generators": "never" }` options:
 
 
@@ -178,6 +206,7 @@ Examples of incorrect code for this rule with the `"as-needed", { "generators": 
 
 var foo = bar(function *baz() {});
 ```
+
 Examples of correct code for this rule with the `"as-needed", { "generators": "never" }` options:
 
 
@@ -186,6 +215,7 @@ Examples of correct code for this rule with the `"as-needed", { "generators": "n
 
 var foo = bar(function *() {});
 ```
+
 Examples of incorrect code for this rule with the `"never", { "generators": "always" }` options:
 
 
@@ -194,6 +224,7 @@ Examples of incorrect code for this rule with the `"never", { "generators": "alw
 
 var foo = bar(function *() {});
 ```
+
 Examples of correct code for this rule with the `"never", { "generators": "always" }` options:
 
 
@@ -202,40 +233,30 @@ Examples of correct code for this rule with the `"never", { "generators": "alway
 
 var foo = bar(function *baz() {});
 ```
+
 ## Compatibility
 
-JSCS: requireAnonymousFunctions 
-JSCS: disallowAnonymousFunctions 
+
+- JSCS: requireAnonymousFunctions 
+
+- JSCS: disallowAnonymousFunctions 
 
 ## Version
+
 This rule was introduced in ESLint v0.4.0.
+
 ## Further Reading
-
-
-
-
 
 Functions Explained - Mark Daggett’s Blog 
  web.archive.org
 
-
-
-
-
-
-
-
-
-
 The names of functions in ES6 
  2ality.com
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

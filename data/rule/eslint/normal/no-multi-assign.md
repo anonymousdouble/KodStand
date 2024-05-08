@@ -1,11 +1,12 @@
 
+
 # no-multi-assign
 ## Overview
+
 Disallow use of chained assignment expressions
 
-
-
 Chaining the assignment of variables can lead to unexpected results and be difficult to read.
+
 
 ```json
 (function() {
@@ -14,8 +15,11 @@ Chaining the assignment of variables can lead to unexpected results and be diffi
 })();
 console.log(bar);        // This will output 1 since `bar` is not scoped.
 ```
+
 ## Rule Details
+
 This rule disallows using multiple assignments within a single statement.
+
 Examples of incorrect code for this rule:
 
 
@@ -36,6 +40,7 @@ class Foo {
 
 a = b = "quux";
 ```
+
 Examples of correct code for this rule:
 
 
@@ -60,12 +65,16 @@ class Foo {
 a = "quux";
 b = "quux";
 ```
+
 ## Options
+
 This rule has an object option:
 
-`"ignoreNonDeclaration"`: When set to `true`, the rule allows chains that don’t include initializing a variable in a declaration or initializing a class field. Default is `false`.
+
+- `"ignoreNonDeclaration"`: When set to `true`, the rule allows chains that don’t include initializing a variable in a declaration or initializing a class field. Default is `false`.
 
 ### ignoreNonDeclaration
+
 Examples of correct code for the `{ "ignoreNonDeclaration": true }` option:
 
 
@@ -80,6 +89,7 @@ const x = {};
 const y = {};
 x.one = y.one = 1;
 ```
+
 Examples of incorrect code for the `{ "ignoreNonDeclaration": true }` option:
 
 
@@ -95,16 +105,21 @@ class Foo {
 }
 ```
 
+
 ## Related Rules
 
 
+- 
 max-statements-per-line 
 
-
 ## Version
+
 This rule was introduced in ESLint v3.14.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,16 +1,20 @@
 
+
 # no-negated-condition
 ## Overview
+
 Disallow negated conditions
 
-
-
 Negated conditions are more difficult to understand. Code can be made more readable by inverting the condition instead.
+
 ## Rule Details
+
 This rule disallows negated conditions in either of the following:
 
-`if` statements which have an `else` branch
-ternary expressions
+
+- `if` statements which have an `else` branch
+
+- ternary expressions
 
 Examples of incorrect code for this rule:
 
@@ -38,6 +42,7 @@ if (a !== b) {
 
 !a ? c : b
 ```
+
 Examples of correct code for this rule:
 
 
@@ -61,10 +66,15 @@ if (a != b) {
 a ? b : c
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v1.6.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

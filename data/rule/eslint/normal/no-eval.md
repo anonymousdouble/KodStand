@@ -1,19 +1,23 @@
 
+
 # no-eval
 ## Overview
+
 Disallow the use of `eval()`
 
-
-
 JavaScript’s `eval()` function is potentially dangerous and is often misused. Using `eval()` on untrusted code can open a program up to several different injection attacks. The use of `eval()` in most contexts can be substituted for a better, alternative approach to a problem.
+
 
 ```json
 var obj = { x: "foo" },
     key = "x",
     value = eval("obj." + key);
 ```
+
 ## Rule Details
+
 This rule is aimed at preventing potentially dangerous, unnecessary, and slow code by disallowing the use of the `eval()` function. As such, it will warn whenever the `eval()` function is used.
+
 Examples of incorrect code for this rule:
 
 
@@ -32,6 +36,7 @@ foo("var a = 0");
 // This `this` is the global object.
 this.eval("var a = 0");
 ```
+
 Example of additional incorrect code for this rule when `browser` environment is set to `true`:
 
 
@@ -41,6 +46,7 @@ Example of additional incorrect code for this rule when `browser` environment is
 
 window.eval("var a = 0");
 ```
+
 Example of additional incorrect code for this rule when `node` environment is set to `true`:
 
 
@@ -50,6 +56,7 @@ Example of additional incorrect code for this rule when `node` environment is se
 
 global.eval("var a = 0");
 ```
+
 Examples of correct code for this rule:
 
 
@@ -79,16 +86,21 @@ class A {
     }
 }
 ```
+
 ## Options
+
 ### allowIndirect
+
 This rule has an option to allow indirect calls to `eval`.
 Indirect calls to `eval` are less dangerous than direct calls to `eval` because they cannot dynamically change the scope. Because of this, they also will not negatively impact performance to the degree of direct `eval`.
+
 
 ```json
 {
     "no-eval": ["error", {"allowIndirect": true}] // default is false
 }
 ```
+
 Example of incorrect code for this rule with the `{"allowIndirect": true}` option:
 
 
@@ -99,6 +111,7 @@ var obj = { x: "foo" },
     key = "x",
     value = eval("obj." + key);
 ```
+
 Examples of correct code for this rule with the `{"allowIndirect": true}` option:
 
 
@@ -114,6 +127,7 @@ this.eval("var a = 0");
 ```
 
 
+
 ```json
 /*eslint no-eval: ["error", {"allowIndirect": true} ]*/
 /*eslint-env browser*/
@@ -122,15 +136,18 @@ window.eval("var a = 0");
 ```
 
 
+
 ```json
 /*eslint no-eval: ["error", {"allowIndirect": true} ]*/
 /*eslint-env node*/
 
 global.eval("var a = 0");
 ```
+
 ## Known Limitations
 
 
+- 
 This rule is warning every `eval()` even if the `eval` is not global’s.
 This behavior is in order to detect calls of direct `eval`. Such as:
 
@@ -143,6 +160,7 @@ module.exports = function(eval) {
 ```
 
 
+- 
 This rule cannot catch renaming the global object. Such as:
 
 ```json
@@ -154,38 +172,25 @@ foo.eval("var a = 0");
 ## Related Rules
 
 
+- 
 no-implied-eval 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.0.2.
+
 ## Further Reading
-
-
-
-
 
 Eval is evil, part one 
  ericlippert.com
 
-
-
-
-
-
-
-
-
-
 How evil is eval? 
  javascriptweblog.wordpress.com
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

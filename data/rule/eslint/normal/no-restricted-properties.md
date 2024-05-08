@@ -1,15 +1,20 @@
 
+
 # no-restricted-properties
 ## Overview
+
 Disallow certain properties on certain objects
 
-
-
 Certain properties on objects may be disallowed in a codebase. This is useful for deprecating an API or restricting usage of a module’s methods. For example, you may want to disallow using `describe.only` when using Mocha or telling people to use `Object.assign` instead of `_.extend`.
+
 ## Rule Details
+
 This rule looks for accessing a given property key on a given object name, either when reading the property’s value or invoking it as a function. You may specify an optional message to indicate an alternative API or a reason for the restriction. This rule applies to both properties accessed by dot notation and destructuring.
+
 ### Options
+
 This rule takes a list of objects, where the object name and property names are specified:
+
 
 ```json
 {
@@ -21,7 +26,9 @@ This rule takes a list of objects, where the object name and property names are 
     }
 }
 ```
+
 Multiple object/property values can be disallowed, and you can specify an optional message:
+
 
 ```json
 {
@@ -37,7 +44,9 @@ Multiple object/property values can be disallowed, and you can specify an option
     }
 }
 ```
+
 If the object name is omitted, the property is disallowed for all objects:
+
 
 ```json
 {
@@ -49,7 +58,9 @@ If the object name is omitted, the property is disallowed for all objects:
     }
 }
 ```
+
 If the property name is omitted, accessing any property of the given object is disallowed:
+
 
 ```json
 {
@@ -61,6 +72,7 @@ If the property name is omitted, accessing any property of the given object is d
     }
 }
 ```
+
 Examples of incorrect code for this rule:
 
 
@@ -76,6 +88,7 @@ disallowedObjectName.disallowedPropertyName(); /*error Disallowed object propert
 ```
 
 
+
 ```json
 /* eslint no-restricted-properties: [2, {
     "property": "__defineGetter__"
@@ -89,6 +102,7 @@ const { __defineGetter__ } = qux();
 ```
 
 
+
 ```json
 /* eslint no-restricted-properties: [2, {
     "object": "require"
@@ -96,6 +110,7 @@ const { __defineGetter__ } = qux();
 
 require.resolve('foo');
 ```
+
 Examples of correct code for this rule:
 
 
@@ -111,6 +126,7 @@ allowedObjectName.disallowedPropertyName();
 ```
 
 
+
 ```json
 /* eslint no-restricted-properties: [2, {
     "object": "require"
@@ -118,20 +134,28 @@ allowedObjectName.disallowedPropertyName();
 
 require('foo');
 ```
+
 ## When Not To Use It
+
 If you don’t have any object/property combinations to restrict, you should not use this rule.
+
 ## Related Rules
 
 
+- 
 no-restricted-globals 
 
+- 
 no-restricted-syntax 
 
-
 ## Version
+
 This rule was introduced in ESLint v3.5.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

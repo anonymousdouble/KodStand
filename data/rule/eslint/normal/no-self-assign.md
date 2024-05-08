@@ -1,24 +1,23 @@
 
+
 # no-self-assign
 ## Overview
+
 Disallow assignments where both sides are exactly the same
-
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
 
 Self assignments have no effect, so probably those are an error due to incomplete refactoring.
 Those indicate that what you should do is still remaining.
+
 
 ```json
 foo = foo;
 [bar, baz] = [bar, qiz];
 ```
+
 ## Rule Details
+
 This rule is aimed at eliminating self assignments.
+
 Examples of incorrect code for this rule:
 
 
@@ -37,6 +36,7 @@ foo &&= foo;
 foo ||= foo;
 foo ??= foo;
 ```
+
 Examples of correct code for this rule:
 
 
@@ -70,8 +70,11 @@ foo |= foo;
 obj[a + b] = obj[a + b];
 obj["a" + "b"] = obj["a" + "b"];
 ```
+
 ## Options
+
 This rule has the option to check properties as well.
+
 
 ```json
 {
@@ -79,9 +82,12 @@ This rule has the option to check properties as well.
 }
 ```
 
-`props` - if this is `true`, `no-self-assign` rule warns self-assignments of properties. Default is `true`.
+
+
+- `props` - if this is `true`, `no-self-assign` rule warns self-assignments of properties. Default is `true`.
 
 ### props
+
 Examples of correct code with the `{ "props": false }` option:
 
 
@@ -94,12 +100,19 @@ obj.a.b = obj.a.b;
 obj["a"] = obj["a"];
 obj[a] = obj[a];
 ```
+
 ## When Not To Use It
+
 If you don’t want to notify about self assignments, then it’s safe to disable this rule.
+
 ## Version
+
 This rule was introduced in ESLint v2.0.0-rc.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

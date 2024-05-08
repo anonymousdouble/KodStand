@@ -1,18 +1,15 @@
 
+
 # padded-blocks
 ## Overview
+
 Require or disallow padding within blocks
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 Some style guides require block statements to start and end with blank lines. The goal is
 to improve readability by visually separating the block content and the surrounding code.
+
 
 ```json
 if (a) {
@@ -21,30 +18,44 @@ if (a) {
 
 }
 ```
+
 Since it’s good to have a consistent code style, you should either always write
 padded blocks or never do it.
+
 ## Rule Details
+
 This rule enforces consistent empty line padding within blocks.
+
 ## Options
+
 This rule has two options, the first one can be a string option or an object option.
 The second one is an object option, it can allow exceptions.
+
 ### First option
+
 String option:
 
-`"always"` (default) requires empty lines at the beginning and ending of block statements, function bodies, class static blocks, classes, and `switch` statements.
-`"never"` disallows empty lines at the beginning and ending of block statements, function bodies, class static blocks, classes, and `switch` statements.
+
+- `"always"` (default) requires empty lines at the beginning and ending of block statements, function bodies, class static blocks, classes, and `switch` statements.
+
+- `"never"` disallows empty lines at the beginning and ending of block statements, function bodies, class static blocks, classes, and `switch` statements.
 
 Object option:
 
-`"blocks"` require or disallow padding within block statements, function bodies, and class static blocks
-`"classes"` require or disallow padding within classes
-`"switches"` require or disallow padding within `switch` statements
+
+- `"blocks"` require or disallow padding within block statements, function bodies, and class static blocks
+
+- `"classes"` require or disallow padding within classes
+
+- `"switches"` require or disallow padding within `switch` statements
 
 ### Second option
 
-`"allowSingleLineBlocks": true` allows single-line blocks
+
+- `"allowSingleLineBlocks": true` allows single-line blocks
 
 ### always
+
 Examples of incorrect code for this rule with the default `"always"` option:
 
 
@@ -79,6 +90,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with the default `"always"` option:
 
 
@@ -115,7 +127,9 @@ class C {
 
 }
 ```
+
 ### never
+
 Examples of incorrect code for this rule with the `"never"` option:
 
 
@@ -155,6 +169,7 @@ class C {
 
 }
 ```
+
 Examples of correct code for this rule with the `"never"` option:
 
 
@@ -176,7 +191,9 @@ class C {
     }
 }
 ```
+
 ### blocks
+
 Examples of incorrect code for this rule with the `{ "blocks": "always" }` option:
 
 
@@ -218,6 +235,7 @@ class C {
 
 }
 ```
+
 Examples of correct code for this rule with the `{ "blocks": "always" }` option:
 
 
@@ -263,6 +281,7 @@ class D {
 
 }
 ```
+
 Examples of incorrect code for this rule with the `{ "blocks": "never" }` option:
 
 
@@ -300,6 +319,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with the `{ "blocks": "never" }` option:
 
 
@@ -329,7 +349,9 @@ class D {
 
 }
 ```
+
 ### classes
+
 Examples of incorrect code for this rule with the `{ "classes": "always" }` option:
 
 
@@ -341,6 +363,7 @@ class  A {
     }
 }
 ```
+
 Examples of correct code for this rule with the `{ "classes": "always" }` option:
 
 
@@ -354,6 +377,7 @@ class  A {
 
 }
 ```
+
 Examples of incorrect code for this rule with the `{ "classes": "never" }` option:
 
 
@@ -367,6 +391,7 @@ class  A {
 
 }
 ```
+
 Examples of correct code for this rule with the `{ "classes": "never" }` option:
 
 
@@ -378,7 +403,9 @@ class  A {
     }
 }
 ```
+
 ### switches
+
 Examples of incorrect code for this rule with the `{ "switches": "always" }` option:
 
 
@@ -389,6 +416,7 @@ switch (a) {
     case 0: foo();
 }
 ```
+
 Examples of correct code for this rule with the `{ "switches": "always" }` option:
 
 
@@ -405,6 +433,7 @@ if (a) {
     b();
 }
 ```
+
 Examples of incorrect code for this rule with the `{ "switches": "never" }` option:
 
 
@@ -417,6 +446,7 @@ switch (a) {
 
 }
 ```
+
 Examples of correct code for this rule with the `{ "switches": "never" }` option:
 
 
@@ -433,7 +463,9 @@ if (a) {
 
 }
 ```
+
 ### always + allowSingleLineBlocks
+
 Examples of incorrect code for this rule with the `"always", {"allowSingleLineBlocks": true}` options:
 
 
@@ -454,6 +486,7 @@ if (a) {
 
 }
 ```
+
 Examples of correct code for this rule with the `"always", {"allowSingleLineBlocks": true}` options:
 
 
@@ -468,20 +501,28 @@ if (a) {
 
 }
 ```
+
 ## When Not To Use It
+
 You can turn this rule off if you are not concerned with the consistency of padding within blocks.
+
 ## Related Rules
 
 
+- 
 lines-between-class-members 
 
+- 
 padding-line-between-statements 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.9.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

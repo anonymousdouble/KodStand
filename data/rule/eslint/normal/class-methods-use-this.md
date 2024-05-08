@@ -1,12 +1,14 @@
 
+
 # class-methods-use-this
 ## Overview
+
 Enforce that class methods utilize `this`
 
-
-
 If a class method does not use `this`, it can sometimes be made into a static function. If you do convert the method into a static function, instances of the class that call that particular method have to be converted to a static call as well (`MyClass.callStaticMethod()`)
+
 It’s possible to have a class method which doesn’t use `this`, such as:
+
 
 ```json
 class A {
@@ -26,7 +28,9 @@ class A {
 let a = new A();
 a.sayHi(); // => "hi"
 ```
+
 In the example above, the `sayHi` method doesn’t use `this`, so we can make it a static method:
+
 
 ```json
 class A {
@@ -45,9 +49,13 @@ class A {
 
 A.sayHi(); // => "hi"
 ```
+
 Also note in the above examples that if you switch a method to a static method, instances of the class that call the static method (`let a = new A(); a.sayHi();`) have to be updated to being a static call (`A.sayHi();`) instead of having the instance of the class call the method
+
 ## Rule Details
+
 This rule is aimed to flag class methods that do not use `this`.
+
 Examples of incorrect code for this rule:
 
 
@@ -61,6 +69,7 @@ class A {
     }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -89,18 +98,25 @@ class C {
     }
 }
 ```
+
 ## Options
+
 This rule has two options:
 
-`"exceptMethods"` allows specified method names to be ignored with this rule.
-`"enforceForClassFields"` enforces that functions used as instance field initializers utilize `this`. (default: `true`)
+
+- `"exceptMethods"` allows specified method names to be ignored with this rule.
+
+- `"enforceForClassFields"` enforces that functions used as instance field initializers utilize `this`. (default: `true`)
 
 ### exceptMethods
+
 
 ```json
 "class-methods-use-this": [<enabled>, { "exceptMethods": [<...exceptions>] }]
 ```
+
 The `"exceptMethods"` option allows you to pass an array of method names for which you would like to ignore warnings. For example, you might have a spec from an external library that requires you to overwrite a method as a regular function (and not as a static method) and does not use `this` inside the function body. In this case, you can add that method to ignore in the warnings.
+
 Examples of incorrect code for this rule when used without `"exceptMethods"`:
 
 
@@ -112,6 +128,7 @@ class A {
     }
 }
 ```
+
 Examples of correct code for this rule when used with exceptMethods:
 
 
@@ -125,12 +142,16 @@ class A {
     }
 }
 ```
+
 ### enforceForClassFields
+
 
 ```json
 "class-methods-use-this": [<enabled>, { "enforceForClassFields": true | false }]
 ```
+
 The `enforceForClassFields` option enforces that arrow functions and function expressions used as instance field initializers utilize `this`. (default: `true`)
+
 Examples of incorrect code for this rule with the `{ "enforceForClassFields": true }` option (default):
 
 
@@ -141,6 +162,7 @@ class A {
     foo = () => {}
 }
 ```
+
 Examples of correct code for this rule with the `{ "enforceForClassFields": true }` option (default):
 
 
@@ -151,6 +173,7 @@ class A {
     foo = () => {this;}
 }
 ```
+
 Examples of correct code for this rule with the `{ "enforceForClassFields": false }` option:
 
 
@@ -162,35 +185,23 @@ class A {
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v3.4.0.
+
 ## Further Reading
-
-
-
-
 
 Classes - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
-
-
-
-
-
 static - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

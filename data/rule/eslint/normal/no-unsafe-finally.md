@@ -1,16 +1,12 @@
 
+
 # no-unsafe-finally
 ## Overview
+
 Disallow control flow statements in `finally` blocks
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 JavaScript suspends the control flow statements of `try` and `catch` blocks until the execution of `finally` block finishes. So, when `return`, `throw`, `break`, or `continue` is used in `finally`, control flow statements inside `try` and `catch` are overwritten, which is considered as unexpected behavior. Such as:
+
 
 ```json
 // We expect this function to return 1;
@@ -27,6 +23,7 @@ JavaScript suspends the control flow statements of `try` and `catch` blocks unti
 // > 3
 ```
 
+
 ```json
 // We expect this function to throw an error, then return
 (() => {
@@ -39,6 +36,7 @@ JavaScript suspends the control flow statements of `try` and `catch` blocks unti
 
 // > 3
 ```
+
 
 ```json
 // We expect this function to throw Try(...) error from the catch block
@@ -55,6 +53,7 @@ JavaScript suspends the control flow statements of `try` and `catch` blocks unti
 // > Uncaught Error: Finally(...)
 ```
 
+
 ```json
 // We expect this function to return 0 from try block.
 (() => {
@@ -68,8 +67,11 @@ JavaScript suspends the control flow statements of `try` and `catch` blocks unti
 
 // > 1
 ```
+
 ## Rule Details
+
 This rule disallows `return`, `throw`, `break`, and `continue` statements inside `finally` blocks. It allows indirect usages, such as in `function` or `class` definitions.
+
 Examples of incorrect code for this rule:
 
 
@@ -87,6 +89,7 @@ let foo = function() {
 ```
 
 
+
 ```json
 /*eslint no-unsafe-finally: "error"*/
 let foo = function() {
@@ -99,6 +102,7 @@ let foo = function() {
     }
 };
 ```
+
 Examples of correct code for this rule:
 
 
@@ -116,6 +120,7 @@ let foo = function() {
 ```
 
 
+
 ```json
 /*eslint no-unsafe-finally: "error"*/
 let foo = function() {
@@ -130,6 +135,7 @@ let foo = function() {
     }
 };
 ```
+
 
 
 ```json
@@ -149,12 +155,19 @@ let foo = function(a) {
     }
 };
 ```
+
 ## When Not To Use It
+
 If you want to allow control flow operations in `finally` blocks, you can turn this rule off.
+
 ## Version
+
 This rule was introduced in ESLint v2.9.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

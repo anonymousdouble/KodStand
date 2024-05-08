@@ -1,12 +1,14 @@
 
+
 # no-process-exit
 ## Overview
+
 Disallow the use of `process.exit()`
 
-
-
 This rule was deprecated in ESLint v7.0.0. Please use the corresponding rule in eslint-plugin-n .
+
 The `process.exit()` method in Node.js is used to immediately stop the Node.js process and exit. This is a dangerous operation because it can occur in any method at any point in time, potentially stopping a Node.js application completely when an error occurs. For example:
+
 
 ```json
 if (somethingBadHappened) {
@@ -14,17 +16,24 @@ if (somethingBadHappened) {
     process.exit(1);
 }
 ```
+
 This code could appear in any module and will stop the entire application when `somethingBadHappened` is truthy. This doesn’t give the application any chance to respond to the error. It’s usually better to throw an error and allow the application to handle it appropriately:
+
 
 ```json
 if (somethingBadHappened) {
     throw new Error("Something bad happened!");
 }
 ```
+
 By throwing an error in this way, other parts of the application have an opportunity to handle the error rather than stopping the application altogether. If the error bubbles all the way up to the process without being handled, then the process will exit and a non-zero exit code will returned, so the end result is the same.
+
 If you are using `process.exit()` only for specifying the exit code, you can set process.exitCode  (introduced in Node.js 0.11.8) instead.
+
 ## Rule Details
+
 This rule aims to prevent the use of `process.exit()` in Node.js JavaScript. As such, it warns whenever `process.exit()` is found in code.
+
 Examples of incorrect code for this rule:
 
 
@@ -34,6 +43,7 @@ Examples of incorrect code for this rule:
 process.exit(1);
 process.exit(0);
 ```
+
 Examples of correct code for this rule:
 
 
@@ -43,12 +53,19 @@ Examples of correct code for this rule:
 Process.exit();
 var exit = process.exit;
 ```
+
 ## When Not To Use It
+
 There may be a part of a Node.js application that is responsible for determining the correct exit code to return upon exiting. In that case, you should turn this rule off to allow proper handling of the exit code.
+
 ## Version
+
 This rule was introduced in ESLint v0.4.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

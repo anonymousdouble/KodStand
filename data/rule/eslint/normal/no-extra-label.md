@@ -1,26 +1,26 @@
 
+
 # no-extra-label
 ## Overview
+
 Disallow unnecessary labels
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 If a loop contains no nested loops or switches, labeling the loop is unnecessary.
+
 
 ```json
 A: while (a) {
     break A;
 }
 ```
+
 You can achieve the same result by removing the label and using `break` or `continue` without a label.
 Probably those labels would confuse developers because they expect labels to jump to further.
+
 ## Rule Details
+
 This rule is aimed at eliminating unnecessary labels.
+
 Examples of incorrect code for this rule:
 
 
@@ -40,6 +40,7 @@ C: switch (a) {
         break C;
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -77,22 +78,31 @@ C: switch (a) {
         break;
 }
 ```
+
 ## When Not To Use It
+
 If you don’t want to be notified about usage of labels, then it’s safe to disable this rule.
+
 ## Related Rules
 
 
+- 
 no-labels 
 
+- 
 no-label-var 
 
+- 
 no-unused-labels 
 
-
 ## Version
+
 This rule was introduced in ESLint v2.0.0-rc.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

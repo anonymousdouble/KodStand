@@ -1,20 +1,25 @@
 
+
 # no-lone-blocks
 ## Overview
+
 Disallow unnecessary nested blocks
 
-
-
 In JavaScript, prior to ES6, standalone code blocks delimited by curly braces do not create a new scope and have no use. For example, these curly braces do nothing to `foo`:
+
 
 ```json
 {
     var foo = bar();
 }
 ```
+
 In ES6, code blocks may create a new scope if a block-level binding (`let` and `const`), a class declaration or a function declaration (in strict mode) are present. A block is not considered redundant in these cases.
+
 ## Rule Details
+
 This rule aims to eliminate unnecessary and potentially confusing blocks at the top level of a script or within other blocks.
+
 Examples of incorrect code for this rule:
 
 
@@ -53,6 +58,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with ES6 environment:
 
 
@@ -101,6 +107,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule with ES6 environment and strict mode via `"parserOptions": { "sourceType": "module" }` in the ESLint configuration or `"use strict"` directive in the code:
 
 
@@ -115,10 +122,15 @@ Examples of correct code for this rule with ES6 environment and strict mode via 
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.4.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

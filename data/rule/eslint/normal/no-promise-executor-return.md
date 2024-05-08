@@ -1,16 +1,12 @@
 
+
 # no-promise-executor-return
 ## Overview
+
 Disallow returning values from Promise executor functions
 
-
-💡 hasSuggestions
-
-            Some problems reported by this rule are manually fixable by editor suggestions 
-
-
-
 The `new Promise` constructor accepts a single argument, called an executor.
+
 
 ```json
 const myPromise = new Promise(function executor(resolve, reject) {
@@ -23,11 +19,17 @@ const myPromise = new Promise(function executor(resolve, reject) {
     });
 });
 ```
+
 The executor function usually initiates some asynchronous operation. Once it is finished, the executor should call `resolve` with the result, or `reject` if an error occurred.
+
 The return value of the executor is ignored. Returning a value from an executor function is a possible error because the returned value cannot be used and it doesn’t affect the promise in any way.
+
 ## Rule Details
+
 This rule disallows returning values from Promise executor functions.
+
 Only `return` without a value is allowed, as it’s a control flow statement.
+
 Examples of incorrect code for this rule:
 
 
@@ -62,6 +64,7 @@ new Promise(() => {
 
 new Promise(r => r(1));
 ```
+
 Examples of correct code for this rule:
 
 
@@ -99,12 +102,16 @@ new Promise(r => { r(1) });
 // or just use Promise.resolve
 Promise.resolve(1);
 ```
+
 ## Options
+
 This rule takes one option, an object, with the following properties:
 
-`allowVoid`: If set to `true` (`false` by default), this rule will allow returning void values.
+
+- `allowVoid`: If set to `true` (`false` by default), this rule will allow returning void values.
 
 ### allowVoid
+
 Examples of correct code for this rule with the `{ "allowVoid": true }` option:
 
 
@@ -136,29 +143,26 @@ new Promise((resolve, reject) => void getSomething((err, data) => {
 new Promise(r => void r(1));
 ```
 
+
 ## Related Rules
 
 
+- 
 no-async-promise-executor 
 
-
 ## Version
+
 This rule was introduced in ESLint v7.3.0.
+
 ## Further Reading
-
-
-
-
 
 Promise - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

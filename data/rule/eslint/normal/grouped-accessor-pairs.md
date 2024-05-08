@@ -1,12 +1,14 @@
 
+
 # grouped-accessor-pairs
 ## Overview
+
 Require grouped accessor pairs in object literals and classes
 
-
-
 A getter and setter for the same property don’t necessarily have to be defined adjacent to each other.
+
 For example, the following statements would create the same object:
+
 
 ```json
 var o = {
@@ -29,12 +31,19 @@ var o = {
     }
 };
 ```
+
 While it is allowed to define the pair for a getter or a setter anywhere in an object or class definition, it’s considered a best practice to group accessor functions for the same property.
+
 In other words, if a property has a getter and a setter, the setter should be defined right after the getter, or vice versa.
+
 ## Rule Details
+
 This rule requires grouped definitions of accessor functions for the same property in object literals, class declarations and class expressions.
+
 Optionally, this rule can also enforce consistent order (`getBeforeSet` or `setBeforeGet`).
+
 This rule does not enforce the existence of the pair for a getter or a setter. See accessor-pairs  if you also want to enforce getter/setter pairs.
+
 Examples of incorrect code for this rule:
 
 
@@ -81,6 +90,7 @@ const Bar = class {
     }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -127,14 +137,20 @@ const Bar = class {
     b(){}
 }
 ```
+
 ## Options
+
 This rule has a string option:
 
-`"anyOrder"` (default) does not enforce order.
-`"getBeforeSet"` if a property has both getter and setter, requires the getter to be defined before the setter.
-`"setBeforeGet"` if a property has both getter and setter, requires the setter to be defined before the getter.
+
+- `"anyOrder"` (default) does not enforce order.
+
+- `"getBeforeSet"` if a property has both getter and setter, requires the getter to be defined before the setter.
+
+- `"setBeforeGet"` if a property has both getter and setter, requires the setter to be defined before the getter.
 
 ### getBeforeSet
+
 Examples of incorrect code for this rule with the `"getBeforeSet"` option:
 
 
@@ -168,6 +184,7 @@ const Bar = class {
     }
 }
 ```
+
 Examples of correct code for this rule with the `"getBeforeSet"` option:
 
 
@@ -201,7 +218,9 @@ const Bar = class {
     }
 }
 ```
+
 ### setBeforeGet
+
 Examples of incorrect code for this rule with the `"setBeforeGet"` option:
 
 
@@ -235,6 +254,7 @@ const Bar = class {
     }
 }
 ```
+
 Examples of correct code for this rule with the `"setBeforeGet"` option:
 
 
@@ -268,9 +288,12 @@ const Bar = class {
     }
 }
 ```
+
 ## Known Limitations
+
 Due to the limits of static analysis, this rule does not account for possible side effects and in certain cases
 might require or miss to require grouping or order for getters/setters that have a computed key, like in the following example:
+
 
 ```json
 /*eslint grouped-accessor-pairs: "error"*/
@@ -299,60 +322,44 @@ var bar = {
     }
 };
 ```
+
 Also, this rule does not report any warnings for properties that have duplicate getters or setters.
+
 See no-dupe-keys  if you also want to disallow duplicate keys in object literals.
+
 See no-dupe-class-members  if you also want to disallow duplicate names in class definitions.
+
 ## Related Rules
 
 
+- 
 accessor-pairs 
 
+- 
 no-dupe-keys 
 
+- 
 no-dupe-class-members 
 
-
 ## Version
+
 This rule was introduced in ESLint v6.7.0.
+
 ## Further Reading
-
-
-
-
 
 setter - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
-
-
-
-
-
 getter - JavaScript | MDN 
  developer.mozilla.org
-
-
-
-
-
-
-
-
-
 
 Classes - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

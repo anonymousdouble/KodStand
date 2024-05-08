@@ -1,0 +1,2102 @@
+﻿Section Name,Style Url,Total Description,Style Rules,Tool URL,Tool Description,Tool Rules (Can Ignore),Options,Our Results,GPT results_rule_name_descr_options,GPT results_rule_name_descr,GPT results_html,Refer url,Refer Results
+3 Source file structure,https://google.github.io/styleguide/jsguide.html#source-file-structure,"All new source files should either be a `goog.module` file (a file containing a `goog.module` call) or an ECMAScript (ES) module (uses `import` and `export` statements). Files consist of the following, in order:
+ 
+ 1. License or copyright information, if present
+ 2. `@fileoverview` JSDoc, if present
+ 3. `goog.module` statement, if a `goog.module` file
+ 4. ES `import` statements, if an ES module
+ 5. `goog.require` and `goog.requireType` statements
+ 6. The file’s implementation
+ 
+ Exactly one blank line separates each section that is present, except the file's implementation, which may be preceded by 1 or 2 blank lines.",the source file consists of different parts arranged in order.,,esling cannot handle,,,esling cannot handle,,,,,
+"3.1 License or copyright information, if present",https://google.github.io/styleguide/jsguide.html#file-copyright,"If license or copyright information belongs in a file, it belongs here.","1. recognize license/ copyright info.
+2.place it at the beginning of the file",,esling cannot handle,,,esling cannot handle,,,,,
+"3.2 @fileoverview JSDoc, if present",https://google.github.io/styleguide/jsguide.html#file-fileoverview,See 7.5 Top/file-level comments for formatting rules.,,,esling cannot handle,,,esling cannot handle,,,,,
+3.3 goog.module statement,https://google.github.io/styleguide/jsguide.html#file-goog-module,"All goog.module files must declare exactly one goog.module name on a single line: lines containing a goog.module declaration must not be wrapped, and are therefore an exception to the 80-column limit.
+ 
+ The entire argument to goog.module is what defines a namespace. It is the package name (an identifier that reflects the fragment of the directory structure where the code lives) plus, optionally, the main class/enum/interface that it defines concatenated to the end.
+ 
+ Example
+ 
+ goog.module('search.urlHistory.UrlHistoryService');","1. recognize goog.module declaration.
+2. declaration must not be wrapped.
+3. declaration can be longer than 80 column ",3.  https://eslint.org/docs/v8.x/rules/max-len,3. Very long lines of code in any language can be difficult to read. In order to aid in readability and maintainability many coders have developed a convention to limit lines of code to X number of characters (traditionally 80 characters).,3. max-len,"3.
+""code"" (default 80) enforces a maximum line length
+""tabWidth"" (default 4) specifies the character width for tab characters
+""comments"" enforces a maximum line length for comments; defaults to value of code
+""ignorePattern"" ignores lines matching a regular expression; can only match a single line and need to be double escaped when written in YAML or JSON
+""ignoreComments"": true ignores all trailing comments and comments on their own line
+""ignoreTrailingComments"": true ignores only trailing comments
+""ignoreUrls"": true ignores lines that contain a URL
+""ignoreStrings"": true ignores lines that contain a double-quoted or single-quoted string
+""ignoreTemplateLiterals"": true ignores lines that contain a template literal
+""ignoreRegExpLiterals"": true ignores lines that contain a RegExp literal",,,,,,
+3.3.1 Hierarchy,https://google.github.io/styleguide/jsguide.html#naming-hierarchy,"Module namespaces may never be named as a direct child of another module's namespace.
+ 
+ Disallowed:
+ 
+ goog.module('foo.bar'); // 'foo.bar.qux' would be fine, though
+ goog.module('foo.bar.baz');
+ 
+ The directory hierarchy reflects the namespace hierarchy, so that deeper-nested children are subdirectories of higher-level parent directories. Note that this implies that owners of “parent” namespace groups are necessarily aware of all child namespaces, since they exist in the same directory.","1. 模块命名空间不可以直接作为另一个模块命名空间的子命名空间
+
+2. 模块的命名空间层级关系应该与文件夹的层级关系一致（涉及到多个文件）",,esling cannot handle,,,esling cannot handle,,,,,
+3.3.2 goog.module.declareLegacyNamespace,https://google.github.io/styleguide/jsguide.html#file-declare-legacy-namespace,"The single goog.module statement may optionally be followed by a call to goog.module.declareLegacyNamespace();. Avoid goog.module.declareLegacyNamespace() when possible.
+ 
+goog.module.declareLegacyNamespace exists to ease the transition from traditional object hierarchy-based namespaces but comes with some naming restrictions. As the child module name must be created after the parent namespace, this name must not be a child or parent of any other goog.module (for example, goog.module('parent'); and goog.module('parent.child'); cannot both exist safely, nor can goog.module('parent'); and goog.module('parent.child.grandchild');).",1. 避免使用 goog.module.declareLegacyNamespace(),,esling cannot handle,,,esling cannot handle,,,,,
+3.3.3 goog.module Exports,https://google.github.io/styleguide/jsguide.html#file-goog-module-exports,"Classes, enums, functions, constants, and other symbols are exported using the exports object. Exported symbols may be defined directly on the exports object, or else declared locally and exported separately. Symbols are only exported if they are meant to be used outside the module. Non-exported module-local symbols are not declared @private nor do their names end with an underscore. There is no prescribed ordering for exported and module-local symbols.
+
+ Do not annotate the exports object as @const as it is already treated as a constant by the compiler.
+","1. Symbols are only exported if they are meant to be used outside the module.
+需要跨文件分析，难以实现
+
+2. Non-exported module-local symbols are not declared @private nor do their names end with an underscore.
+检测是否使用@private修饰
+检测命名方式
+
+3.不需要使用 @const 注解 exports 对象",,,,,esling cannot handle,,,,,
+3.4 ES modules,https://google.github.io/styleguide/jsguide.html#file-es-modules,,,,,,,esling cannot handle,,,,,
+3.4.1 Imports,https://google.github.io/styleguide/jsguide.html#es-module-imports,Import statements must not be line wrapped and are therefore an exception to the 80-column limit.,"1. import statements must not be line wrapped
+
+2.the length of import statements can be greater than 80 columns","1. eslint cannot handle
+2. https://eslint.org/docs/v8.x/rules/max-len","1.eslint cannot handle
+2. Very long lines of code in any language can be difficult to read. In order to aid in readability and maintainability many coders have developed a convention to limit lines of code to X number of characters (traditionally 80 characters).",2.max-len,"2.
+""code"" (default 80) enforces a maximum line length
+""tabWidth"" (default 4) specifies the character width for tab characters
+""comments"" enforces a maximum line length for comments; defaults to value of code
+""ignorePattern"" ignores lines matching a regular expression; can only match a single line and need to be double escaped when written in YAML or JSON
+""ignoreComments"": true ignores all trailing comments and comments on their own line
+""ignoreTrailingComments"": true ignores only trailing comments
+""ignoreUrls"": true ignores lines that contain a URL
+""ignoreStrings"": true ignores lines that contain a double-quoted or single-quoted string
+""ignoreTemplateLiterals"": true ignores lines that contain a template literal
+""ignoreRegExpLiterals"": true ignores lines that contain a RegExp literal","max-len: [""error"", { 
+""code"":80,
+""ignorePattern"": ""^import .*""
+}
+]",,,,,
+3.4.1.1 Import paths,previous,"ES module files must use the import statement to import other ES module files. Do not goog.require another ES module.
+
+import './sideeffects.js';
+
+import * as goog from '../closure/goog/goog.js';
+import * as parent from '../parent.js';
+
+import {name} from './sibling.js';","1. recognize es module file.
+
+2. use import ranther than goog.require in es module file",,,,,,,,,,
+3.4.1.1.1 File extensions in import paths,previous,"The .js file extension is not optional in import paths and must always be included.
+
+import '../directory/file';
+import '../directory/file.js';","The .js file extension is not optional in import paths and must always be included.
+",,,,,,,,,,
+3.4.1.2 Importing the same file multiple times,previous,"Do not import the same file multiple times. This can make it hard to determine the aggregate imports of a file.
+
+// Imports have the same path, but since it doesn't align it can be hard to see.
+import {short} from './long/path/to/a/file.js';
+import {aLongNameThatBreaksAlignment} from './long/path/to/a/file.js';",Do not import the same file multiple times. ,https://eslint.org/docs/v8.x/rules/no-duplicate-imports,"Disallow duplicate module imports
+
+Using a single import statement per module will make the code clearer because you can see everything being imported from that module on one line.
+
+In the following example the module import on line 1 is repeated on line 3. These can be combined to make the list of imports more succinct.
+
+import { merge } from 'module';
+import something from 'another-module';
+import { find } from 'module';",no-duplicate-imports,"This rule takes one optional argument, an object with a single key, includeExports which is a boolean. It defaults to false.
+
+If re-exporting from an imported module, you should add the imports to the import-statement, and export that directly, not use export ... from.
+
+Example of incorrect code for this rule with the { ""includeExports"": true } option:
+
+Open in Playground
+/*eslint no-duplicate-imports: [""error"", { ""includeExports"": true }]*/
+
+import { merge } from 'module';
+
+export { find } from 'module';
+
+
+
+
+
+Example of correct code for this rule with the { ""includeExports"": true } option:
+
+Open in Playground
+/*eslint no-duplicate-imports: [""error"", { ""includeExports"": true }]*/
+
+import { merge, find } from 'module';
+
+export { find };
+
+
+
+
+
+Example of correct code for this rule with the { ""includeExports"": true } option:
+
+Open in Playground
+/*eslint no-duplicate-imports: [""error"", { ""includeExports"": true }]*/
+
+import { merge, find } from 'module';
+
+// cannot be merged with the above import
+export * as something from 'module';
+
+// cannot be written differently
+export * from 'module';","no-duplicate-imports: [""error""]",,,,,
+3.4.1.3 Naming imports,previous,,,,,,,,,,,,
+3.4.1.3.1 Naming module imports,previous,"Module import names (import * as name) are lowerCamelCase names that are derived from the imported file name.
+
+import * as fileOne from '../file-one.js';
+import * as fileTwo from '../file_two.js';
+import * as fileThree from '../filethree.js';
+import * as libString from './lib/string.js';
+import * as math from './math/math.js';
+import * as vectorMath from './vector/math.js';","1. Module import names (import * as name) are lowerCamelCase
+
+2. import names should be derived from the imported file name",1. https://eslint.org/docs/v8.x/rules/camelcase,"When it comes to naming variables, style guides generally fall into one of two camps: camelcase (variableName) and underscores (variable_name). This rule focuses on using the camelcase approach. If your style guide calls for camelCasing your variable names, then this rule is for you!",camelcase,"This rule has an object option:
+
+""properties"": ""always"" (default) enforces camelcase style for property names
+""properties"": ""never"" does not check property names
+""ignoreDestructuring"": false (default) enforces camelcase style for destructured identifiers
+""ignoreDestructuring"": true does not check destructured identifiers (but still checks any use of those identifiers later in the code)
+""ignoreImports"": false (default) enforces camelcase style for ES2015 imports
+""ignoreImports"": true does not check ES2015 imports (but still checks any use of the imports later in the code except function arguments)
+""ignoreGlobals"": false (default) enforces camelcase style for global variables
+""ignoreGlobals"": true does not enforce camelcase style for global variables
+allow (string[]) list of properties to accept. Accept regex.
+properties: “always”
+Examples of incorrect code for this rule with the default { ""properties"": ""always"" } option:
+
+Open in Playground
+/*eslint camelcase: ""error""*/
+
+import { no_camelcased } from ""external-module""
+
+var my_favorite_color = ""#112C85"";
+
+function do_something() {
+    // ...
+}
+
+obj.do_something = function() {
+    // ...
+};
+
+function foo({ no_camelcased }) {
+    // ...
+};
+
+function bar({ isCamelcased: no_camelcased }) {
+    // ...
+}
+
+function baz({ no_camelcased = 'default value' }) {
+    // ...
+};
+
+var obj = {
+    my_pref: 1
+};
+
+var { category_id = 1 } = query;
+
+var { foo: snake_cased } = bar;
+
+var { foo: bar_baz = 1 } = quz;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the default { ""properties"": ""always"" } option:
+
+Open in Playground
+/*eslint camelcase: ""error""*/
+
+import { no_camelcased as camelCased } from ""external-module"";
+
+var myFavoriteColor   = ""#112C85"";
+var _myFavoriteColor  = ""#112C85"";
+var myFavoriteColor_  = ""#112C85"";
+var MY_FAVORITE_COLOR = ""#112C85"";
+var foo1 = bar.baz_boom;
+var foo2 = { qux: bar.baz_boom };
+
+obj.do_something();
+do_something();
+new do_something();
+
+var { category_id: category } = query;
+
+function foo({ isCamelCased }) {
+    // ...
+};
+
+function bar({ isCamelCased: isAlsoCamelCased }) {
+    // ...
+}
+
+function baz({ isCamelCased = 'default value' }) {
+    // ...
+};
+
+var { categoryId = 1 } = query;
+
+var { foo: isCamelCased } = bar;
+
+var { foo: isCamelCased = 1 } = quz;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+properties: “never”
+Examples of correct code for this rule with the { ""properties"": ""never"" } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {properties: ""never""}]*/
+
+var obj = {
+    my_pref: 1
+};
+
+obj.foo_bar = ""baz"";
+
+
+
+
+
+
+
+ignoreDestructuring: false
+Examples of incorrect code for this rule with the default { ""ignoreDestructuring"": false } option:
+
+Open in Playground
+/*eslint camelcase: ""error""*/
+
+var { category_id } = query;
+
+var { category_name = 1 } = query;
+
+var { category_id: category_title } = query;
+
+var { category_id: category_alias } = query;
+
+var { category_id: categoryId, ...other_props } = query;
+
+
+
+
+
+
+
+
+
+
+
+ignoreDestructuring: true
+Examples of incorrect code for this rule with the { ""ignoreDestructuring"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreDestructuring: true}]*/
+
+var { category_id: category_alias } = query;
+
+var { category_id, ...other_props } = query;
+
+
+
+
+
+Examples of correct code for this rule with the { ""ignoreDestructuring"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreDestructuring: true}]*/
+
+var { category_id } = query;
+
+var { category_id = 1 } = query;
+
+var { category_id: category_id } = query;
+
+
+
+
+
+
+
+Please note that this option applies only to identifiers inside destructuring patterns. It doesn’t additionally allow any particular use of the created variables later in the code apart from the use that is already allowed by default or by other options.
+
+Examples of additional incorrect code for this rule with the { ""ignoreDestructuring"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreDestructuring: true}]*/
+
+var { some_property } = obj; // allowed by {ignoreDestructuring: true}
+var foo = some_property + 1; // error, ignoreDestructuring does not apply to this statement
+
+
+
+
+A common use case for this option is to avoid useless renaming when the identifier is not intended to be used later in the code.
+
+Examples of additional correct code for this rule with the { ""ignoreDestructuring"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreDestructuring: true}]*/
+
+var { some_property, ...rest } = obj;
+// do something with 'rest', nothing with 'some_property'
+
+
+
+
+Another common use case for this option is in combination with { ""properties"": ""never"" }, when the identifier is intended to be used only as a property shorthand.
+
+Examples of additional correct code for this rule with the { ""properties"": ""never"", ""ignoreDestructuring"": true } options:
+
+Open in Playground
+/*eslint camelcase: [""error"", {""properties"": ""never"", ignoreDestructuring: true}]*/
+
+var { some_property } = obj;
+doSomething({ some_property });
+
+
+
+
+ignoreImports: false
+Examples of incorrect code for this rule with the default { ""ignoreImports"": false } option:
+
+Open in Playground
+/*eslint camelcase: ""error""*/
+
+import { snake_cased } from 'mod';
+
+
+
+ignoreImports: true
+Examples of incorrect code for this rule with the { ""ignoreImports"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreImports: true}]*/
+
+import default_import from 'mod';
+
+import * as namespaced_import from 'mod';
+
+
+
+
+
+Examples of correct code for this rule with the { ""ignoreImports"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreImports: true}]*/
+
+import { snake_cased } from 'mod';
+
+
+
+ignoreGlobals: false
+Examples of incorrect code for this rule with the default { ""ignoreGlobals"": false } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreGlobals: false}]*/
+/* global no_camelcased */
+
+const foo = no_camelcased;
+
+
+
+
+ignoreGlobals: true
+Examples of correct code for this rule with the { ""ignoreGlobals"": true } option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {ignoreGlobals: true}]*/
+/* global no_camelcased */
+
+const foo = no_camelcased;
+
+
+
+
+allow
+Examples of correct code for this rule with the allow option:
+
+Open in Playground
+/*eslint camelcase: [""error"", {allow: [""UNSAFE_componentWillMount""]}]*/
+
+function UNSAFE_componentWillMount() {
+    // ...
+}
+
+
+
+
+
+Open in Playground
+/*eslint camelcase: [""error"", {allow: [""^UNSAFE_""]}]*/
+
+function UNSAFE_componentWillMount() {
+    // ...
+}
+
+function UNSAFE_componentWillReceiveProps() {
+    // ...
+}","camelcase: [""error"", {ignoreImports: false}",,,,,
+3.4.1.3.2 Naming default imports,previous,"Default import names are derived from the imported file name and follow the rules in 6.2 Rules by identifier type.
+
+import MyClass from '../my-class.js';
+import myFunction from '../my_function.js';
+import SOME_CONSTANT from '../someconstant.js';
+
+Note: In general this should not happen as default exports are banned by this style guide, see 3.4.2.1 Named vs default exports. Default imports are only used to import modules that do not conform to this style guide.","1. Default import names are derived from the imported file name
+
+2. should not use default exports",,,,,,,,,,
+3.4.1.3.3 Naming named imports,previous,"In general symbols imported via the named import (import {name}) should keep the same name. Avoid aliasing imports (import {SomeThing as SomeOtherThing}). Prefer fixing name collisions by using a module import (import *) or renaming the exports themselves.
+
+import * as bigAnimals from './biganimals.js';
+import * as domesticatedAnimals from './domesticatedanimals.js';
+
+new bigAnimals.Cat();
+new domesticatedAnimals.Cat();
+
+
+If renaming a named import is needed then use components of the imported module's file name or path in the resulting alias.
+
+import {Cat as BigCat} from './biganimals.js';
+import {Cat as DomesticatedCat} from './domesticatedanimals.js';
+
+new BigCat();
+new DomesticatedCat();","1. Avoid aliasing imports
+
+2. Prefer fixing name collisions by using a module import (import *) or renaming the exports themselves.
+
+3.If renaming a named import is needed then use components of the imported module's file name or path in the resulting alias.
+",,,,,,,,,,
+3.4.2 Exports,https://google.github.io/styleguide/jsguide.html#es-module-exports,Symbols are only exported if they are meant to be used outside the module. Non-exported module-local symbols are not declared @private nor do their names end with an underscore. There is no prescribed ordering for exported and module-local symbols.,"1. Symbols are only exported if they are meant to be used outside the module.
+需要跨文件分析，难以实现
+
+2. Non-exported module-local symbols are not declared @private nor do their names end with an underscore.",,,,,,,,,,
+3.4.2.1 Named vs default exports,previous,"Use named exports in all code. You can apply the export keyword to a declaration, or use the export {name}; syntax.
+
+Do not use default exports. Importing modules must give a name to these values, which can lead to inconsistencies in naming across modules.
+
+// Do not use default exports:
+export default class Foo { ... } // BAD!
+// Use named exports:
+export class Foo { ... }
+// Alternate style named exports:
+class Foo { ... }
+
+export {Foo};",1. use named exports instead of using default exports.,https://eslint.org/docs/v8.x/rules/no-restricted-exports,"Disallow specified names in exports
+
+In a project, certain names may be disallowed from being used as exported names for various reasons.",no-restricted-exports,"By default, this rule doesn’t disallow any names. Only the names you specify in the configuration will be disallowed.
+
+This rule has an object option:
+
+""restrictedNamedExports"" is an array of strings, where each string is a name to be restricted.
+""restrictDefaultExports"" is an object option with boolean properties to restrict certain default export declarations. The option works only if the restrictedNamedExports option does not contain the ""default"" value. The following properties are allowed:
+direct: restricts export default declarations.
+named: restricts export { foo as default }; declarations.
+defaultFrom: restricts export { default } from 'foo'; declarations.
+namedFrom: restricts export { foo as default } from 'foo'; declarations.
+namespaceFrom: restricts export * as default from 'foo'; declarations.
+restrictedNamedExports
+Examples of incorrect code for the ""restrictedNamedExports"" option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", {
+    ""restrictedNamedExports"": [""foo"", ""bar"", ""Baz"", ""a"", ""b"", ""c"", ""d"", ""e"", ""👍""]
+}]*/
+
+export const foo = 1;
+
+export function bar() {}
+
+export class Baz {}
+
+const a = {};
+export { a };
+
+function someFunction() {}
+export { someFunction as b };
+
+export { c } from ""some_module"";
+
+export { ""d"" } from ""some_module"";
+
+export { something as e } from ""some_module"";
+
+export { ""👍"" } from ""some_module"";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for the ""restrictedNamedExports"" option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", {
+    ""restrictedNamedExports"": [""foo"", ""bar"", ""Baz"", ""a"", ""b"", ""c"", ""d"", ""e"", ""👍""]
+}]*/
+
+export const quux = 1;
+
+export function myFunction() {}
+
+export class MyClass {}
+
+const a = {};
+export { a as myObject };
+
+function someFunction() {}
+export { someFunction };
+
+export { c as someName } from ""some_module"";
+
+export { ""d"" as "" d "" } from ""some_module"";
+
+export { something } from ""some_module"";
+
+export { ""👍"" as thumbsUp } from ""some_module"";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Default exports
+By design, the ""restrictedNamedExports"" option doesn’t disallow export default declarations. If you configure ""default"" as a restricted name, that restriction will apply only to named export declarations.
+
+Examples of additional incorrect code for the ""restrictedNamedExports"": [""default""] option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictedNamedExports"": [""default""] }]*/
+
+function foo() {}
+
+export { foo as default };
+
+
+
+
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictedNamedExports"": [""default""] }]*/
+
+export { default } from ""some_module"";
+
+
+
+Examples of additional correct code for the ""restrictedNamedExports"": [""default""] option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictedNamedExports"": [""default"", ""foo""] }]*/
+
+export default function foo() {}
+
+
+
+restrictDefaultExports
+This option allows you to restrict certain default declarations. The option works only if the restrictedNamedExports option does not contain the ""default"" value. This option accepts the following properties:
+
+direct
+Examples of incorrect code for the ""restrictDefaultExports"": { ""direct"": true } option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""direct"": true } }]*/
+
+export default foo;
+
+
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""direct"": true } }]*/
+
+export default 42;
+
+
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""direct"": true } }]*/
+
+export default function foo() {}
+
+
+
+named
+Examples of incorrect code for the ""restrictDefaultExports"": { ""named"": true } option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""named"": true } }]*/
+
+const foo = 123;
+
+export { foo as default };
+
+
+
+
+
+defaultFrom
+Examples of incorrect code for the ""restrictDefaultExports"": { ""defaultFrom"": true } option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""defaultFrom"": true } }]*/
+
+export { default } from 'foo';
+
+
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""defaultFrom"": true } }]*/
+
+export { default as default } from 'foo';
+
+
+
+namedFrom
+Examples of incorrect code for the ""restrictDefaultExports"": { ""namedFrom"": true } option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""namedFrom"": true } }]*/
+
+export { foo as default } from 'foo';
+
+
+
+namespaceFrom
+Examples of incorrect code for the ""restrictDefaultExports"": { ""namespaceFrom"": true } option:
+
+Open in Playground
+/*eslint no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""namespaceFrom"": true } }]*/
+
+export * as default from 'foo';","no-restricted-exports: [""error"", { ""restrictDefaultExports"": { ""direct"": true } }]",,,,,
+3.4.2.2 Exporting static container classes and objects,previous,"Do not export container classes or objects with static methods or properties for the sake of namespacing.
+
+// container.js
+// Bad: Container is an exported class that has only static methods and fields.
+export class Container {
+  /** @return {number} */
+  static bar() {
+    return 1;
+  }
+}
+
+/** @const {number} */
+Container.FOO = 1;
+
+Instead, export individual constants and functions:
+
+/** @return {number} */
+export function bar() {
+  return 1;
+}
+
+export const /** number */ FOO = 1;",1. exported classes should not be containers,,,,,,,,,,
+3.4.2.3 Mutability of exports,previous,"Exported variables must not be mutated outside of module initialization.
+
+There are alternatives if mutation is needed, including exporting a constant reference to an object that has mutable fields or exporting accessor functions for mutable data.
+
+// Bad: both foo and mutateFoo are exported and mutated.
+export let /** number */ foo = 0;
+
+/**
+ * Mutates foo.
+ */
+export function mutateFoo() {
+  ++foo;
+}
+
+/**
+ * @param {function(number): number} newMutateFoo
+ */
+export function setMutateFoo(newMutateFoo) {
+  // Exported classes and functions can be mutated!
+  mutateFoo = () => {
+    foo = newMutateFoo(foo);
+  };
+}
+// Good: Rather than export the mutable variables foo and mutateFoo directly,
+// instead make them module scoped and export a getter for foo and a wrapper for
+// mutateFooFunc.
+let /** number */ foo = 0;
+let /** function(number): number */ mutateFooFunc = foo => foo + 1;
+
+/** @return {number} */
+export function getFoo() {
+  return foo;
+}
+
+export function mutateFoo() {
+  foo = mutateFooFunc(foo);
+}
+
+/** @param {function(number): number} mutateFoo */
+export function setMutateFoo(mutateFoo) {
+  mutateFooFunc = mutateFoo;
+}",1. Exported variables must not be mutated outside of module initialization.,,,,,,,,,,
+3.4.2.4 export from,previous,"export from statements must not be line wrapped and are therefore an exception to the 80-column limit. This applies to both export from flavors.
+
+export {specificName} from './other.js';
+export * from './another.js';","1. export statements must not be line wrapped
+
+2.the length of export statements can be greater than 80 columns","1. eslint cannot handle
+2. https://eslint.org/docs/v8.x/rules/max-len","1.eslint cannot handle
+2. Very long lines of code in any language can be difficult to read. In order to aid in readability and maintainability many coders have developed a convention to limit lines of code to X number of characters (traditionally 80 characters).",,"2.
+""code"" (default 80) enforces a maximum line length
+""tabWidth"" (default 4) specifies the character width for tab characters
+""comments"" enforces a maximum line length for comments; defaults to value of code
+""ignorePattern"" ignores lines matching a regular expression; can only match a single line and need to be double escaped when written in YAML or JSON
+""ignoreComments"": true ignores all trailing comments and comments on their own line
+""ignoreTrailingComments"": true ignores only trailing comments
+""ignoreUrls"": true ignores lines that contain a URL
+""ignoreStrings"": true ignores lines that contain a double-quoted or single-quoted string
+""ignoreTemplateLiterals"": true ignores lines that contain a template literal
+""ignoreRegExpLiterals"": true ignores lines that contain a RegExp literal","max-len: [""error"", { 
+""code"":80,
+""ignorePattern"": ""^export .*""
+}
+]",,,,,
+3.4.3 Circular Dependencies in ES modules,https://google.github.io/styleguide/jsguide.html#es-module-circular-dependencies,"Do not create cycles between ES modules, even though the ECMAScript specification allows this. Note that it is possible to create cycles with both the import and export statements.
+
+// a.js
+import './b.js';
+// b.js
+import './a.js';
+
+// `export from` can cause circular dependencies too!
+export {x} from './c.js';
+// c.js
+import './b.js';
+
+export let x;",跨文件分析检测循环依赖，难以实现,,,,,,,,,,
+3.4.4 Interoperating with Closure,https://google.github.io/styleguide/jsguide.html#es-module-closure-interop,,,,,,,,,,,,
+3.4.4.1 Referencing goog,previous,"To reference the Closure goog namespace, import Closure's goog.js.
+
+import * as goog from '../closure/goog/goog.js';
+
+const name = goog.require('a.name');
+
+export const CONSTANT = name.compute();
+goog.js exports only a subset of properties from the global goog that can be used in ES modules.","To reference the Closure goog namespace, import Closure's goog.js.
+感觉是一个goog.require的调用方法说明，并没有说一个错误的调用方法是怎样的。",,,,,,,,,,
+3.4.4.2 goog.require in ES modules,,"goog.require in ES modules works as it does in goog.module files. You can require any Closure namespace symbol (i.e., symbols created by goog.provide or goog.module) and goog.require will return the value.
+
+import * as goog from '../closure/goog/goog.js';
+import * as anEsModule from './anEsModule.js';
+
+const GoogPromise = goog.require('goog.Promise');
+const myNamespace = goog.require('my.namespace');",同上,,,,,,,,,,
+3.4.4.3 Declaring Closure Module IDs in ES modules,,"goog.declareModuleId can be used within ES modules to declare a goog.module-like module ID. This means that this module ID can be goog.required, goog.module.getd, goog.forwardDeclare'd, etc. as if it were a goog.module that did not call goog.module.declareLegacyNamespace. It does not create the module ID as a globally available JavaScript symbol.
+
+A goog.require (or goog.module.get) for a module ID from goog.declareModuleId will always return the module object (as if it was import *'d). As a result, the argument to goog.declareModuleId should always end with a lowerCamelCaseName.
+
+Note: It is an error to call goog.module.declareLegacyNamespace in an ES module, it can only be called from goog.module files. There is no direct way to associate a legacy namespace with an ES module.
+
+goog.declareModuleId should only be used to upgrade Closure files to ES modules in place, where named exports are used.
+
+import * as goog from '../closure/goog.js';
+
+goog.declareModuleId('my.esm');
+
+export class Class {};","1. the argument to goog.declareModuleId should always end with a lowerCamelCaseName.
+
+2.  goog.module.declareLegacyNamespace can only be called from goog.module files.
+
+3. goog.declareModuleId should only be used to upgrade Closure files to ES modules in place, where named exports are used.",,,,,,,,,,
+3.5 goog.setTestOnly,https://google.github.io/styleguide/jsguide.html#file-set-test-only,"In a goog.module file the goog.module statement may optionally be followed by a call to goog.setTestOnly().
+
+In an ES module the import statements may optionally be followed by a call to goog.setTestOnly().","1. recognize goog.setTestOnly
+
+2. goog.setTestOnly can be used after the import statement in an Es module 
+
+3. goog.setTestOnly can be used after the goog.module statement in a goog.module file",,,,,,,,,,
+3.6 goog.require and goog.requireType statements,https://google.github.io/styleguide/jsguide.html#file-goog-require,"Imports are done with goog.require and goog.requireType statements. The names imported by a goog.require statement may be used both in code and in type annotations, while those imported by a goog.requireType may be used in type annotations only.
+
+The goog.require and goog.requireType statements form a contiguous block with no empty lines. This block follows the goog.module declaration separated by a single empty line. The entire argument to goog.require or goog.requireType is a namespace defined by a goog.module in a separate file. goog.require and goog.requireType statements may not appear anywhere else in the file.
+
+Each goog.require or goog.requireType is assigned to a single constant alias, or else destructured into several constant aliases. These aliases are the only acceptable way to refer to dependencies in type annotations or code. Fully qualified namespaces must not be used anywhere, except as an argument to goog.require or goog.requireType.
+
+Exception: Types, variables, and functions declared in externs files have to use their fully qualified name in type annotations and code.
+
+Aliases must match the final dot-separated component of the imported module's namespace.
+
+Exception: In certain cases, additional components of the namespace can be used to form a longer alias. The resulting alias must retain the original identifier's casing such that it still correctly identifies its type. Longer aliases may be used to disambiguate otherwise identical aliases, or if it significantly improves readability. In addition, a longer alias must be used to prevent masking native types such as Element, Event, Error, Map, and Promise (for a more complete list, see Standard Built-in Objects and Web APIs at MDN). When renaming destructured aliases, a space must follow the colon as required in 4.6.2 Horizontal whitespace.
+
+A file should not contain both a goog.require and a goog.requireType statement for the same namespace. If the imported name is used both in code and in type annotations, it should be imported by a single goog.require statement.
+
+If a module is imported only for its side effects, the call must be a goog.require (not a goog.requireType) and assignment may be omitted. A comment is required to explain why this is needed and suppress a compiler warning.
+
+The lines are sorted according to the following rules: All requires with a name on the left hand side come first, sorted alphabetically by those names. Then destructuring requires, again sorted by the names on the left hand side. Finally, any require calls that are standalone (generally these are for modules imported just for their side effects).
+
+Tip: There’s no need to memorize this order and enforce it manually. You can rely on your IDE to report requires that are not sorted correctly.
+
+If a long alias or module name would cause a line to exceed the 80-column limit, it must not be wrapped: require lines are an exception to the 80-column limit.
+
+Example:
+
+// Standard alias style.
+const MyClass = goog.require('some.package.MyClass');
+const MyType = goog.requireType('some.package.MyType');
+// Namespace-based alias used to disambiguate.
+const NsMyClass = goog.require('other.ns.MyClass');
+// Namespace-based alias used to prevent masking native type.
+const RendererElement = goog.require('web.renderer.Element');
+// Out of sequence namespace-based aliases used to improve readability.
+// Also, require lines longer than 80 columns must not be wrapped.
+const SomeDataStructureModel = goog.requireType('identical.package.identifiers.models.SomeDataStructure');
+const SomeDataStructureProto = goog.require('proto.identical.package.identifiers.SomeDataStructure');
+// Standard alias style.
+const asserts = goog.require('goog.asserts');
+// Namespace-based alias used to disambiguate.
+const testingAsserts = goog.require('goog.testing.asserts');
+// Standard destructuring into aliases.
+const {clear, clone} = goog.require('goog.array');
+const {Rgb} = goog.require('goog.color');
+// Namespace-based destructuring into aliases in order to disambiguate.
+const {SomeType: FooSomeType} = goog.requireType('foo.types');
+const {clear: objectClear, clone: objectClone} = goog.require('goog.object');
+// goog.require without an alias in order to trigger side effects.
+/** @suppress {extraRequire} Initializes MyFramework. */
+goog.require('my.framework.initialization');
+
+Discouraged:
+
+// If necessary to disambiguate, prefer PackageClass over SomeClass as it is
+// closer to the format of the module name.
+const SomeClass = goog.require('some.package.Class');
+
+Disallowed:
+
+// Extra terms must come from the namespace.
+const MyClassForBizzing = goog.require('some.package.MyClass');
+// Alias must include the entire final namespace component.
+const MyClass = goog.require('some.package.MyClassForBizzing');
+// Alias must not mask native type (should be `const JspbMap` here).
+const Map = goog.require('jspb.Map');
+// Don't break goog.require lines over 80 columns.
+const SomeDataStructure =
+    goog.require('proto.identical.package.identifiers.SomeDataStructure');
+// Alias must be based on the namespace.
+const randomName = goog.require('something.else');
+// Missing a space after the colon.
+const {Foo:FooProto} = goog.require('some.package.proto.Foo');
+// goog.requireType without an alias.
+goog.requireType('some.package.with.a.Type');
+
+
+/**
+ * @param {!some.unimported.Dependency} param All external types used in JSDoc
+ *     annotations must be goog.require'd, unless declared in externs.
+ */
+function someFunction(param) {
+  // goog.require lines must be at the top level before any other code.
+  const alias = goog.require('my.long.name.alias');
+  // ...
+}","1. goog.require 用于导入可以在代码和类型注释中使用的命名空间
+
+2.  goog.requireType 只能在类型注释中使用
+
+3. goog.require 和 goog.requireType 语句形成一个连续的代码块，之间没有空行
+
+4. 每个 goog.require 或 goog.requireType 语句都必须分配给一个常量别名，或者分解为多个常量别名。只能使用这些别名在代码和类型注释中引用依赖项
+
+5. Aliases must match the final dot-separated component of the imported module's namespace
+
+6. 如果模块仅用于其副作用，则调用必须是 goog.require（而不是 goog.requireType），并且可以省略赋值
+（不懂
+
+7. 代码行按照一定规则排序
+首先是所有带有左侧名称的 require，按照这些名称的字母顺序排列
+然后是解构 require，再次按照左侧名称排序
+最后是任何独立的 require 调用（通常是仅用于副作用的模块导入）
+
+8. 避免使用模糊的别名，应该优先使用与模块名格式相似的包名
+
+",,,,,,,,,,
+3.7 The file’s implementation,https://google.github.io/styleguide/jsguide.html#file-implementation,"The actual implementation follows after all dependency information is declared (separated by at least one blank line).
+
+This may consist of any module-local declarations (constants, variables, classes, functions, etc), as well as any exported symbols.","1. recognize dependency part and implementation part.
+
+2. implementation part follows after dependency part.",,,,,,,,,,
+4 Formatting,https://google.github.io/styleguide/jsguide.html#formatting,"Terminology Note: block-like construct refers to the body of a class, function, method, or brace-delimited block of code. Note that, by 5.2 Array literals and 5.3 Object literals, any array or object literal may optionally be treated as if it were a block-like construct.",,,,,,,,,,,
+4.1 Braces,https://google.github.io/styleguide/jsguide.html#formatting-braces,,,,,,,,,,,,
+4.1.1 Braces are used for all control structures,https://google.github.io/styleguide/jsguide.html#formatting-braces-all,"Braces are required for all control structures (i.e. if, else, for, do, while, as well as any others), even if the body contains only a single statement. The first statement of a non-empty block must begin on its own line.
+
+Disallowed:
+
+if (someVeryLongCondition())
+  doSomething();
+
+for (let i = 0; i < foo.length; i++) bar(foo[i]);
+Exception: A simple if statement that can fit entirely on a single line with no wrapping (and that doesn’t have an else) may be kept on a single line with no braces when it improves readability. This is the only case in which a control structure may omit braces and newlines.
+
+if (shortCondition()) foo();",1. control structure should be wrapped by braces.,https://eslint.org/docs/v8.x/rules/curly,"JavaScript allows the omission of curly braces when a block contains only one statement. However, it is considered by many to be best practice to never omit curly braces around blocks, even when they are optional, because it can lead to bugs and reduces code clarity. So the following:
+
+if (foo) foo++;
+
+Can be rewritten as:
+
+if (foo) {
+    foo++;
+}
+
+
+
+There are, however, some who prefer to only use braces when there is more than one statement to be executed.",,"all
+Examples of incorrect code for the default ""all"" option:
+
+Open in Playground
+/*eslint curly: ""error""*/
+
+if (foo) foo++;
+
+while (bar)
+    baz();
+
+if (foo) {
+    baz();
+} else qux();
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for the default ""all"" option:
+
+Open in Playground
+/*eslint curly: ""error""*/
+
+if (foo) {
+    foo++;
+}
+
+while (bar) {
+    baz();
+}
+
+if (foo) {
+    baz();
+} else {
+    qux();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+multi
+By default, this rule warns whenever if, else, for, while, or do are used without block statements as their body. However, you can specify that block statements should be used only when there are multiple statements in the block and warn when there is only one statement in the block.
+
+Examples of incorrect code for the ""multi"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi""]*/
+
+if (foo) {
+    foo++;
+}
+
+if (foo) bar();
+else {
+    foo++;
+}
+
+while (true) {
+    doSomething();
+}
+
+for (var i=0; i < items.length; i++) {
+    doSomething();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for the ""multi"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi""]*/
+
+if (foo) foo++;
+
+else foo();
+
+while (true) {
+    doSomething();
+    doSomethingElse();
+}
+
+
+
+
+
+
+
+
+
+
+multi-line
+Alternatively, you can relax the rule to allow brace-less single-line if, else if, else, for, while, or do, while still enforcing the use of curly braces for other instances.
+
+Examples of incorrect code for the ""multi-line"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi-line""]*/
+
+if (foo)
+  doSomething();
+else
+  doSomethingElse();
+
+if (foo) foo(
+  bar,
+  baz);
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for the ""multi-line"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi-line""]*/
+
+if (foo) foo++; else doSomething();
+
+if (foo) foo++;
+else if (bar) baz()
+else doSomething();
+
+do something();
+while (foo);
+
+while (foo
+  && bar) baz();
+
+if (foo) {
+    foo++;
+}
+
+if (foo) { foo++; }
+
+while (true) {
+    doSomething();
+    doSomethingElse();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+multi-or-nest
+You can use another configuration that forces brace-less if, else if, else, for, while, or do if their body contains only one single-line statement. And forces braces in all other cases.
+
+Examples of incorrect code for the ""multi-or-nest"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi-or-nest""]*/
+
+if (!foo)
+    foo = {
+        bar: baz,
+        qux: foo
+    };
+
+while (true)
+  if(foo)
+      doSomething();
+  else
+      doSomethingElse();
+
+if (foo) {
+    foo++;
+}
+
+while (true) {
+    doSomething();
+}
+
+for (var i = 0; foo; i++) {
+    doSomething();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for the ""multi-or-nest"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi-or-nest""]*/
+
+if (!foo) {
+    foo = {
+        bar: baz,
+        qux: foo
+    };
+}
+
+while (true) {
+  if(foo)
+      doSomething();
+  else
+      doSomethingElse();
+}
+
+if (foo)
+    foo++;
+
+while (true)
+    doSomething();
+
+for (var i = 0; foo; i++)
+    doSomething();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+For single-line statements preceded by a comment, braces are allowed but not required.
+
+Examples of additional correct code for the ""multi-or-nest"" option:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi-or-nest""]*/
+
+if (foo)
+    // some comment
+    bar();
+
+if (foo) {
+    // some comment
+    bar();
+}
+
+
+
+
+
+
+
+
+
+
+consistent
+When using any of the multi* options, you can add an option to enforce all bodies of a if, else if and else chain to be with or without braces.
+
+Examples of incorrect code for the ""multi"", ""consistent"" options:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi"", ""consistent""]*/
+
+if (foo) {
+    bar();
+    baz();
+} else
+    buz();
+
+if (foo)
+    bar();
+else if (faa)
+    bor();
+else {
+    other();
+    things();
+}
+
+if (true)
+    foo();
+else {
+    baz();
+}
+
+if (foo) {
+    foo++;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for the ""multi"", ""consistent"" options:
+
+Open in Playground
+/*eslint curly: [""error"", ""multi"", ""consistent""]*/
+
+if (foo) {
+    bar();
+    baz();
+} else {
+    buz();
+}
+
+if (foo) {
+    bar();
+} else if (faa) {
+    bor();
+} else {
+    other();
+    things();
+}
+
+if (true)
+    foo();
+else
+    baz();
+
+if (foo)
+    foo++;","curly: [""error"", ""multi""]",,,,,
+4.1.2 Nonempty blocks: K&R style,https://google.github.io/styleguide/jsguide.html#formatting-nonempty-blocks,"Braces follow the Kernighan and Ritchie style (Egyptian brackets) for nonempty blocks and block-like constructs:
+
+No line break before the opening brace.
+Line break after the opening brace.
+Line break before the closing brace.
+Line break after the closing brace if that brace terminates a statement or the body of a function or class statement, or a class method. Specifically, there is no line break after the brace if it is followed by else, catch, while, or a comma, semicolon, or right-parenthesis.
+Example:
+
+class InnerClass {
+  constructor() {}
+
+  /** @param {number} foo */
+  method(foo) {
+    if (condition(foo)) {
+      try {
+        // Note: this might fail.
+        something();
+      } catch (err) {
+        recover();
+      }
+    }
+  }
+}","1. No line break before the opening brace.
+2. Line break after the opening brace.
+3. Line break before the closing brace.
+4. Line break after the closing brace if that brace terminates a statement or the body of a function or class statement, or a class method.
+5. Specifically, there is no line break after the brace if it is followed by else, catch, while, or a comma, semicolon, or right-parenthesis.",https://eslint.org/docs/v8.x/rules/brace-style,"Brace style is closely related to indent style in programming and describes the placement of braces relative to their control statement and body. There are probably a dozen, if not more, brace styles in the world.
+
+The one true brace style is one of the most common brace styles in JavaScript, in which the opening brace of a block is placed on the same line as its corresponding statement or declaration. For example:
+
+if (foo) {
+  bar();
+} else {
+  baz();
+}
+
+
+
+
+
+One common variant of one true brace style is called Stroustrup, in which the else statements in an if-else construct, as well as catch and finally, must be on its own line after the preceding closing brace. For example:
+
+if (foo) {
+  bar();
+}
+else {
+  baz();
+}
+
+
+
+
+
+
+Another style is called Allman, in which all the braces are expected to be on their own lines without any extra indentation. For example:
+
+if (foo)
+{
+  bar();
+}
+else
+{
+  baz();
+}
+
+
+
+
+
+
+
+
+While no style is considered better than the other, most developers agree that having a consistent style throughout a project is important for its long-term maintainability.","Options仅支持几种模式，无法调整细节。
+4和5无法实现","This rule has a string option:
+
+""1tbs"" (default) enforces one true brace style
+""stroustrup"" enforces Stroustrup style
+""allman"" enforces Allman style
+This rule has an object option for an exception:
+
+""allowSingleLine"": true (default false) allows the opening and closing braces for a block to be on the same line
+1tbs
+Examples of incorrect code for this rule with the default ""1tbs"" option:
+
+Open in Playground
+/*eslint brace-style: ""error""*/
+
+function foo()
+{
+  return true;
+}
+
+if (foo)
+{
+  bar();
+}
+
+try
+{
+  somethingRisky();
+} catch(e)
+{
+  handleError();
+}
+
+if (foo) {
+  bar();
+}
+else {
+  baz();
+}
+
+class C
+{
+    static
+    {
+        foo();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the default ""1tbs"" option:
+
+Open in Playground
+/*eslint brace-style: ""error""*/
+
+function foo() {
+  return true;
+}
+
+if (foo) {
+  bar();
+}
+
+if (foo) {
+  bar();
+} else {
+  baz();
+}
+
+try {
+  somethingRisky();
+} catch(e) {
+  handleError();
+}
+
+class C {
+    static {
+        foo();
+    }
+}
+
+// when there are no braces, there are no problems
+if (foo) bar();
+else if (baz) boom();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the ""1tbs"", { ""allowSingleLine"": true } options:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""1tbs"", { ""allowSingleLine"": true }]*/
+
+function nop() { return; }
+
+if (foo) { bar(); }
+
+if (foo) { bar(); } else { baz(); }
+
+try { somethingRisky(); } catch(e) { handleError(); }
+
+if (foo) { baz(); } else {
+  boom();
+}
+
+if (foo) { baz(); } else if (bar) {
+  boom();
+}
+
+if (foo) { baz(); } else
+if (bar) {
+  boom();
+}
+
+if (foo) { baz(); } else if (bar) {
+  boom();
+}
+
+try { somethingRisky(); } catch(e) {
+  handleError();
+}
+
+class C {
+    static { foo(); }
+}
+
+class D { static { foo(); } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+stroustrup
+Examples of incorrect code for this rule with the ""stroustrup"" option:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""stroustrup""]*/
+
+function foo()
+{
+  return true;
+}
+
+if (foo)
+{
+  bar();
+}
+
+try
+{
+  somethingRisky();
+} catch(e)
+{
+  handleError();
+}
+
+class C
+{
+    static
+    {
+        foo();
+    }
+}
+
+if (foo) {
+  bar();
+} else {
+  baz();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the ""stroustrup"" option:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""stroustrup""]*/
+
+function foo() {
+  return true;
+}
+
+if (foo) {
+  bar();
+}
+
+if (foo) {
+  bar();
+}
+else {
+  baz();
+}
+
+try {
+  somethingRisky();
+}
+catch(e) {
+  handleError();
+}
+
+class C {
+    static {
+        foo();
+    }
+}
+
+// when there are no braces, there are no problems
+if (foo) bar();
+else if (baz) boom();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the ""stroustrup"", { ""allowSingleLine"": true } options:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""stroustrup"", { ""allowSingleLine"": true }]*/
+
+function nop() { return; }
+
+if (foo) { bar(); }
+
+if (foo) { bar(); }
+else { baz(); }
+
+try { somethingRisky(); }
+catch(e) { handleError(); }
+
+class C {
+    static { foo(); }
+}
+
+class D { static { foo(); } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+allman
+Examples of incorrect code for this rule with the ""allman"" option:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""allman""]*/
+
+function foo() {
+  return true;
+}
+
+if (foo)
+{
+  bar(); }
+
+try
+{
+  somethingRisky();
+} catch(e)
+{
+  handleError();
+}
+
+class C {
+    static {
+        foo();
+    }
+}
+
+if (foo) {
+  bar();
+} else {
+  baz();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the ""allman"" option:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""allman""]*/
+
+function foo()
+{
+  return true;
+}
+
+if (foo)
+{
+  bar();
+}
+
+if (foo)
+{
+  bar();
+}
+else
+{
+  baz();
+}
+
+try
+{
+  somethingRisky();
+}
+catch(e)
+{
+  handleError();
+}
+
+class C
+{
+    static
+    {
+        foo();
+    }
+}
+
+// when there are no braces, there are no problems
+if (foo) bar();
+else if (baz) boom();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Examples of correct code for this rule with the ""allman"", { ""allowSingleLine"": true } options:
+
+Open in Playground
+/*eslint brace-style: [""error"", ""allman"", { ""allowSingleLine"": true }]*/
+
+function nop() { return; }
+
+if (foo) { bar(); }
+
+if (foo) { bar(); }
+else { baz(); }
+
+try { somethingRisky(); }
+catch(e) { handleError(); }
+
+class C
+{
+    static { foo(); }
+
+    static
+    { foo(); }
+}
+
+class D { static { foo(); } }","brace-style: [""error"", ""1tbs""]",,,,,

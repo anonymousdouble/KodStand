@@ -1,24 +1,25 @@
 
+
 # no-new-symbol
 ## Overview
+
 Disallow `new` operators with the `Symbol` object
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 `Symbol` is not intended to be used with the `new` operator, but to be called as a function.
+
 
 ```json
 var foo = new Symbol("foo");
 ```
+
 This throws a `TypeError` exception.
+
 ## Rule Details
+
 This rule is aimed at preventing the accidental calling of `Symbol` with the `new` operator.
+
 ## Examples
+
 Examples of incorrect code for this rule:
 
 
@@ -28,6 +29,7 @@ Examples of incorrect code for this rule:
 
 var foo = new Symbol('foo');
 ```
+
 Examples of correct code for this rule:
 
 
@@ -43,29 +45,30 @@ function bar(Symbol) {
 }
 
 ```
+
 ## When Not To Use It
+
 This rule should not be used in ES3/5 environments.
+
 ## Handled by TypeScript
+
 
                 It is safe to disable this rule when using TypeScript because TypeScript's compiler enforces this check.
             
+
 ## Version
+
 This rule was introduced in ESLint v2.0.0-beta.1.
+
 ## Further Reading
-
-
-
-
 
 ECMAScript 2015 Language Specification – ECMA-262 6th Edition 
  www.ecma-international.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

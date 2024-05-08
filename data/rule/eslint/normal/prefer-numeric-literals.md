@@ -1,23 +1,22 @@
 
+
 # prefer-numeric-literals
 ## Overview
+
 Disallow `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal literals
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 The `parseInt()` and `Number.parseInt()` functions can be used to turn binary, octal, and hexadecimal strings into integers. As binary, octal, and hexadecimal literals are supported in ES6, this rule encourages use of those numeric literals instead of `parseInt()` or `Number.parseInt()`.
+
 
 ```json
 0b111110111 === 503;
 0o767 === 503;
 ```
+
 ## Rule Details
+
 This rule disallows calls to `parseInt()` or `Number.parseInt()` if called with two arguments: a string; and a radix option of 2 (binary), 8 (octal), or 16 (hexadecimal).
+
 Examples of incorrect code for this rule:
 
 
@@ -32,6 +31,7 @@ Number.parseInt("111110111", 2) === 503;
 Number.parseInt("767", 8) === 503;
 Number.parseInt("1F7", 16) === 503;
 ```
+
 Examples of correct code for this rule:
 
 
@@ -55,16 +55,24 @@ parseInt(foo, 2);
 Number.parseInt(foo);
 Number.parseInt(foo, 2);
 ```
+
 ## When Not To Use It
+
 If you want to allow use of `parseInt()` or `Number.parseInt()` for binary, octal, or hexadecimal integers, or if you are not using ES6 (because binary and octal literals are not supported in ES5 and below), you may wish to disable this rule.
+
 ## Compatibility
 
-JSCS: requireNumericLiterals 
+
+- JSCS: requireNumericLiterals 
 
 ## Version
+
 This rule was introduced in ESLint v3.5.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

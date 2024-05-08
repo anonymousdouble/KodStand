@@ -1,14 +1,17 @@
 
+
 # no-inline-comments
 ## Overview
+
 Disallow inline comments after code
-
-
 
 Some style guides disallow comments on the same line as code. Code can become difficult to read if comments immediately follow the code on the same line.
 On the other hand, it is sometimes faster and more obvious to put comments immediately following code.
+
 ## Rule Details
+
 This rule disallows comments on the same line as code.
+
 Examples of incorrect code for this rule:
 
 
@@ -26,6 +29,7 @@ function getRandomNumber(){
 
 var c = 3; /* A block comment after code */
 ```
+
 Examples of correct code for this rule:
 
 
@@ -38,8 +42,11 @@ var foo = 5;
 var bar = 5;
 //This is a comment below a line of code
 ```
+
 ### JSX exception
+
 Comments inside the curly braces in JSX are allowed to be on the same line as the braces, but only if they are not on the same line with other code, and the braces do not enclose an actual expression.
+
 Examples of incorrect code for this rule:
 
 
@@ -56,6 +63,7 @@ var bar = (
     </div>
 );
 ```
+
 Examples of correct code for this rule:
 
 
@@ -88,9 +96,13 @@ var quux = (
     </div>
 )
 ```
+
 ## Options
+
 ### ignorePattern
+
 To make this rule ignore specific comments, set the `ignorePattern` option to a string pattern that will be passed to the RegExp constructor .
+
 Examples of correct code for the `ignorePattern` option:
 
 
@@ -99,6 +111,7 @@ Examples of correct code for the `ignorePattern` option:
 
 import(/* webpackChunkName: "my-chunk-name" */ './locale/en');
 ```
+
 Examples of incorrect code for the `ignorePattern` option:
 
 
@@ -108,10 +121,15 @@ Examples of incorrect code for the `ignorePattern` option:
 var foo = 4; // other thing
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.10.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

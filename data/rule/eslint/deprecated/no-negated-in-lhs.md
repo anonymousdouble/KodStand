@@ -1,14 +1,18 @@
 
+
 # no-negated-in-lhs
 ## Overview
+
 Disallow negating the left operand in `in` expressions
 
-
-
 This rule was deprecated in ESLint v3.3.0 and replaced by the no-unsafe-negation  rule.
+
 Just as developers might type `-a + b` when they mean `-(a + b)` for the negative of a sum, they might type `!key in object` by mistake when they almost certainly mean `!(key in object)` to test that a key is not in an object.
+
 ## Rule Details
+
 This rule disallows negating the left operand in `in` expressions.
+
 Examples of incorrect code for this rule:
 
 
@@ -20,6 +24,7 @@ if(!key in object) {
     // and type conversion makes it equivalent to (key ? "false" : "true") in object
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -35,12 +40,19 @@ if(('' + !key) in object) {
     // in a rare situation when that is the intended meaning
 }
 ```
+
 ## When Not To Use It
+
 Never.
+
 ## Version
+
 This rule was introduced in ESLint v0.1.2.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

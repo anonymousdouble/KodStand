@@ -1,46 +1,52 @@
 
+
 # no-irregular-whitespace
 ## Overview
+
 Disallow irregular whitespace
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 Invalid or irregular whitespace causes issues with ECMAScript 5 parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
+
 Various whitespace characters can be inputted by programmers by mistake for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non breaking space character for example.
+
 A simple fix for this problem could be to rewrite the offending line from scratch. This might also be a problem introduced by the text editor: if rewriting the line does not fix it, try using a different editor.
+
 Known issues these spaces cause:
 
-Ogham Space Mark
 
-Is a valid token separator, but is rendered as a visible glyph in most typefaces, which may be misleading in source code.
-
-
-Mongolian Vowel Separator
-
-Is no longer considered a space separator since Unicode 6.3. It will result in a syntax error in current parsers when used in place of a regular token separator.
+- Ogham Space Mark
 
 
-Line Separator and Paragraph Separator
-
-These have always been valid whitespace characters and line terminators, but were considered illegal in string literals prior to ECMAScript 2019.
+- Is a valid token separator, but is rendered as a visible glyph in most typefaces, which may be misleading in source code.
 
 
-Zero Width Space
-
-Is NOT considered a separator for tokens and is often parsed as an `Unexpected token ILLEGAL`.
-Is NOT shown in modern browsers making code repository software expected to resolve the visualization.
+- Mongolian Vowel Separator
 
 
+- Is no longer considered a space separator since Unicode 6.3. It will result in a syntax error in current parsers when used in place of a regular token separator.
+
+
+- Line Separator and Paragraph Separator
+
+
+- These have always been valid whitespace characters and line terminators, but were considered illegal in string literals prior to ECMAScript 2019.
+
+
+- Zero Width Space
+
+
+- Is NOT considered a separator for tokens and is often parsed as an `Unexpected token ILLEGAL`.
+
+- Is NOT shown in modern browsers making code repository software expected to resolve the visualization.
 
 In JSON, none of the characters listed as irregular whitespace by this rule may appear outside of a string.
+
 ## Rule Details
+
 This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
+
 This rule disallows the following characters except where the options allow:
+
 
 ```json
 \u000B - Line Tabulation (\v) - <VT>
@@ -68,16 +74,24 @@ This rule disallows the following characters except where the options allow:
 \u205f - Medium Mathematical Space
 \u3000 - Ideographic Space
 ```
+
 ## Options
+
 This rule has an object option for exceptions:
 
-`"skipStrings": true` (default) allows any whitespace characters in string literals
-`"skipComments": true` allows any whitespace characters in comments
-`"skipRegExps": true` allows any whitespace characters in regular expression literals
-`"skipTemplates": true` allows any whitespace characters in template literals
-`"skipJSXText": true` allows any whitespace characters in JSX text
+
+- `"skipStrings": true` (default) allows any whitespace characters in string literals
+
+- `"skipComments": true` allows any whitespace characters in comments
+
+- `"skipRegExps": true` allows any whitespace characters in regular expression literals
+
+- `"skipTemplates": true` allows any whitespace characters in template literals
+
+- `"skipJSXText": true` allows any whitespace characters in JSX text
 
 ### skipStrings
+
 Examples of incorrect code for this rule with the default `{ "skipStrings": true }` option:
 
 
@@ -125,6 +139,7 @@ var thing = function() {
     return `template <NBSP>string`;
 }
 ```
+
 Examples of correct code for this rule with the default `{ "skipStrings": true }` option:
 
 
@@ -143,7 +158,9 @@ var thing = function() {
     return 'th <NBSP>ing';
 }
 ```
+
 ### skipComments
+
 Examples of additional correct code for this rule with the `{ "skipComments": true }` option:
 
 
@@ -158,7 +175,9 @@ function thing() {
 Description <NBSP>: some descriptive text
 */
 ```
+
 ### skipRegExps
+
 Examples of additional correct code for this rule with the `{ "skipRegExps": true }` option:
 
 
@@ -169,7 +188,9 @@ function thing() {
     return / <NBSP>regexp/;
 }
 ```
+
 ### skipTemplates
+
 Examples of additional correct code for this rule with the `{ "skipTemplates": true }` option:
 
 
@@ -181,7 +202,9 @@ function thing() {
     return `template <NBSP>string`;
 }
 ```
+
 ### skipJSXText
+
 Examples of additional correct code for this rule with the `{ "skipJSXText": true }` option:
 
 
@@ -193,49 +216,30 @@ function Thing() {
     return <div>text in JSX</div>; // <NBSP> before `JSX`
 }
 ```
+
 ## When Not To Use It
+
 If you decide that you wish to use whitespace other than tabs and spaces outside of strings in your application.
+
 ## Version
+
 This rule was introduced in ESLint v0.9.0.
+
 ## Further Reading
-
-
-
-
 
 Annotated ES5 
  es5.github.io
 
-
-
-
-
-
-
-
-
-
 JSON: The JavaScript subset that isn’t - Timeless 
  web.archive.org
-
-
-
-
-
-
-
-
-
 
 U+1680 OGHAM SPACE MARK:   – Unicode – Codepoints 
  codepoints.net
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

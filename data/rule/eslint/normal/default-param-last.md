@@ -1,11 +1,12 @@
 
+
 # default-param-last
 ## Overview
+
 Enforce default parameters to be last
 
-
-
 Putting default parameter at last allows function calls to omit optional tail arguments.
+
 
 ```json
 // Correct: optional argument can be omitted
@@ -16,8 +17,11 @@ createUser("tabby")
 function createUser(isAdmin = false, id) {}
 createUser(undefined, "tabby")
 ```
+
 ## Rule Details
+
 This rule enforces default parameters to be the last of parameters.
+
 Examples of incorrect code for this rule:
 
 
@@ -28,6 +32,7 @@ function f(a = 0, b) {}
 
 function g(a, b = 0, c) {}
 ```
+
 Examples of correct code for this rule:
 
 
@@ -37,10 +42,15 @@ Examples of correct code for this rule:
 function f(a, b = 0) {}
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v6.4.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

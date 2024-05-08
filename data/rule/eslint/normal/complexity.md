@@ -1,11 +1,12 @@
 
+
 # complexity
 ## Overview
+
 Enforce a maximum cyclomatic complexity allowed in a program
 
-
-
 Cyclomatic complexity measures the number of linearly independent paths through a program’s source code. This rule allows setting a cyclomatic complexity threshold.
+
 
 ```json
 function a(x) {
@@ -18,8 +19,11 @@ function a(x) {
     }
 }
 ```
+
 ## Rule Details
+
 This rule is aimed at reducing code complexity by capping the amount of cyclomatic complexity allowed in a program. As such, it will warn when the cyclomatic complexity crosses the configured threshold (default is `20`).
+
 Examples of incorrect code for a maximum of 2:
 
 
@@ -41,6 +45,7 @@ function b() {
     bar &&= 1;
 }
 ```
+
 Examples of correct code for a maximum of 2:
 
 
@@ -59,7 +64,9 @@ function b() {
     foo ||= 1;
 }
 ```
+
 Class field initializers and class static blocks are implicit functions. Therefore, their complexity is calculated separately for each initializer and each static block, and it doesn’t contribute to the complexity of the enclosing code.
+
 Examples of additional incorrect code for a maximum of 2:
 
 
@@ -78,6 +85,7 @@ class D { // this static block has complexity = 3
     }
 }
 ```
+
 Examples of additional correct code for a maximum of 2:
 
 
@@ -105,103 +113,78 @@ function foo() { // this function has complexity = 1
     }
 }
 ```
+
 ## Options
+
 Optionally, you may specify a `max` object property:
+
 
 ```json
 "complexity": ["error", 2]
 ```
+
 is equivalent to
+
 
 ```json
 "complexity": ["error", { "max": 2 }]
 ```
+
 Deprecated: the object property `maximum` is deprecated. Please use the property `max` instead.
+
 ## When Not To Use It
+
 If you can’t determine an appropriate complexity limit for your code, then it’s best to disable this rule.
+
 ## Related Rules
 
 
+- 
 max-depth 
 
+- 
 max-len 
 
+- 
 max-lines 
 
+- 
 max-lines-per-function 
 
+- 
 max-nested-callbacks 
 
+- 
 max-params 
 
+- 
 max-statements 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Further Reading
-
-
-
-
 
 Cyclomatic complexity - Wikipedia 
  en.wikipedia.org
 
-
-
-
-
-
-
-
-
-
 Complexity Analysis of JavaScript Code 
  ariya.io
-
-
-
-
-
-
-
-
-
 
 Complexity for JavaScript 
  craftsmanshipforsoftware.com
 
-
-
-
-
-
-
-
-
-
 About complexity | JSComplexity.org 
  web.archive.org
-
-
-
-
-
-
-
-
-
 
 Complexity has no default · Issue #4808 · eslint/eslint 
  github.com
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

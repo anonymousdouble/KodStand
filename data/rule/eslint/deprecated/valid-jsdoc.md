@@ -1,17 +1,14 @@
 
+
 # valid-jsdoc
 ## Overview
+
 Enforce valid JSDoc comments
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated  in ESLint v5.10.0.
+
 JSDoc  generates application programming interface (API) documentation from specially-formatted comments in JavaScript code. For example, this is a JSDoc comment for a function:
+
 
 ```json
 /**
@@ -24,20 +21,32 @@ function add(num1, num2) {
     return num1 + num2;
 }
 ```
+
 If comments are invalid because of typing mistakes, then documentation will be incomplete.
+
 If comments are inconsistent because they are not updated when function definitions are modified, then readers might become confused.
+
 ## Rule Details
+
 This rule enforces valid and consistent JSDoc comments. It reports any of the following problems:
 
-missing parameter tag: `@arg`, `@argument`, or `@param`
-inconsistent order of parameter names in a comment compared to the function or method
-missing return tag: `@return` or `@returns`
-missing parameter or return type
-missing parameter or return description
-syntax error
+
+- missing parameter tag: `@arg`, `@argument`, or `@param`
+
+- inconsistent order of parameter names in a comment compared to the function or method
+
+- missing return tag: `@return` or `@returns`
+
+- missing parameter or return type
+
+- missing parameter or return description
+
+- syntax error
 
 This rule does not report missing JSDoc comments for classes, functions, or methods.
+
 Note: This rule does not support all of the Google Closure documentation tool’s use cases. As such, some code such as `(/**number*/ n => n * 2);` will be flagged as missing appropriate function JSDoc comments even though `/**number*/` is intended to be a type hint and not a documentation block for the function. We don’t recommend using this rule if you use type hints in this way.
+
 Examples of incorrect code for this rule:
 
 
@@ -78,6 +87,7 @@ function sum(num1, num2) {
     this.num2 = num2;
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -155,24 +165,36 @@ class WonderfulWidget extends Widget {
     }
 }
 ```
+
 ## Options
+
 This rule has an object option:
 
-`"prefer"` enforces consistent documentation tags specified by an object whose properties mean instead of key use value (for example, `"return": "returns"` means instead of `@return` use `@returns`)
-`"preferType"` enforces consistent type strings specified by an object whose properties mean instead of key use value (for example, `"object": "Object"` means instead of `object` use `Object`)
-`"requireReturn"` requires a return tag:
 
-`true` (default) even if the function or method does not have a `return` statement (this option value does not apply to constructors)
-`false` if and only if the function or method has a `return` statement or returns a value e.g. `async` function (this option value does apply to constructors)
+- `"prefer"` enforces consistent documentation tags specified by an object whose properties mean instead of key use value (for example, `"return": "returns"` means instead of `@return` use `@returns`)
+
+- `"preferType"` enforces consistent type strings specified by an object whose properties mean instead of key use value (for example, `"object": "Object"` means instead of `object` use `Object`)
+
+- `"requireReturn"` requires a return tag:
 
 
-`"requireReturnType": false` allows missing type in return tags
-`"matchDescription"` specifies (as a string) a regular expression to match the description in each JSDoc comment (for example, `".+"` requires a description; this option does not apply to descriptions in parameter or return tags)
-`"requireParamDescription": false` allows missing description in parameter tags
-`"requireReturnDescription": false` allows missing description in return tags
-`"requireParamType": false` allows missing type in parameter tags
+- `true` (default) even if the function or method does not have a `return` statement (this option value does not apply to constructors)
+
+- `false` if and only if the function or method has a `return` statement or returns a value e.g. `async` function (this option value does apply to constructors)
+
+
+- `"requireReturnType": false` allows missing type in return tags
+
+- `"matchDescription"` specifies (as a string) a regular expression to match the description in each JSDoc comment (for example, `".+"` requires a description; this option does not apply to descriptions in parameter or return tags)
+
+- `"requireParamDescription": false` allows missing description in parameter tags
+
+- `"requireReturnDescription": false` allows missing description in return tags
+
+- `"requireParamType": false` allows missing type in parameter tags
 
 ### prefer
+
 Examples of additional incorrect code for this rule with sample `"prefer": { "arg": "param", "argument": "param", "class": "constructor", "return": "returns", "virtual": "abstract" }` options:
 
 
@@ -213,7 +235,9 @@ class Widget {
     }
 }
 ```
+
 ### preferType
+
 Examples of additional incorrect code for this rule with sample `"preferType": { "Boolean": "boolean", "Number": "number", "object": "Object", "String": "string" }` options:
 
 
@@ -252,7 +276,9 @@ class Widget {
     }
 }
 ```
+
 ### requireReturn
+
 Examples of additional incorrect code for this rule with the `"requireReturn": false` option:
 
 
@@ -280,6 +306,7 @@ class Widget {
     }
 }
 ```
+
 Example of additional correct code for this rule with the `"requireReturn": false` option:
 
 
@@ -293,7 +320,9 @@ function greet(name) {
     console.log("Hello " + name);
 }
 ```
+
 ### requireReturnType
+
 Example of additional correct code for this rule with the `"requireReturnType": false` option:
 
 
@@ -310,7 +339,9 @@ function add(num1, num2) {
     return num1 + num2;
 }
 ```
+
 ### requireParamType
+
 Example of additional correct code for this rule with the `"requireParamType": false` option:
 
 
@@ -327,7 +358,9 @@ function add(num1, num2) {
     return num1 + num2;
 }
 ```
+
 ### matchDescription
+
 Example of additional incorrect code for this rule with a sample `"matchDescription": ".+"` option:
 
 
@@ -343,7 +376,9 @@ function greet(name) {
     console.log("Hello " + name);
 }
 ```
+
 ### requireParamDescription
+
 Example of additional correct code for this rule with the `"requireParamDescription": false` option:
 
 
@@ -360,7 +395,9 @@ function add(num1, num2) {
     return num1 + num2;
 }
 ```
+
 ### requireReturnDescription
+
 Example of additional correct code for this rule with the `"requireReturnDescription": false` option:
 
 
@@ -377,31 +414,30 @@ function add(num1, num2) {
     return num1 + num2;
 }
 ```
+
 ## When Not To Use It
+
 If you aren’t using JSDoc, then you can safely turn this rule off.
+
 ## Related Rules
 
 
+- 
 require-jsdoc 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.4.0.
+
 ## Further Reading
-
-
-
-
 
 Use JSDoc: Index 
  jsdoc.app
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

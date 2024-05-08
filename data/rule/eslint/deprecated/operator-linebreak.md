@@ -1,46 +1,56 @@
 
+
 # operator-linebreak
 ## Overview
+
 Enforce consistent linebreak style for operators
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 When a statement is too long to fit on a single line, line breaks are generally inserted next to the operators separating expressions. The first style coming to mind would be to place the operator at the end of the line, following the English punctuation rules.
+
 
 ```json
 var fullHeight = borderTop +
                  innerHeight +
                  borderBottom;
 ```
+
 Some developers find that placing operators at the beginning of the line makes the code more readable.
+
 
 ```json
 var fullHeight = borderTop
                + innerHeight
                + borderBottom;
 ```
+
 ## Rule Details
+
 This rule enforces a consistent linebreak style for operators.
+
 ## Options
+
 This rule has two options, a string option and an object option.
+
 String option:
 
-`"after"` requires linebreaks to be placed after the operator
-`"before"` requires linebreaks to be placed before the operator
-`"none"` disallows linebreaks on either side of the operator
+
+- `"after"` requires linebreaks to be placed after the operator
+
+- `"before"` requires linebreaks to be placed before the operator
+
+- `"none"` disallows linebreaks on either side of the operator
 
 Object option:
 
-`"overrides"` overrides the global setting for specified operators
+
+- `"overrides"` overrides the global setting for specified operators
 
 The default configuration is `"after", { "overrides": { "?": "before", ":": "before" } }`
+
 ### after
+
 Examples of incorrect code for this rule with the `"after"` option:
 
 
@@ -75,6 +85,7 @@ class Foo {
         = 3;
 }
 ```
+
 Examples of correct code for this rule with the `"after"` option:
 
 
@@ -108,7 +119,9 @@ class Foo {
     d = 4;
 }
 ```
+
 ### before
+
 Examples of incorrect code for this rule with the `"before"` option:
 
 
@@ -139,6 +152,7 @@ class Foo {
         3;
 }
 ```
+
 Examples of correct code for this rule with the `"before"` option:
 
 
@@ -172,7 +186,9 @@ class Foo {
     d = 4;
 }
 ```
+
 ### none
+
 Examples of incorrect code for this rule with the `"none"` option:
 
 
@@ -218,6 +234,7 @@ class Foo {
         = 6;
 }
 ```
+
 Examples of correct code for this rule with the `"none"` option:
 
 
@@ -244,7 +261,9 @@ class Foo {
     ] = 6;
 }
 ```
+
 ### overrides
+
 Examples of additional incorrect code for this rule with the `{ "overrides": { "+=": "before" } }` option:
 
 
@@ -255,6 +274,7 @@ var thing = 'thing';
 thing +=
   's';
 ```
+
 Examples of additional correct code for this rule with the `{ "overrides": { "+=": "before" } }` option:
 
 
@@ -265,6 +285,7 @@ var thing = 'thing';
 thing
   += 's';
 ```
+
 Examples of additional correct code for this rule with the `{ "overrides": { "?": "ignore", ":": "ignore" } }` option:
 
 
@@ -281,6 +302,7 @@ answer = everything
   :
   foo;
 ```
+
 Examples of incorrect code for this rule with the default `"after", { "overrides": { "?": "before", ":": "before" } }` option:
 
 
@@ -305,6 +327,7 @@ answer = everything ?
   42 :
   foo;
 ```
+
 Examples of correct code for this rule with the default `"after", { "overrides": { "?": "before", ":": "before" } }` option:
 
 
@@ -327,18 +350,25 @@ answer = everything
   ? 42
   : foo;
 ```
+
 ## When Not To Use It
+
 If your project will not be using a common operator line break style, turn this rule off.
+
 ## Related Rules
 
 
+- 
 comma-style 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.19.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

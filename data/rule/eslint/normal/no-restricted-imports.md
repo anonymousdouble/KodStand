@@ -1,35 +1,46 @@
 
+
 # no-restricted-imports
 ## Overview
+
 Disallow specified modules when loaded by `import`
 
-
-
 Imports are an ES6/ES2015 standard for making the functionality of other modules available in your current module. In CommonJS this is implemented through the `require()` call which makes this ESLint rule roughly equivalent to its CommonJS counterpart `no-restricted-modules`.
+
 Why would you want to restrict imports?
 
 
+- 
 Some imports might not make sense in a particular environment. For example, Node.js’ `fs` module would not make sense in an environment that didn’t have a file system.
 
 
+- 
 Some modules provide similar or identical functionality, think `lodash` and `underscore`. Your project may have standardized on a module. You want to make sure that the other alternatives are not being used as this would unnecessarily bloat the project and provide a higher maintenance cost of two dependencies when one would suffice.
 
-
 ## Rule Details
+
 This rule allows you to specify imports that you don’t want to use in your application.
+
 It applies to static imports only, not dynamic ones.
+
 ## Options
+
 The syntax to specify restricted imports looks like this:
+
 
 ```json
 "no-restricted-imports": ["error", "import1", "import2"]
 ```
+
 or like this:
+
 
 ```json
 "no-restricted-imports": ["error", { "paths": ["import1", "import2"] }]
 ```
+
 When using the object form, you can also specify an array of gitignore-style patterns:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -37,7 +48,9 @@ When using the object form, you can also specify an array of gitignore-style pat
     "patterns": ["import1/private/*", "import2/*", "!import2/good"]
 }]
 ```
+
 You may also specify a custom message for any paths you want to restrict as follows:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -48,7 +61,9 @@ You may also specify a custom message for any paths you want to restrict as foll
     "message": "Please use import-quux instead."
 }]
 ```
+
 or like this:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -61,7 +76,9 @@ or like this:
     }]
 }]
 ```
+
 or like this if you need to restrict only certain imports from a module:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -72,7 +89,9 @@ or like this if you need to restrict only certain imports from a module:
   }]
 }]
 ```
+
 or like this if you want to apply a custom message to pattern matches:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -85,8 +104,11 @@ or like this if you want to apply a custom message to pattern matches:
     }]
 }]
 ```
+
 The custom message will be appended to the default error message.
+
 Pattern matches can also be configured to be case-sensitive:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -96,7 +118,9 @@ Pattern matches can also be configured to be case-sensitive:
     }]
 }]
 ```
+
 Pattern matches can restrict specific import names only, similar to the `paths` option:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -107,7 +131,9 @@ Pattern matches can restrict specific import names only, similar to the `paths` 
     }]
 }]
 ```
+
 Regex patterns can also be used to restrict specific import Name:
+
 
 ```json
 "no-restricted-imports": ["error", {
@@ -117,14 +143,18 @@ Regex patterns can also be used to restrict specific import Name:
     }]
 }]
 ```
+
 To restrict the use of all Node.js core imports (via https://github.com/nodejs/node/tree/master/lib ):
+
 
 ```json
     "no-restricted-imports": ["error",
          "assert","buffer","child_process","cluster","crypto","dgram","dns","domain","events","freelist","fs","http","https","module","net","os","path","punycode","querystring","readline","repl","smalloc","stream","string_decoder","sys","timers","tls","tracing","tty","url","util","vm","zlib"
     ],
 ```
+
 ## Examples
+
 Examples of incorrect code for this rule:
 
 
@@ -135,11 +165,13 @@ import fs from 'fs';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", "fs"]*/
 
 export { fs } from 'fs';
 ```
+
 
 
 ```json
@@ -149,6 +181,7 @@ export * from 'fs';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { "paths": ["cluster"] }]*/
 
@@ -156,11 +189,13 @@ import cluster from 'cluster';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { "patterns": ["lodash/*"] }]*/
 
 import pick from 'lodash/pick';
 ```
+
 
 
 ```json
@@ -172,6 +207,7 @@ import pick from 'lodash/pick';
 
 import DisallowedObject from "foo";
 ```
+
 
 
 ```json
@@ -189,6 +225,7 @@ import { "DisallowedObject" as SomeObject } from "foo";
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { paths: [{
     name: "foo",
@@ -198,6 +235,7 @@ import { "DisallowedObject" as SomeObject } from "foo";
 
 import * as Foo from "foo";
 ```
+
 
 
 ```json
@@ -210,6 +248,7 @@ import pick from 'lodash/pick';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { patterns: [{
     group: ["foo[A-Z]*"],
@@ -218,6 +257,7 @@ import pick from 'lodash/pick';
 
 import pick from 'fooBar';
 ```
+
 
 
 ```json
@@ -231,6 +271,7 @@ import { isEmpty } from 'utils/collection-utils';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { patterns: [{
     group: ["utils/*"],
@@ -240,6 +281,7 @@ import { isEmpty } from 'utils/collection-utils';
 
 import { isEmpty } from 'utils/collection-utils';
 ```
+
 
 
 ```json
@@ -253,6 +295,7 @@ import { isSomething, hasSomething } from 'foo/bar';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { patterns: [{
     group: ["foo/*"],
@@ -262,6 +305,7 @@ import { isSomething, hasSomething } from 'foo/bar';
 
 import { bar, bazQux } from 'foo/quux';
 ```
+
 Examples of correct code for this rule:
 
 
@@ -273,6 +317,7 @@ export { foo } from "bar";
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { "paths": ["fs"], "patterns": ["eslint/*"] }]*/
 
@@ -282,11 +327,13 @@ export * from "path";
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { paths: [{ name: "foo", importNames: ["DisallowedObject"] }] }]*/
 
 import DisallowedObject from "foo"
 ```
+
 
 
 ```json
@@ -300,6 +347,7 @@ import { AllowedObject as DisallowedObject } from "foo";
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { patterns: [{
     group: ["lodash/*"],
@@ -310,6 +358,7 @@ import lodash from 'lodash';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { patterns: [{
     group: ["foo[A-Z]*"],
@@ -318,6 +367,7 @@ import lodash from 'lodash';
 
 import pick from 'food';
 ```
+
 
 
 ```json
@@ -331,6 +381,7 @@ import { hasValues } from 'utils/collection-utils';
 ```
 
 
+
 ```json
 /*eslint no-restricted-imports: ["error", { patterns: [{
     group: ["utils/*"],
@@ -340,12 +391,19 @@ import { hasValues } from 'utils/collection-utils';
 
 import isEmpty, { hasValue } from 'utils/collection-utils';
 ```
+
 ## When Not To Use It
+
 Don’t use this rule or don’t include a module in the list for this rule if you want to be able to import a module in your project without an ESLint error or warning.
+
 ## Version
+
 This rule was introduced in ESLint v2.0.0-alpha-1.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,12 +1,14 @@
 
+
 # require-jsdoc
 ## Overview
+
 Require JSDoc comments
 
-
-
 This rule was deprecated  in ESLint v5.10.0.
+
 JSDoc  is a JavaScript API documentation generator. It uses specially-formatted comments inside of code to generate API documentation automatically. For example, this is what a JSDoc comment looks like for a function:
+
 
 ```json
 /**
@@ -19,22 +21,33 @@ function sum(num1, num2) {
     return num1 + num2;
 }
 ```
+
 Some style guides require JSDoc comments for all functions as a way of explaining function behavior.
+
 ## Rule Details
+
 This rule requires JSDoc comments for specified nodes. Supported nodes:
 
-`"FunctionDeclaration"`
-`"ClassDeclaration"`
-`"MethodDefinition"`
-`"ArrowFunctionExpression"`
-`"FunctionExpression"`
+
+- `"FunctionDeclaration"`
+
+- `"ClassDeclaration"`
+
+- `"MethodDefinition"`
+
+- `"ArrowFunctionExpression"`
+
+- `"FunctionExpression"`
 
 ## Options
+
 This rule has a single object option:
 
-`"require"` requires JSDoc comments for the specified nodes
+
+- `"require"` requires JSDoc comments for the specified nodes
 
 Default option settings are:
+
 
 ```json
 {
@@ -49,7 +62,9 @@ Default option settings are:
     }]
 }
 ```
+
 ### require
+
 Examples of incorrect code for this rule with the `{ "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true, "ArrowFunctionExpression": true, "FunctionExpression": true } }` option:
 
 
@@ -92,6 +107,7 @@ var bar = {
     }
 };
 ```
+
 Examples of correct code for this rule with the `{ "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true, "ArrowFunctionExpression": true, "FunctionExpression": true } }` option:
 
 
@@ -178,18 +194,25 @@ var bar = {
 
 setTimeout(() => {}, 10); // since it's an anonymous arrow function
 ```
+
 ## When Not To Use It
+
 If you do not require JSDoc for your functions, then you can leave this rule off.
+
 ## Related Rules
 
 
+- 
 valid-jsdoc 
 
-
 ## Version
+
 This rule was introduced in ESLint v1.4.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

@@ -1,13 +1,16 @@
 
+
 # block-scoped-var
 ## Overview
+
 Enforce the use of variables within the scope they are defined
 
-
-
 The `block-scoped-var` rule generates warnings when variables are used outside of the block in which they were defined. This emulates C-style block scope.
+
 ## Rule Details
+
 This rule aims to reduce the usage of variables outside of their binding context and emulate traditional block scope from other languages. This is to help newcomers to the language avoid difficult bugs with variable hoisting.
+
 Examples of incorrect code for this rule:
 
 
@@ -54,6 +57,7 @@ class C {
     }
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -108,35 +112,23 @@ class C {
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v0.1.0.
+
 ## Further Reading
-
-
-
-
 
 JavaScript Scoping and Hoisting 
  www.adequatelygood.com
 
-
-
-
-
-
-
-
-
-
 var - JavaScript | MDN 
  developer.mozilla.org
 
-
-
-
-
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

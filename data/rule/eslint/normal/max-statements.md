@@ -1,11 +1,12 @@
 
+
 # max-statements
 ## Overview
+
 Enforce a maximum number of statements allowed in function blocks
 
-
-
 The `max-statements` rule allows you to specify the maximum number of statements allowed in a function.
+
 
 ```json
 function foo() {
@@ -14,19 +15,27 @@ function foo() {
   var qux = 3; // three statements
 }
 ```
+
 ## Rule Details
+
 This rule enforces a maximum number of statements allowed in function blocks.
+
 ## Options
+
 This rule has a number or object option:
 
-`"max"` (default `10`) enforces a maximum number of statements allows in function blocks
+
+- `"max"` (default `10`) enforces a maximum number of statements allows in function blocks
 
 Deprecated: The object property `maximum` is deprecated; please use the object property `max` instead.
+
 This rule has an object option:
 
-`"ignoreTopLevelFunctions": true` ignores top-level functions
+
+- `"ignoreTopLevelFunctions": true` ignores top-level functions
 
 ### max
+
 Examples of incorrect code for this rule with the default `{ "max": 10 }` option:
 
 
@@ -64,6 +73,7 @@ let bar = () => {
   var foo11 = 11; // Too many.
 };
 ```
+
 Examples of correct code for this rule with the default `{ "max": 10 }` option:
 
 
@@ -113,7 +123,9 @@ let bar = () => {
   };
 }
 ```
+
 Note that this rule does not apply to class static blocks, and that statements in class static blocks do not count as statements in the enclosing function.
+
 Examples of correct code for this rule with `{ "max": 2 }` option:
 
 
@@ -136,7 +148,9 @@ function foo() {
     };
 }
 ```
+
 ### ignoreTopLevelFunctions
+
 Examples of additional correct code for this rule with the `{ "max": 10 }, { "ignoreTopLevelFunctions": true }` options:
 
 
@@ -158,28 +172,39 @@ function foo() {
 }
 ```
 
+
 ## Related Rules
 
 
+- 
 complexity 
 
+- 
 max-depth 
 
+- 
 max-len 
 
+- 
 max-lines 
 
+- 
 max-lines-per-function 
 
+- 
 max-nested-callbacks 
 
+- 
 max-params 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.0.9.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

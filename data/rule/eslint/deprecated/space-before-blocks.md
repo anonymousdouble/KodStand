@@ -1,35 +1,41 @@
 
+
 # space-before-blocks
 ## Overview
+
 Enforce consistent spacing before blocks
 
-
-🔧 Fixable
-
-            Some problems reported by this rule are automatically fixable by the `--fix` command line  option
-        
-
-
 This rule was deprecated in ESLint v8.53.0. Please use the corresponding rule  in @stylistic/eslint-plugin-js .
+
 Consistency is an important part of any style guide.
 While it is a personal preference where to put the opening brace of blocks,
 it should be consistent across a whole project.
 Having an inconsistent style distracts the reader from seeing the important parts of the code.
+
 ## Rule Details
+
 This rule will enforce consistency of spacing before blocks. It is only applied on blocks that don’t begin on a new line.
 
-This rule ignores spacing which is between `=>` and a block. The spacing is handled by the `arrow-spacing` rule.
-This rule ignores spacing which is between a keyword and a block. The spacing is handled by the `keyword-spacing` rule.
-This rule ignores spacing which is between `:` of a switch case and a block. The spacing is handled by the `switch-colon-spacing` rule.
+
+- This rule ignores spacing which is between `=>` and a block. The spacing is handled by the `arrow-spacing` rule.
+
+- This rule ignores spacing which is between a keyword and a block. The spacing is handled by the `keyword-spacing` rule.
+
+- This rule ignores spacing which is between `:` of a switch case and a block. The spacing is handled by the `switch-colon-spacing` rule.
 
 ## Options
+
 This rule takes one argument. If it is `"always"` then blocks must always have at least one preceding space. If `"never"`
 then all blocks should never have any preceding space. If different spacing is desired for function
 blocks, keyword blocks and classes, an optional configuration object can be passed as the rule argument to
 configure the cases separately. If any value in the configuration object is `"off"`, then neither style will be enforced for blocks of that kind.
+
 ( e.g. `{ "functions": "never", "keywords": "always", "classes": "always" }` )
+
 The default is `"always"`.
+
 ### “always”
+
 Examples of incorrect code for this rule with the “always” option:
 
 
@@ -52,6 +58,7 @@ class Foo{
   constructor(){}
 }
 ```
+
 Examples of correct code for this rule with the `"always"` option:
 
 
@@ -80,7 +87,9 @@ for (;;) {
 
 try {} catch(a) {}
 ```
+
 ### “never”
+
 Examples of incorrect code for this rule with the `"never"` option:
 
 
@@ -99,6 +108,7 @@ for (;;) {
 
 try {} catch(a) {}
 ```
+
 Examples of correct code for this rule with the `"never"` option:
 
 
@@ -121,6 +131,7 @@ class Foo{
   constructor(){}
 }
 ```
+
 Examples of incorrect code for this rule when configured `{ "functions": "never", "keywords": "always", "classes": "never" }`:
 
 
@@ -136,6 +147,7 @@ class Foo{
   constructor() {}
 }
 ```
+
 Examples of correct code for this rule when configured `{ "functions": "never", "keywords": "always", "classes": "never" }`:
 
 
@@ -155,6 +167,7 @@ class Foo{
   constructor(){}
 }
 ```
+
 Examples of incorrect code for this rule when configured `{ "functions": "always", "keywords": "never", "classes": "never" }`:
 
 
@@ -170,6 +183,7 @@ class Foo {
   constructor(){}
 }
 ```
+
 Examples of correct code for this rule when configured `{ "functions": "always", "keywords": "never", "classes": "never" }`:
 
 
@@ -187,6 +201,7 @@ class Foo{
   constructor() {}
 }
 ```
+
 Examples of incorrect code for this rule when configured `{ "functions": "never", "keywords": "never", "classes": "always" }`:
 
 
@@ -198,6 +213,7 @@ class Foo{
   constructor(){}
 }
 ```
+
 Examples of correct code for this rule when configured `{ "functions": "never", "keywords": "never", "classes": "always" }`:
 
 
@@ -209,26 +225,37 @@ class Foo {
   constructor(){}
 }
 ```
+
 ## When Not To Use It
+
 You can turn this rule off if you are not concerned with the consistency of spacing before blocks.
+
 ## Related Rules
 
 
+- 
 keyword-spacing 
 
+- 
 arrow-spacing 
 
+- 
 switch-colon-spacing 
 
+- 
 block-spacing 
 
+- 
 brace-style 
 
-
 ## Version
+
 This rule was introduced in ESLint v0.9.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 

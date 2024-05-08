@@ -1,16 +1,12 @@
 
+
 # no-unsafe-optional-chaining
 ## Overview
+
 Disallow use of optional chaining in contexts where the `undefined` value is not allowed
 
-
-✅ Recommended
-
-            The `"extends": "eslint:recommended"` property in a configuration file  enables this rule
-        
-
-
 The optional chaining (`?.`) expression can short-circuit with a return value of `undefined`. Therefore, treating an evaluated optional chaining expression as a function, object, number, etc., can cause TypeError or unexpected results. For example:
+
 
 ```json
 var obj = undefined;
@@ -21,7 +17,9 @@ for (bar of obj?.foo);  // TypeError
 bar instanceof obj?.foo;  // TypeError
 const { bar } = obj?.foo;  // TypeError
 ```
+
 Also, parentheses limit the scope of short-circuiting in chains. For example:
+
 
 ```json
 var obj = undefined;
@@ -29,8 +27,11 @@ var obj = undefined;
 (obj?.foo)(); // TypeError
 (obj?.foo).bar; // TypeError
 ```
+
 ## Rule Details
+
 This rule aims to detect some cases where the use of optional chaining doesn’t prevent runtime errors. In particular, it flags optional chaining expressions in positions where short-circuiting to `undefined` causes throwing a TypeError afterward.
+
 Examples of incorrect code for this rule:
 
 
@@ -85,6 +86,7 @@ async function foo () {
    (await obj?.foo).bar;
 }
 ```
+
 Examples of correct code for this rule:
 
 
@@ -117,17 +119,24 @@ async function foo () {
    (await obj?.foo)?.bar;
 }
 ```
+
 ## Options
+
 This rule has an object option:
 
-`disallowArithmeticOperators`: Disallow arithmetic operations on optional chaining expressions (Default `false`). If this is `true`, this rule warns arithmetic operations on optional chaining expressions, which possibly result in `NaN`.
+
+- `disallowArithmeticOperators`: Disallow arithmetic operations on optional chaining expressions (Default `false`). If this is `true`, this rule warns arithmetic operations on optional chaining expressions, which possibly result in `NaN`.
 
 ### disallowArithmeticOperators
+
 With this option set to `true` the rule is enforced for:
 
-Unary operators: `-`, `+`
-Arithmetic operators: `+`, `-`, `/`, `*`, `%`, `**`
-Assignment operators: `+=`, `-=`, `/=`, `*=`, `%=`, `**=`
+
+- Unary operators: `-`, `+`
+
+- Arithmetic operators: `+`, `-`, `/`, `*`, `%`, `**`
+
+- Assignment operators: `+=`, `-=`, `/=`, `*=`, `%=`, `**=`
 
 Examples of additional incorrect code for this rule with the `{ "disallowArithmeticOperators": true }` option:
 
@@ -159,10 +168,15 @@ async function foo () {
 }
 ```
 
+
 ## Version
+
 This rule was introduced in ESLint v7.15.0.
+
 ## Resources
 
-Rule source 
-Tests source 
+
+- Rule source 
+
+- Tests source 
 
