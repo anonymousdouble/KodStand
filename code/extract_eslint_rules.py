@@ -290,4 +290,3 @@ def get_rules():
 
 if __name__ == "__main__":
     # parse_all()
-    get_rule_simple()

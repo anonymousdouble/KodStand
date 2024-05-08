@@ -80,7 +80,6 @@ class GPTAgent:
                 answer = self.simple_qa(prompt)
                 if answer is not None:
                     result.append(f"{google_rule}\n{answer}")
-            break
         with open("data\\matching\\google2eslint\\matching_auto.txt", "w", encoding="utf-8") as f:
             for r in result:
                 f.write(f"{r}\n")
