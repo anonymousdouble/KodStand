@@ -1,5 +1,5 @@
 import os
-
+import re
 
 class CoTPatterns:
     MAPPING_TASK = [
@@ -60,7 +60,7 @@ class PrompGenerator:
         """
         获取rule的简单信息
         """
-        def get_single_name_simple(path):
+        def get_single(path):
             rule = path.split("\\")[-1].replace(".md", "")
             desc = ""
             with open(path, "r", encoding="utf-8") as f:
@@ -74,12 +74,12 @@ class PrompGenerator:
         res = []
         for file in os.listdir(normal_dir):
             if file.endswith('.md'):
-                rule, desc = get_single_name_simple(
+                rule, desc = get_single(
                     os.path.join(normal_dir, file))
                 res.append((rule, desc))
         for file in os.listdir(deprecated_dir):
             if file.endswith('.md'):
-                rule, desc = get_single_name_simple(
+                rule, desc = get_single(
                     os.path.join(deprecated_dir, file))
                 res.append((rule, desc))
         # for file in os.listdir(removed_dir):
@@ -94,7 +94,39 @@ class PrompGenerator:
         获取rule的详细信息
 
         """
-        ...
+        def get_single(path):
+            rule = path.split("\\")[-1].replace(".md", "")
+            desc = []
+            with open(path, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+                for line in lines[5:]:
+                    if line.startswith("## Rule Details"):
+                        break
+                    desc.append(line)
+            desc = "\n".join(desc)
+            # combine multiple '\n'
+            desc = re.sub(r'\n+', '\n', desc)
+            return rule, desc
+        root_path = "data\\rule\\eslint"
+        normal_dir = os.path.join(root_path, "normal")
+        deprecated_dir = os.path.join(root_path, "deprecated")
+        removed_dir = os.path.join(root_path, "removed")
+        res = []
+        for file in os.listdir(normal_dir):
+            if file.endswith('.md'):
+                rule, desc = get_single(
+                    os.path.join(normal_dir, file))
+                res.append((rule, desc))
+        for file in os.listdir(deprecated_dir):
+            if file.endswith('.md'):
+                rule, desc = get_single(
+                    os.path.join(deprecated_dir, file))
+                res.append((rule, desc))
+        # for file in os.listdir(removed_dir):
+        #     if file.endswith('.md'):
+        #         rule, desc = get_single(os.path.join(removed_dir, file))
+        #         res.append((rule, desc))
+        return "\n".join([f"# {r[0]}\n## desc\n{r[1]}" for r in res])
 
     def __get_rule_name_desc_option(self):
         """
@@ -134,4 +166,4 @@ Response Format Should be a json object:{response_format}
 
 if __name__ == '__main__':
     with open("test_prompt.txt", 'w', encoding="utf-8") as f:
-        f.write(PrompGenerator().get_prompt(target_rule))
+        f.write(PrompGenerator().get_prompt(target_rule, "simple"))
