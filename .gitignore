@@ -10,6 +10,6 @@
 /data/input
 /dataSources.local.xml
 *.pyc
-*/.pyc
+*/*.pyc
 .DS_Store
 */.DS_Store

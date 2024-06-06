@@ -1,0 +1,1106 @@
+[
+    [
+        "https://checkstyle.org/checks/coding/packagedeclaration.html#PackageDeclaration",
+        "PackageDeclaration",
+        "Ensures that a class has a package declaration, and (optionally) whether              the package name matches the directory name for the source file.",
+        "\nmatchDirectoryStructure, Control whether to check for directory and package name match."
+    ],
+    [
+        "https://checkstyle.org/checks/design/visibilitymodifier.html#VisibilityModifier",
+        "VisibilityModifier",
+        "Checks visibility of class members.",
+        "\nallowPublicFinalFields, Allow final fields to be declared as public.\nallowPublicImmutableFields, Allow immutable fields to be declared as public if defined in final class.\nignoreAnnotationCanonicalNames, Specify annotations canonical names which ignore variables in consideration.\nimmutableClassCanonicalNames, Specify immutable classes canonical names.\npackageAllowed, Control whether package visible members are allowed.\nprotectedAllowed, Control whether protected members are allowed.\npublicMemberPattern, Specify pattern for public members that should be ignored."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/indentation.html#Indentation",
+        "Indentation",
+        "Checks correct indentation of Java code.",
+        "\narrayInitIndent, Specify how far an array initialization should be indented when on next line.\nbasicOffset, Specify how far new indentation level should be indented when on the next line.\nbraceAdjustment, Specify how far a braces should be indented when on the next line.\ncaseIndent, Specify how far a case label should be indented when on next line.\nforceStrictCondition, Force strict indent level in line wrapping case. If value is true, line wrap indent have to be same as lineWrappingIndentation parameter. If value is false, line wrap indent could be bigger on any value user would like.\nlineWrappingIndentation, Specify how far continuation line should be indented when line-wrapping is present.\nthrowsIndent, Specify how far a throws clause should be indented when on next line."
+    ],
+    [
+        "https://checkstyle.org/checks/design/onetoplevelclass.html#OneTopLevelClass",
+        "OneTopLevelClass",
+        "Checks that each top-level class, interface, enum or annotation resides in              a source file of its own.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/missingdeprecated.html#MissingDeprecated",
+        "MissingDeprecated",
+        "Verifies that the annotation @Deprecated and the Javadoc tag              @deprecated              are both present when either of them is present.",
+        "\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocvariable.html#JavadocVariable",
+        "JavadocVariable",
+        "Checks that a variable has a Javadoc comment.",
+        "\nexcludeScope, Specify the visibility scope where Javadoc comments are not checked.\nignoreNamePattern, Specify the regexp to define variable names to ignore.\nscope, Specify the visibility scope where Javadoc comments are checked.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma",
+        "NoEnumTrailingComma",
+        "Checks that enum definition does not contain a trailing comma.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/misc/uniqueproperties.html#UniqueProperties",
+        "UniqueProperties",
+        "Detects duplicated keys in properties files.",
+        "\nfileExtensions, Specify the file extensions of the files to process."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation",
+        "JavadocTagContinuationIndentation",
+        "Checks the indentation of the continuation lines in block tags.",
+        "\noffset, Specify how many spaces to use for new indentation level.\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/lambdaparametername.html#LambdaParameterName",
+        "LambdaParameterName",
+        "Checks lambda parameter names.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/superfinalize.html#SuperFinalize",
+        "SuperFinalize",
+        "Checks that an overriding finalize() method invokes super.finalize().",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad",
+        "EmptyForIteratorPad",
+        "Checks the padding of an empty for iterator; that is whether a white              space is required at an empty for iterator, or such white space is              forbidden.",
+        "\noption, Specify policy on how to pad an empty for iterator."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/onestatementperline.html#OneStatementPerLine",
+        "OneStatementPerLine",
+        "Checks that there is only one statement per line.",
+        "\ntreatTryResourcesAsStatement, Enable resources processing."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/interfacetypeparametername.html#InterfaceTypeParameterName",
+        "InterfaceTypeParameterName",
+        "Checks that interface type parameter names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/missingjavadocmethod.html#MissingJavadocMethod",
+        "MissingJavadocMethod",
+        "Checks for missing Javadoc comments for a method or constructor.",
+        "\nallowMissingPropertyJavadoc, Control whether to allow missing Javadoc on accessor methods for properties (setters and getters).\nallowedAnnotations, Configure annotations that allow missed documentation.\nexcludeScope, Specify the visibility scope where Javadoc comments are not checked.\nignoreMethodNamesRegex, Ignore method whose names are matching specified regex.\nminLineCount, Control the minimal amount of lines in method to allow no documentation.\nscope, Specify the visibility scope where Javadoc comments are checked.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/metrics/javancss.html#JavaNCSS",
+        "JavaNCSS",
+        "Determines complexity of methods, classes and files by counting              the Non Commenting Source Statements (NCSS).",
+        "\nclassMaximum, Specify the maximum allowed number of non commenting lines in a class.\nfileMaximum, Specify the maximum allowed number of non commenting lines in a file including all top level and nested classes.\nmethodMaximum, Specify the maximum allowed number of non commenting lines in a method.\nrecordMaximum, Specify the maximum allowed number of non commenting lines in a record."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/unnecessaryparentheses.html#UnnecessaryParentheses",
+        "UnnecessaryParentheses",
+        "Checks if unnecessary parentheses are used in a statement or expression.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/fallthrough.html#FallThrough",
+        "FallThrough",
+        "Checks for fall-through in switch statements.",
+        "\ncheckLastCaseGroup, Control whether the last case group must be checked.\nreliefPattern, Define the RegExp to match the relief comment that suppresses the warning about a fall through."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadoctype.html#JavadocType",
+        "JavadocType",
+        "Checks the Javadoc comments for type definitions.",
+        "\nallowMissingParamTags, Control whether to ignore violations when a class has type parameters but does not have matching param tags in the Javadoc.\nallowUnknownTags, Control whether to ignore violations when a Javadoc tag is not recognised.\nallowedAnnotations, Specify annotations that allow skipping validation at all. Only short names are allowed, e.g. Generated.\nauthorFormat, Specify the pattern for @author tag.\nexcludeScope, Specify the visibility scope where Javadoc comments are not checked.\nscope, Specify the visibility scope where Javadoc comments are checked.\nversionFormat, Specify the pattern for @version tag.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/metrics/npathcomplexity.html#NPathComplexity",
+        "NPathComplexity",
+        "Checks the NPATH complexity against a specified limit.",
+        "\nmax, Specify the maximum threshold allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/trailingcomment.html#TrailingComment",
+        "TrailingComment",
+        "The check to ensure that lines with code do not end with comment.",
+        "\nformat, Specify pattern for strings allowed before the comment.\nlegalComment, Define pattern for text allowed in trailing comments. This pattern will not be applied to multiline comments."
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/packageannotation.html#PackageAnnotation",
+        "PackageAnnotation",
+        "Checks that all package annotations are in the package-info.java file.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/metrics/booleanexpressioncomplexity.html#BooleanExpressionComplexity",
+        "BooleanExpressionComplexity",
+        "Restricts the number of boolean operators (&&, ||, &, | and ^)              in an expression.",
+        "\nmax, Specify the maximum number of boolean operations allowed in one expression.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/imports/unusedimports.html#UnusedImports",
+        "UnusedImports",
+        "Checks for unused import statements.",
+        "\nprocessJavadoc, Control whether to process Javadoc comments."
+    ],
+    [
+        "https://checkstyle.org/checks/design/hideutilityclassconstructor.html#HideUtilityClassConstructor",
+        "HideUtilityClassConstructor",
+        "Makes sure that utility classes (classes that contain only static              methods or fields in their API) do not have a public constructor.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/nestedifdepth.html#NestedIfDepth",
+        "NestedIfDepth",
+        "Restricts nested if-else blocks to a specified depth.",
+        "\nmax, Specify maximum allowed nesting depth."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/nowhitespacebeforecasedefaultcolon.html#NoWhitespaceBeforeCaseDefaultColon",
+        "NoWhitespaceBeforeCaseDefaultColon",
+        "Checks that there is no whitespace before the colon in a switch block.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/design/throwscount.html#ThrowsCount",
+        "ThrowsCount",
+        "Restricts throws statements to a specified count.",
+        "\nignorePrivateMethods, Allow private methods to be ignored.\nmax, Specify maximum allowed number of throws statements."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/commentsindentation.html#CommentsIndentation",
+        "CommentsIndentation",
+        "Controls the indentation between comments and surrounding code.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/unnecessarysemicoloninenumeration.html#UnnecessarySemicolonInEnumeration",
+        "UnnecessarySemicolonInEnumeration",
+        "Checks if unnecessary semicolon is in enum definitions.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/methodlength.html#MethodLength",
+        "MethodLength",
+        "Checks for long methods and constructors.",
+        "\ncountEmpty, Control whether to count empty lines and comments.\nmax, Specify the maximum number of lines allowed.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/misc/orderedproperties.html#OrderedProperties",
+        "OrderedProperties",
+        "Detects if keys in properties files are in correct order.",
+        "\nfileExtensions, Specify the file extensions of the files to process."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/typecastparenpad.html#TypecastParenPad",
+        "TypecastParenPad",
+        "Checks the policy on the padding of parentheses for typecasts.",
+        "\noption, Specify policy on how to pad parentheses."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/typename.html#TypeName",
+        "TypeName",
+        "Checks that type names conform to a specified pattern.",
+        "\napplyToPackage, Control if check should apply to package-private members.\napplyToPrivate, Control if check should apply to private members.\napplyToProtected, Control if check should apply to protected members.\napplyToPublic, Control if check should apply to public members.\nformat, Sets the pattern to match valid identifiers.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/unnecessarysemicolonafteroutertypedeclaration.html#UnnecessarySemicolonAfterOuterTypeDeclaration",
+        "UnnecessarySemicolonAfterOuterTypeDeclaration",
+        "Checks if unnecessary semicolon is used after type declaration.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/variabledeclarationusagedistance.html#VariableDeclarationUsageDistance",
+        "VariableDeclarationUsageDistance",
+        "Checks the distance between declaration of variable and its first usage.",
+        "\nallowedDistance, Specify distance between declaration of variable and its first usage. Values should be greater than 0.\nignoreFinal, Allow to ignore variables with a 'final' modifier.\nignoreVariablePattern, Define RegExp to ignore distance calculation for variables listed in this pattern.\nvalidateBetweenScopes, Allow to calculate the distance between declaration of variable and its first usage in the different scopes."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/invalidjavadocposition.html#InvalidJavadocPosition",
+        "InvalidJavadocPosition",
+        "Checks that Javadocs are located at the correct position.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/missingjavadoctype.html#MissingJavadocType",
+        "MissingJavadocType",
+        "Checks for missing Javadoc comments for class, enum, interface, and annotation            interface definitions.",
+        "\nexcludeScope, Specify the visibility scope where Javadoc comments are not checked.\nscope, Specify the visibility scope where Javadoc comments are checked.\nskipAnnotations, Specify annotations that allow missed documentation. If annotation is present in target sources in multiple forms of qualified name, all forms should be listed in this property.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/header/regexpheader.html#RegexpHeader",
+        "RegexpHeader",
+        "Checks the header of a source file against a header that contains              a pattern for each line of the source header.",
+        "\ncharset, Specify the character encoding to use when reading the headerFile.\nfileExtensions, Specify the file extensions of the files to process.\nheader, Define the required header specified inline. Individual header lines must be separated by the string \"\\n\" (even on platforms with a different line separator). For header lines containing \"\\n\\n\" checkstyle will forcefully expect an empty line to exist. See examples below. Regular expressions must not span multiple lines.\nheaderFile, Specify the name of the file containing the required header.\nmultiLines, Specify the line numbers to repeat (zero or more times)."
+    ],
+    [
+        "https://checkstyle.org/checks/blocks/emptycatchblock.html#EmptyCatchBlock",
+        "EmptyCatchBlock",
+        "Checks for empty catch blocks.",
+        "\ncommentFormat, Specify the RegExp for the first comment inside empty catch block. If check meets comment inside empty catch block matching specified format - empty block is suppressed. If it is multi-line comment - only its first line is analyzed.\nexceptionVariableName, Specify the RegExp for the name of the variable associated with exception. If check meets variable name matching specified value - empty block is suppressed."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/recordcomponentname.html#RecordComponentName",
+        "RecordComponentName",
+        "Checks that record component names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/covariantequals.html#CovariantEquals",
+        "CovariantEquals",
+        "Checks that classes and records which define a covariant equals()              method also override method equals(Object).",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/operatorwrap.html#OperatorWrap",
+        "OperatorWrap",
+        "Checks the policy on how to wrap lines on operators.",
+        "\noption, Specify policy on how to wrap lines.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/avoidinlineconditionals.html#AvoidInlineConditionals",
+        "AvoidInlineConditionals",
+        "Detects inline conditionals.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/naming/membername.html#MemberName",
+        "MemberName",
+        "Checks that instance variable names conform to a specified pattern.",
+        "\napplyToPackage, Control if check should apply to package-private members.\napplyToPrivate, Control if check should apply to private members.\napplyToProtected, Control if check should apply to protected members.\napplyToPublic, Control if check should apply to public members.\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/overloadmethodsdeclarationorder.html#OverloadMethodsDeclarationOrder",
+        "OverloadMethodsDeclarationOrder",
+        "Checks that overloaded methods are grouped together.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/avoiddoublebraceinitialization.html#AvoidDoubleBraceInitialization",
+        "AvoidDoubleBraceInitialization",
+        "Detects double brace initialization.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/avoidnoargumentsuperconstructorcall.html#AvoidNoArgumentSuperConstructorCall",
+        "AvoidNoArgumentSuperConstructorCall",
+        "Checks if call to superclass constructor without arguments is present.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/naming/methodtypeparametername.html#MethodTypeParameterName",
+        "MethodTypeParameterName",
+        "Checks that method type parameter names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/missingoverride.html#MissingOverride",
+        "MissingOverride",
+        "Verifies that the @Override annotation is present              when the @inheritDoc javadoc tag is present.",
+        "\njavaFiveCompatibility, Enable java 5 compatibility mode."
+    ],
+    [
+        "https://checkstyle.org/checks/modifier/classmemberimpliedmodifier.html#ClassMemberImpliedModifier",
+        "ClassMemberImpliedModifier",
+        "Checks for implicit modifiers on nested types in classes and records.",
+        "\nviolateImpliedStaticOnNestedEnum, Control whether to enforce that static is explicitly coded on nested enums in classes and records.\nviolateImpliedStaticOnNestedInterface, Control whether to enforce that static is explicitly coded on nested interfaces in classes and records.\nviolateImpliedStaticOnNestedRecord, Control whether to enforce that static is explicitly coded on nested records in classes and records."
+    ],
+    [
+        "https://checkstyle.org/checks/metrics/classdataabstractioncoupling.html#ClassDataAbstractionCoupling",
+        "ClassDataAbstractionCoupling",
+        "Measures the number of instantiations of other classes within the given class              or record.",
+        "\nexcludeClassesRegexps, Specify user-configured regular expressions to ignore classes.\nexcludedClasses, Specify user-configured class names to ignore.\nexcludedPackages, Specify user-configured packages to ignore.\nmax, Specify the maximum threshold allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/annotationusestyle.html#AnnotationUseStyle",
+        "AnnotationUseStyle",
+        "Checks the style of elements in annotations.",
+        "\nclosingParens, Define the policy for ending parenthesis.\nelementStyle, Define the annotation element styles.\ntrailingArrayComma, Define the policy for trailing comma in arrays."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/classtypeparametername.html#ClassTypeParameterName",
+        "ClassTypeParameterName",
+        "Checks that class type parameter names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/parameternumber.html#ParameterNumber",
+        "ParameterNumber",
+        "Checks the number of parameters of a method or constructor.",
+        "\nignoreAnnotatedBy, Ignore methods and constructors annotated with the specified annotation(s).\nignoreOverriddenMethods, Ignore number of parameters for methods with @Override annotation.\nmax, Specify the maximum number of parameters allowed.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/illegalinstantiation.html#IllegalInstantiation",
+        "IllegalInstantiation",
+        "Checks for illegal instantiations where a factory method is preferred.",
+        "\nclasses, Specify fully qualified class names that should not be instantiated."
+    ],
+    [
+        "https://checkstyle.org/checks/imports/avoidstaticimport.html#AvoidStaticImport",
+        "AvoidStaticImport",
+        "Checks that there are no static import statements.",
+        "\nexcludes, Control whether to allow for certain classes via a star notation to be excluded such as java.lang.Math.* or specific static members to be excluded like java.lang.System.out for a variable or java.lang.Math.random for a method. See notes section for details."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/matchxpath.html#MatchXpath",
+        "MatchXpath",
+        "Evaluates Xpath query and report violation on all matching AST nodes.",
+        "\nquery, Specify Xpath query."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/illegaltokentext.html#IllegalTokenText",
+        "IllegalTokenText",
+        "Checks specified tokens text for matching an illegal pattern.",
+        "\nformat, Define the RegExp for illegal pattern.\nignoreCase, Control whether to ignore case when matching.\nmessage, Define the message which is used to notify about violations; if empty then the default message is used.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/misc/translation.html#Translation",
+        "Translation",
+        "Ensures the correct translation of code by checking property files              for consistency regarding their keys.",
+        "\nbaseName, Specify\nBase name of resource bundles which contain message resources. It helps the check to distinguish config and localization resources.\nfileExtensions, Specify the file extensions of the files to process.\nrequiredTranslations, Specify language codes of required translations which must exist in project."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/missingctor.html#MissingCtor",
+        "MissingCtor",
+        "Checks that classes (except abstract ones) define a constructor              and don't rely on the default one.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/executablestatementcount.html#ExecutableStatementCount",
+        "ExecutableStatementCount",
+        "Restricts the number of executable statements to a specified limit.",
+        "\nmax, Specify the maximum threshold allowed.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadoccontentlocation.html#JavadocContentLocation",
+        "JavadocContentLocation",
+        "Checks that the Javadoc content begins from the same position              for all Javadoc comments in the project.",
+        "\nlocation, Specify the policy on placement of the Javadoc content."
+    ],
+    [
+        "https://checkstyle.org/checks/regexp/regexpmultiline.html#RegexpMultiline",
+        "RegexpMultiline",
+        "Checks that a specified pattern matches across multiple lines in            any file type.",
+        "\nfileExtensions, Specify the file extensions of the files to process.\nformat, Specify the format of the regular expression to match.\nignoreCase, Control whether to ignore case when searching.\nmatchAcrossLines, Control whether to match expressions across multiple lines.\nmaximum, Specify the maximum number of matches required in each file.\nmessage, Specify the message which is used to notify about violations, if empty then default (hard-coded) message is used.\nminimum, Specify the minimum number of matches required in each file."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/atclauseorder.html#AtclauseOrder",
+        "AtclauseOrder",
+        "Checks the order of javadoc block-tags or javadoc tags.",
+        "\ntagOrder, Specify the order by tags.\ntarget, Specify block tags targeted.\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/design/innertypelast.html#InnerTypeLast",
+        "InnerTypeLast",
+        "Checks nested (internal) classes/interfaces are declared at the bottom of the              primary (top-level) class after all init and static init blocks,              method, constructor and field declarations.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/finallocalvariable.html#FinalLocalVariable",
+        "FinalLocalVariable",
+        "Checks that local variables that never have their values changed are declared final.",
+        "\nvalidateEnhancedForLoopVariable, Control whether to check\nenhanced for-loop variable.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/whitespaceafter.html#WhitespaceAfter",
+        "WhitespaceAfter",
+        "Checks that a token is followed by whitespace, with the exception that it            does not check for whitespace after the semicolon of an empty for iterator.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/metrics/classfanoutcomplexity.html#ClassFanOutComplexity",
+        "ClassFanOutComplexity",
+        "Checks the number of other types a given class/record/interface/enum/annotation              relies on.",
+        "\nexcludeClassesRegexps, Specify user-configured regular expressions to ignore classes.\nexcludedClasses, Specify user-configured class names to ignore.\nexcludedPackages, Specify user-configured packages to ignore.\nmax, Specify the maximum threshold allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/regexp/regexpsinglelinejava.html#RegexpSinglelineJava",
+        "RegexpSinglelineJava",
+        "Checks that a specified pattern matches a single-line in Java files.",
+        "\nformat, Specify the format of the regular expression to match.\nignoreCase, Control whether to ignore case when searching.\nignoreComments, Control whether to ignore text in comments when searching.\nmaximum, Specify the maximum number of matches required in each file.\nmessage, Specify the message which is used to notify about violations, if empty then default (hard-coded) message is used.\nminimum, Specify the minimum number of matches required in each file."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/singlelinejavadoc.html#SingleLineJavadoc",
+        "SingleLineJavadoc",
+        "Checks that a Javadoc block can fit in a single-line and doesn't contain              block tags.",
+        "\nignoreInlineTags, Control whether\ninline tags must be ignored.\nignoredTags, Specify\nblock tags which are ignored by the check.\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/nolinewrap.html#NoLineWrap",
+        "NoLineWrap",
+        "Checks that chosen statements are not line-wrapped.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/methodcount.html#MethodCount",
+        "MethodCount",
+        "Checks the number of methods declared in each type declaration by access modifier            or total count.",
+        "\nmaxPackage, Specify the maximum number of package methods allowed.\nmaxPrivate, Specify the maximum number of private methods allowed.\nmaxProtected, Specify the maximum number of protected methods allowed.\nmaxPublic, Specify the maximum number of public methods allowed.\nmaxTotal, Specify the maximum number of methods allowed at all scope levels.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/annotationlocation.html#AnnotationLocation",
+        "AnnotationLocation",
+        "Checks location of annotation on language elements.",
+        "\nallowSamelineMultipleAnnotations, Allow annotation(s) to be located on the same line as target element.\nallowSamelineParameterizedAnnotation, Allow one and only parameterized annotation to be located on the same line as target element.\nallowSamelineSingleParameterlessAnnotation, Allow single parameterless annotation to be located on the same line as target element.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/modifier/redundantmodifier.html#RedundantModifier",
+        "RedundantModifier",
+        "Checks for redundant modifiers.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocpackage.html#JavadocPackage",
+        "JavadocPackage",
+        "Checks that each Java package has a Javadoc file used for commenting.",
+        "\nallowLegacy, Allow legacy package.html file to be used.\nfileExtensions, Specify the file extensions of the files to process."
+    ],
+    [
+        "https://checkstyle.org/checks/design/designforextension.html#DesignForExtension",
+        "DesignForExtension",
+        "Checks that classes are designed for extension (subclass creation).",
+        "\nignoredAnnotations, Specify annotations which allow the check to skip the method from validation.\nrequiredJavadocPhrase, Specify the comment text pattern which qualifies a method as designed for extension. Supports multi-line regex."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/catchparametername.html#CatchParameterName",
+        "CatchParameterName",
+        "Checks that catch parameter names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/missingswitchdefault.html#MissingSwitchDefault",
+        "MissingSwitchDefault",
+        "Checks that switch statement has a default clause.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/stringliteralequality.html#StringLiteralEquality",
+        "StringLiteralEquality",
+        "Checks that string literals are not used with              == or !=.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/misc/arraytypestyle.html#ArrayTypeStyle",
+        "ArrayTypeStyle",
+        "Checks the style of array type definitions.",
+        "\njavaStyle, Control whether to enforce Java style (true) or C style (false)."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/noarraytrailingcomma.html#NoArrayTrailingComma",
+        "NoArrayTrailingComma",
+        "Checks that array initialization do not contain a trailing comma.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/filelength.html#FileLength",
+        "FileLength",
+        "Checks for long source files.",
+        "\nfileExtensions, Specify the file extensions of the files to process.\nmax, Specify the maximum number of lines allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/simplifybooleanexpression.html#SimplifyBooleanExpression",
+        "SimplifyBooleanExpression",
+        "Checks for over-complicated boolean expressions.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/illegaltoken.html#IllegalToken",
+        "IllegalToken",
+        "Checks for illegal tokens.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/innerassignment.html#InnerAssignment",
+        "InnerAssignment",
+        "Checks for assignments in subexpressions, such as in              String s = Integer.toString(i = 2);.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/missingjavadocpackage.html#MissingJavadocPackage",
+        "MissingJavadocPackage",
+        "Checks for missing package definition Javadoc comments in package-info.java files.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/blocks/avoidnestedblocks.html#AvoidNestedBlocks",
+        "AvoidNestedBlocks",
+        "Finds nested blocks (blocks that are used freely in the code).",
+        "\nallowInSwitchCase, Allow nested blocks if they are the only child of a switch case."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/methodparampad.html#MethodParamPad",
+        "MethodParamPad",
+        "Checks the padding between the identifier of a method definition,              constructor definition, method call, or constructor invocation;            and the left parenthesis of the parameter list.",
+        "\nallowLineBreaks, Allow a line break between the identifier and left parenthesis.\noption, Specify policy on how to pad method parameter.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/blocks/leftcurly.html#LeftCurly",
+        "LeftCurly",
+        "Checks for the placement of left curly braces ('{') for code blocks.",
+        "\nignoreEnums, Allow to ignore enums when left curly brace policy is EOL.\noption, Specify the policy on placement of a left curly brace ('{').\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/imports/importcontrol.html#ImportControl",
+        "ImportControl",
+        "Controls what can be imported in each package and file.",
+        "\nfile, Specify the location of the file containing the import control configuration. It can be a regular file, URL or resource path. It will try loading the path as a URL first, then as a file, and finally as a resource.\npath, Specify the regular expression of file paths to which this check should apply. Files that don't match the pattern will not be checked. The pattern will be matched against the full absolute file path."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/recordtypeparametername.html#RecordTypeParameterName",
+        "RecordTypeParameterName",
+        "Checks that record type parameter names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/upperell.html#UpperEll",
+        "UpperEll",
+        "Checks that long constants are defined with an upper ell.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/parameterassignment.html#ParameterAssignment",
+        "ParameterAssignment",
+        "Disallows assignment of parameters.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/noclone.html#NoClone",
+        "NoClone",
+        "Checks that the clone method is not overridden from the            Object class.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/imports/customimportorder.html#CustomImportOrder",
+        "CustomImportOrder",
+        "Checks that the groups of import declarations appear in the order specified              by the user.",
+        "\ncustomImportOrderRules, Specify ordered list of import groups.\nseparateLineBetweenGroups, Force empty line separator between import groups.\nsortImportsInGroupAlphabetically, Force grouping alphabetically, in ASCII sort order.\nspecialImportsRegExp, Specify RegExp for SPECIAL_IMPORTS group imports.\nstandardPackageRegExp, Specify RegExp for STANDARD_JAVA_PACKAGE group imports.\nthirdPartyPackageRegExp, Specify RegExp for THIRD_PARTY_PACKAGE group imports."
+    ],
+    [
+        "https://checkstyle.org/checks/design/interfaceistype.html#InterfaceIsType",
+        "InterfaceIsType",
+        "Implements Joshua Bloch, Effective Java, Item 17 - Use Interfaces only to              define types.",
+        "\nallowMarkerInterfaces, Control whether marker interfaces like Serializable are allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/unnecessarysemicolonaftertypememberdeclaration.html#UnnecessarySemicolonAfterTypeMemberDeclaration",
+        "UnnecessarySemicolonAfterTypeMemberDeclaration",
+        "Checks if unnecessary semicolon is used after type member declaration.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/returncount.html#ReturnCount",
+        "ReturnCount",
+        "Restricts the number of return statements in methods, constructors              and lambda expressions.",
+        "\nformat, Specify method names to ignore.\nmax, Specify maximum allowed number of return statements in non-void methods/lambdas.\nmaxForVoid, Specify maximum allowed number of return statements in void methods/constructors/lambdas.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/naming/localfinalvariablename.html#LocalFinalVariableName",
+        "LocalFinalVariableName",
+        "Checks that local final variable names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/naming/patternvariablename.html#PatternVariableName",
+        "PatternVariableName",
+        "Checks that pattern variable names conform to a specified pattern.",
+        "\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/outertypenumber.html#OuterTypeNumber",
+        "OuterTypeNumber",
+        "Checks for the number of types declared at the outer              (or root) level in a file.",
+        "\nmax, Specify the maximum number of outer types allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/unnecessarysemicolonintrywithresources.html#UnnecessarySemicolonInTryWithResources",
+        "UnnecessarySemicolonInTryWithResources",
+        "Checks if unnecessary semicolon is used in last resource declaration.",
+        "\nallowWhenNoBraceAfterSemicolon, Allow unnecessary semicolon if closing paren is not on the same line."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad",
+        "EmptyForInitializerPad",
+        "Checks the padding of an empty for initializer; that is whether              a white space is required at an empty for initializer, or such white              space is forbidden.",
+        "\noption, Specify policy on how to pad an empty for iterator."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/explicitinitialization.html#ExplicitInitialization",
+        "ExplicitInitialization",
+        "Checks if any class or object member is explicitly initialized to default              for its type value (null for object references, zero for numeric              types and char and false for boolean.",
+        "\nonlyObjectReferences, Control whether only explicit initializations made to null for objects should be checked."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/illegaltype.html#IllegalType",
+        "IllegalType",
+        "Checks that particular classes or interfaces are never used.",
+        "\nignoredMethodNames, Specify methods that should not be checked.\nillegalAbstractClassNameFormat, Specify RegExp for illegal abstract class names.\nillegalClassNames, Specify classes that should not be used as types in variable declarations, return values or parameters.\nlegalAbstractClassNames, Define abstract classes that may be used as types.\nmemberModifiers, Control whether to check only methods and fields with any of the specified modifiers. This property does not affect method calls nor method references nor record components.\nvalidateAbstractClassNames, Control whether to validate abstract class names.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/misc/finalparameters.html#FinalParameters",
+        "FinalParameters",
+        "Checks that parameters for methods, constructors, catch and for-each blocks are final.",
+        "\nignorePrimitiveTypes, Ignore primitive types as parameters.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/imports/illegalimport.html#IllegalImport",
+        "IllegalImport",
+        "Checks for imports from a set of illegal packages.",
+        "\nillegalClasses, Specify class names to reject, if regexp property is not set, checks if import equals class name. If regexp property is set, then list of class names will be interpreted as regular expressions. Note, all properties for match will be used.\nillegalPkgs, Specify packages to reject, if regexp property is not set, checks if import is the part of package. If regexp property is set, then list of packages will be interpreted as regular expressions. Note, all properties for match will be used.\nregexp, Control whether the illegalPkgs and illegalClasses should be interpreted as regular expressions."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/requireemptylinebeforeblocktaggroup.html#RequireEmptyLineBeforeBlockTagGroup",
+        "RequireEmptyLineBeforeBlockTagGroup",
+        "Checks that one blank line before the block tag if it is present in Javadoc.",
+        "\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/blocks/needbraces.html#NeedBraces",
+        "NeedBraces",
+        "Checks for braces around code blocks.",
+        "\nallowEmptyLoopBody, Allow loops with empty bodies.\nallowSingleLineStatement, Allow single-line statements without braces.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/misc/todocomment.html#TodoComment",
+        "TodoComment",
+        "Checks for TODO: comments.",
+        "\nformat, Specify pattern to match comments against."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/descendanttoken.html#DescendantToken",
+        "DescendantToken",
+        "Checks for restricted tokens beneath other tokens.",
+        "\nlimitedTokens, Specify set of tokens with limited occurrences as descendants.\nmaximumDepth, Specify the maximum depth for descendant counts.\nmaximumMessage, Define the violation message when the maximum count is exceeded.\nmaximumNumber, Specify a maximum count for descendants.\nminimumDepth, Specify the minimum depth for descendant counts.\nminimumMessage, Define the violation message when the minimum count is not reached.\nminimumNumber, Specify a minimum count for descendants.\nsumTokenCounts, Control whether the number of tokens found should be calculated from the sum of the individual token counts.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/emptystatement.html#EmptyStatement",
+        "EmptyStatement",
+        "Detects empty statements (standalone \";\" semicolon).",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/singlespaceseparator.html#SingleSpaceSeparator",
+        "SingleSpaceSeparator",
+        "Checks that non-whitespace characters are separated by no more than one              whitespace.",
+        "\nvalidateComments, Control whether to validate whitespaces surrounding comments."
+    ],
+    [
+        "https://checkstyle.org/checks/regexp/regexpsingleline.html#RegexpSingleline",
+        "RegexpSingleline",
+        "Checks that a specified pattern matches a single-line in any file type.",
+        "\nfileExtensions, Specify the file extensions of the files to process.\nformat, Specify the format of the regular expression to match.\nignoreCase, Control whether to ignore case when searching.\nmaximum, Specify the maximum number of matches required in each file.\nmessage, Specify the message which is used to notify about violations, if empty then default (hard-coded) message is used.\nminimum, Specify the minimum number of matches required in each file."
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/recordcomponentnumber.html#RecordComponentNumber",
+        "RecordComponentNumber",
+        "Checks the number of record components in the header of a record definition.",
+        "\naccessModifiers, Access modifiers of record definitions where the number of record components should be checked.\nmax, Specify the maximum number of components allowed in the header of a record definition."
+    ],
+    [
+        "https://checkstyle.org/checks/regexp/regexp.html#Regexp",
+        "Regexp",
+        "Checks that a specified pattern exists, exists less than a set              number of times, or does not exist in the file.",
+        "\nduplicateLimit, Control whether to check for duplicates of a required pattern, any negative value means no checking for duplicates, any positive value is used as the maximum number of allowed duplicates, if the limit is exceeded violations will be logged.\nerrorLimit, Specify the maximum number of violations before the check will abort.\nformat, Specify the pattern to match against.\nignoreComments, Control whether to ignore matches found within comments.\nillegalPattern, Control whether the pattern is required or illegal.\nmessage, Specify message which is used to notify about violations, if empty then the default (hard-coded) message is used."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/uncommentedmain.html#UncommentedMain",
+        "UncommentedMain",
+        "Detects uncommented main methods.",
+        "\nexcludedClasses, Specify pattern for qualified names of classes which are allowed to have a main method."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/emptylineseparator.html#EmptyLineSeparator",
+        "EmptyLineSeparator",
+        "Checks for empty line separators before package,              all import declarations, fields, constructors, methods, nested classes,              static initializers and instance initializers.",
+        "\nallowMultipleEmptyLines, Allow multiple empty lines between class members.\nallowMultipleEmptyLinesInsideClassMembers, Allow multiple empty lines inside class members.\nallowNoEmptyLineBetweenFields, Allow no empty line between fields.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/hiddenfield.html#HiddenField",
+        "HiddenField",
+        "Checks that a local variable or a parameter does not shadow            a field that is defined in the same class.",
+        "\nignoreAbstractMethods, Control whether to ignore parameters of abstract methods.\nignoreConstructorParameter, Control whether to ignore constructor parameters.\nignoreFormat, Define the RegExp for names of variables and parameters to ignore.\nignoreSetter, Allow to ignore the parameter of a property setter method.\nsetterCanReturnItsClass, Allow to expand the definition of a setter method to include methods that return the class' instance.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/suppresswarnings.html#SuppressWarnings",
+        "SuppressWarnings",
+        "Allows to specify what warnings that              @SuppressWarnings              is not allowed to suppress.",
+        "\nformat, Specify the RegExp to match against warnings. Any warning being suppressed matching this pattern will be flagged.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocmissingleadingasterisk.html#JavadocMissingLeadingAsterisk",
+        "JavadocMissingLeadingAsterisk",
+        "Checks if the javadoc has                              leading asterisks                            on each line.",
+        "\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocmethod.html#JavadocMethod",
+        "JavadocMethod",
+        "Checks the Javadoc of a method or constructor.",
+        "\naccessModifiers, Specify the access modifiers where Javadoc comments are checked.\nallowMissingParamTags, Control whether to ignore violations when a method has parameters but does not have matching param tags in the javadoc.\nallowMissingReturnTag, Control whether to ignore violations when a method returns non-void type and does not have a return tag in the javadoc.\nallowedAnnotations, Specify annotations that allow missed documentation.\nvalidateThrows, Control whether to validate throws tags.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/simplifybooleanreturn.html#SimplifyBooleanReturn",
+        "SimplifyBooleanReturn",
+        "Checks for over-complicated boolean return statements.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/summaryjavadoc.html#SummaryJavadoc",
+        "SummaryJavadoc",
+        "Checks that Javadoc summary sentence does not contain phrases that are not recommended            to use.",
+        "\nforbiddenSummaryFragments, Specify the regexp for forbidden summary fragments.\nperiod, Specify the period symbol at the end of first javadoc sentence.\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/equalshashcode.html#EqualsHashCode",
+        "EqualsHashCode",
+        "Checks that classes that either override equals()              or hashCode() also overrides the other.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/unusedlocalvariable.html#UnusedLocalVariable",
+        "UnusedLocalVariable",
+        "Checks that a local variable is declared and/or assigned, but not used.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocparagraph.html#JavadocParagraph",
+        "JavadocParagraph",
+        "Checks the Javadoc paragraph.",
+        "\nallowNewlineParagraph, Control whether the <p> tag should be placed immediately before the first word.\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore",
+        "NoWhitespaceBefore",
+        "Checks that there is no whitespace before a token.",
+        "\nallowLineBreaks, Control whether whitespace is allowed if the token is at a linebreak.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/lambdabodylength.html#LambdaBodyLength",
+        "LambdaBodyLength",
+        "Checks lambda body length.",
+        "\nmax, Specify the maximum number of lines allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocstyle.html#JavadocStyle",
+        "JavadocStyle",
+        "Validates Javadoc comments to help ensure they are well formed.",
+        "\ncheckEmptyJavadoc, Control whether to check if the Javadoc is missing a describing text.\ncheckFirstSentence, Control whether to check the first sentence for proper end of sentence.\ncheckHtml, Control whether to check for incomplete HTML tags.\nendOfSentenceFormat, Specify the format for matching the end of a sentence.\nexcludeScope, Specify the visibility scope where Javadoc comments are not checked.\nscope, Specify the visibility scope where Javadoc comments are checked.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/coding/nestedfordepth.html#NestedForDepth",
+        "NestedForDepth",
+        "Restricts nested for blocks to a specified depth.",
+        "\nmax, Specify maximum allowed nesting depth."
+    ],
+    [
+        "https://checkstyle.org/checks/imports/redundantimport.html#RedundantImport",
+        "RedundantImport",
+        "Checks for redundant import statements.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/parenpad.html#ParenPad",
+        "ParenPad",
+        "Checks the policy on the padding of parentheses; that is whether a              space is required after a left parenthesis and before a right              parenthesis, or such spaces are forbidden.",
+        "\noption, Specify policy on how to pad parentheses.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/linelength.html#LineLength",
+        "LineLength",
+        "Checks for long lines.",
+        "\nfileExtensions, Specify the file extensions of the files to process.\nignorePattern, Specify pattern for lines to ignore.\nmax, Specify the maximum line length allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocblocktaglocation.html#JavadocBlockTagLocation",
+        "JavadocBlockTagLocation",
+        "Checks that a javadoc block tag appears only at the beginning of a line,              ignoring leading asterisks and white space.",
+        "\ntags, Specify the javadoc tags to process.\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/modifier/modifierorder.html#ModifierOrder",
+        "ModifierOrder",
+        "Checks that the order of modifiers conforms to the suggestions in the              Java Language specification, \u00a7 8.1.1, 8.3.1, 8.4.3 and 9.4.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/defaultcomeslast.html#DefaultComesLast",
+        "DefaultComesLast",
+        "Check that the default is after all the              cases in a switch statement.",
+        "\nskipIfLastAndSharedWithCase, Control whether to allow default along with case if they are not last."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/nocodeinfile.html#NoCodeInFile",
+        "NoCodeInFile",
+        "Checks whether file contains code.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/multiplestringliterals.html#MultipleStringLiterals",
+        "MultipleStringLiterals",
+        "Checks for multiple occurrences of the same string literal within a            single file.",
+        "\nallowedDuplicates, Specify the maximum number of occurrences to allow without generating a warning.\nignoreOccurrenceContext, Specify token type names where duplicate strings are ignored even if they don't match ignoredStringsRegexp. This allows you to exclude syntactical contexts like annotations or static initializers from the check.\nignoreStringsRegexp, Specify RegExp for ignored strings (with quotation marks)."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/abstractclassname.html#AbstractClassName",
+        "AbstractClassName",
+        "Ensures that the names of abstract classes conforming to some pattern and              check that abstract modifier exists.",
+        "\nformat, Specify valid identifiers.\nignoreModifier, Control whether to ignore checking for the abstract modifier on classes that match the name.\nignoreName, Control whether to ignore checking the name. Realistically only useful if using the check to identify that match name and do not have the abstract modifier."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/whitespacearound.html#WhitespaceAround",
+        "WhitespaceAround",
+        "Checks that a token is surrounded by whitespace.",
+        "\nallowEmptyCatches, Allow empty catch bodies.\nallowEmptyConstructors, Allow empty constructor bodies.\nallowEmptyLambdas, Allow empty lambda bodies.\nallowEmptyLoops, Allow empty loop bodies.\nallowEmptyMethods, Allow empty method bodies.\nallowEmptyTypes, Allow empty class, interface and enum bodies.\nignoreEnhancedForColon, Ignore whitespace around colon in\nenhanced for loop.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/nonemptyatclausedescription.html#NonEmptyAtclauseDescription",
+        "NonEmptyAtclauseDescription",
+        "Checks that the block tag is followed by description.",
+        "\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules.\njavadocTokens, javadoc tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/imports/importorder.html#ImportOrder",
+        "ImportOrder",
+        "Checks the ordering/grouping of imports.",
+        "\ncaseSensitive, Control whether string comparison should be case-sensitive or not. Case-sensitive sorting is in ASCII sort order. It affects both type imports and static imports.\ngroups, Specify list of type import groups. Every group identified either by a common prefix string, or by a regular expression enclosed in forward slashes (e.g. /regexp/). All type imports, which does not match any group, falls into an additional group, located at the end. Thus, the empty list of type groups (the default value) means one group for all type imports.\noption, Specify policy on the relative order between type imports and static imports.\nordered, Control whether type imports within each group should be sorted. It doesn't affect sorting for static imports.\nseparated, Control whether type import groups should be separated by, at least, one blank line or comment and aren't separated internally. It doesn't affect separations for static imports.\nseparatedStaticGroups, Control whether static import groups should be separated by, at least, one blank line or comment and aren't separated internally. This property has effect only when the property option is set to top or bottom and when property staticGroups is enabled.\nsortStaticImportsAlphabetically, Control whether static imports located at top or bottom are sorted within the group.\nstaticGroups, Specify list of static import groups. Every group identified either by a common prefix string, or by a regular expression enclosed in forward slashes (e.g. /regexp/). All static imports, which does not match any group, fall into an additional group, located at the end. Thus, the empty list of static groups (the default value) means one group for all static imports. This property has effect only when the property option is set to top or bottom.\nuseContainerOrderingForStatic, Control whether to use container ordering (Eclipse IDE term) for static imports or not."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/nofinalizer.html#NoFinalizer",
+        "NoFinalizer",
+        "Checks that there is no method finalize with zero parameters.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/magicnumber.html#MagicNumber",
+        "MagicNumber",
+        "Checks that there are no \"magic numbers\" where a magic number              is a numeric literal that is not defined as a constant.",
+        "\nconstantWaiverParentToken, Specify tokens that are allowed in the AST path from the number literal to the enclosing constant definition.\nignoreAnnotation, Ignore magic numbers in annotation declarations.\nignoreAnnotationElementDefaults, Ignore magic numbers in annotation elements defaults.\nignoreFieldDeclaration, Ignore magic numbers in field declarations.\nignoreHashCodeMethod, Ignore magic numbers in hashCode methods.\nignoreNumbers, Specify non-magic numbers.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters",
+        "AvoidEscapedUnicodeCharacters",
+        "Restricts using Unicode escapes (such as \\u221e).",
+        "\nallowByTailComment, Allow use escapes if trail comment is present.\nallowEscapesForControlCharacters, Allow use escapes for non-printable, control characters.\nallowIfAllCharactersEscaped, Allow if all characters in literal are escaped.\nallowNonPrintableEscapes, Allow use escapes for non-printable, whitespace characters."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/abbreviationaswordinname.html#AbbreviationAsWordInName",
+        "AbbreviationAsWordInName",
+        "Validates abbreviations (consecutive capital letters)             length in identifier name, it also allows to enforce camel case naming.",
+        "\nallowedAbbreviationLength, Indicate the number of consecutive capital letters allowed in targeted identifiers (abbreviations in the classes, interfaces, variables and methods names, ... ).\nallowedAbbreviations, Specify abbreviations that must be skipped for checking.\nignoreFinal, Allow to skip variables with final modifier.\nignoreOverriddenMethods, Allow to ignore methods tagged with @Override annotation (that usually mean inherited name).\nignoreStatic, Allow to skip variables with static modifier.\nignoreStaticFinal, Allow to skip variables with both static and final modifiers.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/blocks/emptyblock.html#EmptyBlock",
+        "EmptyBlock",
+        "Checks for empty blocks.",
+        "\noption, Specify the policy on block contents.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter",
+        "NoWhitespaceAfter",
+        "Checks that there is no whitespace after a token.",
+        "\nallowLineBreaks, Control whether whitespace is allowed if the token is at a linebreak.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/naming/constantname.html#ConstantName",
+        "ConstantName",
+        "Checks that constant names conform to a specified pattern.",
+        "\napplyToPackage, Control if check should apply to package-private members.\napplyToPrivate, Control if check should apply to private members.\napplyToProtected, Control if check should apply to protected members.\napplyToPublic, Control if check should apply to public members.\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/annotation/annotationonsameline.html#AnnotationOnSameLine",
+        "AnnotationOnSameLine",
+        "Checks that annotations are located on the same line with their targets.",
+        "\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/modifier/interfacememberimpliedmodifier.html#InterfaceMemberImpliedModifier",
+        "InterfaceMemberImpliedModifier",
+        "Checks for implicit modifiers on interface members and nested types.",
+        "\nviolateImpliedAbstractMethod, Control whether to enforce that abstract is explicitly coded on interface methods.\nviolateImpliedFinalField, Control whether to enforce that final is explicitly coded on interface fields.\nviolateImpliedPublicField, Control whether to enforce that public is explicitly coded on interface fields.\nviolateImpliedPublicMethod, Control whether to enforce that public is explicitly coded on interface methods.\nviolateImpliedPublicNested, Control whether to enforce that public is explicitly coded on interface nested types.\nviolateImpliedStaticField, Control whether to enforce that static is explicitly coded on interface fields.\nviolateImpliedStaticNested, Control whether to enforce that static is explicitly coded on interface nested types."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/illegalcatch.html#IllegalCatch",
+        "IllegalCatch",
+        "Checks that certain exception types do not appear in a catch statement.",
+        "\nillegalClassNames, Specify exception class names to reject."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/modifiedcontrolvariable.html#ModifiedControlVariable",
+        "ModifiedControlVariable",
+        "Checks that for loop control variables are not modified inside the for block.",
+        "\nskipEnhancedForLoopVariable, Control whether to check\nenhanced for-loop variable."
+    ],
+    [
+        "https://checkstyle.org/checks/design/finalclass.html#FinalClass",
+        "FinalClass",
+        "Ensures that identifies classes that can be effectively declared as final are              explicitly marked as final.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/coding/illegalthrows.html#IllegalThrows",
+        "IllegalThrows",
+        "Checks that specified types are not declared to be thrown.",
+        "\nignoreOverriddenMethods, Allow to ignore checking overridden methods (marked with Override or java.lang.Override annotation).\nignoredMethodNames, Specify names of methods to ignore.\nillegalClassNames, Specify throw class names to reject."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/illegalidentifiername.html#IllegalIdentifierName",
+        "IllegalIdentifierName",
+        "Checks identifiers with a pattern for a set of illegal names, such as those              that are restricted or contextual keywords.",
+        "\nformat, Sets the pattern to match valid identifiers.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/naming/parametername.html#ParameterName",
+        "ParameterName",
+        "Checks that method parameter names conform to a specified pattern.",
+        "\naccessModifiers, Access modifiers of methods where parameters are checked.\nformat, Sets the pattern to match valid identifiers.\nignoreOverridden, Allows to skip methods with Override annotation from validation."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/separatorwrap.html#SeparatorWrap",
+        "SeparatorWrap",
+        "Checks line wrapping with separators.",
+        "\noption, Specify policy on how to wrap lines.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/misc/newlineatendoffile.html#NewlineAtEndOfFile",
+        "NewlineAtEndOfFile",
+        "Checks whether files end with a line separator.",
+        "\nfileExtensions, Specify the file extensions of the files to process.\nlineSeparator, Specify the type of line separator."
+    ],
+    [
+        "https://checkstyle.org/checks/design/mutableexception.html#MutableException",
+        "MutableException",
+        "Ensures that exception classes (classes with names conforming to              some pattern and explicitly extending classes with names              conforming to other pattern) are immutable, that is,              that they have only final fields.",
+        "\nextendedClassNameFormat, Specify pattern for extended class names.\nformat, Specify pattern for exception class names."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/arraytrailingcomma.html#ArrayTrailingComma",
+        "ArrayTrailingComma",
+        "Checks that array initialization contains a trailing comma.",
+        "\nalwaysDemandTrailingComma, Control whether to always check for a trailing comma, even when an array is inline."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/declarationorder.html#DeclarationOrder",
+        "DeclarationOrder",
+        "Checks that the parts of a class, record, or interface declaration              appear in the order suggested by the Code Conventions for the Java Programming Language.",
+        "\nignoreConstructors, Control whether to ignore constructors.\nignoreModifiers, Control whether to ignore modifiers (fields, ...)."
+    ],
+    [
+        "https://checkstyle.org/checks/imports/avoidstarimport.html#AvoidStarImport",
+        "AvoidStarImport",
+        "Checks that there are no import statements that use the * notation.",
+        "\nallowClassImports, Control whether to allow starred class imports like import java.util.*;.\nallowStaticMemberImports, Control whether to allow starred static member imports like import static org.junit.Assert.*;.\nexcludes, Specify packages where starred class imports are allowed and classes where starred static member imports are allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/javadocmissingwhitespaceafterasterisk.html#JavadocMissingWhitespaceAfterAsterisk",
+        "JavadocMissingWhitespaceAfterAsterisk",
+        "Checks that there is at least one whitespace after the leading asterisk.",
+        "\nviolateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at\nTight-HTML Rules."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/staticvariablename.html#StaticVariableName",
+        "StaticVariableName",
+        "Checks that static, non-final variable names              conform to a specified pattern.",
+        "\napplyToPackage, Control if check should apply to package-private members.\napplyToPrivate, Control if check should apply to private members.\napplyToProtected, Control if check should apply to protected members.\napplyToPublic, Control if check should apply to public members.\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/header/header.html#Header",
+        "Header",
+        "Checks that a source file begins with a specified header.",
+        "\ncharset, Specify the character encoding to use when reading the headerFile.\nfileExtensions, Specify the file extensions of the files to process.\nheader, Specify the required header specified inline. Individual header lines must be separated by the string \"\\n\"(even on platforms with a different line separator).\nheaderFile, Specify the name of the file containing the required header.\nignoreLines, Specify the line numbers to ignore."
+    ],
+    [
+        "https://checkstyle.org/checks/regexp/regexponfilename.html#RegexpOnFilename",
+        "RegexpOnFilename",
+        "Checks that a specified pattern matches based on file and/or folder path.",
+        "\nfileExtensions, Specify the file extensions of the files to process.\nfileNamePattern, Specify the regular expression to match the file name against.\nfolderPattern, Specify the regular expression to match the folder path against.\nignoreFileNameExtensions, Control whether to ignore the file extension for the file name match.\nmatch, Control whether to look for a match or mismatch on the file name, if the fileNamePattern is supplied, otherwise it is applied on the folderPattern."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/filetabcharacter.html#FileTabCharacter",
+        "FileTabCharacter",
+        "Checks that there are no tab characters ('\\t') in the source code.",
+        "\neachLine, Control whether to report on each line containing a tab, or just the first instance.\nfileExtensions, Specify the file extensions of the files to process."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/equalsavoidnull.html#EqualsAvoidNull",
+        "EqualsAvoidNull",
+        "Checks that any combination of String literals              is on the left side of an equals() comparison.",
+        "\nignoreEqualsIgnoreCase, Control whether to ignore String.equalsIgnoreCase(String) invocations."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/superclone.html#SuperClone",
+        "SuperClone",
+        "Checks that an overriding clone() method invokes super.clone().",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/javadoc/writetag.html#WriteTag",
+        "WriteTag",
+        "Requires user defined Javadoc tag to be present in Javadoc comment              with defined format.",
+        "\ntag, Specify the name of tag.\ntagFormat, Specify the regexp to match tag content.\ntagSeverity, Specify the severity level when tag is found and printed.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/metrics/cyclomaticcomplexity.html#CyclomaticComplexity",
+        "CyclomaticComplexity",
+        "Checks cyclomatic complexity against a specified limit.",
+        "\nmax, Specify the maximum threshold allowed.\nswitchBlockAsSingleDecisionPoint, Control whether to treat the whole switch block as a single decision point.\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/sizes/anoninnerlength.html#AnonInnerLength",
+        "AnonInnerLength",
+        "Checks for long anonymous inner classes.",
+        "\nmax, Specify the maximum number of lines allowed."
+    ],
+    [
+        "https://checkstyle.org/checks/misc/outertypefilename.html#OuterTypeFilename",
+        "OuterTypeFilename",
+        "Checks that the outer type name and the file name match.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/naming/localvariablename.html#LocalVariableName",
+        "LocalVariableName",
+        "Checks that local, non-final variable names conform to a specified pattern.",
+        "\nallowOneCharVarInForLoop, Allow one character variable name in\ninitialization expressions in FOR loop if one char variable name is prohibited by format regexp.\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/nestedtrydepth.html#NestedTryDepth",
+        "NestedTryDepth",
+        "Restricts nested try-catch-finally blocks to a specified depth.",
+        "\nmax, Specify maximum allowed nesting depth."
+    ],
+    [
+        "https://checkstyle.org/checks/naming/methodname.html#MethodName",
+        "MethodName",
+        "Checks that method names conform to a specified pattern.",
+        "\nallowClassName, Control whether to allow a method name to have the same name as the enclosing class name. Setting this property false helps to avoid confusion between constructors and methods.\napplyToPackage, Control if check should apply to package-private members.\napplyToPrivate, Control if check should apply to private members.\napplyToProtected, Control if check should apply to protected members.\napplyToPublic, Control if check should apply to public members.\nformat, Sets the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/whitespace/genericwhitespace.html#GenericWhitespace",
+        "GenericWhitespace",
+        "Checks that the whitespace around the Generic tokens (angle brackets)              \"<\" and \">\" are correct to the typical convention.",
+        ""
+    ],
+    [
+        "https://checkstyle.org/checks/blocks/rightcurly.html#RightCurly",
+        "RightCurly",
+        "Checks the placement of right curly braces ('}') for code blocks.",
+        "\noption, Specify the policy on placement of a right curly brace ('}').\ntokens, tokens to check"
+    ],
+    [
+        "https://checkstyle.org/checks/naming/packagename.html#PackageName",
+        "PackageName",
+        "Checks that package names conform to a specified pattern.",
+        "\nformat, Control the pattern to match valid identifiers."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/requirethis.html#RequireThis",
+        "RequireThis",
+        "Checks that references to instance variables and methods of the present              object are explicitly of the form \"this.varName\" or              \"this.methodName(args)\" and that those references don't              rely on the default behavior when \"this.\" is absent.",
+        "\ncheckFields, Control whether to check references to fields.\ncheckMethods, Control whether to check references to methods.\nvalidateOnlyOverlapping, Control whether to check only overlapping by variables or arguments."
+    ],
+    [
+        "https://checkstyle.org/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations",
+        "MultipleVariableDeclarations",
+        "Checks that each variable declaration is in its own statement            and on its own line.",
+        ""
+    ]
+]

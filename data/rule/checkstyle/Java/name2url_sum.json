@@ -1,0 +1,738 @@
+{
+    "AbbreviationAsWordInName": [
+        "https://checkstyle.org/checks/naming/abbreviationaswordinname.html#AbbreviationAsWordInName",
+        "Validates abbreviations (consecutive capital letters)             length in identifier name, it also allows to enforce camel case naming."
+    ],
+    "AbstractClassName": [
+        "https://checkstyle.org/checks/naming/abstractclassname.html#AbstractClassName",
+        "Ensures that the names of abstract classes conforming to some pattern and              check that abstract modifier exists."
+    ],
+    "AnnotationLocation": [
+        "https://checkstyle.org/checks/annotation/annotationlocation.html#AnnotationLocation",
+        "Checks location of annotation on language elements."
+    ],
+    "AnnotationOnSameLine": [
+        "https://checkstyle.org/checks/annotation/annotationonsameline.html#AnnotationOnSameLine",
+        "Checks that annotations are located on the same line with their targets."
+    ],
+    "AnnotationUseStyle": [
+        "https://checkstyle.org/checks/annotation/annotationusestyle.html#AnnotationUseStyle",
+        "Checks the style of elements in annotations."
+    ],
+    "AnonInnerLength": [
+        "https://checkstyle.org/checks/sizes/anoninnerlength.html#AnonInnerLength",
+        "Checks for long anonymous inner classes."
+    ],
+    "ArrayTrailingComma": [
+        "https://checkstyle.org/checks/coding/arraytrailingcomma.html#ArrayTrailingComma",
+        "Checks that array initialization contains a trailing comma."
+    ],
+    "ArrayTypeStyle": [
+        "https://checkstyle.org/checks/misc/arraytypestyle.html#ArrayTypeStyle",
+        "Checks the style of array type definitions."
+    ],
+    "AtclauseOrder": [
+        "https://checkstyle.org/checks/javadoc/atclauseorder.html#AtclauseOrder",
+        "Checks the order of javadoc block-tags or javadoc tags."
+    ],
+    "AvoidDoubleBraceInitialization": [
+        "https://checkstyle.org/checks/coding/avoiddoublebraceinitialization.html#AvoidDoubleBraceInitialization",
+        "Detects double brace initialization."
+    ],
+    "AvoidEscapedUnicodeCharacters": [
+        "https://checkstyle.org/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters",
+        "Restricts using Unicode escapes (such as \\u221e)."
+    ],
+    "AvoidInlineConditionals": [
+        "https://checkstyle.org/checks/coding/avoidinlineconditionals.html#AvoidInlineConditionals",
+        "Detects inline conditionals."
+    ],
+    "AvoidNestedBlocks": [
+        "https://checkstyle.org/checks/blocks/avoidnestedblocks.html#AvoidNestedBlocks",
+        "Finds nested blocks (blocks that are used freely in the code)."
+    ],
+    "AvoidNoArgumentSuperConstructorCall": [
+        "https://checkstyle.org/checks/coding/avoidnoargumentsuperconstructorcall.html#AvoidNoArgumentSuperConstructorCall",
+        "Checks if call to superclass constructor without arguments is present."
+    ],
+    "AvoidStarImport": [
+        "https://checkstyle.org/checks/imports/avoidstarimport.html#AvoidStarImport",
+        "Checks that there are no import statements that use the * notation."
+    ],
+    "AvoidStaticImport": [
+        "https://checkstyle.org/checks/imports/avoidstaticimport.html#AvoidStaticImport",
+        "Checks that there are no static import statements."
+    ],
+    "BooleanExpressionComplexity": [
+        "https://checkstyle.org/checks/metrics/booleanexpressioncomplexity.html#BooleanExpressionComplexity",
+        "Restricts the number of boolean operators (&&, ||, &, | and ^)              in an expression."
+    ],
+    "CatchParameterName": [
+        "https://checkstyle.org/checks/naming/catchparametername.html#CatchParameterName",
+        "Checks that catch parameter names conform to a specified pattern."
+    ],
+    "ClassDataAbstractionCoupling": [
+        "https://checkstyle.org/checks/metrics/classdataabstractioncoupling.html#ClassDataAbstractionCoupling",
+        "Measures the number of instantiations of other classes within the given class              or record."
+    ],
+    "ClassFanOutComplexity": [
+        "https://checkstyle.org/checks/metrics/classfanoutcomplexity.html#ClassFanOutComplexity",
+        "Checks the number of other types a given class/record/interface/enum/annotation              relies on."
+    ],
+    "ClassMemberImpliedModifier": [
+        "https://checkstyle.org/checks/modifier/classmemberimpliedmodifier.html#ClassMemberImpliedModifier",
+        "Checks for implicit modifiers on nested types in classes and records."
+    ],
+    "ClassTypeParameterName": [
+        "https://checkstyle.org/checks/naming/classtypeparametername.html#ClassTypeParameterName",
+        "Checks that class type parameter names conform to a specified pattern."
+    ],
+    "CommentsIndentation": [
+        "https://checkstyle.org/checks/misc/commentsindentation.html#CommentsIndentation",
+        "Controls the indentation between comments and surrounding code."
+    ],
+    "ConstantName": [
+        "https://checkstyle.org/checks/naming/constantname.html#ConstantName",
+        "Checks that constant names conform to a specified pattern."
+    ],
+    "CovariantEquals": [
+        "https://checkstyle.org/checks/coding/covariantequals.html#CovariantEquals",
+        "Checks that classes and records which define a covariant equals()              method also override method equals(Object)."
+    ],
+    "CustomImportOrder": [
+        "https://checkstyle.org/checks/imports/customimportorder.html#CustomImportOrder",
+        "Checks that the groups of import declarations appear in the order specified              by the user."
+    ],
+    "CyclomaticComplexity": [
+        "https://checkstyle.org/checks/metrics/cyclomaticcomplexity.html#CyclomaticComplexity",
+        "Checks cyclomatic complexity against a specified limit."
+    ],
+    "DeclarationOrder": [
+        "https://checkstyle.org/checks/coding/declarationorder.html#DeclarationOrder",
+        "Checks that the parts of a class, record, or interface declaration              appear in the order suggested by the Code Conventions for the Java Programming Language."
+    ],
+    "DefaultComesLast": [
+        "https://checkstyle.org/checks/coding/defaultcomeslast.html#DefaultComesLast",
+        "Check that the default is after all the              cases in a switch statement."
+    ],
+    "DescendantToken": [
+        "https://checkstyle.org/checks/misc/descendanttoken.html#DescendantToken",
+        "Checks for restricted tokens beneath other tokens."
+    ],
+    "DesignForExtension": [
+        "https://checkstyle.org/checks/design/designforextension.html#DesignForExtension",
+        "Checks that classes are designed for extension (subclass creation)."
+    ],
+    "EmptyBlock": [
+        "https://checkstyle.org/checks/blocks/emptyblock.html#EmptyBlock",
+        "Checks for empty blocks."
+    ],
+    "EmptyCatchBlock": [
+        "https://checkstyle.org/checks/blocks/emptycatchblock.html#EmptyCatchBlock",
+        "Checks for empty catch blocks."
+    ],
+    "EmptyForInitializerPad": [
+        "https://checkstyle.org/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad",
+        "Checks the padding of an empty for initializer; that is whether              a white space is required at an empty for initializer, or such white              space is forbidden."
+    ],
+    "EmptyForIteratorPad": [
+        "https://checkstyle.org/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad",
+        "Checks the padding of an empty for iterator; that is whether a white              space is required at an empty for iterator, or such white space is              forbidden."
+    ],
+    "EmptyLineSeparator": [
+        "https://checkstyle.org/checks/whitespace/emptylineseparator.html#EmptyLineSeparator",
+        "Checks for empty line separators before package,              all import declarations, fields, constructors, methods, nested classes,              static initializers and instance initializers."
+    ],
+    "EmptyStatement": [
+        "https://checkstyle.org/checks/coding/emptystatement.html#EmptyStatement",
+        "Detects empty statements (standalone \";\" semicolon)."
+    ],
+    "EqualsAvoidNull": [
+        "https://checkstyle.org/checks/coding/equalsavoidnull.html#EqualsAvoidNull",
+        "Checks that any combination of String literals              is on the left side of an equals() comparison."
+    ],
+    "EqualsHashCode": [
+        "https://checkstyle.org/checks/coding/equalshashcode.html#EqualsHashCode",
+        "Checks that classes that either override equals()              or hashCode() also overrides the other."
+    ],
+    "ExecutableStatementCount": [
+        "https://checkstyle.org/checks/sizes/executablestatementcount.html#ExecutableStatementCount",
+        "Restricts the number of executable statements to a specified limit."
+    ],
+    "ExplicitInitialization": [
+        "https://checkstyle.org/checks/coding/explicitinitialization.html#ExplicitInitialization",
+        "Checks if any class or object member is explicitly initialized to default              for its type value (null for object references, zero for numeric              types and char and false for boolean."
+    ],
+    "FallThrough": [
+        "https://checkstyle.org/checks/coding/fallthrough.html#FallThrough",
+        "Checks for fall-through in switch statements."
+    ],
+    "FileLength": [
+        "https://checkstyle.org/checks/sizes/filelength.html#FileLength",
+        "Checks for long source files."
+    ],
+    "FileTabCharacter": [
+        "https://checkstyle.org/checks/whitespace/filetabcharacter.html#FileTabCharacter",
+        "Checks that there are no tab characters ('\\t') in the source code."
+    ],
+    "FinalClass": [
+        "https://checkstyle.org/checks/design/finalclass.html#FinalClass",
+        "Ensures that identifies classes that can be effectively declared as final are              explicitly marked as final."
+    ],
+    "FinalLocalVariable": [
+        "https://checkstyle.org/checks/coding/finallocalvariable.html#FinalLocalVariable",
+        "Checks that local variables that never have their values changed are declared final."
+    ],
+    "FinalParameters": [
+        "https://checkstyle.org/checks/misc/finalparameters.html#FinalParameters",
+        "Checks that parameters for methods, constructors, catch and for-each blocks are final."
+    ],
+    "GenericWhitespace": [
+        "https://checkstyle.org/checks/whitespace/genericwhitespace.html#GenericWhitespace",
+        "Checks that the whitespace around the Generic tokens (angle brackets)              \"<\" and \">\" are correct to the typical convention."
+    ],
+    "Header": [
+        "https://checkstyle.org/checks/header/header.html#Header",
+        "Checks that a source file begins with a specified header."
+    ],
+    "HiddenField": [
+        "https://checkstyle.org/checks/coding/hiddenfield.html#HiddenField",
+        "Checks that a local variable or a parameter does not shadow            a field that is defined in the same class."
+    ],
+    "HideUtilityClassConstructor": [
+        "https://checkstyle.org/checks/design/hideutilityclassconstructor.html#HideUtilityClassConstructor",
+        "Makes sure that utility classes (classes that contain only static              methods or fields in their API) do not have a public constructor."
+    ],
+    "IllegalCatch": [
+        "https://checkstyle.org/checks/coding/illegalcatch.html#IllegalCatch",
+        "Checks that certain exception types do not appear in a catch statement."
+    ],
+    "IllegalIdentifierName": [
+        "https://checkstyle.org/checks/naming/illegalidentifiername.html#IllegalIdentifierName",
+        "Checks identifiers with a pattern for a set of illegal names, such as those              that are restricted or contextual keywords."
+    ],
+    "IllegalImport": [
+        "https://checkstyle.org/checks/imports/illegalimport.html#IllegalImport",
+        "Checks for imports from a set of illegal packages."
+    ],
+    "IllegalInstantiation": [
+        "https://checkstyle.org/checks/coding/illegalinstantiation.html#IllegalInstantiation",
+        "Checks for illegal instantiations where a factory method is preferred."
+    ],
+    "IllegalThrows": [
+        "https://checkstyle.org/checks/coding/illegalthrows.html#IllegalThrows",
+        "Checks that specified types are not declared to be thrown."
+    ],
+    "IllegalToken": [
+        "https://checkstyle.org/checks/coding/illegaltoken.html#IllegalToken",
+        "Checks for illegal tokens."
+    ],
+    "IllegalTokenText": [
+        "https://checkstyle.org/checks/coding/illegaltokentext.html#IllegalTokenText",
+        "Checks specified tokens text for matching an illegal pattern."
+    ],
+    "IllegalType": [
+        "https://checkstyle.org/checks/coding/illegaltype.html#IllegalType",
+        "Checks that particular classes or interfaces are never used."
+    ],
+    "ImportControl": [
+        "https://checkstyle.org/checks/imports/importcontrol.html#ImportControl",
+        "Controls what can be imported in each package and file."
+    ],
+    "ImportOrder": [
+        "https://checkstyle.org/checks/imports/importorder.html#ImportOrder",
+        "Checks the ordering/grouping of imports."
+    ],
+    "Indentation": [
+        "https://checkstyle.org/checks/misc/indentation.html#Indentation",
+        "Checks correct indentation of Java code."
+    ],
+    "InnerAssignment": [
+        "https://checkstyle.org/checks/coding/innerassignment.html#InnerAssignment",
+        "Checks for assignments in subexpressions, such as in              String s = Integer.toString(i = 2);."
+    ],
+    "InnerTypeLast": [
+        "https://checkstyle.org/checks/design/innertypelast.html#InnerTypeLast",
+        "Checks nested (internal) classes/interfaces are declared at the bottom of the              primary (top-level) class after all init and static init blocks,              method, constructor and field declarations."
+    ],
+    "InterfaceIsType": [
+        "https://checkstyle.org/checks/design/interfaceistype.html#InterfaceIsType",
+        "Implements Joshua Bloch, Effective Java, Item 17 - Use Interfaces only to              define types."
+    ],
+    "InterfaceMemberImpliedModifier": [
+        "https://checkstyle.org/checks/modifier/interfacememberimpliedmodifier.html#InterfaceMemberImpliedModifier",
+        "Checks for implicit modifiers on interface members and nested types."
+    ],
+    "InterfaceTypeParameterName": [
+        "https://checkstyle.org/checks/naming/interfacetypeparametername.html#InterfaceTypeParameterName",
+        "Checks that interface type parameter names conform to a specified pattern."
+    ],
+    "InvalidJavadocPosition": [
+        "https://checkstyle.org/checks/javadoc/invalidjavadocposition.html#InvalidJavadocPosition",
+        "Checks that Javadocs are located at the correct position."
+    ],
+    "JavadocBlockTagLocation": [
+        "https://checkstyle.org/checks/javadoc/javadocblocktaglocation.html#JavadocBlockTagLocation",
+        "Checks that a javadoc block tag appears only at the beginning of a line,              ignoring leading asterisks and white space."
+    ],
+    "JavadocContentLocation": [
+        "https://checkstyle.org/checks/javadoc/javadoccontentlocation.html#JavadocContentLocation",
+        "Checks that the Javadoc content begins from the same position              for all Javadoc comments in the project."
+    ],
+    "JavadocMethod": [
+        "https://checkstyle.org/checks/javadoc/javadocmethod.html#JavadocMethod",
+        "Checks the Javadoc of a method or constructor."
+    ],
+    "JavadocMissingLeadingAsterisk": [
+        "https://checkstyle.org/checks/javadoc/javadocmissingleadingasterisk.html#JavadocMissingLeadingAsterisk",
+        "Checks if the javadoc has                              leading asterisks                            on each line."
+    ],
+    "JavadocMissingWhitespaceAfterAsterisk": [
+        "https://checkstyle.org/checks/javadoc/javadocmissingwhitespaceafterasterisk.html#JavadocMissingWhitespaceAfterAsterisk",
+        "Checks that there is at least one whitespace after the leading asterisk."
+    ],
+    "JavadocPackage": [
+        "https://checkstyle.org/checks/javadoc/javadocpackage.html#JavadocPackage",
+        "Checks that each Java package has a Javadoc file used for commenting."
+    ],
+    "JavadocParagraph": [
+        "https://checkstyle.org/checks/javadoc/javadocparagraph.html#JavadocParagraph",
+        "Checks the Javadoc paragraph."
+    ],
+    "JavadocStyle": [
+        "https://checkstyle.org/checks/javadoc/javadocstyle.html#JavadocStyle",
+        "Validates Javadoc comments to help ensure they are well formed."
+    ],
+    "JavadocTagContinuationIndentation": [
+        "https://checkstyle.org/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation",
+        "Checks the indentation of the continuation lines in block tags."
+    ],
+    "JavadocType": [
+        "https://checkstyle.org/checks/javadoc/javadoctype.html#JavadocType",
+        "Checks the Javadoc comments for type definitions."
+    ],
+    "JavadocVariable": [
+        "https://checkstyle.org/checks/javadoc/javadocvariable.html#JavadocVariable",
+        "Checks that a variable has a Javadoc comment."
+    ],
+    "JavaNCSS": [
+        "https://checkstyle.org/checks/metrics/javancss.html#JavaNCSS",
+        "Determines complexity of methods, classes and files by counting              the Non Commenting Source Statements (NCSS)."
+    ],
+    "LambdaBodyLength": [
+        "https://checkstyle.org/checks/sizes/lambdabodylength.html#LambdaBodyLength",
+        "Checks lambda body length."
+    ],
+    "LambdaParameterName": [
+        "https://checkstyle.org/checks/naming/lambdaparametername.html#LambdaParameterName",
+        "Checks lambda parameter names."
+    ],
+    "LeftCurly": [
+        "https://checkstyle.org/checks/blocks/leftcurly.html#LeftCurly",
+        "Checks for the placement of left curly braces ('{') for code blocks."
+    ],
+    "LineLength": [
+        "https://checkstyle.org/checks/sizes/linelength.html#LineLength",
+        "Checks for long lines."
+    ],
+    "LocalFinalVariableName": [
+        "https://checkstyle.org/checks/naming/localfinalvariablename.html#LocalFinalVariableName",
+        "Checks that local final variable names conform to a specified pattern."
+    ],
+    "LocalVariableName": [
+        "https://checkstyle.org/checks/naming/localvariablename.html#LocalVariableName",
+        "Checks that local, non-final variable names conform to a specified pattern."
+    ],
+    "MagicNumber": [
+        "https://checkstyle.org/checks/coding/magicnumber.html#MagicNumber",
+        "Checks that there are no \"magic numbers\" where a magic number              is a numeric literal that is not defined as a constant."
+    ],
+    "MatchXpath": [
+        "https://checkstyle.org/checks/coding/matchxpath.html#MatchXpath",
+        "Evaluates Xpath query and report violation on all matching AST nodes."
+    ],
+    "MemberName": [
+        "https://checkstyle.org/checks/naming/membername.html#MemberName",
+        "Checks that instance variable names conform to a specified pattern."
+    ],
+    "MethodCount": [
+        "https://checkstyle.org/checks/sizes/methodcount.html#MethodCount",
+        "Checks the number of methods declared in each type declaration by access modifier            or total count."
+    ],
+    "MethodLength": [
+        "https://checkstyle.org/checks/sizes/methodlength.html#MethodLength",
+        "Checks for long methods and constructors."
+    ],
+    "MethodName": [
+        "https://checkstyle.org/checks/naming/methodname.html#MethodName",
+        "Checks that method names conform to a specified pattern."
+    ],
+    "MethodParamPad": [
+        "https://checkstyle.org/checks/whitespace/methodparampad.html#MethodParamPad",
+        "Checks the padding between the identifier of a method definition,              constructor definition, method call, or constructor invocation;            and the left parenthesis of the parameter list."
+    ],
+    "MethodTypeParameterName": [
+        "https://checkstyle.org/checks/naming/methodtypeparametername.html#MethodTypeParameterName",
+        "Checks that method type parameter names conform to a specified pattern."
+    ],
+    "MissingCtor": [
+        "https://checkstyle.org/checks/coding/missingctor.html#MissingCtor",
+        "Checks that classes (except abstract ones) define a constructor              and don't rely on the default one."
+    ],
+    "MissingDeprecated": [
+        "https://checkstyle.org/checks/annotation/missingdeprecated.html#MissingDeprecated",
+        "Verifies that the annotation @Deprecated and the Javadoc tag              @deprecated              are both present when either of them is present."
+    ],
+    "MissingJavadocMethod": [
+        "https://checkstyle.org/checks/javadoc/missingjavadocmethod.html#MissingJavadocMethod",
+        "Checks for missing Javadoc comments for a method or constructor."
+    ],
+    "MissingJavadocPackage": [
+        "https://checkstyle.org/checks/javadoc/missingjavadocpackage.html#MissingJavadocPackage",
+        "Checks for missing package definition Javadoc comments in package-info.java files."
+    ],
+    "MissingJavadocType": [
+        "https://checkstyle.org/checks/javadoc/missingjavadoctype.html#MissingJavadocType",
+        "Checks for missing Javadoc comments for class, enum, interface, and annotation            interface definitions."
+    ],
+    "MissingOverride": [
+        "https://checkstyle.org/checks/annotation/missingoverride.html#MissingOverride",
+        "Verifies that the @Override annotation is present              when the @inheritDoc javadoc tag is present."
+    ],
+    "MissingSwitchDefault": [
+        "https://checkstyle.org/checks/coding/missingswitchdefault.html#MissingSwitchDefault",
+        "Checks that switch statement has a default clause."
+    ],
+    "ModifiedControlVariable": [
+        "https://checkstyle.org/checks/coding/modifiedcontrolvariable.html#ModifiedControlVariable",
+        "Checks that for loop control variables are not modified inside the for block."
+    ],
+    "ModifierOrder": [
+        "https://checkstyle.org/checks/modifier/modifierorder.html#ModifierOrder",
+        "Checks that the order of modifiers conforms to the suggestions in the              Java Language specification, \u00a7 8.1.1, 8.3.1, 8.4.3 and 9.4."
+    ],
+    "MultipleStringLiterals": [
+        "https://checkstyle.org/checks/coding/multiplestringliterals.html#MultipleStringLiterals",
+        "Checks for multiple occurrences of the same string literal within a            single file."
+    ],
+    "MultipleVariableDeclarations": [
+        "https://checkstyle.org/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations",
+        "Checks that each variable declaration is in its own statement            and on its own line."
+    ],
+    "MutableException": [
+        "https://checkstyle.org/checks/design/mutableexception.html#MutableException",
+        "Ensures that exception classes (classes with names conforming to              some pattern and explicitly extending classes with names              conforming to other pattern) are immutable, that is,              that they have only final fields."
+    ],
+    "NeedBraces": [
+        "https://checkstyle.org/checks/blocks/needbraces.html#NeedBraces",
+        "Checks for braces around code blocks."
+    ],
+    "NestedForDepth": [
+        "https://checkstyle.org/checks/coding/nestedfordepth.html#NestedForDepth",
+        "Restricts nested for blocks to a specified depth."
+    ],
+    "NestedIfDepth": [
+        "https://checkstyle.org/checks/coding/nestedifdepth.html#NestedIfDepth",
+        "Restricts nested if-else blocks to a specified depth."
+    ],
+    "NestedTryDepth": [
+        "https://checkstyle.org/checks/coding/nestedtrydepth.html#NestedTryDepth",
+        "Restricts nested try-catch-finally blocks to a specified depth."
+    ],
+    "NewlineAtEndOfFile": [
+        "https://checkstyle.org/checks/misc/newlineatendoffile.html#NewlineAtEndOfFile",
+        "Checks whether files end with a line separator."
+    ],
+    "NoArrayTrailingComma": [
+        "https://checkstyle.org/checks/coding/noarraytrailingcomma.html#NoArrayTrailingComma",
+        "Checks that array initialization do not contain a trailing comma."
+    ],
+    "NoClone": [
+        "https://checkstyle.org/checks/coding/noclone.html#NoClone",
+        "Checks that the clone method is not overridden from the            Object class."
+    ],
+    "NoCodeInFile": [
+        "https://checkstyle.org/checks/misc/nocodeinfile.html#NoCodeInFile",
+        "Checks whether file contains code."
+    ],
+    "NoFinalizer": [
+        "https://checkstyle.org/checks/coding/nofinalizer.html#NoFinalizer",
+        "Checks that there is no method finalize with zero parameters."
+    ],
+    "NoLineWrap": [
+        "https://checkstyle.org/checks/whitespace/nolinewrap.html#NoLineWrap",
+        "Checks that chosen statements are not line-wrapped."
+    ],
+    "NonEmptyAtclauseDescription": [
+        "https://checkstyle.org/checks/javadoc/nonemptyatclausedescription.html#NonEmptyAtclauseDescription",
+        "Checks that the block tag is followed by description."
+    ],
+    "NoEnumTrailingComma": [
+        "https://checkstyle.org/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma",
+        "Checks that enum definition does not contain a trailing comma."
+    ],
+    "NoWhitespaceAfter": [
+        "https://checkstyle.org/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter",
+        "Checks that there is no whitespace after a token."
+    ],
+    "NoWhitespaceBefore": [
+        "https://checkstyle.org/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore",
+        "Checks that there is no whitespace before a token."
+    ],
+    "NoWhitespaceBeforeCaseDefaultColon": [
+        "https://checkstyle.org/checks/whitespace/nowhitespacebeforecasedefaultcolon.html#NoWhitespaceBeforeCaseDefaultColon",
+        "Checks that there is no whitespace before the colon in a switch block."
+    ],
+    "NPathComplexity": [
+        "https://checkstyle.org/checks/metrics/npathcomplexity.html#NPathComplexity",
+        "Checks the NPATH complexity against a specified limit."
+    ],
+    "OneStatementPerLine": [
+        "https://checkstyle.org/checks/coding/onestatementperline.html#OneStatementPerLine",
+        "Checks that there is only one statement per line."
+    ],
+    "OneTopLevelClass": [
+        "https://checkstyle.org/checks/design/onetoplevelclass.html#OneTopLevelClass",
+        "Checks that each top-level class, interface, enum or annotation resides in              a source file of its own."
+    ],
+    "OperatorWrap": [
+        "https://checkstyle.org/checks/whitespace/operatorwrap.html#OperatorWrap",
+        "Checks the policy on how to wrap lines on operators."
+    ],
+    "OrderedProperties": [
+        "https://checkstyle.org/checks/misc/orderedproperties.html#OrderedProperties",
+        "Detects if keys in properties files are in correct order."
+    ],
+    "OuterTypeFilename": [
+        "https://checkstyle.org/checks/misc/outertypefilename.html#OuterTypeFilename",
+        "Checks that the outer type name and the file name match."
+    ],
+    "OuterTypeNumber": [
+        "https://checkstyle.org/checks/sizes/outertypenumber.html#OuterTypeNumber",
+        "Checks for the number of types declared at the outer              (or root) level in a file."
+    ],
+    "OverloadMethodsDeclarationOrder": [
+        "https://checkstyle.org/checks/coding/overloadmethodsdeclarationorder.html#OverloadMethodsDeclarationOrder",
+        "Checks that overloaded methods are grouped together."
+    ],
+    "PackageAnnotation": [
+        "https://checkstyle.org/checks/annotation/packageannotation.html#PackageAnnotation",
+        "Checks that all package annotations are in the package-info.java file."
+    ],
+    "PackageDeclaration": [
+        "https://checkstyle.org/checks/coding/packagedeclaration.html#PackageDeclaration",
+        "Ensures that a class has a package declaration, and (optionally) whether              the package name matches the directory name for the source file."
+    ],
+    "PackageName": [
+        "https://checkstyle.org/checks/naming/packagename.html#PackageName",
+        "Checks that package names conform to a specified pattern."
+    ],
+    "ParameterAssignment": [
+        "https://checkstyle.org/checks/coding/parameterassignment.html#ParameterAssignment",
+        "Disallows assignment of parameters."
+    ],
+    "ParameterName": [
+        "https://checkstyle.org/checks/naming/parametername.html#ParameterName",
+        "Checks that method parameter names conform to a specified pattern."
+    ],
+    "ParameterNumber": [
+        "https://checkstyle.org/checks/sizes/parameternumber.html#ParameterNumber",
+        "Checks the number of parameters of a method or constructor."
+    ],
+    "ParenPad": [
+        "https://checkstyle.org/checks/whitespace/parenpad.html#ParenPad",
+        "Checks the policy on the padding of parentheses; that is whether a              space is required after a left parenthesis and before a right              parenthesis, or such spaces are forbidden."
+    ],
+    "PatternVariableName": [
+        "https://checkstyle.org/checks/naming/patternvariablename.html#PatternVariableName",
+        "Checks that pattern variable names conform to a specified pattern."
+    ],
+    "RecordComponentNumber": [
+        "https://checkstyle.org/checks/sizes/recordcomponentnumber.html#RecordComponentNumber",
+        "Checks the number of record components in the header of a record definition."
+    ],
+    "RecordComponentName": [
+        "https://checkstyle.org/checks/naming/recordcomponentname.html#RecordComponentName",
+        "Checks that record component names conform to a specified pattern."
+    ],
+    "RecordTypeParameterName": [
+        "https://checkstyle.org/checks/naming/recordtypeparametername.html#RecordTypeParameterName",
+        "Checks that record type parameter names conform to a specified pattern."
+    ],
+    "RedundantImport": [
+        "https://checkstyle.org/checks/imports/redundantimport.html#RedundantImport",
+        "Checks for redundant import statements."
+    ],
+    "RedundantModifier": [
+        "https://checkstyle.org/checks/modifier/redundantmodifier.html#RedundantModifier",
+        "Checks for redundant modifiers."
+    ],
+    "Regexp": [
+        "https://checkstyle.org/checks/regexp/regexp.html#Regexp",
+        "Checks that a specified pattern exists, exists less than a set              number of times, or does not exist in the file."
+    ],
+    "RegexpHeader": [
+        "https://checkstyle.org/checks/header/regexpheader.html#RegexpHeader",
+        "Checks the header of a source file against a header that contains              a pattern for each line of the source header."
+    ],
+    "RegexpMultiline": [
+        "https://checkstyle.org/checks/regexp/regexpmultiline.html#RegexpMultiline",
+        "Checks that a specified pattern matches across multiple lines in            any file type."
+    ],
+    "RegexpOnFilename": [
+        "https://checkstyle.org/checks/regexp/regexponfilename.html#RegexpOnFilename",
+        "Checks that a specified pattern matches based on file and/or folder path."
+    ],
+    "RegexpSingleline": [
+        "https://checkstyle.org/checks/regexp/regexpsingleline.html#RegexpSingleline",
+        "Checks that a specified pattern matches a single-line in any file type."
+    ],
+    "RegexpSinglelineJava": [
+        "https://checkstyle.org/checks/regexp/regexpsinglelinejava.html#RegexpSinglelineJava",
+        "Checks that a specified pattern matches a single-line in Java files."
+    ],
+    "RequireThis": [
+        "https://checkstyle.org/checks/coding/requirethis.html#RequireThis",
+        "Checks that references to instance variables and methods of the present              object are explicitly of the form \"this.varName\" or              \"this.methodName(args)\" and that those references don't              rely on the default behavior when \"this.\" is absent."
+    ],
+    "ReturnCount": [
+        "https://checkstyle.org/checks/coding/returncount.html#ReturnCount",
+        "Restricts the number of return statements in methods, constructors              and lambda expressions."
+    ],
+    "RightCurly": [
+        "https://checkstyle.org/checks/blocks/rightcurly.html#RightCurly",
+        "Checks the placement of right curly braces ('}') for code blocks."
+    ],
+    "SeparatorWrap": [
+        "https://checkstyle.org/checks/whitespace/separatorwrap.html#SeparatorWrap",
+        "Checks line wrapping with separators."
+    ],
+    "SimplifyBooleanExpression": [
+        "https://checkstyle.org/checks/coding/simplifybooleanexpression.html#SimplifyBooleanExpression",
+        "Checks for over-complicated boolean expressions."
+    ],
+    "SimplifyBooleanReturn": [
+        "https://checkstyle.org/checks/coding/simplifybooleanreturn.html#SimplifyBooleanReturn",
+        "Checks for over-complicated boolean return statements."
+    ],
+    "SingleLineJavadoc": [
+        "https://checkstyle.org/checks/javadoc/singlelinejavadoc.html#SingleLineJavadoc",
+        "Checks that a Javadoc block can fit in a single-line and doesn't contain              block tags."
+    ],
+    "RequireEmptyLineBeforeBlockTagGroup": [
+        "https://checkstyle.org/checks/javadoc/requireemptylinebeforeblocktaggroup.html#RequireEmptyLineBeforeBlockTagGroup",
+        "Checks that one blank line before the block tag if it is present in Javadoc."
+    ],
+    "SingleSpaceSeparator": [
+        "https://checkstyle.org/checks/whitespace/singlespaceseparator.html#SingleSpaceSeparator",
+        "Checks that non-whitespace characters are separated by no more than one              whitespace."
+    ],
+    "StaticVariableName": [
+        "https://checkstyle.org/checks/naming/staticvariablename.html#StaticVariableName",
+        "Checks that static, non-final variable names              conform to a specified pattern."
+    ],
+    "StringLiteralEquality": [
+        "https://checkstyle.org/checks/coding/stringliteralequality.html#StringLiteralEquality",
+        "Checks that string literals are not used with              == or !=."
+    ],
+    "SummaryJavadoc": [
+        "https://checkstyle.org/checks/javadoc/summaryjavadoc.html#SummaryJavadoc",
+        "Checks that Javadoc summary sentence does not contain phrases that are not recommended            to use."
+    ],
+    "SuperClone": [
+        "https://checkstyle.org/checks/coding/superclone.html#SuperClone",
+        "Checks that an overriding clone() method invokes super.clone()."
+    ],
+    "SuperFinalize": [
+        "https://checkstyle.org/checks/coding/superfinalize.html#SuperFinalize",
+        "Checks that an overriding finalize() method invokes super.finalize()."
+    ],
+    "SuppressWarnings": [
+        "https://checkstyle.org/checks/annotation/suppresswarnings.html#SuppressWarnings",
+        "Allows to specify what warnings that              @SuppressWarnings              is not allowed to suppress."
+    ],
+    "ThrowsCount": [
+        "https://checkstyle.org/checks/design/throwscount.html#ThrowsCount",
+        "Restricts throws statements to a specified count."
+    ],
+    "TodoComment": [
+        "https://checkstyle.org/checks/misc/todocomment.html#TodoComment",
+        "Checks for TODO: comments."
+    ],
+    "TrailingComment": [
+        "https://checkstyle.org/checks/misc/trailingcomment.html#TrailingComment",
+        "The check to ensure that lines with code do not end with comment."
+    ],
+    "Translation": [
+        "https://checkstyle.org/checks/misc/translation.html#Translation",
+        "Ensures the correct translation of code by checking property files              for consistency regarding their keys."
+    ],
+    "TypecastParenPad": [
+        "https://checkstyle.org/checks/whitespace/typecastparenpad.html#TypecastParenPad",
+        "Checks the policy on the padding of parentheses for typecasts."
+    ],
+    "TypeName": [
+        "https://checkstyle.org/checks/naming/typename.html#TypeName",
+        "Checks that type names conform to a specified pattern."
+    ],
+    "UncommentedMain": [
+        "https://checkstyle.org/checks/misc/uncommentedmain.html#UncommentedMain",
+        "Detects uncommented main methods."
+    ],
+    "UniqueProperties": [
+        "https://checkstyle.org/checks/misc/uniqueproperties.html#UniqueProperties",
+        "Detects duplicated keys in properties files."
+    ],
+    "UnnecessaryParentheses": [
+        "https://checkstyle.org/checks/coding/unnecessaryparentheses.html#UnnecessaryParentheses",
+        "Checks if unnecessary parentheses are used in a statement or expression."
+    ],
+    "UnnecessarySemicolonInEnumeration": [
+        "https://checkstyle.org/checks/coding/unnecessarysemicoloninenumeration.html#UnnecessarySemicolonInEnumeration",
+        "Checks if unnecessary semicolon is in enum definitions."
+    ],
+    "UnnecessarySemicolonInTryWithResources": [
+        "https://checkstyle.org/checks/coding/unnecessarysemicolonintrywithresources.html#UnnecessarySemicolonInTryWithResources",
+        "Checks if unnecessary semicolon is used in last resource declaration."
+    ],
+    "UnnecessarySemicolonAfterOuterTypeDeclaration": [
+        "https://checkstyle.org/checks/coding/unnecessarysemicolonafteroutertypedeclaration.html#UnnecessarySemicolonAfterOuterTypeDeclaration",
+        "Checks if unnecessary semicolon is used after type declaration."
+    ],
+    "UnnecessarySemicolonAfterTypeMemberDeclaration": [
+        "https://checkstyle.org/checks/coding/unnecessarysemicolonaftertypememberdeclaration.html#UnnecessarySemicolonAfterTypeMemberDeclaration",
+        "Checks if unnecessary semicolon is used after type member declaration."
+    ],
+    "UnusedImports": [
+        "https://checkstyle.org/checks/imports/unusedimports.html#UnusedImports",
+        "Checks for unused import statements."
+    ],
+    "UpperEll": [
+        "https://checkstyle.org/checks/misc/upperell.html#UpperEll",
+        "Checks that long constants are defined with an upper ell."
+    ],
+    "UnusedLocalVariable": [
+        "https://checkstyle.org/checks/coding/unusedlocalvariable.html#UnusedLocalVariable",
+        "Checks that a local variable is declared and/or assigned, but not used."
+    ],
+    "VariableDeclarationUsageDistance": [
+        "https://checkstyle.org/checks/coding/variabledeclarationusagedistance.html#VariableDeclarationUsageDistance",
+        "Checks the distance between declaration of variable and its first usage."
+    ],
+    "VisibilityModifier": [
+        "https://checkstyle.org/checks/design/visibilitymodifier.html#VisibilityModifier",
+        "Checks visibility of class members."
+    ],
+    "WhitespaceAfter": [
+        "https://checkstyle.org/checks/whitespace/whitespaceafter.html#WhitespaceAfter",
+        "Checks that a token is followed by whitespace, with the exception that it            does not check for whitespace after the semicolon of an empty for iterator."
+    ],
+    "WhitespaceAround": [
+        "https://checkstyle.org/checks/whitespace/whitespacearound.html#WhitespaceAround",
+        "Checks that a token is surrounded by whitespace."
+    ],
+    "WriteTag": [
+        "https://checkstyle.org/checks/javadoc/writetag.html#WriteTag",
+        "Requires user defined Javadoc tag to be present in Javadoc comment              with defined format."
+    ]
+}
