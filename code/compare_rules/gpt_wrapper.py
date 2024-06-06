@@ -18,7 +18,7 @@ class GPTWrapper:
     def __init__(self) -> None:
         self.client = OpenAI(
             base_url="https://api.xty.app/v1",
-            api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
+            # api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
             http_client=httpx.Client(
                     base_url="https://api.xty.app/v1",
                     follow_redirects=True,
