@@ -6,9 +6,9 @@ from langchain.vectorstores.chroma import Chroma
 import json
 
 dbm = None
-os.environ["OPENAI_API_KEY"] = (
-    "sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
-)
+# os.environ["OPENAI_API_KEY"] = (
+#     "sk-proj-0W1mHlj2J2BnYHauKePhT=====3BlbkFJF3W9NDdOrs0BOkyaOJqh"
+# )
 
 
 class DBManager:
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     resp2 = augmented_name_desc_str(query)
     resp1 = augmented_name_desc_mopt_str(query)
     resp2 = augmented_name_desc_str(query)
-    with open('resp1.txt','w') as f:
+    with open("resp1.txt", "w") as f:
         f.write(resp1)
-    with open('resp2.txt','w') as f:
+    with open("resp2.txt", "w") as f:
         f.write(resp2)
