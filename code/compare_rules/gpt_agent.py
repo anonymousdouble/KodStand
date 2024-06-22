@@ -1,89 +1,121 @@
-import json
-import os
+# encoding=utf-8
+"""
+requires openai == 1.25.0
+
+references:
+- https://github.com/openai/openai-python
+- https://flowus.cn/share/bf106afc-6e3c-4b52-b7e4-bf23b3ec758
+
+"""
+from openai import OpenAI
+from retry import retry
+import httpx
 import re
-import shutil
-import pandas as pd
-from gpt_wrapper import GPTWrapper
-from prompt import PrompGenerator
-
-
+wrapper = None
 class GPTAgent:
 
-    def __init__(self):
-        self.wrapper = GPTWrapper.get_wrapper()
-        # self.rule_set_root1 = "data\\rule\\google\\jsguide.json"
-        # self.rule_set_root2 = "data\\rule\\eslint"
+    def __init__(self) -> None:
+        self.client = OpenAI(
+            # api_key="sk-proj-vrNPSb5ttqXsOV39pl7FT3BlbkFJ93LlRultIv7DLd7Pwe8e"
+            api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
+        )
+        # self.client = OpenAI(
+        #     base_url="https://api.xty.app/v1",
+        #     api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
+        #     http_client=httpx.Client(
+        #             base_url="https://api.xty.app/v1",
+        #             follow_redirects=True,
+        #     ),
+        # )
 
-    def compare_rules_simple(self, rule: str):
-        eslint_rules_simple = ""
-        simple_path = "data\\rule\\eslint\\overview.md"
-        with open(simple_path, 'r', encoding='utf-8') as f:
-            eslint_rules_simple = f.read()
+    @retry(delay=0, tries=6, backoff=1, max_delay=120)
+    def ask(self, content,examples=None,model="gpt-3.5-turbo-0125",temperature=0):
+        messages = []
+        # if isinstance(content,list):
+        #     for i,each_prompt in enumerate(content):
+        #         if i%2:
+        #             messages.append({"role": "user", "content": content})
+        #         else:
+        #             messages.append({"role": "user", "content": content})
+        if examples:
+            '''
+            https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb
+              {"role": "user", "content": "Help me translate the following corporate jargon into plain English."},
+            {"role": "assistant", "content": "Sure, I'd be happy to!"},
+            '''
+            for user_prompt, response in examples:
+                messages.extend([
+                    {"role": "user",
+                     "content": user_prompt},
+                    {"role": "assistant",
+                     "content": str(response)}])
+        messages.append({"role": "user", "content": content})
+        # print(">>>>messages: ",messages)
+        completion = self.client.chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=temperature,
+            # response_format={"type": "json_object"}
+        )
+        # print(completion)
+        return completion.choices[0].message.content
 
-        if len(eslint_rules_simple) > 0:
-            question = "Given a rule:\n\n"
-            question += rule
-            question += "\n\nCan you find a corresponding rule in the following rule set?\n\n"
-            question += eslint_rules_simple
-            answer = self.wrapper.ask(question)
-            print(answer)
-
-    def e2g(self, rule):
-        if not hasattr(self, 'titles'):
-            self.google_rules = []
-            with open("data\\rule\\google\\jsguide.json", "r", encoding="utf-8") as f:
-                data = json.load(f)
-                for r in data:
-                    self.google_rules.append(r)
-            self.titles = [" ".join(case["title"].split()[1:])
-                           for case in self.google_rules if len(case["cases"]) > 0]
-
-        question = "Given a rule:\n\n"
-        question += rule
-        question += "\n\nCan you find a corresponding rule in the following rule set?\n\n"
-        question += '\n'.join(self.titles)
-        question += "\n\n Only provide the most likely option."
-
-        try:
-            answer = self.wrapper.ask(question)
-            print(answer)
-        except Exception as e:
-            print(e)
-            return None
-        # print(answer)
-        for t in self.titles:
-            if t in answer:
-                return t
-
-        return None
-
-    def simple_qa(self,question):
-        try:
-            answer = self.wrapper.ask(question)
-        except Exception as e:
-            print(e)
-            return None
+    def get_response(self, prompt,examples=None,model="gpt-3.5-turbo-0125",temperature=0):
+        '''
+        Answer: You respond with Yes or No for whether exists an ESLint configuration for the given style convention
+        Configuration:
+        rule-name: ['error', {
+          option1: value1,
+          ...
+          optionn: valuen
+        }]
+        '''
+        # if model == 'gpt-4o':
+        #     self.client = OpenAI(api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh")
+        # else:
+        #     self.client = OpenAI(
+        #         base_url="https://api.xty.app/v1",
+        #         api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
+        #         http_client=httpx.Client(
+        #                 base_url="https://api.xty.app/v1",
+        #                 follow_redirects=True,
+        #         ),
+        #     )
+        answer = self.ask(prompt,examples,model,temperature)
         return answer
+        # if len(eslint_rules_simple) > 0:
+        #     # question = "Given a rule:\n\n"
+        #     # question += rule
+        #     # question += "Can you find a corresponding rule in the following rule set?\n\n"
+        #     # question += eslint_rules_simple
+        #     answer = self.wrapper.ask(prompt)
+        #     print(answer)
 
-    def match_from_excel(self,excel_path):
-        df = pd.read_excel(excel_path)
-        generator = PrompGenerator()
+class GPTWrapper:
 
-        result = []
-        for i in range(len(df)):
-            google_rule = df.loc[i, "Section Name"]
-            desc = df.loc[i, "Total Description"]
-            if not pd.isnull(desc):
-                rule_detail = f"{google_rule}\n{desc}"
-                print(f"Matching {google_rule}")
-                prompt = generator.get_prompt(rule_detail, "simple")
-                answer = self.simple_qa(prompt)
-                if answer is not None:
-                    result.append(f"{google_rule}\n{answer}")
-        with open("data\\matching\\google2eslint\\matching_auto.txt", "w", encoding="utf-8") as f:
-            for r in result:
-                f.write(f"{r}\n")
+    def __init__(self) -> None:
+        self.client = OpenAI(
+            api_key="sk-proj-vrNPSb5ttqXsOV39pl7FT3BlbkFJ93LlRultIv7DLd7Pwe8e"
 
-if __name__ == "__main__":
-    agent = GPTAgent()
-    agent.match_from_excel("data\\matching\\google2eslint\\google.xlsx")
+        )
+        # self.client = OpenAI(
+        #     base_url="https://api.xty.app/v1",
+        #     api_key="sk-proj-vrNPSb5ttqXsOV39pl7FT3BlbkFJ93LlRultIv7DLd7Pwe8e",
+        #     http_client=httpx.Client(
+        #             base_url="https://api.xty.app/v1",
+        #             follow_redirects=True,
+        #     ),
+        # )
+
+    @retry(delay=0, tries=6, backoff=1, max_delay=120)
+    def ask(self, content, cot_pattern=[]):
+        messages =[]
+        messages.append({"role": "user", "content": content})
+        completion = self.client.chat.completions.create(
+            model="gpt-3.5-turbo-0125",
+            messages=messages,
+            temperature=0,
+            response_format={"type": "json_object"}
+        )
+        # print(completion)
+        return completion.choices[0].message.content

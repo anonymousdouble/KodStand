@@ -4,23 +4,13 @@ import shutil
 import sys
 
 from gpt_agent_028 import GPTAgent
-
+from dsl import dsl
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import util
 
 
-dsl = """RuleSet ::= Rule1 [And|Or|; Rule2]* # And means should satisfy Rule1 and Rule2. Or means can satisfy Rule1 or Rule2. ; means Rule1,Rule2 belongs to diffent groups
-Rule ::= {{'Optional'| 'Mandatory'}} [ ['Order' of | 'Number' of] TermList [Operator TermList]* | Rule1 '->' Rule2] [ExceptionRule] #'Order' of  means order rule, 'Number' of means numberConstraint, Rule1 '->' Rule2 means if Rule1 then Rule2
-ExceptionRule ::= 'Except ' TermList | Rule # means rules not applied to TermList | Rule
-Operator = 'is'| 'is not' | '>=' | '<=' | '=' | '!=' | 'for' | 'not for' | 'before' | 'not before' | 'after' | 'not after' | 'between' | 'not between' | 'have' | 'not have' | 'Add' | 'Sub' | 'Mult' | MatMult | 'Div' | 'Mod' | 'Pow' | 'LShift' | 'RShift' | 'BitOr' | 'BitXor' | 'BitAnd' | 'FloorDiv'
-TermList ::= Term [, Term]*
-Modifier ::= 'some' | 'each' | 'all' | 'except' | 'first' | 'last' | ...
-Term :: = JavaTerm | Modifier* Term | Term of Term
-JavaTerm means the formal expression using such format [XXX] "XXX" represent a JavaTerm
-"""
-
-examples = """For Example, Analyze the following {{Style}}, please parse the {{Style}} using the given {{grammar}} to make its semantics clear and correct. {{Style}} consists of Description and configurable Options. 
+checkstyle_dsl_examples = """For Example, Analyze the following {{Style}}, please parse the {{Style}} using the given {{grammar}} to make its semantics clear and correct. {{Style}} consists of Description and configurable Options. 
 
 {{Style}}:
 Rulename:
@@ -79,7 +69,7 @@ True: Optional: Number of [statement] of [body] of [tokens] is 1 -> [tokens] not
 
 
 def preprocess_promt(
-    rule: str, DSL_Syntax: str, style="CheckStyle Rule", grammar="Grammar", example=""
+    rule: str, dsl_syntax: str, style="CheckStyle Rule", grammar="Grammar", example=""
 ):
     # then determine formal term of Java for objects of style and determine the appropriate operators between terms. Pay attention to
     prompt = """Analyze the following {{Style}}, please parse the {{Style}} using the given {{grammar}} to make its semantics clear and correct. {{Style}} consists of Description and configurable Options. 
@@ -98,37 +88,13 @@ def preprocess_promt(
 
     prompt = prompt.replace("{{Example}}", example)
     prompt = prompt.replace("{{Style}}", style)
-    prompt = prompt.replace("{{Syntax}}", DSL_Syntax)
+    prompt = prompt.replace("{{Syntax}}", dsl_syntax)
     prompt = prompt.replace("{{Description}}", rule)
     prompt = prompt.replace("{{grammar}}", grammar)
 
     return prompt
 
-
-def get_all_gpt_res_for_java_checkstyle(
-    rule_list, dsl, examples, style, model, output_dir
-):
-
-    agent = GPTAgent()
-    result = {}
-    prompts = {}
-    for rule_description in rule_list[:10]:
-        rule_name = rule_description.split("\n")[1]
-        print(f"generate dsl for: {rule_name}")
-
-        prompt = preprocess_promt(
-            rule=rule_description, example=examples, DSL_Syntax=dsl, style=style
-        )
-        answer = agent.get_response(prompt, model=model)
-        result[rule_name] = answer
-        prompts[rule_name] = prompt
-    with open(os.path.join(output_dir, f"{model}_prompt.json"), "w") as f:
-        json.dump(prompts, f, indent=4)
-    with open(os.path.join(output_dir, f"{model}_response.json"), "w") as f:
-        json.dump(result, f, indent=4)
-
-
-def get_rules_from_file(file_path):
+def get_checkstyle_rules_from_file(file_path):
     with open(file_path) as f:
         jdata = json.load(f)
 
@@ -146,27 +112,23 @@ def get_rules_from_file(file_path):
 if __name__ == "__main__":
 
     file_path = "data/rule/checkstyle/java/url_name_desc_opt.json"
-    rule_list = get_rules_from_file(file_path)
-
-    # get_all_gpt_res_for_java_checkstyle(
-    #     rule_list,
-    #     dsl,
-    #     examples=examples,
-    #     style="CheckStyle Rule",
-    #     model="gpt-3.5-turbo-0125",
-    #     output_dir="data/dsl_output/",
-    # )
+    rule_list = get_checkstyle_rules_from_file(file_path)
+    agent = GPTAgent()
+    agent.gen_dsl(
+        rule_list,
+        dsl,
+        examples=checkstyle_dsl_examples,
+        prompt_processor=preprocess_promt,
+        style="CheckStyle Rule",
+        model="gpt-3.5-turbo-0125",
+        output_dir="data/dsl_output/checkstyle",
+    )
     res = None
-    with open("data/dsl_output/checkstyle/gpt-3.5-turbo-0125_response.json") as f:
+    with open("data/dsl_output/checkstyle/gpt-3.5-turbo-0125_rule_prompt_response_simple.json") as f:
         res = json.load(f)
-    prompts = None
-    with open("data/dsl_output/checkstyle/gpt-3.5-turbo-0125_prompt.json") as f:
-        prompts = json.load(f)
-    for i,rule in enumerate(rule_list[:10]):
+    for i,rule in enumerate(rule_list[:1]):
         with open(f"data/dsl_output/checkstyle/{i}.txt", "w") as f:
             rule_name = rule.split("\n")[1]
-            f.write(prompts[rule_name])
+            f.write(res[rule_name][0])
             f.write("\n=======================================================\n")
-            f.write(res[rule_name])
-
-
+            f.write(res[rule_name][1])

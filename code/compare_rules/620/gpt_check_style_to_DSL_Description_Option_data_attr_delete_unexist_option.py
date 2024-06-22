@@ -6,7 +6,7 @@ import util
 
 from openai import OpenAI
 from retry import retry
-from gpt_wrapper import GPTAgent
+from code.compare_rules.gpt_agent import GPTAgent
 # rule=rule_description, DSL_Syntax=dsl
 def preprocess_promt(rule: str, DSL_Syntax: str, style="CheckStyle Rule",grammar="Grammar",example="",options="Answer about Options are data specifications or not",Options_Answer=None):
     #then determine formal term of Java for objects of style and determine the appropriate operators between terms. Pay attention to

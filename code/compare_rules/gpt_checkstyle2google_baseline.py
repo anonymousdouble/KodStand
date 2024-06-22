@@ -6,7 +6,7 @@ import sys
 import xml.etree.ElementTree as ET
 import pandas as pd
 from rag import augmented_name_desc_mopt_str,augmented_name_desc_str
-# from gpt_wrapper_new import GPTAgent
+# from gpt_agent import GPTAgent
 from gpt_agent_028 import GPTAgent # openai==0.28
 
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -195,7 +195,7 @@ def get_checkstyle_str(opt, rule: str=""):
     raise Exception(f"Invalid option: {opt}")
 
 
-def get_all_gpt_res_for_java_checkstyle(opt, model, rules,use_examples=False):
+def gpt_res_of_checkstyle_dsl_from_csv(opt, model, rules,use_examples=False):
     """
     1. parse each rule of style guide as a string
     2. parse all rules of style tool as a string
@@ -207,8 +207,6 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules,use_examples=False):
     print(f"baseline: {opt}")
     print(f"model: {model}")
     for i, row in rules.iterrows():
-        # if i < 3:
-        #     continue
         rule_name = row.rule
         rule_desc = row.desc
         checkstyle_str = get_checkstyle_str(opt,f"{rule_name}\n{rule_desc}")
@@ -257,8 +255,9 @@ if __name__ == "__main__":
         "data/benchmark/checkstyle2google_java_benchmark.xlsx")
     for model in ["3.5", "4o"]:
         for str_type in str_types:
-            gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules,use_examples=True)
+            gpt_answers = gpt_res_of_checkstyle_dsl_from_csv(str_type, model, all_rules,use_examples=True)
             # continue
+            # ! use offline data
             # gpt_answers = offline_res(model,str_type)
             csv_results = []
             for index, row in all_rules.iterrows():

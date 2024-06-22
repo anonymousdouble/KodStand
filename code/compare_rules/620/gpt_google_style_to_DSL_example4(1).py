@@ -6,7 +6,7 @@ import util
 
 from openai import OpenAI
 from retry import retry
-from gpt_wrapper import GPTAgent
+from code.compare_rules.gpt_agent import GPTAgent
 
 def preprocess_promt(rule: str, DSL_Syntax: str, style="Google Java Style Guide",grammar="Grammar",example=""):
 
