@@ -915,7 +915,7 @@ InterfaceTypeParameterName"
 <module name='StaticVariableName'>
         <property name='id' value='staticVariableName'/>
         <property name='option' value='class'/>
-    </module>",false,,,,,,,,,
+    </module>",,,,,,,,,,
 6.4 Finalizers: not used,"It is extremely rare to override `Object.finalize` .
  Tip: Don't do it. If you absolutely must, first read and understand Effective Java
   

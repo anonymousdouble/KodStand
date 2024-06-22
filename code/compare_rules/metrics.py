@@ -130,11 +130,9 @@ def compare_config(gpt_answer, benchmark):
             option_value_fn,
         ]
     else:
-        module_res = [[], [], [], []]
-        option_name_res = [[], [], [], []]
-        option_value_res = [[], [], [], []]
-    if module_res == [[], [], [], []]:
-        aa = 1
+        module_res = [[], [], [], benchmark]
+        option_name_res = [[], [], [], benchmark]
+        option_value_res = [[], [], [], benchmark]
     return [module_res, option_name_res, option_value_res]
 
 
@@ -311,40 +309,33 @@ def compare_and_cal_metrics(csv_path, benchmark_path):
                 m_all_res[i].append(module_level_res[i])
                 on_all_res[i].append(option_name_level_res[i])
                 ov_all_res[i].append(option_value_level_res[i])
-
             # rule level match
             if module_level_res[2] == 0 and module_level_res[3] == 0:
                 rule_m_correct += 1
-
             # option name level match
             if option_name_level_res[2] == 0 and option_name_level_res[3] == 0:
                 rule_on_correct += 1
-
             # option value level match
             if option_value_level_res[2] == 0 and option_value_level_res[3] == 0:
                 rule_ov_correct += 1
-
         else:
             if benchmark_exist_config:
                 exmap_tp += 1
+                failed_cnt += 1
+                output_csv_data[-1].append("false")
+                error_data = [
+                    "",
+                    "",
+                    "\n".join([mod["modulename"] for mod in cor_benchmark]),
+                ]
+                output_csv_data[-1].extend(error_data * 3)
+                error_res = [0, 0, 0, len(cor_benchmark)]
+                for i in range(4):
+                    m_all_res[i].append(error_res[i])
+                    on_all_res[i].append(error_res[i])
+                    ov_all_res[i].append(error_res[i])
             else:
                 exmap_fp += 1
-            failed_cnt += 1
-            output_csv_data[-1].append("false")
-
-            error_data = [
-                "",
-                "",
-                "\n".join([mod["modulename"] for mod in cor_benchmark]),
-            ]
-
-            output_csv_data[-1].extend(error_data * 3)
-
-            error_res = [0, 0, 0, len(cor_benchmark)]
-            for i in range(4):
-                m_all_res[i].append(error_res[i])
-                on_all_res[i].append(error_res[i])
-                ov_all_res[i].append(error_res[i])
 
     output_df = pd.DataFrame(
         output_csv_data,

@@ -161,7 +161,7 @@ NoLineWrap"
             ""
 <module name='MemberParent'>"": {
                 ""<property name='id' value='m_member_ordering'/>"": """",
-                ""<property name='option' value='public_fields_first'/>",false,,,,,,,,,
+                ""<property name='option' value='public_fields_first'/>",,,,,,,,,,
 4 Formatting,"Terminology Note: 
  block-like construct refers to the body of a class, method or constructor. Note that, by Section 4.8.3.1 on array initializers , any array initializer may optionally be treated as if it were a block-like construct.",,Yes,"<module name='Indentation'>
         <property name='basicOffset' value='4'/>
