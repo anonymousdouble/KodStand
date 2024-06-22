@@ -436,7 +436,7 @@ def compare_and_cal_metrics(csv_path, benchmark_path):
 
 if __name__ == "__main__":
     stat_data = []
-    root = "data/gpt_answer_with_example"
+    root = "data/gpt_answer_with_example_new"
     bm_path = "data/benchmark/simple_benchmark.json"
     for file in os.listdir(root + "/3.5"):
         if file.endswith(".csv") and not file.endswith("_compared.csv"):

@@ -89,14 +89,14 @@ Response Format Should be a json object:
 
 
 str_types = [
-    # "empty",
-    # "name",
-    "name_desc",
-    "name_desc_mopt",
-    # "name_sdesc_mopt",
-    # "name_url",
-    # "name_url_sdesc",
-    # "name_sdesc",
+    "empty",
+    "name",
+    # "name_desc",
+    # "name_desc_mopt",
+    "name_sdesc_mopt",
+    "name_url",
+    "name_url_sdesc",
+    "name_sdesc",
 ]
 
 
@@ -228,9 +228,9 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules,use_examples=False):
             with open(f"data/examples/response.txt", "r") as f:
                 exmaples.append({"role": "assistant", "content": f.read()})
         # ! check prompt
-        with open(f"data/testdata/{model}_{opt}_prompt_{i}.txt", "w") as f:
-            f.write(prompt)
-            continue
+        # with open(f"data/testdata/{model}_{opt}_prompt_{i}.txt", "w") as f:
+        #     f.write(prompt)
+        #     continue
         try:
             if model == "3.5":
                 answer = agent.get_response(prompt,messages=exmaples)
@@ -258,7 +258,7 @@ if __name__ == "__main__":
     for model in ["3.5", "4o"]:
         for str_type in str_types:
             gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules,use_examples=True)
-            continue
+            # continue
             # gpt_answers = offline_res(model,str_type)
             csv_results = []
             for index, row in all_rules.iterrows():

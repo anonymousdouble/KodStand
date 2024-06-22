@@ -1,0 +1,2856 @@
+https://checkstyle.org/checks/coding/packagedeclaration.html#PackageDeclaration,PackageDeclaration,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class] have [package declaration]
+
+Option Rule:
+matchDirectoryStructure option:
+true: Mandatory: [package name] of [class] is [directory name] of [source file]
+false: Optional: [package name] of [class] is not [directory name] of [source file]
+
+Options that are data specifications:
+{{matchDirectoryStructure}}: boolean; {true, false}; true"
+https://checkstyle.org/checks/design/visibilitymodifier.html#VisibilityModifier,VisibilityModifier,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [public class members] except [static final members], [immutable members], [annotated members]
+And
+Mandatory: No [class members] except [private class members] -> {{protectedAllowed}} is true Or {{packageAllowed}} is true
+
+Option Rule:
+allowPublicFinalFields option:
+true: Optional: [public final fields] are allowed
+false: Mandatory: No [public final fields]
+
+allowPublicImmutableFields option:
+true: Optional: [public immutable fields] are allowed -> [enclosing class] is [final class]
+false: Mandatory: No [public immutable fields]
+
+publicMemberPattern option:
+true: Optional: [public members] matching {{publicMemberPattern}} are not flagged
+false: Mandatory: No [public members] matching {{publicMemberPattern}}
+
+Options that are data specifications:
+{{ignoreAnnotationCanonicalNames}}: String[]; {com.google.common.annotations.VisibleForTesting, org.junit.ClassRule, org.junit.Rule}; {}
+{{immutableClassCanonicalNames}}: String[]; {java.io.File, java.lang.Boolean, java.lang.Byte, java.lang.Character, java.lang.Double, java.lang.Float, java.lang.Integer, java.lang.Long, java.lang.Short, java.lang.StackTraceElement, java.lang.String, java.math.BigDecimal, java.math.BigInteger, java.net.Inet4Address, java.net.Inet6Address, java.net.InetSocketAddress, java.net.URI, java.net.URL, java.util.Locale, java.util.UUID}; {}
+{{publicMemberPattern}}: Pattern; ""^serialVersionUID$""; ""^serialVersionUID$"""
+https://checkstyle.org/checks/misc/indentation.html#Indentation,Indentation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [indentation] of [Java code] is {{basicOffset}}
+And
+Mandatory: [indentation] of [array initialization] is {{arrayInitIndent}}
+And
+Mandatory: [indentation] of [brace] is {{braceAdjustment}}
+And
+Mandatory: [indentation] of [case label] is {{caseIndent}}
+And
+Mandatory: [indentation] of [throws clause] is {{throwsIndent}}
+And
+Mandatory: [indentation] of [continuation line] is {{lineWrappingIndentation}}
+
+Option Rule:
+forceStrictCondition option:
+true: Mandatory: [indentation] of [line wrapping] is {{lineWrappingIndentation}}
+false: Optional: [indentation] of [line wrapping] is not {{lineWrappingIndentation}}
+
+Options that are data specifications:
+{{arrayInitIndent}}: int; {0, 1, 2, 3, 4, ...}; 4
+{{basicOffset}}: int; {0, 1, 2, 3, 4, ...}; 4
+{{braceAdjustment}}: int; {0, 1, 2, 3, 4, ...}; 0
+{{caseIndent}}: int; {0, 1, 2, 3, 4, ...}; 4
+{{lineWrappingIndentation}}: int; {0, 1, 2, 3, 4, ...}; 4
+{{throwsIndent}}: int; {0, 1, 2, 3, 4, ...}; 4"
+https://checkstyle.org/checks/design/onetoplevelclass.html#OneTopLevelClass,OneTopLevelClass,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [top-level class, interface, enum, annotation] of [source file] is 1
+
+Explanation:
+- The rule checks that each top-level class, interface, enum, or annotation resides in a source file of its own.
+- This is represented as a mandatory rule that the number of top-level class, interface, enum, or annotation in a source file must be 1.
+
+There are no options provided in the CheckStyle Rule, so no option rules or data specifications are needed."
+https://checkstyle.org/checks/annotation/missingdeprecated.html#MissingDeprecated,MissingDeprecated,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [@Deprecated annotation] and [@deprecated javadoc tag] both present when either of them is present
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Optional: Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at Tight-HTML Rules.
+false: Optional: Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at Tight-HTML Rules.
+
+Options that are data specifications:
+{{violateExecutionOnNonTightHtml}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/javadoc/javadocvariable.html#JavadocVariable,JavadocVariable,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [variable] have [Javadoc comment]
+Except [serialVersionUID fields]
+
+Option Rule:
+excludeScope option:
+null: Optional: [Javadoc comment] not for [variable] of {{excludeScope}}
+
+ignoreNamePattern option:
+null: Optional: [Javadoc comment] not for [variable] of {{ignoreNamePattern}}
+
+scope option:
+private: Mandatory: [Javadoc comment] for [variable] of {{scope}}
+
+Options that are data specifications:
+{{excludeScope}}: Scope; {public, protected, package, private}; null
+{{ignoreNamePattern}}: Pattern; RegExp; null
+{{scope}}: Scope; {public, protected, package, private}; private
+{{tokens}}: String[]; {ENUM_CONSTANT_DEF}; {ENUM_CONSTANT_DEF}"
+https://checkstyle.org/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma,NoEnumTrailingComma,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [comma] not at end of [enum constant list]
+
+There are no options for this rule."
+https://checkstyle.org/checks/misc/uniqueproperties.html#UniqueProperties,UniqueProperties,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [duplicated keys] in [properties files]
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {"".properties""}; {"".properties""}"
+https://checkstyle.org/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation,JavadocTagContinuationIndentation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [spaces] of [indentation] of [continuation lines] >= {{offset}}
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Mandatory: [violation] for [Javadoc] not following [tight HTML rules]
+false: Optional: [violation] for [Javadoc] not following [tight HTML rules]
+
+Options that are data specifications:
+{{offset}}: int; {0, 1, 2, 3, 4, ...}; 4"
+https://checkstyle.org/checks/naming/lambdaparametername.html#LambdaParameterName,LambdaParameterName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [lambda parameter names] match {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/coding/superfinalize.html#SuperFinalize,SuperFinalize,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [finalize() method] of [overriding method] have [super.finalize() method]
+Except [native method]
+
+There are no options provided in the CheckStyle Rule, so no Option Rule or data specifications are needed."
+https://checkstyle.org/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad,EmptyForIteratorPad,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [padding] of [empty for iterator] is {{option}}
+Except [line wrap] at [iterator]
+
+Option Rule:
+option:
+nospace: Mandatory: [padding] of [empty for iterator] is not [whitespace]
+
+Options that are data specifications:
+{{option}}: PadOption; {nospace}; {nospace}"
+https://checkstyle.org/checks/coding/onestatementperline.html#OneStatementPerLine,OneStatementPerLine,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [statement] of [line] is 1
+
+Option Rule:
+treatTryResourcesAsStatement option:
+true: Mandatory: Number of [statement] of [line] is 1 -> [line] have [resource statement]
+false: Optional: Number of [statement] of [line] is 1 -> [line] not have [resource statement]
+
+Options that are data specifications:
+treatTryResourcesAsStatement: boolean; {true, false}; false"
+https://checkstyle.org/checks/naming/interfacetypeparametername.html#InterfaceTypeParameterName,InterfaceTypeParameterName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [interface type parameter names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[A-Z]$""; ""^[A-Z]$"""
+https://checkstyle.org/checks/javadoc/missingjavadocmethod.html#MissingJavadocMethod,MissingJavadocMethod,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadoc comment] for [method] of {{scope}}
+Except [method] have [@Override annotation]
+Except [method] have [@inheritDoc tag]
+
+Option Rule:
+allowMissingPropertyJavadoc option:
+true: Optional: [Javadoc comment] not for [accessor methods for properties]
+false: Mandatory: [Javadoc comment] for [accessor methods for properties]
+
+allowedAnnotations option:
+Override: Optional: [Javadoc comment] not for [method] have [@Override annotation]
+
+excludeScope option:
+{{excludeScope}}: Optional: [Javadoc comment] not for [method] of {{excludeScope}}
+
+ignoreMethodNamesRegex option:
+{{ignoreMethodNamesRegex}}: Optional: [Javadoc comment] not for [method] matching {{ignoreMethodNamesRegex}}
+
+minLineCount option:
+-1: Optional: [Javadoc comment] not for [method] of [line count] <= -1
+other values: Mandatory: [Javadoc comment] for [method] of [line count] > {{minLineCount}}
+
+scope option:
+{{scope}}: Mandatory: [Javadoc comment] for [method] of {{scope}}
+
+tokens option:
+METHOD_DEF: Mandatory: [Javadoc comment] for [method definition]
+CTOR_DEF: Mandatory: [Javadoc comment] for [constructor definition]
+ANNOTATION_FIELD_DEF: Mandatory: [Javadoc comment] for [annotation field definition]
+COMPACT_CTOR_DEF: Mandatory: [Javadoc comment] for [compact constructor definition]
+
+Options that are data specifications:
+{{allowedAnnotations}}: String[]; {Override}; {Override}
+{{excludeScope}}: Scope; {public, protected, package, private}; null
+{{ignoreMethodNamesRegex}}: Pattern; RegExp; null
+{{minLineCount}}: int; {any integer}; -1
+{{scope}}: Scope; {public, protected, package, private}; public
+{{tokens}}: String[]; {METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF}; {METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/metrics/javancss.html#JavaNCSS,JavaNCSS,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [Non Commenting Source Statements (NCSS)] of [method] <= {{methodMaximum}}
+And
+Mandatory: Number of [Non Commenting Source Statements (NCSS)] of [class] <= {{classMaximum}}
+And
+Mandatory: Number of [Non Commenting Source Statements (NCSS)] of [file] <= {{fileMaximum}}
+And
+Mandatory: Number of [Non Commenting Source Statements (NCSS)] of [record] <= {{recordMaximum}}
+
+Options that are data specifications:
+{{classMaximum}}: int; {0, 1, 2, ..., 1500}; 1500
+{{fileMaximum}}: int; {0, 1, 2, ..., 2000}; 2000
+{{methodMaximum}}: int; {0, 1, 2, ..., 50}; 50
+{{recordMaximum}}: int; {0, 1, 2, ..., 150}; 150"
+https://checkstyle.org/checks/coding/unnecessaryparentheses.html#UnnecessaryParentheses,UnnecessaryParentheses,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: No [parentheses] around [identifier]
+And
+Mandatory: No [parentheses] around [return value]
+And
+Mandatory: No [parentheses] around [assignment rhs]
+And
+Mandatory: No [parentheses] around [literal]
+And
+Mandatory: No [parentheses] around [expression]
+
+Option Rule:
+tokens option:
+EXPR: Optional: [parentheses] around [EXPR]
+IDENT: Optional: [parentheses] around [IDENT]
+NUM_DOUBLE: Optional: [parentheses] around [NUM_DOUBLE]
+NUM_FLOAT: Optional: [parentheses] around [NUM_FLOAT]
+NUM_INT: Optional: [parentheses] around [NUM_INT]
+NUM_LONG: Optional: [parentheses] around [NUM_LONG]
+STRING_LITERAL: Optional: [parentheses] around [STRING_LITERAL]
+LITERAL_NULL: Optional: [parentheses] around [LITERAL_NULL]
+LITERAL_FALSE: Optional: [parentheses] around [LITERAL_FALSE]
+LITERAL_TRUE: Optional: [parentheses] around [LITERAL_TRUE]
+ASSIGN: Optional: [parentheses] around [ASSIGN]
+BAND_ASSIGN: Optional: [parentheses] around [BAND_ASSIGN]
+BOR_ASSIGN: Optional: [parentheses] around [BOR_ASSIGN]
+BSR_ASSIGN: Optional: [parentheses] around [BSR_ASSIGN]
+BXOR_ASSIGN: Optional: [parentheses] around [BXOR_ASSIGN]
+DIV_ASSIGN: Optional: [parentheses] around [DIV_ASSIGN]
+MINUS_ASSIGN: Optional: [parentheses] around [MINUS_ASSIGN]
+MOD_ASSIGN: Optional: [parentheses] around [MOD_ASSIGN]
+PLUS_ASSIGN: Optional: [parentheses] around [PLUS_ASSIGN]
+SL_ASSIGN: Optional: [parentheses] around [SL_ASSIGN]
+SR_ASSIGN: Optional: [parentheses] around [SR_ASSIGN]
+STAR_ASSIGN: Optional: [parentheses] around [STAR_ASSIGN]
+LAMBDA: Optional: [parentheses] around [LAMBDA]
+TEXT_BLOCK_LITERAL_BEGIN: Optional: [parentheses] around [TEXT_BLOCK_LITERAL_BEGIN]
+LAND: Optional: [parentheses] around [LAND]
+LOR: Optional: [parentheses] around [LOR]
+LITERAL_INSTANCEOF: Optional: [parentheses] around [LITERAL_INSTANCEOF]
+GT: Optional: [parentheses] around [GT]
+LT: Optional: [parentheses] around [LT]
+GE: Optional: [parentheses] around [GE]
+LE: Optional: [parentheses] around [LE]
+EQUAL: Optional: [parentheses] around [EQUAL]
+NOT_EQUAL: Optional: [parentheses] around [NOT_EQUAL]
+UNARY_MINUS: Optional: [parentheses] around [UNARY_MINUS]
+UNARY_PLUS: Optional: [parentheses] around [UNARY_PLUS]
+INC: Optional: [parentheses] around [INC]
+DEC: Optional: [parentheses] around [DEC]
+LNOT: Optional: [parentheses] around [LNOT]
+BNOT: Optional: [parentheses] around [BNOT]
+POST_INC: Optional: [parentheses] around [POST_INC]
+POST_DEC: Optional: [parentheses] around [POST_DEC]
+
+Options that are data specifications:
+tokens: String[]; {EXPR, IDENT, NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG, STRING_LITERAL, LITERAL_NULL, LITERAL_FALSE, LITERAL_TRUE, ASSIGN, BAND_ASSIGN, BOR_ASSIGN, BSR_ASSIGN, BXOR_ASSIGN, DIV_ASSIGN, MINUS_ASSIGN, MOD_ASSIGN, PLUS_ASSIGN, SL_ASSIGN, SR_ASSIGN, STAR_ASSIGN, LAMBDA, TEXT_BLOCK_LITERAL_BEGIN, LAND, LOR, LITERAL_INSTANCEOF, GT, LT, GE, LE, EQUAL, NOT_EQUAL, UNARY_MINUS, UNARY_PLUS, INC, DEC, LNOT, BNOT, POST_INC, POST_DEC}; {};"
+https://checkstyle.org/checks/coding/fallthrough.html#FallThrough,FallThrough,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [case] of [switch statement] have [Java code] -> [case] of [switch statement] have [break statement] or [return statement] or [yield statement] or [throw statement] or [continue statement]
+
+Option Rule:
+checkLastCaseGroup option:
+true: Mandatory: [last case group] of [switch statement] have [Java code] -> [last case group] of [switch statement] have [break statement] or [return statement] or [yield statement] or [throw statement] or [continue statement]
+false: Optional: [last case group] of [switch statement] have [Java code] -> [last case group] of [switch statement] not have [break statement] or [return statement] or [yield statement] or [throw statement] or [continue statement]
+
+reliefPattern option:
+""falls?[ -]?thr(u|ough)"": Mandatory: [comment] before [case] of [switch statement] have [RegExp] {{reliefPattern}}
+
+Options that are data specifications:
+{{reliefPattern}}: Pattern; RegExp; ""falls?[ -]?thr(u|ough)"""
+https://checkstyle.org/checks/javadoc/javadoctype.html#JavadocType,JavadocType,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadoc comments] of [type definitions] is checked
+And
+Optional: [author tags] of [Javadoc comments] is not checked
+And
+Optional: [version tags] of [Javadoc comments] is not checked
+And
+Mandatory: [scope] of [Javadoc comments] is {{scope}}
+And
+Optional: [inner classes] of [type definitions] is not checked
+And
+Optional: [type definitions] of [Javadoc comments] is not checked if [Javadoc comments] is [Null]
+
+Option Rule:
+allowMissingParamTags option:
+true: Optional: [error messages] about [type parameters] and [record components] for which [param tags] is not present is suppressed
+false: Mandatory: [error messages] about [type parameters] and [record components] for which [param tags] is not present is not suppressed
+
+allowUnknownTags option:
+true: Optional: [violations] when [Javadoc tag] is not recognized is ignored
+false: Mandatory: [violations] when [Javadoc tag] is not recognized is not ignored
+
+allowedAnnotations option:
+Mandatory: [annotations] that allow skipping validation is {{allowedAnnotations}}
+
+authorFormat option:
+Mandatory: [pattern] for [author tag] is {{authorFormat}}
+
+excludeScope option:
+Mandatory: [visibility scope] where [Javadoc comments] is not checked is {{excludeScope}}
+
+scope option:
+Mandatory: [visibility scope] where [Javadoc comments] is checked is {{scope}}
+
+versionFormat option:
+Mandatory: [pattern] for [version tag] is {{versionFormat}}
+
+tokens option:
+Mandatory: [tokens] to check is {{tokens}}
+
+Options that are data specifications:
+{{allowedAnnotations}}: String[]; {Generated}; {Generated}
+{{authorFormat}}: Pattern; RegExp; null
+{{excludeScope}}: Scope; {public, protected, package, private}; null
+{{scope}}: Scope; {public, protected, package, private}; private
+{{versionFormat}}: Pattern; RegExp; null
+{{tokens}}: String[]; {INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}; {INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/metrics/npathcomplexity.html#NPathComplexity,NPathComplexity,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [NPATH complexity] of [function(method)] <= {{max}}
+
+Option Rule:
+max option:
+200: Mandatory: [NPATH complexity] of [function(method)] <= 200
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, ..., Integer.MAX_VALUE}; 200"
+https://checkstyle.org/checks/misc/trailingcomment.html#TrailingComment,TrailingComment,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [line] with [code] not at end of [comment]
+And
+Mandatory: [line] with [// comment] -> [whitespace] before [// comment]
+
+Option Rule:
+format option:
+""^[\s});]*$"": Mandatory: [string] before [comment] matches {{format}}
+
+legalComment option:
+null: Optional: [text] of [trailing comment] not matches {{legalComment}}
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^[\s});]*$""
+{{legalComment}}: Pattern; RegExp; null"
+https://checkstyle.org/checks/annotation/packageannotation.html#PackageAnnotation,PackageAnnotation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [package annotations] in [package-info.java file]
+
+Explanation:
+1. The rule ""Checks that all package annotations are in the package-info.java file."" is parsed as a mandatory rule that requires package annotations to be in the package-info.java file.
+2. The sentences regarding Java SE8 and above, and Java SE7 and below, are subjective and provide context rather than enforceable rules, so they are skipped.
+3. There are no options provided in the CheckStyle Rule, so no option rules or data specifications are needed."
+https://checkstyle.org/checks/metrics/booleanexpressioncomplexity.html#BooleanExpressionComplexity,BooleanExpressionComplexity,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [boolean operators] of [expression] <= {{max}}
+Except [boolean operators] of [constructor call] | [boolean operators] of [method call]
+
+Option Rule:
+tokens option:
+LAND: Optional: [boolean operator] is [&&]
+BAND: Optional: [boolean operator] is [&]
+LOR: Optional: [boolean operator] is [||]
+BOR: Optional: [boolean operator] is [|]
+BXOR: Optional: [boolean operator] is [^]
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, 3, ...}; 3
+{{tokens}}: String[]; {LAND, BAND, LOR, BOR, BXOR}; {LAND, BAND, LOR, BOR, BXOR}"
+https://checkstyle.org/checks/imports/unusedimports.html#UnusedImports,UnusedImports,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [import statement] not have [reference] in [file]
+Or
+Mandatory: [import statement] is [import from java.lang package]
+Or
+Mandatory: [import statement] is [import from same package]
+Or
+Mandatory: [static method] is [imported as method reference] -> [type] is [imported]
+
+Option Rule:
+processJavadoc option:
+true: Optional: [import statement] is [referenced in Javadoc comments]
+false: Mandatory: [import statement] not have [reference] in [Javadoc comments]
+
+Options that are data specifications:
+processJavadoc: boolean; {true, false}; true"
+https://checkstyle.org/checks/design/hideutilityclassconstructor.html#HideUtilityClassConstructor,HideUtilityClassConstructor,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [public constructor] of [utility class]
+And
+Mandatory: [constructor] of [utility class] is [private] Or [constructor] of [utility class] is [protected]
+
+There are no options in this CheckStyle rule, so no additional option rules or data specifications are provided."
+https://checkstyle.org/checks/coding/nestedifdepth.html#NestedIfDepth,NestedIfDepth,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [nested if-else blocks] of [code] <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {1, 2, 3, ...}; {1}"
+https://checkstyle.org/checks/whitespace/nowhitespacebeforecasedefaultcolon.html#NoWhitespaceBeforeCaseDefaultColon,NoWhitespaceBeforeCaseDefaultColon,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [whitespace] before [colon] of [switch block] is not [present]"
+https://checkstyle.org/checks/design/throwscount.html#ThrowsCount,ThrowsCount,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [throws statements] of [method] <= {{max}}
+Except [method] have [Override] or [java.lang.Override] annotation
+
+Option Rule:
+ignorePrivateMethods option:
+true: Optional: [method] is [private] -> Number of [throws statements] of [method] is not checked
+false: Mandatory: [method] is [private] -> Number of [throws statements] of [method] is checked
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, 3, 4, ...}; 4"
+https://checkstyle.org/checks/misc/commentsindentation.html#CommentsIndentation,CommentsIndentation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [comments] of {{tokens}} is [indented] at [same level] as [surrounding code]
+
+Options that are data specifications:
+{{tokens}}: String[]; {SINGLE_LINE_COMMENT, BLOCK_COMMENT_BEGIN}; {SINGLE_LINE_COMMENT, BLOCK_COMMENT_BEGIN}"
+https://checkstyle.org/checks/coding/unnecessarysemicoloninenumeration.html#UnnecessarySemicolonInEnumeration,UnnecessarySemicolonInEnumeration,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [semicolon] is not at end of [enum body] -> [enum body] have [enum constants]"
+https://checkstyle.org/checks/sizes/methodlength.html#MethodLength,MethodLength,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [lines] of [method] is <= {{max}}
+
+Option Rule:
+countEmpty option:
+true: Mandatory: Number of [lines] of [method] is <= {{max}}
+false: Optional: Number of [lines] of [method] is <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, ..., 150}; {150}
+{{tokens}}: String[]; {METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF}; {METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/misc/orderedproperties.html#OrderedProperties,OrderedProperties,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [keys] of [properties files] is [correct order]
+
+Option Rule:
+fileExtensions option:
+.properties: Optional: [file extension] of [files] is "".properties""
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {"".properties""}; {"".properties""}"
+https://checkstyle.org/checks/whitespace/typecastparenpad.html#TypecastParenPad,TypecastParenPad,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [space] after [left parenthesis] of [typecast]
+And
+Mandatory: [space] before [right parenthesis] of [typecast]
+
+Option Rule:
+option:
+nospace: 
+Mandatory: [space] not after [left parenthesis] of [typecast]
+And
+Mandatory: [space] not before [right parenthesis] of [typecast]
+
+Options that are data specifications:
+{{PadOption}}: String; {nospace}; {nospace}"
+https://checkstyle.org/checks/naming/typename.html#TypeName,TypeName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [type names] conform to {{format}}
+
+Option Rule:
+applyToPackage option:
+true: Mandatory: [package-private members] conform to {{format}}
+false: Optional: [package-private members] not conform to {{format}}
+
+applyToPrivate option:
+true: Mandatory: [private members] conform to {{format}}
+false: Optional: [private members] not conform to {{format}}
+
+applyToProtected option:
+true: Mandatory: [protected members] conform to {{format}}
+false: Optional: [protected members] not conform to {{format}}
+
+applyToPublic option:
+true: Mandatory: [public members] conform to {{format}}
+false: Optional: [public members] not conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^[A-Z][a-zA-Z0-9]*$""
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/coding/unnecessarysemicolonafteroutertypedeclaration.html#UnnecessarySemicolonAfterOuterTypeDeclaration,UnnecessarySemicolonAfterOuterTypeDeclaration,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [semicolon] after [type declaration] is not [Null]
+
+Options that are data specifications:
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/coding/variabledeclarationusagedistance.html#VariableDeclarationUsageDistance,VariableDeclarationUsageDistance,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [declaration of variable] before [first usage of variable] is {{allowedDistance}}
+
+Option Rule:
+ignoreFinal option:
+true: Optional: [variable] with [final modifier] not for [distance calculation]
+false: Mandatory: [variable] with [final modifier] for [distance calculation]
+
+validateBetweenScopes option:
+true: Mandatory: [distance calculation] between [declaration of variable] and [first usage of variable] in [different scopes]
+false: Optional: [distance calculation] not between [declaration of variable] and [first usage of variable] in [different scopes]
+
+Options that are data specifications:
+{{allowedDistance}}: int; > 0; 3
+{{ignoreVariablePattern}}: Pattern; RegExp; """""
+https://checkstyle.org/checks/javadoc/invalidjavadocposition.html#InvalidJavadocPosition,InvalidJavadocPosition,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadocs] before [module, package, class, interface, constructor, method, field declarations]
+And
+Mandatory: [Javadocs] not in [body of a method]
+
+There are no options for this CheckStyle rule, so no option rules or data specifications are provided."
+https://checkstyle.org/checks/javadoc/missingjavadoctype.html#MissingJavadocType,MissingJavadocType,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadoc comment] for [class, enum, interface, annotation interface definitions] is [present]
+And
+Mandatory: [Javadoc comment] for [class, enum, interface, annotation interface definitions] is [present] for {{scope}}
+
+Option Rule:
+excludeScope option:
+null: Optional: [Javadoc comment] for [class, enum, interface, annotation interface definitions] is not [present] for {{excludeScope}}
+
+scope option:
+public: Mandatory: [Javadoc comment] for [class, enum, interface, annotation interface definitions] is [present] for {{scope}}
+
+skipAnnotations option:
+Generated: Optional: [Javadoc comment] for [class, enum, interface, annotation interface definitions] is not [present] for {{skipAnnotations}}
+
+tokens option:
+INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF: Mandatory: [Javadoc comment] for [INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF] is [present]
+
+Options that are data specifications:
+{{excludeScope}}: Scope; {public, protected, package, private}; {null}
+{{scope}}: Scope; {public, protected, package, private}; {public}
+{{skipAnnotations}}: String[]; {Generated}; {}
+{{tokens}}: String[]; {INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}; {INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/header/regexpheader.html#RegexpHeader,RegexpHeader,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [header of source file] matches [pattern for each line of the source header]
+
+Option Rule:
+charset option:
+String: Optional: [character encoding] is {{charset}}
+
+fileExtensions option:
+String[]: Optional: [file extensions] is {{fileExtensions}}
+
+header option:
+String: Optional: [required header] is {{header}}
+
+headerFile option:
+URI: Optional: [name of the file containing the required header] is {{headerFile}}
+
+multiLines option:
+int[]: Optional: [line numbers to repeat] is {{multiLines}}
+
+Options that are data specifications:
+{{charset}}: String; any valid charset; the charset property of the parent <a href=""https://checkstyle.org/config.html#Checker"">Checker</a> module
+{{fileExtensions}}: String[]; any valid file extensions; all files
+{{header}}: String; any valid string; null
+{{headerFile}}: URI; any valid URI; null
+{{multiLines}}: int[]; any valid integer array; {}"
+https://checkstyle.org/checks/blocks/emptycatchblock.html#EmptyCatchBlock,EmptyCatchBlock,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [catch block] is [empty]
+
+Option Rule:
+commentFormat option:
+""Pattern"": Mandatory: [first comment] of [empty catch block] matches {{commentFormat}}
+
+exceptionVariableName option:
+""Pattern"": Mandatory: [variable name] of [exception] matches {{exceptionVariableName}}
+
+Options that are data specifications:
+{{commentFormat}}: Pattern; RegExp; "".*""
+{{exceptionVariableName}}: Pattern; RegExp; ""^$"""
+https://checkstyle.org/checks/naming/recordcomponentname.html#RecordComponentName,RecordComponentName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [record component names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/coding/covariantequals.html#CovariantEquals,CovariantEquals,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class] or [record] that have [covariant equals method] -> [class] or [record] override [equals(Object)]
+
+Option Rule:
+None
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/whitespace/operatorwrap.html#OperatorWrap,OperatorWrap,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [line] of [operator] is {{option}}
+
+Option Rule:
+option:
+nl: Mandatory: [line] of [operator] is [new line]
+
+Options that are data specifications:
+{{tokens}}: String[]; {QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR, GE, GT, SL, LE, LT, BXOR, BOR, LOR, BAND, LAND, LITERAL_INSTANCEOF, TYPE_EXTENSION_AND, ASSIGN, DIV_ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, STAR_ASSIGN, MOD_ASSIGN, SR_ASSIGN, BSR_ASSIGN, SL_ASSIGN, BXOR_ASSIGN, BOR_ASSIGN, BAND_ASSIGN, METHOD_REF}; {QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR, GE, GT, SL, LE, LT, BXOR, BOR, LOR, BAND, LAND, TYPE_EXTENSION_AND, LITERAL_INSTANCEOF}"
+https://checkstyle.org/checks/coding/avoidinlineconditionals.html#AvoidInlineConditionals,AvoidInlineConditionals,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: [inline conditional] not have [Java code]
+
+Explanation:
+- The CheckStyle rule ""AvoidInlineConditionals"" detects inline conditionals in Java code.
+- The rule is mandatory and specifies that inline conditionals should not be present in the code.
+- There are no options associated with this rule, so only the basic rule is provided."
+https://checkstyle.org/checks/naming/membername.html#MemberName,MemberName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [instance variable names] match {{format}}
+
+Option Rule:
+applyToPackage option:
+true: Mandatory: [instance variable names] of [package-private members] match {{format}}
+false: Optional: [instance variable names] of [package-private members] not match {{format}}
+
+applyToPrivate option:
+true: Mandatory: [instance variable names] of [private members] match {{format}}
+false: Optional: [instance variable names] of [private members] not match {{format}}
+
+applyToProtected option:
+true: Mandatory: [instance variable names] of [protected members] match {{format}}
+false: Optional: [instance variable names] of [protected members] not match {{format}}
+
+applyToPublic option:
+true: Mandatory: [instance variable names] of [public members] match {{format}}
+false: Optional: [instance variable names] of [public members] not match {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/coding/overloadmethodsdeclarationorder.html#OverloadMethodsDeclarationOrder,OverloadMethodsDeclarationOrder,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [overloaded methods] of [class] is [grouped together]
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/coding/avoiddoublebraceinitialization.html#AvoidDoubleBraceInitialization,AvoidDoubleBraceInitialization,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: No [double brace initialization]
+
+Explanation:
+1. The description ""Detects double brace initialization"" is a rule.
+2. The rationale provides context but does not contain additional rules.
+3. There are no options provided in this CheckStyle rule.
+
+Since there are no options, the final representation only includes the basic rule."
+https://checkstyle.org/checks/coding/avoidnoargumentsuperconstructorcall.html#AvoidNoArgumentSuperConstructorCall,AvoidNoArgumentSuperConstructorCall,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [call] of [superclass constructor] is not [No Argument]
+
+There are no options provided in the CheckStyle Rule, so no additional option rules or data specifications are needed."
+https://checkstyle.org/checks/naming/methodtypeparametername.html#MethodTypeParameterName,MethodTypeParameterName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [method type parameter names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[A-Z]$""; ""^[A-Z]$"""
+https://checkstyle.org/checks/annotation/missingoverride.html#MissingOverride,MissingOverride,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [@Override annotation] is [present] -> [@inheritDoc javadoc tag] is [present]
+And
+Mandatory: [@inheritDoc javadoc tag] is [present] -> [method] is not [private]
+And
+Mandatory: [@inheritDoc javadoc tag] is [present] -> [method] is not [static]
+
+Option Rule:
+javaFiveCompatibility option:
+true: Mandatory: [class] not have [extends keyword] -> [method] is not [annotated with @Override]
+false: Optional: [class] have [extends keyword] -> [method] is [annotated with @Override]
+
+Options that are data specifications:
+javaFiveCompatibility: boolean; {true, false}; false"
+https://checkstyle.org/checks/modifier/classmemberimpliedmodifier.html#ClassMemberImpliedModifier,ClassMemberImpliedModifier,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [static modifier] of [nested enum] is [explicitly coded]
+And
+Mandatory: [static modifier] of [nested interface] is [explicitly coded]
+And
+Mandatory: [static modifier] of [nested record] is [explicitly coded]
+
+Option Rule:
+violateImpliedStaticOnNestedEnum option:
+true: Mandatory: [static modifier] of [nested enum] is [explicitly coded]
+false: Optional: [static modifier] of [nested enum] is not [explicitly coded]
+
+violateImpliedStaticOnNestedInterface option:
+true: Mandatory: [static modifier] of [nested interface] is [explicitly coded]
+false: Optional: [static modifier] of [nested interface] is not [explicitly coded]
+
+violateImpliedStaticOnNestedRecord option:
+true: Mandatory: [static modifier] of [nested record] is [explicitly coded]
+false: Optional: [static modifier] of [nested record] is not [explicitly coded]
+
+Options that are data specifications:
+{{violateImpliedStaticOnNestedEnum}}: boolean; {true, false}; {true}
+{{violateImpliedStaticOnNestedInterface}}: boolean; {true, false}; {true}
+{{violateImpliedStaticOnNestedRecord}}: boolean; {true, false}; {true}"
+https://checkstyle.org/checks/metrics/classdataabstractioncoupling.html#ClassDataAbstractionCoupling,ClassDataAbstractionCoupling,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [instantiations of other classes] of [class or record] >= {{max}}
+Except [class] of {{excludedClasses}}
+Except [class] of {{excludedPackages}}
+
+Option Rule:
+excludeClassesRegexps option:
+Pattern[]: Optional: [class] of [instantiations of other classes] is not {{excludeClassesRegexps}}
+
+Options that are data specifications:
+{{excludeClassesRegexps}}: Pattern[]; RegExp; ^$
+{{excludedClasses}}: String[]; {ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void}; {}
+{{excludedPackages}}: String[]; {}; {}
+{{max}}: int; 0-2147483647; 7"
+https://checkstyle.org/checks/annotation/annotationusestyle.html#AnnotationUseStyle,AnnotationUseStyle,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [style] of [elements] of [annotations] is {{elementStyle}}
+And
+Optional: [ending parenthesis] of [annotations] is {{closingParens}}
+And
+Optional: [trailing comma] of [arrays] of [elements] of [annotations] is {{trailingArrayComma}}
+
+Option Rule:
+closingParens option:
+always: Mandatory: [ending parenthesis] of [annotations] is [present]
+never: Optional: [ending parenthesis] of [annotations] is [absent]
+ignore: Optional: [ending parenthesis] of [annotations] is [either present or absent]
+
+elementStyle option:
+compact_no_array: Mandatory: [style] of [elements] of [annotations] is [compact_no_array]
+compact: Mandatory: [style] of [elements] of [annotations] is [compact] -> [element] called 'value' is [sole element] or [all other elements] have [default values]
+expanded: Mandatory: [style] of [elements] of [annotations] is [expanded]
+
+trailingArrayComma option:
+always: Mandatory: [trailing comma] of [arrays] of [elements] of [annotations] is [present]
+never: Optional: [trailing comma] of [arrays] of [elements] of [annotations] is [absent]
+ignore: Optional: [trailing comma] of [arrays] of [elements] of [annotations] is [either present or absent]
+
+Options that are data specifications:
+{{closingParens}}: Enum; {always, never, ignore}; never
+{{elementStyle}}: Enum; {compact_no_array, compact, expanded, ignore}; compact_no_array
+{{trailingArrayComma}}: Enum; {always, never, ignore}; never"
+https://checkstyle.org/checks/naming/classtypeparametername.html#ClassTypeParameterName,ClassTypeParameterName,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: [class type parameter names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[A-Z]$""; ""^[A-Z]$"""
+https://checkstyle.org/checks/sizes/parameternumber.html#ParameterNumber,ParameterNumber,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [parameters] of [method] <= {{max}}
+And
+Mandatory: Number of [parameters] of [constructor] <= {{max}}
+
+Option Rule:
+ignoreAnnotatedBy option:
+true: Optional: Number of [parameters] of [method] <= {{max}} Except [method] annotated with {{ignoreAnnotatedBy}}
+true: Optional: Number of [parameters] of [constructor] <= {{max}} Except [constructor] annotated with {{ignoreAnnotatedBy}}
+
+ignoreOverriddenMethods option:
+true: Optional: Number of [parameters] of [method] <= {{max}} Except [method] annotated with [@Override]
+
+Options that are data specifications:
+{{ignoreAnnotatedBy}}: String[]; {}; {}
+{{max}}: int; {0, 1, 2, 3, 4, 5, 6, 7}; 7
+{{tokens}}: String[]; {METHOD_DEF, CTOR_DEF}; {METHOD_DEF, CTOR_DEF}"
+https://checkstyle.org/checks/coding/illegalinstantiation.html#IllegalInstantiation,IllegalInstantiation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [constructor] of {{classes}}
+
+Options that are data specifications:
+{{classes}}: String[]; {}; {}"
+https://checkstyle.org/checks/imports/avoidstaticimport.html#AvoidStaticImport,AvoidStaticImport,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [static import statements]
+
+Option Rule:
+excludes option:
+# No specific rules provided for values of 'excludes' option as it is a data specification.
+
+Options that are data specifications:
+{{excludes}}: String[]; {}; {};"
+https://checkstyle.org/checks/coding/matchxpath.html#MatchXpath,MatchXpath,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Xpath query] is {{query}}
+
+Option Rule:
+None
+
+Options that are data specifications:
+{{query}}: String; """"; """";"
+https://checkstyle.org/checks/coding/illegaltokentext.html#IllegalTokenText,IllegalTokenText,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [text] of {{tokens}} match [{{format}}]
+
+Option Rule:
+ignoreCase option:
+true: Mandatory: [text] of {{tokens}} match [{{format}}] ignoring case
+false: Optional: [text] of {{tokens}} match [{{format}}] considering case
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^$""
+{{tokens}}: String[]; {NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG, IDENT, COMMENT_CONTENT, STRING_LITERAL, CHAR_LITERAL, TEXT_BLOCK_CONTENT, STRING_TEMPLATE_CONTENT}; {}"
+https://checkstyle.org/checks/misc/translation.html#Translation,Translation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [property files] describing [one context] have [same keys]
+And
+Optional: [required translations] exist in [project] -> [requiredTranslations] is used
+
+Option Rule:
+baseName option:
+Pattern: Mandatory: [base name] of [resource bundles] is {{baseName}}
+
+fileExtensions option:
+String[]: Mandatory: [file extensions] of [files] to process is {{fileExtensions}}
+
+requiredTranslations option:
+String[]: Mandatory: [language codes] of [required translations] exist in [project] -> [requiredTranslations] is used
+
+Options that are data specifications:
+{{baseName}}: Pattern; ""^messages.*$""; ""^messages.*$""
+{{fileExtensions}}: String[]; {"".properties""}; {"".properties""}
+{{requiredTranslations}}: String[]; {}; {}"
+https://checkstyle.org/checks/coding/missingctor.html#MissingCtor,MissingCtor,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: [class] not have [abstract modifier] -> [class] have [constructor]"
+https://checkstyle.org/checks/sizes/executablestatementcount.html#ExecutableStatementCount,ExecutableStatementCount,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [executable statements] of {{tokens}} <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {0-∞}; {30}
+{{tokens}}: String[]; {CTOR_DEF, METHOD_DEF, INSTANCE_INIT, STATIC_INIT, COMPACT_CTOR_DEF, LAMBDA}; {CTOR_DEF, METHOD_DEF, INSTANCE_INIT, STATIC_INIT, COMPACT_CTOR_DEF, LAMBDA}"
+https://checkstyle.org/checks/javadoc/javadoccontentlocation.html#JavadocContentLocation,JavadocContentLocation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [Javadoc content] is {{location}}
+
+Option Rule:
+location option:
+first_line: Mandatory: [Javadoc content] at begin of [first line]
+second_line: Mandatory: [Javadoc content] at begin of [second line]
+
+Options that are data specifications:
+{{location}}: JavadocContentLocationOption; {first_line, second_line}; {second_line}"
+https://checkstyle.org/checks/regexp/regexpmultiline.html#RegexpMultiline,RegexpMultiline,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [pattern] matches across multiple lines in [file]
+
+Option Rule:
+ignoreCase option:
+true: Mandatory: [pattern] matches [text] ignoring case
+false: Optional: [pattern] matches [text] considering case
+
+matchAcrossLines option:
+true: Mandatory: [pattern] matches across multiple lines in [file]
+false: Optional: [pattern] matches within a single line in [file]
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {all files}; {}
+{{format}}: Pattern; RegExp; ""$.""
+{{maximum}}: int; {0, 1, 2, ...}; 0
+{{minimum}}: int; {0, 1, 2, ...}; 0"
+https://checkstyle.org/checks/javadoc/atclauseorder.html#AtclauseOrder,AtclauseOrder,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [javadoc block-tags] is {{tagOrder}}
+And
+Mandatory: Order of [javadoc tags] is {{tagOrder}}
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Mandatory: [violations] if [Javadoc] violates [tight HTML rules]
+false: Optional: [violations] not if [Javadoc] violates [tight HTML rules]
+
+Options that are data specifications:
+{{tagOrder}}: String[]; {@author, @deprecated, @exception, @param, @return, @see, @serial, @serialData, @serialField, @since, @throws, @version}; {}
+{{target}}: String[]; {CLASS_DEF, COMPACT_CTOR_DEF, CTOR_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, RECORD_DEF, VARIABLE_DEF}; {}"
+https://checkstyle.org/checks/design/innertypelast.html#InnerTypeLast,InnerTypeLast,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [nested classes/interfaces] is [at end of] [primary class] after [init blocks], [static init blocks], [methods], [constructors], [fields]
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/coding/finallocalvariable.html#FinalLocalVariable,FinalLocalVariable,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [local variables] that [never have their values changed] are [declared final]
+
+Option Rule:
+validateEnhancedForLoopVariable option:
+true: Mandatory: [enhanced for-loop variable] that [never have their values changed] are [declared final]
+false: Optional: [enhanced for-loop variable] that [never have their values changed] are not [declared final]
+
+Options that are data specifications:
+{{tokens}}: String[]; {VARIABLE_DEF, PARAMETER_DEF}; {VARIABLE_DEF}"
+https://checkstyle.org/checks/whitespace/whitespaceafter.html#WhitespaceAfter,WhitespaceAfter,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [token] after {{tokens}} have [whitespace]
+Except: [semicolon] after [empty for iterator]
+
+Option Rule:
+None
+
+Options that are data specifications:
+{{tokens}}: String[]; {COMMA, SEMI, TYPECAST, LITERAL_IF, LITERAL_ELSE, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, LITERAL_FINALLY, LITERAL_RETURN, LITERAL_YIELD, LITERAL_CATCH, DO_WHILE, ELLIPSIS, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_CASE, LAMBDA}; {COMMA, SEMI, TYPECAST, LITERAL_IF, LITERAL_ELSE, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, LITERAL_FINALLY, LITERAL_RETURN, LITERAL_YIELD, LITERAL_CATCH, DO_WHILE, ELLIPSIS, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_CASE, LAMBDA}"
+https://checkstyle.org/checks/metrics/classfanoutcomplexity.html#ClassFanOutComplexity,ClassFanOutComplexity,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Iterates over all [tokens] that might contain [type reference]
+And
+Mandatory: [class] imported with [direct import] or [class] referenced with [package name] and [package] is {{excludedPackages}} -> [class] not increase [complexity]
+And
+Mandatory: [class name] is {{excludedClasses}} -> [class] not increase [complexity]
+
+Options that are data specifications:
+{{excludeClassesRegexps}}: Pattern[]; RegExp; ^$
+{{excludedClasses}}: String[]; {ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void}; {}
+{{excludedPackages}}: String[]; {}; {}
+{{max}}: int; 0-2147483647; 20"
+https://checkstyle.org/checks/regexp/regexpsinglelinejava.html#RegexpSinglelineJava,RegexpSinglelineJava,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: [single-line] of [Java files] matches {{format}}
+
+Option Rule:
+ignoreCase option:
+true: Optional: [case] of [single-line] of [Java files] is ignored
+false: Optional: [case] of [single-line] of [Java files] is not ignored
+
+ignoreComments option:
+true: Optional: [text] in [comments] of [single-line] of [Java files] is ignored
+false: Optional: [text] in [comments] of [single-line] of [Java files] is not ignored
+
+maximum option:
+0: Optional: Number of [matches] of [single-line] of [Java files] is 0
+>0: Mandatory: Number of [matches] of [single-line] of [Java files] <= {{maximum}}
+
+minimum option:
+0: Optional: Number of [matches] of [single-line] of [Java files] is 0
+>0: Mandatory: Number of [matches] of [single-line] of [Java files] >= {{minimum}}
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""$.""
+{{maximum}}: int; {0, 1, 2, ...}; 0
+{{minimum}}: int; {0, 1, 2, ...}; 0"
+https://checkstyle.org/checks/javadoc/singlelinejavadoc.html#SingleLineJavadoc,SingleLineJavadoc,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [Javadoc block] is 1 -> [Javadoc block] not have [block tags]
+
+Option Rule:
+ignoreInlineTags option:
+true: Optional: [inline tags] not have [Javadoc block]
+false: Optional: [inline tags] have [Javadoc block]
+
+violateExecutionOnNonTightHtml option:
+true: Optional: [Javadoc block] violate [tight html rules]
+false: Optional: [Javadoc block] not violate [tight html rules]
+
+Options that are data specifications:
+{{ignoredTags}}: String[]; {}; {};"
+https://checkstyle.org/checks/whitespace/nolinewrap.html#NoLineWrap,NoLineWrap,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [line-wrapped] of {{tokens}}
+
+Options that are data specifications:
+{{tokens}}: String[]; {IMPORT, STATIC_IMPORT, PACKAGE_DEF, CLASS_DEF, METHOD_DEF, CTOR_DEF, ENUM_DEF, INTERFACE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}; {PACKAGE_DEF, IMPORT, STATIC_IMPORT}"
+https://checkstyle.org/checks/sizes/methodcount.html#MethodCount,MethodCount,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [method] of [type declaration] is {{maxTotal}}
+And
+Mandatory: Number of [method] of [access modifier] is {{maxPackage}} for [package-private]
+And
+Mandatory: Number of [method] of [access modifier] is {{maxPrivate}} for [private]
+And
+Mandatory: Number of [method] of [access modifier] is {{maxProtected}} for [protected]
+And
+Mandatory: Number of [method] of [access modifier] is {{maxPublic}} for [public]
+Except [method] of [anonymous class]
+
+Option Rule:
+tokens option:
+CLASS_DEF: Optional: [CLASS_DEF] of {{tokens}}
+ENUM_CONSTANT_DEF: Optional: [ENUM_CONSTANT_DEF] of {{tokens}}
+ENUM_DEF: Optional: [ENUM_DEF] of {{tokens}}
+INTERFACE_DEF: Optional: [INTERFACE_DEF] of {{tokens}}
+ANNOTATION_DEF: Optional: [ANNOTATION_DEF] of {{tokens}}
+RECORD_DEF: Optional: [RECORD_DEF] of {{tokens}}
+
+Options that are data specifications:
+{{maxPackage}}: int; {0-100}; {100}
+{{maxPrivate}}: int; {0-100}; {100}
+{{maxProtected}}: int; {0-100}; {100}
+{{maxPublic}}: int; {0-100}; {100}
+{{maxTotal}}: int; {0-100}; {100}
+{{tokens}}: String[]; {CLASS_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, ANNOTATION_DEF, RECORD_DEF}; {CLASS_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/annotation/annotationlocation.html#AnnotationLocation,AnnotationLocation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [annotation] after [documentation block] and before [target element]
+And
+Mandatory: [annotation] on separate line from [target element]
+And
+Mandatory: [annotation] at same indenting level as [annotated element] if not on same line
+
+Option Rule:
+allowSamelineMultipleAnnotations option:
+false: Mandatory: [annotation] not on same line as [target element]
+true: Optional: [annotation] on same line as [target element]
+
+allowSamelineParameterizedAnnotation option:
+false: Mandatory: [parameterized annotation] not on same line as [target element]
+true: Optional: [parameterized annotation] on same line as [target element]
+
+allowSamelineSingleParameterlessAnnotation option:
+false: Mandatory: [single parameterless annotation] not on same line as [target element]
+true: Optional: [single parameterless annotation] on same line as [target element]
+
+Options that are data specifications:
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, PACKAGE_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, RECORD_DEF, COMPACT_CTOR_DEF}; {CLASS_DEF, INTERFACE_DEF, PACKAGE_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/modifier/redundantmodifier.html#RedundantModifier,RedundantModifier,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [public modifier] of [method declarations] of [interface definitions]
+And
+Mandatory: No [abstract modifier] of [method declarations] of [interface definitions]
+And
+Mandatory: No [final modifier] of [methods] of [final classes]
+And
+Mandatory: No [final modifier] of [methods] of [anonymous classes]
+And
+Mandatory: No [public modifier] of [type declarations] nested under [interfaces]
+And
+Mandatory: No [static modifier] of [type declarations] nested under [interfaces]
+And
+Mandatory: No [public modifier] of [fields] of [interfaces]
+And
+Mandatory: No [static modifier] of [fields] of [interfaces]
+And
+Mandatory: No [final modifier] of [fields] of [interfaces]
+And
+Mandatory: No [public modifier] of [fields] of [annotations]
+And
+Mandatory: No [static modifier] of [fields] of [annotations]
+And
+Mandatory: No [final modifier] of [fields] of [annotations]
+And
+Mandatory: No [final modifier] of [record definitions]
+And
+Mandatory: No [static modifier] of [nested record definitions]
+And
+Mandatory: No [static modifier] of [enums]
+And
+Mandatory: No [public modifier] of [enums] inside of [interfaces]
+And
+Mandatory: No [final modifier] of [methods] of [final classes]
+And
+Mandatory: No [public modifier] of [constructors] of [non-public non-protected classes]
+
+Option Rule:
+None
+
+Options that are data specifications:
+{{tokens}}: String[]; {METHOD_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, INTERFACE_DEF, CTOR_DEF, CLASS_DEF, ENUM_DEF, RESOURCE, ANNOTATION_DEF, RECORD_DEF}; {METHOD_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, INTERFACE_DEF, CTOR_DEF, CLASS_DEF, ENUM_DEF, RESOURCE, ANNOTATION_DEF, RECORD_DEF}
+{{tokens to check}}: String[]; {METHOD_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, INTERFACE_DEF, CTOR_DEF, CLASS_DEF, ENUM_DEF, RESOURCE, ANNOTATION_DEF, RECORD_DEF}; {METHOD_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, INTERFACE_DEF, CTOR_DEF, CLASS_DEF, ENUM_DEF, RESOURCE, ANNOTATION_DEF, RECORD_DEF}
+{{subset of tokens}}: String[]; {METHOD_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, INTERFACE_DEF, CTOR_DEF, CLASS_DEF, ENUM_DEF, RESOURCE, ANNOTATION_DEF, RECORD_DEF}; {METHOD_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, INTERFACE_DEF, CTOR_DEF, CLASS_DEF, ENUM_DEF, RESOURCE, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/javadoc/javadocpackage.html#JavadocPackage,JavadocPackage,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Java package] have [Javadoc file]
+And
+Optional: [package-info.java file] or [package.html file] not both exist
+
+Option Rule:
+allowLegacy option:
+true: Optional: [package.html file] is [allowed]
+false: Mandatory: [package.html file] is not [allowed]
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {"".java""}; {"".java""}"
+https://checkstyle.org/checks/design/designforextension.html#DesignForExtension,DesignForExtension,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class] have [overridable methods] -> [class] have [non-empty implementation]
+
+Option Rule:
+ignoredAnnotations option:
+""After"": Optional: [method] have [annotation] is ""After"" -> [method] not have [violation]
+""AfterClass"": Optional: [method] have [annotation] is ""AfterClass"" -> [method] not have [violation]
+""Before"": Optional: [method] have [annotation] is ""Before"" -> [method] not have [violation]
+""BeforeClass"": Optional: [method] have [annotation] is ""BeforeClass"" -> [method] not have [violation]
+""Test"": Optional: [method] have [annotation] is ""Test"" -> [method] not have [violation]
+
+requiredJavadocPhrase option:
+"".*"": Optional: [method] have [javadoc comment] at end of [documentation comment] is "".*"" -> [method] not have [violation]
+
+Options that are data specifications:
+{{ignoredAnnotations}}: String[]; {""After"", ""AfterClass"", ""Before"", ""BeforeClass"", ""Test""}; {}
+{{requiredJavadocPhrase}}: Pattern; "".*""; "".*"""
+https://checkstyle.org/checks/naming/catchparametername.html#CatchParameterName,CatchParameterName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [catch parameter name] match {{format}}
+
+Option Rule:
+format option:
+""^(e|t|ex|[a-z][a-z][a-zA-Z]+)$"": Mandatory: [catch parameter name] match ""^(e|t|ex|[a-z][a-z][a-zA-Z]+)$""
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^(e|t|ex|[a-z][a-z][a-zA-Z]+)$"""
+https://checkstyle.org/checks/coding/missingswitchdefault.html#MissingSwitchDefault,MissingSwitchDefault,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [switch statement] have [default clause]
+
+This CheckStyle rule ensures that every switch statement includes a default clause. There are no options or data specifications associated with this rule."
+https://checkstyle.org/checks/coding/stringliteralequality.html#StringLiteralEquality,StringLiteralEquality,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [string literal] not have [==] And [string literal] not have [!=]
+
+Explanation:
+1. The rule ""Checks that string literals are not used with == or !=."" is parsed as:
+   - Mandatory: [string literal] not have [==]
+   - And
+   - Mandatory: [string literal] not have [!=]
+
+2. The rest of the description provides rationale and examples but does not introduce additional rules or options.
+
+There are no options provided in this CheckStyle rule, so no option rules or data specifications are needed."
+https://checkstyle.org/checks/misc/arraytypestyle.html#ArrayTypeStyle,ArrayTypeStyle,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [array type definition] is [Java style]
+
+Option Rule:
+javaStyle option:
+true: Mandatory: [array type definition] is [Java style]
+false: Optional: [array type definition] is [C style]
+
+Options that are data specifications:
+javaStyle: boolean; {true, false}; true"
+https://checkstyle.org/checks/coding/noarraytrailingcomma.html#NoArrayTrailingComma,NoArrayTrailingComma,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [comma] not at end of [array initialization]
+
+There are no options provided in the CheckStyle Rule, so no Option Rule or data specifications are needed."
+https://checkstyle.org/checks/sizes/filelength.html#FileLength,FileLength,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [lines] of [source file] <= {{max}}
+
+Option Rule:
+fileExtensions option:
+all files: Optional: [source file] have [any file extension]
+# No other values provided for fileExtensions, so no additional rules
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {any valid file extension}; {all files}
+{{max}}: int; {0 to Integer.MAX_VALUE}; {2000}"
+https://checkstyle.org/checks/coding/simplifybooleanexpression.html#SimplifyBooleanExpression,SimplifyBooleanExpression,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [boolean expression] is not [b == true]
+And
+Mandatory: [boolean expression] is not [b || true]
+And
+Mandatory: [boolean expression] is not [!false]
+And
+Mandatory: [boolean expression] is not [q > 12 ? true : false]
+
+Options that are data specifications:
+No Option"
+https://checkstyle.org/checks/coding/illegaltoken.html#IllegalToken,IllegalToken,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [LABELED_STAT] of {{tokens}}
+
+Options that are data specifications:
+{{tokens}}: String[]; {LABELED_STAT}; {LABELED_STAT}"
+https://checkstyle.org/checks/coding/innerassignment.html#InnerAssignment,InnerAssignment,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [assignment] in [subexpression] is not allowed
+Except [assignment] in [loop condition]
+
+Explanation:
+1. The basic rule is derived from the description that assignments in subexpressions are not allowed, except for specific loop conditions.
+2. The exception rule is derived from the note that allows assignments in loop conditions.
+
+There are no options provided in the CheckStyle Rule, so no option rules or data specifications are needed."
+https://checkstyle.org/checks/javadoc/missingjavadocpackage.html#MissingJavadocPackage,MissingJavadocPackage,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadoc comment] of [package definition] in [package-info.java file] is [present]
+
+This rule ensures that every package definition in a `package-info.java` file must have a Javadoc comment. There are no options or data specifications associated with this rule."
+https://checkstyle.org/checks/blocks/avoidnestedblocks.html#AvoidNestedBlocks,AvoidNestedBlocks,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [nested block] of [code]
+
+Option Rule:
+allowInSwitchCase option:
+true: Optional: [nested block] of [switch case] is [allowed]
+false: Mandatory: [nested block] of [switch case] is not [allowed]
+
+Options that are data specifications:
+{{allowInSwitchCase}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/whitespace/methodparampad.html#MethodParamPad,MethodParamPad,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [identifier] and [left parenthesis] of [method definition, constructor definition, method call, or constructor invocation] on the same line -> [space] is required immediately after [identifier]
+Or
+Mandatory: [identifier] and [left parenthesis] of [method definition, constructor definition, method call, or constructor invocation] on the same line -> [space] is forbidden immediately after [identifier]
+And
+Mandatory: [identifier] and [left parenthesis] of [method definition, constructor definition, method call, or constructor invocation] not on the same line -> [violation] is reported
+
+Option Rule:
+allowLineBreaks option:
+true: Optional: [identifier] and [left parenthesis] of [method definition, constructor definition, method call, or constructor invocation] not on the same line -> [violation] is not reported
+false: Mandatory: [identifier] and [left parenthesis] of [method definition, constructor definition, method call, or constructor invocation] not on the same line -> [violation] is reported
+
+option option:
+nospace: Mandatory: [space] is forbidden immediately after [identifier]
+space: Mandatory: [space] is required immediately after [identifier]
+
+Options that are data specifications:
+{{tokens}}: String[]; {CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF, SUPER_CTOR_CALL, ENUM_CONSTANT_DEF, RECORD_DEF}; {CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF, SUPER_CTOR_CALL, ENUM_CONSTANT_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/blocks/leftcurly.html#LeftCurly,LeftCurly,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [block] of {{tokens}} have [Brace]
+
+Option Rule:
+ignoreEnums option:
+true: Optional: [enum] not for [block] of {{tokens}}
+
+option option:
+eol: Mandatory: [Brace] at end of [line] of [block] of {{tokens}}
+nl: Mandatory: [Brace] at begin of [line] of [block] of {{tokens}}
+alone: Mandatory: [Brace] at begin of [line] of [block] of {{tokens}}
+
+Options that are data specifications:
+{{tokens}}: String[]; {ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, LAMBDA, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF, OBJBLOCK, STATIC_INIT, RECORD_DEF, COMPACT_CTOR_DEF}; {ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, LAMBDA, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF, OBJBLOCK, STATIC_INIT, RECORD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/imports/importcontrol.html#ImportControl,ImportControl,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [rules] of [subpackage] is [declaration order in XML file]
+And
+Mandatory: [import] is not allowed if [no matching allow/disallow rule] in [current file/subpackage] and [parent subpackage] and [root level]
+
+Option Rule:
+file option:
+null: Optional: [file] is [null]
+not null: Mandatory: [file] is [URI]
+
+path option:
+"".*"": Mandatory: [file path] matches {{path}}
+
+Options that are data specifications:
+{{file}}: URI; {any valid URI}; {null}
+{{path}}: Pattern; RegExp; "".*"""
+https://checkstyle.org/checks/naming/recordtypeparametername.html#RecordTypeParameterName,RecordTypeParameterName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [record type parameter names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[A-Z]$""; ""^[A-Z]$"""
+https://checkstyle.org/checks/misc/upperell.html#UpperEll,UpperEll,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [long constants] at end of [constant] is [L]
+
+Explanation:
+- The rule checks that long constants are defined with an upper ell ('L') instead of a lower-case ell ('l').
+- This is a mandatory rule as per the Java Language Specification, Section 3.10.1.
+
+There are no options provided in this CheckStyle rule, so no additional option rules or data specifications are needed."
+https://checkstyle.org/checks/coding/parameterassignment.html#ParameterAssignment,ParameterAssignment,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [assignment] of [parameters]"
+https://checkstyle.org/checks/coding/noclone.html#NoClone,NoClone,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [clone method] of [Object class]
+
+Note: There are no options provided in the CheckStyle Rule, so there are no option rules or data specifications to include."
+https://checkstyle.org/checks/imports/customimportorder.html#CustomImportOrder,CustomImportOrder,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [import groups] is {{customImportOrderRules}}
+And
+Mandatory: {{customImportOrderRules}} not have [an import group] -> [the import group] at end of [import groups]
+
+Option Rule:
+separateLineBetweenGroups option:
+true: Mandatory: [empty line] between [import groups]
+false: Optional: [empty line] not between [import groups]
+
+sortImportsInGroupAlphabetically option:
+true: Mandatory: Order of [imports] of [import group] is [ASCII sort order]
+false: Optional: Order of [imports] of [import group] is not [ASCII sort order]
+
+Options that are data specifications:
+{{customImportOrderRules}}: String[]; {STATIC, SAME_PACKAGE(n), SPECIAL_IMPORTS, STANDARD_JAVA_PACKAGE, THIRD_PARTY_PACKAGE}; {}
+{{specialImportsRegExp}}: Pattern; RegExp; ""^$""
+{{standardPackageRegExp}}: Pattern; RegExp; ""^(java|javax)\.""
+{{thirdPartyPackageRegExp}}: Pattern; RegExp; "".*"""
+https://checkstyle.org/checks/design/interfaceistype.html#InterfaceIsType,InterfaceIsType,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [interface] have [constant] except [interface] have [method]
+
+Option Rule:
+allowMarkerInterfaces option:
+true: Optional: No [interface] have [constant] except [interface] have [method] or [interface] is [marker interface]
+false: Mandatory: No [interface] have [constant] except [interface] have [method]
+
+Options that are data specifications:
+{{marker interface}}: String[]; {java.io.Serializable}; {};"
+https://checkstyle.org/checks/coding/unnecessarysemicolonaftertypememberdeclaration.html#UnnecessarySemicolonAfterTypeMemberDeclaration,UnnecessarySemicolonAfterTypeMemberDeclaration,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [semicolon] after [type member declaration] is not [necessary]
+
+Options that are data specifications:
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, STATIC_INIT, INSTANCE_INIT, CTOR_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, COMPACT_CTOR_DEF, RECORD_DEF}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, VARIABLE_DEF, ANNOTATION_FIELD_DEF, STATIC_INIT, INSTANCE_INIT, CTOR_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, COMPACT_CTOR_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/coding/returncount.html#ReturnCount,ReturnCount,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [return statements] of [method] is <= {{max}}
+And
+Mandatory: Number of [return statements] of [lambda expression] is <= {{max}}
+And
+Mandatory: Number of [return statements] of [method] is <= {{maxForVoid}} for [void return type]
+And
+Mandatory: Number of [return statements] of [constructor] is <= {{maxForVoid}} for [void return type]
+And
+Mandatory: Number of [return statements] of [lambda expression] is <= {{maxForVoid}} for [void return type]
+
+Option Rule:
+format option:
+""^equals$"": Optional: [method name] is not [equals]
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, ...}; 2
+{{maxForVoid}}: int; {0, 1, 2, ...}; 1
+{{tokens}}: String[]; {CTOR_DEF, METHOD_DEF, LAMBDA}; {CTOR_DEF, METHOD_DEF, LAMBDA}"
+https://checkstyle.org/checks/naming/localfinalvariablename.html#LocalFinalVariableName,LocalFinalVariableName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [local final variable names] conform to {{format}}
+
+Option Rule:
+None
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$""
+{{tokens}}: String[]; {VARIABLE_DEF, PARAMETER_DEF, RESOURCE}; {VARIABLE_DEF, PARAMETER_DEF, RESOURCE}"
+https://checkstyle.org/checks/naming/patternvariablename.html#PatternVariableName,PatternVariableName,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: [pattern variable names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/sizes/outertypenumber.html#OuterTypeNumber,OuterTypeNumber,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [types] of [outer level] of [file] <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {1, 2, 3, ...}; 1"
+https://checkstyle.org/checks/coding/unnecessarysemicolonintrywithresources.html#UnnecessarySemicolonInTryWithResources,UnnecessarySemicolonInTryWithResources,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [semicolon] at end of [resource declaration]
+
+Option Rule:
+allowWhenNoBraceAfterSemicolon option:
+true: Optional: No [semicolon] at end of [resource declaration] -> [closing paren] not at end of [line]
+false: Mandatory: No [semicolon] at end of [resource declaration]
+
+Options that are data specifications:
+{{allowWhenNoBraceAfterSemicolon}}: boolean; {true, false}; true"
+https://checkstyle.org/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad,EmptyForInitializerPad,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [padding] of [empty for initializer] is {{PadOption}}
+
+Option Rule:
+option:
+nospace: Mandatory: [padding] of [empty for initializer] is [no space]
+
+Options that are data specifications:
+{{PadOption}}: String; {space, nospace}; {nospace}"
+https://checkstyle.org/checks/coding/explicitinitialization.html#ExplicitInitialization,ExplicitInitialization,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class member] or [object member] not have [explicit initialization] to [default value]
+
+Option Rule:
+onlyObjectReferences option:
+true: Mandatory: [explicit initialization] of [object member] is [null]
+false: Optional: [explicit initialization] of [object member] is [null]
+
+Options that are data specifications:
+{{onlyObjectReferences}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/coding/illegaltype.html#IllegalType,IllegalType,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [class] is {{illegalClassNames}}
+And
+Mandatory: No [interface] is {{illegalClassNames}}
+
+Option Rule:
+validateAbstractClassNames option:
+true: Mandatory: No [abstract class] is {{illegalAbstractClassNameFormat}}
+false: Optional: No [abstract class] is not {{illegalAbstractClassNameFormat}}
+
+Options that are data specifications:
+{{ignoredMethodNames}}: String[]; {getEnvironment, getInitialContext}; {}
+{{illegalAbstractClassNameFormat}}: Pattern; RegExp; ""^(.*[.])?Abstract.*$""
+{{illegalClassNames}}: String[]; {HashMap, HashSet, LinkedHashMap, LinkedHashSet, TreeMap, TreeSet, java.util.HashMap, java.util.HashSet, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, java.util.TreeSet}; {}
+{{legalAbstractClassNames}}: String[]; {}; {}
+{{memberModifiers}}: subset of tokens TokenTypes; {}; {}
+{{tokens}}: subset of tokens; {ANNOTATION_FIELD_DEF, CLASS_DEF, INTERFACE_DEF, METHOD_CALL, METHOD_DEF, METHOD_REF, PARAMETER_DEF, VARIABLE_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF}; {ANNOTATION_FIELD_DEF, CLASS_DEF, INTERFACE_DEF, METHOD_CALL, METHOD_DEF, METHOD_REF, PARAMETER_DEF, VARIABLE_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF}"
+https://checkstyle.org/checks/misc/finalparameters.html#FinalParameters,FinalParameters,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [parameter] of [method], [constructor], [catch block], [for-each block] is [final]
+Except [parameter] of [interface method], [abstract method], [native method]
+
+Option Rule:
+ignorePrimitiveTypes option:
+true: Optional: [parameter] of [method], [constructor], [catch block], [for-each block] is not [final] for [primitive type]
+false: Mandatory: [parameter] of [method], [constructor], [catch block], [for-each block] is [final] for [primitive type]
+
+Options that are data specifications:
+{{tokens}}: String[]; {METHOD_DEF, CTOR_DEF, LITERAL_CATCH, FOR_EACH_CLAUSE}; {METHOD_DEF, CTOR_DEF}"
+https://checkstyle.org/checks/imports/illegalimport.html#IllegalImport,IllegalImport,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [import] is {{illegalClasses}}
+And
+Mandatory: No [import] is part of {{illegalPkgs}}
+
+Option Rule:
+regexp option:
+true: Mandatory: No [import] matches {{illegalClasses}} as regular expressions
+And
+Mandatory: No [import] matches {{illegalPkgs}} as regular expressions
+false: Optional: No [import] matches {{illegalClasses}} as regular expressions
+And
+Optional: No [import] matches {{illegalPkgs}} as regular expressions
+
+Options that are data specifications:
+{{illegalClasses}}: String[]; {}; {}
+{{illegalPkgs}}: String[]; {}; {sun}"
+https://checkstyle.org/checks/javadoc/requireemptylinebeforeblocktaggroup.html#RequireEmptyLineBeforeBlockTagGroup,RequireEmptyLineBeforeBlockTagGroup,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [blank line] before [block tag] of [Javadoc]
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Mandatory: [Javadoc] violates [tight html rules] -> [print violations]
+false: Optional: [Javadoc] not violates [tight html rules] -> [do not print violations]
+
+Options that are data specifications:
+{{violateExecutionOnNonTightHtml}}: boolean; {true, false}; {false}"
+https://checkstyle.org/checks/blocks/needbraces.html#NeedBraces,NeedBraces,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [block] of {{tokens}} have [Brace]
+
+Option Rule:
+allowEmptyLoopBody option:
+false: Mandatory: [body] of [loop statement] is not [Null]
+true: Optional: [body] of [loop statement] is [Null]
+
+allowSingleLineStatement option:
+false: Mandatory: Number of [statement] of [body] of {{tokens}} is 1 -> [body] of {{tokens}} have [Brace]
+true: Optional: Number of [statement] of [body] of {{tokens}} is 1 -> [body] of {{tokens}} not have [Brace]
+
+Options that are data specifications:
+tokens: String[]; {LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE, LITERAL_CASE, LITERAL_DEFAULT, LAMBDA}; {LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE}"
+https://checkstyle.org/checks/misc/todocomment.html#TodoComment,TodoComment,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [comment] is [Java comment] -> [comment] have [pattern] is {{format}}
+
+Option Rule:
+format option:
+""TODO:"": Mandatory: [comment] have [pattern] is ""TODO:""
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""TODO:"""
+https://checkstyle.org/checks/misc/descendanttoken.html#DescendantToken,DescendantToken,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [restricted tokens] beneath [other tokens]
+
+Option Rule:
+maximumMessage option:
+null: Optional: [violation message] is not defined
+non-null: Mandatory: [violation message] is defined
+
+minimumMessage option:
+null: Optional: [violation message] is not defined
+non-null: Mandatory: [violation message] is defined
+
+sumTokenCounts option:
+false: Optional: [number of tokens] found is not calculated from [sum of individual token counts]
+true: Mandatory: [number of tokens] found is calculated from [sum of individual token counts]
+
+Options that are data specifications:
+{{limitedTokens}}: TokenTypes[]; {subset of tokens TokenTypes}; {}
+{{maximumDepth}}: int; {0 to 2147483647}; 2147483647
+{{maximumNumber}}: int; {0 to 2147483647}; 2147483647
+{{minimumDepth}}: int; {0 to 2147483647}; 0
+{{minimumNumber}}: int; {0 to 2147483647}; 0
+{{tokens}}: TokenTypes[]; {set of any supported tokens}; {}"
+https://checkstyle.org/checks/coding/emptystatement.html#EmptyStatement,EmptyStatement,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [statement] is not [Null]"
+https://checkstyle.org/checks/whitespace/singlespaceseparator.html#SingleSpaceSeparator,SingleSpaceSeparator,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [non-whitespace characters] of [whitespace] <= 1
+And
+Mandatory: [whitespace] is not [tab]
+And
+Mandatory: [whitespace] is not [multiple spaces]
+
+Option Rule:
+validateComments option:
+true: Mandatory: Number of [non-whitespace characters] of [whitespace] <= 1 for [whitespace] before and after [comments]
+false: Optional: Number of [non-whitespace characters] of [whitespace] > 1 for [whitespace] before and after [comments]
+
+Options that are data specifications:
+validateComments: boolean; {true, false}; false"
+https://checkstyle.org/checks/regexp/regexpsingleline.html#RegexpSingleline,RegexpSingleline,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [a specified pattern] matches [a single-line] in [any file type]
+
+Option Rule:
+ignoreCase option:
+true: Mandatory: [case] of [searching] is [ignored]
+false: Optional: [case] of [searching] is not [ignored]
+
+message option:
+null: Optional: [default message] is used
+not null: Mandatory: [specified message] is used to notify about [violations]
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {all files}; {}
+{{format}}: Pattern; RegExp; ""$.""
+{{maximum}}: int; {0, Integer.MAX_VALUE}; 0
+{{minimum}}: int; {0, Integer.MAX_VALUE}; 0"
+https://checkstyle.org/checks/sizes/recordcomponentnumber.html#RecordComponentNumber,RecordComponentNumber,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: Number of [record components] of [header] of [record definition] <= {{max}}
+
+Options that are data specifications:
+{{accessModifiers}}: AccessModifierOption[]; {public, protected, package, private}; {}
+{{max}}: int; {0, 1, 2, 3, 4, 5, 6, 7, 8, ...}; 8"
+https://checkstyle.org/checks/regexp/regexp.html#Regexp,Regexp,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [pattern] exists in [file]
+Or
+Mandatory: Number of [pattern] of [file] <= {{duplicateLimit}}
+Or
+Mandatory: [pattern] not exists in [file]
+
+Option Rule:
+ignoreComments option:
+true: Optional: [pattern] not in [comments]
+false: Optional: [pattern] in [comments]
+
+illegalPattern option:
+true: Mandatory: [pattern] not exists in [file]
+false: Mandatory: [pattern] exists in [file]
+
+message option:
+null: Optional: [default message] is used
+not null: Optional: [custom message] is used
+
+Options that are data specifications:
+{{duplicateLimit}}: int; any negative value means no checking for duplicates, any positive value is used as the maximum number of allowed duplicates; 0
+{{errorLimit}}: int; any positive integer; 100
+{{format}}: Pattern; RegExp; ""^$"""
+https://checkstyle.org/checks/misc/uncommentedmain.html#UncommentedMain,UncommentedMain,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [main method] not have [comment]
+
+Option Rule:
+excludedClasses option:
+""^$"": Optional: [qualified name] of [class] is not [pattern]
+
+Options that are data specifications:
+{{excludedClasses}}: Pattern; RegExp; ""^$"""
+https://checkstyle.org/checks/whitespace/emptylineseparator.html#EmptyLineSeparator,EmptyLineSeparator,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [empty line] before [package]
+And
+Mandatory: [empty line] before [import declarations]
+And
+Mandatory: [empty line] before [fields]
+And
+Mandatory: [empty line] before [constructors]
+And
+Mandatory: [empty line] before [methods]
+And
+Mandatory: [empty line] before [nested classes]
+And
+Mandatory: [empty line] before [static initializers]
+And
+Mandatory: [empty line] before [instance initializers]
+And
+Mandatory: [empty line] before [statements]
+And
+Mandatory: [empty line] before [implementation comments]
+And
+Mandatory: [empty line] before [documentation comments]
+And
+Mandatory: [empty line] before [blocks]
+And
+Mandatory: [empty line] between [token siblings] of {{tokens}}
+And
+Mandatory: [empty line] at end of [token] of {{tokens}} -> [token] not have [sibling] of [same type]
+And
+Optional: [trailing comments] are skipped
+
+Option Rule:
+allowMultipleEmptyLines option:
+true: Optional: [multiple empty lines] between [class members]
+false: Mandatory: [multiple empty lines] not between [class members]
+
+allowMultipleEmptyLinesInsideClassMembers option:
+true: Optional: [multiple empty lines] inside [class members]
+false: Mandatory: [multiple empty lines] not inside [class members]
+
+allowNoEmptyLineBetweenFields option:
+true: Optional: [empty line] not between [fields]
+false: Mandatory: [empty line] between [fields]
+
+Options that are data specifications:
+{{tokens}}: String[]; {PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF, STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}; {PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF, STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/coding/hiddenfield.html#HiddenField,HiddenField,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [local variable] or [parameter] shadow [field] of [class]
+
+Option Rule:
+ignoreAbstractMethods option:
+true: Optional: No [parameter] of [abstract method] shadow [field] of [class]
+false: Mandatory: No [parameter] of [abstract method] shadow [field] of [class]
+
+ignoreConstructorParameter option:
+true: Optional: No [constructor parameter] shadow [field] of [class]
+false: Mandatory: No [constructor parameter] shadow [field] of [class]
+
+ignoreSetter option:
+true: Optional: No [parameter] of [setter method] shadow [field] of [class]
+false: Mandatory: No [parameter] of [setter method] shadow [field] of [class]
+
+setterCanReturnItsClass option:
+true: Optional: No [parameter] of [method returning class instance] shadow [field] of [class]
+false: Mandatory: No [parameter] of [method returning class instance] shadow [field] of [class]
+
+Options that are data specifications:
+{{ignoreFormat}}: Pattern; RegExp; null
+{{tokens}}: String[]; {VARIABLE_DEF, PARAMETER_DEF, PATTERN_VARIABLE_DEF, LAMBDA, RECORD_COMPONENT_DEF}; {VARIABLE_DEF, PARAMETER_DEF, PATTERN_VARIABLE_DEF, LAMBDA, RECORD_COMPONENT_DEF}"
+https://checkstyle.org/checks/annotation/suppresswarnings.html#SuppressWarnings,SuppressWarnings,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [@SuppressWarnings] for {{tokens}}
+And
+Mandatory: [@SuppressWarnings] is not [empty string] or [whitespace] (regex: ^$|^\s+$)
+
+Option Rule:
+format option:
+Pattern: Mandatory: [@SuppressWarnings] match {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^\s*+$""
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, ENUM_CONSTANT_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF, RECORD_DEF}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, ENUM_CONSTANT_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/javadoc/javadocmissingleadingasterisk.html#JavadocMissingLeadingAsterisk,JavadocMissingLeadingAsterisk,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [line] of [Javadoc] have [*]
+Except [first line] of [Javadoc]
+Except [last line] of [Javadoc] is [blank]
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Mandatory: [Javadoc] violate [tight html rules] -> [print violations]
+false: Optional: [Javadoc] violate [tight html rules] -> [not print violations]
+
+Options that are data specifications:
+{{violateExecutionOnNonTightHtml}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/javadoc/javadocmethod.html#JavadocMethod,JavadocMethod,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadoc] of [method] have [param tag] for [parameters] of [method] -> [allowMissingParamTags] is false
+And
+Mandatory: [Javadoc] of [method] have [return tag] for [return type] of [method] -> [allowMissingReturnTag] is false
+And
+Mandatory: [Javadoc] of [method] have [throws tag] for [exceptions] of [method] -> [validateThrows] is true
+And
+Optional: [Javadoc] of [method] not required for [method] have [Override annotation]
+And
+Optional: [Javadoc] of [method] have [@inheritDoc tag] for [inheritable items]
+
+Option Rule:
+allowMissingParamTags option:
+false: Mandatory: [Javadoc] of [method] have [param tag] for [parameters] of [method]
+true: Optional: [Javadoc] of [method] not have [param tag] for [parameters] of [method]
+
+allowMissingReturnTag option:
+false: Mandatory: [Javadoc] of [method] have [return tag] for [return type] of [method]
+true: Optional: [Javadoc] of [method] not have [return tag] for [return type] of [method]
+
+validateThrows option:
+false: Optional: [Javadoc] of [method] not have [throws tag] for [exceptions] of [method]
+true: Mandatory: [Javadoc] of [method] have [throws tag] for [exceptions] of [method]
+
+Options that are data specifications:
+{{accessModifiers}}: AccessModifierOption[]; {public, protected, package, private}; {public, protected, package, private}
+{{allowedAnnotations}}: String[]; {Override}; {Override}
+{{tokens}}: String[]; {METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF}; {METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/coding/simplifybooleanreturn.html#SimplifyBooleanReturn,SimplifyBooleanReturn,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [boolean return statement] is not [over-complicated]
+
+Explanation:
+- The rule checks for over-complicated boolean return statements.
+- The example provided shows how a complex boolean return statement can be simplified.
+- The rule is objective and can be parsed using the given grammar.
+
+There are no options for this rule, so no option rules or data specifications are provided."
+https://checkstyle.org/checks/javadoc/summaryjavadoc.html#SummaryJavadoc,SummaryJavadoc,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [Javadoc summary sentence] have [phrases] not recommended to use
+And
+Optional: [Javadoc summary sentence] have [the {@inheritDoc} tag]
+And
+Optional: [Javadoc summary sentence] have [a non-empty {@code {@return}}]
+And
+Mandatory: [Javadoc] not have [first sentence] -> [Javadoc] have [the {@code {@return}}] not at end of [Javadoc]
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Mandatory: [violations] of [Javadoc] is [printed] if [Javadoc] violates [tight html rules]
+false: Optional: [violations] of [Javadoc] is not [printed] if [Javadoc] violates [tight html rules]
+
+Options that are data specifications:
+{{forbiddenSummaryFragments}}: Pattern; RegExp; ""^$""
+{{period}}: String; Single Character; ""."""
+https://checkstyle.org/checks/coding/equalshashcode.html#EqualsHashCode,EqualsHashCode,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class] have [equals()] -> [class] have [hashCode()]
+And
+Mandatory: [class] have [hashCode()] -> [class] have [equals()]
+
+There are no options in this CheckStyle rule."
+https://checkstyle.org/checks/coding/unusedlocalvariable.html#UnusedLocalVariable,UnusedLocalVariable,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [local variable] is [declared] And [local variable] is [assigned] And [local variable] is not [used]
+
+Explanation:
+1. ""Checks that a local variable is declared and/or assigned, but not used."" is a rule. It specifies that a local variable must be declared and assigned but not used.
+2. ""Doesn't support pattern variables yet."" is subjective and not a rule.
+3. ""Doesn't check array components as array components are classified as different kind of variables by JLS."" is subjective and not a rule.
+
+There are no options provided in this CheckStyle rule, so no option rules or data specifications are needed."
+https://checkstyle.org/checks/javadoc/javadocparagraph.html#JavadocParagraph,JavadocParagraph,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [blank line] between [paragraphs] is 1
+And
+Mandatory: [paragraph] except [first paragraph] at begin of [paragraph] have [<p>]
+
+Option Rule:
+allowNewlineParagraph option:
+true: Optional: [<p>] not at begin of [paragraph]
+false: Mandatory: [<p>] at begin of [paragraph]
+
+violateExecutionOnNonTightHtml option:
+true: Optional: [Javadoc] not have [tight html rules]
+false: Mandatory: [Javadoc] have [tight html rules]
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore,NoWhitespaceBefore,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [whitespace] not before {{tokens}}
+And
+Optional: [linebreak] before {{tokens}} -> all [characters] before [linebreak] is [whitespace]
+
+Option Rule:
+allowLineBreaks option:
+true: Optional: [linebreak] before {{tokens}} -> all [characters] before [linebreak] is [whitespace]
+false: Mandatory: [whitespace] not before {{tokens}}
+
+Options that are data specifications:
+{{tokens}}: String[]; {COMMA, SEMI, POST_INC, POST_DEC, DOT, GENERIC_START, GENERIC_END, ELLIPSIS, LABELED_STAT, METHOD_REF}; {COMMA, SEMI, POST_INC, POST_DEC, ELLIPSIS, LABELED_STAT}"
+https://checkstyle.org/checks/sizes/lambdabodylength.html#LambdaBodyLength,LambdaBodyLength,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [line] of [lambda body] <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, ..., Integer.MAX_VALUE}; 10"
+https://checkstyle.org/checks/javadoc/javadocstyle.html#JavadocStyle,JavadocStyle,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [first sentence] of [Javadoc comment] at end of {{endOfSentenceFormat}} Except [inline @return tag]
+And
+Mandatory: [Javadoc comment] not have [empty description] or [only tags] such as [@param] and [@return]
+And
+Mandatory: [HTML tag] of [Javadoc comment] have [corresponding end tag] Except [end tag] not have [previous open tag]
+And
+Mandatory: [package Javadoc comment] is [well-formed]
+And
+Mandatory: [HTML tag] of [Javadoc comment] is [allowed HTML tag]
+
+Option Rule:
+checkEmptyJavadoc option:
+true: Mandatory: [Javadoc comment] not have [empty description] or [only tags] such as [@param] and [@return]
+false: Optional: [Javadoc comment] not have [empty description] or [only tags] such as [@param] and [@return]
+
+checkFirstSentence option:
+true: Mandatory: [first sentence] of [Javadoc comment] at end of {{endOfSentenceFormat}} Except [inline @return tag]
+false: Optional: [first sentence] of [Javadoc comment] at end of {{endOfSentenceFormat}} Except [inline @return tag]
+
+checkHtml option:
+true: Mandatory: [HTML tag] of [Javadoc comment] have [corresponding end tag] Except [end tag] not have [previous open tag]
+false: Optional: [HTML tag] of [Javadoc comment] have [corresponding end tag] Except [end tag] not have [previous open tag]
+
+Options that are data specifications:
+{{endOfSentenceFormat}}: Pattern; ""([.?!][ \t\n\r\f<])|([.?!]$)""; ""([.?!][ \t\n\r\f<])|([.?!]$)""
+{{excludeScope}}: Scope; {public, protected, package, private}; null
+{{scope}}: Scope; {public, protected, package, private}; private
+{{tokens}}: String[]; {ANNOTATION_DEF, ANNOTATION_FIELD_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, PACKAGE_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}; {ANNOTATION_DEF, ANNOTATION_FIELD_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, PACKAGE_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/coding/nestedfordepth.html#NestedForDepth,NestedForDepth,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [nested for blocks] of [code] <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {1, 2, 3, ...}; {1}"
+https://checkstyle.org/checks/imports/redundantimport.html#RedundantImport,RedundantImport,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [import statement] is duplicate of [another import statement]
+And
+Mandatory: No [import statement] is [non-statically imported] of [java.lang package]
+And
+Mandatory: No [import statement] is [non-statically imported] of [same package as current package]
+
+There are no options provided in the CheckStyle Rule, so only the basic rules are represented."
+https://checkstyle.org/checks/whitespace/parenpad.html#ParenPad,ParenPad,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [space] after [left parenthesis] of {{tokens}}
+Or
+Mandatory: [space] before [right parenthesis] of {{tokens}}
+Except [right parenthesis] after [empty for iterator]
+Except [left parenthesis] before [empty for initialization]
+Except [right parenthesis] of [try-with-resources resource specification] where [last resource variable] have [trailing semicolon]
+
+Option Rule:
+option option:
+nospace: Mandatory: [space] not after [left parenthesis] of {{tokens}}
+Or
+Mandatory: [space] not before [right parenthesis] of {{tokens}}
+
+Options that are data specifications:
+tokens: String[]; {ANNOTATION, ANNOTATION_FIELD_DEF, CTOR_CALL, CTOR_DEF, DOT, ENUM_CONSTANT_DEF, EXPR, LITERAL_CATCH, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_NEW, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE, METHOD_CALL, METHOD_DEF, QUESTION, RESOURCE_SPECIFICATION, SUPER_CTOR_CALL, LAMBDA, RECORD_DEF}; {ANNOTATION, ANNOTATION_FIELD_DEF, CTOR_CALL, CTOR_DEF, DOT, ENUM_CONSTANT_DEF, EXPR, LITERAL_CATCH, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_NEW, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE, METHOD_CALL, METHOD_DEF, QUESTION, RESOURCE_SPECIFICATION, SUPER_CTOR_CALL, LAMBDA, RECORD_DEF}"
+https://checkstyle.org/checks/sizes/linelength.html#LineLength,LineLength,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [line length] is <= {{max}}
+
+Option Rule:
+fileExtensions option:
+all files: Optional: [file extension] of [file] is not specified
+
+ignorePattern option:
+""^(package|import) .*"": Optional: [line] of [file] matches {{ignorePattern}}
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {any valid file extension}; {all files}
+{{ignorePattern}}: Pattern; {any valid regex pattern}; {""^(package|import) .*""}
+{{max}}: int; {0 to Integer.MAX_VALUE}; {80}"
+https://checkstyle.org/checks/javadoc/javadocblocktaglocation.html#JavadocBlockTagLocation,JavadocBlockTagLocation,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [javadoc block tag] at begin of [line]
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Mandatory: [Javadoc] violate [tight html rules]
+false: Optional: [Javadoc] not violate [tight html rules]
+
+Options that are data specifications:
+{{tags}}: String[]; {author, deprecated, exception, hidden, param, provides, return, see, serial, serialData, serialField, since, throws, uses, version}; {author, deprecated, exception, hidden, param, provides, return, see, serial, serialData, serialField, since, throws, uses, version}"
+https://checkstyle.org/checks/modifier/modifierorder.html#ModifierOrder,ModifierOrder,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [modifiers] is [public, protected, private, abstract, default, static, sealed, non-sealed, final, transient, volatile, synchronized, native, strictfp]
+And
+Mandatory: [annotations] before [modifiers]
+
+Note: The rationale and the attention note are subjective and thus skipped. There are no options provided in this CheckStyle rule.
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/coding/defaultcomeslast.html#DefaultComesLast,DefaultComesLast,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [default] is after [case] of [switch statement]
+
+Option Rule:
+skipIfLastAndSharedWithCase option:
+true: Optional: [default] of [switch statement] is with [case] if [case] is last
+false: Mandatory: [default] of [switch statement] is not with [case] if [case] is last
+
+Options that are data specifications:
+skipIfLastAndSharedWithCase: boolean; {true, false}; false"
+https://checkstyle.org/checks/misc/nocodeinfile.html#NoCodeInFile,NoCodeInFile,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [code] in [file]
+
+Explanation:
+- The rule ""Checks whether file contains code"" is parsed as ""Mandatory: No [code] in [file]"".
+- The rule ""Java compiler is not raising errors on files with no code or all commented out"" is subjective and thus skipped.
+- The rule ""Files which are considered to have no code"" is parsed as ""Mandatory: No [code] in [file]"".
+- The sub-rules ""File with no text"", ""File with single-line comment(s)"", and ""File with a multi line comment(s)"" are all examples of files with no code, so they are included under the main rule.
+
+There are no options provided in the CheckStyle Rule, so no option rules or data specifications are needed."
+https://checkstyle.org/checks/coding/multiplestringliterals.html#MultipleStringLiterals,MultipleStringLiterals,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [string literal] of [file] <= {{allowedDuplicates}}
+
+Option Rule:
+ignoreOccurrenceContext option:
+ANNOTATION: Optional: [string literal] of [ANNOTATION] not for [file]
+
+ignoreStringsRegexp option:
+""^""""$"": Optional: [string literal] matching {{ignoreStringsRegexp}} not for [file]
+
+Options that are data specifications:
+{{allowedDuplicates}}: int; {1, 2, 3, ...}; 1
+{{ignoreOccurrenceContext}}: TokenTypes[]; {ANNOTATION, ...}; {}
+{{ignoreStringsRegexp}}: Pattern; RegExp; ""^""""$"""
+https://checkstyle.org/checks/naming/abstractclassname.html#AbstractClassName,AbstractClassName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [name] of [abstract class] is {{format}}
+And
+Mandatory: [abstract class] have [abstract modifier]
+
+Option Rule:
+ignoreModifier option:
+true: Optional: [abstract class] not have [abstract modifier]
+false: Mandatory: [abstract class] have [abstract modifier]
+
+ignoreName option:
+true: Optional: [name] of [abstract class] is not {{format}}
+false: Mandatory: [name] of [abstract class] is {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^Abstract.+$""; ""^Abstract.+$"""
+https://checkstyle.org/checks/whitespace/whitespacearound.html#WhitespaceAround,WhitespaceAround,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [token] of {{tokens}} is surrounded by [whitespace]
+
+Option Rule:
+allowEmptyCatches option:
+false: Mandatory: [catch block] of [try statement] is not [empty]
+true: Optional: [catch block] of [try statement] is [empty]
+
+allowEmptyConstructors option:
+false: Mandatory: [body] of [constructor] is not [empty]
+true: Optional: [body] of [constructor] is [empty]
+
+allowEmptyLambdas option:
+false: Mandatory: [body] of [lambda expression] is not [empty]
+true: Optional: [body] of [lambda expression] is [empty]
+
+allowEmptyLoops option:
+false: Mandatory: [body] of [loop statement] is not [empty]
+true: Optional: [body] of [loop statement] is [empty]
+
+allowEmptyMethods option:
+false: Mandatory: [body] of [method] is not [empty]
+true: Optional: [body] of [method] is [empty]
+
+allowEmptyTypes option:
+false: Mandatory: [body] of [class, interface, enum] is not [empty]
+true: Optional: [body] of [class, interface, enum] is [empty]
+
+ignoreEnhancedForColon option:
+true: Optional: [whitespace] around [colon] in [enhanced for loop] is ignored
+false: Mandatory: [whitespace] around [colon] in [enhanced for loop] is not ignored
+
+Options that are data specifications:
+{{tokens}}: String[]; {ASSIGN, ARRAY_INIT, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, DO_WHILE, EQUAL, GE, GT, LAMBDA, LAND, LCURLY, LE, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL, PLUS, PLUS_ASSIGN, QUESTION, RCURLY, SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN, LITERAL_ASSERT, TYPE_EXTENSION_AND, WILDCARD_TYPE, GENERIC_START, GENERIC_END, ELLIPSIS}; {}"
+https://checkstyle.org/checks/javadoc/nonemptyatclausedescription.html#NonEmptyAtclauseDescription,NonEmptyAtclauseDescription,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [block tag] followed by [description]
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+true: Optional: [violations] printed if [Javadoc] violates [tight html rules]
+false: Optional: [violations] not printed if [Javadoc] violates [tight html rules]
+
+Options that are data specifications:
+{{javadocTokens}}: String[]; {PARAM_LITERAL, RETURN_LITERAL, THROWS_LITERAL, EXCEPTION_LITERAL, DEPRECATED_LITERAL}; {PARAM_LITERAL, RETURN_LITERAL, THROWS_LITERAL, EXCEPTION_LITERAL, DEPRECATED_LITERAL}"
+https://checkstyle.org/checks/imports/importorder.html#ImportOrder,ImportOrder,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [import groups] is {{groups}}
+And
+Mandatory: [empty line] between [import groups]
+And
+Mandatory: Order of [imports] of [import group] is [lexicographic order]
+And
+Mandatory: Order of [imports] of [import group] is [ASCII sort order]
+
+Option Rule:
+caseSensitive option:
+true: Mandatory: Order of [imports] of [import group] is [ASCII sort order]
+false: Optional: Order of [imports] of [import group] is not [ASCII sort order]
+
+ordered option:
+true: Mandatory: Order of [imports] of [import group] is [lexicographic order]
+false: Optional: Order of [imports] of [import group] is not [lexicographic order]
+
+separated option:
+true: Mandatory: [empty line] between [import groups]
+false: Optional: [empty line] not between [import groups]
+
+separatedStaticGroups option:
+true: Mandatory: [empty line] between [static import groups]
+false: Optional: [empty line] not between [static import groups]
+
+sortStaticImportsAlphabetically option:
+true: Mandatory: Order of [static imports] of [static import group] is [lexicographic order]
+false: Optional: Order of [static imports] of [static import group] is not [lexicographic order]
+
+useContainerOrderingForStatic option:
+true: Mandatory: Order of [static imports] of [static import group] is [container order]
+false: Optional: Order of [static imports] of [static import group] is not [container order]
+
+Options that are data specifications:
+{{groups}}: Pattern[]; {RegExp}; {}
+{{option}}: ImportOrderOption; {under, top, bottom}; under
+{{staticGroups}}: Pattern[]; {RegExp}; {}"
+https://checkstyle.org/checks/coding/nofinalizer.html#NoFinalizer,NoFinalizer,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [method] ""finalize"" with [zero parameters]"
+https://checkstyle.org/checks/coding/magicnumber.html#MagicNumber,MagicNumber,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [magic numbers] where [magic number] is [numeric literal] not defined as [constant]
+
+Option Rule:
+constantWaiverParentToken option:
+ARRAY_INIT: Optional: [ARRAY_INIT] in [AST path] from [number literal] to [enclosing constant definition]
+ASSIGN: Optional: [ASSIGN] in [AST path] from [number literal] to [enclosing constant definition]
+DIV: Optional: [DIV] in [AST path] from [number literal] to [enclosing constant definition]
+ELIST: Optional: [ELIST] in [AST path] from [number literal] to [enclosing constant definition]
+EXPR: Optional: [EXPR] in [AST path] from [number literal] to [enclosing constant definition]
+LITERAL_NEW: Optional: [LITERAL_NEW] in [AST path] from [number literal] to [enclosing constant definition]
+METHOD_CALL: Optional: [METHOD_CALL] in [AST path] from [number literal] to [enclosing constant definition]
+MINUS: Optional: [MINUS] in [AST path] from [number literal] to [enclosing constant definition]
+PLUS: Optional: [PLUS] in [AST path] from [number literal] to [enclosing constant definition]
+STAR: Optional: [STAR] in [AST path] from [number literal] to [enclosing constant definition]
+TYPECAST: Optional: [TYPECAST] in [AST path] from [number literal] to [enclosing constant definition]
+UNARY_MINUS: Optional: [UNARY_MINUS] in [AST path] from [number literal] to [enclosing constant definition]
+UNARY_PLUS: Optional: [UNARY_PLUS] in [AST path] from [number literal] to [enclosing constant definition]
+
+ignoreAnnotation option:
+true: Optional: [magic numbers] in [annotation declarations]
+false: Mandatory: No [magic numbers] in [annotation declarations]
+
+ignoreAnnotationElementDefaults option:
+true: Optional: [magic numbers] in [annotation elements defaults]
+false: Mandatory: No [magic numbers] in [annotation elements defaults]
+
+ignoreFieldDeclaration option:
+true: Optional: [magic numbers] in [field declarations]
+false: Mandatory: No [magic numbers] in [field declarations]
+
+ignoreHashCodeMethod option:
+true: Optional: [magic numbers] in [hashCode methods]
+false: Mandatory: No [magic numbers] in [hashCode methods]
+
+Options that are data specifications:
+{{constantWaiverParentToken}}: TokenTypes[]; {ARRAY_INIT, ASSIGN, DIV, ELIST, EXPR, LITERAL_NEW, METHOD_CALL, MINUS, PLUS, STAR, TYPECAST, UNARY_MINUS, UNARY_PLUS}; {}
+{{ignoreNumbers}}: double[]; {-1, 0, 1, 2}; {-1, 0, 1, 2}
+{{tokens}}: TokenTypes[]; {NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG}; {NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG}"
+https://checkstyle.org/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters,AvoidEscapedUnicodeCharacters,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [Unicode escapes]
+
+Option Rule:
+allowByTailComment option:
+true: Optional: [Unicode escapes] at end of [comment]
+false: Mandatory: No [Unicode escapes] at end of [comment]
+
+allowEscapesForControlCharacters option:
+true: Optional: [Unicode escapes] for [control characters]
+false: Mandatory: No [Unicode escapes] for [control characters]
+
+allowIfAllCharactersEscaped option:
+true: Optional: [Unicode escapes] for [all characters in literal]
+false: Mandatory: No [Unicode escapes] for [all characters in literal]
+
+allowNonPrintableEscapes option:
+true: Optional: [Unicode escapes] for [non-printable, whitespace characters]
+false: Mandatory: No [Unicode escapes] for [non-printable, whitespace characters]
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/naming/abbreviationaswordinname.html#AbbreviationAsWordInName,AbbreviationAsWordInName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [consecutive capital letters] of [identifier name] <= {{allowedAbbreviationLength}}
+And
+Mandatory: [identifier name] have [camel case naming]
+
+Option Rule:
+ignoreFinal option:
+true: Optional: [variable] with [final modifier] not for [identifier name]
+false: Mandatory: [variable] with [final modifier] for [identifier name]
+
+ignoreStatic option:
+true: Optional: [variable] with [static modifier] not for [identifier name]
+false: Mandatory: [variable] with [static modifier] for [identifier name]
+
+ignoreStaticFinal option:
+true: Optional: [variable] with [static and final modifiers] not for [identifier name]
+false: Mandatory: [variable] with [static and final modifiers] for [identifier name]
+
+Options that are data specifications:
+{{allowedAbbreviationLength}}: int; {0, 1, 2, 3, ...}; 3
+{{allowedAbbreviations}}: String[]; {}; {}
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF}"
+https://checkstyle.org/checks/blocks/emptyblock.html#EmptyBlock,EmptyBlock,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [block] of {{tokens}} have [Brace]
+
+Option Rule:
+option:
+statement: Mandatory: [block] of {{tokens}} is not [Null]
+
+Options that are data specifications:
+{{tokens}}: String[]; {LITERAL_WHILE, LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_CASE, LITERAL_DEFAULT, ARRAY_INIT}; {LITERAL_WHILE, LITERAL_TRY, LITERAL_FINALLY, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH, LITERAL_SYNCHRONIZED}"
+https://checkstyle.org/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter,NoWhitespaceAfter,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [whitespace] after {{tokens}}
+And
+Mandatory: No [whitespace] before [ARRAY_DECLARATOR, INDEX_OP]
+Except [ANNOTATIONS] before [ARRAY_DECLARATOR, INDEX_OP]
+And
+Mandatory: No [whitespace] after [LITERAL_SYNCHRONIZED] -> [synchronized statement]
+
+Option Rule:
+allowLineBreaks option:
+true: Optional: [whitespace] after {{tokens}} is [whitespace] at end of [line]
+false: Mandatory: No [whitespace] after {{tokens}}
+
+Options that are data specifications:
+{{tokens}}: String[]; {ARRAY_INIT, AT, INC, DEC, UNARY_MINUS, UNARY_PLUS, BNOT, LNOT, DOT, TYPECAST, ARRAY_DECLARATOR, INDEX_OP, LITERAL_SYNCHRONIZED, METHOD_REF}; {ARRAY_INIT, AT, INC, DEC, UNARY_MINUS, UNARY_PLUS, BNOT, LNOT, DOT, ARRAY_DECLARATOR, INDEX_OP}
+"
+https://checkstyle.org/checks/naming/constantname.html#ConstantName,ConstantName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [constant name] matches {{format}}
+And
+Mandatory: [constant] is [static] and [final] or [interface/annotation field]
+Except [constant name] is ""serialVersionUID""
+Except [constant name] is ""serialPersistentFields""
+
+Option Rule:
+applyToPackage option:
+true: Mandatory: [constant name] matches {{format}} for [package-private members]
+false: Optional: [constant name] not matches {{format}} for [package-private members]
+
+applyToPrivate option:
+true: Mandatory: [constant name] matches {{format}} for [private members]
+false: Optional: [constant name] not matches {{format}} for [private members]
+
+applyToProtected option:
+true: Mandatory: [constant name] matches {{format}} for [protected members]
+false: Optional: [constant name] not matches {{format}} for [protected members]
+
+applyToPublic option:
+true: Mandatory: [constant name] matches {{format}} for [public members]
+false: Optional: [constant name] not matches {{format}} for [public members]
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"";"
+https://checkstyle.org/checks/annotation/annotationonsameline.html#AnnotationOnSameLine,AnnotationOnSameLine,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [annotation] of {{tokens}} is [on the same line] as [target]
+
+Options that are data specifications:
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, PARAMETER_DEF, ANNOTATION_DEF, TYPECAST, LITERAL_THROWS, IMPLEMENTS_CLAUSE, TYPE_ARGUMENT, LITERAL_NEW, DOT, ANNOTATION_FIELD_DEF, RECORD_DEF, COMPACT_CTOR_DEF}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF}"
+https://checkstyle.org/checks/modifier/interfacememberimpliedmodifier.html#InterfaceMemberImpliedModifier,InterfaceMemberImpliedModifier,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [modifier] of [method] is [public] -> [method] of [interface]
+And
+Mandatory: [modifier] of [method] is [abstract] -> [method] of [interface]
+And
+Mandatory: [modifier] of [field] is [public] -> [field] of [interface]
+And
+Mandatory: [modifier] of [field] is [static] -> [field] of [interface]
+And
+Mandatory: [modifier] of [field] is [final] -> [field] of [interface]
+And
+Mandatory: [modifier] of [nested type] is [public] -> [nested type] of [interface]
+And
+Mandatory: [modifier] of [nested type] is [static] -> [nested type] of [interface]
+
+Option Rule:
+violateImpliedAbstractMethod option:
+true: Mandatory: [modifier] of [method] is [abstract] -> [method] of [interface]
+false: Optional: [modifier] of [method] is not [abstract] -> [method] of [interface]
+
+violateImpliedFinalField option:
+true: Mandatory: [modifier] of [field] is [final] -> [field] of [interface]
+false: Optional: [modifier] of [field] is not [final] -> [field] of [interface]
+
+violateImpliedPublicField option:
+true: Mandatory: [modifier] of [field] is [public] -> [field] of [interface]
+false: Optional: [modifier] of [field] is not [public] -> [field] of [interface]
+
+violateImpliedPublicMethod option:
+true: Mandatory: [modifier] of [method] is [public] -> [method] of [interface]
+false: Optional: [modifier] of [method] is not [public] -> [method] of [interface]
+
+violateImpliedPublicNested option:
+true: Mandatory: [modifier] of [nested type] is [public] -> [nested type] of [interface]
+false: Optional: [modifier] of [nested type] is not [public] -> [nested type] of [interface]
+
+violateImpliedStaticField option:
+true: Mandatory: [modifier] of [field] is [static] -> [field] of [interface]
+false: Optional: [modifier] of [field] is not [static] -> [field] of [interface]
+
+violateImpliedStaticNested option:
+true: Mandatory: [modifier] of [nested type] is [static] -> [nested type] of [interface]
+false: Optional: [modifier] of [nested type] is not [static] -> [nested type] of [interface]
+
+Options that are data specifications:
+{{violateImpliedAbstractMethod}}: boolean; {true, false}; {true}
+{{violateImpliedFinalField}}: boolean; {true, false}; {true}
+{{violateImpliedPublicField}}: boolean; {true, false}; {true}
+{{violateImpliedPublicMethod}}: boolean; {true, false}; {true}
+{{violateImpliedPublicNested}}: boolean; {true, false}; {true}
+{{violateImpliedStaticField}}: boolean; {true, false}; {true}
+{{violateImpliedStaticNested}}: boolean; {true, false}; {true}"
+https://checkstyle.org/checks/coding/illegalcatch.html#IllegalCatch,IllegalCatch,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [exception class] is {{illegalClassNames}}
+
+Option Rule:
+illegalClassNames option:
+Error: Mandatory: No [exception class] is [Error]
+Exception: Mandatory: No [exception class] is [Exception]
+RuntimeException: Mandatory: No [exception class] is [RuntimeException]
+Throwable: Mandatory: No [exception class] is [Throwable]
+java.lang.Error: Mandatory: No [exception class] is [java.lang.Error]
+java.lang.Exception: Mandatory: No [exception class] is [java.lang.Exception]
+java.lang.RuntimeException: Mandatory: No [exception class] is [java.lang.RuntimeException]
+java.lang.Throwable: Mandatory: No [exception class] is [java.lang.Throwable]
+
+Options that are data specifications:
+{{illegalClassNames}}: String[]; {Error, Exception, RuntimeException, Throwable, java.lang.Error, java.lang.Exception, java.lang.RuntimeException, java.lang.Throwable}; {};"
+https://checkstyle.org/checks/coding/modifiedcontrolvariable.html#ModifiedControlVariable,ModifiedControlVariable,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [modification] of [control variable] inside [for block]
+
+Option Rule:
+skipEnhancedForLoopVariable option:
+true: Optional: No [modification] of [enhanced for-loop variable] inside [for block]
+false: Mandatory: No [modification] of [enhanced for-loop variable] inside [for block]
+
+Options that are data specifications:
+{{skipEnhancedForLoopVariable}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/design/finalclass.html#FinalClass,FinalClass,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class] is [final] -> [class] is [private] and [class] not have [constructor]
+Or
+Mandatory: [class] is [final] -> [class] have [private constructor]
+
+Exception Rule:
+Except [class] is [super class] of [anonymous inner class]
+Or
+Except [class] is [extended] by [another class] in [same file]
+
+Options that are data specifications:
+No Option"
+https://checkstyle.org/checks/coding/illegalthrows.html#IllegalThrows,IllegalThrows,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [throw class names] is {{illegalClassNames}}
+
+Option Rule:
+ignoreOverriddenMethods option:
+true: Optional: No [throw class names] is {{illegalClassNames}} -> [method] is not [overridden method]
+false: Mandatory: No [throw class names] is {{illegalClassNames}}
+
+ignoredMethodNames option:
+finalize: Optional: No [throw class names] is {{illegalClassNames}} -> [method name] is ""finalize""
+
+Options that are data specifications:
+{{illegalClassNames}}: String[]; {Error, RuntimeException, Throwable, java.lang.Error, java.lang.RuntimeException, java.lang.Throwable}; {Error, RuntimeException, Throwable, java.lang.Error, java.lang.RuntimeException, java.lang.Throwable}"
+https://checkstyle.org/checks/naming/illegalidentifiername.html#IllegalIdentifierName,IllegalIdentifierName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [identifier] is {{format}}
+
+Option Rule:
+tokens option:
+CLASS_DEF: Mandatory: [identifier] of [CLASS_DEF] is {{format}}
+INTERFACE_DEF: Mandatory: [identifier] of [INTERFACE_DEF] is {{format}}
+ENUM_DEF: Mandatory: [identifier] of [ENUM_DEF] is {{format}}
+ANNOTATION_DEF: Mandatory: [identifier] of [ANNOTATION_DEF] is {{format}}
+ANNOTATION_FIELD_DEF: Mandatory: [identifier] of [ANNOTATION_FIELD_DEF] is {{format}}
+PARAMETER_DEF: Mandatory: [identifier] of [PARAMETER_DEF] is {{format}}
+VARIABLE_DEF: Mandatory: [identifier] of [VARIABLE_DEF] is {{format}}
+METHOD_DEF: Mandatory: [identifier] of [METHOD_DEF] is {{format}}
+ENUM_CONSTANT_DEF: Mandatory: [identifier] of [ENUM_CONSTANT_DEF] is {{format}}
+PATTERN_VARIABLE_DEF: Mandatory: [identifier] of [PATTERN_VARIABLE_DEF] is {{format}}
+RECORD_DEF: Mandatory: [identifier] of [RECORD_DEF] is {{format}}
+RECORD_COMPONENT_DEF: Mandatory: [identifier] of [RECORD_COMPONENT_DEF] is {{format}}
+LAMBDA: Mandatory: [identifier] of [LAMBDA] is {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""(?i)^(?!(record|yield|var|permits|sealed|_)$).+$""
+{{tokens}}: String[]; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF, LAMBDA}; {CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF, LAMBDA}"
+https://checkstyle.org/checks/naming/parametername.html#ParameterName,ParameterName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [method parameter names] conform to {{format}}
+And
+Optional: [method parameter names] of [methods] of {{accessModifiers}} conform to {{format}}
+And
+Optional: [catch parameter names] conform to {{CatchParameterName}}
+And
+Optional: [lambda parameter names] conform to {{LambdaParameterName}}
+
+Option Rule:
+ignoreOverridden option:
+true: Optional: [methods] with [Override annotation] not for [method parameter names] conform to {{format}}
+false: Mandatory: [methods] with [Override annotation] for [method parameter names] conform to {{format}}
+
+Options that are data specifications:
+{{accessModifiers}}: AccessModifierOption[]; {public, protected, package, private}; {}
+{{format}}: Pattern; RegExp; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/whitespace/separatorwrap.html#SeparatorWrap,SeparatorWrap,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [line wrapping] with [separators] is {{option}}
+
+Option Rule:
+option:
+eol: Mandatory: [line wrapping] with [separators] is [end of line]
+
+Options that are data specifications:
+{{tokens}}: String[]; {DOT, COMMA, SEMI, ELLIPSIS, AT, LPAREN, RPAREN, ARRAY_DECLARATOR, RBRACK, METHOD_REF}; {DOT, COMMA}"
+https://checkstyle.org/checks/misc/newlineatendoffile.html#NewlineAtEndOfFile,NewlineAtEndOfFile,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [file] at end of [file] have [line separator]
+
+Option Rule:
+fileExtensions option:
+all files: Optional: [file] of {{fileExtensions}} is [all files]
+
+lineSeparator option:
+lf_cr_crlf: Optional: [line separator] of [file] is {{lineSeparator}}
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {any valid file extension}; {all files}
+{{lineSeparator}}: LineSeparatorOption; {lf, cr, crlf}; {lf_cr_crlf}"
+https://checkstyle.org/checks/design/mutableexception.html#MutableException,MutableException,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [class] of [exception] have [final field]
+
+Option Rule:
+extendedClassNameFormat option:
+""^.*Exception$|^.*Error$|^.*Throwable$"": Mandatory: [class] of [exception] extending [class] matching {{extendedClassNameFormat}} have [final field]
+
+format option:
+""^.*Exception$|^.*Error$|^.*Throwable$"": Mandatory: [class] matching {{format}} have [final field]
+
+Options that are data specifications:
+{{extendedClassNameFormat}}: Pattern; RegExp; ""^.*Exception$|^.*Error$|^.*Throwable$""
+{{format}}: Pattern; RegExp; ""^.*Exception$|^.*Error$|^.*Throwable$"""
+https://checkstyle.org/checks/coding/arraytrailingcomma.html#ArrayTrailingComma,ArrayTrailingComma,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [array initialization] have [trailing comma] -> [left curly brace] not at end of [line] And [right curly brace] not at end of [line]
+
+Option Rule:
+alwaysDemandTrailingComma option:
+true: Mandatory: [array initialization] have [trailing comma]
+false: Optional: [array initialization] not have [trailing comma]
+
+Options that are data specifications:
+{{alwaysDemandTrailingComma}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/coding/declarationorder.html#DeclarationOrder,DeclarationOrder,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Order of [class variables] is [public, protected, package, private]
+And
+Mandatory: Order of [instance variables] is [public, protected, package, private]
+And
+Mandatory: Order of [class members] is [class variables, instance variables, constructors, methods]
+
+Option Rule:
+ignoreConstructors option:
+true: Optional: [constructors] not in [class members]
+false: Mandatory: [constructors] in [class members]
+
+ignoreModifiers option:
+true: Optional: [modifiers] not in [class variables, instance variables]
+false: Mandatory: [modifiers] in [class variables, instance variables]
+
+Options that are data specifications:
+None"
+https://checkstyle.org/checks/imports/avoidstarimport.html#AvoidStarImport,AvoidStarImport,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [import statements] have [* notation]
+
+Option Rule:
+allowClassImports option:
+true: Optional: [import statements] have [* notation] for [class imports]
+false: Mandatory: No [import statements] have [* notation] for [class imports]
+
+allowStaticMemberImports option:
+true: Optional: [import statements] have [* notation] for [static member imports]
+false: Mandatory: No [import statements] have [* notation] for [static member imports]
+
+Options that are data specifications:
+{{excludes}}: String[]; {package names, class names}; {}"
+https://checkstyle.org/checks/javadoc/javadocmissingwhitespaceafterasterisk.html#JavadocMissingWhitespaceAfterAsterisk,JavadocMissingWhitespaceAfterAsterisk,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [whitespace] after [leading asterisk]
+
+Option Rule:
+violateExecutionOnNonTightHtml option:
+false: Optional: No specific rule applied
+true: Optional: No specific rule applied
+
+Options that are data specifications:
+{{violateExecutionOnNonTightHtml}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/naming/staticvariablename.html#StaticVariableName,StaticVariableName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [static, non-final variable names] conform to {{format}}
+
+Option Rule:
+applyToPackage option:
+true: Mandatory: [static, non-final variable names] conform to {{format}} for [package-private members]
+false: Optional: [static, non-final variable names] not conform to {{format}} for [package-private members]
+
+applyToPrivate option:
+true: Mandatory: [static, non-final variable names] conform to {{format}} for [private members]
+false: Optional: [static, non-final variable names] not conform to {{format}} for [private members]
+
+applyToProtected option:
+true: Mandatory: [static, non-final variable names] conform to {{format}} for [protected members]
+false: Optional: [static, non-final variable names] not conform to {{format}} for [protected members]
+
+applyToPublic option:
+true: Mandatory: [static, non-final variable names] conform to {{format}} for [public members]
+false: Optional: [static, non-final variable names] not conform to {{format}} for [public members]
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/header/header.html#Header,Header,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [source file] at begin of [file] is {{header}}
+
+Option Rule:
+charset option:
+Mandatory: [character encoding] of [headerFile] is {{charset}}
+
+fileExtensions option:
+Mandatory: [file extension] of [file] is {{fileExtensions}}
+
+header option:
+Mandatory: [header] of [file] is {{header}}
+
+headerFile option:
+Mandatory: [file] containing [header] is {{headerFile}}
+
+ignoreLines option:
+Mandatory: [line numbers] to ignore is {{ignoreLines}}
+
+Options that are data specifications:
+{{charset}}: String; any valid charset; the charset property of the parent Checker module
+{{fileExtensions}}: String[]; any valid file extensions; all files
+{{header}}: String; any valid string; null
+{{headerFile}}: URI; any valid URI; null
+{{ignoreLines}}: int[]; any valid line numbers; {}"
+https://checkstyle.org/checks/regexp/regexponfilename.html#RegexpOnFilename,RegexpOnFilename,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [file] of [folder path] have [pattern] -> [file] of [folder path] is {{fileExtensions}}
+And
+Mandatory: [file] of [folder path] have [pattern] -> [file] of [folder path] is {{fileNamePattern}}
+And
+Mandatory: [file] of [folder path] have [pattern] -> [folder path] is {{folderPattern}}
+
+Option Rule:
+ignoreFileNameExtensions option:
+true: Mandatory: [file name] of [file] not have [file extension]
+false: Optional: [file name] of [file] have [file extension]
+
+match option:
+true: Mandatory: [file name] of [file] have [pattern] -> [file name] of [file] is {{fileNamePattern}}
+false: Optional: [file name] of [file] not have [pattern] -> [file name] of [file] is {{fileNamePattern}}
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {all files}; {}
+{{fileNamePattern}}: Pattern; RegExp; null
+{{folderPattern}}: Pattern; RegExp; null"
+https://checkstyle.org/checks/whitespace/filetabcharacter.html#FileTabCharacter,FileTabCharacter,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: No [tab characters] in [source code]
+
+Option Rule:
+eachLine option:
+true: Mandatory: No [tab characters] in each [line] of [source code]
+false: Optional: No [tab characters] in [source code]
+
+Options that are data specifications:
+{{fileExtensions}}: String[]; {all files}; {all files}"
+https://checkstyle.org/checks/coding/equalsavoidnull.html#EqualsAvoidNull,EqualsAvoidNull,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [String literal] at begin of [equals() comparison]
+And
+Mandatory: [String literal] assigned to [field] -> [String literal] at begin of [equals() comparison]
+
+Option Rule:
+ignoreEqualsIgnoreCase option:
+true: Optional: [String.equalsIgnoreCase(String)] not at begin of [equals() comparison]
+false: Mandatory: [String.equalsIgnoreCase(String)] at begin of [equals() comparison]
+
+Options that are data specifications:
+{{ignoreEqualsIgnoreCase}}: boolean; {true, false}; false"
+https://checkstyle.org/checks/coding/superclone.html#SuperClone,SuperClone,"Final RuleSet Representation:
+Basic Rule:
+Mandatory: [clone() method] of [overriding method] have [super.clone()]
+
+Since there are no options provided in the CheckStyle Rule, there are no option rules or data specifications to include."
+https://checkstyle.org/checks/javadoc/writetag.html#WriteTag,WriteTag,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [Javadoc comment] have [user defined Javadoc tag] with [defined format] -> [tag] is {{tag}} And [tag content] is {{tagFormat}}
+
+Option Rule:
+tagSeverity option:
+info: Optional: [severity level] of [event] is [info]
+warning: Optional: [severity level] of [event] is [warning]
+error: Optional: [severity level] of [event] is [error]
+
+Options that are data specifications:
+{{tag}}: String; {any valid string}; {null}
+{{tagFormat}}: Pattern; {any valid regular expression}; {null}
+{{tagSeverity}}: SeverityLevel; {info, warning, error}; {info}
+{{tokens}}: String[]; {INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, METHOD_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ANNOTATION_FIELD_DEF, RECORD_DEF, COMPACT_CTOR_DEF}; {INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF}"
+https://checkstyle.org/checks/metrics/cyclomaticcomplexity.html#CyclomaticComplexity,CyclomaticComplexity,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [decision points] of [method, constructor, static initializer, instance initializer] Add 1 <= {{max}}
+
+Option Rule:
+switchBlockAsSingleDecisionPoint option:
+true: Mandatory: Number of [switch block] of [decision points] is 1
+false: Optional: Number of [switch block] of [decision points] is not 1
+
+Options that are data specifications:
+{{max}}: int; {0-2147483647}; {10}
+{{tokens}}: String[]; {LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_CASE, LITERAL_CATCH, QUESTION, LAND, LOR}; {LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_CASE, LITERAL_CATCH, QUESTION, LAND, LOR}"
+https://checkstyle.org/checks/sizes/anoninnerlength.html#AnonInnerLength,AnonInnerLength,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [lines] of [anonymous inner class] <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {0, 1, 2, ..., Integer.MAX_VALUE}; 20"
+https://checkstyle.org/checks/misc/outertypefilename.html#OuterTypeFilename,OuterTypeFilename,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [outer type name] is [file name]
+
+Explanation:
+- The rule checks that the outer type name and the file name match.
+- For example, the class Foo must be in a file named Foo.java.
+- There are no options provided, so only the basic rule is represented."
+https://checkstyle.org/checks/naming/localvariablename.html#LocalVariableName,LocalVariableName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [local, non-final variable names] conform to {{format}}
+And
+Mandatory: [catch parameter] is [local variable]
+
+Option Rule:
+allowOneCharVarInForLoop option:
+true: Optional: [one character variable name] in [initialization expressions] of [FOR loop]
+false: Mandatory: [one character variable name] not in [initialization expressions] of [FOR loop]
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/coding/nestedtrydepth.html#NestedTryDepth,NestedTryDepth,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [try-catch-finally blocks] of [nested try-catch-finally blocks] <= {{max}}
+
+Options that are data specifications:
+{{max}}: int; {1, 2, 3, ...}; {1}"
+https://checkstyle.org/checks/naming/methodname.html#MethodName,MethodName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [method name] match {{format}}
+And
+Optional: [method name] not have [same name] as [enclosing class name] -> [return type] is specified
+
+Option Rule:
+allowClassName option:
+false: Optional: [method name] not have [same name] as [enclosing class name]
+true: Optional: [method name] have [same name] as [enclosing class name]
+
+applyToPackage option:
+true: Mandatory: [method name] of [package-private member] match {{format}}
+false: Optional: [method name] of [package-private member] not match {{format}}
+
+applyToPrivate option:
+true: Mandatory: [method name] of [private member] match {{format}}
+false: Optional: [method name] of [private member] not match {{format}}
+
+applyToProtected option:
+true: Mandatory: [method name] of [protected member] match {{format}}
+false: Optional: [method name] of [protected member] not match {{format}}
+
+applyToPublic option:
+true: Mandatory: [method name] of [public member] match {{format}}
+false: Optional: [method name] of [public member] not match {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; ""^[a-z][a-zA-Z0-9]*$""; ""^[a-z][a-zA-Z0-9]*$"""
+https://checkstyle.org/checks/whitespace/genericwhitespace.html#GenericWhitespace,GenericWhitespace,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [whitespace] before [""<""] is [whitespace] -> [generic method definition]
+And
+Mandatory: [whitespace] not before [""<""] -> [method name] or [constructor]
+And
+Mandatory: [whitespace] not before [""<""] -> [type name]
+And
+Mandatory: [whitespace] not after [""<""]
+And
+Mandatory: [whitespace] not before ["">""]
+And
+Mandatory: [whitespace] after ["">""] -> [diamond operator] or [method name] or [constructor] or [record header]
+
+Options that are data specifications:
+No Option"
+https://checkstyle.org/checks/blocks/rightcurly.html#RightCurly,RightCurly,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [placement] of [right curly brace] of {{tokens}} is [correct]
+
+Option Rule:
+option:
+same: Mandatory: [placement] of [right curly brace] of {{tokens}} is [same line]
+alone: Mandatory: [placement] of [right curly brace] of {{tokens}} is [new line]
+alone_or_singleline: Mandatory: [placement] of [right curly brace] of {{tokens}} is [new line] or [single line]
+
+Options that are data specifications:
+{{tokens}}: String[]; {LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT, ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF, RECORD_DEF, COMPACT_CTOR_DEF, LITERAL_SWITCH, LITERAL_CASE}; {LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE}"
+https://checkstyle.org/checks/naming/packagename.html#PackageName,PackageName,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [package names] conform to {{format}}
+
+Option Rule:
+format option:
+""^[a-z]+(\.[a-zA-Z_]\w*)*$"": Mandatory: [package names] conform to {{format}}
+
+Options that are data specifications:
+{{format}}: Pattern; RegExp; ""^[a-z]+(\.[a-zA-Z_]\w*)*$"""
+https://checkstyle.org/checks/coding/requirethis.html#RequireThis,RequireThis,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: [reference] to [instance variable] of [present object] is [this.varName]
+And
+Mandatory: [reference] to [method] of [present object] is [this.methodName(args)]
+And
+Mandatory: [reference] to [instance variable] of [present object] not rely on [default behavior] when [this.] is absent
+And
+Mandatory: [reference] to [method] of [present object] not rely on [default behavior] when [this.] is absent
+
+Option Rule:
+checkFields option:
+true: Mandatory: [reference] to [fields] is [this.varName]
+false: Optional: [reference] to [fields] not is [this.varName]
+
+checkMethods option:
+true: Mandatory: [reference] to [methods] is [this.methodName(args)]
+false: Optional: [reference] to [methods] not is [this.methodName(args)]
+
+validateOnlyOverlapping option:
+true: Mandatory: [reference] to [overlapping variables or arguments] is [this.varName] or [this.methodName(args)]
+false: Optional: [reference] to [overlapping variables or arguments] not is [this.varName] or [this.methodName(args)]
+
+Options that are data specifications:
+{{checkFields}}: boolean; {true, false}; {true}
+{{checkMethods}}: boolean; {true, false}; {true}
+{{validateOnlyOverlapping}}: boolean; {true, false}; {true}"
+https://checkstyle.org/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations,MultipleVariableDeclarations,"Final RuleSet Representation:
+
+Basic Rule:
+Mandatory: Number of [variable declaration] is 1 for [statement]
+And
+Mandatory: Number of [variable declaration] is 1 for [line]
+
+Explanation:
+1. The rule ""Checks that each variable declaration is in its own statement and on its own line."" is parsed into two mandatory rules:
+   - Each statement should have only one variable declaration.
+   - Each line should have only one variable declaration.
+
+There are no options provided in the CheckStyle Rule, so no option rules or data specifications are needed."

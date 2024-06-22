@@ -2,7 +2,9 @@ import os
 import openai
 from retry import retry
 
-
+"""
+需要将openai版本降至openai==0.28.1
+"""
 class GPTAgent:
     """
     与chatGPT进行交互
