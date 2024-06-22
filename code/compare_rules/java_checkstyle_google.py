@@ -5,8 +5,14 @@ import shutil
 import sys
 import xml.etree.ElementTree as ET
 import pandas as pd
-from gpt_wrapper_new import GPTAgent
+from dag import augmented_name_desc_mopt_str,augmented_name_desc_str
+# from gpt_wrapper_new import GPTAgent
+from gpt_agent_028 import GPTAgent # openai==0.28
 
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores.chroma import Chroma
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import TextLoader
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import util
@@ -38,32 +44,6 @@ Response Format Should be a json object:
         ...
         <property name='name_m' value='value_m'/>
     </module>"
-}
-
-Example:
-
-{
-    "Answer": "Yes",
-    "Configuration":
-    <module name="OperatorWrap">
-        <property name="option" value="NL"/>
-        <property name="tokens" value="EQUAL, NOT_EQUAL"/>
-    </module>
-    <module name="SeparatorWrap">
-        <property name="id" value="SeparatorWrapNL"/>
-        <property name="tokens" value="DOT, METHOD_REF"/>
-        <property name="option" value="nl"/>
-    </module>
-    <module name="SeparatorWrap">
-        <property name="id" value="SeparatorWrapEOL"/>
-        <property name="tokens" value="COMMA, LPAREN"/>
-        <property name="option" value="EOL"/>
-    </module>
-    <module name="MethodParamPad">
-        <property name="allowLineBreaks" value="true"/>
-        <property name="option" value="space"/>
-        <property name="tokens" value="CTOR_DEF"/>
-    </module>
 }
 """
     prompt = prompt.replace("{{style}}", style)
@@ -103,28 +83,24 @@ Response Format Should be a json object:
 }
 
 Example:
-
+[Input]
+3.3.2 No line-wrapping
+Import statements are not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to import statements.
+[Output]
 {
     "Answer": "Yes",
     "Configuration":
-    <module name="OperatorWrap">
-        <property name="option" value="NL"/>
-        <property name="tokens" value="EQUAL, NOT_EQUAL"/>
-    </module>
-    <module name="SeparatorWrap">
-        <property name="id" value="SeparatorWrapNL"/>
-        <property name="tokens" value="DOT, METHOD_REF"/>
-        <property name="option" value="nl"/>
-    </module>
-    <module name="SeparatorWrap">
-        <property name="id" value="SeparatorWrapEOL"/>
-        <property name="tokens" value="COMMA, LPAREN"/>
-        <property name="option" value="EOL"/>
-    </module>
-    <module name="MethodParamPad">
-        <property name="allowLineBreaks" value="true"/>
-        <property name="option" value="space"/>
-        <property name="tokens" value="CTOR_DEF"/>
+    <module name="Checker">
+        <module name="LineLength">
+            <property name="fileExtensions" value="java"/>
+            <property name="ignorePattern" value="^import.*"/>
+            <property name="max" value="100"/>
+        </module>
+        <module name="TreeWalker">
+            <module name="NoLineWrap">
+                <property name="tokens" value=" IMPORT, STATIC_IMPORT"/>
+            </module>
+        </module>
     </module>
 }
 """
@@ -135,18 +111,18 @@ Example:
 
 
 str_types = [
-    "empty",
-    "name",
-    # "name_desc",
-    # "name_desc_mopt",
-    "name_sdesc_mopt",
-    "name_url",
-    "name_url_sdesc",
-    "name_sdesc",
+    # "empty",
+    # "name",
+    "name_desc",
+    "name_desc_mopt",
+    # "name_sdesc_mopt",
+    # "name_url",
+    # "name_url_sdesc",
+    # "name_sdesc",
 ]
 
 
-def get_checkstyle_str(opt):
+def get_checkstyle_str(opt, rule: str=""):
     def empty():
         """
         empty
@@ -164,45 +140,47 @@ def get_checkstyle_str(opt):
         )
         return name_str
 
-    def name_desc():
+    def name_desc(rule: str):
         """
         name & description
         """
-        fname = "url_name_desc_mopt"
-        jdata = util.load_json("data/rule/checkstyle/java/", fname)
-        name_desc_list = []
-        for rule in jdata:
-            rule_name = rule[1]
-            rule_desc = rule[2]
-            prefix = "Description"
-            if rule_desc.startswith(prefix):
-                rule_desc = rule_desc[len(prefix):]
-            rule_desc = rule_desc.strip()
-            name_desc_list.append(
-                f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}")
-        name_desc_str = "\n".join(name_desc_list)
-        return name_desc_str
+        # fname = "url_name_desc_mopt"
+        # jdata = util.load_json("data/rule/checkstyle/java/", fname)
+        # name_desc_list = []
+        # for rule in jdata:
+        #     rule_name = rule[1]
+        #     rule_desc = rule[2]
+        #     prefix = "Description"
+        #     if rule_desc.startswith(prefix):
+        #         rule_desc = rule_desc[len(prefix):]
+        #     rule_desc = rule_desc.strip()
+        #     name_desc_list.append(
+        #         f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}")
+        # name_desc_str = "\n".join(name_desc_list)
+        # return 
+        return augmented_name_desc_str(rule)
 
-    def name_desc_mopt():
+    def name_desc_mopt(rule: str):
         """
         name & description & modified options
         """
-        fname = "url_name_desc_mopt"
-        jdata = util.load_json("data/rule/checkstyle/java/", fname)
-        name_desc_mopt_list = []
-        for rule in jdata:
-            rule_name = rule[1]
-            rule_desc = rule[2]
-            prefix = "Description"
-            if rule_desc.startswith(prefix):
-                rule_desc = rule_desc[len(prefix):]
-            rule_desc = rule_desc.strip()
-            rule_str = f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}"
-            if len(rule) == 4:
-                rule_str += f"\n[Options]{rule[3]}"
-            name_desc_mopt_list.append(rule_str)
-        name_desc_mopt_str = "\n".join(name_desc_mopt_list)
-        return name_desc_mopt_str
+        # fname = "url_name_desc_mopt"
+        # jdata = util.load_json("data/rule/checkstyle/java/", fname)
+        # name_desc_mopt_list = []
+        # for rule in jdata:
+        #     rule_name = rule[1]
+        #     rule_desc = rule[2]
+        #     prefix = "Description"
+        #     if rule_desc.startswith(prefix):
+        #         rule_desc = rule_desc[len(prefix):]
+        #     rule_desc = rule_desc.strip()
+        #     rule_str = f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}"
+        #     if len(rule) == 4:
+        #         rule_str += f"\n[Options]{rule[3]}"
+        #     name_desc_mopt_list.append(rule_str)
+        # name_desc_mopt_str = "\n".join(name_desc_mopt_list)
+        # return name_desc_mopt_str
+        return augmented_name_desc_mopt_str(rule)
 
     def name_sdesc_mopt():
         """
@@ -261,7 +239,10 @@ def get_checkstyle_str(opt):
 
     for options in str_types:
         if options == opt:
-            return locals()[options]()
+            if opt == "name_desc" or opt == "name_desc_mopt":
+                return locals()[options](rule)
+            else:
+                return locals()[options]()
 
     raise Exception(f"Invalid option: {opt}")
 
@@ -273,13 +254,14 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
     3. get and save GPT results
     """
     agent = GPTAgent()
-    checkstyle_str = get_checkstyle_str(opt)
+    
     answer_dict = {}
     print(f"baseline: {opt}")
     print(f"model: {model}")
     for _, row in rules.iterrows():
         rule_name = row.rule
         rule_desc = row.desc
+        checkstyle_str = get_checkstyle_str(opt,f"{rule_name}\n{rule_desc}")
         print(f"rule_name: {rule_name}")
         if opt == "empty":
             prompt = gen_nocheckstyle_prompt(rule=f"{rule_name}\n{rule_desc}")
@@ -289,7 +271,7 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
                 tool_rules=checkstyle_str,
                 style="CheckStyle",
             )
-        #! check prompt
+        # ! check prompt
         # with open(f"{opt}_prompt.txt", "w") as f:
         #     f.write(prompt)
         #     return
@@ -306,7 +288,7 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
         if answer.endswith("\n```"):
             answer = answer[:-len("\n```")]
         answer_dict[rule_name] = answer
-        # break
+        break
 
     return answer_dict
 
@@ -319,8 +301,9 @@ if __name__ == "__main__":
         "data/benchmark/checkstyle2google_java_benchmark.xlsx")
     for model in ["3.5", "4o"]:
         for str_type in str_types:
-            # gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules)
-            gpt_answers = offline_res(model,str_type)
+            gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules)
+            # continue
+            # gpt_answers = offline_res(model,str_type)
             csv_results = []
             for index, row in all_rules.iterrows():
                 rule_name = row.rule

@@ -15,18 +15,18 @@ wrapper = None
 class GPTAgent:
 
     def __init__(self) -> None:
-        # self.client = OpenAI(
-        #     # api_key="sk-proj-vrNPSb5ttqXsOV39pl7FT3BlbkFJ93LlRultIv7DLd7Pwe8e"
-        #     api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
-        # )
         self.client = OpenAI(
-            base_url="https://api.xty.app/v1",
-            api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
-            http_client=httpx.Client(
-                    base_url="https://api.xty.app/v1",
-                    follow_redirects=True,
-            ),
+            # api_key="sk-proj-vrNPSb5ttqXsOV39pl7FT3BlbkFJ93LlRultIv7DLd7Pwe8e"
+            api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
         )
+        # self.client = OpenAI(
+        #     base_url="https://api.xty.app/v1",
+        #     api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
+        #     http_client=httpx.Client(
+        #             base_url="https://api.xty.app/v1",
+        #             follow_redirects=True,
+        #     ),
+        # )
 
     @retry(delay=0, tries=6, backoff=1, max_delay=120)
     def ask(self, content,examples=None,model="gpt-3.5-turbo-0125",temperature=0):
@@ -70,17 +70,17 @@ class GPTAgent:
           optionn: valuen
         }]
         '''
-        if model == 'gpt-4o':
-            self.client = OpenAI(api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh")
-        else:
-            self.client = OpenAI(
-                base_url="https://api.xty.app/v1",
-                api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
-                http_client=httpx.Client(
-                        base_url="https://api.xty.app/v1",
-                        follow_redirects=True,
-                ),
-            )
+        # if model == 'gpt-4o':
+        #     self.client = OpenAI(api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh")
+        # else:
+        #     self.client = OpenAI(
+        #         base_url="https://api.xty.app/v1",
+        #         api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
+        #         http_client=httpx.Client(
+        #                 base_url="https://api.xty.app/v1",
+        #                 follow_redirects=True,
+        #         ),
+        #     )
         answer = self.ask(prompt,examples,model,temperature)
         return answer
         # if len(eslint_rules_simple) > 0:

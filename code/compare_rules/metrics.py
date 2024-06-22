@@ -44,17 +44,17 @@ def cal_macro_prf(data):
         p, r, f = cal_prf(data[0][i], data[2][i], data[3][i])
         # TODO 要不要 skip
         if type(p) == str:
-            iv_p += 1
+            # iv_p += 1
             ...
         else:
             precision += p
         if type(r) == str:
-            iv_r += 1
+            # iv_r += 1
             ...
         else:
             recall += r
         if type(f) == str:
-            iv_f += 1
+            # iv_f += 1
             ...
         else:
             f1 += f
