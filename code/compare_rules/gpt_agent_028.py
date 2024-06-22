@@ -2,6 +2,7 @@ import os
 import openai
 from retry import retry
 
+
 class GPTAgent:
     """
     与chatGPT进行交互
@@ -11,7 +12,7 @@ class GPTAgent:
         self.api_key = "sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
 
     @retry(delay=0, tries=6, backoff=1, max_delay=120)
-    def ask(self, content, model="gpt-3.5-turbo-0125",temperature=0):
+    def ask(self, content, model="gpt-3.5-turbo-0125", temperature=0):
         openai.api_key = self.api_key
         messages = []
         messages.append({"role": "user", "content": content})
@@ -22,7 +23,7 @@ class GPTAgent:
         )
 
         return completion.choices[0].message["content"]
-    
-    def get_response(self, prompt,examples=None,model="gpt-3.5-turbo-0125",temperature=0):
-        answer = self.ask(prompt,examples,model,temperature)
+
+    def get_response(self, prompt, model="gpt-3.5-turbo-0125", temperature=0):
+        answer = self.ask(prompt, model, temperature)
         return answer
