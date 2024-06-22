@@ -36,21 +36,18 @@ class GPTAgent:
         )
         return answer
 
-    def gen_dsl(
-        self, rule_list, dsl, examples, prompt_processor, style, model, output_dir
-    ):
+    def gen_dsl(self, rule_list, pargs, prompt_processor, model, output_dir):
         # ! test: 只取前10个rule
         result = {}
         result_simple = {}
         for rule_description in rule_list[:10]:
             rule_name = rule_description.split("\n")[1]
             print(f"generate dsl for: {rule_name}")
-            prompt = prompt_processor(
-                rule=rule_description, example=examples, dsl_syntax=dsl, style=style
-            )
+            pargs["rule"] = rule_description
+            prompt = prompt_processor(**pargs)
             answer = self.get_response(prompt, model=model)
-            result[rule_description]=[prompt, answer]
-            result_simple[rule_name]=[prompt, answer]
+            result[rule_description] = [prompt, answer]
+            result_simple[rule_name] = [prompt, answer]
             break
         with open(
             os.path.join(output_dir, f"{model}_rule_prompt_response.json"), "w"
