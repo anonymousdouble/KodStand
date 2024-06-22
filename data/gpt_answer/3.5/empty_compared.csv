@@ -98,7 +98,10 @@ JavadocParagraph",AvoidEscapedUnicodeCharacters
                         <property name=""tokens"" value=""PACKAGE_DEF""/>
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,"LineLength
+NoLineWrap",,,"LineLength
+NoLineWrap",,,"LineLength
+NoLineWrap"
 3.3.1 No wildcard imports,"Wildcard imports , static or otherwise, are not used .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""AvoidStarImport""/>
@@ -149,12 +152,12 @@ NoLineWrap"
         <property name='option2' value='nl'/>
         <property name='option3' value='same'/>
     </module>",true,,ImportOrder,CustomImportOrder,,ImportOrder,CustomImportOrder,,ImportOrder,CustomImportOrder
-3.3.4 No static import for classes,Static import is not used for static nested classes. They are imported with normal imports.,,No,,,,,,,,,,,
+3.3.4 No static import for classes,Static import is not used for static nested classes. They are imported with normal imports.,,No,,false,,,,,,,,,
 3.4.1 Exactly one top-level class declaration,Each top-level class resides in a source file of its own.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OneTopLevelClass""/>
   </module>
-</module>",,,,,,,,,,,,
+</module>",,,false,,,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,Yes,"<module name='TreeWalker'>"": {
@@ -422,7 +425,7 @@ MethodParamPad"
                         <property name=""throwsIndent"" value=""4""/>
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,Indentation,,,Indentation,,,Indentation
 4.6.1 Vertical Whitespace,"A single blank line always appears:
  Between consecutive members or initializers of a class: fields, constructors, methods, nested classes, static initializers, and instance initializers. 
  Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. 
@@ -785,7 +788,13 @@ RecordComponentName"
                         <message key=""name.invalidPattern"" value=""Pattern variable name ''{0}'' must match pattern ''{1}''.""/>
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,"LocalVariableName
+LocalFinalVariableName
+PatternVariableName",,,"LocalVariableName
+LocalFinalVariableName
+PatternVariableName",,,"LocalVariableName
+LocalFinalVariableName
+PatternVariableName"
 5.2.8 Type variable names,"Each type variable is named in one of two styles:
  A single capital letter, optionally followed by a single numeral (such as `E` , `T` , `X` , `T2` ) 
  A name in the form used for classes (see Section 5.2.2, Class names ), followed by the capital letter `T` (examples: `RequestT` , `FooBarT` ).","<module name=""Checker"">
@@ -1106,10 +1115,10 @@ MissingJavadocMethod"
                         <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF""/>
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,MissingJavadocMethod,,,MissingJavadocMethod,,,MissingJavadocMethod
 7.3.4 Non-required Javadoc,"Other classes and members have Javadoc as needed or desired .
  Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member, that comment is written as Javadoc instead (using `/**` ).
- Non-required Javadoc is not strictly required to follow the formatting rules of Sections 7.1.1, 7.1.2, 7.1.3, and 7.2, though it is of course recommended.",,No,,,,,,,,,,,
+ Non-required Javadoc is not strictly required to follow the formatting rules of Sections 7.1.1, 7.1.2, 7.1.3, and 7.2, though it is of course recommended.",,No,,false,,,,,,,,,
 4.8.5.1 Type-use annotations,"Type-use annotations appear immediately before the annotated type. An annotation is a type-use annotation if it is meta-annotated with @Target(ElementType.TYPE_USE). Example:
  final @Nullable String name;
  
@@ -1149,7 +1158,7 @@ MissingJavadocMethod"
                         <property name=""allowSamelineMultipleAnnotations"" value=""false""/>
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,AnnotationLocation,,,AnnotationLocation,,,AnnotationLocation
 4.8.5.4 Field annotations,"Annotations applying to a field also appear immediately after the documentation block, but in this case, multiple annotations (possibly parameterized) may be listed on the same line; for example:
  @Partial @Mock DataLoader loader;","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1166,7 +1175,7 @@ MissingJavadocMethod"
         <property name=""option"" value=""space""/>
         <property name=""tokens"" value=""PARAMETER_DEF""/>
     </module>",true,,MethodParamPad,AnnotationLocation,,MethodParamPad,AnnotationLocation,,MethodParamPad,AnnotationLocation
-4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,,,,,,,,,,
+4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,false,,,,,,,,,
 3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OverloadMethodsDeclarationOrder""/>
@@ -1206,7 +1215,7 @@ MissingJavadocMethod"
   0, 1,  }
   2, 3
  }  new int[]
-  {0, 1, 2, 3}",,No,,,,,,,,,,,
+  {0, 1, 2, 3}",,No,,false,,,,,,,,,
 4.8.3.2 No C-style array declarations,"The square brackets form a part of the type, not the variable: String[] args, not String args[].","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""ArrayTypeStyle"">
@@ -1251,7 +1260,7 @@ MissingJavadocMethod"
       <property name=""reliefPattern"" value="".*""/>
 </module>
   </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,FallThrough,,,FallThrough,,,FallThrough
 4.8.4.3 Presence of the default label,"Each switch statement includes a default statement group, even if it contains no code.
  Exception: A switch statement for an enum type may omit the default statement group, if it includes explicit cases covering all possible values of that type. This enables IDEs or other static analysis tools to issue a warning if any cases were missed.","<module name=""Checker"">
   <module name=""TreeWalker"">

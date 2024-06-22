@@ -1282,7 +1282,7 @@ JavadocVariable
 JavadocMethod","MissingJavadocType
 MissingJavadocMethod"
 7.3.1 Exception: self-explanatory members,"Javadoc is optional for ""simple, obvious"" members like `getFoo()` , in cases where there really and truly is nothing else worthwhile to say but ""Returns the foo"".
- Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!",,No,,,,,,,,,,,
+ Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!",,No,,false,,,,,,,,,
 7.3.2 Exception: overrides,Javadoc is not always present on a method that overrides a supertype method.,"<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""MissingJavadocMethod"">
@@ -1292,7 +1292,7 @@ MissingJavadocMethod"
                         <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF""/>
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,MissingJavadocMethod,,,MissingJavadocMethod,,,MissingJavadocMethod
 7.3.4 Non-required Javadoc,"Other classes and members have Javadoc as needed or desired .
  Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member, that comment is written as Javadoc instead (using `/**` ).
  Non-required Javadoc is not strictly required to follow the formatting rules of Sections 7.1.1, 7.1.2, 7.1.3, and 7.2, though it is of course recommended.",,Yes,<module name='JavadocMissingLeadingAsterisk'/>,true,,JavadocMissingLeadingAsterisk,,,JavadocMissingLeadingAsterisk,,,JavadocMissingLeadingAsterisk,
@@ -1363,7 +1363,7 @@ MissingJavadocMethod"
                 </module>
         </module>
 </module>",Yes,<module name='JavadocStyle'/>,true,,JavadocStyle,AnnotationLocation,,JavadocStyle,AnnotationLocation,,JavadocStyle,AnnotationLocation
-4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,,,,,,,,,,
+4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,false,,,,,,,,,
 3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OverloadMethodsDeclarationOrder""/>
@@ -1426,7 +1426,7 @@ FinalLocalVariable",VariableDeclarationUsageDistance
       <property name=""javaStyle"" value=""true""/>
     </module>
   </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,ArrayTypeStyle,,,ArrayTypeStyle,,,ArrayTypeStyle
 4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,Yes,"<module name='FallThrough'>
         <property name='severity' value='warning'/>
     </module>",true,,FallThrough,,,FallThrough,,,FallThrough,

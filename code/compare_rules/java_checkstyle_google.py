@@ -319,16 +319,11 @@ if __name__ == "__main__":
         "data/benchmark/checkstyle2google_java_benchmark.xlsx")
     for model in ["3.5", "4o"]:
         for str_type in str_types:
-            # gpt_answers = get_all_gpt_res_for_java_checkstyle(
-            #     str_type, model, all_rules)
-            if model == "4o" and "mopt" in str_type:
-                aa = 1
+            # gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules)
             gpt_answers = offline_res(model,str_type)
             csv_results = []
             for index, row in all_rules.iterrows():
                 rule_name = row.rule
-                if rule_name == "2.3.2 Special escape sequences":
-                    aa = 2
                 answer = ""
                 csv_results.append(
                     [rule_name, row.desc, row.res if row.res == row.res else ""])

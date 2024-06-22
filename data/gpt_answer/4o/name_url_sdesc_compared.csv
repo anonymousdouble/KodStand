@@ -2814,7 +2814,7 @@ AnnotationUseStyle",AnnotationLocation
         <property name='tokens' value='VARIABLE_DEF'/>
         <property name='allowSamelineMultipleAnnotations' value='true'/>
     </module>",true,,AnnotationUseStyle,AnnotationLocation,,AnnotationUseStyle,AnnotationLocation,,AnnotationUseStyle,AnnotationLocation
-4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,,,,,,,,,,
+4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,false,,,,,,,,,
 3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OverloadMethodsDeclarationOrder""/>

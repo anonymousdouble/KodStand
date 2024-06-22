@@ -83,7 +83,7 @@ def compare_config(gpt_answer, benchmark):
     return [module_res, option_name_res, option_value_res]
 
 
-def check_option_match(gpt_module:dict, benchmark_module:dict):
+def check_option_match(gpt_module: dict, benchmark_module: dict):
     all_prop_name_match = True
     all_prop_value_match = True
     for prop in benchmark_module:
@@ -103,7 +103,7 @@ def check_option_match(gpt_module:dict, benchmark_module:dict):
                 all_prop_value_match = False
             elif cor_prop != gpt_module[prop]:
                 all_prop_value_match = False
-    return all_prop_name_match,all_prop_value_match
+    return all_prop_name_match, all_prop_value_match
 
 
 def cal_fp_fn(gpt_answer, benchmark, module_tp):
@@ -127,11 +127,47 @@ def cal_fp_fn(gpt_answer, benchmark, module_tp):
     return module_fp, module_fn
 
 
+def get_answer_config(csv_line):
+    # ! NO + Config/Invalid config = Yes + Invalid config = Answer no config
+    answer_exist_config = csv_line["gpt_answer"]
+    answer_exist_config = (
+        answer_exist_config == answer_exist_config
+        and answer_exist_config.lower() == "yes"
+    )
+    if not answer_exist_config:
+        return False, None, "no config"
+
+    answer = csv_line["gpt_configuration"]
+    if answer == answer:
+        if answer.startswith("<module\n"):
+            answer = answer[8:]
+        answer = f"<module name='Checker'>{answer}</module>"
+        root = None
+        if valid_xml(answer):
+            root = ET.fromstring(answer)
+        elif valid_xml(answer := re.sub('>["]*,', ">", answer)):
+            root = ET.fromstring(answer)
+        elif valid_xml(answer := re.sub('["]*<,', "<", answer)):
+            root = ET.fromstring(answer)
+        elif valid_xml(answer := re.sub(' ["]+', "", answer)):
+            root = ET.fromstring(answer)
+        elif valid_xml(answer := re.sub("\\\\n<", "<", answer)):
+            root = ET.fromstring(answer)
+        elif valid_xml(answer := re.sub(">\\\\n", ">", answer)):
+            root = ET.fromstring(answer)
+        elif valid_xml(answer := re.sub(" +\n", "", answer)):
+            root = ET.fromstring(answer)
+        else:
+            return False, None, "invalid config"
+        return True, root, ""
+    return False, None, "no config"
+
+
 def compare_benchmark_output(csv_path, benchmark_path):
 
     data = pd.read_csv(csv_path)
 
-    output_data = []
+    output_csv_data = []
     jdata = json.load(open(benchmark_path))
     failed_cnt = 0
 
@@ -139,31 +175,52 @@ def compare_benchmark_output(csv_path, benchmark_path):
     option_name_all_res = [0, 0, 0, 0]
     option_value_all_res = [0, 0, 0, 0]
 
-    m_rule_correct = 0
+    m_rule_correct = 0  # TP
     on_rule_correct = 0
     ov_rule_correct = 0
+
     exist_mapping_tp = 0
     exist_mapping_fp = 0
     exist_mapping_fn = 0
+
+    # algo1: no config 不算 code pair
+    cp_m_algo1_tp = 0
+    cp_m_algo1_fp = 0
+    cp_m_algo1_fn = 0
+    cp_on_algo1_tp = 0
+    cp_on_algo1_fp = 0
+    cp_on_algo1_fn = 0
+    cp_ov_algo1_tp = 0
+    cp_ov_algo1_fp = 0
+    cp_ov_algo1_fn = 0
+
+    # algo2: no config 算 code pair
+    cp_m_algo2_tp = 0
+    cp_m_algo2_fp = 0
+    cp_m_algo2_fn = 0
+    cp_on_algo2_tp = 0
+    cp_on_algo2_fp = 0
+    cp_on_algo2_fn = 0
+    cp_ov_algo2_tp = 0
+    cp_ov_algo2_fp = 0
+    cp_ov_algo2_fn = 0
+
+    # algo3: 只考虑aw 和 bm 都有 config 的情况
+    cp_m_algo3_tp = 0
+    cp_m_algo3_fp = 0
+    cp_m_algo3_fn = 0
+    cp_on_algo3_tp = 0
+    cp_on_algo3_fp = 0
+    cp_on_algo3_fn = 0
+    cp_ov_algo3_tp = 0
+    cp_ov_algo3_fp = 0
+    cp_ov_algo3_fn = 0
+
     for _, line in data.iterrows():
         rule = line["rule_name"]
         cor_benchmark = jdata[rule]
         benchmark_exist_config = len(cor_benchmark) > 0
-        if rule == "2.3.2 Special escape sequences" and "4o" in csv_path and "mopt" in csv_path:
-            aa = 1
-        answer_exist_config = line['gpt_answer']
-        answer_exist_config = answer_exist_config == answer_exist_config and answer_exist_config.lower() == "yes"
-
-        #! cal exist mapping metrics
-        if benchmark_exist_config and answer_exist_config:
-            exist_mapping_tp += 1
-        elif benchmark_exist_config and not answer_exist_config:
-            exist_mapping_fn += 1
-        elif not benchmark_exist_config and answer_exist_config:
-            exist_mapping_fp += 1
-
-        answer = line["gpt_configuration"]
-        output_data.append(
+        output_csv_data.append(
             [
                 line["rule_name"],
                 line["description"],
@@ -172,55 +229,20 @@ def compare_benchmark_output(csv_path, benchmark_path):
                 line["gpt_configuration"],
             ]
         )
-        if answer == answer:
-            if answer.startswith("<module\n"):
-                answer = answer[8:]
-            answer = f"<module name='Checker'>{answer}</module>"
-            root = None
-            if valid_xml(answer):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub('>["]*,', ">", answer)):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub('["]*<,', "<", answer)):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub(' ["]+', "", answer)):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub("\\\\n<", "<", answer)):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub(">\\\\n", ">", answer)):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub(" +\n", "", answer)):
-                root = ET.fromstring(answer)
-            else:
-                # print(f"[cannot parse]:{rule}")
-                failed_cnt += 1
-                output_data[-1].append("false")
-                # 全部都是 FN
-                error_fn = len(cor_benchmark)
-                error_res = [
-                    "",
-                    "",
-                    "\n".join([mod["modulename"] for mod in cor_benchmark]),
-                ]
 
-                output_data[-1].extend(error_res * 3)
-                module_all_res[3] += error_fn
-                option_name_all_res[3] += error_fn
-                option_value_all_res[3] += error_fn
-                continue
-            output_data[-1].append("true")
-            answer_config = []
-            for child in root:
-                answer_config.append({})
-                answer_config[-1]["modulename"] = child.attrib["name"]
+        answer_exist_config, answer_config_xml, aw_stat = get_answer_config(line)
+        if answer_exist_config:
+            output_csv_data[-1].append("true")
+            answer_config_list = []
+            for child in answer_config_xml:
+                answer_config_list.append({})
+                answer_config_list[-1]["modulename"] = child.attrib["name"]
                 for prop in child:
                     if prop.tag == "property":
-                        answer_config[-1][prop.attrib["name"]] = prop.attrib["value"]
-            # if rule == "3.4.1 Exactly one top-level class declaration":
-            #     if "4o" in csv_path:
-            #         if "name_simpledesc_opt" in csv_path:
-            #             print(answer_config)
-            compare_result = compare_config(answer_config, cor_benchmark)
+                        answer_config_list[-1][prop.attrib["name"]] = prop.attrib[
+                            "value"
+                        ]
+            compare_result = compare_config(answer_config_list, cor_benchmark)
             indices = [
                 (0, 0),
                 (0, 2),
@@ -233,7 +255,9 @@ def compare_benchmark_output(csv_path, benchmark_path):
                 (2, 3),
             ]
             for i, j in indices:
-                output_data[-1].append("\n".join([mod.get("modulename") for mod in compare_result[i][j]]))
+                output_csv_data[-1].append(
+                    "\n".join([mod.get("modulename") for mod in compare_result[i][j]])
+                )
 
             module_level_res = [
                 len(compare_result[0][0]),
@@ -260,20 +284,235 @@ def compare_benchmark_output(csv_path, benchmark_path):
             option_value_all_res = [
                 option_value_all_res[i] + option_value_level_res[i] for i in range(4)
             ]
-            # if module_level_res[0] > 0:
-            #     print(rule)
+
+            # rule level match
             if module_level_res[2] == 0 and module_level_res[3] == 0:
                 m_rule_correct += 1
-                # print(f"---rule level match {rule}")
+                cp_m_algo1_tp += 1
+                cp_m_algo2_tp += 1
+                cp_m_algo3_tp += 1
+            else:
+                # diff res -> bm not in aw_set, aw not in bm_set
+                cp_m_algo2_fn += 1
+                cp_m_algo2_fp += 1
+                if benchmark_exist_config:
+                    # diff res and both have config -> bm not in aw_set, aw not in bm_set
+                    cp_m_algo1_fn += 1
+                    cp_m_algo1_fp += 1
+                    cp_m_algo3_fn += 1
+                    cp_m_algo3_fp += 1
+
+            # option name level match
             if option_name_level_res[2] == 0 and option_name_level_res[3] == 0:
                 on_rule_correct += 1
-                # print(f"===option name level match {rule}")
+                cp_on_algo1_tp += 1
+                cp_on_algo2_tp += 1
+                cp_on_algo3_tp += 1
+            else:
+                cp_on_algo2_fn += 1
+                cp_on_algo2_fp += 1
+                if benchmark_exist_config:
+                    cp_on_algo1_fn += 1
+                    cp_on_algo1_fp += 1
+                    cp_on_algo3_fn += 1
+                    cp_on_algo3_fp += 1
+
+            # option value level match
             if option_value_level_res[2] == 0 and option_value_level_res[3] == 0:
                 ov_rule_correct += 1
-                # print(f"+++option value level match {rule}")
+                cp_ov_algo1_tp += 1
+                cp_ov_algo2_tp += 1
+                cp_ov_algo3_tp += 1
+            else:
+                cp_ov_algo2_fn += 1
+                cp_ov_algo2_fp += 1
+                if benchmark_exist_config:
+                    cp_ov_algo1_fn += 1
+                    cp_ov_algo1_fp += 1
+                    cp_ov_algo3_fn += 1
+                    cp_ov_algo3_fp += 1
+        else:
+            if aw_stat == "invalid config":
+                failed_cnt += 1
+            output_csv_data[-1].append("false")
+            error_fn = len(cor_benchmark)
+            error_res = [
+                "",
+                "",
+                "\n".join([mod["modulename"] for mod in cor_benchmark]),
+            ]
+
+            if benchmark_exist_config:
+                cp_m_algo1_fn += 1
+                cp_on_algo1_fn += 1
+                cp_ov_algo1_fn += 1
+
+            output_csv_data[-1].extend(error_res * 3)
+            module_all_res[3] += error_fn
+            option_name_all_res[3] += error_fn
+            option_value_all_res[3] += error_fn
+            continue
+
+        if benchmark_exist_config and answer_exist_config:
+            exist_mapping_tp += 1
+        if answer_exist_config and not benchmark_exist_config:
+            exist_mapping_fp += 1
+
+            cp_m_algo1_fp += 1
+            cp_on_algo1_fp += 1
+            cp_ov_algo1_fp += 1
+        if not answer_exist_config and benchmark_exist_config:
+            exist_mapping_fn += 1
+
+            cp_m_algo1_fn += 1
+            cp_on_algo1_fn += 1
+            cp_ov_algo1_fn += 1
+
+        # answer_exist_config = line["gpt_answer"]
+        # answer_exist_config = (
+        #     answer_exist_config == answer_exist_config
+        #     and answer_exist_config.lower() == "yes"
+        # )
+        # answer = line["gpt_configuration"]
+        # if not answer_exist_config:
+        #     answer = ""
+        # if answer == answer:
+        #     if answer.startswith("<module\n"):
+        #         answer = answer[8:]
+        #     answer = f"<module name='Checker'>{answer}</module>"
+        #     answer_config_xml = None
+        #     if valid_xml(answer):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     elif valid_xml(answer := re.sub('>["]*,', ">", answer)):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     elif valid_xml(answer := re.sub('["]*<,', "<", answer)):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     elif valid_xml(answer := re.sub(' ["]+', "", answer)):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     elif valid_xml(answer := re.sub("\\\\n<", "<", answer)):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     elif valid_xml(answer := re.sub(">\\\\n", ">", answer)):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     elif valid_xml(answer := re.sub(" +\n", "", answer)):
+        #         answer_config_xml = ET.fromstring(answer)
+        #     else:
+        #         # print(f"[cannot parse]:{rule}")
+        #         failed_cnt += 1
+        #         output_csv_data[-1].append("false")
+        #         # 全部都是 FN
+        #         error_fn = len(cor_benchmark)
+        #         error_res = [
+        #             "",
+        #             "",
+        #             "\n".join([mod["modulename"] for mod in cor_benchmark]),
+        #         ]
+
+        #         if benchmark_exist_config:
+        #             cp_m_algo1_fn += 1
+        #             cp_on_algo1_fn += 1
+        #             cp_ov_algo1_fn += 1
+
+        #         output_csv_data[-1].extend(error_res * 3)
+        #         module_all_res[3] += error_fn
+        #         option_name_all_res[3] += error_fn
+        #         option_value_all_res[3] += error_fn
+        #         continue
+
+        #     if not benchmark_exist_config:
+        #         cp_m_algo1_fp += 1
+        #         cp_on_algo1_fp += 1
+        #         cp_ov_algo1_fp += 1
+
+        #     output_csv_data[-1].append("true")
+        #     answer_config_list = []
+        #     for child in answer_config_xml:
+        #         answer_config_list.append({})
+        #         answer_config_list[-1]["modulename"] = child.attrib["name"]
+        #         for prop in child:
+        #             if prop.tag == "property":
+        #                 answer_config_list[-1][prop.attrib["name"]] = prop.attrib["value"]
+        #     compare_result = compare_config(answer_config_list, cor_benchmark)
+        #     indices = [
+        #         (0, 0),
+        #         (0, 2),
+        #         (0, 3),
+        #         (1, 0),
+        #         (1, 2),
+        #         (1, 3),
+        #         (2, 0),
+        #         (2, 2),
+        #         (2, 3),
+        #     ]
+        #     for i, j in indices:
+        #         output_csv_data[-1].append(
+        #             "\n".join([mod.get("modulename") for mod in compare_result[i][j]])
+        #         )
+
+        #     module_level_res = [
+        #         len(compare_result[0][0]),
+        #         len(compare_result[0][1]),
+        #         len(compare_result[0][2]),
+        #         len(compare_result[0][3]),
+        #     ]
+        #     option_name_level_res = [
+        #         len(compare_result[1][0]),
+        #         len(compare_result[1][1]),
+        #         len(compare_result[1][2]),
+        #         len(compare_result[1][3]),
+        #     ]
+        #     option_value_level_res = [
+        #         len(compare_result[2][0]),
+        #         len(compare_result[2][1]),
+        #         len(compare_result[2][2]),
+        #         len(compare_result[2][3]),
+        #     ]
+        #     module_all_res = [module_all_res[i] + module_level_res[i] for i in range(4)]
+        #     option_name_all_res = [
+        #         option_name_all_res[i] + option_name_level_res[i] for i in range(4)
+        #     ]
+        #     option_value_all_res = [
+        #         option_value_all_res[i] + option_value_level_res[i] for i in range(4)
+        #     ]
+
+        #     # rule level match
+        #     if module_level_res[2] == 0 and module_level_res[3] == 0:
+        #         m_rule_correct += 1
+        #         cp_m_algo1_tp += 1
+        #         cp_m_algo2_tp += 1
+        #     else:
+        #         # diff res -> bm not in aw_set, aw not in bm_set
+        #         cp_m_algo2_fn += 1
+        #         cp_m_algo2_fp += 1
+        #         if benchmark_exist_config and answer_exist_config:
+        #             # diff res and both have config -> bm not in aw_set, aw not in bm_set
+        #             cp_m_algo1_fn += 1
+        #             cp_m_algo1_fp += 1
+
+        #     # option name level match
+        #     if option_name_level_res[2] == 0 and option_name_level_res[3] == 0:
+        #         on_rule_correct += 1
+        #         cp_on_algo1_tp += 1
+        #         cp_on_algo2_tp += 1
+        #     else:
+        #         cp_on_algo2_fn += 1
+        #         cp_on_algo2_fp += 1
+        #         if benchmark_exist_config and answer_exist_config:
+        #             cp_on_algo1_fn += 1
+        #             cp_on_algo1_fp += 1
+        #     # option value level match
+        #     if option_value_level_res[2] == 0 and option_value_level_res[3] == 0:
+        #         ov_rule_correct += 1
+        #         cp_ov_algo1_tp += 1
+        #         cp_ov_algo2_tp += 1
+        #     else:
+        #         cp_ov_algo2_fn += 1
+        #         cp_ov_algo2_fp += 1
+        #         if benchmark_exist_config and answer_exist_config:
+        #             cp_ov_algo1_fn += 1
+        #             cp_ov_algo1_fp += 1
 
     output_df = pd.DataFrame(
-        output_data,
+        output_csv_data,
         columns=[
             "rule_name",
             "description",
@@ -314,6 +553,60 @@ def compare_benchmark_output(csv_path, benchmark_path):
     ov_accuracy = (option_value_all_res[0] + option_value_all_res[1]) / sum(
         option_value_all_res
     )
+    exist_mapping_recall = exist_mapping_tp / (exist_mapping_tp + exist_mapping_fn)
+    exist_mapping_precision = exist_mapping_tp / (exist_mapping_tp + exist_mapping_fp)
+    exist_mapping_accuracy = exist_mapping_tp / (
+        exist_mapping_tp + exist_mapping_fp + exist_mapping_fn
+    )
+
+    cp_m_algo1_recall = cp_m_algo1_tp / (cp_m_algo1_tp + cp_m_algo1_fn)
+    cp_m_algo1_precision = cp_m_algo1_tp / (cp_m_algo1_tp + cp_m_algo1_fp)
+    cp_m_algo1_accuracy = cp_m_algo1_tp / (
+        cp_m_algo1_tp + cp_m_algo1_fp + cp_m_algo1_fn
+    )
+    cp_on_algo1_recall = cp_on_algo1_tp / (cp_on_algo1_tp + cp_on_algo1_fn)
+    cp_on_algo1_precision = cp_on_algo1_tp / (cp_on_algo1_tp + cp_on_algo1_fp)
+    cp_on_algo1_accuracy = cp_on_algo1_tp / (
+        cp_on_algo1_tp + cp_on_algo1_fp + cp_on_algo1_fn
+    )
+    cp_ov_algo1_recall = cp_ov_algo1_tp / (cp_ov_algo1_tp + cp_ov_algo1_fn)
+    cp_ov_algo1_precision = cp_ov_algo1_tp / (cp_ov_algo1_tp + cp_ov_algo1_fp)
+    cp_ov_algo1_accuracy = cp_ov_algo1_tp / (
+        cp_ov_algo1_tp + cp_ov_algo1_fp + cp_ov_algo1_fn
+    )
+
+    cp_m_algo2_recall = cp_m_algo2_tp / (cp_m_algo2_tp + cp_m_algo2_fn)
+    cp_m_algo2_precision = cp_m_algo2_tp / (cp_m_algo2_tp + cp_m_algo2_fp)
+    cp_m_algo2_accuracy = cp_m_algo2_tp / (
+        cp_m_algo2_tp + cp_m_algo2_fp + cp_m_algo2_fn
+    )
+    cp_on_algo2_recall = cp_on_algo2_tp / (cp_on_algo2_tp + cp_on_algo2_fn)
+    cp_on_algo2_precision = cp_on_algo2_tp / (cp_on_algo2_tp + cp_on_algo2_fp)
+    cp_on_algo2_accuracy = cp_on_algo2_tp / (
+        cp_on_algo2_tp + cp_on_algo2_fp + cp_on_algo2_fn
+    )
+    cp_ov_algo2_recall = cp_ov_algo2_tp / (cp_ov_algo2_tp + cp_ov_algo2_fn)
+    cp_ov_algo2_precision = cp_ov_algo2_tp / (cp_ov_algo2_tp + cp_ov_algo2_fp)
+    cp_ov_algo2_accuracy = cp_ov_algo2_tp / (
+        cp_ov_algo2_tp + cp_ov_algo2_fp + cp_ov_algo2_fn
+    )
+
+    cp_m_algo3_recall = cp_m_algo3_tp / (cp_m_algo3_tp + cp_m_algo3_fn)
+    cp_m_algo3_precision = cp_m_algo3_tp / (cp_m_algo3_tp + cp_m_algo3_fp)
+    cp_m_algo3_accuracy = cp_m_algo3_tp / (
+        cp_m_algo3_tp + cp_m_algo3_fp + cp_m_algo3_fn
+    )
+    cp_on_algo3_recall = cp_on_algo3_tp / (cp_on_algo3_tp + cp_on_algo3_fn)
+    cp_on_algo3_precision = cp_on_algo3_tp / (cp_on_algo3_tp + cp_on_algo3_fp)
+    cp_on_algo3_accuracy = cp_on_algo3_tp / (
+        cp_on_algo3_tp + cp_on_algo3_fp + cp_on_algo3_fn
+    )
+    cp_ov_algo3_recall = cp_ov_algo3_tp / (cp_ov_algo3_tp + cp_ov_algo3_fn)
+    cp_ov_algo3_precision = cp_ov_algo3_tp / (cp_ov_algo3_tp + cp_ov_algo3_fp)
+    cp_ov_algo3_accuracy = cp_ov_algo3_tp / (
+        cp_ov_algo3_tp + cp_ov_algo3_fp + cp_ov_algo3_fn
+    )
+
     print(f"baseline: {csv_path}")
     print(f"Module level: {module_all_res}")
     print(f"Option name level: {option_name_all_res}")
@@ -333,6 +626,66 @@ def compare_benchmark_output(csv_path, benchmark_path):
         m_rule_correct,
         on_rule_correct,
         ov_rule_correct,
+        exist_mapping_tp,
+        exist_mapping_fp,
+        exist_mapping_fn,
+        exist_mapping_recall,
+        exist_mapping_precision,
+        exist_mapping_accuracy,
+        cp_m_algo1_tp,
+        cp_m_algo1_fp,
+        cp_m_algo1_fn,
+        cp_m_algo1_recall,
+        cp_m_algo1_precision,
+        cp_m_algo1_accuracy,
+        cp_on_algo1_tp,
+        cp_on_algo1_fp,
+        cp_on_algo1_fn,
+        cp_on_algo1_recall,
+        cp_on_algo1_precision,
+        cp_on_algo1_accuracy,
+        cp_ov_algo1_tp,
+        cp_ov_algo1_fp,
+        cp_ov_algo1_fn,
+        cp_ov_algo1_recall,
+        cp_ov_algo1_precision,
+        cp_ov_algo1_accuracy,
+        cp_m_algo2_tp,
+        cp_m_algo2_fp,
+        cp_m_algo2_fn,
+        cp_m_algo2_recall,
+        cp_m_algo2_precision,
+        cp_m_algo2_accuracy,
+        cp_on_algo2_tp,
+        cp_on_algo2_fp,
+        cp_on_algo2_fn,
+        cp_on_algo2_recall,
+        cp_on_algo2_precision,
+        cp_on_algo2_accuracy,
+        cp_ov_algo2_tp,
+        cp_ov_algo2_fp,
+        cp_ov_algo2_fn,
+        cp_ov_algo2_recall,
+        cp_ov_algo2_precision,
+        cp_ov_algo2_accuracy,
+        cp_m_algo3_tp,
+        cp_m_algo3_fp,
+        cp_m_algo3_fn,
+        cp_m_algo3_recall,
+        cp_m_algo3_precision,
+        cp_m_algo3_accuracy,
+        cp_on_algo3_tp,
+        cp_on_algo3_fp,
+        cp_on_algo3_fn,
+        cp_on_algo3_recall,
+        cp_on_algo3_precision,
+        cp_on_algo3_accuracy,
+        cp_ov_algo3_tp,
+        cp_ov_algo3_fp,
+        cp_ov_algo3_fn,
+        cp_ov_algo3_recall,
+        cp_ov_algo3_precision,
+        cp_ov_algo3_accuracy,
     ]
     return return_list
 
@@ -370,6 +723,67 @@ if __name__ == "__main__":
             "m_rule_accuracy",
             "on_rule_accuracy",
             "ov_rule_accuracy",
+            "exist_mapping_tp",
+            "exist_mapping_fp",
+            "exist_mapping_fn",
+            "exist_mapping_recall",
+            "exist_mapping_precision",
+            "exist_mapping_accuracy",
+            "cp_m_algo1_tp",
+            "cp_m_algo1_fp",
+            "cp_m_algo1_fn",
+            "cp_m_algo1_recall",
+            "cp_m_algo1_precision",
+            "cp_m_algo1_accuracy",
+            "cp_on_algo1_tp",
+            "cp_on_algo1_fp",
+            "cp_on_algo1_fn",
+            "cp_on_algo1_recall",
+            "cp_on_algo1_precision",
+            "cp_on_algo1_accuracy",
+            "cp_ov_algo1_tp",
+            "cp_ov_algo1_fp",
+            "cp_ov_algo1_fn",
+            "cp_ov_algo1_recall",
+            "cp_ov_algo1_precision",
+            "cp_ov_algo1_accuracy",
+            "cp_m_algo2_tp",
+            "cp_m_algo2_fp",
+            "cp_m_algo2_fn",
+            "cp_m_algo2_recall",
+            "cp_m_algo2_precision",
+            "cp_m_algo2_accuracy",
+            "cp_on_algo2_tp",
+            "cp_on_algo2_fp",
+            "cp_on_algo2_fn",
+            "cp_on_algo2_recall",
+            "cp_on_algo2_precision",
+            "cp_on_algo2_accuracy",
+            "cp_ov_algo2_tp",
+            "cp_ov_algo2_fp",
+            "cp_ov_algo2_fn",
+            "cp_ov_algo2_recall",
+            "cp_ov_algo2_precision",
+            "cp_ov_algo2_accuracy",
+            "cp_m_algo3_tp",
+            "cp_m_algo3_fp",
+            "cp_m_algo3_fn",
+            "cp_m_algo3_recall",
+            "cp_m_algo3_precision",
+            "cp_m_algo3_accuracy",
+            "cp_on_algo3_tp",
+            "cp_on_algo3_fp",
+            "cp_on_algo3_fn",
+            "cp_on_algo3_recall",
+            "cp_on_algo3_precision",
+            "cp_on_algo3_accuracy",
+            "cp_ov_algo3_tp",
+            "cp_ov_algo3_fp",
+            "cp_ov_algo3_fn",
+            "cp_ov_algo3_recall",
+            "cp_ov_algo3_precision",
+            "cp_ov_algo3_accuracy",
+
         ],
     )
     stat_df.to_csv("stat.csv", index=False)

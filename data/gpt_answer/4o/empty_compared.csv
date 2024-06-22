@@ -39,7 +39,7 @@ RegexpSingleline",
 		<property name=""format"" value=""\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)""/>
 		<property name=""tokens"" value=""STRING_LITERAL, CHAR_LITERAL""/>
 	</module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,IllegalTokenText,,,IllegalTokenText,,,IllegalTokenText
 2.3.3 Non-ASCII characters,"For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
  Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
  Examples:
@@ -190,7 +190,7 @@ NoLineWrap"
     </module>",true,OneTopLevelClass,,,,OneTopLevelClass,OneTopLevelClass,,OneTopLevelClass,OneTopLevelClass
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
- some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,No,,,,,,,,,,,
+ some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,No,,false,,,,,,,,,
 4 Formatting,"Terminology Note: 
  block-like construct refers to the body of a class, method or constructor. Note that, by Section 4.8.3.1 on array initializers , any array initializer may optionally be treated as if it were a block-like construct.",,Yes,"<module name='LeftCurly'>
         <property name='option' value='nl'/>
@@ -588,8 +588,8 @@ NoWhitespaceBeforeCaseDefaultColon"
  private Color color; // may leave it unaligned
  
 
- Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed . More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a ""blast radius."" This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.",,No,,,,,,,,,,,
-4.7 Grouping parentheses: recommended,"Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.",,No,,,,,,,,,,,
+ Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed . More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a ""blast radius."" This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.",,No,,false,,,,,,,,,
+4.7 Grouping parentheses: recommended,"Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.",,No,,false,,,,,,,,,
 4.8.1 Enum classes,"After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
  private enum Answer {
   YES {
@@ -681,7 +681,7 @@ Indentation
 LeftCurly
 RightCurly",
 4.8.6 Comments,"This section addresses implementation comments . Javadoc is addressed separately in Section 7, Javadoc .
- Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.",,No,,,,,,,,,,,
+ Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.",,No,,false,,,,,,,,,
 4.8.6.1 Block comment style,"lock comments are indented at the same level as the surrounding code. They may be in /* ... */ style or // ... style. For multi-line /* ... */ comments, subsequent lines must start with * aligned with the * on the previous line.
 
 /*
@@ -1247,7 +1247,10 @@ SingleLineJavadoc",SingleLineJavadoc
                 <module name=""JavadocParagraph""/>
                 <module name=""RequireEmptyLineBeforeBlockTagGroup""/>
         </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,"JavadocParagraph
+RequireEmptyLineBeforeBlockTagGroup",,,"JavadocParagraph
+RequireEmptyLineBeforeBlockTagGroup",,,"JavadocParagraph
+RequireEmptyLineBeforeBlockTagGroup"
 7.1.3 Block tags,"Any of the standard ""block tags"" that are used appear in the order `@param` , `@return` , `@throws` , `@deprecated` , and these four types never appear with an empty description. When a block tag doesn't fit on a single line, continuation lines are indented four (or more) spaces from the position of the `@` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""AtclauseOrder"">
@@ -1359,7 +1362,7 @@ JavadocMethod
 JavadocMethod","MissingJavadocType
 MissingJavadocMethod"
 7.3.1 Exception: self-explanatory members,"Javadoc is optional for ""simple, obvious"" members like `getFoo()` , in cases where there really and truly is nothing else worthwhile to say but ""Returns the foo"".
- Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!",,No,,,,,,,,,,,
+ Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!",,No,,false,,,,,,,,,
 7.3.2 Exception: overrides,Javadoc is not always present on a method that overrides a supertype method.,"<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""MissingJavadocMethod"">
@@ -1400,7 +1403,7 @@ JavadocVariable",
  final @Nullable String name;
  
 
- public @Nullable Person getPersonByName(String name);",,No,,,,,,,,,,,
+ public @Nullable Person getPersonByName(String name);",,No,,false,,,,,,,,,
 4.8.5.2 Class annotations,"Annotations applying to a class appear immediately after the documentation block, and each annotation is listed on a line of its own (that is, one annotation per line). These line breaks do not constitute line-wrapping (Section 4.5, Line-wrapping), so the indentation level is not increased. Example:
  @Deprecated
  @CheckReturnValue
@@ -1457,13 +1460,13 @@ SingleLineJavadoc",AnnotationLocation
  <property name=""allowSamelineSingleParameterlessAnnotation"" value=""true""/> 
                 </module>
         </module>
-</module>",No,,,,,,,,,,,
-4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,,,,,,,,,,
+</module>",No,,false,,,AnnotationLocation,,,AnnotationLocation,,,AnnotationLocation
+4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,false,,,,,,,,,
 3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OverloadMethodsDeclarationOrder""/>
   </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,OverloadMethodsDeclarationOrder,,,OverloadMethodsDeclarationOrder,,,OverloadMethodsDeclarationOrder
 4.8.2.1 One variable per declaration,"Every variable declaration (field or local) declares only one variable: declarations such as int a, b; are not used.
  Exception: Multiple variable declarations are acceptable in the header of a for loop.","<module name=""Checker"">
   <module name=""TreeWalker"">
@@ -1477,7 +1480,7 @@ SingleLineJavadoc",AnnotationLocation
   <module name=""TreeWalker"">
     <module name=""VariableDeclarationUsageDistance""/>
   </module>
-</module>",No,,,,,,,,,,,
+</module>",No,,false,,,VariableDeclarationUsageDistance,,,VariableDeclarationUsageDistance,,,VariableDeclarationUsageDistance
 "4.8.3.1 Array initializers: can be ""block-like""","Any array initializer may optionally be formatted as if it were a ""block-like construct."" For example, the following are all valid (not an exhaustive list):
  new int[] {  new int[] {
   0, 1, 2, 3 0,
@@ -1487,7 +1490,7 @@ SingleLineJavadoc",AnnotationLocation
   0, 1,  }
   2, 3
  }  new int[]
-  {0, 1, 2, 3}",,No,,,,,,,,,,,
+  {0, 1, 2, 3}",,No,,false,,,,,,,,,
 4.8.3.2 No C-style array declarations,"The square brackets form a part of the type, not the variable: String[] args, not String args[].","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""ArrayTypeStyle"">
