@@ -3159,7 +3159,7 @@ NoWhitespaceBeforeCaseDefaultColon"
  private Color color; // may leave it unaligned
  
 
- Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed . More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a ""blast radius."" This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.",,No,,false,,,,,,,,,
+ Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed . More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a ""blast radius."" This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.",,No,,,,,,,,,,,
 4.7 Grouping parentheses: recommended,"Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.",,Yes,<module name='UnnecessaryParentheses'>,false,,,,,,,,,
 4.8.1 Enum classes,"After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
  private enum Answer {
@@ -4895,7 +4895,7 @@ AnnotationUseStyle",AnnotationLocation
         <property name='allowSamelineMultipleAnnotations' value='true'/>
         <property name='tokens' value='FIELD_DEF'/>
     </module>",true,AnnotationLocation,,,,AnnotationLocation,AnnotationLocation,,AnnotationLocation,AnnotationLocation
-4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,false,,,,,,,,,
+4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,No,,,,,,,,,,,
 3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OverloadMethodsDeclarationOrder""/>
@@ -4930,7 +4930,7 @@ AnnotationUseStyle",AnnotationLocation
   0, 1,  }
   2, 3
  }  new int[]
-  {0, 1, 2, 3}",,No,,false,,,,,,,,,
+  {0, 1, 2, 3}",,No,,,,,,,,,,,
 4.8.3.2 No C-style array declarations,"The square brackets form a part of the type, not the variable: String[] args, not String args[].","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""ArrayTypeStyle"">
