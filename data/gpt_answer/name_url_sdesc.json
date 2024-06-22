@@ -1,0 +1,1 @@
+{"2.2 File encoding: UTF-8": "{\n    \"Answer\": \"Yes\",\n    \"Configuration\": \n    \"<module name='FileTabCharacter'>\n        <property name='eachLine' value='true'/>\n    </module>\n    <module name='PackageName'>\n        <property name='format' value='^[a-z]+(\\.[a-z][a-z0-9]*)*$'/>\n    </module>\"\n}"}

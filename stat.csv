@@ -1,0 +1,5 @@
+baseline,failed_cnt,m_recall,m_precision,m_accuracy,on_recall,on_precision,on_accuracy,ov_recall,ov_precision,ov_accuracy,m_rule_correct,on_rule_correct,ov_rule_correct
+GPT4o_name_simpledesc.json,,,,,,,,,,,,,
+GPT4o_name_simpledesc_opt.json,0.0,0.5,0.20670391061452514,0.1712962962962963,0.11267605633802817,0.04519774011299435,0.03333333333333333,0.056338028169014086,0.022598870056497175,0.01639344262295082,11.0,2.0,1.0
+GPT4o_name_url.json,,,,,,,,,,,,,
+GPT4o_name_url_simpledesc.json,,,,,,,,,,,,,

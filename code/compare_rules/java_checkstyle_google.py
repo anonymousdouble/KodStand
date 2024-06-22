@@ -11,9 +11,66 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import util
 
+def gen_nocheckstyle_prompt(rule: str, style="CheckStyle"):
+    prompt = """Please generate {{style}} configurations based on the following style convention. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+{{rule}}
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether {{style}} configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple {{style}} rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>"
+    "</module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}
+
+Example:
+
+{
+    "Answer": "Yes",
+    "Configuration":
+    <module name="OperatorWrap">
+        <property name="option" value="NL"/>
+        <property name="tokens" value="EQUAL, NOT_EQUAL"/>
+    </module>
+    <module name="SeparatorWrap">
+        <property name="id" value="SeparatorWrapNL"/>
+        <property name="tokens" value="DOT, METHOD_REF"/>
+        <property name="option" value="nl"/>
+    </module>
+    <module name="SeparatorWrap">
+        <property name="id" value="SeparatorWrapEOL"/>
+        <property name="tokens" value="COMMA, LPAREN"/>
+        <property name="option" value="EOL"/>
+    </module>
+    <module name="MethodParamPad">
+        <property name="allowLineBreaks" value="true"/>
+        <property name="option" value="space"/>
+        <property name="tokens" value="CTOR_DEF"/>
+    </module>
+}
+"""
+    prompt = prompt.replace("{{style}}", style)
+    prompt = prompt.replace("{{rule}}", rule)
+    return prompt
 
 def gen_prompt(rule: str, tool_rules: str, style="CheckStyle"):
-    prompt = """Please generate {{style}} configurations based on the following style convention and CheckStyle rules, ensuring that the output only includes relevant configurations and excludes any unrelated rules.
+    prompt = """Please generate {{style}} configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
 
 
 Style Convention:
@@ -26,10 +83,48 @@ Response Format Should be a json object:
 {
     "Answer":  Respond with either Yes or No to show whether {{style}} configurations exist for the given style convention,
     "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple {{style}} rules for the given style convention. The configuration format should be xml format:
-    ["<module name='rulename1'>\n  <property name='id' value='id_value1'/>\n  <property name='name1' value='value1'/>\n  ...\n  <property name='name2' value='value2'/>"
-    "</module>\n...\n<module name='rulename2'>\n  <property name='id' value='id_value1'/>\n  <property name='name1' value='value1'/>\n  ...\n  <property name='name2' value='value2'/>\n</module>"]
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>"
+    "</module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
 }
 
+Example:
+
+{
+    "Answer": "Yes",
+    "Configuration":
+    <module name="OperatorWrap">
+        <property name="option" value="NL"/>
+        <property name="tokens" value="EQUAL, NOT_EQUAL"/>
+    </module>
+    <module name="SeparatorWrap">
+        <property name="id" value="SeparatorWrapNL"/>
+        <property name="tokens" value="DOT, METHOD_REF"/>
+        <property name="option" value="nl"/>
+    </module>
+    <module name="SeparatorWrap">
+        <property name="id" value="SeparatorWrapEOL"/>
+        <property name="tokens" value="COMMA, LPAREN"/>
+        <property name="option" value="EOL"/>
+    </module>
+    <module name="MethodParamPad">
+        <property name="allowLineBreaks" value="true"/>
+        <property name="option" value="space"/>
+        <property name="tokens" value="CTOR_DEF"/>
+    </module>
+}
 """
     prompt = prompt.replace("{{style}}", style)
     prompt = prompt.replace("{{rule}}", rule)
@@ -38,6 +133,8 @@ Response Format Should be a json object:
 
 
 str_types = [
+    # "empty",
+    "name",
     # "name_desc",
     # "name_desc_mopt",
     "name_sdesc_mopt",
@@ -48,19 +145,39 @@ str_types = [
 
 
 def get_checkstyle_str(opt):
-
+    def empty():
+        """
+        empty
+        """
+        return ""
+    
+    def name():
+        """
+        name
+        """
+        fname = "url_name_sdesc_mopt"
+        jdata = util.load_json("data/rule/checkstyle/java/", fname)
+        name_str = "\n".join(
+            [f"[Rule]\n{rule[1]}" for rule in jdata]
+        )
+        return name_str
+        
     def name_desc():
         """
         name & description
         """
         fname = "url_name_desc_mopt"
         jdata = util.load_json("data/rule/checkstyle/java/", fname)
-        name_desc_str = "\n".join(
-            [
-                f"[Rule]\n{rule[1]}\n[Description]\n{rule[2].strip('Description').strip()}"
-                for rule in jdata
-            ]
-        )
+        name_desc_list = []
+        for rule in jdata:
+            rule_name = rule[1]
+            rule_desc = rule[2]
+            prefix = "Description"
+            if rule_desc.startswith(prefix):
+                rule_desc = rule_desc[len(prefix):]
+            rule_desc = rule_desc.strip()
+            name_desc_list.append(f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}")
+        name_desc_str = "\n".join(name_desc_list)
         return name_desc_str
 
     def name_desc_mopt():
@@ -69,14 +186,19 @@ def get_checkstyle_str(opt):
         """
         fname = "url_name_desc_mopt"
         jdata = util.load_json("data/rule/checkstyle/java/", fname)
-        jlist = []
+        name_desc_mopt_list = []
         for rule in jdata:
-            rule_str = f"[Rule]\n{rule[1]}"
-            rule_str += f"\n[Description]\n{rule[2].strip('Description').strip()}"
+            rule_name = rule[1]
+            rule_desc = rule[2]
+            prefix = "Description"
+            if rule_desc.startswith(prefix):
+                rule_desc = rule_desc[len(prefix):]
+            rule_desc = rule_desc.strip()
+            rule_str = f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}"
             if len(rule) == 4:
                 rule_str += f"\n[Options]{rule[3]}"
-            jlist.append(rule_str)
-        name_desc_mopt_str = "\n".join(jlist)
+            name_desc_mopt_list.append(rule_str)
+        name_desc_mopt_str = "\n".join(name_desc_mopt_list)
         return name_desc_mopt_str
 
     def name_sdesc_mopt():
@@ -150,24 +272,35 @@ def get_all_gpt_res_for_java_checkstyle(opt, rules):
     agent = GPTAgent()
     checkstyle_str = get_checkstyle_str(opt)
     answer_dict = {}
-    cnt = 0
     for _, row in rules.iterrows():
         rule_name = row.rule
         rule_desc = row.desc
-        prompt = gen_prompt(
-            rule=f"{rule_name}\n{rule_desc}",
-            tool_rules=checkstyle_str,
-            style="CheckStyle",
-        )
+        if opt == "empty":
+            prompt = gen_nocheckstyle_prompt(rule=f"{rule_name}\n{rule_desc}")
+        else:
+            prompt = gen_prompt(
+                rule=f"{rule_name}\n{rule_desc}",
+                tool_rules=checkstyle_str,
+                style="CheckStyle",
+            )
+        #! check prompt
+        # with open(f"{opt}_prompt.txt", "w") as f:
+        #     f.write(prompt)
+        #     return
         try:
+            # use gpt-3.5-turbo
             answer = agent.get_response(prompt)
+            # use gpt-4o
+            # answer = agent.get_response(prompt, model="gpt-4o")
         except Exception as e:
             print(f"failed to get response for rule: {rule_name}")
             continue
+        if answer.startswith("```json\n"):
+            answer = answer[len("```json\n"):]
+        if answer.endswith("\n```"):
+            answer = answer[:-len("\n```")]
         answer_dict[rule_name] = answer
-        cnt+=1
-        if cnt == 2:
-            break
+        break
     util.save_json(
         "data/gpt_answer/",
         opt,
@@ -179,9 +312,18 @@ def get_all_gpt_res_for_java_checkstyle(opt, rules):
 if __name__ == "__main__":
     all_rules = pd.read_excel(
         "data/benchmark/checkstyle2google_java_benchmark.xlsx")
-    for str_type in str_types:
-        gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, all_rules)
+    # for str_type in str_types:
+    for file in os.listdir("data/gpt_answer/4o"):
+        if not file.endswith(".json"):
+            continue
+        # gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, all_rules)
+        gpt_answers = {}
+        with open (f"data/gpt_answer/3.5/{file}",encoding='utf-8') as f:
+
+            gpt_answers = json.load(f)
+
         csv_results = []
+        # continue
         for index, row in all_rules.iterrows():
             rule_name = row.rule
             answer = ""
@@ -195,7 +337,7 @@ if __name__ == "__main__":
                     y_or_n = json_object["Answer"]
                     csv_results[-1].append(y_or_n)
                     configuration_list = json_object["Configuration"]
-                    csv_results[-1].append("\n******\n".join(configuration_list))
+                    csv_results[-1].append("\n".join(configuration_list))
                 except:
                     print(">>>>>>>exception")
                     if "'Answer': 'Yes'" in answer:
@@ -206,12 +348,11 @@ if __name__ == "__main__":
                             csv_results[-1].append("Failed to parse")
                             continue
                         config = answer[idx_start:idx_end + 1]
-                        config_str = "\n******\n".join(
-                            [
-                                "<module" + each_config
-                                for each_config in config.split("<module")
-                            ]
-                        )
+                        config_list = []
+                        for each_config in config.split("<module"):
+                            if len(each_config.strip()) > 0:
+                                config_list.append("<module" + each_config)
+                        config_str = "\n".join(config_list)
                         csv_results[-1].append("Yes")
                         csv_results[-1].append(config_str)
                         print(config_str)
@@ -223,19 +364,18 @@ if __name__ == "__main__":
                             csv_results[-1].append("Failed to parse")
                             continue
                         config = answer[idx_start:idx_end + 1]
-                        config_str = "\n******\n".join(
-                            [
-                                "<module" + each_config
-                                for each_config in config.split("<module")
-                            ]
-                        )
+                        config_list = []
+                        for each_config in config.split("<module"):
+                            if len(each_config.strip()) > 0:
+                                config_list.append("<module" + each_config)
+                        config_str = "\n".join(config_list)
                         csv_results[-1].append("Yes")
                         csv_results[-1].append(config_str)
                         print(config_str)
                     else:
                         csv_results[-1].append("No")
         util.save_csv(
-            f"data/gpt_answer/{str_type}.csv",
+            f"data/gpt_answer/{file}.csv",
             csv_results,
             [
                 "rule_name",
