@@ -1,0 +1,318 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.8.4.3 Presence of the default label
+Each switch statement includes a default statement group, even if it contains no code.
+ Exception: A switch statement for an enum type may omit the default statement group, if it includes explicit cases covering all possible values of that type. This enables IDEs or other static analysis tools to issue a warning if any cases were missed.
+
+CheckStyle Rules:
+[Rule]
+MissingSwitchDefault
+[Description]
+Checks that switch statement has a default clause.
+
+
+Rationale: It's usually a good idea to introduce a default case in
+every switch statement. Even if the developer is sure that all
+currently possible cases are covered, this should be expressed in
+the default branch, e.g. by using an assertion. This way the code is
+protected against later changes, e.g. introduction of new types in an
+enumeration type.
+
+
+This check does not validate any switch expressions. Rationale:
+The compiler requires switch expressions to be exhaustive. This means
+that all possible inputs must be covered.
+
+
+This check does not validate switch statements that use pattern or null
+labels. Rationale: Switch statements that use pattern or null labels are
+checked by the compiler for exhaustiveness. This means that all possible
+inputs must be covered.
+
+
+See the
+
+Java Language Specification for more information about switch statements
+and expressions.
+[Options]
+[Rule]
+DefaultComesLast
+[Description]
+Check that the default is after all the
+cases in a switch statement.
+
+
+Rationale: Java allows default anywhere
+within the switch statement. But it is
+more readable if it comes after the last case.
+[Options]
+skipIfLastAndSharedWithCase, Control whether to allow default along with case if they are not last.
+[Rule]
+NoWhitespaceBeforeCaseDefaultColon
+[Description]
+Checks that there is no whitespace before the colon in a switch block.
+[Options]
+[Rule]
+AvoidNestedBlocks
+[Description]
+Finds nested blocks (blocks that are used freely in the code).
+
+
+Rationale: Nested blocks are often leftovers from the
+debugging process, they confuse the reader.
+
+
+For example, this check finds the obsolete braces in
+
+
+
+public void guessTheOutput()
+{
+int whichIsWhich = 0;
+{
+whichIsWhich = 2;
+}
+System.out.println("value = " + whichIsWhich);
+}
+
+and debugging / refactoring leftovers such as
+
+
+// if (conditionThatIsNotUsedAnyLonger)
+{
+System.out.println("unconditional");
+}
+
+
+A case in a switch statement does not implicitly form a block.
+Thus, to be able to introduce local variables that have case
+scope it is necessary to open a nested block. This is
+supported, set the allowInSwitchCase property to true and
+include all statements of the case in the block.
+[Options]
+allowInSwitchCase, Allow nested blocks if they are the only child of a switch case.
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+[Options]
+[Rule]
+EmptyStatement
+[Description]
+Detects empty statements (standalone ";" semicolon).
+Empty statements often introduce bugs that are hard to spot
+[Options]
+[Rule]
+EmptyBlock
+[Description]
+Checks for empty blocks. This check does not validate sequential blocks.
+Sequential blocks won't be checked. Also, no violations for fallthrough:
+
+
+switch (a) {
+case 1:                          // no violation
+case 2:                          // no violation
+case 3: someMethod(); { }        // no violation
+default: break;
+}
+
+
+NOTE: This check processes LITERAL_CASE and LITERAL_DEFAULT separately.
+Verification empty block is done for single nearest {@code case} or {@code default}.
+[Options]
+option, Specify the policy on block contents.
+tokens, tokens to check
+[Rule]
+OneStatementPerLine
+[Description]
+Checks that there is only one statement per line.
+
+
+Rationale: It's very difficult to read multiple statements on one line.
+
+
+In the Java programming language, statements are the fundamental unit of
+execution. All statements except blocks are terminated by a semicolon.
+Blocks are denoted by open and close curly braces.
+
+
+OneStatementPerLineCheck checks the following types of statements:
+variable declaration statements, empty statements, import statements,
+assignment statements, expression statements, increment statements,
+object creation statements, 'for loop' statements, 'break' statements,
+'continue' statements, 'return' statements, resources statements (optional).
+[Options]
+treatTryResourcesAsStatement, Enable resources processing.
+[Rule]
+InterfaceMemberImpliedModifier
+[Description]
+Checks for implicit modifiers on interface members and nested types.
+
+
+This check is effectively the opposite of
+RedundantModifier.
+It checks the modifiers on interface members, ensuring that certain
+modifiers are explicitly specified even though they are actually redundant.
+
+
+Methods in interfaces are public by default, however from Java 9
+they can also be private. This check provides the ability to enforce
+that public is explicitly coded and not implicitly added by the compiler.
+
+
+From Java 8, there are three types of methods in interfaces - static methods
+marked with static, default methods marked with default and
+abstract methods which do not have to be marked with anything.
+From Java 9, there are also private methods marked with private.
+This check provides the ability to enforce that abstract is explicitly
+coded and not implicitly added by the compiler.
+
+
+Fields in interfaces are always public static final and as such the
+compiler does not require these modifiers. This check provides the ability to
+enforce that these modifiers are explicitly coded and not implicitly added by
+the compiler.
+
+
+Nested types within an interface are always public static and as such the
+compiler does not require the public static modifiers. This check provides
+the ability to enforce that the public and static modifiers
+are explicitly coded and not implicitly added by the compiler.
+
+
+
+public interface AddressFactory {
+// check enforces code contains "public static final"
+public static final String UNKNOWN = "Unknown";
+
+String OTHER = "Other";  // violation
+
+// check enforces code contains "public" or "private"
+public static AddressFactory instance();
+
+// check enforces code contains "public abstract"
+public abstract Address createAddress(String addressLine, String city);
+
+List<Address> findAddresses(String city);  // violation
+
+// check enforces default methods are explicitly declared "public"
+public default Address createAddress(String city) {
+return createAddress(UNKNOWN, city);
+}
+
+default Address createOtherAddress() {  // violation
+return createAddress(OTHER, OTHER);
+}
+}
+
+
+Rationale for this check:
+Methods, fields and nested types are treated differently depending on whether
+they are part of an interface or part of a class. For example, by default methods
+are package-scoped on classes, but public in interfaces. However, from Java 8 onwards,
+interfaces have changed to be much more like abstract classes.
+Interfaces now have static and instance methods with code. Developers should not have
+to remember which modifiers are required and which are implied.
+This check allows the simpler alternative approach to be adopted where the
+implied modifiers must always be coded explicitly.
+[Options]
+violateImpliedAbstractMethod, Control whether to enforce that abstract is explicitly coded on interface methods.
+violateImpliedFinalField, Control whether to enforce that final is explicitly coded on interface fields.
+violateImpliedPublicField, Control whether to enforce that public is explicitly coded on interface fields.
+violateImpliedPublicMethod, Control whether to enforce that public is explicitly coded on interface methods.
+violateImpliedPublicNested, Control whether to enforce that public is explicitly coded on interface nested types.
+violateImpliedStaticField, Control whether to enforce that static is explicitly coded on interface fields.
+violateImpliedStaticNested, Control whether to enforce that static is explicitly coded on interface nested types.
+[Rule]
+OneTopLevelClass
+[Description]
+Checks that each top-level class, interface, enum
+or annotation resides in a source file of its own.
+Official description of a 'top-level' term:
+7.6. Top Level Type Declarations.
+If file doesn't contain public class, interface, enum or annotation,
+top-level type is the first type in file.
+[Options]
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

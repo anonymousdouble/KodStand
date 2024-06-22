@@ -1,0 +1,174 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.8.2.2 Declared when needed
+Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. Local variable declarations typically have initializers, or are initialized immediately after declaration.
+
+CheckStyle Rules:
+[Rule]
+UnusedLocalVariable
+[Description]
+Checks that a local variable is declared and/or assigned, but not used.
+Doesn't support pattern variables yet.
+Doesn't check array components as array
+components are classified as different kind of variables by JLS.
+[Rule]
+MultipleVariableDeclarations
+[Description]
+Checks that each variable declaration is in its own statement and on
+its own line.
+
+
+Rationale:
+
+the Java code conventions chapter 6.1 recommends that
+declarations should be one per line/statement.
+[Rule]
+FinalLocalVariable
+[Description]
+Checks that local variables that never have their values changed are
+declared final. The check can be configured to also check that
+unchanged parameters are declared final.
+[Rule]
+VariableDeclarationUsageDistance
+[Description]
+Checks the distance between declaration of variable and its first usage.
+Note : Variable declaration/initialization statements are not counted
+while calculating length.
+[Rule]
+ModifiedControlVariable
+[Description]
+Checks that for loop control variables are not modified inside
+the for block. An example is:
+
+
+
+for (int i = 0; i < 1; i++) {
+i++; // violation
+}
+
+
+Rationale: If the control variable is modified inside the loop
+body, the program flow becomes more difficult to follow. See
+
+FOR statement specification for more details.
+
+
+Such loop would be suppressed:
+
+
+
+for (int i = 0; i < 10;) {
+i++;
+}
+
+
+NOTE:The check works with only primitive type variables.
+The check will not work for arrays used as control variable.An example is
+
+
+
+for (int a[]={0};a[0] < 10;a[0]++) {
+a[0]++;   // it will skip this violation
+}
+[Rule]
+AvoidNestedBlocks
+[Description]
+Finds nested blocks (blocks that are used freely in the code).
+
+
+Rationale: Nested blocks are often leftovers from the
+debugging process, they confuse the reader.
+
+
+For example, this check finds the obsolete braces in
+
+
+
+public void guessTheOutput()
+{
+int whichIsWhich = 0;
+{
+whichIsWhich = 2;
+}
+System.out.println("value = " + whichIsWhich);
+}
+
+and debugging / refactoring leftovers such as
+
+
+// if (conditionThatIsNotUsedAnyLonger)
+{
+System.out.println("unconditional");
+}
+
+
+A case in a switch statement does not implicitly form a block.
+Thus, to be able to introduce local variables that have case
+scope it is necessary to open a nested block. This is
+supported, set the allowInSwitchCase property to true and
+include all statements of the case in the block.
+[Rule]
+LocalVariableName
+[Description]
+Checks that local, non-final variable names conform to a specified pattern.
+A catch parameter is considered to be a local variable.
+[Rule]
+AvoidInlineConditionals
+[Description]
+Detects inline conditionals. Here is one example of an inline conditional:
+
+
+
+String a = getParameter("a");
+String b = (a==null || a.length()<1) ? null : a.substring(1);
+
+
+Rationale: Some developers find inline conditionals hard to read, so
+their employer's coding standards forbid them.
+[Rule]
+HiddenField
+[Description]
+Checks that a local variable or a parameter does not shadow a field
+that is defined in the same class.
+[Rule]
+OneStatementPerLine
+[Description]
+Checks that there is only one statement per line.
+
+
+Rationale: It's very difficult to read multiple statements on one line.
+
+
+In the Java programming language, statements are the fundamental unit of
+execution. All statements except blocks are terminated by a semicolon.
+Blocks are denoted by open and close curly braces.
+
+
+OneStatementPerLineCheck checks the following types of statements:
+variable declaration statements, empty statements, import statements,
+assignment statements, expression statements, increment statements,
+object creation statements, 'for loop' statements, 'break' statements,
+'continue' statements, 'return' statements, resources statements (optional).
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

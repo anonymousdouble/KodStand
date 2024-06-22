@@ -1,0 +1,237 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.8.8 Numeric Literals
+`long` -valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1` ). For example, `3000000000L` rather than `3000000000l` .
+
+CheckStyle Rules:
+[Rule]
+UpperEll
+[Description]
+Checks that long constants are defined with an upper ell. That
+is 'L' and not 'l'. This is in accordance with the Java
+Language Specification,
+
+Section 3.10.1.
+
+
+Rationale: The lower-case ell 'l' looks a lot like 1.
+[Rule]
+MagicNumber
+[Description]
+Checks that there are no
+
+"magic numbers" where a magic
+number is a numeric literal that is not defined as a constant.
+By default, -1, 0, 1, and 2 are not considered to be magic numbers.
+
+
+Constant definition is any variable/field that has 'final' modifier.
+It is fine to have one constant defining multiple numeric literals within one expression:
+
+
+
+static final int SECONDS_PER_DAY = 24 * 60 * 60;
+static final double SPECIAL_RATIO = 4.0 / 3.0;
+static final double SPECIAL_SUM = 1 + Math.E;
+static final double SPECIAL_DIFFERENCE = 4 - Math.PI;
+static final Border STANDARD_BORDER = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+static final Integer ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE = new Integer(42);
+[Rule]
+AbbreviationAsWordInName
+[Description]
+Validates abbreviations (consecutive capital letters) length in identifier name,
+it also allows to enforce camel case naming. Please read more at
+
+Google Style Guide
+to get to know how to avoid long abbreviations in names.
+
+'_' is considered as word separator in identifier name.
+
+allowedAbbreviationLength specifies how many consecutive capital letters are
+allowed in the identifier.
+A value of 3 indicates that up to 4 consecutive capital letters are allowed,
+one after the other, before a violation is printed. The identifier 'MyTEST' would be
+allowed, but 'MyTESTS' would not be.
+A value of 0 indicates that only 1 consecutive capital letter is allowed. This
+is what should be used to enforce strict camel casing. The identifier 'MyTest' would
+be allowed, but 'MyTEst' would not be.
+
+
+ignoreFinal, ignoreStatic, and ignoreStaticFinal
+control whether variables with the respective modifiers are to be ignored.
+Note that a variable that is both static and final will always be considered under
+ignoreStaticFinal only, regardless of the values of ignoreFinal
+and ignoreStatic. So for example if ignoreStatic is true but
+ignoreStaticFinal is false, then static final variables will not be ignored.
+[Rule]
+StringLiteralEquality
+[Description]
+Checks that string literals are not used with == or
+!=.
+Since == will compare the object references,
+not the actual value of the strings,
+String.equals() should be used.
+More information can be found
+
+in this article.
+
+
+Rationale: Novice Java programmers often use code like:
+
+
+
+if (x == "something")
+
+when they mean
+
+
+if ("something".equals(x))
+[Rule]
+ConstantName
+[Description]
+Checks that constant names conform to a specified pattern.
+A constant is a static and final field or an
+interface/annotation field, except serialVersionUID and
+serialPersistentFields.
+[Rule]
+LineLength
+[Description]
+Checks for long lines.
+
+
+Rationale: Long lines are hard to read in printouts or if developers
+have limited screen space for the source code, e.g. if the IDE
+displays additional information like project tree, class hierarchy,
+etc.
+[Rule]
+IllegalInstantiation
+[Description]
+Checks for illegal instantiations where a factory method is
+preferred.
+
+
+Rationale: Depending on the project, for some classes it might be
+preferable to create instances through factory methods rather than
+calling the constructor.
+
+
+A simple example is the java.lang.Boolean
+class. For performance reasons, it is preferable to
+use the predefined constants  TRUE and
+FALSE. Constructor invocations should be
+replaced by calls to Boolean.valueOf().
+
+
+Some extremely performance sensitive projects may require the use of
+factory methods for other classes as well, to enforce the usage of
+number caches or object pools.
+[Rule]
+MethodLength
+[Description]
+Checks for long methods and constructors.
+
+
+Rationale: If a method becomes very long it is hard to
+understand. Therefore, long methods should usually be refactored into
+several individual methods that focus on a specific task.
+[Rule]
+EqualsAvoidNull
+[Description]
+Checks that any combination of String literals
+is on the left side of an equals() comparison.
+Also checks for String literals assigned to some field
+(such as someString.equals(anotherString = "text")).
+
+
+Rationale: Calling the equals()
+method on String literals will avoid a potential
+NullPointerException. Also, it is pretty common to see null
+checks right before equals comparisons but following this rule such checks
+are not required.
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

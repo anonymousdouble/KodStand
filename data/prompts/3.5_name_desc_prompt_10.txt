@@ -1,0 +1,331 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+3.3.4 No static import for classes
+Static import is not used for static nested classes. They are imported with normal imports.
+
+CheckStyle Rules:
+[Rule]
+AvoidStaticImport
+[Description]
+Checks that there are no static import statements.
+
+
+Rationale: Importing static members can lead to naming
+conflicts between class' members. It may lead to poor code
+readability since it may no longer be clear what class a
+member resides in (without looking at the import statement).
+[Rule]
+RedundantImport
+[Description]
+Checks for redundant import statements. An import statement is
+considered redundant if:
+
+
+
+It is a duplicate of another import. This is, when a class is
+imported more than once.
+
+
+The class non-statically imported is from the java.lang
+package, e.g. importing java.lang.String.
+
+
+The class non-statically imported is from the same package as the current package.
+[Rule]
+AvoidStarImport
+[Description]
+Checks that there are no import statements that use the * notation.
+
+
+Rationale: Importing all classes from a package or static
+members from a class leads to tight coupling between packages
+or classes and might lead to problems when a new version of a
+library introduces name clashes.
+[Rule]
+UnusedImports
+[Description]
+Checks for unused import statements. An
+import statement is considered unused if:
+
+
+
+It is not referenced in the file. The algorithm does not support
+wild-card imports like import
+java.io.*;. Most IDE's provide very sophisticated checks
+for imports that handle wild-card imports.
+
+
+The class imported is from the java.lang
+package. For example importing java.lang.String.
+
+
+The class imported is from the same package.
+
+
+A static method is imported when used as method reference. In that case,
+only the type needs to be imported and that's enough to resolve the method.
+
+
+Optionally: it is referenced in Javadoc comments. This check
+is on by default, but it is considered bad practice to introduce
+a compile-time dependency for documentation purposes only.
+As an example, the import java.util.List would be
+considered referenced with the Javadoc comment
+{@link List}. The alternative to avoid introducing a
+compile-time dependency would be to write the Javadoc comment as
+{@link java.util.List}.
+
+
+
+The main limitation of this check is handling the cases where:
+
+
+
+An imported type has the same name as a declaration, such as a member variable.
+
+
+There are two or more static imports with the same method name
+(javac can distinguish imports with same name but different parameters, but checkstyle
+can not due to
+limitation.)
+[Rule]
+PackageDeclaration
+[Description]
+Ensures that a class has a package declaration, and (optionally) whether
+the package name matches the directory name for the source file.
+
+
+Rationale: Classes that live in the null package cannot be
+imported. Many novice developers are not aware of this.
+
+
+Packages provide logical namespace to classes and should be stored in
+the form of directory levels to provide physical grouping to your classes.
+These directories are added to the classpath so that your classes
+are visible to JVM when it runs the code.
+[Rule]
+ImportOrder
+[Description]
+Checks the ordering/grouping of imports. Features are:
+
+groups type/static imports: ensures that groups of imports come in a
+specific order (e.g., java. comes first, javax. comes second,
+then everything else)
+adds a separation between type import groups : ensures that a blank
+line sit between each group
+type/static import groups aren't separated internally: ensures that
+each group aren't separated internally by blank line or comment
+sorts type/static imports inside each group: ensures that imports
+within each group are in lexicographic order
+
+sorts according to case: ensures that the comparison
+between imports is case-sensitive, in
+ASCII sort order
+
+
+arrange static imports: ensures the relative order between
+type imports and static imports (see
+ImportOrderOption)
+[Rule]
+FinalClass
+[Description]
+Ensures that identifies classes that can be effectively declared as final are explicitly
+marked as final. The following are different types of classes that can be identified:
+
+
+
+Private classes with no declared constructors.
+
+
+Classes with any modifier, and contains only private constructors.
+
+
+
+Classes are skipped if:
+
+
+
+Class is Super class of some Anonymous inner class.
+
+
+Class is extended by another class in the same file.
+[Rule]
+RedundantModifier
+[Description]
+Checks for redundant modifiers.
+
+
+Rationale: The Java Language Specification strongly
+discourages the usage of public and abstract for method
+declarations in interface definitions as a matter of style.
+
+The check validates:
+
+Interface and annotation definitions.
+Final modifier on methods of final and anonymous classes.
+
+Type declarations nested under interfaces that are declared as public
+or static.
+
+Class constructors.
+
+Nested enum definitions that are declared
+as static.
+
+
+record definitions that are declared as final and nested
+record definitions that are declared as static.
+
+
+
+interfaces by definition are abstract so the abstract modifier is
+redundant on them.
+
+
+Type declarations nested under interfaces by definition are public and static,
+so the public and static modifiers on nested type
+declarations are redundant. On the other hand, classes inside of interfaces can
+be abstract or non abstract. So, abstract modifier is allowed.
+
+
+Fields in interfaces and annotations are automatically
+public, static and final, so these modifiers are redundant as
+well.
+
+
+As annotations are a form of interface, their fields are also
+automatically public, static and final just as their
+annotation fields are automatically public and abstract.
+
+
+A record class is implicitly final and cannot be abstract, these restrictions emphasize
+that the API of a record class is defined solely by its state description, and cannot be
+enhanced later by another class. Nested records are implicitly static. This avoids an
+immediately enclosing instance which would silently add state to the record class.
+See JEP 395 for more info.
+
+
+Enums by definition are static implicit subclasses of java.lang.Enum<E>.
+So, the static modifier on the enums is redundant. In addition,
+if enum is inside of interface, public modifier is also redundant.
+
+
+Enums can also contain abstract methods and methods which can be overridden by the
+declared enumeration fields.
+See the following example:
+
+
+
+public enum EnumClass {
+FIELD_1,
+FIELD_2 {
+@Override
+public final void method1() {} // violation expected
+};
+
+public void method1() {}
+public final void method2() {} // no violation expected
+}
+
+
+Since these methods can be overridden in these situations, the final methods are not
+marked as redundant even though they can't be extended by other classes/enums.
+
+
+Nested enum types are always static by default.
+
+
+Final classes by definition cannot be extended so the final
+modifier on the method of a final class is redundant.
+
+
+Public modifier for constructors in non-public non-protected classes
+is always obsolete:
+
+
+
+public class PublicClass {
+public PublicClass() {} // OK
+}
+
+class PackagePrivateClass {
+public PackagePrivateClass() {} // violation expected
+}
+
+There is no violation in the following example,
+because removing public modifier from ProtectedInnerClass
+constructor will make this code not compiling:
+
+
+
+package a;
+public class ClassExample {
+protected class ProtectedInnerClass {
+public ProtectedInnerClass () {}
+}
+}
+
+package b;
+import a.ClassExample;
+public class ClassExtending extends ClassExample {
+ProtectedInnerClass pc = new ProtectedInnerClass();
+}
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Rule]
+InnerTypeLast
+[Description]
+Checks nested (internal) classes/interfaces are declared at the bottom of the
+primary (top-level) class after all init and static init blocks,
+method, constructor and field declarations.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

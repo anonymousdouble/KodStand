@@ -1,0 +1,232 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+3 Source file structure
+A source file consists of, in order : 
+ License or copyright information, if present 
+ Package statement 
+ Import statements 
+ Exactly one top-level class
+ 
+
+ Exactly one blank line separates each section that is present.
+
+CheckStyle Rules:
+[Rule]
+OneTopLevelClass
+[Description]
+Checks that each top-level class, interface, enum
+or annotation resides in a source file of its own.
+Official description of a 'top-level' term:
+7.6. Top Level Type Declarations.
+If file doesn't contain public class, interface, enum or annotation,
+top-level type is the first type in file.
+[Rule]
+PackageDeclaration
+[Description]
+Ensures that a class has a package declaration, and (optionally) whether
+the package name matches the directory name for the source file.
+
+
+Rationale: Classes that live in the null package cannot be
+imported. Many novice developers are not aware of this.
+
+
+Packages provide logical namespace to classes and should be stored in
+the form of directory levels to provide physical grouping to your classes.
+These directories are added to the classpath so that your classes
+are visible to JVM when it runs the code.
+[Rule]
+NoCodeInFile
+[Description]
+Checks whether file contains code.
+Java compiler is not raising errors on files with no code or all commented out.
+Files which are considered to have no code:
+
+
+
+File with no text
+
+
+File with single-line comment(s)
+
+
+File with a multi line comment(s).
+[Rule]
+FileLength
+[Description]
+Checks for long source files.
+
+
+Rationale: If a source file becomes very long it is hard to
+understand. Therefore, long classes should usually be refactored
+into several individual classes that focus on a specific task.
+[Rule]
+RedundantImport
+[Description]
+Checks for redundant import statements. An import statement is
+considered redundant if:
+
+
+
+It is a duplicate of another import. This is, when a class is
+imported more than once.
+
+
+The class non-statically imported is from the java.lang
+package, e.g. importing java.lang.String.
+
+
+The class non-statically imported is from the same package as the current package.
+[Rule]
+OneStatementPerLine
+[Description]
+Checks that there is only one statement per line.
+
+
+Rationale: It's very difficult to read multiple statements on one line.
+
+
+In the Java programming language, statements are the fundamental unit of
+execution. All statements except blocks are terminated by a semicolon.
+Blocks are denoted by open and close curly braces.
+
+
+OneStatementPerLineCheck checks the following types of statements:
+variable declaration statements, empty statements, import statements,
+assignment statements, expression statements, increment statements,
+object creation statements, 'for loop' statements, 'break' statements,
+'continue' statements, 'return' statements, resources statements (optional).
+[Rule]
+JavaNCSS
+[Description]
+Determines complexity of methods, classes and files by
+counting the Non Commenting Source Statements (NCSS). This
+check adheres to the
+specification for the
+JavaNCSS-Tool
+written by Chr. Clemens Lee.
+
+
+Roughly said the NCSS metric is calculated by
+counting the source lines which are not comments, (nearly)
+equivalent to counting the semicolons and opening curly braces.
+
+
+The NCSS for a class is summarized from the NCSS
+of all its methods, the NCSS of its nested classes and the
+number of member variable declarations.
+
+
+The NCSS for a file is summarized from the ncss of all its top level classes,
+the number of imports and the package declaration.
+
+
+Rationale: Too large methods and classes are hard to read and
+costly to maintain. A large NCSS number often means that a
+method or class has too many responsibilities and/or
+functionalities which should be decomposed into smaller units.
+[Rule]
+ImportOrder
+[Description]
+Checks the ordering/grouping of imports. Features are:
+
+groups type/static imports: ensures that groups of imports come in a
+specific order (e.g., java. comes first, javax. comes second,
+then everything else)
+adds a separation between type import groups : ensures that a blank
+line sit between each group
+type/static import groups aren't separated internally: ensures that
+each group aren't separated internally by blank line or comment
+sorts type/static imports inside each group: ensures that imports
+within each group are in lexicographic order
+
+sorts according to case: ensures that the comparison
+between imports is case-sensitive, in
+ASCII sort order
+
+
+arrange static imports: ensures the relative order between
+type imports and static imports (see
+ImportOrderOption)
+[Rule]
+UncommentedMain
+[Description]
+Detects uncommented main methods.
+
+
+Rationale: A main method is often used for debugging
+purposes. When debugging is finished, developers often forget
+to remove the method, which changes the API and increases the
+size of the resulting class or JAR file. Except for
+the real program entry points, all main methods should be
+removed or commented out of the sources.
+[Rule]
+DeclarationOrder
+[Description]
+Checks that the parts of a class, record, or interface declaration appear in the order
+suggested by the
+
+Code Conventions for the Java Programming Language.
+
+
+According to
+
+Code Conventions for the Java Programming Language , the parts
+of a class or interface declaration should appear in the following
+order:
+
+
+
+Class (static) variables. First the public class variables, then
+protected, then package level (no access modifier), and then
+private.
+
+
+Instance variables. First the public class variables, then
+protected, then package level (no access modifier), and then
+private.
+
+Constructors
+Methods
+
+
+Purpose of ignore* option is to ignore related violations,
+however it still impacts on other class members.
+
+
+ATTENTION: the check skips class fields which have
+
+forward references
+from validation due to the fact that we have Checkstyle's limitations to clearly
+detect user intention of fields location and grouping. For example:
+
+
+
+public class A {
+private double x = 1.0;
+private double y = 2.0;
+public double slope = x / y; // will be skipped from validation due to forward reference
+}
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

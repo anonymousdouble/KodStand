@@ -1,1 +1,0 @@
-## The Ruff Language Server

@@ -1,0 +1,434 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+5.2.4 Constant names
+Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. But what is a constant, exactly?
+ Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
+ // Constants
+ static final int NUMBER = 5;
+ static final ImmutableList<String> NAMES = ImmutableList.of("Ed", "Ann");
+ static final Map<String, Integer> AGES = ImmutableMap.of("Ed", 35, "Ann", 32);
+ static final Joiner COMMA_JOINER = Joiner.on(','); // because Joiner is immutable
+ static final SomeMutableType[] EMPTY_ARRAY = {};
+ 
+
+ // Not constants
+ static String nonFinal = "non-final";
+ final String nonStatic = "non-static";
+ static final Set<String> mutableCollection = new HashSet<String>();
+ static final ImmutableSet<SomeMutableType> mutableElements = ImmutableSet.of(mutable);
+ static final ImmutableMap<String, SomeMutableType> mutableValues =
+  ImmutableMap.of("Ed", mutableInstance, "Ann", mutableInstance2);
+ static final Logger logger = Logger.getLogger(MyClass.getName());
+ static final String[] nonEmptyArray = {"these", "can", "change"};
+ 
+
+ These names are typically nouns or noun phrases.
+
+CheckStyle Rules:
+[Rule]
+ConstantName
+[Description]
+Checks that constant names conform to a specified pattern.
+A constant is a static and final field or an
+interface/annotation field, except serialVersionUID and
+serialPersistentFields.
+[Options]
+applyToPackage, Control if check should apply to package-private members.
+applyToPrivate, Control if check should apply to private members.
+applyToProtected, Control if check should apply to protected members.
+applyToPublic, Control if check should apply to public members.
+format, Sets the pattern to match valid identifiers.
+[Rule]
+MagicNumber
+[Description]
+Checks that there are no
+
+"magic numbers" where a magic
+number is a numeric literal that is not defined as a constant.
+By default, -1, 0, 1, and 2 are not considered to be magic numbers.
+
+
+Constant definition is any variable/field that has 'final' modifier.
+It is fine to have one constant defining multiple numeric literals within one expression:
+
+
+
+static final int SECONDS_PER_DAY = 24 * 60 * 60;
+static final double SPECIAL_RATIO = 4.0 / 3.0;
+static final double SPECIAL_SUM = 1 + Math.E;
+static final double SPECIAL_DIFFERENCE = 4 - Math.PI;
+static final Border STANDARD_BORDER = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+static final Integer ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE = new Integer(42);
+[Options]
+constantWaiverParentToken, Specify tokens that are allowed in the AST path from the number literal to the enclosing constant definition.
+ignoreAnnotation, Ignore magic numbers in annotation declarations.
+ignoreAnnotationElementDefaults, Ignore magic numbers in annotation elements defaults.
+ignoreFieldDeclaration, Ignore magic numbers in field declarations.
+ignoreHashCodeMethod, Ignore magic numbers in hashCode methods.
+ignoreNumbers, Specify non-magic numbers.
+tokens, tokens to check
+[Rule]
+VisibilityModifier
+[Description]
+Checks visibility of class members. Only static final, immutable or annotated
+by specified annotation members may be public; other class members must be private
+unless the property protectedAllowed or packageAllowed is set.
+
+
+Public members are not flagged if the name matches the public
+member regular expression (contains "^serialVersionUID$" by default).
+
+Note that
+Checkstyle 2 used to include "^f[A-Z][a-zA-Z0-9]*$" in the default
+pattern to allow names used in container-managed persistence for Enterprise JavaBeans
+(EJB) 1.1 with the default settings. With EJB 2.0 it is no longer necessary to have
+public access for persistent fields, so the default has been changed.
+
+
+Rationale: Enforce encapsulation.
+
+
+Check also has options making it less strict:
+
+
+ignoreAnnotationCanonicalNames - the list of annotations which ignore variables
+in consideration. If user want to provide short annotation name that type
+will match to any named the same type without consideration of package.
+
+
+allowPublicFinalFields - which allows public final fields.
+
+
+allowPublicImmutableFields - which allows immutable fields to be declared as
+public if defined in final class.
+
+
+Field is known to be immutable if:
+
+
+It's declared as final
+
+Has either a primitive type or instance of class user defined to be immutable
+(such as String, ImmutableCollection from Guava, etc.)
+
+
+
+Classes known to be immutable are listed in immutableClassCanonicalNames by their
+canonical names.
+
+
+Property Rationale: Forcing all fields of class to have private modifier by default is
+good in most cases, but in some cases it drawbacks in too much boilerplate get/set code.
+One of such cases are immutable classes.
+
+
+Restriction: Check doesn't check if class is immutable, there's no
+checking if accessory methods are missing and all fields are immutable, we only check
+if current field is immutable or final. Under the flag
+allowPublicImmutableFields, the enclosing class must also be final, to encourage
+immutability. Under the flag allowPublicFinalFields, the final modifier on
+the enclosing class is optional.
+
+
+Star imports are out of scope of this Check. So if one of type imported via
+star import collides with user specified one by its short name -
+there won't be Check's violation.
+[Options]
+allowPublicFinalFields, Allow final fields to be declared as public.
+allowPublicImmutableFields, Allow immutable fields to be declared as public if defined in final class.
+ignoreAnnotationCanonicalNames, Specify annotations canonical names which ignore variables in consideration.
+immutableClassCanonicalNames, Specify immutable classes canonical names.
+packageAllowed, Control whether package visible members are allowed.
+protectedAllowed, Control whether protected members are allowed.
+publicMemberPattern, Specify pattern for public members that should be ignored.
+[Rule]
+AbbreviationAsWordInName
+[Description]
+Validates abbreviations (consecutive capital letters) length in identifier name,
+it also allows to enforce camel case naming. Please read more at
+
+Google Style Guide
+to get to know how to avoid long abbreviations in names.
+
+'_' is considered as word separator in identifier name.
+
+allowedAbbreviationLength specifies how many consecutive capital letters are
+allowed in the identifier.
+A value of 3 indicates that up to 4 consecutive capital letters are allowed,
+one after the other, before a violation is printed. The identifier 'MyTEST' would be
+allowed, but 'MyTESTS' would not be.
+A value of 0 indicates that only 1 consecutive capital letter is allowed. This
+is what should be used to enforce strict camel casing. The identifier 'MyTest' would
+be allowed, but 'MyTEst' would not be.
+
+
+ignoreFinal, ignoreStatic, and ignoreStaticFinal
+control whether variables with the respective modifiers are to be ignored.
+Note that a variable that is both static and final will always be considered under
+ignoreStaticFinal only, regardless of the values of ignoreFinal
+and ignoreStatic. So for example if ignoreStatic is true but
+ignoreStaticFinal is false, then static final variables will not be ignored.
+[Options]
+allowedAbbreviationLength, Indicate the number of consecutive capital letters allowed in targeted identifiers (abbreviations in the classes, interfaces, variables and methods names, ... ).
+allowedAbbreviations, Specify abbreviations that must be skipped for checking.
+ignoreFinal, Allow to skip variables with final modifier.
+ignoreOverriddenMethods, Allow to ignore methods tagged with @Override annotation (that usually mean inherited name).
+ignoreStatic, Allow to skip variables with static modifier.
+ignoreStaticFinal, Allow to skip variables with both static and final modifiers.
+tokens, tokens to check
+[Rule]
+StaticVariableName
+[Description]
+Checks that static, non-final variable names
+conform to a specified pattern.
+[Options]
+applyToPackage, Control if check should apply to package-private members.
+applyToPrivate, Control if check should apply to private members.
+applyToProtected, Control if check should apply to protected members.
+applyToPublic, Control if check should apply to public members.
+format, Sets the pattern to match valid identifiers.
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+UpperEll
+[Description]
+Checks that long constants are defined with an upper ell. That
+is 'L' and not 'l'. This is in accordance with the Java
+Language Specification,
+
+Section 3.10.1.
+
+
+Rationale: The lower-case ell 'l' looks a lot like 1.
+[Options]
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+[Options]
+[Rule]
+InterfaceMemberImpliedModifier
+[Description]
+Checks for implicit modifiers on interface members and nested types.
+
+
+This check is effectively the opposite of
+RedundantModifier.
+It checks the modifiers on interface members, ensuring that certain
+modifiers are explicitly specified even though they are actually redundant.
+
+
+Methods in interfaces are public by default, however from Java 9
+they can also be private. This check provides the ability to enforce
+that public is explicitly coded and not implicitly added by the compiler.
+
+
+From Java 8, there are three types of methods in interfaces - static methods
+marked with static, default methods marked with default and
+abstract methods which do not have to be marked with anything.
+From Java 9, there are also private methods marked with private.
+This check provides the ability to enforce that abstract is explicitly
+coded and not implicitly added by the compiler.
+
+
+Fields in interfaces are always public static final and as such the
+compiler does not require these modifiers. This check provides the ability to
+enforce that these modifiers are explicitly coded and not implicitly added by
+the compiler.
+
+
+Nested types within an interface are always public static and as such the
+compiler does not require the public static modifiers. This check provides
+the ability to enforce that the public and static modifiers
+are explicitly coded and not implicitly added by the compiler.
+
+
+
+public interface AddressFactory {
+// check enforces code contains "public static final"
+public static final String UNKNOWN = "Unknown";
+
+String OTHER = "Other";  // violation
+
+// check enforces code contains "public" or "private"
+public static AddressFactory instance();
+
+// check enforces code contains "public abstract"
+public abstract Address createAddress(String addressLine, String city);
+
+List<Address> findAddresses(String city);  // violation
+
+// check enforces default methods are explicitly declared "public"
+public default Address createAddress(String city) {
+return createAddress(UNKNOWN, city);
+}
+
+default Address createOtherAddress() {  // violation
+return createAddress(OTHER, OTHER);
+}
+}
+
+
+Rationale for this check:
+Methods, fields and nested types are treated differently depending on whether
+they are part of an interface or part of a class. For example, by default methods
+are package-scoped on classes, but public in interfaces. However, from Java 8 onwards,
+interfaces have changed to be much more like abstract classes.
+Interfaces now have static and instance methods with code. Developers should not have
+to remember which modifiers are required and which are implied.
+This check allows the simpler alternative approach to be adopted where the
+implied modifiers must always be coded explicitly.
+[Options]
+violateImpliedAbstractMethod, Control whether to enforce that abstract is explicitly coded on interface methods.
+violateImpliedFinalField, Control whether to enforce that final is explicitly coded on interface fields.
+violateImpliedPublicField, Control whether to enforce that public is explicitly coded on interface fields.
+violateImpliedPublicMethod, Control whether to enforce that public is explicitly coded on interface methods.
+violateImpliedPublicNested, Control whether to enforce that public is explicitly coded on interface nested types.
+violateImpliedStaticField, Control whether to enforce that static is explicitly coded on interface fields.
+violateImpliedStaticNested, Control whether to enforce that static is explicitly coded on interface nested types.
+[Rule]
+ClassMemberImpliedModifier
+[Description]
+Checks for implicit modifiers on nested types in classes and records.
+
+
+This check is effectively the opposite of
+RedundantModifier.
+It checks the modifiers on nested types in classes and records, ensuring that certain
+modifiers are explicitly specified even though they are actually redundant.
+
+
+Nested enums, interfaces, and records within a class are always static and as
+such the compiler does not require the static modifier. This check provides
+the ability to enforce that the static modifier is explicitly coded and not
+implicitly added by the compiler.
+
+
+
+public final class Person {
+enum Age {  // violation
+CHILD, ADULT
+}
+}
+
+
+Rationale for this check:
+Nested enums, interfaces, and records are treated differently from nested classes as they
+are only allowed to be static. Developers should not need to remember this
+rule, and this check provides the means to enforce that the modifier is coded explicitly.
+[Options]
+violateImpliedStaticOnNestedEnum, Control whether to enforce that static is explicitly coded on nested enums in classes and records.
+violateImpliedStaticOnNestedInterface, Control whether to enforce that static is explicitly coded on nested interfaces in classes and records.
+violateImpliedStaticOnNestedRecord, Control whether to enforce that static is explicitly coded on nested records in classes and records.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

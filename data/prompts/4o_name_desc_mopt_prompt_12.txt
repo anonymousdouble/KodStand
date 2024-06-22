@@ -1,0 +1,401 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+3.4.2 Ordering of class contents
+The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
+ What is important is that each class uses 
+ some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield "chronological by date added" ordering, which is not a logical ordering.
+
+CheckStyle Rules:
+[Rule]
+DeclarationOrder
+[Description]
+Checks that the parts of a class, record, or interface declaration appear in the order
+suggested by the
+
+Code Conventions for the Java Programming Language.
+
+
+According to
+
+Code Conventions for the Java Programming Language , the parts
+of a class or interface declaration should appear in the following
+order:
+
+
+
+Class (static) variables. First the public class variables, then
+protected, then package level (no access modifier), and then
+private.
+
+
+Instance variables. First the public class variables, then
+protected, then package level (no access modifier), and then
+private.
+
+Constructors
+Methods
+
+
+Purpose of ignore* option is to ignore related violations,
+however it still impacts on other class members.
+
+
+ATTENTION: the check skips class fields which have
+
+forward references
+from validation due to the fact that we have Checkstyle's limitations to clearly
+detect user intention of fields location and grouping. For example:
+
+
+
+public class A {
+private double x = 1.0;
+private double y = 2.0;
+public double slope = x / y; // will be skipped from validation due to forward reference
+}
+[Options]
+ignoreConstructors, Control whether to ignore constructors.
+ignoreModifiers, Control whether to ignore modifiers (fields, ...).
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+[Options]
+[Rule]
+ImportOrder
+[Description]
+Checks the ordering/grouping of imports. Features are:
+
+groups type/static imports: ensures that groups of imports come in a
+specific order (e.g., java. comes first, javax. comes second,
+then everything else)
+adds a separation between type import groups : ensures that a blank
+line sit between each group
+type/static import groups aren't separated internally: ensures that
+each group aren't separated internally by blank line or comment
+sorts type/static imports inside each group: ensures that imports
+within each group are in lexicographic order
+
+sorts according to case: ensures that the comparison
+between imports is case-sensitive, in
+ASCII sort order
+
+
+arrange static imports: ensures the relative order between
+type imports and static imports (see
+ImportOrderOption)
+[Options]
+caseSensitive, Control whether string comparison should be case-sensitive or not. Case-sensitive sorting is in ASCII sort order. It affects both type imports and static imports.
+groups, Specify list of type import groups. Every group identified either by a common prefix string, or by a regular expression enclosed in forward slashes (e.g. /regexp/). All type imports, which does not match any group, falls into an additional group, located at the end. Thus, the empty list of type groups (the default value) means one group for all type imports.
+option, Specify policy on the relative order between type imports and static imports.
+ordered, Control whether type imports within each group should be sorted. It doesn't affect sorting for static imports.
+separated, Control whether type import groups should be separated by, at least, one blank line or comment and aren't separated internally. It doesn't affect separations for static imports.
+separatedStaticGroups, Control whether static import groups should be separated by, at least, one blank line or comment and aren't separated internally. This property has effect only when the property option is set to top or bottom and when property staticGroups is enabled.
+sortStaticImportsAlphabetically, Control whether static imports located at top or bottom are sorted within the group.
+staticGroups, Specify list of static import groups. Every group identified either by a common prefix string, or by a regular expression enclosed in forward slashes (e.g. /regexp/). All static imports, which does not match any group, fall into an additional group, located at the end. Thus, the empty list of static groups (the default value) means one group for all static imports. This property has effect only when the property option is set to top or bottom.
+useContainerOrderingForStatic, Control whether to use container ordering (Eclipse IDE term) for static imports or not.
+[Rule]
+FinalClass
+[Description]
+Ensures that identifies classes that can be effectively declared as final are explicitly
+marked as final. The following are different types of classes that can be identified:
+
+
+
+Private classes with no declared constructors.
+
+
+Classes with any modifier, and contains only private constructors.
+
+
+
+Classes are skipped if:
+
+
+
+Class is Super class of some Anonymous inner class.
+
+
+Class is extended by another class in the same file.
+[Options]
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+OneTopLevelClass
+[Description]
+Checks that each top-level class, interface, enum
+or annotation resides in a source file of its own.
+Official description of a 'top-level' term:
+7.6. Top Level Type Declarations.
+If file doesn't contain public class, interface, enum or annotation,
+top-level type is the first type in file.
+[Options]
+[Rule]
+CustomImportOrder
+[Description]
+Checks that the groups of import declarations appear in the order specified
+by the user. If there is an import but its group is not specified in the
+configuration such an import should be placed at the end of the import list.
+[Options]
+customImportOrderRules, Specify ordered list of import groups.
+separateLineBetweenGroups, Force empty line separator between import groups.
+sortImportsInGroupAlphabetically, Force grouping alphabetically, in ASCII sort order.
+specialImportsRegExp, Specify RegExp for SPECIAL_IMPORTS group imports.
+standardPackageRegExp, Specify RegExp for STANDARD_JAVA_PACKAGE group imports.
+thirdPartyPackageRegExp, Specify RegExp for THIRD_PARTY_PACKAGE group imports.
+[Rule]
+InnerTypeLast
+[Description]
+Checks nested (internal) classes/interfaces are declared at the bottom of the
+primary (top-level) class after all init and static init blocks,
+method, constructor and field declarations.
+[Options]
+[Rule]
+ExplicitInitialization
+[Description]
+Checks if any class or object member is explicitly initialized to
+default for its type value (null for
+object references, zero for numeric types and char and false for
+boolean.
+
+
+Rationale: Each instance variable gets initialized twice, to the
+same value. Java initializes each instance variable to its default value
+(0 or null) before performing any initialization specified in
+the code. So there is a minor inefficiency.
+[Options]
+onlyObjectReferences, Control whether only explicit initializations made to null for objects should be checked.
+[Rule]
+DesignForExtension
+[Description]
+Checks that classes are designed for extension (subclass creation).
+
+
+Nothing wrong could be with founded classes.
+This check makes sense only for library projects (not application projects)
+which care of ideal OOP-design to make sure that class works in all cases even misusage.
+Even in library projects this check most likely will find classes that are designed
+for extension by somebody. User needs to use suppressions extensively to got a benefit
+from this check, and keep in suppressions all confirmed/known classes that are deigned
+for inheritance intentionally to let the check catch only new classes, and bring this to
+team/user attention.
+
+
+ATTENTION: Only user can decide whether a class is designed for extension or not.
+The check just shows all classes which are possibly designed for extension.
+If smth inappropriate is found please use suppression.
+
+
+ATTENTION: If the method which can be overridden in a subclass has a javadoc comment
+(a good practice is to explain its self-use of overridable methods) the check will not
+rise a violation. The violation can also be skipped if the method which can be overridden
+in a subclass has one or more annotations that are specified in ignoredAnnotations
+option. Note, that by default @Override annotation is not included in the
+ignoredAnnotations set as in a subclass the method which has the annotation can also be
+overridden in its subclass.
+
+
+Problem is described at "Effective Java, 2nd Edition by Joshua Bloch" book, chapter
+"Item 17: Design and document for inheritance or else prohibit it".
+
+
+Some quotes from book:
+
+The class must document its self-use of overridable methods.
+By convention, a method that invokes overridable methods contains a description
+of these invocations at the end of its documentation comment. The description
+begins with the phrase ¡°This implementation.¡±
+
+The best solution to this problem is to prohibit subclassing in classes that
+are not designed and documented to be safely subclassed.
+
+If a concrete class does not implement a standard interface, then you may
+inconvenience some programmers by prohibiting inheritance. If you feel that you
+must allow inheritance from such a class, one reasonable approach is to ensure
+that the class never invokes any of its overridable methods and to document this
+fact. In other words, eliminate the class¡¯s self-use of overridable methods entirely.
+In doing so, you¡¯ll create a class that is reasonably safe to subclass. Overriding a
+method will never affect the behavior of any other method.
+
+
+The check finds classes that have overridable methods (public or protected methods
+that are non-static, not-final, non-abstract) and have non-empty implementation.
+
+
+Rationale: This library design style protects superclasses against
+being broken by subclasses. The downside is that subclasses are
+limited in their flexibility, in particular they cannot prevent
+execution of code in the superclass, but that also means that
+subclasses cannot corrupt the state of the superclass by forgetting
+to call the superclass's method.
+
+
+More specifically,
+it enforces a programming style where superclasses provide empty
+"hooks" that can be implemented by subclasses.
+
+
+Example of code that cause violation as it is designed for extension:
+
+
+
+public abstract class Plant {
+private String roots;
+private String trunk;
+
+protected void validate() {
+if (roots == null) throw new IllegalArgumentException("No roots!");
+if (trunk == null) throw new IllegalArgumentException("No trunk!");
+}
+
+public abstract void grow();
+}
+
+public class Tree extends Plant {
+private List leaves;
+
+@Overrides
+protected void validate() {
+super.validate();
+if (leaves == null) throw new IllegalArgumentException("No leaves!");
+}
+
+public void grow() {
+validate();
+}
+}
+
+
+Example of code without violation:
+
+
+
+public abstract class Plant {
+private String roots;
+private String trunk;
+
+private void validate() {
+if (roots == null) throw new IllegalArgumentException("No roots!");
+if (trunk == null) throw new IllegalArgumentException("No trunk!");
+validateEx();
+}
+
+protected void validateEx() { }
+
+public abstract void grow();
+}
+[Options]
+ignoredAnnotations, Specify annotations which allow the check to skip the method from validation.
+requiredJavadocPhrase, Specify the comment text pattern which qualifies a method as designed for extension. Supports multi-line regex.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

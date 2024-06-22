@@ -1,0 +1,287 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.7 Grouping parentheses: recommended
+Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.
+
+CheckStyle Rules:
+[Rule]
+UnnecessaryParentheses
+[Description]
+Checks if unnecessary parentheses are used in a statement or expression.
+The check will flag the following with warnings:
+
+
+
+return (x);          // parens around identifier
+return (x + 1);      // parens around return value
+int x = (y / 2 + 1); // parens around assignment rhs
+for (int i = (0); i < 10; i++) {  // parens around literal
+t -= (z + 1);                     // parens around assignment rhs
+boolean a = (x > 7 && y > 5)      // parens around expression
+|| z < 9;
+boolean b = (~a) > -27            // parens around ~a
+&& (a-- < 30);        // parens around expression
+[Rule]
+AvoidInlineConditionals
+[Description]
+Detects inline conditionals. Here is one example of an inline conditional:
+
+
+
+String a = getParameter("a");
+String b = (a==null || a.length()<1) ? null : a.substring(1);
+
+
+Rationale: Some developers find inline conditionals hard to read, so
+their employer's coding standards forbid them.
+[Rule]
+InnerAssignment
+[Description]
+Checks for assignments in subexpressions, such as in
+String s = Integer.toString(i = 2);.
+
+
+Rationale: Except for the loop idioms,
+all assignments should occur in their own top-level statement
+to increase readability. With inner assignments like the one given above, it is difficult
+to see all places where a variable is set.
+
+
+Note: Check allows usage of the popular assignments in loops:
+
+
+
+String line;
+while ((line = bufferedReader.readLine()) != null) { // OK
+// process the line
+}
+
+for (;(line = bufferedReader.readLine()) != null;) { // OK
+// process the line
+}
+
+do {
+// process the line
+}
+while ((line = bufferedReader.readLine()) != null); // OK
+
+
+Assignment inside a condition is not a problem here, as the assignment is surrounded by
+an extra pair of parentheses. The comparison is != null and there is no
+chance that intention was to write line == reader.readLine().
+[Rule]
+Indentation
+[Description]
+Checks correct indentation of Java code.
+
+
+The idea behind this is that while pretty printers are
+sometimes convenient for bulk reformats of legacy code, they often
+either aren't configurable enough or just can't anticipate how
+format should be done. Sometimes this is personal preference, other
+times it is practical experience. In any case, this check should
+just ensure that a minimal set of indentation rules is followed.
+
+
+Basic offset indentation is used for indentation inside code blocks.
+For any lines that span more than 1, line wrapping indentation is used for those
+lines after the first.
+Brace adjustment, case, and throws indentations are all used only if those specific
+identifiers start the line. If, for example, a brace is used in the middle of the line,
+its indentation will not take effect.
+All indentations have an accumulative/recursive effect when they are triggered. If
+during a line wrapping, another code block is found and it doesn't end on that same
+line, then the subsequent lines afterwards, in that new code block, are increased on
+top of the line wrap and any indentations above it.
+
+Example:
+
+
+if ((condition1 && condition2)
+|| (condition3 && condition4)    // line wrap with bigger indentation
+||!(condition5 && condition6)) { // line wrap with bigger indentation
+field.doSomething()                    // basic offset
+.doSomething()                     // line wrap
+.doSomething( c -> {               // line wrap
+return c.doSome();               // basic offset
+});
+}
+[Rule]
+RightCurly
+[Description]
+Checks the placement of right curly braces ('}') for code blocks.
+This check supports if-else, try-catch-finally blocks, switch statements, switch cases,
+while-loops, for-loops, method definitions, class definitions, constructor definitions,
+instance, static initialization blocks, annotation definitions and enum definitions.
+For right curly brace of expression blocks of arrays, lambdas and class instances
+please follow issue
+#5945.
+For right curly brace of enum constant please follow issue
+#7519.
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+[Rule]
+NeedBraces
+[Description]
+Checks for braces around code blocks.
+[Rule]
+ParenPad
+[Description]
+Checks the policy on the padding of parentheses; that is whether a
+space is required after a left parenthesis and before a right
+parenthesis, or such spaces are forbidden. No check occurs at
+the right parenthesis after an empty for iterator, at the left
+parenthesis before an empty for initialization, or at the right
+parenthesis of a try-with-resources resource specification where
+the last resource variable has a trailing semicolon.
+Use Check
+EmptyForIteratorPad to validate empty for iterators and
+
+EmptyForInitializerPad to validate empty for initializers.
+Typecasts are also not checked, as there is
+
+TypecastParenPad to validate them.
+[Rule]
+AvoidNestedBlocks
+[Description]
+Finds nested blocks (blocks that are used freely in the code).
+
+
+Rationale: Nested blocks are often leftovers from the
+debugging process, they confuse the reader.
+
+
+For example, this check finds the obsolete braces in
+
+
+
+public void guessTheOutput()
+{
+int whichIsWhich = 0;
+{
+whichIsWhich = 2;
+}
+System.out.println("value = " + whichIsWhich);
+}
+
+and debugging / refactoring leftovers such as
+
+
+// if (conditionThatIsNotUsedAnyLonger)
+{
+System.out.println("unconditional");
+}
+
+
+A case in a switch statement does not implicitly form a block.
+Thus, to be able to introduce local variables that have case
+scope it is necessary to open a nested block. This is
+supported, set the allowInSwitchCase property to true and
+include all statements of the case in the block.
+[Rule]
+BooleanExpressionComplexity
+[Description]
+Restricts the number of boolean operators (&&, ||,
+&, | and ^) in an expression.
+
+
+Rationale: Too many conditions leads to code that is difficult
+to read and hence debug and maintain.
+
+
+Note that the operators & and
+| are not only integer bitwise operators, they are also the
+
+non-shortcut versions of the boolean operators
+&& and ||.
+
+
+Note that &, | and ^ are not checked
+if they are part of constructor or method call
+because they can be applied to non-boolean variables and
+Checkstyle does not know types of methods from different classes.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

@@ -70,8 +70,8 @@ Response Format Should be a json object:
         <property name='name_1' value='value_1'/>
         <property name='name_2' value='value_2'/>
         ...
-        <property name='name_n' value='value_n'/>"
-    "</module>
+        <property name='name_n' value='value_n'/>
+    </module>
     ...
     <module name='rule_name_x'>
         <property name='id' value='id_value_1'/>
@@ -80,28 +80,6 @@ Response Format Should be a json object:
         ...
         <property name='name_m' value='value_m'/>
     </module>"
-}
-
-Example:
-[Input]
-3.3.2 No line-wrapping
-Import statements are not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to import statements.
-[Output]
-{
-    "Answer": "Yes",
-    "Configuration":
-    <module name="Checker">
-        <module name="LineLength">
-            <property name="fileExtensions" value="java"/>
-            <property name="ignorePattern" value="^import.*"/>
-            <property name="max" value="100"/>
-        </module>
-        <module name="TreeWalker">
-            <module name="NoLineWrap">
-                <property name="tokens" value=" IMPORT, STATIC_IMPORT"/>
-            </module>
-        </module>
-    </module>
 }
 """
     prompt = prompt.replace("{{style}}", style)
@@ -144,42 +122,12 @@ def get_checkstyle_str(opt, rule: str=""):
         """
         name & description
         """
-        # fname = "url_name_desc_mopt"
-        # jdata = util.load_json("data/rule/checkstyle/java/", fname)
-        # name_desc_list = []
-        # for rule in jdata:
-        #     rule_name = rule[1]
-        #     rule_desc = rule[2]
-        #     prefix = "Description"
-        #     if rule_desc.startswith(prefix):
-        #         rule_desc = rule_desc[len(prefix):]
-        #     rule_desc = rule_desc.strip()
-        #     name_desc_list.append(
-        #         f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}")
-        # name_desc_str = "\n".join(name_desc_list)
-        # return 
         return augmented_name_desc_str(rule)
 
     def name_desc_mopt(rule: str):
         """
         name & description & modified options
         """
-        # fname = "url_name_desc_mopt"
-        # jdata = util.load_json("data/rule/checkstyle/java/", fname)
-        # name_desc_mopt_list = []
-        # for rule in jdata:
-        #     rule_name = rule[1]
-        #     rule_desc = rule[2]
-        #     prefix = "Description"
-        #     if rule_desc.startswith(prefix):
-        #         rule_desc = rule_desc[len(prefix):]
-        #     rule_desc = rule_desc.strip()
-        #     rule_str = f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}"
-        #     if len(rule) == 4:
-        #         rule_str += f"\n[Options]{rule[3]}"
-        #     name_desc_mopt_list.append(rule_str)
-        # name_desc_mopt_str = "\n".join(name_desc_mopt_list)
-        # return name_desc_mopt_str
         return augmented_name_desc_mopt_str(rule)
 
     def name_sdesc_mopt():
@@ -247,7 +195,7 @@ def get_checkstyle_str(opt, rule: str=""):
     raise Exception(f"Invalid option: {opt}")
 
 
-def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
+def get_all_gpt_res_for_java_checkstyle(opt, model, rules,use_examples=False):
     """
     1. parse each rule of style guide as a string
     2. parse all rules of style tool as a string
@@ -258,7 +206,9 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
     answer_dict = {}
     print(f"baseline: {opt}")
     print(f"model: {model}")
-    for _, row in rules.iterrows():
+    for i, row in rules.iterrows():
+        # if i < 3:
+        #     continue
         rule_name = row.rule
         rule_desc = row.desc
         checkstyle_str = get_checkstyle_str(opt,f"{rule_name}\n{rule_desc}")
@@ -271,15 +221,21 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
                 tool_rules=checkstyle_str,
                 style="CheckStyle",
             )
+        exmaples = []
+        if use_examples:
+            with open(f"data/examples/{opt}_prompt.txt", "r") as f:
+                exmaples.append({"role": "user", "content": f.read()})
+            with open(f"data/examples/response.txt", "r") as f:
+                exmaples.append({"role": "assistant", "content": f.read()})
         # ! check prompt
-        # with open(f"{opt}_prompt.txt", "w") as f:
-        #     f.write(prompt)
-        #     return
+        with open(f"data/testdata/{model}_{opt}_prompt_{i}.txt", "w") as f:
+            f.write(prompt)
+            continue
         try:
             if model == "3.5":
-                answer = agent.get_response(prompt)
+                answer = agent.get_response(prompt,messages=exmaples)
             else:
-                answer = agent.get_response(prompt, model="gpt-4o")
+                answer = agent.get_response(prompt,messages=exmaples, model="gpt-4o")
         except Exception as e:
             print(f"failed to get response for rule: {rule_name}")
             continue
@@ -301,8 +257,8 @@ if __name__ == "__main__":
         "data/benchmark/checkstyle2google_java_benchmark.xlsx")
     for model in ["3.5", "4o"]:
         for str_type in str_types:
-            gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules)
-            # continue
+            gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, model, all_rules,use_examples=True)
+            continue
             # gpt_answers = offline_res(model,str_type)
             csv_results = []
             for index, row in all_rules.iterrows():

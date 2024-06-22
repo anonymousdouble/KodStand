@@ -1,0 +1,92 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+2.3.3 Non-ASCII characters
+For the remaining non-ASCII characters, either the actual Unicode character (e.g. `¡Þ` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+ Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+ Examples:
+ Example 
+ Discussion 
+ `StringunitAbbrev="¦Ìs";` 
+ Best: perfectly clear even without a comment. 
+ `StringunitAbbrev="\u03bcs";//"¦Ìs"` 
+ Allowed, but there's no reason to do this. 
+ `StringunitAbbrev="\u03bcs";//Greeklettermu,"s"` 
+ Allowed, but awkward and prone to mistakes. 
+ `StringunitAbbrev="\u03bcs";` 
+ Poor: the reader has no idea what this is. 
+ `return'\ufeff'+content;//byteordermark` 
+ Good: use escapes for non-printable characters, and comment if necessary.
+ Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and they must be fixed .
+
+CheckStyle Rules:
+[Rule]
+UnusedLocalVariable
+[URL]
+https://checkstyle.org/checks/coding/unusedlocalvariable.html#UnusedLocalVariable
+[Rule]
+JavadocParagraph
+[URL]
+https://checkstyle.org/checks/javadoc/javadocparagraph.html#JavadocParagraph
+[Rule]
+NoWhitespaceBefore
+[URL]
+https://checkstyle.org/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore
+[Rule]
+LambdaBodyLength
+[URL]
+https://checkstyle.org/checks/sizes/lambdabodylength.html#LambdaBodyLength
+[Rule]
+JavadocStyle
+[URL]
+https://checkstyle.org/checks/javadoc/javadocstyle.html#JavadocStyle
+[Rule]
+MagicNumber
+[URL]
+https://checkstyle.org/checks/coding/magicnumber.html#MagicNumber
+[Rule]
+AvoidEscapedUnicodeCharacters
+[URL]
+https://checkstyle.org/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters
+[Rule]
+AbbreviationAsWordInName
+[URL]
+https://checkstyle.org/checks/naming/abbreviationaswordinname.html#AbbreviationAsWordInName
+[Rule]
+EmptyBlock
+[URL]
+https://checkstyle.org/checks/blocks/emptyblock.html#EmptyBlock
+[Rule]
+NoWhitespaceAfter
+[URL]
+https://checkstyle.org/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter
+[Rule]
+ConstantName
+[URL]
+https://checkstyle.org/checks/naming/constantname.html#ConstantName
+[Rule]
+MultipleVariableDeclarations
+[URL]
+https://checkstyle.org/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>"
+    "</module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

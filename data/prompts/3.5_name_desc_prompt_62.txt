@@ -1,0 +1,302 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.8.3.1 Array initializers: can be "block-like"
+Any array initializer may optionally be formatted as if it were a "block-like construct." For example, the following are all valid (not an exhaustive list):
+ new int[] {  new int[] {
+  0, 1, 2, 3 0,
+ }  1,
+  2,
+ new int[] {  3,
+  0, 1,  }
+  2, 3
+ }  new int[]
+  {0, 1, 2, 3}
+
+CheckStyle Rules:
+[Rule]
+ArrayTrailingComma
+[Description]
+Checks that array initialization contains a trailing comma.
+
+
+
+int[] a = new int[]
+{
+1,
+2,
+3,
+};
+
+
+By default, the check demands a comma at the end if neither left nor right curly braces
+are on the same line as the last element of the array.
+
+
+
+return new int[] { 0 };
+return new int[] { 0
+};
+return new int[] {
+0 };
+
+
+Rationale: Putting this comma in makes it easier to change the order
+of the elements or add new elements on the end. Main benefit of a trailing
+comma is that when you add new entry to an array, no surrounding lines are changed.
+
+
+
+{
+100000000000000000000,
+200000000000000000000, // OK
+}
+
+{
+100000000000000000000,
+200000000000000000000,
+300000000000000000000,  // Just this line added, no other changes
+}
+
+
+If closing brace is on the same line as trailing comma, this benefit is gone
+(as the check does not demand a certain location of curly braces the following
+two cases will not produce a violation):
+
+
+
+{100000000000000000000,
+200000000000000000000,} // Trailing comma not needed, line needs to be modified anyway
+
+{100000000000000000000,
+200000000000000000000, // Modified line
+300000000000000000000,} // Added line
+
+
+If opening brace is on the same line as trailing comma there's also (more arguable)
+problem:
+
+
+
+{100000000000000000000, // Line cannot be just duplicated to slightly modify entry
+}
+
+{100000000000000000000,
+100000000000000000001, // More work needed to duplicate
+}
+[Rule]
+NoArrayTrailingComma
+[Description]
+Checks that array initialization do not contain a trailing comma.
+Rationale: JLS allows trailing commas in arrays and enumerations, but does not allow
+them in other locations. To unify the coding style, the use of trailing commas should
+be prohibited.
+
+
+
+int[] foo = new int[] {
+1,
+2
+};
+
+
+The check demands that there should not be any comma after the last element of an array.
+
+
+
+String[] foo = new String[] {
+"FOO",
+"BAR", //violation
+}
+[Rule]
+RightCurly
+[Description]
+Checks the placement of right curly braces ('}') for code blocks.
+This check supports if-else, try-catch-finally blocks, switch statements, switch cases,
+while-loops, for-loops, method definitions, class definitions, constructor definitions,
+instance, static initialization blocks, annotation definitions and enum definitions.
+For right curly brace of expression blocks of arrays, lambdas and class instances
+please follow issue
+#5945.
+For right curly brace of enum constant please follow issue
+#7519.
+[Rule]
+AvoidNestedBlocks
+[Description]
+Finds nested blocks (blocks that are used freely in the code).
+
+
+Rationale: Nested blocks are often leftovers from the
+debugging process, they confuse the reader.
+
+
+For example, this check finds the obsolete braces in
+
+
+
+public void guessTheOutput()
+{
+int whichIsWhich = 0;
+{
+whichIsWhich = 2;
+}
+System.out.println("value = " + whichIsWhich);
+}
+
+and debugging / refactoring leftovers such as
+
+
+// if (conditionThatIsNotUsedAnyLonger)
+{
+System.out.println("unconditional");
+}
+
+
+A case in a switch statement does not implicitly form a block.
+Thus, to be able to introduce local variables that have case
+scope it is necessary to open a nested block. This is
+supported, set the allowInSwitchCase property to true and
+include all statements of the case in the block.
+[Rule]
+ArrayTypeStyle
+[Description]
+Checks the style of array type definitions. Some like Java style:
+public static void main(String[] args) and some like
+C style: public static void main(String args[]).
+
+
+By default, the Check enforces Java style.
+
+
+This check strictly enforces only Java style for method return types
+regardless of the value for 'javaStyle'. For example, byte[] getData().
+This is because C doesn't compile methods with array declarations on the name.
+[Rule]
+EmptyBlock
+[Description]
+Checks for empty blocks. This check does not validate sequential blocks.
+Sequential blocks won't be checked. Also, no violations for fallthrough:
+
+
+switch (a) {
+case 1:                          // no violation
+case 2:                          // no violation
+case 3: someMethod(); { }        // no violation
+default: break;
+}
+
+
+NOTE: This check processes LITERAL_CASE and LITERAL_DEFAULT separately.
+Verification empty block is done for single nearest {@code case} or {@code default}.
+[Rule]
+AvoidInlineConditionals
+[Description]
+Detects inline conditionals. Here is one example of an inline conditional:
+
+
+
+String a = getParameter("a");
+String b = (a==null || a.length()<1) ? null : a.substring(1);
+
+
+Rationale: Some developers find inline conditionals hard to read, so
+their employer's coding standards forbid them.
+[Rule]
+ModifiedControlVariable
+[Description]
+Checks that for loop control variables are not modified inside
+the for block. An example is:
+
+
+
+for (int i = 0; i < 1; i++) {
+i++; // violation
+}
+
+
+Rationale: If the control variable is modified inside the loop
+body, the program flow becomes more difficult to follow. See
+
+FOR statement specification for more details.
+
+
+Such loop would be suppressed:
+
+
+
+for (int i = 0; i < 10;) {
+i++;
+}
+
+
+NOTE:The check works with only primitive type variables.
+The check will not work for arrays used as control variable.An example is
+
+
+
+for (int a[]={0};a[0] < 10;a[0]++) {
+a[0]++;   // it will skip this violation
+}
+[Rule]
+MagicNumber
+[Description]
+Checks that there are no
+
+"magic numbers" where a magic
+number is a numeric literal that is not defined as a constant.
+By default, -1, 0, 1, and 2 are not considered to be magic numbers.
+
+
+Constant definition is any variable/field that has 'final' modifier.
+It is fine to have one constant defining multiple numeric literals within one expression:
+
+
+
+static final int SECONDS_PER_DAY = 24 * 60 * 60;
+static final double SPECIAL_RATIO = 4.0 / 3.0;
+static final double SPECIAL_SUM = 1 + Math.E;
+static final double SPECIAL_DIFFERENCE = 4 - Math.PI;
+static final Border STANDARD_BORDER = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+static final Integer ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE = new Integer(42);
+[Rule]
+AvoidDoubleBraceInitialization
+[Description]
+Detects double brace initialization.
+
+
+Rationale: Double brace initialization (set of
+
+Instance Initializers in class body) may look cool,
+but it is considered as anti-pattern and should be avoided.
+This is also can lead to a hard-to-detect memory leak, if the anonymous class instance is
+returned outside and other object(s) hold reference to it.
+Created anonymous class is not static, it holds an implicit reference to the outer class
+instance.
+See this
+
+blog post and
+
+article for more details.
+Check ignores any comments and semicolons in class body.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

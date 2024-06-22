@@ -1,0 +1,242 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+7.1.3 Block tags
+Any of the standard "block tags" that are used appear in the order `@param` , `@return` , `@throws` , `@deprecated` , and these four types never appear with an empty description. When a block tag doesn't fit on a single line, continuation lines are indented four (or more) spaces from the position of the `@` .
+
+CheckStyle Rules:
+[Rule]
+NonEmptyAtclauseDescription
+[Description]
+Checks that the block tag is followed by description.
+[Options]
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+javadocTokens, javadoc tokens to check
+[Rule]
+SingleLineJavadoc
+[Description]
+Checks that a Javadoc block can fit in a single-line and doesn't
+contain block tags. Javadoc comment that contains at least one block tag
+should be formatted in a few lines.
+[Options]
+ignoreInlineTags, Control whether
+inline tags must be ignored.
+ignoredTags, Specify
+block tags which are ignored by the check.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+RequireEmptyLineBeforeBlockTagGroup
+[Description]
+Checks that one blank line before the block tag if it is present in Javadoc.
+[Options]
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+JavadocBlockTagLocation
+[Description]
+Checks that a
+
+javadoc block tag appears only at the beginning of a line, ignoring
+leading asterisks and white space. A block tag is a token that starts
+with @ symbol and is preceded by a whitespace. This check
+ignores block tags in comments and inside inline tags {@code } and
+{@literal }.
+
+
+Rationale: according to
+
+the specification all javadoc block tags should be placed at the
+beginning of a line. Tags that are not placed at the beginning are treated
+as plain text. To recognize intentional tag placement to text area
+it is better to escape the @ symbol, and all non-escaped
+tags should be located at the beginning of the line. See NOTE section
+for details on how to escape.
+[Options]
+tags, Specify the javadoc tags to process.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+JavadocTagContinuationIndentation
+[Description]
+Checks the indentation of the continuation lines in block tags.
+That is whether the
+continued description of at clauses should be indented or not. If the text is not properly
+indented it throws a violation. A continuation line is when the description starts/spans
+past the line with the tag. Default indentation required is at least 4, but this can be
+changed with the help of properties below.
+[Options]
+offset, Specify how many spaces to use for new indentation level.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+AtclauseOrder
+[Description]
+Checks the order of
+
+javadoc block-tags or javadoc tags.
+
+
+Note: Google used the term "at-clauses" for block tags in their guide till 2017-02-28.
+[Options]
+tagOrder, Specify the order by tags.
+target, Specify block tags targeted.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+WriteTag
+[Description]
+Requires user defined Javadoc tag to be present in Javadoc comment with
+defined format. To define the format for a tag, set property tagFormat to a regular
+expression. Property tagSeverity is used for severity of events when the tag exists.
+[Options]
+tag, Specify the name of tag.
+tagFormat, Specify the regexp to match tag content.
+tagSeverity, Specify the severity level when tag is found and printed.
+tokens, tokens to check
+[Rule]
+InvalidJavadocPosition
+[Description]
+Checks that Javadocs are located at the correct position.
+As specified at
+
+Documentation Comment Specification for the Standard Doclet,
+Javadocs are recognized only when placed immediately before module, package, class,
+interface, constructor, method, or field declarations. Any other position, like
+in the body of a method, will be ignored by the javadoc tool and is considered
+invalid by this check.
+[Options]
+[Rule]
+JavadocMethod
+[Description]
+Checks the Javadoc of a method or constructor.
+
+
+Violates parameters and type parameters
+for which no param tags are
+present can be suppressed by defining property
+allowMissingParamTags.
+
+
+Violates methods which return non-void but for which no return tag is
+present can be suppressed by defining property
+allowMissingReturnTag.
+
+
+Violates exceptions which are declared to be thrown (by throws in the method
+signature or by throw new in the method body), but for which no throws tag is
+present by activation of property validateThrows.
+Note that throw new is not checked in the following places:
+
+
+
+Inside a try block (with catch). It is not possible to determine if the thrown
+exception can be caught by the catch block as there is no knowledge of the
+inheritance hierarchy, so the try block is ignored entirely. However, catch
+and finally blocks, as well as try blocks without catch, are still checked.
+
+
+Local classes, anonymous classes and lambda expressions. It is not known when the
+throw statements inside such classes are going to be evaluated, so they are ignored.
+
+
+
+ATTENTION: Checkstyle does not have information about hierarchy of exception types
+so usage of base class is considered as separate exception type.
+As workaround, you need to specify both types in javadoc (parent and exact type).
+
+
+Javadoc is not required on a method that is tagged with the
+@Override annotation. However, under
+Java 5 it is not possible to mark a method required for an
+interface (this was corrected under Java 6). Hence,
+Checkstyle supports using the convention of using a single
+{@inheritDoc} tag instead of all the
+other tags.
+
+
+Note that only inheritable items will allow the
+{@inheritDoc} tag to be used in place
+of comments. Static methods at all visibilities, private non-static
+methods and constructors are not inheritable.
+
+
+For example, if the following method is
+implementing a method required by an interface, then the
+Javadoc could be done as:
+
+
+
+/** {@inheritDoc} */
+public int checkReturnTag(final int aTagIndex,
+JavadocTag[] aTags,
+int aLineNo)
+[Options]
+accessModifiers, Specify the access modifiers where Javadoc comments are checked.
+allowMissingParamTags, Control whether to ignore violations when a method has parameters but does not have matching param tags in the javadoc.
+allowMissingReturnTag, Control whether to ignore violations when a method returns non-void type and does not have a return tag in the javadoc.
+allowedAnnotations, Specify annotations that allow missed documentation.
+validateThrows, Control whether to validate throws tags.
+tokens, tokens to check
+[Rule]
+AvoidNestedBlocks
+[Description]
+Finds nested blocks (blocks that are used freely in the code).
+
+
+Rationale: Nested blocks are often leftovers from the
+debugging process, they confuse the reader.
+
+
+For example, this check finds the obsolete braces in
+
+
+
+public void guessTheOutput()
+{
+int whichIsWhich = 0;
+{
+whichIsWhich = 2;
+}
+System.out.println("value = " + whichIsWhich);
+}
+
+and debugging / refactoring leftovers such as
+
+
+// if (conditionThatIsNotUsedAnyLonger)
+{
+System.out.println("unconditional");
+}
+
+
+A case in a switch statement does not implicitly form a block.
+Thus, to be able to introduce local variables that have case
+scope it is necessary to open a nested block. This is
+supported, set the allowInSwitchCase property to true and
+include all statements of the case in the block.
+[Options]
+allowInSwitchCase, Allow nested blocks if they are the only child of a switch case.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

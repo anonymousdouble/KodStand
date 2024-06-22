@@ -1,0 +1,244 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+3.3.1 No wildcard imports
+Wildcard imports , static or otherwise, are not used .
+
+CheckStyle Rules:
+[Rule]
+AvoidStaticImport
+[Description]
+Checks that there are no static import statements.
+
+
+Rationale: Importing static members can lead to naming
+conflicts between class' members. It may lead to poor code
+readability since it may no longer be clear what class a
+member resides in (without looking at the import statement).
+[Options]
+excludes, Control whether to allow for certain classes via a star notation to be excluded such as java.lang.Math.* or specific static members to be excluded like java.lang.System.out for a variable or java.lang.Math.random for a method. See notes section for details.
+[Rule]
+AvoidStarImport
+[Description]
+Checks that there are no import statements that use the * notation.
+
+
+Rationale: Importing all classes from a package or static
+members from a class leads to tight coupling between packages
+or classes and might lead to problems when a new version of a
+library introduces name clashes.
+[Options]
+allowClassImports, Control whether to allow starred class imports like import java.util.*;.
+allowStaticMemberImports, Control whether to allow starred static member imports like import static org.junit.Assert.*;.
+excludes, Specify packages where starred class imports are allowed and classes where starred static member imports are allowed.
+[Rule]
+RedundantImport
+[Description]
+Checks for redundant import statements. An import statement is
+considered redundant if:
+
+
+
+It is a duplicate of another import. This is, when a class is
+imported more than once.
+
+
+The class non-statically imported is from the java.lang
+package, e.g. importing java.lang.String.
+
+
+The class non-statically imported is from the same package as the current package.
+[Options]
+[Rule]
+UnusedImports
+[Description]
+Checks for unused import statements. An
+import statement is considered unused if:
+
+
+
+It is not referenced in the file. The algorithm does not support
+wild-card imports like import
+java.io.*;. Most IDE's provide very sophisticated checks
+for imports that handle wild-card imports.
+
+
+The class imported is from the java.lang
+package. For example importing java.lang.String.
+
+
+The class imported is from the same package.
+
+
+A static method is imported when used as method reference. In that case,
+only the type needs to be imported and that's enough to resolve the method.
+
+
+Optionally: it is referenced in Javadoc comments. This check
+is on by default, but it is considered bad practice to introduce
+a compile-time dependency for documentation purposes only.
+As an example, the import java.util.List would be
+considered referenced with the Javadoc comment
+{@link List}. The alternative to avoid introducing a
+compile-time dependency would be to write the Javadoc comment as
+{@link java.util.List}.
+
+
+
+The main limitation of this check is handling the cases where:
+
+
+
+An imported type has the same name as a declaration, such as a member variable.
+
+
+There are two or more static imports with the same method name
+(javac can distinguish imports with same name but different parameters, but checkstyle
+can not due to
+limitation.)
+[Options]
+processJavadoc, Control whether to process Javadoc comments.
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+ImportOrder
+[Description]
+Checks the ordering/grouping of imports. Features are:
+
+groups type/static imports: ensures that groups of imports come in a
+specific order (e.g., java. comes first, javax. comes second,
+then everything else)
+adds a separation between type import groups : ensures that a blank
+line sit between each group
+type/static import groups aren't separated internally: ensures that
+each group aren't separated internally by blank line or comment
+sorts type/static imports inside each group: ensures that imports
+within each group are in lexicographic order
+
+sorts according to case: ensures that the comparison
+between imports is case-sensitive, in
+ASCII sort order
+
+
+arrange static imports: ensures the relative order between
+type imports and static imports (see
+ImportOrderOption)
+[Options]
+caseSensitive, Control whether string comparison should be case-sensitive or not. Case-sensitive sorting is in ASCII sort order. It affects both type imports and static imports.
+groups, Specify list of type import groups. Every group identified either by a common prefix string, or by a regular expression enclosed in forward slashes (e.g. /regexp/). All type imports, which does not match any group, falls into an additional group, located at the end. Thus, the empty list of type groups (the default value) means one group for all type imports.
+option, Specify policy on the relative order between type imports and static imports.
+ordered, Control whether type imports within each group should be sorted. It doesn't affect sorting for static imports.
+separated, Control whether type import groups should be separated by, at least, one blank line or comment and aren't separated internally. It doesn't affect separations for static imports.
+separatedStaticGroups, Control whether static import groups should be separated by, at least, one blank line or comment and aren't separated internally. This property has effect only when the property option is set to top or bottom and when property staticGroups is enabled.
+sortStaticImportsAlphabetically, Control whether static imports located at top or bottom are sorted within the group.
+staticGroups, Specify list of static import groups. Every group identified either by a common prefix string, or by a regular expression enclosed in forward slashes (e.g. /regexp/). All static imports, which does not match any group, fall into an additional group, located at the end. Thus, the empty list of static groups (the default value) means one group for all static imports. This property has effect only when the property option is set to top or bottom.
+useContainerOrderingForStatic, Control whether to use container ordering (Eclipse IDE term) for static imports or not.
+[Rule]
+UnusedLocalVariable
+[Description]
+Checks that a local variable is declared and/or assigned, but not used.
+Doesn't support pattern variables yet.
+Doesn't check array components as array
+components are classified as different kind of variables by JLS.
+[Options]
+[Rule]
+IllegalImport
+[Description]
+Checks for imports from a set of illegal packages.
+[Options]
+illegalClasses, Specify class names to reject, if regexp property is not set, checks if import equals class name. If regexp property is set, then list of class names will be interpreted as regular expressions. Note, all properties for match will be used.
+illegalPkgs, Specify packages to reject, if regexp property is not set, checks if import is the part of package. If regexp property is set, then list of packages will be interpreted as regular expressions. Note, all properties for match will be used.
+regexp, Control whether the illegalPkgs and illegalClasses should be interpreted as regular expressions.
+[Rule]
+MagicNumber
+[Description]
+Checks that there are no
+
+"magic numbers" where a magic
+number is a numeric literal that is not defined as a constant.
+By default, -1, 0, 1, and 2 are not considered to be magic numbers.
+
+
+Constant definition is any variable/field that has 'final' modifier.
+It is fine to have one constant defining multiple numeric literals within one expression:
+
+
+
+static final int SECONDS_PER_DAY = 24 * 60 * 60;
+static final double SPECIAL_RATIO = 4.0 / 3.0;
+static final double SPECIAL_SUM = 1 + Math.E;
+static final double SPECIAL_DIFFERENCE = 4 - Math.PI;
+static final Border STANDARD_BORDER = BorderFactory.createEmptyBorder(3, 3, 3, 3);
+static final Integer ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE = new Integer(42);
+[Options]
+constantWaiverParentToken, Specify tokens that are allowed in the AST path from the number literal to the enclosing constant definition.
+ignoreAnnotation, Ignore magic numbers in annotation declarations.
+ignoreAnnotationElementDefaults, Ignore magic numbers in annotation elements defaults.
+ignoreFieldDeclaration, Ignore magic numbers in field declarations.
+ignoreHashCodeMethod, Ignore magic numbers in hashCode methods.
+ignoreNumbers, Specify non-magic numbers.
+tokens, tokens to check
+[Rule]
+CustomImportOrder
+[Description]
+Checks that the groups of import declarations appear in the order specified
+by the user. If there is an import but its group is not specified in the
+configuration such an import should be placed at the end of the import list.
+[Options]
+customImportOrderRules, Specify ordered list of import groups.
+separateLineBetweenGroups, Force empty line separator between import groups.
+sortImportsInGroupAlphabetically, Force grouping alphabetically, in ASCII sort order.
+specialImportsRegExp, Specify RegExp for SPECIAL_IMPORTS group imports.
+standardPackageRegExp, Specify RegExp for STANDARD_JAVA_PACKAGE group imports.
+thirdPartyPackageRegExp, Specify RegExp for THIRD_PARTY_PACKAGE group imports.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

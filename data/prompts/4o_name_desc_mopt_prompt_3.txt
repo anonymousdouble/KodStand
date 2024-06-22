@@ -1,0 +1,317 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+2.3.3 Non-ASCII characters
+For the remaining non-ASCII characters, either the actual Unicode character (e.g. `¡Þ` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+ Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+ Examples:
+ Example 
+ Discussion 
+ `StringunitAbbrev="¦Ìs";` 
+ Best: perfectly clear even without a comment. 
+ `StringunitAbbrev="\u03bcs";//"¦Ìs"` 
+ Allowed, but there's no reason to do this. 
+ `StringunitAbbrev="\u03bcs";//Greeklettermu,"s"` 
+ Allowed, but awkward and prone to mistakes. 
+ `StringunitAbbrev="\u03bcs";` 
+ Poor: the reader has no idea what this is. 
+ `return'\ufeff'+content;//byteordermark` 
+ Good: use escapes for non-printable characters, and comment if necessary.
+ Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and they must be fixed .
+
+CheckStyle Rules:
+[Rule]
+AvoidEscapedUnicodeCharacters
+[Description]
+Restricts using
+
+Unicode escapes (such as \u221e).
+It is possible to allow using escapes for
+
+non-printable, control characters.
+Also, this check can be configured to allow using escapes
+if trail comment is present. By the option it is possible to
+allow using escapes if literal contains only them.
+[Options]
+allowByTailComment, Allow use escapes if trail comment is present.
+allowEscapesForControlCharacters, Allow use escapes for non-printable, control characters.
+allowIfAllCharactersEscaped, Allow if all characters in literal are escaped.
+allowNonPrintableEscapes, Allow use escapes for non-printable, whitespace characters.
+[Rule]
+SingleSpaceSeparator
+[Description]
+Checks that non-whitespace characters are separated by no more than one
+whitespace. Separating characters by tabs or multiple spaces will be
+reported. Currently, the check doesn't permit horizontal alignment. To inspect
+whitespaces before and after comments, set the property
+validateComments to true.
+
+
+Setting validateComments to false will ignore cases like:
+
+
+
+int i;  // Multiple whitespaces before comment tokens will be ignored.
+private void foo(int  /* whitespaces before and after block-comments will be
+ignored */  i) {
+
+
+Sometimes, users like to space similar items on different lines to the same
+column position for easier reading. This feature isn't supported by this
+check, so both braces in the following case will be reported as violations.
+
+
+
+public long toNanos(long d)  { return d;             } // 2 violations
+public long toMicros(long d) { return d / (C1 / C0); }
+[Options]
+validateComments, Control whether to validate whitespaces surrounding comments.
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+StringLiteralEquality
+[Description]
+Checks that string literals are not used with == or
+!=.
+Since == will compare the object references,
+not the actual value of the strings,
+String.equals() should be used.
+More information can be found
+
+in this article.
+
+
+Rationale: Novice Java programmers often use code like:
+
+
+
+if (x == "something")
+
+when they mean
+
+
+if ("something".equals(x))
+[Options]
+[Rule]
+AbbreviationAsWordInName
+[Description]
+Validates abbreviations (consecutive capital letters) length in identifier name,
+it also allows to enforce camel case naming. Please read more at
+
+Google Style Guide
+to get to know how to avoid long abbreviations in names.
+
+'_' is considered as word separator in identifier name.
+
+allowedAbbreviationLength specifies how many consecutive capital letters are
+allowed in the identifier.
+A value of 3 indicates that up to 4 consecutive capital letters are allowed,
+one after the other, before a violation is printed. The identifier 'MyTEST' would be
+allowed, but 'MyTESTS' would not be.
+A value of 0 indicates that only 1 consecutive capital letter is allowed. This
+is what should be used to enforce strict camel casing. The identifier 'MyTest' would
+be allowed, but 'MyTEst' would not be.
+
+
+ignoreFinal, ignoreStatic, and ignoreStaticFinal
+control whether variables with the respective modifiers are to be ignored.
+Note that a variable that is both static and final will always be considered under
+ignoreStaticFinal only, regardless of the values of ignoreFinal
+and ignoreStatic. So for example if ignoreStatic is true but
+ignoreStaticFinal is false, then static final variables will not be ignored.
+[Options]
+allowedAbbreviationLength, Indicate the number of consecutive capital letters allowed in targeted identifiers (abbreviations in the classes, interfaces, variables and methods names, ... ).
+allowedAbbreviations, Specify abbreviations that must be skipped for checking.
+ignoreFinal, Allow to skip variables with final modifier.
+ignoreOverriddenMethods, Allow to ignore methods tagged with @Override annotation (that usually mean inherited name).
+ignoreStatic, Allow to skip variables with static modifier.
+ignoreStaticFinal, Allow to skip variables with both static and final modifiers.
+tokens, tokens to check
+[Rule]
+AvoidInlineConditionals
+[Description]
+Detects inline conditionals. Here is one example of an inline conditional:
+
+
+
+String a = getParameter("a");
+String b = (a==null || a.length()<1) ? null : a.substring(1);
+
+
+Rationale: Some developers find inline conditionals hard to read, so
+their employer's coding standards forbid them.
+[Options]
+[Rule]
+TrailingComment
+[Description]
+The check to ensure that lines with code do not end with comment.
+For the case of // comments that means that the only thing
+that should precede it is whitespace. It doesn't check comments if
+they do not end a line; for example, it accepts the following:
+Thread.sleep( 10 /*some comment here*/ ); Format
+property is intended to deal with the } // while example.
+
+
+Rationale: Steve McConnell in Code Complete suggests that
+endline comments are a bad practice. An end line comment would be
+one that is on the same line as actual code. For example:
+
+
+
+a = b + c;      // Some insightful comment
+d = e / f;        // Another comment for this line
+
+
+Quoting Code Complete for the justification:
+
+
+"The comments have to be aligned so that they do not
+interfere with the visual structure of the code. If you don't align
+them neatly, they'll make your listing look like it's been through a
+washing machine."
+
+"Endline comments tend to be hard to format...It takes
+time to align them. Such time is not spent learning more about the
+code; it's dedicated solely to the tedious task of pressing the
+spacebar or tab key."
+
+"Endline comments are also hard to maintain. If the code
+on any line containing an endline comment grows, it bumps the
+comment farther out, and all the other endline comments will have to
+bumped out to match. Styles that are hard to maintain aren't
+maintained...."
+
+"Endline comments also tend to be cryptic. The right side
+of the line doesn't offer much room and the desire to keep the
+comment on one line means the comment must be short. Work then goes
+into making the line as short as possible instead of as clear as
+possible. The comment usually ends up as cryptic as
+possible...."
+
+"A systemic problem with endline comments is that it's
+hard to write a meaningful comment for one line of code. Most
+endline comments just repeat the line of code, which hurts more than
+it helps."
+
+
+
+McConnell's comments on being hard to maintain when the size of the line
+changes are even more important in the age of automated
+refactorings.
+[Options]
+format, Specify pattern for strings allowed before the comment.
+legalComment, Define pattern for text allowed in trailing comments. This pattern will not be applied to multiline comments.
+[Rule]
+UpperEll
+[Description]
+Checks that long constants are defined with an upper ell. That
+is 'L' and not 'l'. This is in accordance with the Java
+Language Specification,
+
+Section 3.10.1.
+
+
+Rationale: The lower-case ell 'l' looks a lot like 1.
+[Options]
+[Rule]
+InnerAssignment
+[Description]
+Checks for assignments in subexpressions, such as in
+String s = Integer.toString(i = 2);.
+
+
+Rationale: Except for the loop idioms,
+all assignments should occur in their own top-level statement
+to increase readability. With inner assignments like the one given above, it is difficult
+to see all places where a variable is set.
+
+
+Note: Check allows usage of the popular assignments in loops:
+
+
+
+String line;
+while ((line = bufferedReader.readLine()) != null) { // OK
+// process the line
+}
+
+for (;(line = bufferedReader.readLine()) != null;) { // OK
+// process the line
+}
+
+do {
+// process the line
+}
+while ((line = bufferedReader.readLine()) != null); // OK
+
+
+Assignment inside a condition is not a problem here, as the assignment is surrounded by
+an extra pair of parentheses. The comparison is != null and there is no
+chance that intention was to write line == reader.readLine().
+[Options]
+[Rule]
+SummaryJavadoc
+[Description]
+Checks that
+
+Javadoc summary sentence does not contain phrases that are not recommended to use.
+Summaries that contain only the {@inheritDoc} tag are skipped. Summaries
+that contain a non-empty {@code {@return}} are allowed. Check also violate Javadoc that
+does not contain first sentence, though with {@code {@return}} a period is not required
+as the Javadoc tool adds it.
+[Options]
+forbiddenSummaryFragments, Specify the regexp for forbidden summary fragments.
+period, Specify the period symbol at the end of first javadoc sentence.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

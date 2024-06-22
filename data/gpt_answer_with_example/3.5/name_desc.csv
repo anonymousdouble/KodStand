@@ -1,104 +1,22 @@
 rule_name,description,benchmark,gpt_answer,gpt_configuration
-2.2 File encoding: UTF-8,Source files are encoded in UTF-8 .,,Yes,"<module name='OuterTypeFilename'>
-        <property name='id' value='OuterTypeFilename'/>
-    </module>
-    
-<module name='OneTopLevelClass'>
-        <property name='id' value='OneTopLevelClass'/>
-    </module>
-    
-<module name='FileEncoding'>
-        <property name='charset' value='UTF-8'/>
-    </module>"
+2.2 File encoding: UTF-8,Source files are encoded in UTF-8 .,,No
 2.3.1 Whitespace characters,"Aside from the line terminator sequence, the ASCII horizontal space character ( 0x20 ) is the only whitespace character that appears anywhere in a source file. This implies that:
  All other whitespace characters in string and character literals are escaped. 
  Tab characters are not used for indentation.","<module name=""Checker"">
   <module name=""FileTabCharacter"">
     <property name=""eachLine"" value=""true""/>
   </module>
-</module>",Yes,"<module name='FileTabCharacter'>
-        <property name='id' value='FileTabCharacter'/>
-    </module>
-    
-<module name='SingleSpaceSeparator'>
-        <property name='id' value='SingleSpaceSeparator'/>
-    </module>
-    
-<module name='GenericWhitespace'>
-        <property name='id' value='GenericWhitespace'/>
-    </module>
-    
-<module name='NoWhitespaceBefore'>
-        <property name='id' value='NoWhitespaceBefore'/>
-    </module>
-    
-<module name='Indentation'>
-        <property name='id' value='Indentation'/>
-    </module>
-    
-<module name='TrailingComment'>
-        <property name='id' value='TrailingComment'/>
-    </module>
-    
-<module name='EmptyForIteratorPad'>
-        <property name='id' value='EmptyForIteratorPad'/>
-    </module>
-    
-<module name='LineLength'>
-        <property name='id' value='LineLength'/>
-    </module>
-    
-<module name='WhitespaceAround'>
-        <property name='id' value='WhitespaceAround'/>
-    </module>
-    
-<module name='AvoidEscapedUnicodeCharacters'>
-        <property name='id' value='AvoidEscapedUnicodeCharacters'/>
-    </module>"
+</module>",Yes,"<module name='AvoidEscapedUnicodeCharacters'>
+                        <property name='allowByTailComment' value='true'/>
+                        <property name='allowEscapesForControlCharacters' value='true'/>
+                        <property name='allowNonPrintableEscapes' value='true'/>
+                    </module>"
 2.3.2 Special escape sequences,"For any character that has a special escape sequence ( `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` ), that sequence is used rather than the corresponding octal (e.g. `\012` ) or Unicode (e.g. `\u000a` ) escape.","<module name=""Checker"">
 	<module name=""IllegalTokenText"">
 		<property name=""format"" value=""\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)""/>
 		<property name=""tokens"" value=""STRING_LITERAL, CHAR_LITERAL""/>
 	</module>
-</module>",Yes,"<module name='AvoidEscapedUnicodeCharacters'>
-        <property name='id' value='AvoidEscapedUnicodeCharacters'/>
-    </module>
-    
-<module name='FileTabCharacter'>
-        <property name='id' value='FileTabCharacter'/>
-    </module>
-    
-<module name='GenericWhitespace'>
-        <property name='id' value='GenericWhitespace'/>
-    </module>
-    
-<module name='StringLiteralEquality'>
-        <property name='id' value='StringLiteralEquality'/>
-    </module>
-    
-<module name='IllegalIdentifierName'>
-        <property name='id' value='IllegalIdentifierName'/>
-    </module>
-    
-<module name='TrailingComment'>
-        <property name='id' value='TrailingComment'/>
-    </module>
-    
-<module name='MagicNumber'>
-        <property name='id' value='MagicNumber'/>
-    </module>
-    
-<module name='HideUtilityClassConstructor'>
-        <property name='id' value='HideUtilityClassConstructor'/>
-    </module>
-    
-<module name='IllegalToken'>
-        <property name='id' value='IllegalToken'/>
-    </module>
-    
-<module name='RightCurly'>
-        <property name='id' value='RightCurly'/>
-    </module>"
+</module>",No
 2.3.3 Non-ASCII characters,"For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
  Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
  Examples:
@@ -124,25 +42,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
         </module>
 </module>
 ",Yes,"<module name='AvoidEscapedUnicodeCharacters'>
-        <property name='id' value='AvoidEscapedUnicodeCharacters'/>
-    </module>
-    
-<module name='AbbreviationAsWordInName'>
-        <property name='id' value='AbbreviationAsWordInName'/>
-        <property name='allowedAbbreviationLength' value='3'/>
-    </module>
-    
-<module name='SingleSpaceSeparator'>
-        <property name='id' value='SingleSpaceSeparator'/>
-    </module>
-    
-<module name='HideUtilityClassConstructor'>
-        <property name='id' value='HideUtilityClassConstructor'/>
-    </module>
-    
-<module name='TrailingComment'>
-        <property name='id' value='TrailingComment'/>
-    </module>"
+                        <property name='allowByTailComment' value='true'/>
+                        <property name='allowEscapesForControlCharacters' value='true'/>
+                        <property name='allowNonPrintableEscapes' value='true'/>
+                    </module>"
 3 Source file structure,"A source file consists of, in order : 
  License or copyright information, if present 
  Package statement 
@@ -159,52 +62,8 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 </module>
         </module>
 </module>
-",Yes,"<module name='PackageDeclaration'>
-        <property name='id' value='PackageDeclaration'/>
-    </module>
-    
-<module name='OneTopLevelClass'>
-        <property name='id' value='OneTopLevelClass'/>
-    </module>"
-"3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.",,Yes,"<module name='OneTopLevelClass'>
-        <property name='id' value='OneTopLevelClass'/>
-    </module>
-    
-<module name='NoCodeInFile'>
-        <property name='id' value='NoCodeInFile'/>
-    </module>
-    
-<module name='FileLength'>
-        <property name='id' value='FileLength'/>
-    </module>
-    
-<module name='PackageDeclaration'>
-        <property name='id' value='PackageDeclaration'/>
-    </module>
-    
-<module name='JavadocPackage'>
-        <property name='id' value='JavadocPackage'/>
-    </module>
-    
-<module name='OuterTypeFilename'>
-        <property name='id' value='OuterTypeFilename'/>
-    </module>
-    
-<module name='CommentsIndentation'>
-        <property name='id' value='CommentsIndentation'/>
-    </module>
-    
-<module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
-    </module>
-    
-<module name='LineLength'>
-        <property name='id' value='LineLength'/>
-    </module>
-    
-<module name='UncommentedMain'>
-        <property name='id' value='UncommentedMain'/>
-    </module>"
+",Yes,<module name='PackageDeclaration'/>
+"3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.",,Yes,<module name='OneTopLevelClass'/>
 3.2 Package statement,"The package statement is not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to package statements.","<module name=""Checker"">
         <module name=""LineLength"">
                 <property name=""fileExtensions"" value=""java""/>
@@ -216,45 +75,14 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                         <property name=""tokens"" value=""PACKAGE_DEF""/>
                 </module>
         </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='TreeWalker'>
-            
-<module name='NoLineWrap'>
-                <property name='tokens' value='PACKAGE'/>
-            </module>
-        </module>
+</module>",Yes,"<module name='NoLineWrap'>
+        <property name='tokens' value='PACKAGE_DEF'/>
     </module>"
 3.3.1 No wildcard imports,"Wildcard imports , static or otherwise, are not used .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""AvoidStarImport""/>
   </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='AvoidStaticImport'>
-            <property name='id' value='AvoidStaticImport'/>
-        </module>
-        
-<module name='AvoidStarImport'>
-            <property name='id' value='AvoidStarImport'/>
-        </module>
-        
-<module name='UnusedImports'>
-            <property name='id' value='UnusedImports'/>
-        </module>
-        
-<module name='RedundantImport'>
-            <property name='id' value='RedundantImport'/>
-        </module>
-        
-<module name='ImportOrder'>
-            <property name='id' value='ImportOrder'/>
-        </module>
-        
-<module name='PackageDeclaration'>
-            <property name='id' value='PackageDeclaration'/>
-        </module>
-    </module>"
+</module>",Yes,<module name='AvoidStarImport'/>
 3.3.2 No line-wrapping,"Import statements are not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to import statements.","<module name=""Checker"">
         <module name=""LineLength"">
                 <property name=""fileExtensions"" value=""java""/>
@@ -266,20 +94,8 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                         <property name=""tokens"" value="" IMPORT, STATIC_IMPORT""/>
                 </module>
         </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='LineLength'>
-            <property name='fileExtensions' value='java'/>
-            <property name='ignorePattern' value='^import.*'/>
-            <property name='max' value='100'/>
-        </module>
-        
-<module name='TreeWalker'>
-            
-<module name='NoLineWrap'>
-                <property name='tokens' value='IMPORT, STATIC_IMPORT'/>
-            </module>
-        </module>
+</module>",Yes,"<module name='NoLineWrap'>
+        <property name='tokens' value='IMPORT'/>
     </module>"
 3.3.3 Ordering and spacing,"Imports are ordered as follows:
  All static imports in a single block. 
@@ -293,77 +109,52 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 <property name=""thirdPartyPackageRegExp"" value=""*.""/>
         </module>
 </module>",Yes,"<module name='ImportOrder'>
-        <property name='option' value='top'/>
+        <property name='groups' value='java.,javax.,*'/>
         <property name='separated' value='true'/>
-        <property name='ordered' value='true'/>
-    </module>
-    
-<module name='CustomImportOrder'>
-        <property name='option' value='bottom'/>
+        <property name='sortStaticImports' value='true'/>
+        <property name='sortImportsInGroup' value='true'/>
+        <property name='caseSensitive' value='true'/>
     </module>"
-3.3.4 No static import for classes,Static import is not used for static nested classes. They are imported with normal imports.,,Yes,"<module name='AvoidStaticImport'>
-        <property name='id' value='AvoidStaticImport'/>
-    </module>"
+3.3.4 No static import for classes,Static import is not used for static nested classes. They are imported with normal imports.,,Yes,<module name='AvoidStaticImport'/>
 3.4.1 Exactly one top-level class declaration,Each top-level class resides in a source file of its own.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OneTopLevelClass""/>
   </module>
-</module>",Yes,"<module name='OuterTypeFilename'>
-        <property name='id' value='OuterTypeFilename'/>
-    </module>
-    
-<module name='OneTopLevelClass'>
-        <property name='id' value='OneTopLevelClass'/>
-    </module>"
+</module>",Yes,<module name='OneTopLevelClass'/>
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,Yes,"<module name='DeclarationOrder'>
-        <property name='id' value='DeclarationOrder'/>
-    </module>
-    
-<module name='ModifierOrder'>
-        <property name='id' value='ModifierOrder'/>
+        <property name='ignoreForwardReferences' value='true'/>
     </module>"
 4 Formatting,"Terminology Note: 
  block-like construct refers to the body of a class, method or constructor. Note that, by Section 4.8.3.1 on array initializers , any array initializer may optionally be treated as if it were a block-like construct.",,Yes,"<module name='RightCurly'>
-        <property name='id' value='RightCurly'/>
+        <property name='option' value='nl'/>
     </module>
     
-<module name='AvoidNestedBlocks'>
-        <property name='id' value='AvoidNestedBlocks'/>
-    </module>
+<module name='AvoidNestedBlocks'/>
     
-<module name='AvoidDoubleBraceInitialization'>
-        <property name='id' value='AvoidDoubleBraceInitialization'/>
-    </module>
+<module name='EmptyBlock'/>
     
-<module name='EmptyBlock'>
-        <property name='id' value='EmptyBlock'/>
-    </module>
-    
-<module name='AvoidInlineConditionals'>
-        <property name='id' value='AvoidInlineConditionals'/>
-    </module>
+<module name='AvoidDoubleBraceInitialization'/>
     
 <module name='WhitespaceAround'>
-        <property name='id' value='WhitespaceAround'/>
+        <property name='allowEmptyMethods' value='true'/>
+        <property name='allowEmptyConstructors' value='true'/>
+        <property name='allowEmptyTypes' value='true'/>
+        <property name='allowEmptyLoops' value='true'/>
+        <property name='allowEmptyLambdas' value='true'/>
+        <property name='allowEmptyCatches' value='true'/>
     </module>
     
 <module name='MethodLength'>
-        <property name='id' value='MethodLength'/>
+        <property name='max' value='30'/>
     </module>
     
-<module name='FinalParameters'>
-        <property name='id' value='FinalParameters'/>
-    </module>
+<module name='FinalParameters'/>
     
-<module name='FinalClass'>
-        <property name='id' value='FinalClass'/>
-    </module>
+<module name='FinalClass'/>
     
-<module name='OneStatementPerLine'>
-        <property name='id' value='OneStatementPerLine'/>
-    </module>"
+<module name='OneStatementPerLine'/>"
 4.1.1 Use of optional braces,"Braces are used with `if` , `else` , `for` , `do` and `while` statements, even when the body is empty or contains only a single statement.
  Other optional braces, such as those in a lambda expression, remain optional.","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -374,15 +165,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 </module>
         </module>
 </module>",Yes,"<module name='NeedBraces'>
-        <property name='id' value='NeedBraces'/>
-    </module>
-    
-<module name='RightCurly'>
-        <property name='id' value='RightCurly'/>
-    </module>
-    
-<module name='LeftCurly'>
-        <property name='id' value='LeftCurly'/>
+        <property name='tokens' value='LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_DO, LITERAL_WHILE'/>
     </module>"
 4.1.2 Nonempty blocks: K & R style,"Braces follow the Kernighan and Ritchie style ("" Egyptian brackets "") for nonempty blocks and block-like constructs:
  No line break before the opening brace, except as detailed below. 
@@ -438,15 +221,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 </module>
         </module>
 </module>",Yes,"<module name='RightCurly'>
-        <property name='id' value='RightCurly'/>
-    </module>
-    
-<module name='NeedBraces'>
-        <property name='id' value='NeedBraces'/>
-    </module>
-    
-<module name='LeftCurly'>
-        <property name='id' value='LeftCurly'/>
+        <property name='option' value='nl'/>
     </module>"
 4.1.3 Empty blocks: may be concise,"An empty block or block-like construct may be in K & R style (as described in Section 4.1.2 ). Alternatively, it may be closed immediately after it is opened, with no characters or line break in between ( `{}` ), unless it is part of a multi-block statement (one that directly contains multiple blocks: `if/else` or `try/catch/finally` ).
  Examples:
@@ -463,11 +238,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
   try {
   doSomething();
   } catch (Exception e) {}",,Yes,"<module name='EmptyBlock'>
-        <property name='id' value='EmptyBlock'/>
-    </module>
-    
-<module name='RightCurly'>
-        <property name='id' value='RightCurly'/>
+        <property name='option' value='allowSingleLineStatement'/>
     </module>"
 4.2 Block indentation: +2 spaces,"Each time a new block or block-like construct is opened, the indent increases by two spaces. When the block ends, the indent returns to the previous indent level. The indent level applies to both code and comments throughout the block. (See the example in Section 4.1.2, Nonempty blocks: K & R Style .)","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -481,42 +252,13 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
         <property name='braceAdjustment' value='0'/>
         <property name='caseIndent' value='0'/>
         <property name='throwsIndent' value='0'/>
-    </module>
-    
-<module name='CommentsIndentation'/>
-    
-<module name='JavadocTagContinuationIndentation'/>
-    
-<module name='AvoidNestedBlocks'/>
-    
-<module name='RightCurly'/>
-    
-<module name='OneStatementPerLine'/>
-    
-<module name='SingleSpaceSeparator'/>
-    
-<module name='SingleLineJavadoc'/>
-    
-<module name='NeedBraces'/>
-    
-<module name='TrailingComment'/>"
+        <property name='lineWrappingIndentation' value='2'/>
+    </module>"
 4.3 One statement per line,Each statement is followed by a line break.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OneStatementPerLine""/>
   </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='TreeWalker'>
-            
-<module name='OneStatementPerLine'>
-                <property name='id' value='OneStatementPerLine'/>
-            </module>
-            
-<module name='MultipleVariableDeclarations'>
-                <property name='id' value='MultipleVariableDeclarations'/>
-            </module>
-        </module>
-    </module>"
+</module>",Yes,<module name='OneStatementPerLine'/>
 4.4 Column limit: 100,"Java code has a column limit of 100 characters. A ""character"" means any Unicode code point. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping .
  Each Unicode code point counts as one character, even if its display width is greater or less. For example, if using fullwidth characters , you may choose to wrap the line earlier than where this rule strictly requires.
  Exceptions:
@@ -529,38 +271,13 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 <property name=""max"" value=""100""/>
                 <property name=""fileExtensions"" value=""java""/>
         </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='LineLength'>
-            <property name='fileExtensions' value='java'/>
-            <property name='ignorePattern' value='^import.*'/>
-            <property name='max' value='100'/>
-        </module>
-        
-<module name='TreeWalker'>
-            
-<module name='NoLineWrap'>
-                <property name='tokens' value='IMPORT, STATIC_IMPORT'/>
-            </module>
-        </module>
+</module>",Yes,"<module name='LineLength'>
+        <property name='max' value='100'/>
     </module>"
 4.5 Line-wrapping,"Terminology Note: When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping .
  There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
  Note: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
- Tip: Extracting a method or local variable may solve the problem without the need to line-wrap.",,Yes,"<module name='Checker'>
-        
-<module name='LineLength'>
-            <property name='fileExtensions' value='java'/>
-            <property name='max' value='100'/>
-        </module>
-        
-<module name='TreeWalker'>
-            
-<module name='NoLineWrap'>
-                <property name='tokens' value='IMPORT, STATIC_IMPORT'/>
-            </module>
-        </module>
-    </module>"
+ Tip: Extracting a method or local variable may solve the problem without the need to line-wrap.",,No
 4.5.1 Where to break,"The prime directive of line-wrapping is: prefer to break at a higher syntactic level . Also:
  When a line is broken at a non-assignment operator the break comes before the symbol. (Note that this is not the same practice used in Google style for other languages, such as C++ and JavaScript.) 
  This also applies to the following ""operator-like"" symbols: 
@@ -606,29 +323,12 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 </module>
         </module>
 </module>
-",Yes,"<module name='Checker'>
-        
-<module name='TreeWalker'>
-            
-<module name='Indentation'>
-                <property name='basicOffset' value='4'/>
-                <property name='braceAdjustment' value='0'/>
-                <property name='caseIndent' value='0'/>
-                <property name='throwsIndent' value='0'/>
-            </module>
-            
-<module name='OperatorWrap'>
-                <property name='option' value='NL'/>
-            </module>
-            
+",Yes,"<module name='OperatorWrap'>
+        <property name='option' value='NL'/>
+    </module>
+    
 <module name='MethodParamPad'>
-                <property name='allowLineBreaks' value='true'/>
-            </module>
-            
-<module name='NoLineWrap'>
-                <property name='tokens' value='LAMBDA, ENUM_CONSTANT'/>
-            </module>
-        </module>
+        <property name='allowLineBreaks' value='true'/>
     </module>"
 4.5.2 Indent continuation lines at least +4 spaces,"When line-wrapping, each line after the first (each continuation line ) is indented at least +4 from the original line.
  When there are multiple continuation lines, indentation may be varied beyond +4 as desired. In general, two continuation lines use the same indentation level if and only if they begin with syntactically parallel elements.
@@ -640,17 +340,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                         <property name=""throwsIndent"" value=""4""/>
                 </module>
         </module>
-</module>",Yes,"<module name='Indentation'>
-        <property name='id' value='Indentation'/>
-        <property name='basicOffset' value='4'/>
-        <property name='braceAdjustment' value='0'/>
-        <property name='caseIndent' value='0'/>
-        <property name='throwsIndent' value='0'/>
-    </module>
-    
-<module name='CommentsIndentation'>
-        <property name='id' value='CommentsIndentation'/>
-    </module>"
+</module>",No
 4.6.1 Vertical Whitespace,"A single blank line always appears:
  Between consecutive members or initializers of a class: fields, constructors, methods, nested classes, static initializers, and instance initializers. 
  Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. 
@@ -664,20 +354,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                         <property name=""allowNoEmptyLineBetweenFields"" value=""true""/>
                 </module>
         </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='EmptyLineSeparator'>
-            <property name='tokens' value='PACKAGE_DEF, IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, STATIC_INIT, INSTANCE_INIT'/>
-        </module>
-        
-<module name='WhitespaceAround'>
-            <property name='allowEmptyMethods' value='true'/>
-            <property name='allowEmptyConstructors' value='true'/>
-            <property name='allowEmptyTypes' value='true'/>
-            <property name='allowEmptyLoops' value='true'/>
-            <property name='allowEmptyLambdas' value='true'/>
-        </module>
-    </module>"
+</module>",Yes,<module name='EmptyLineSeparator'/>
 4.6.2 Horizontal whitespace,"Beyond where required by the language or other style rules, and apart from literals, comments and Javadoc, a single ASCII space also appears in the following places only .
  Separating any reserved word, such as `if` , `for` or `catch` , from an open parenthesis ( `(` ) that follows it on that line 
  Separating any reserved word, such as `else` or `catch` , from a closing curly brace ( `}` ) that precedes it on that line 
@@ -722,48 +399,25 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
                 </module>
                 <module name=""NoWhitespaceBeforeCaseDefaultColon""/>
         </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='SingleSpaceSeparator'>
-            <property name='id' value='SingleSpaceSeparator'/>
-        </module>
-        
-<module name='GenericWhitespace'>
-            <property name='id' value='GenericWhitespace'/>
-        </module>
-        
-<module name='WhitespaceAround'>
-            <property name='id' value='WhitespaceAround'/>
-        </module>
-        
-<module name='JavadocMissingWhitespaceAfterAsterisk'>
-            <property name='id' value='JavadocMissingWhitespaceAfterAsterisk'/>
-        </module>
-        
-<module name='NoWhitespaceBefore'>
-            <property name='id' value='NoWhitespaceBefore'/>
-        </module>
-        
-<module name='TrailingComment'>
-            <property name='id' value='TrailingComment'/>
-        </module>
-        
-<module name='NoWhitespaceAfter'>
-            <property name='id' value='NoWhitespaceAfter'/>
-        </module>
-        
-<module name='Indentation'>
-            <property name='id' value='Indentation'/>
-        </module>
-        
-<module name='MethodParamPad'>
-            <property name='id' value='MethodParamPad'/>
-        </module>
-        
-<module name='EmptyLineSeparator'>
-            <property name='id' value='EmptyLineSeparator'/>
-        </module>
-    </module>"
+</module>",Yes,"<module name='SingleSpaceSeparator'>
+        <property name='validateComments' value='true'/>
+    </module>
+    
+<module name='GenericWhitespace'/>
+    
+<module name='WhitespaceAround'/>
+    
+<module name='NoWhitespaceBefore'/>
+    
+<module name='TrailingComment'/>
+    
+<module name='NoWhitespaceAfter'/>
+    
+<module name='Indentation'/>
+    
+<module name='MethodParamPad'/>
+    
+<module name='EmptyLineSeparator'/>"
 4.6.3 Horizontal alignment: never required,"Terminology Note: 
  Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.
  This practice is permitted, but is never required by Google Style. It is not even required to maintain horizontal alignment in places where it was already used.
@@ -777,32 +431,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
  
 
  Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed . More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a ""blast radius."" This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.",,Yes,"<module name='SingleSpaceSeparator'>
-        <property name='validateComments' value='false'/>
-    </module>
-    
-<module name='Indentation'/>
-    
-<module name='AnnotationLocation'/>
-    
-<module name='AvoidInlineConditionals'/>
-    
-<module name='TrailingComment'/>
-    
-<module name='WhitespaceAround'/>
-    
-<module name='JavadocContentLocation'/>
-    
-<module name='OneStatementPerLine'/>
-    
-<module name='LineLength'/>
-    
-<module name='GenericWhitespace'/>"
+        <property name='validateComments' value='true'/>
+    </module>"
 4.7 Grouping parentheses: recommended,"Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.",,Yes,"<module name='UnnecessaryParentheses'>
-        <property name='id' value='UnnecessaryParentheses'/>
-    </module>
-    
-<module name='AvoidInlineConditionals'>
-        <property name='id' value='AvoidInlineConditionals'/>
+        <property name='tokens' value='ASSIGN, LITERAL1, LITERAL2, METHOD_DEF, CTOR_DEF, EXPR, TYPECAST, VARIABLE_DEF'/>
     </module>"
 4.8.1 Enum classes,"After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
  private enum Answer {
@@ -822,46 +454,14 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration
  private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
  
 
- Since enum classes are classes , all other rules for formatting classes apply.",,Yes,"<module name='NoEnumTrailingComma'>
-        <property name='id' value='NoEnumTrailingComma'/>
-    </module>
-    
-<module name='SingleSpaceSeparator'>
-        <property name='id' value='SingleSpaceSeparator'/>
-    </module>
-    
-<module name='RightCurly'>
-        <property name='id' value='RightCurly'/>
-    </module>"
-4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,Yes,"<module name='NeedBraces'>
-        <property name='id' value='NeedBraces'/>
-    </module>
-    
-<module name='MissingSwitchDefault'>
-        <property name='id' value='MissingSwitchDefault'/>
+ Since enum classes are classes , all other rules for formatting classes apply.",,Yes,<module name='NoEnumTrailingComma'/>
+4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,Yes,"<module name='AvoidNestedBlocks'>
+        <property name='allowInSwitchCase' value='true'/>
     </module>"
 4.8.6 Comments,"This section addresses implementation comments . Javadoc is addressed separately in Section 7, Javadoc .
- Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.",,Yes,"<module name='SingleSpaceSeparator'>
-        <property name='validateComments' value='true'/>
-    </module>
-    
-<module name='TrailingComment'/>
-    
-<module name='JavadocMissingWhitespaceAfterAsterisk'/>
-    
-<module name='JavadocParagraph'/>
-    
-<module name='SingleLineJavadoc'/>
-    
-<module name='JavadocStyle'/>
-    
-<module name='JavadocTagContinuationIndentation'/>
-    
-<module name='JavadocMissingLeadingAsterisk'/>
-    
-<module name='JavadocVariable'/>
-    
-<module name='InvalidJavadocPosition'/>"
+ Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.",,Yes,"<module name='TrailingComment'>
+        <property name='format' value='^\\s*//.*$'/>
+    </module>"
 4.8.6.1 Block comment style,"lock comments are indented at the same level as the surrounding code. They may be in /* ... */ style or // ... style. For multi-line /* ... */ comments, subsequent lines must start with * aligned with the * on the previous line.
 
 /*
@@ -878,18 +478,6 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         </module>
 </module>",Yes,"<module name='CommentsIndentation'>
         <property name='id' value='CommentsIndentation'/>
-    </module>
-    
-<module name='TrailingComment'>
-        <property name='id' value='TrailingComment'/>
-    </module>
-    
-<module name='SingleLineJavadoc'>
-        <property name='id' value='SingleLineJavadoc'/>
-    </module>
-    
-<module name='Indentation'>
-        <property name='id' value='Indentation'/>
     </module>"
 4.8.7 Modifiers,"Class and member modifiers, when present, appear in the order recommended by the Java Language Specification:
  public protected private abstract default static final transient volatile synchronized native strictfp","<module name=""Checker"">
@@ -897,94 +485,92 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
     <module name=""ModifierOrder""/>
   </module>
 </module>",Yes,"<module name='ModifierOrder'>
-        <property name='id' value='ModifierOrder'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>""
+    ""
 <module name='RedundantModifier'>
-        <property name='id' value='RedundantModifier'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>""
+    ""
 <module name='FinalClass'>
-        <property name='id' value='FinalClass'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_x' value='value_x'/>
+    </module>""
+    ""
 <module name='VisibilityModifier'>
-        <property name='id' value='VisibilityModifier'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_y' value='value_y'/>
+    </module>""
+    ""
 <module name='DeclarationOrder'>
-        <property name='id' value='DeclarationOrder'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_z' value='value_z'/>
+    </module>""
+    ""
 <module name='InterfaceMemberImpliedModifier'>
-        <property name='id' value='InterfaceMemberImpliedModifier'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_p' value='value_p'/>
+    </module>""
+    ""
 <module name='ClassMemberImpliedModifier'>
-        <property name='id' value='ClassMemberImpliedModifier'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_q' value='value_q'/>
+    </module>""
+    ""
 <module name='HideUtilityClassConstructor'>
-        <property name='id' value='HideUtilityClassConstructor'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_r' value='value_r'/>
+    </module>""
+    ""
 <module name='FinalParameters'>
-        <property name='id' value='FinalParameters'/>
-    </module>
-    
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_s' value='value_s'/>
+    </module>""
+    ""
 <module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_t' value='value_t'/>
     </module>"
 4.8.8 Numeric Literals,"`long` -valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1` ). For example, `3000000000L` rather than `3000000000l` .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""UpperEll""/>
   </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='UpperEll'>
-            <property name='id' value='UpperEll'/>
-        </module>
-    </module>"
+</module>",Yes,<module name='UpperEll'/>
 5.1 Rules common to all identifiers,"Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores. Thus each valid identifier name is matched by the regular expression `\w+` .
  In Google Style, special prefixes or suffixes are not used. For example, these names are not Google Style: `name_` , `mName` , `s_name` and `kName` .",,Yes,"<module name='IllegalIdentifierName'>
-        <property name='id' value='IllegalIdentifierName'/>
-    </module>
-    
-<module name='AbbreviationAsWordInName'>
-        <property name='id' value='AbbreviationAsWordInName'/>
-    </module>
-    
-<module name='ConstantName'>
-        <property name='id' value='ConstantName'/>
-    </module>
-    
-<module name='MemberName'>
-        <property name='id' value='MemberName'/>
-    </module>
-    
-<module name='StaticVariableName'>
-        <property name='id' value='StaticVariableName'/>
-    </module>
-    
-<module name='PackageName'>
-        <property name='id' value='PackageName'/>
-        <property name='format' value='^[a-z]+(\.[a-z][a-z0-9]*)*$'/>
-    </module>
-    
-<module name='CatchParameterName'>
-        <property name='id' value='CatchParameterName'/>
-    </module>
-    
-<module name='IllegalToken'>
-        <property name='id' value='IllegalToken'/>
-    </module>
-    
-<module name='MethodName'>
-        <property name='id' value='MethodName'/>
-    </module>
-    
-<module name='TypeName'>
-        <property name='id' value='TypeName'/>
+        <property name='format' value='\\w+'/>
     </module>"
 5.2.1 Package names,"Package names use only lowercase letters and digits (no underscores). Consecutive words are simply concatenated together. For example, `com.example.deepspace` , not `com.example.deepSpace` or `com.example.deep_space` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -994,7 +580,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='PackageName'>
-        <property name='format' value='^[a-z]+(\.[a-z][a-z0-9]*)*$'/>
+        <property name='format' value='^[a-z]+(\\.[a-z][a-z0-9]*)*$'/>
     </module>"
 5.2.2 Class names,"Class names are written in UpperCamelCase .
  Class names are typically nouns or noun phrases. For example, `Character` or `ImmutableList` . Interface names may also be nouns or noun phrases (for example, `List` ), but may sometimes be adjectives or adjective phrases instead (for example, `Readable` ).
@@ -1007,44 +593,21 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                         <message key=""name.invalidPattern"" value=""Type name ''{0}'' must match pattern ''{1}''.""/>
                 </module>
         </module>
-</module>",Yes,"<module name='FinalClass'>
-        <property name='id' value='FinalClass'/>
-    </module>
-    
-<module name='OneTopLevelClass'>
-        <property name='id' value='OneTopLevelClass'/>
-    </module>
-    
-<module name='AbbreviationAsWordInName'>
-        <property name='id' value='AbbreviationAsWordInName'/>
-    </module>
-    
-<module name='ConstantName'>
-        <property name='id' value='ConstantName'/>
-    </module>
-    
-<module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
-    </module>
-    
-<module name='ModifierOrder'>
-        <property name='id' value='ModifierOrder'/>
-    </module>
-    
-<module name='InterfaceIsType'>
-        <property name='id' value='InterfaceIsType'/>
-    </module>
-    
-<module name='DeclarationOrder'>
-        <property name='id' value='DeclarationOrder'/>
-    </module>
-    
-<module name='OuterTypeFilename'>
-        <property name='id' value='OuterTypeFilename'/>
-    </module>
-    
-<module name='RedundantModifier'>
-        <property name='id' value='RedundantModifier'/>
+</module>",Yes,"<module name='DeclarationOrder'>
+        <property name='option' value='public_static_final_fields'/>
+        <property name='option' value='protected_static_final_fields'/>
+        <property name='option' value='package_static_final_fields'/>
+        <property name='option' value='private_static_final_fields'/>
+        <property name='option' value='public_static_fields'/>
+        <property name='option' value='protected_static_fields'/>
+        <property name='option' value='package_static_fields'/>
+        <property name='option' value='private_static_fields'/>
+        <property name='option' value='public_instance_fields'/>
+        <property name='option' value='protected_instance_fields'/>
+        <property name='option' value='package_instance_fields'/>
+        <property name='option' value='private_instance_fields'/>
+        <property name='option' value='constructors'/>
+        <property name='option' value='methods'/>
     </module>"
 5.2.3 Method names,"Method names are written in lowerCamelCase .
  Method names are typically verbs or verb phrases. For example, `sendMessage` or `stop` .
@@ -1087,11 +650,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='ConstantName'>
-        <property name='id' value='ConstantName'/>
-    </module>
-    
-<module name='StaticVariableName'>
-        <property name='id' value='StaticVariableName'/>
+        <property name='format' value='^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'/>
     </module>"
 5.2.5 Non-constant field names,"Non-constant field names (static or otherwise) are written in lowerCamelCase .
  These names are typically nouns or noun phrases. For example, `computedValues` or `index` .","<module name=""Checker"">
@@ -1101,23 +660,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                         <message key=""name.invalidPattern"" value=""Member name ''{0}'' must match pattern ''{1}''.""/>
                 </module>
         </module>
-</module>",Yes,"<module name='ConstantName'>
-        <property name='id' value='ConstantName'/>
-        <property name='format' value='^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'/>
-    </module>
-    
-<module name='StaticVariableName'>
-        <property name='id' value='StaticVariableName'/>
-        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
-    </module>
-    
-<module name='AbbreviationAsWordInName'>
-        <property name='id' value='AbbreviationAsWordInName'/>
-        <property name='allowedAbbreviationLength' value='0'/>
-        <property name='ignoreFinal' value='false'/>
-        <property name='ignoreStatic' value='false'/>
-        <property name='ignoreStaticFinal' value='false'/>
-    </module>"
+</module>",No
 5.2.6 Parameter names,"Parameter names are written in lowerCamelCase .
  One-character parameter names in public methods should be avoided.","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1140,10 +683,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         </module>
 </module>",Yes,"<module name='ParameterName'>
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
-        <property name='allowOneCharParameter' value='false'/>
-    </module>
-    
-<module name='LambdaParameterName'>
+        <property name='allowOneCharParameterNames' value='false'/>
     </module>"
 5.2.7 Local variable names,"Local variable names are written in lowerCamelCase .
  Even when final and immutable, local variables are not considered to be constants, and should not be styled as constants.","<module name=""Checker"">
@@ -1161,16 +701,8 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='LocalVariableName'>
-        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
-    </module>
-    
-<module name='LocalFinalVariableName'>
-        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
-    </module>
-    
-<module name='FinalLocalVariable'>
-        <property name='ignoreMethodParameters' value='false'/>
-    </module>"
+                        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+                      </module>"
 5.2.8 Type variable names,"Each type variable is named in one of two styles:
  A single capital letter, optionally followed by a single numeral (such as `E` , `T` , `X` , `T2` ) 
  A name in the form used for classes (see Section 5.2.2, Class names ), followed by the capital letter `T` (examples: `RequestT` , `FooBarT` ).","<module name=""Checker"">
@@ -1192,9 +724,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                         <message key=""name.invalidPattern"" value=""Interface type name ''{0}'' must match pattern ''{1}''.""/>
                 </module>
         </module>
-</module>",Yes,"<module name='TypeName'>
-        <property name='format' value='^[A-Z][0-9]*$|^[a-zA-Z]+T$'/>
-    </module>"
+</module>",No
 5.3 Camel case: defined,"Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like ""IPv6"" or ""iOS"" are present. To improve predictability, Google Style specifies the following (nearly) deterministic scheme.
  Beginning with the prose form of the name:
  Convert the phrase to plain ASCII and remove any apostrophes. For example, ""Müller's algorithm"" might become ""Muellers algorithm"". 
@@ -1234,9 +764,6 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         </module>
 </module>",Yes,"<module name='AbbreviationAsWordInName'>
         <property name='allowedAbbreviationLength' value='0'/>
-        <property name='ignoreFinal' value='false'/>
-        <property name='ignoreStatic' value='false'/>
-        <property name='ignoreStaticFinal' value='false'/>
     </module>"
 6.2 Caught exceptions: not ignored,"Except as noted below, it is very rarely correct to do nothing in response to a caught exception. (Typical responses are to log it, or if it is considered ""impossible"", rethrow it as an `AssertionError` .)
  When it truly is appropriate to take no action whatsoever in a catch block, the reason this is justified is explained in a comment.
@@ -1261,23 +788,13 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                         <property name=""tokens"" value=""LITERAL_CATCH""/>
                 </module>
         </module>
-</module>",Yes,"<module name='IllegalCatch'>
-        <property name='id' value='IllegalCatch'/>
-    </module>
-    
-<module name='EmptyCatchBlock'>
-        <property name='id' value='EmptyCatchBlock'/>
-    </module>"
+</module>",No
 6.3 Static members: qualified using class,"When a reference to a static class member must be qualified, it is qualified with that class's name, not with a reference or expression of that class's type.
  Foo aFoo = ...;
  Foo.aStaticMethod(); // good
  aFoo.aStaticMethod(); // bad
  somethingThatYieldsAFoo().aStaticMethod(); // very bad",,Yes,"<module name='StaticVariableName'>
-        <property name='id' value='StaticVariableName'/>
-    </module>
-    
-<module name='ConstantName'>
-        <property name='id' value='ConstantName'/>
+        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
     </module>"
 6.4 Finalizers: not used,"It is extremely rare to override `Object.finalize` .
  Tip: Don't do it. If you absolutely must, first read and understand Effective Java
@@ -1286,9 +803,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
   <module name=""TreeWalker"">
     <module name=""NoFinalizer""/>
   </module>
-</module>",Yes,"<module name='NoFinalizer'>
-        <property name='id' value='NoFinalizer'/>
-    </module>"
+</module>",Yes,<module name='NoFinalizer'/>
 7.1.1 General form,"The basic formatting of Javadoc blocks is as seen in this example:
  /**
   * Multiple lines of Javadoc text are written here,
@@ -1307,19 +822,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
   </module>
 </module>
         ",Yes,"<module name='SingleLineJavadoc'>
-        <property name='id' value='SingleLineJavadoc'/>
-    </module>
-    
-<module name='JavadocParagraph'>
-        <property name='id' value='JavadocParagraph'/>
-    </module>
-    
-<module name='JavadocStyle'>
-        <property name='id' value='JavadocStyle'/>
-    </module>
-    
-<module name='JavadocMissingLeadingAsterisk'>
-        <property name='id' value='JavadocMissingLeadingAsterisk'/>
+        <property name='allowSingleLineJavadoc' value='true'/>
     </module>"
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1327,11 +830,8 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 <module name=""RequireEmptyLineBeforeBlockTagGroup""/>
         </module>
 </module>",Yes,"<module name='JavadocParagraph'>
-        <property name='id' value='JavadocParagraph'/>
-    </module>
-    
-<module name='RequireEmptyLineBeforeBlockTagGroup'>
-        <property name='id' value='RequireEmptyLineBeforeBlockTagGroup'/>
+        <property name='allowMultipleParagraphs' value='true'/>
+        <property name='allowPBeforeFirstWord' value='true'/>
     </module>"
 7.1.3 Block tags,"Any of the standard ""block tags"" that are used appear in the order `@param` , `@return` , `@throws` , `@deprecated` , and these four types never appear with an empty description. When a block tag doesn't fit on a single line, continuation lines are indented four (or more) spaces from the position of the `@` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1344,21 +844,8 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
                 <module name=""NonEmptyAtclauseDescription""/>
         </module>
-</module>",Yes,"<module name='JavadocTagContinuationIndentation'>
-        <property name='id' value='JavadocTagContinuationIndentation'/>
-        <property name='severity' value='warning'/>
-        <property name='indent' value='4'/>
-    </module>
-    
-<module name='AtclauseOrder'>
-        <property name='id' value='AtclauseOrder'/>
-        <property name='severity' value='warning'/>
-        <property name='tagOrder' value='@param, @return, @throws, @deprecated'/>
-    </module>
-    
-<module name='RequireEmptyLineBeforeBlockTagGroup'>
-        <property name='id' value='RequireEmptyLineBeforeBlockTagGroup'/>
-        <property name='severity' value='warning'/>
+</module>",Yes,"<module name='JavadocBlockTagLocation'>
+        <property name='id' value='id_value_1'/>
     </module>"
 7.2 The summary fragment,"Each Javadoc block begins with a brief summary fragment . This fragment is very important: it is the only part of the text that appears in certain contexts such as class and method indexes.
  This is a fragment—a noun phrase or verb phrase, not a complete sentence. It does not begin with `A{@codeFoo}isa...` , or `Thismethodreturns...` , nor does it form a complete imperative sentence like `Savetherecord.` . However, the fragment is capitalized and punctuated as if it were a complete sentence.
@@ -1369,43 +856,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
 		</module>
 	</module>
 </module>",Yes,"<module name='SummaryJavadoc'>
-        <property name='id' value='SummaryJavadoc'/>
-    </module>
-    
-<module name='JavadocStyle'>
-        <property name='id' value='JavadocStyle'/>
-    </module>
-    
-<module name='SingleLineJavadoc'>
-        <property name='id' value='SingleLineJavadoc'/>
-    </module>
-    
-<module name='JavadocContentLocation'>
-        <property name='id' value='JavadocContentLocation'/>
-    </module>
-    
-<module name='JavadocParagraph'>
-        <property name='id' value='JavadocParagraph'/>
-    </module>
-    
-<module name='InvalidJavadocPosition'>
-        <property name='id' value='InvalidJavadocPosition'/>
-    </module>
-    
-<module name='JavadocMissingWhitespaceAfterAsterisk'>
-        <property name='id' value='JavadocMissingWhitespaceAfterAsterisk'/>
-    </module>
-    
-<module name='JavadocVariable'>
-        <property name='id' value='JavadocVariable'/>
-    </module>
-    
-<module name='JavadocBlockTagLocation'>
-        <property name='id' value='JavadocBlockTagLocation'/>
-    </module>
-    
-<module name='AtclauseOrder'>
-        <property name='id' value='AtclauseOrder'/>
+        <property name='allowReturnTag' value='true'/>
     </module>"
 7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
  Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","<module name=""Checker"">
@@ -1422,31 +873,28 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                         <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF""/>
                 </module>
         </module>
-</module>",Yes,"<module name='MissingJavadocType'>
-        <property name='scope' value='PUBLIC'/>
+</module>",Yes,<module name='InvalidJavadocPosition'/>
+7.3.1 Exception: self-explanatory members,"Javadoc is optional for ""simple, obvious"" members like `getFoo()` , in cases where there really and truly is nothing else worthwhile to say but ""Returns the foo"".
+ Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!",,Yes,"<module name='InvalidJavadocPosition'>
+        <property name='allowJavadocAfterAnnotations' value='false'/>
+        <property name='allowJavadocBeforeAnnotations' value='true'/>
+        <property name='allowJavadocBetweenAnnotations' value='false'/>
+    </module>
+    
+<module name='SummaryJavadoc'>
+        <property name='forbiddenSummaryFragments' value='^@inheritDoc$'/>
     </module>
     
 <module name='JavadocVariable'/>
     
-<module name='JavadocPackage'/>
-    
-<module name='MissingJavadocPackage'/>
-    
-<module name='JavadocStyle'/>
-    
-<module name='JavadocMissingWhitespaceAfterAsterisk'/>
-    
-<module name='SummaryJavadoc'/>
-    
-<module name='ModifierOrder'/>"
-7.3.1 Exception: self-explanatory members,"Javadoc is optional for ""simple, obvious"" members like `getFoo()` , in cases where there really and truly is nothing else worthwhile to say but ""Returns the foo"".
- Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!",,Yes,"<module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
+<module name='VisibilityModifier'>
+        <property name='protectedAllowed' value='false'/>
+        <property name='packageAllowed' value='false'/>
     </module>
     
-<module name='InvalidJavadocPosition'>
-        <property name='id' value='InvalidJavadocPosition'/>
-    </module>"
+<module name='InterfaceMemberImpliedModifier'/>
+    
+<module name='AvoidInlineConditionals'/>"
 7.3.2 Exception: overrides,Javadoc is not always present on a method that overrides a supertype method.,"<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""MissingJavadocMethod"">
@@ -1457,55 +905,69 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
+        <property name='allowClasses' value='true'/>
+        <property name='allowMethods' value='true'/>
+        <property name='allowAnnotations' value='true'/>
+        <property name='allowInterfaces' value='true'/>
+        <property name='allowEnums' value='true'/>
+        <property name='allowConstructors' value='true'/>
+        <property name='allowFields' value='true'/>
     </module>"
 7.3.4 Non-required Javadoc,"Other classes and members have Javadoc as needed or desired .
  Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member, that comment is written as Javadoc instead (using `/**` ).
  Non-required Javadoc is not strictly required to follow the formatting rules of Sections 7.1.1, 7.1.2, 7.1.3, and 7.2, though it is of course recommended.",,Yes,"<module name='JavadocVariable'>
-        <property name='id' value='JavadocVariable'/>
+        <property name='allowMissingJavadoc' value='true'/>
+        <property name='ignoreFinal' value='true'/>
+        <property name='ignoreStatic' value='true'/>
+        <property name='ignoreStaticFinal' value='true'/>
     </module>
     
 <module name='MissingJavadocType'>
-        <property name='id' value='MissingJavadocType'/>
+        <property name='scope' value='PUBLIC'/>
     </module>
     
-<module name='InvalidJavadocPosition'>
-        <property name='id' value='InvalidJavadocPosition'/>
-    </module>
+<module name='InvalidJavadocPosition'/>
     
-<module name='SummaryJavadoc'>
-        <property name='id' value='SummaryJavadoc'/>
-    </module>
+<module name='SummaryJavadoc'/>
     
-<module name='MissingJavadocPackage'>
-        <property name='id' value='MissingJavadocPackage'/>
-    </module>
+<module name='MissingJavadocPackage'/>
     
-<module name='JavadocStyle'>
-        <property name='id' value='JavadocStyle'/>
-    </module>
+<module name='JavadocStyle'/>
     
-<module name='JavadocMissingWhitespaceAfterAsterisk'>
-        <property name='id' value='JavadocMissingWhitespaceAfterAsterisk'/>
-    </module>
-    
-<module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
-    </module>
-    
-<module name='WriteTag'>
-        <property name='id' value='WriteTag'/>
-    </module>
-    
-<module name='UnusedImports'>
-        <property name='id' value='UnusedImports'/>
-    </module>"
+<module name='JavadocMissingWhitespaceAfterAsterisk'/>"
 4.8.5.1 Type-use annotations,"Type-use annotations appear immediately before the annotated type. An annotation is a type-use annotation if it is meta-annotated with @Target(ElementType.TYPE_USE). Example:
  final @Nullable String name;
  
 
  public @Nullable Person getPersonByName(String name);",,Yes,"<module name='AnnotationLocation'>
-        <property name='id' value='AnnotationLocation'/>
+        <property name='allowAtMethodLevel' value='false'/>
+        <property name='allowAtParameterLevel' value='false'/>
+        <property name='allowAtVariableLevel' value='false'/>
+        <property name='allowAtClassLevel' value='true'/>
+        <property name='allowAtConstructorLevel' value='false'/>
+        <property name='allowAtFieldLevel' value='false'/>
+        <property name='allowAtInterfaceLevel' value='false'/>
+        <property name='allowAtEnumLevel' value='false'/>
+        <property name='allowAtAnnotationLevel' value='false'/>
+        <property name='allowAtPackageLevel' value='false'/>
+        <property name='allowAtTypeParameterLevel' value='false'/>
+        <property name='allowAtTypeUseLevel' value='true'/>
+        <property name='allowAtModuleLevel' value='false'/>
+        <property name='allowAtRecordLevel' value='false'/>
+        <property name='allowAtLocalVariableLevel' value='false'/>
+        <property name='allowAtRecordComponentLevel' value='false'/>
+        <property name='allowAtConstructorParameterLevel' value='false'/>
+        <property name='allowAtMethodParameterLevel' value='false'/>
+        <property name='allowAtLambdaParameterLevel' value='false'/>
+        <property name='allowAtLambdaVariableLevel' value='false'/>
+        <property name='allowAtResourceVariableLevel' value='false'/>
+        <property name='allowAtExceptionParameterLevel' value='false'/>
+        <property name='allowAtModuleRequiresLevel' value='false'/>
+        <property name='allowAtModuleExportsLevel' value='false'/>
+        <property name='allowAtModuleOpensLevel' value='false'/>
+        <property name='allowAtModuleUsesLevel' value='false'/>
+        <property name='allowAtModuleProvidesLevel' value='false'/>
+        <property name='allowAtRecordComponentParameterLevel' value='false'/>
     </module>"
 4.8.5.2 Class annotations,"Annotations applying to a class appear immediately after the documentation block, and each annotation is listed on a line of its own (that is, one annotation per line). These line breaks do not constitute line-wrapping (Section 4.5, Line-wrapping), so the indentation level is not increased. Example:
  @Deprecated
@@ -1521,7 +983,9 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='AnnotationLocation'>
-        <property name='id' value='AnnotationLocation'/>
+        <property name='allowAnnotationsAfterDocumentation' value='true'/>
+        <property name='allowMultipleAnnotationsOnSameLine' value='false'/>
+        <property name='allowSingleLine' value='false'/>
     </module>"
 4.8.5.3 Method and constructor annotations,"The rules for annotations on method and constructor declarations are the same as the previous section. Example:
  @Deprecated
@@ -1538,25 +1002,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                         <property name=""allowSamelineMultipleAnnotations"" value=""false""/>
                 </module>
         </module>
-</module>",Yes,"<module name='AnnotationLocation'>
-        <property name='id' value='AnnotationLocation'/>
-    </module>
-    
-<module name='DeclarationOrder'>
-        <property name='id' value='DeclarationOrder'/>
-    </module>
-    
-<module name='RedundantModifier'>
-        <property name='id' value='RedundantModifier'/>
-    </module>
-    
-<module name='DesignForExtension'>
-        <property name='id' value='DesignForExtension'/>
-    </module>
-    
-<module name='ModifierOrder'>
-        <property name='id' value='ModifierOrder'/>
-    </module>"
+</module>",Yes,<module name='AnnotationLocation'/>
 4.8.5.4 Field annotations,"Annotations applying to a field also appear immediately after the documentation block, but in this case, multiple annotations (possibly parameterized) may be listed on the same line; for example:
  @Partial @Mock DataLoader loader;","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1569,109 +1015,95 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='AnnotationLocation'>
-        <property name='id' value='AnnotationLocation'/>
-    </module>
-    
-<module name='AnnotationOnSameLine'>
-        <property name='id' value='AnnotationOnSameLine'/>
-    </module>
-    
-<module name='InvalidJavadocPosition'>
-        <property name='id' value='InvalidJavadocPosition'/>
+        <property name='allowAtMethodLevel' value='false'/>
+        <property name='allowAtParameter' value='false'/>
+        <property name='allowAtVariable' value='false'/>
+        <property name='allowAtConstructor' value='false'/>
+        <property name='allowAtClass' value='false'/>
+        <property name='allowAtInterface' value='false'/>
+        <property name='allowAtPackage' value='false'/>
+        <property name='allowAtModule' value='false'/>
+        <property name='allowAtField' value='true'/>
+        <property name='allowAtMethod' value='false'/>
+        <property name='allowAtType' value='false'/>
+        <property name='allowAtLocalVariable' value='false'/>
+        <property name='allowAtAnnotationType' value='false'/>
+        <property name='allowAtEnum' value='false'/>
+        <property name='allowAtEnumConstant' value='false'/>
+        <property name='allowAtRecord' value='false'/>
+        <property name='allowAtRecordComponent' value='false'/>
+        <property name='allowAtTypeUse' value='false'/>
+        <property name='allowAtTypeParameter' value='false'/>
+        <property name='allowAtModuleRequires' value='false'/>
+        <property name='allowAtModuleExports' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
+        <property name='allowAtModuleOpens' value='false'/>
+        <property name='allowAtModuleUses' value='false'/>
+        <property name='allowAtModuleProvides' value='false'/>
     </module>"
-4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,Yes,"<module name='AnnotationLocation'>
-        <property name='id' value='AnnotationLocation'/>
-    </module>
-    
-<module name='AnnotationOnSameLine'>
-        <property name='id' value='AnnotationOnSameLine'/>
-    </module>
-    
-<module name='ParameterAssignment'>
-        <property name='id' value='ParameterAssignment'/>
-    </module>
-    
-<module name='LocalVariableName'>
-        <property name='id' value='LocalVariableName'/>
-    </module>
-    
-<module name='FinalLocalVariable'>
-        <property name='id' value='FinalLocalVariable'/>
-    </module>
-    
-<module name='FinalParameters'>
-        <property name='id' value='FinalParameters'/>
+4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",,Yes,"<module name='LocalVariableName'>
+        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+        <property name='ignoreFinal' value='false'/>
+        <property name='ignoreStatic' value='false'/>
+        <property name='ignoreStaticFinal' value='false'/>
     </module>"
 3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OverloadMethodsDeclarationOrder""/>
   </module>
-</module>",Yes,"<module name='OverloadMethodsDeclarationOrder'>
-        <property name='id' value='OverloadMethodsDeclarationOrder'/>
-    </module>
-    
-<module name='HideUtilityClassConstructor'>
-        <property name='id' value='HideUtilityClassConstructor'/>
-    </module>"
+</module>",Yes,<module name='OverloadMethodsDeclarationOrder'/>
 4.8.2.1 One variable per declaration,"Every variable declaration (field or local) declares only one variable: declarations such as int a, b; are not used.
  Exception: Multiple variable declarations are acceptable in the header of a for loop.","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""MultipleVariableDeclarations""/>
   </module>
 </module>
-        ",Yes,"<module name='MultipleVariableDeclarations'>
-        <property name='id' value='MultipleVariableDeclarations'/>
-    </module>
-    
-<module name='OneStatementPerLine'>
-        <property name='id' value='OneStatementPerLine'/>
-    </module>
-    
-<module name='ModifiedControlVariable'>
-        <property name='id' value='ModifiedControlVariable'/>
-    </module>"
+        ",Yes,<module name='MultipleVariableDeclarations'/>
 4.8.2.2 Declared when needed,"Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. Local variable declarations typically have initializers, or are initialized immediately after declaration.","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""VariableDeclarationUsageDistance""/>
   </module>
-</module>",Yes,"<module name='UnusedLocalVariable'>
-        <property name='id' value='UnusedLocalVariable'/>
-    </module>
-    
-<module name='MultipleVariableDeclarations'>
-        <property name='id' value='MultipleVariableDeclarations'/>
-    </module>
-    
-<module name='FinalLocalVariable'>
-        <property name='id' value='FinalLocalVariable'/>
-    </module>
-    
-<module name='VariableDeclarationUsageDistance'>
-        <property name='id' value='VariableDeclarationUsageDistance'/>
-    </module>
-    
-<module name='ModifiedControlVariable'>
-        <property name='id' value='ModifiedControlVariable'/>
-    </module>
-    
-<module name='AvoidNestedBlocks'>
-        <property name='id' value='AvoidNestedBlocks'/>
-    </module>
-    
-<module name='LocalVariableName'>
-        <property name='id' value='LocalVariableName'/>
-    </module>
-    
-<module name='AvoidInlineConditionals'>
-        <property name='id' value='AvoidInlineConditionals'/>
-    </module>
-    
-<module name='HiddenField'>
-        <property name='id' value='HiddenField'/>
-    </module>
-    
-<module name='OneStatementPerLine'>
-        <property name='id' value='OneStatementPerLine'/>
+</module>",Yes,"<module name='FinalLocalVariable'>
+        <property name='ignoreFinal' value='false'/>
+        <property name='ignoreParameters' value='false'/>
     </module>"
 "4.8.3.1 Array initializers: can be ""block-like""","Any array initializer may optionally be formatted as if it were a ""block-like construct."" For example, the following are all valid (not an exhaustive list):
  new int[] {  new int[] {
@@ -1683,11 +1115,11 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
   2, 3
  }  new int[]
   {0, 1, 2, 3}",,Yes,"<module name='ArrayTrailingComma'>
-        <property name='id' value='ArrayTrailingComma'/>
+        <property name='allowTrailingComma' value='true'/>
     </module>
     
 <module name='NoArrayTrailingComma'>
-        <property name='id' value='NoArrayTrailingComma'/>
+        <property name='allowTrailingComma' value='false'/>
     </module>"
 4.8.3.2 No C-style array declarations,"The square brackets form a part of the type, not the variable: String[] args, not String args[].","<module name=""Checker"">
   <module name=""TreeWalker"">
@@ -1696,18 +1128,10 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
     </module>
   </module>
 </module>",Yes,"<module name='ArrayTypeStyle'>
-        <property name='id' value='ArrayTypeStyle'/>
-    </module>
-    
-<module name='NoArrayTrailingComma'>
-        <property name='id' value='NoArrayTrailingComma'/>
+        <property name='javaStyle' value='true'/>
     </module>"
-4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,Yes,"<module name='NeedBraces'>
-        <property name='id' value='NeedBraces'/>
-    </module>
-    
-<module name='MissingSwitchDefault'>
-        <property name='id' value='MissingSwitchDefault'/>
+4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,Yes,"<module name='AvoidNestedBlocks'>
+        <property name='allowInSwitchCase' value='true'/>
     </module>"
 4.8.4.1 Indentation,"As with any other block, the contents of a switch block are indented +2.
  After a switch label, there is a line break, and the indentation level is increased +2, exactly as if a block were being opened. The following switch label returns to the previous indentation level, as if a block had been closed.","<module name=""Checker"">
@@ -1717,7 +1141,10 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
                 </module>
         </module>
 </module>",Yes,"<module name='Indentation'>
-        <property name='id' value='Indentation'/>
+        <property name='basicOffset' value='2'/>
+        <property name='caseIndent' value='2'/>
+        <property name='throwsIndent' value='2'/>
+        <property name='braceAdjustment' value='true'/>
     </module>"
 4.8.4.2 Fall-through: commented,"Within a switch block, each statement group either terminates abruptly (with a break, continue, return or thrown exception), or is marked with a comment to indicate that execution will or might continue into the next statement group. Any comment that communicates the idea of fall-through is sufficient (typically // fall through). This special comment is not required in the last statement group of the switch block. Example:
  switch (input) {
@@ -1737,15 +1164,10 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
       <property name=""reliefPattern"" value="".*""/>
 </module>
   </module>
-</module>",Yes,"<module name='Checker'>
-        
-<module name='TreeWalker'>
-            
-<module name='FallThrough'>
-                <property name='tokens' value='LITERAL_CASE, LITERAL_DEFAULT'/>
-                <property name='commentFormat' value='fallthru, fall thru, fall-thru, fallthrough, fall through, fall-through, fallsthrough, falls through, falls-through'/>
-            </module>
-        </module>
+</module>",Yes,"<module name='FallThrough'>
+        <property name='tokens' value='CASE_DEF'/>
+        <property name='ignoreComment' value='true'/>
+        <property name='ignoreEmptySwitchStatements' value='true'/>
     </module>"
 4.8.4.3 Presence of the default label,"Each switch statement includes a default statement group, even if it contains no code.
  Exception: A switch statement for an enum type may omit the default statement group, if it includes explicit cases covering all possible values of that type. This enables IDEs or other static analysis tools to issue a warning if any cases were missed.","<module name=""Checker"">
@@ -1753,10 +1175,4 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
     <module name=""MissingSwitchDefault""/>
   </module>
 </module>
-        ",Yes,"<module name='MissingSwitchDefault'>
-        <property name='id' value='MissingSwitchDefault'/>
-    </module>
-    
-<module name='DefaultComesLast'>
-        <property name='id' value='DefaultComesLast'/>
-    </module>"
+        ",Yes,<module name='MissingSwitchDefault'/>

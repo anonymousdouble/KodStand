@@ -1,0 +1,92 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+2.3.3 Non-ASCII characters
+For the remaining non-ASCII characters, either the actual Unicode character (e.g. `¡Þ` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+ Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+ Examples:
+ Example 
+ Discussion 
+ `StringunitAbbrev="¦Ìs";` 
+ Best: perfectly clear even without a comment. 
+ `StringunitAbbrev="\u03bcs";//"¦Ìs"` 
+ Allowed, but there's no reason to do this. 
+ `StringunitAbbrev="\u03bcs";//Greeklettermu,"s"` 
+ Allowed, but awkward and prone to mistakes. 
+ `StringunitAbbrev="\u03bcs";` 
+ Poor: the reader has no idea what this is. 
+ `return'\ufeff'+content;//byteordermark` 
+ Good: use escapes for non-printable characters, and comment if necessary.
+ Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and they must be fixed .
+
+CheckStyle Rules:
+[Rule]
+JavadocContentLocation
+[Description]
+Checks that the Javadoc content begins from the same position for all Javadoc comments in the project.
+[Rule]
+RegexpMultiline
+[Description]
+Checks that a specified pattern matches across multiple lines in any file type.
+[Rule]
+AtclauseOrder
+[Description]
+Checks the order of javadoc block-tags or javadoc tags.
+[Rule]
+InnerTypeLast
+[Description]
+Checks nested (internal) classes/interfaces are declared at the bottom of the primary (top-level) class after all init and static init blocks, method, constructor and field declarations.
+[Rule]
+FinalLocalVariable
+[Description]
+Checks that local variables that never have their values changed are declared final.
+[Rule]
+WhitespaceAfter
+[Description]
+Checks that a token is followed by whitespace, with the exception that it does not check for whitespace after the semicolon of an empty for iterator.
+[Rule]
+ClassFanOutComplexity
+[Description]
+Checks the number of other types a given class/record/interface/enum/annotation relies on.
+[Rule]
+RegexpSinglelineJava
+[Description]
+Checks that a specified pattern matches a single-line in Java files.
+[Rule]
+MagicNumber
+[Description]
+Checks that there are no "magic numbers" where a magic number is a numeric literal that is not defined as a constant.
+[Rule]
+AvoidEscapedUnicodeCharacters
+[Description]
+Restricts using Unicode escapes (such as \u221e).
+[Rule]
+AbbreviationAsWordInName
+[Description]
+Validates abbreviations (consecutive capital letters) length in identifier name, it also allows to enforce camel case naming.
+[Rule]
+EmptyBlock
+[Description]
+Checks for empty blocks.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>"
+    "</module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

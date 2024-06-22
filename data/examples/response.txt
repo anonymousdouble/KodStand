@@ -1,0 +1,9 @@
+{
+    "Answer":  "Yes"
+    "Configuration":
+    "<module name="AvoidEscapedUnicodeCharacters">
+        <property name="allowByTailComment" value="true"/>
+        <property name="allowEscapesForControlCharacters" value="true"/>
+        <property name="allowNonPrintableEscapes" value="true"/>
+    </module>"
+}

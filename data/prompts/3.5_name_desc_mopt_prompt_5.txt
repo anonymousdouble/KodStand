@@ -1,0 +1,178 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+3.1 License or copyright information, if present
+If license or copyright information belongs in a file, it belongs here.
+
+CheckStyle Rules:
+[Rule]
+PackageAnnotation
+[Description]
+Checks that all package annotations are in the package-info.java file.
+
+
+For Java SE8 and above, placement of package annotations in the package-info.java
+file is enforced by the compiler and this check is not necessary.
+
+
+For Java SE7 and below, the Java Language Specification highly recommends
+but doesn't require that annotations are placed in the package-info.java file,
+and this check can help to enforce that placement.
+
+
+See
+Java Language Specification, ¡ì7.4.1 for more info.
+[Options]
+[Rule]
+OneTopLevelClass
+[Description]
+Checks that each top-level class, interface, enum
+or annotation resides in a source file of its own.
+Official description of a 'top-level' term:
+7.6. Top Level Type Declarations.
+If file doesn't contain public class, interface, enum or annotation,
+top-level type is the first type in file.
+[Options]
+[Rule]
+NoCodeInFile
+[Description]
+Checks whether file contains code.
+Java compiler is not raising errors on files with no code or all commented out.
+Files which are considered to have no code:
+
+
+
+File with no text
+
+
+File with single-line comment(s)
+
+
+File with a multi line comment(s).
+[Options]
+[Rule]
+JavadocPackage
+[Description]
+Checks that each Java package has a Javadoc file used for
+commenting. By default, it only allows a package-info.java file, but can be
+configured to allow a package.html
+file.
+
+
+A violation will be reported if both files exist as this is not
+allowed by the Javadoc tool.
+[Options]
+allowLegacy, Allow legacy package.html file to be used.
+fileExtensions, Specify the file extensions of the files to process.
+[Rule]
+OuterTypeFilename
+[Description]
+Checks that the outer type name and the file name match. For example,
+the class Foo must be in a file named
+Foo.java.
+[Options]
+[Rule]
+PackageDeclaration
+[Description]
+Ensures that a class has a package declaration, and (optionally) whether
+the package name matches the directory name for the source file.
+
+
+Rationale: Classes that live in the null package cannot be
+imported. Many novice developers are not aware of this.
+
+
+Packages provide logical namespace to classes and should be stored in
+the form of directory levels to provide physical grouping to your classes.
+These directories are added to the classpath so that your classes
+are visible to JVM when it runs the code.
+[Options]
+matchDirectoryStructure, Control whether to check for directory and package name match.
+[Rule]
+MissingJavadocPackage
+[Description]
+Checks for missing package definition Javadoc comments in package-info.java files.
+
+
+Rationale: description and other related documentation for a package can be written up
+in the package-info.java file and it gets used in the production of the Javadocs.
+See
+link for more info.
+
+
+This check specifically only validates package definitions. It will not validate any
+methods or interfaces declared in the package-info.java file.
+[Options]
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+IllegalImport
+[Description]
+Checks for imports from a set of illegal packages.
+[Options]
+illegalClasses, Specify class names to reject, if regexp property is not set, checks if import equals class name. If regexp property is set, then list of class names will be interpreted as regular expressions. Note, all properties for match will be used.
+illegalPkgs, Specify packages to reject, if regexp property is not set, checks if import is the part of package. If regexp property is set, then list of packages will be interpreted as regular expressions. Note, all properties for match will be used.
+regexp, Control whether the illegalPkgs and illegalClasses should be interpreted as regular expressions.
+[Rule]
+FileLength
+[Description]
+Checks for long source files.
+
+
+Rationale: If a source file becomes very long it is hard to
+understand. Therefore, long classes should usually be refactored
+into several individual classes that focus on a specific task.
+[Options]
+fileExtensions, Specify the file extensions of the files to process.
+max, Specify the maximum number of lines allowed.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

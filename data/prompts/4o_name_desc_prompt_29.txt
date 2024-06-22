@@ -1,0 +1,232 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.8.6 Comments
+This section addresses implementation comments . Javadoc is addressed separately in Section 7, Javadoc .
+ Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.
+
+CheckStyle Rules:
+[Rule]
+SingleSpaceSeparator
+[Description]
+Checks that non-whitespace characters are separated by no more than one
+whitespace. Separating characters by tabs or multiple spaces will be
+reported. Currently, the check doesn't permit horizontal alignment. To inspect
+whitespaces before and after comments, set the property
+validateComments to true.
+
+
+Setting validateComments to false will ignore cases like:
+
+
+
+int i;  // Multiple whitespaces before comment tokens will be ignored.
+private void foo(int  /* whitespaces before and after block-comments will be
+ignored */  i) {
+
+
+Sometimes, users like to space similar items on different lines to the same
+column position for easier reading. This feature isn't supported by this
+check, so both braces in the following case will be reported as violations.
+
+
+
+public long toNanos(long d)  { return d;             } // 2 violations
+public long toMicros(long d) { return d / (C1 / C0); }
+[Rule]
+TrailingComment
+[Description]
+The check to ensure that lines with code do not end with comment.
+For the case of // comments that means that the only thing
+that should precede it is whitespace. It doesn't check comments if
+they do not end a line; for example, it accepts the following:
+Thread.sleep( 10 /*some comment here*/ ); Format
+property is intended to deal with the } // while example.
+
+
+Rationale: Steve McConnell in Code Complete suggests that
+endline comments are a bad practice. An end line comment would be
+one that is on the same line as actual code. For example:
+
+
+
+a = b + c;      // Some insightful comment
+d = e / f;        // Another comment for this line
+
+
+Quoting Code Complete for the justification:
+
+
+"The comments have to be aligned so that they do not
+interfere with the visual structure of the code. If you don't align
+them neatly, they'll make your listing look like it's been through a
+washing machine."
+
+"Endline comments tend to be hard to format...It takes
+time to align them. Such time is not spent learning more about the
+code; it's dedicated solely to the tedious task of pressing the
+spacebar or tab key."
+
+"Endline comments are also hard to maintain. If the code
+on any line containing an endline comment grows, it bumps the
+comment farther out, and all the other endline comments will have to
+bumped out to match. Styles that are hard to maintain aren't
+maintained...."
+
+"Endline comments also tend to be cryptic. The right side
+of the line doesn't offer much room and the desire to keep the
+comment on one line means the comment must be short. Work then goes
+into making the line as short as possible instead of as clear as
+possible. The comment usually ends up as cryptic as
+possible...."
+
+"A systemic problem with endline comments is that it's
+hard to write a meaningful comment for one line of code. Most
+endline comments just repeat the line of code, which hurts more than
+it helps."
+
+
+
+McConnell's comments on being hard to maintain when the size of the line
+changes are even more important in the age of automated
+refactorings.
+[Rule]
+JavadocMissingWhitespaceAfterAsterisk
+[Description]
+Checks that there is at least one whitespace after the leading asterisk.
+Although spaces after asterisks are optional in the Javadoc comments, their absence
+makes the documentation difficult to read. It is the de facto standard to put at least
+one whitespace after the leading asterisk.
+[Rule]
+JavadocParagraph
+[Description]
+Checks the Javadoc paragraph.
+
+
+Checks that:
+
+
+
+There is one blank line between each of two paragraphs.
+
+
+Each paragraph but the first has <p> immediately before the first word, with
+no space after.
+[Rule]
+SingleLineJavadoc
+[Description]
+Checks that a Javadoc block can fit in a single-line and doesn't
+contain block tags. Javadoc comment that contains at least one block tag
+should be formatted in a few lines.
+[Rule]
+JavadocStyle
+[Description]
+Validates Javadoc comments to help ensure they are well formed.
+
+
+The following checks are performed:
+
+
+
+Ensures the first sentence ends with proper punctuation
+(That is a period, question mark, or exclamation mark, by default).
+Note that this check is not applied to inline @return tags,
+because the Javadoc tools automatically appends a period to the end of the tag
+content.
+Javadoc automatically places the first sentence in the
+method summary table and index. Without proper punctuation
+the Javadoc may be malformed. All items eligible for the
+{@inheritDoc} tag are exempt from this
+requirement.
+
+
+Check text for Javadoc statements that do not have any
+description. This includes both completely empty Javadoc,
+and Javadoc with only tags such as @param and @return.
+
+
+Check text for incomplete HTML tags. Verifies that HTML
+tags have corresponding end tags and issues an "Unclosed
+HTML tag found:" error if not. An "Extra HTML tag found:"
+error is issued if an end tag is found without a previous
+open tag.
+
+
+Check that a package Javadoc comment is well-formed (as
+described above).
+
+
+Check for allowed HTML tags. The list of allowed HTML tags
+is "a", "abbr", "acronym", "address", "area", "b", "bdo", "big",
+"blockquote", "br", "caption", "cite", "code", "colgroup", "dd",
+"del", "dfn", "div", "dl", "dt", "em", "fieldset", "font", "h1",
+"h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li",
+"ol", "p", "pre", "q", "samp", "small", "span", "strong", "sub",
+"sup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "tt",
+"u", "ul", "var".
+
+
+
+These checks were patterned after the checks made by the
+DocCheck
+doclet available from Sun. Note: Original Sun's DocCheck tool does not exist anymore.
+[Rule]
+JavadocTagContinuationIndentation
+[Description]
+Checks the indentation of the continuation lines in block tags.
+That is whether the
+continued description of at clauses should be indented or not. If the text is not properly
+indented it throws a violation. A continuation line is when the description starts/spans
+past the line with the tag. Default indentation required is at least 4, but this can be
+changed with the help of properties below.
+[Rule]
+JavadocMissingLeadingAsterisk
+[Description]
+Checks if the javadoc has
+
+leading asterisks
+
+on each line.
+
+
+The check does not require asterisks on the first line, nor on the last line
+if it is blank. All other lines in a Javadoc should start with *,
+including blank lines and code blocks.
+[Rule]
+JavadocVariable
+[Description]
+Checks that a variable has a Javadoc comment. Ignores serialVersionUID
+fields.
+[Rule]
+InvalidJavadocPosition
+[Description]
+Checks that Javadocs are located at the correct position.
+As specified at
+
+Documentation Comment Specification for the Standard Doclet,
+Javadocs are recognized only when placed immediately before module, package, class,
+interface, constructor, method, or field declarations. Any other position, like
+in the body of a method, will be ignored by the javadoc tool and is considered
+invalid by this check.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

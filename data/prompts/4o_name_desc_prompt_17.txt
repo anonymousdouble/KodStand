@@ -1,0 +1,245 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.2 Block indentation: +2 spaces
+Each time a new block or block-like construct is opened, the indent increases by two spaces. When the block ends, the indent returns to the previous indent level. The indent level applies to both code and comments throughout the block. (See the example in Section 4.1.2, Nonempty blocks: K & R Style .)
+
+CheckStyle Rules:
+[Rule]
+Indentation
+[Description]
+Checks correct indentation of Java code.
+
+
+The idea behind this is that while pretty printers are
+sometimes convenient for bulk reformats of legacy code, they often
+either aren't configurable enough or just can't anticipate how
+format should be done. Sometimes this is personal preference, other
+times it is practical experience. In any case, this check should
+just ensure that a minimal set of indentation rules is followed.
+
+
+Basic offset indentation is used for indentation inside code blocks.
+For any lines that span more than 1, line wrapping indentation is used for those
+lines after the first.
+Brace adjustment, case, and throws indentations are all used only if those specific
+identifiers start the line. If, for example, a brace is used in the middle of the line,
+its indentation will not take effect.
+All indentations have an accumulative/recursive effect when they are triggered. If
+during a line wrapping, another code block is found and it doesn't end on that same
+line, then the subsequent lines afterwards, in that new code block, are increased on
+top of the line wrap and any indentations above it.
+
+Example:
+
+
+if ((condition1 && condition2)
+|| (condition3 && condition4)    // line wrap with bigger indentation
+||!(condition5 && condition6)) { // line wrap with bigger indentation
+field.doSomething()                    // basic offset
+.doSomething()                     // line wrap
+.doSomething( c -> {               // line wrap
+return c.doSome();               // basic offset
+});
+}
+[Rule]
+CommentsIndentation
+[Description]
+Controls the indentation between comments and surrounding code.
+Comments are indented at the same level as the surrounding code.
+Detailed info about such convention can be found
+
+here
+[Rule]
+JavadocTagContinuationIndentation
+[Description]
+Checks the indentation of the continuation lines in block tags.
+That is whether the
+continued description of at clauses should be indented or not. If the text is not properly
+indented it throws a violation. A continuation line is when the description starts/spans
+past the line with the tag. Default indentation required is at least 4, but this can be
+changed with the help of properties below.
+[Rule]
+AvoidNestedBlocks
+[Description]
+Finds nested blocks (blocks that are used freely in the code).
+
+
+Rationale: Nested blocks are often leftovers from the
+debugging process, they confuse the reader.
+
+
+For example, this check finds the obsolete braces in
+
+
+
+public void guessTheOutput()
+{
+int whichIsWhich = 0;
+{
+whichIsWhich = 2;
+}
+System.out.println("value = " + whichIsWhich);
+}
+
+and debugging / refactoring leftovers such as
+
+
+// if (conditionThatIsNotUsedAnyLonger)
+{
+System.out.println("unconditional");
+}
+
+
+A case in a switch statement does not implicitly form a block.
+Thus, to be able to introduce local variables that have case
+scope it is necessary to open a nested block. This is
+supported, set the allowInSwitchCase property to true and
+include all statements of the case in the block.
+[Rule]
+RightCurly
+[Description]
+Checks the placement of right curly braces ('}') for code blocks.
+This check supports if-else, try-catch-finally blocks, switch statements, switch cases,
+while-loops, for-loops, method definitions, class definitions, constructor definitions,
+instance, static initialization blocks, annotation definitions and enum definitions.
+For right curly brace of expression blocks of arrays, lambdas and class instances
+please follow issue
+#5945.
+For right curly brace of enum constant please follow issue
+#7519.
+[Rule]
+OneStatementPerLine
+[Description]
+Checks that there is only one statement per line.
+
+
+Rationale: It's very difficult to read multiple statements on one line.
+
+
+In the Java programming language, statements are the fundamental unit of
+execution. All statements except blocks are terminated by a semicolon.
+Blocks are denoted by open and close curly braces.
+
+
+OneStatementPerLineCheck checks the following types of statements:
+variable declaration statements, empty statements, import statements,
+assignment statements, expression statements, increment statements,
+object creation statements, 'for loop' statements, 'break' statements,
+'continue' statements, 'return' statements, resources statements (optional).
+[Rule]
+SingleSpaceSeparator
+[Description]
+Checks that non-whitespace characters are separated by no more than one
+whitespace. Separating characters by tabs or multiple spaces will be
+reported. Currently, the check doesn't permit horizontal alignment. To inspect
+whitespaces before and after comments, set the property
+validateComments to true.
+
+
+Setting validateComments to false will ignore cases like:
+
+
+
+int i;  // Multiple whitespaces before comment tokens will be ignored.
+private void foo(int  /* whitespaces before and after block-comments will be
+ignored */  i) {
+
+
+Sometimes, users like to space similar items on different lines to the same
+column position for easier reading. This feature isn't supported by this
+check, so both braces in the following case will be reported as violations.
+
+
+
+public long toNanos(long d)  { return d;             } // 2 violations
+public long toMicros(long d) { return d / (C1 / C0); }
+[Rule]
+SingleLineJavadoc
+[Description]
+Checks that a Javadoc block can fit in a single-line and doesn't
+contain block tags. Javadoc comment that contains at least one block tag
+should be formatted in a few lines.
+[Rule]
+NeedBraces
+[Description]
+Checks for braces around code blocks.
+[Rule]
+TrailingComment
+[Description]
+The check to ensure that lines with code do not end with comment.
+For the case of // comments that means that the only thing
+that should precede it is whitespace. It doesn't check comments if
+they do not end a line; for example, it accepts the following:
+Thread.sleep( 10 /*some comment here*/ ); Format
+property is intended to deal with the } // while example.
+
+
+Rationale: Steve McConnell in Code Complete suggests that
+endline comments are a bad practice. An end line comment would be
+one that is on the same line as actual code. For example:
+
+
+
+a = b + c;      // Some insightful comment
+d = e / f;        // Another comment for this line
+
+
+Quoting Code Complete for the justification:
+
+
+"The comments have to be aligned so that they do not
+interfere with the visual structure of the code. If you don't align
+them neatly, they'll make your listing look like it's been through a
+washing machine."
+
+"Endline comments tend to be hard to format...It takes
+time to align them. Such time is not spent learning more about the
+code; it's dedicated solely to the tedious task of pressing the
+spacebar or tab key."
+
+"Endline comments are also hard to maintain. If the code
+on any line containing an endline comment grows, it bumps the
+comment farther out, and all the other endline comments will have to
+bumped out to match. Styles that are hard to maintain aren't
+maintained...."
+
+"Endline comments also tend to be cryptic. The right side
+of the line doesn't offer much room and the desire to keep the
+comment on one line means the comment must be short. Work then goes
+into making the line as short as possible instead of as clear as
+possible. The comment usually ends up as cryptic as
+possible...."
+
+"A systemic problem with endline comments is that it's
+hard to write a meaningful comment for one line of code. Most
+endline comments just repeat the line of code, which hurts more than
+it helps."
+
+
+
+McConnell's comments on being hard to maintain when the size of the line
+changes are even more important in the age of automated
+refactorings.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

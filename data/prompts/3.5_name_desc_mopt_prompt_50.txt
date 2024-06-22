@@ -1,0 +1,266 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+7.3 Where Javadoc is used
+At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
+ Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .
+
+CheckStyle Rules:
+[Rule]
+InvalidJavadocPosition
+[Description]
+Checks that Javadocs are located at the correct position.
+As specified at
+
+Documentation Comment Specification for the Standard Doclet,
+Javadocs are recognized only when placed immediately before module, package, class,
+interface, constructor, method, or field declarations. Any other position, like
+in the body of a method, will be ignored by the javadoc tool and is considered
+invalid by this check.
+[Options]
+[Rule]
+MissingJavadocPackage
+[Description]
+Checks for missing package definition Javadoc comments in package-info.java files.
+
+
+Rationale: description and other related documentation for a package can be written up
+in the package-info.java file and it gets used in the production of the Javadocs.
+See
+link for more info.
+
+
+This check specifically only validates package definitions. It will not validate any
+methods or interfaces declared in the package-info.java file.
+[Options]
+[Rule]
+MissingJavadocType
+[Description]
+Checks for missing Javadoc comments for class, enum, interface, and annotation
+interface definitions. The scope to verify is specified using the Scope
+class and defaults to Scope.PUBLIC. To verify
+another scope, set property scope to one of the
+Scope constants.
+[Options]
+excludeScope, Specify the visibility scope where Javadoc comments are not checked.
+scope, Specify the visibility scope where Javadoc comments are checked.
+skipAnnotations, Specify annotations that allow missed documentation. If annotation is present in target sources in multiple forms of qualified name, all forms should be listed in this property.
+tokens, tokens to check
+[Rule]
+JavadocPackage
+[Description]
+Checks that each Java package has a Javadoc file used for
+commenting. By default, it only allows a package-info.java file, but can be
+configured to allow a package.html
+file.
+
+
+A violation will be reported if both files exist as this is not
+allowed by the Javadoc tool.
+[Options]
+allowLegacy, Allow legacy package.html file to be used.
+fileExtensions, Specify the file extensions of the files to process.
+[Rule]
+UnusedImports
+[Description]
+Checks for unused import statements. An
+import statement is considered unused if:
+
+
+
+It is not referenced in the file. The algorithm does not support
+wild-card imports like import
+java.io.*;. Most IDE's provide very sophisticated checks
+for imports that handle wild-card imports.
+
+
+The class imported is from the java.lang
+package. For example importing java.lang.String.
+
+
+The class imported is from the same package.
+
+
+A static method is imported when used as method reference. In that case,
+only the type needs to be imported and that's enough to resolve the method.
+
+
+Optionally: it is referenced in Javadoc comments. This check
+is on by default, but it is considered bad practice to introduce
+a compile-time dependency for documentation purposes only.
+As an example, the import java.util.List would be
+considered referenced with the Javadoc comment
+{@link List}. The alternative to avoid introducing a
+compile-time dependency would be to write the Javadoc comment as
+{@link java.util.List}.
+
+
+
+The main limitation of this check is handling the cases where:
+
+
+
+An imported type has the same name as a declaration, such as a member variable.
+
+
+There are two or more static imports with the same method name
+(javac can distinguish imports with same name but different parameters, but checkstyle
+can not due to
+limitation.)
+[Options]
+processJavadoc, Control whether to process Javadoc comments.
+[Rule]
+JavadocContentLocation
+[Description]
+Checks that the Javadoc content begins from the same position
+for all Javadoc comments in the project. Any leading asterisks and spaces
+are not counted as the beginning of the content and are therefore ignored.
+
+
+It is possible to enforce two different styles:
+
+
+
+{@code first_line} - Javadoc content starts from the first line:
+
+
+
+/** Summary text.
+* More details.
+*/
+public void method();
+
+
+
+{@code second_line} - Javadoc content starts from the second line:
+
+
+
+/**
+* Summary text.
+* More details.
+*/
+public void method();
+[Options]
+location, Specify the policy on placement of the Javadoc content.
+[Rule]
+JavadocParagraph
+[Description]
+Checks the Javadoc paragraph.
+
+
+Checks that:
+
+
+
+There is one blank line between each of two paragraphs.
+
+
+Each paragraph but the first has <p> immediately before the first word, with
+no space after.
+[Options]
+allowNewlineParagraph, Control whether the <p> tag should be placed immediately before the first word.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+JavadocMissingWhitespaceAfterAsterisk
+[Description]
+Checks that there is at least one whitespace after the leading asterisk.
+Although spaces after asterisks are optional in the Javadoc comments, their absence
+makes the documentation difficult to read. It is the de facto standard to put at least
+one whitespace after the leading asterisk.
+[Options]
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+JavadocVariable
+[Description]
+Checks that a variable has a Javadoc comment. Ignores serialVersionUID
+fields.
+[Options]
+excludeScope, Specify the visibility scope where Javadoc comments are not checked.
+ignoreNamePattern, Specify the regexp to define variable names to ignore.
+scope, Specify the visibility scope where Javadoc comments are checked.
+tokens, tokens to check
+[Rule]
+JavadocStyle
+[Description]
+Validates Javadoc comments to help ensure they are well formed.
+
+
+The following checks are performed:
+
+
+
+Ensures the first sentence ends with proper punctuation
+(That is a period, question mark, or exclamation mark, by default).
+Note that this check is not applied to inline @return tags,
+because the Javadoc tools automatically appends a period to the end of the tag
+content.
+Javadoc automatically places the first sentence in the
+method summary table and index. Without proper punctuation
+the Javadoc may be malformed. All items eligible for the
+{@inheritDoc} tag are exempt from this
+requirement.
+
+
+Check text for Javadoc statements that do not have any
+description. This includes both completely empty Javadoc,
+and Javadoc with only tags such as @param and @return.
+
+
+Check text for incomplete HTML tags. Verifies that HTML
+tags have corresponding end tags and issues an "Unclosed
+HTML tag found:" error if not. An "Extra HTML tag found:"
+error is issued if an end tag is found without a previous
+open tag.
+
+
+Check that a package Javadoc comment is well-formed (as
+described above).
+
+
+Check for allowed HTML tags. The list of allowed HTML tags
+is "a", "abbr", "acronym", "address", "area", "b", "bdo", "big",
+"blockquote", "br", "caption", "cite", "code", "colgroup", "dd",
+"del", "dfn", "div", "dl", "dt", "em", "fieldset", "font", "h1",
+"h2", "h3", "h4", "h5", "h6", "hr", "i", "img", "ins", "kbd", "li",
+"ol", "p", "pre", "q", "samp", "small", "span", "strong", "sub",
+"sup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "tt",
+"u", "ul", "var".
+
+
+
+These checks were patterned after the checks made by the
+DocCheck
+doclet available from Sun. Note: Original Sun's DocCheck tool does not exist anymore.
+[Options]
+checkEmptyJavadoc, Control whether to check if the Javadoc is missing a describing text.
+checkFirstSentence, Control whether to check the first sentence for proper end of sentence.
+checkHtml, Control whether to check for incomplete HTML tags.
+endOfSentenceFormat, Specify the format for matching the end of a sentence.
+excludeScope, Specify the visibility scope where Javadoc comments are not checked.
+scope, Specify the visibility scope where Javadoc comments are checked.
+tokens, tokens to check
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

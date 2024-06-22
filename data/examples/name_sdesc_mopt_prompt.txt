@@ -1,0 +1,139 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+2.3.3 Non-ASCII characters
+For the remaining non-ASCII characters, either the actual Unicode character (e.g. `¡Þ` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+ Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+ Examples:
+ Example 
+ Discussion 
+ `StringunitAbbrev="¦Ìs";` 
+ Best: perfectly clear even without a comment. 
+ `StringunitAbbrev="\u03bcs";//"¦Ìs"` 
+ Allowed, but there's no reason to do this. 
+ `StringunitAbbrev="\u03bcs";//Greeklettermu,"s"` 
+ Allowed, but awkward and prone to mistakes. 
+ `StringunitAbbrev="\u03bcs";` 
+ Poor: the reader has no idea what this is. 
+ `return'\ufeff'+content;//byteordermark` 
+ Good: use escapes for non-printable characters, and comment if necessary.
+ Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and they must be fixed .
+
+CheckStyle Rules:
+[Rule]
+NoEnumTrailingComma
+[Description]
+Checks that enum definition does not contain a trailing comma.
+[Options]
+[Rule]
+UniqueProperties
+[Description]
+Detects duplicated keys in properties files.
+[Options]
+fileExtensions, Specify the file extensions of the files to process.
+[Rule]
+JavadocTagContinuationIndentation
+[Description]
+Checks the indentation of the continuation lines in block tags.
+[Options]
+offset, Specify how many spaces to use for new indentation level.
+violateExecutionOnNonTightHtml, Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at
+Tight-HTML Rules.
+[Rule]
+LambdaParameterName
+[Description]
+Checks lambda parameter names.
+[Options]
+format, Sets the pattern to match valid identifiers.
+[Rule]
+SuperFinalize
+[Description]
+Checks that an overriding finalize() method invokes super.finalize().
+[Options]
+[Rule]
+EmptyForIteratorPad
+[Description]
+Checks the padding of an empty for iterator; that is whether a white space is required at an empty for iterator, or such white space is forbidden.
+[Options]
+option, Specify policy on how to pad an empty for iterator.
+[Rule]
+OneStatementPerLine
+[Description]
+Checks that there is only one statement per line.
+[Options]
+treatTryResourcesAsStatement, Enable resources processing.
+[Rule]
+InterfaceTypeParameterName
+[Description]
+Checks that interface type parameter names conform to a specified pattern.
+[Options]
+format, Sets the pattern to match valid identifiers.
+[Rule]
+UnnecessarySemicolonAfterTypeMemberDeclaration
+[Description]
+Checks if unnecessary semicolon is used after type member declaration.
+[Options]
+tokens, tokens to check
+[Rule]
+AvoidEscapedUnicodeCharacters
+[Description]
+Restricts using Unicode escapes (such as \u221e).
+[Options]
+allowByTailComment, Allow use escapes if trail comment is present.
+allowEscapesForControlCharacters, Allow use escapes for non-printable, control characters.
+allowIfAllCharactersEscaped, Allow if all characters in literal are escaped.
+allowNonPrintableEscapes, Allow use escapes for non-printable, whitespace characters.
+[Rule]
+LocalVariableName
+[Description]
+Checks that local, non-final variable names conform to a specified pattern.
+[Options]
+allowOneCharVarInForLoop, Allow one character variable name in
+initialization expressions in FOR loop if one char variable name is prohibited by format regexp.
+format, Sets the pattern to match valid identifiers.
+[Rule]
+NestedTryDepth
+[Description]
+Restricts nested try-catch-finally blocks to a specified depth.
+[Options]
+max, Specify maximum allowed nesting depth.
+[Rule]
+GenericWhitespace
+[Description]
+Checks that the whitespace around the Generic tokens (angle brackets) "<" and ">" are correct to the typical convention.
+[Options]
+[Rule]
+RightCurly
+[Description]
+Checks the placement of right curly braces ('}') for code blocks.
+[Options]
+option, Specify the policy on placement of a right curly brace ('}').
+tokens, tokens to check
+[Rule]
+PackageName
+[Description]
+Checks that package names conform to a specified pattern.
+[Options]
+format, Control the pattern to match valid identifiers.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>"
+    "</module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

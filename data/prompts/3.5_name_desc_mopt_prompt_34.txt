@@ -1,0 +1,258 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+5.2.1 Package names
+Package names use only lowercase letters and digits (no underscores). Consecutive words are simply concatenated together. For example, `com.example.deepspace` , not `com.example.deepSpace` or `com.example.deep_space` .
+
+CheckStyle Rules:
+[Rule]
+PackageName
+[Description]
+Checks that package names conform to a specified pattern.
+
+
+The default value of format for module PackageName has been
+chosen to match the requirements in the
+Java
+Language specification and the Sun coding conventions. However,
+both underscores and uppercase letters are rather uncommon, so most
+configurations should probably assign value ^[a-z]+(\.[a-z][a-z0-9]*)*$ to
+format for module PackageName.
+[Options]
+format, Control the pattern to match valid identifiers.
+[Rule]
+ConstantName
+[Description]
+Checks that constant names conform to a specified pattern.
+A constant is a static and final field or an
+interface/annotation field, except serialVersionUID and
+serialPersistentFields.
+[Options]
+applyToPackage, Control if check should apply to package-private members.
+applyToPrivate, Control if check should apply to private members.
+applyToProtected, Control if check should apply to protected members.
+applyToPublic, Control if check should apply to public members.
+format, Sets the pattern to match valid identifiers.
+[Rule]
+PackageDeclaration
+[Description]
+Ensures that a class has a package declaration, and (optionally) whether
+the package name matches the directory name for the source file.
+
+
+Rationale: Classes that live in the null package cannot be
+imported. Many novice developers are not aware of this.
+
+
+Packages provide logical namespace to classes and should be stored in
+the form of directory levels to provide physical grouping to your classes.
+These directories are added to the classpath so that your classes
+are visible to JVM when it runs the code.
+[Options]
+matchDirectoryStructure, Control whether to check for directory and package name match.
+[Rule]
+AbbreviationAsWordInName
+[Description]
+Validates abbreviations (consecutive capital letters) length in identifier name,
+it also allows to enforce camel case naming. Please read more at
+
+Google Style Guide
+to get to know how to avoid long abbreviations in names.
+
+'_' is considered as word separator in identifier name.
+
+allowedAbbreviationLength specifies how many consecutive capital letters are
+allowed in the identifier.
+A value of 3 indicates that up to 4 consecutive capital letters are allowed,
+one after the other, before a violation is printed. The identifier 'MyTEST' would be
+allowed, but 'MyTESTS' would not be.
+A value of 0 indicates that only 1 consecutive capital letter is allowed. This
+is what should be used to enforce strict camel casing. The identifier 'MyTest' would
+be allowed, but 'MyTEst' would not be.
+
+
+ignoreFinal, ignoreStatic, and ignoreStaticFinal
+control whether variables with the respective modifiers are to be ignored.
+Note that a variable that is both static and final will always be considered under
+ignoreStaticFinal only, regardless of the values of ignoreFinal
+and ignoreStatic. So for example if ignoreStatic is true but
+ignoreStaticFinal is false, then static final variables will not be ignored.
+[Options]
+allowedAbbreviationLength, Indicate the number of consecutive capital letters allowed in targeted identifiers (abbreviations in the classes, interfaces, variables and methods names, ... ).
+allowedAbbreviations, Specify abbreviations that must be skipped for checking.
+ignoreFinal, Allow to skip variables with final modifier.
+ignoreOverriddenMethods, Allow to ignore methods tagged with @Override annotation (that usually mean inherited name).
+ignoreStatic, Allow to skip variables with static modifier.
+ignoreStaticFinal, Allow to skip variables with both static and final modifiers.
+tokens, tokens to check
+[Rule]
+MemberName
+[Description]
+Checks that instance variable names conform to a specified pattern.
+[Options]
+applyToPackage, Control if check should apply to package-private members.
+applyToPrivate, Control if check should apply to private members.
+applyToProtected, Control if check should apply to protected members.
+applyToPublic, Control if check should apply to public members.
+format, Sets the pattern to match valid identifiers.
+[Rule]
+StaticVariableName
+[Description]
+Checks that static, non-final variable names
+conform to a specified pattern.
+[Options]
+applyToPackage, Control if check should apply to package-private members.
+applyToPrivate, Control if check should apply to private members.
+applyToProtected, Control if check should apply to protected members.
+applyToPublic, Control if check should apply to public members.
+format, Sets the pattern to match valid identifiers.
+[Rule]
+PackageAnnotation
+[Description]
+Checks that all package annotations are in the package-info.java file.
+
+
+For Java SE8 and above, placement of package annotations in the package-info.java
+file is enforced by the compiler and this check is not necessary.
+
+
+For Java SE7 and below, the Java Language Specification highly recommends
+but doesn't require that annotations are placed in the package-info.java file,
+and this check can help to enforce that placement.
+
+
+See
+Java Language Specification, ¡ì7.4.1 for more info.
+[Options]
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+[Options]
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+JavadocPackage
+[Description]
+Checks that each Java package has a Javadoc file used for
+commenting. By default, it only allows a package-info.java file, but can be
+configured to allow a package.html
+file.
+
+
+A violation will be reported if both files exist as this is not
+allowed by the Javadoc tool.
+[Options]
+allowLegacy, Allow legacy package.html file to be used.
+fileExtensions, Specify the file extensions of the files to process.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

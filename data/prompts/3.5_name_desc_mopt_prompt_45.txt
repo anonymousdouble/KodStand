@@ -1,0 +1,297 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+6.4 Finalizers: not used
+It is extremely rare to override `Object.finalize` .
+ Tip: Don't do it. If you absolutely must, first read and understand Effective Java
+  
+  Item 8 , "Avoid finalizers and cleaners" very carefully, and then don't do it.
+
+CheckStyle Rules:
+[Rule]
+NoFinalizer
+[Description]
+Checks that there is no method finalize with zero parameters.
+
+See
+Object.finalize()
+
+
+Rationale: Finalizers are unpredictable, often dangerous, and generally unnecessary.
+Their use can cause erratic behavior, poor performance, and portability problems.
+For more information for the finalize method and its issues, see Effective Java:
+Programming Language Guide Third Edition by Joshua Bloch, ¡ì8.
+[Options]
+[Rule]
+SuperFinalize
+[Description]
+Checks that an overriding finalize() method invokes
+super.finalize(). Does not check native methods, as
+they have no possible java defined implementation.
+
+
+References:
+
+How to Handle Java Finalization's Memory-Retention Issues;
+
+10 points on finalize method in Java.
+[Options]
+[Rule]
+NoClone
+[Description]
+Checks that the clone method is not overridden from the
+Object class.
+
+
+This check is almost exactly the same as the NoFinalizerCheck.
+
+
+See
+Object.clone()
+
+
+Rationale: The clone method relies on strange, hard to follow rules that
+are difficult to get right and do not work in all situations.
+In some cases, either a copy constructor
+or a static factory method can be used instead of the clone method
+to return copies of an object.
+For more information on rules for the clone method and its issues, see Effective Java:
+Programming Language Guide First Edition by Joshua Bloch
+pages 45-52.
+
+
+Below are some rules/reasons why the clone method should be avoided.
+
+
+
+Classes supporting the clone method should implement the Cloneable interface
+but the Cloneable interface does not include the clone method.
+As a result, it doesn't enforce the method override.
+
+
+The Cloneable interface forces the Object's clone method to work correctly.
+Without implementing it, the Object's clone method will throw a
+CloneNotSupportedException.
+
+
+Non-final classes must return the object returned from a call to super.clone().
+
+
+Final classes can use a constructor to create a clone which is different
+from non-final classes.
+
+
+If a super class implements the clone method incorrectly all subclasses calling
+super.clone() are doomed to failure.
+
+
+If a class has references to mutable objects then those object references must be
+replaced with copies in the clone method after calling super.clone().
+
+
+The clone method does not work correctly with final mutable object references because
+final references cannot be reassigned.
+
+
+If a super class overrides the clone method then all subclasses must provide a correct
+clone implementation.
+
+
+
+Two alternatives to the clone method, in some cases, is a copy constructor or a static
+factory method to return copies of an object. Both of these approaches are simpler and
+do not conflict with final fields. They do not force the calling client to handle a
+CloneNotSupportedException.  They also are typed therefore no casting is necessary.
+Finally, they are more flexible since they can take interface types rather than concrete
+classes.
+
+
+Sometimes a copy constructor or static factory is not an acceptable alternative to the
+clone method.  The example below highlights the limitation of a copy constructor
+(or static factory). Assume Square is a subclass for Shape.
+
+
+
+Shape s1 = new Square();
+System.out.println(s1 instanceof Square); //true
+
+
+...assume at this point the code knows nothing of s1 being a Square that's the beauty
+of polymorphism but the code wants to copy the Square which is declared as a Shape,
+its super type...
+
+
+
+Shape s2 = new Shape(s1); //using the copy constructor
+System.out.println(s2 instanceof Square); //false
+
+
+The working solution (without knowing about all subclasses and doing many casts) is to do
+the following (assuming correct clone implementation).
+
+
+
+Shape s2 = s1.clone();
+System.out.println(s2 instanceof Square); //true
+
+
+Just keep in mind if this type of polymorphic cloning is required then a properly
+implemented clone method may be the best choice.
+
+
+Much of this information was taken from Effective Java: Programming Language Guide First
+Edition by Joshua Bloch pages 45-52.  Give Bloch credit for writing an excellent book.
+[Options]
+[Rule]
+SuperClone
+[Description]
+Checks that an overriding clone() method invokes
+super.clone(). Does not check native methods, as
+they have no possible java defined implementation.
+
+
+Reference:
+Object.clone().
+[Options]
+[Rule]
+FinalClass
+[Description]
+Ensures that identifies classes that can be effectively declared as final are explicitly
+marked as final. The following are different types of classes that can be identified:
+
+
+
+Private classes with no declared constructors.
+
+
+Classes with any modifier, and contains only private constructors.
+
+
+
+Classes are skipped if:
+
+
+
+Class is Super class of some Anonymous inner class.
+
+
+Class is extended by another class in the same file.
+[Options]
+[Rule]
+ExplicitInitialization
+[Description]
+Checks if any class or object member is explicitly initialized to
+default for its type value (null for
+object references, zero for numeric types and char and false for
+boolean.
+
+
+Rationale: Each instance variable gets initialized twice, to the
+same value. Java initializes each instance variable to its default value
+(0 or null) before performing any initialization specified in
+the code. So there is a minor inefficiency.
+[Options]
+onlyObjectReferences, Control whether only explicit initializations made to null for objects should be checked.
+[Rule]
+ParameterAssignment
+[Description]
+Disallows assignment of parameters.
+
+Rationale: Parameter assignment is often considered poor programming
+practice. Forcing developers to declare parameters as final is often
+onerous. Having a check ensure that parameters are never assigned
+would give the best of both worlds.
+[Options]
+[Rule]
+FinalParameters
+[Description]
+Checks that parameters for methods, constructors, catch and for-each blocks are
+final. Interface, abstract, and native methods are not checked: the final
+keyword does not make sense for interface, abstract, and native method
+parameters as there is no code that could modify the parameter.
+
+
+Rationale: Changing the value of parameters during the execution of
+the method's algorithm can be confusing and should be avoided. A
+great way to let the Java compiler prevent this coding style is to
+declare parameters final.
+[Options]
+ignorePrimitiveTypes, Ignore primitive types as parameters.
+tokens, tokens to check
+[Rule]
+HideUtilityClassConstructor
+[Description]
+Makes sure that utility classes (classes that contain only static
+methods or fields in their API) do not have a public constructor.
+
+
+Rationale: Instantiating utility classes does not make sense. Hence,
+the constructors should either be private or (if you want to allow
+subclassing) protected. A common mistake is forgetting to hide the
+default constructor.
+
+
+If you make the constructor protected you may want to consider the
+following constructor implementation technique to disallow
+instantiating subclasses:
+
+
+
+public class StringUtils // not final to allow subclassing
+{
+protected StringUtils() {
+// prevents calls from subclass
+throw new UnsupportedOperationException();
+}
+
+public static int count(char c, String s) {
+// ...
+}
+}
+[Options]
+[Rule]
+MutableException
+[Description]
+Ensures that exception classes (classes with names conforming to some pattern
+and explicitly extending classes with names conforming to other
+pattern) are immutable, that is, that they have only final fields.
+
+
+The current algorithm is very simple: it checks that all members of
+exception are final. The user can still mutate an exception's instance
+(e.g. Throwable has a method called setStackTrace
+which changes the exception's stack trace). But, at least, all information
+provided by this exception type is unchangeable.
+
+
+Rationale: Exception instances should represent an error
+condition. Having non-final fields not only allows the state to be
+modified by accident and therefore mask the original condition but
+also allows developers to accidentally forget to set the initial state.
+In both cases, code catching the exception could draw incorrect
+conclusions based on the state.
+[Options]
+extendedClassNameFormat, Specify pattern for extended class names.
+format, Specify pattern for exception class names.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

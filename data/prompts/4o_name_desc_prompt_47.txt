@@ -1,0 +1,154 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+7.1.2 Paragraphs
+One blank line¡ªthat is, a line containing only the aligned leading asterisk ( `*` )¡ªappears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .
+
+CheckStyle Rules:
+[Rule]
+JavadocParagraph
+[Description]
+Checks the Javadoc paragraph.
+
+
+Checks that:
+
+
+
+There is one blank line between each of two paragraphs.
+
+
+Each paragraph but the first has <p> immediately before the first word, with
+no space after.
+[Rule]
+JavadocBlockTagLocation
+[Description]
+Checks that a
+
+javadoc block tag appears only at the beginning of a line, ignoring
+leading asterisks and white space. A block tag is a token that starts
+with @ symbol and is preceded by a whitespace. This check
+ignores block tags in comments and inside inline tags {@code } and
+{@literal }.
+
+
+Rationale: according to
+
+the specification all javadoc block tags should be placed at the
+beginning of a line. Tags that are not placed at the beginning are treated
+as plain text. To recognize intentional tag placement to text area
+it is better to escape the @ symbol, and all non-escaped
+tags should be located at the beginning of the line. See NOTE section
+for details on how to escape.
+[Rule]
+RequireEmptyLineBeforeBlockTagGroup
+[Description]
+Checks that one blank line before the block tag if it is present in Javadoc.
+[Rule]
+SingleLineJavadoc
+[Description]
+Checks that a Javadoc block can fit in a single-line and doesn't
+contain block tags. Javadoc comment that contains at least one block tag
+should be formatted in a few lines.
+[Rule]
+JavadocTagContinuationIndentation
+[Description]
+Checks the indentation of the continuation lines in block tags.
+That is whether the
+continued description of at clauses should be indented or not. If the text is not properly
+indented it throws a violation. A continuation line is when the description starts/spans
+past the line with the tag. Default indentation required is at least 4, but this can be
+changed with the help of properties below.
+[Rule]
+JavadocMissingWhitespaceAfterAsterisk
+[Description]
+Checks that there is at least one whitespace after the leading asterisk.
+Although spaces after asterisks are optional in the Javadoc comments, their absence
+makes the documentation difficult to read. It is the de facto standard to put at least
+one whitespace after the leading asterisk.
+[Rule]
+AtclauseOrder
+[Description]
+Checks the order of
+
+javadoc block-tags or javadoc tags.
+
+
+Note: Google used the term "at-clauses" for block tags in their guide till 2017-02-28.
+[Rule]
+OneStatementPerLine
+[Description]
+Checks that there is only one statement per line.
+
+
+Rationale: It's very difficult to read multiple statements on one line.
+
+
+In the Java programming language, statements are the fundamental unit of
+execution. All statements except blocks are terminated by a semicolon.
+Blocks are denoted by open and close curly braces.
+
+
+OneStatementPerLineCheck checks the following types of statements:
+variable declaration statements, empty statements, import statements,
+assignment statements, expression statements, increment statements,
+object creation statements, 'for loop' statements, 'break' statements,
+'continue' statements, 'return' statements, resources statements (optional).
+[Rule]
+JavadocContentLocation
+[Description]
+Checks that the Javadoc content begins from the same position
+for all Javadoc comments in the project. Any leading asterisks and spaces
+are not counted as the beginning of the content and are therefore ignored.
+
+
+It is possible to enforce two different styles:
+
+
+
+{@code first_line} - Javadoc content starts from the first line:
+
+
+
+/** Summary text.
+* More details.
+*/
+public void method();
+
+
+
+{@code second_line} - Javadoc content starts from the second line:
+
+
+
+/**
+* Summary text.
+* More details.
+*/
+public void method();
+[Rule]
+NonEmptyAtclauseDescription
+[Description]
+Checks that the block tag is followed by description.
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}

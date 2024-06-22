@@ -1,0 +1,248 @@
+Please generate CheckStyle configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+
+Style Convention:
+4.8.5.4 Field annotations
+Annotations applying to a field also appear immediately after the documentation block, but in this case, multiple annotations (possibly parameterized) may be listed on the same line; for example:
+ @Partial @Mock DataLoader loader;
+
+CheckStyle Rules:
+[Rule]
+AnnotationLocation
+[Description]
+Checks location of annotation on language elements.
+By default, Check enforce to locate annotations immediately after documentation block
+and before target element, annotation should be located on separate line from target
+element. This check also verifies that the annotations are on the same indenting level as
+the annotated element if they are not on the same line.
+
+
+Attention: Elements that cannot have JavaDoc comments like local variables are not in the
+scope of this check even though a token type like VARIABLE_DEF would match
+them.
+
+
+Attention: Annotations among modifiers are ignored (looks like false-negative)
+as there might be a problem with annotations for return types:
+
+
+public @Nullable Long getStartTimeOrNull() { ... }
+
+Such annotations are better to keep close to type.
+Due to limitations, Checkstyle can not examine the target of an annotation.
+
+
+Example:
+
+
+
+@Override
+@Nullable
+public String getNameIfPresent() { ... }
+[Options]
+allowSamelineMultipleAnnotations, Allow annotation(s) to be located on the same line as target element.
+allowSamelineParameterizedAnnotation, Allow one and only parameterized annotation to be located on the same line as target element.
+allowSamelineSingleParameterlessAnnotation, Allow single parameterless annotation to be located on the same line as target element.
+tokens, tokens to check
+[Rule]
+PackageAnnotation
+[Description]
+Checks that all package annotations are in the package-info.java file.
+
+
+For Java SE8 and above, placement of package annotations in the package-info.java
+file is enforced by the compiler and this check is not necessary.
+
+
+For Java SE7 and below, the Java Language Specification highly recommends
+but doesn't require that annotations are placed in the package-info.java file,
+and this check can help to enforce that placement.
+
+
+See
+Java Language Specification, ¡ì7.4.1 for more info.
+[Options]
+[Rule]
+AnnotationOnSameLine
+[Description]
+Checks that annotations are located on the same line with their targets.
+Verifying with this check is not good practice, but it is using by some style guides.
+[Options]
+tokens, tokens to check
+[Rule]
+InvalidJavadocPosition
+[Description]
+Checks that Javadocs are located at the correct position.
+As specified at
+
+Documentation Comment Specification for the Standard Doclet,
+Javadocs are recognized only when placed immediately before module, package, class,
+interface, constructor, method, or field declarations. Any other position, like
+in the body of a method, will be ignored by the javadoc tool and is considered
+invalid by this check.
+[Options]
+[Rule]
+JavadocContentLocation
+[Description]
+Checks that the Javadoc content begins from the same position
+for all Javadoc comments in the project. Any leading asterisks and spaces
+are not counted as the beginning of the content and are therefore ignored.
+
+
+It is possible to enforce two different styles:
+
+
+
+{@code first_line} - Javadoc content starts from the first line:
+
+
+
+/** Summary text.
+* More details.
+*/
+public void method();
+
+
+
+{@code second_line} - Javadoc content starts from the second line:
+
+
+
+/**
+* Summary text.
+* More details.
+*/
+public void method();
+[Options]
+location, Specify the policy on placement of the Javadoc content.
+[Rule]
+ModifierOrder
+[Description]
+Checks that the order of modifiers conforms to the suggestions in
+the Java
+Language specification, ¡ì 8.1.1, 8.3.1, 8.4.3 and
+
+9.4. The correct order is:
+
+
+
+public
+
+
+protected
+
+
+private
+
+
+abstract
+
+
+default
+
+
+static
+
+
+sealed
+
+
+non-sealed
+
+
+final
+
+
+transient
+
+
+volatile
+
+
+synchronized
+
+
+native
+
+
+strictfp
+
+
+
+In additional, modifiers are checked to ensure all annotations are
+declared before all other modifiers.
+
+
+Rationale: Code is easier to read if everybody follows a standard.
+
+
+ATTENTION: We skip
+
+type annotations from validation.
+[Options]
+[Rule]
+MissingJavadocType
+[Description]
+Checks for missing Javadoc comments for class, enum, interface, and annotation
+interface definitions. The scope to verify is specified using the Scope
+class and defaults to Scope.PUBLIC. To verify
+another scope, set property scope to one of the
+Scope constants.
+[Options]
+excludeScope, Specify the visibility scope where Javadoc comments are not checked.
+scope, Specify the visibility scope where Javadoc comments are checked.
+skipAnnotations, Specify annotations that allow missed documentation. If annotation is present in target sources in multiple forms of qualified name, all forms should be listed in this property.
+tokens, tokens to check
+[Rule]
+JavadocVariable
+[Description]
+Checks that a variable has a Javadoc comment. Ignores serialVersionUID
+fields.
+[Options]
+excludeScope, Specify the visibility scope where Javadoc comments are not checked.
+ignoreNamePattern, Specify the regexp to define variable names to ignore.
+scope, Specify the visibility scope where Javadoc comments are checked.
+tokens, tokens to check
+[Rule]
+OneTopLevelClass
+[Description]
+Checks that each top-level class, interface, enum
+or annotation resides in a source file of its own.
+Official description of a 'top-level' term:
+7.6. Top Level Type Declarations.
+If file doesn't contain public class, interface, enum or annotation,
+top-level type is the first type in file.
+[Options]
+[Rule]
+HiddenField
+[Description]
+Checks that a local variable or a parameter does not shadow a field
+that is defined in the same class.
+[Options]
+ignoreAbstractMethods, Control whether to ignore parameters of abstract methods.
+ignoreConstructorParameter, Control whether to ignore constructor parameters.
+ignoreFormat, Define the RegExp for names of variables and parameters to ignore.
+ignoreSetter, Allow to ignore the parameter of a property setter method.
+setterCanReturnItsClass, Allow to expand the definition of a setter method to include methods that return the class' instance.
+tokens, tokens to check
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether CheckStyle configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple CheckStyle rules for the given style convention. The configuration format should be xml format:
+    "<module name='rule_name_1'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_n' value='value_n'/>
+    </module>
+    ...
+    <module name='rule_name_x'>
+        <property name='id' value='id_value_1'/>
+        <property name='name_1' value='value_1'/>
+        <property name='name_2' value='value_2'/>
+        ...
+        <property name='name_m' value='value_m'/>
+    </module>"
+}
