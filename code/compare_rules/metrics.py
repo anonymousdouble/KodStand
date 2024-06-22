@@ -14,6 +14,9 @@ def valid_xml(string):
 
 
 def valid_config(gpt_answer):
+    """
+    判断xml是否语法？语义正确
+    """
     ...
     # sort by key
     sorted_gpt_answer = sorted(gpt_answer, key=lambda x: x["modulename"])
@@ -31,6 +34,9 @@ def cal_prfa(tp, fp, fn):
 
 
 def compare_config(gpt_answer, benchmark):
+    """
+    比较 benchmark 和 gpt answer 对于同一个 rule 的配置
+    """
     if valid_config(gpt_answer):
         module_tp = []
         option_name_tp = []
@@ -47,7 +53,6 @@ def compare_config(gpt_answer, benchmark):
         for gpt_module in gpt_answer:
             for benchmark_module in module_fn:
                 # TODO 计算方法有问题：同一个module如果存在多个
-                # 判断benchmark中是否存在该module
                 if gpt_module["modulename"] == benchmark_module["modulename"]:
                     module_tp.append(gpt_module)
                     module_fn.remove(benchmark_module)
@@ -92,6 +97,9 @@ def compare_config(gpt_answer, benchmark):
 
 
 def check_option_match(gpt_module: dict, benchmark_module: dict):
+    """
+    对于一个 module ，从 module option name 和 option value 两个维度比较 benchmark 和 gpt answer
+    """
     all_prop_name_match = True
     all_prop_value_match = True
     for prop in benchmark_module:
@@ -114,29 +122,11 @@ def check_option_match(gpt_module: dict, benchmark_module: dict):
     return all_prop_name_match, all_prop_value_match
 
 
-def cal_fp_fn(gpt_answer, benchmark, module_tp):
-    # !处理同名 module
-    # fp: gpt_answer中有，benchmark中没有
-    # gpt_answer中有1个，benchmark中有多个？
-    # gpt_answer中有多个，benchmark中有多个？
-    # gpt_answer中有多个，benchmark中有1个？
-    # gpt_answer中有多个，benchmark中有0个？
-    # fn: gpt_answer中没有，benchmark中有
-
-    module_fp = []
-    module_fn = []
-    for gpt_module in gpt_answer:
-        if gpt_module["modulename"] not in module_tp:
-            module_fp.append(gpt_module["modulename"])
-
-    for benchmark_module in benchmark:
-        if benchmark_module["modulename"] not in module_tp:
-            module_fn.append(benchmark_module["modulename"])
-    return module_fp, module_fn
-
-
 def get_answer_config(csv_line):
-    # ! NO + Config/Invalid config = Yes + Invalid config = Answer no config
+    """
+    判断 gpt answer 是否返回一个配置
+    """
+    # ! NO + (Config|Invalid config) = Yes + Invalid config = Answer no config
     answer_exist_config = csv_line["gpt_answer"]
     answer_exist_config = (
         answer_exist_config == answer_exist_config
@@ -171,8 +161,10 @@ def get_answer_config(csv_line):
     return False, None, "no config"
 
 
-def compare_benchmark_output(csv_path, benchmark_path):
-
+def compare_and_cal_metrics(csv_path, benchmark_path):
+    """
+    比较所有 gpt answer 和 benchmark 的配置，计算各种指标
+    """
     data = pd.read_csv(csv_path)
 
     output_csv_data = []
@@ -583,13 +575,12 @@ if __name__ == "__main__":
         if file.endswith(".csv") and not file.endswith("_compared.csv"):
             stat_data.append(["GPT3.5_" + file[:-4]])
             stat_data[-1].extend(
-                compare_benchmark_output(f"{root}/3.5/{file}", bm_path)
+                compare_and_cal_metrics(f"{root}/3.5/{file}", bm_path)
             )
     for file in os.listdir(root + "/4o"):
         if file.endswith(".csv") and not file.endswith("_compared.csv"):
             stat_data.append(["GPT4o_" + file[:-4]])
-            # if "simpledesc_opt" in file:
-            stat_data[-1].extend(compare_benchmark_output(f"{root}/4o/{file}", bm_path))
+            stat_data[-1].extend(compare_and_cal_metrics(f"{root}/4o/{file}", bm_path))
 
     stat_df = pd.DataFrame(
         stat_data,
