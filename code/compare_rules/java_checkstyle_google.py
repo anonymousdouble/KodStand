@@ -5,7 +5,7 @@ import shutil
 import sys
 import xml.etree.ElementTree as ET
 import pandas as pd
-from dag import augmented_name_desc_mopt_str,augmented_name_desc_str
+from rag import augmented_name_desc_mopt_str,augmented_name_desc_str
 # from gpt_wrapper_new import GPTAgent
 from gpt_agent_028 import GPTAgent # openai==0.28
 
@@ -288,7 +288,7 @@ def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
         if answer.endswith("\n```"):
             answer = answer[:-len("\n```")]
         answer_dict[rule_name] = answer
-        break
+        # break
 
     return answer_dict
 
