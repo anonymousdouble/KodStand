@@ -6,8 +6,7 @@ import sys
 import xml.etree.ElementTree as ET
 import pandas as pd
 from rag import augmented_name_desc_mopt_str,augmented_name_desc_str
-# from gpt_agent import GPTAgent
-from gpt_agent_028 import GPTAgent # openai==0.28
+from gpt_agent_028 import GPTAgent
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores.chroma import Chroma

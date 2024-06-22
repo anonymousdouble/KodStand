@@ -117,10 +117,12 @@ if __name__ == "__main__":
         "options_answer": "None",
     }
     agent = GPTAgent()
-    agent.gen_dsl(
-        rule_list = rule_list,
-        pargs=pargs,
-        prompt_processor=preprocess_promt,
-        model="gpt-4o",
-        output_dir=gpt_answer_dir,
-    )
+    for model in ["gpt-4o", "gpt-3.5-turbo-0125"]:
+        print(f"Model: {model}")
+        agent.gen_dsl(
+            rule_list = rule_list,
+            pargs=pargs,
+            prompt_processor=preprocess_promt,
+            model=model,
+            output_dir=gpt_answer_dir,
+        )

@@ -17,7 +17,7 @@ class GPTAgent:
     def __init__(self) -> None:
         self.client = OpenAI(
             # api_key="sk-proj-vrNPSb5ttqXsOV39pl7FT3BlbkFJ93LlRultIv7DLd7Pwe8e"
-            api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
+            # api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
         )
         # self.client = OpenAI(
         #     base_url="https://api.xty.app/v1",

@@ -17,12 +17,13 @@ class GPTAgent:
         self.api_key = "sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
 
     @retry(delay=0, tries=6, backoff=1, max_delay=120)
-    def ask(self, content, messages=[], model="gpt-3.5-turbo-0125", temperature=0):
+    def ask(self, prompt, messages=[], model="gpt-3.5-turbo-0125", temperature=0):
+        msg = messages.copy()
         openai.api_key = self.api_key
-        messages.append({"role": "user", "content": content})
+        msg.append({"role": "user", "content": prompt})
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=messages,
+            messages=msg,
             temperature=temperature,
         )
 
@@ -31,8 +32,21 @@ class GPTAgent:
     def get_response(
         self, prompt, messages=[], model="gpt-3.5-turbo-0125", temperature=0
     ):
+        answer = self.ask(prompt, messages, model, temperature)
+        return answer
+
+    def get_response_with_examples(
+        self, content, examples, model="gpt-3.5-turbo-0125", temperature=0
+    ):
+        messages = []
+        for user_prompt, response in examples:
+            messages.append({"role": "user", "content": user_prompt})
+            messages.append({"role": "assistant", "content": str(response)})
         answer = self.ask(
-            content=prompt, messages=messages, model=model, temperature=temperature
+            content,
+            messages,
+            model,
+            temperature,
         )
         return answer
 
@@ -46,9 +60,10 @@ class GPTAgent:
             pargs["rule"] = rule_description
             prompt = prompt_processor(**pargs)
             answer = self.get_response(prompt, model=model)
+            
             result[rule_description] = [prompt, answer]
             result_simple[rule_name] = [prompt, answer]
-            break
+            # break
         with open(
             os.path.join(output_dir, f"{model}_rule_prompt_response.json"), "w"
         ) as f:
