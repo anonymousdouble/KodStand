@@ -5,7 +5,7 @@ import sys
 import json
 from dsl import dsl
 from gpt_agent_028 import GPTAgent
-from code.compare_rules.gpt_checkstyle2dsl_example import (
+from code.compare_rules.checkstyle2dsl import (
     get_checkstyle_rules_from_file,
     get_all_gpt_res_for_java_checkstyle,
 )
