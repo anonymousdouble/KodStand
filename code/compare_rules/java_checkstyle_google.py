@@ -11,6 +11,7 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_dir)
 import util
 
+
 def gen_nocheckstyle_prompt(rule: str, style="CheckStyle"):
     prompt = """Please generate {{style}} configurations based on the following style convention. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
 
@@ -68,6 +69,7 @@ Example:
     prompt = prompt.replace("{{style}}", style)
     prompt = prompt.replace("{{rule}}", rule)
     return prompt
+
 
 def gen_prompt(rule: str, tool_rules: str, style="CheckStyle"):
     prompt = """Please generate {{style}} configurations based on the following style convention and CheckStyle rules. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
@@ -133,7 +135,7 @@ Example:
 
 
 str_types = [
-    # "empty",
+    "empty",
     "name",
     # "name_desc",
     # "name_desc_mopt",
@@ -150,7 +152,7 @@ def get_checkstyle_str(opt):
         empty
         """
         return ""
-    
+
     def name():
         """
         name
@@ -161,7 +163,7 @@ def get_checkstyle_str(opt):
             [f"[Rule]\n{rule[1]}" for rule in jdata]
         )
         return name_str
-        
+
     def name_desc():
         """
         name & description
@@ -176,7 +178,8 @@ def get_checkstyle_str(opt):
             if rule_desc.startswith(prefix):
                 rule_desc = rule_desc[len(prefix):]
             rule_desc = rule_desc.strip()
-            name_desc_list.append(f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}")
+            name_desc_list.append(
+                f"[Rule]\n{rule_name}\n[Description]\n{rule_desc}")
         name_desc_str = "\n".join(name_desc_list)
         return name_desc_str
 
@@ -263,7 +266,7 @@ def get_checkstyle_str(opt):
     raise Exception(f"Invalid option: {opt}")
 
 
-def get_all_gpt_res_for_java_checkstyle(opt, rules):
+def get_all_gpt_res_for_java_checkstyle(opt, model, rules):
     """
     1. parse each rule of style guide as a string
     2. parse all rules of style tool as a string
@@ -272,9 +275,12 @@ def get_all_gpt_res_for_java_checkstyle(opt, rules):
     agent = GPTAgent()
     checkstyle_str = get_checkstyle_str(opt)
     answer_dict = {}
+    print(f"baseline: {opt}")
+    print(f"model: {model}")
     for _, row in rules.iterrows():
         rule_name = row.rule
         rule_desc = row.desc
+        print(f"rule_name: {rule_name}")
         if opt == "empty":
             prompt = gen_nocheckstyle_prompt(rule=f"{rule_name}\n{rule_desc}")
         else:
@@ -288,10 +294,10 @@ def get_all_gpt_res_for_java_checkstyle(opt, rules):
         #     f.write(prompt)
         #     return
         try:
-            # use gpt-3.5-turbo
-            answer = agent.get_response(prompt)
-            # use gpt-4o
-            # answer = agent.get_response(prompt, model="gpt-4o")
+            if model == "3.5":
+                answer = agent.get_response(prompt)
+            else:
+                answer = agent.get_response(prompt, model="gpt-4o")
         except Exception as e:
             print(f"failed to get response for rule: {rule_name}")
             continue
@@ -300,88 +306,86 @@ def get_all_gpt_res_for_java_checkstyle(opt, rules):
         if answer.endswith("\n```"):
             answer = answer[:-len("\n```")]
         answer_dict[rule_name] = answer
-        break
-    util.save_json(
-        "data/gpt_answer/",
-        opt,
-        answer_dict,
-    )
+        # break
+
     return answer_dict
 
+def offline_res(model:str, opt:str):
+    res = util.load_json(f"data/gpt_answer/{model}/", opt)
+    return res
 
 if __name__ == "__main__":
     all_rules = pd.read_excel(
         "data/benchmark/checkstyle2google_java_benchmark.xlsx")
-    # for str_type in str_types:
-    for file in os.listdir("data/gpt_answer/4o"):
-        if not file.endswith(".json"):
-            continue
-        # gpt_answers = get_all_gpt_res_for_java_checkstyle(str_type, all_rules)
-        gpt_answers = {}
-        with open (f"data/gpt_answer/3.5/{file}",encoding='utf-8') as f:
-
-            gpt_answers = json.load(f)
-
-        csv_results = []
-        # continue
-        for index, row in all_rules.iterrows():
-            rule_name = row.rule
-            answer = ""
-            csv_results.append(
-                [rule_name, row.desc, row.res if row.res == row.res else ""])
-            if gpt_answers.get(rule_name):
-                answer = gpt_answers[rule_name]
-                try:
-                    json_object = json.loads(answer)
-                    print(">>>>>>: ", json_object)
-                    y_or_n = json_object["Answer"]
-                    csv_results[-1].append(y_or_n)
-                    configuration_list = json_object["Configuration"]
-                    csv_results[-1].append("\n".join(configuration_list))
-                except:
-                    print(">>>>>>>exception")
-                    if "'Answer': 'Yes'" in answer:
-                        idx_start = answer.find("<module")
-                        idx_end = answer.rfind(">")
-                        if idx_start == -1 or idx_end == -1:
+    for model in ["3.5", "4o"]:
+        for str_type in str_types:
+            # gpt_answers = get_all_gpt_res_for_java_checkstyle(
+            #     str_type, model, all_rules)
+            if model == "4o" and "mopt" in str_type:
+                aa = 1
+            gpt_answers = offline_res(model,str_type)
+            csv_results = []
+            for index, row in all_rules.iterrows():
+                rule_name = row.rule
+                if rule_name == "2.3.2 Special escape sequences":
+                    aa = 2
+                answer = ""
+                csv_results.append(
+                    [rule_name, row.desc, row.res if row.res == row.res else ""])
+                if gpt_answers.get(rule_name):
+                    answer = gpt_answers[rule_name]
+                    try:
+                        json_object = json.loads(answer)
+                        y_or_n = json_object["Answer"]
+                        ET.fromstring(json_object["Configuration"])
+                        csv_results[-1].append(y_or_n)
+                        csv_results[-1].append(json_object["Configuration"])
+                    except:
+                        if "'Answer': 'Yes'" in answer:
+                            idx_start = answer.find("<module")
+                            idx_end = answer.rfind(">")
+                            if idx_start == -1 or idx_end == -1:
+                                csv_results[-1].append("Yes")
+                                csv_results[-1].append("Failed to parse")
+                                continue
+                            config = answer[idx_start:idx_end + 1]
+                            config_list = []
+                            for each_config in config.split("<module"):
+                                if len(each_config.strip()) > 0:
+                                    config_list.append("<module" + each_config)
+                            config_str = "\n".join(config_list)
                             csv_results[-1].append("Yes")
-                            csv_results[-1].append("Failed to parse")
-                            continue
-                        config = answer[idx_start:idx_end + 1]
-                        config_list = []
-                        for each_config in config.split("<module"):
-                            if len(each_config.strip()) > 0:
-                                config_list.append("<module" + each_config)
-                        config_str = "\n".join(config_list)
-                        csv_results[-1].append("Yes")
-                        csv_results[-1].append(config_str)
-                        print(config_str)
-                    elif '"Answer": "Yes"' in answer:
-                        idx_start = answer.find("<module")
-                        idx_end = answer.rfind(">")
-                        if idx_start == -1 or idx_end == -1:
+                            csv_results[-1].append(config_str)
+                        elif '"Answer": "Yes"' in answer:
+                            idx_start = answer.find("<module")
+                            idx_end = answer.rfind(">")
+                            if idx_start == -1 or idx_end == -1:
+                                csv_results[-1].append("Yes")
+                                csv_results[-1].append("Failed to parse")
+                                continue
+                            config = answer[idx_start:idx_end + 1]
+                            config_list = []
+                            for each_config in config.split("<module"):
+                                if len(each_config.strip()) > 0:
+                                    config_list.append("<module" + each_config)
+                            config_str = "\n".join(config_list)
                             csv_results[-1].append("Yes")
-                            csv_results[-1].append("Failed to parse")
-                            continue
-                        config = answer[idx_start:idx_end + 1]
-                        config_list = []
-                        for each_config in config.split("<module"):
-                            if len(each_config.strip()) > 0:
-                                config_list.append("<module" + each_config)
-                        config_str = "\n".join(config_list)
-                        csv_results[-1].append("Yes")
-                        csv_results[-1].append(config_str)
-                        print(config_str)
-                    else:
-                        csv_results[-1].append("No")
-        util.save_csv(
-            f"data/gpt_answer/{file}.csv",
-            csv_results,
-            [
-                "rule_name",
-                "description",
-                "benchmark",
-                "gpt_answer",
-                "gpt_configuration",
-            ],
-        )
+                            csv_results[-1].append(config_str)
+                        else:
+                            csv_results[-1].append("No")
+            util.save_json(
+                f"data/gpt_answer/{model}/",
+                str_type,
+                gpt_answers,
+            )
+            util.save_csv(
+                f"data/gpt_answer/{model}/{str_type}.csv",
+                csv_results,
+                [
+                    "rule_name",
+                    "description",
+                    "benchmark",
+                    "gpt_answer",
+                    "gpt_configuration",
+                ],
+            )

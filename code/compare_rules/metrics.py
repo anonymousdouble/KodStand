@@ -13,61 +13,77 @@ def valid_xml(string):
         return False
 
 
+def valid_config(gpt_answer):
+    ...
+    # sort by key
+    sorted_gpt_answer = sorted(gpt_answer, key=lambda x: x["modulename"])
+
+    # TODO 如果配置不合法怎么办？
+    return True
+
+
 def compare_config(gpt_answer, benchmark):
+    if valid_config(gpt_answer):
+        module_tp = []
+        option_name_tp = []
+        option_value_tp = []
 
-    module_tp = []
-    module_tn = []
-    option_name_tp = []
-    option_name_tn = []
-    option_name_fp = []
+        module_fp = gpt_answer.copy()
+        option_name_fp = gpt_answer.copy()
+        option_value_fp = gpt_answer.copy()
 
-    option_value_tp = []
-    option_value_tn = []
-    option_value_fp = []
-    module_without_true_option = 0
-    module_with_true_option = 0
-    for gpt_module in gpt_answer:
-        for benchmark_module in benchmark:
-            # TODO 计算方法有问题：同一个module如果存在多个
-            # 判断benchmark中是否存在该module
-            if gpt_module["modulename"] == benchmark_module["modulename"]:
-                module_tp.append(gpt_module["modulename"])
+        module_fn = benchmark.copy()
+        option_name_fn = benchmark.copy()
+        option_value_fn = benchmark.copy()
 
-                if len(gpt_module) > 1:
-                    if len(benchmark_module) > 1:
-                        # 该 module 实际有配置，answer中也有
-                        all_prop_name_match, all_prop_value_match = check_option_match(gpt_module, benchmark_module)
-                        if all_prop_name_match:
-                            option_name_tp.append(gpt_module["modulename"])
-                        if all_prop_value_match:
-                            option_value_tp.append(gpt_module["modulename"])
-                    else:
-                        # 该 module 实际无配置，answer中有配置
-                        ...
-                elif len(benchmark_module) == 1:
-                    # 该 module 无配置，answer中也无配置
-                    option_name_tp.append(gpt_module["modulename"])
-                    option_value_tp.append(gpt_module["modulename"])
-                else:
-                    # 该 module 有配置，answer中无配置
-                    ...
-    module_fp, module_fn = cal_fp_fn(gpt_answer, benchmark, module_tp)
-    module_res = [module_tp, module_tn, module_fp, module_fn]
+        for gpt_module in gpt_answer:
+            for benchmark_module in module_fn:
+                # TODO 计算方法有问题：同一个module如果存在多个
+                # 判断benchmark中是否存在该module
+                if gpt_module["modulename"] == benchmark_module["modulename"]:
+                    module_tp.append(gpt_module)
+                    module_fn.remove(benchmark_module)
+                    module_fp.remove(gpt_module)
+                    break
+            for benchmark_module in option_name_fn:
+                if gpt_module["modulename"] == benchmark_module["modulename"]:
+                    all_prop_name_match, all_prop_value_match = check_option_match(
+                        gpt_module, benchmark_module
+                    )
+                    if all_prop_name_match:
+                        option_name_tp.append(gpt_module)
+                        option_name_fn.remove(benchmark_module)
+                        option_name_fp.remove(gpt_module)
+                        break
+            for benchmark_module in option_value_fn:
+                if gpt_module["modulename"] == benchmark_module["modulename"]:
+                    all_prop_name_match, all_prop_value_match = check_option_match(
+                        gpt_module, benchmark_module
+                    )
+                    if all_prop_value_match:
+                        option_value_tp.append(gpt_module)
+                        option_value_fn.remove(benchmark_module)
+                        option_value_fp.remove(gpt_module)
+                        break
 
-    option_name_fp, option_name_fn = cal_fp_fn(gpt_answer, benchmark, option_name_tp)
-    option_name_res = [option_name_tp, option_name_tn, option_name_fp, option_name_fn]
+        module_res = [module_tp, [], module_fp, module_fn]
 
-    option_value_fp, option_value_fn = cal_fp_fn(gpt_answer, benchmark, option_value_tp)
-    option_value_res = [
-        option_value_tp,
-        option_value_tn,
-        option_value_fp,
-        option_value_fn,
-    ]
+        option_name_res = [option_name_tp, [], option_name_fp, option_name_fn]
 
+        option_value_res = [
+            option_value_tp,
+            [],
+            option_value_fp,
+            option_value_fn,
+        ]
+    else:
+        module_res = [[], [], [], []]
+        option_name_res = [[], [], [], []]
+        option_value_res = [[], [], [], []]
     return [module_res, option_name_res, option_value_res]
 
-def check_option_match(gpt_module, benchmark_module):
+
+def check_option_match(gpt_module:dict, benchmark_module:dict):
     all_prop_name_match = True
     all_prop_value_match = True
     for prop in benchmark_module:
@@ -91,6 +107,14 @@ def check_option_match(gpt_module, benchmark_module):
 
 
 def cal_fp_fn(gpt_answer, benchmark, module_tp):
+    # !处理同名 module
+    # fp: gpt_answer中有，benchmark中没有
+    # gpt_answer中有1个，benchmark中有多个？
+    # gpt_answer中有多个，benchmark中有多个？
+    # gpt_answer中有多个，benchmark中有1个？
+    # gpt_answer中有多个，benchmark中有0个？
+    # fn: gpt_answer中没有，benchmark中有
+
     module_fp = []
     module_fn = []
     for gpt_module in gpt_answer:
@@ -118,12 +142,26 @@ def compare_benchmark_output(csv_path, benchmark_path):
     m_rule_correct = 0
     on_rule_correct = 0
     ov_rule_correct = 0
-
-    for row, line in data.iterrows():
+    exist_mapping_tp = 0
+    exist_mapping_fp = 0
+    exist_mapping_fn = 0
+    for _, line in data.iterrows():
         rule = line["rule_name"]
-        # if rule == '3.3.3 Ordering and spacing' and "simpledesc_opt" in csv_path:
-        #     aa = 1
         cor_benchmark = jdata[rule]
+        benchmark_exist_config = len(cor_benchmark) > 0
+        if rule == "2.3.2 Special escape sequences" and "4o" in csv_path and "mopt" in csv_path:
+            aa = 1
+        answer_exist_config = line['gpt_answer']
+        answer_exist_config = answer_exist_config == answer_exist_config and answer_exist_config.lower() == "yes"
+
+        #! cal exist mapping metrics
+        if benchmark_exist_config and answer_exist_config:
+            exist_mapping_tp += 1
+        elif benchmark_exist_config and not answer_exist_config:
+            exist_mapping_fn += 1
+        elif not benchmark_exist_config and answer_exist_config:
+            exist_mapping_fp += 1
+
         answer = line["gpt_configuration"]
         output_data.append(
             [
@@ -140,8 +178,6 @@ def compare_benchmark_output(csv_path, benchmark_path):
             answer = f"<module name='Checker'>{answer}</module>"
             root = None
             if valid_xml(answer):
-                root = ET.fromstring(answer)
-            elif valid_xml(answer := re.sub("\*\*\*\*\*\*", "", answer)):
                 root = ET.fromstring(answer)
             elif valid_xml(answer := re.sub('>["]*,', ">", answer)):
                 root = ET.fromstring(answer)
@@ -184,8 +220,6 @@ def compare_benchmark_output(csv_path, benchmark_path):
             #     if "4o" in csv_path:
             #         if "name_simpledesc_opt" in csv_path:
             #             print(answer_config)
-            if "5.2.4 Constant names" in rule:
-                aa = 1
             compare_result = compare_config(answer_config, cor_benchmark)
             indices = [
                 (0, 0),
@@ -199,7 +233,7 @@ def compare_benchmark_output(csv_path, benchmark_path):
                 (2, 3),
             ]
             for i, j in indices:
-                output_data[-1].append("\n".join(compare_result[i][j]))
+                output_data[-1].append("\n".join([mod.get("modulename") for mod in compare_result[i][j]]))
 
             module_level_res = [
                 len(compare_result[0][0]),
@@ -230,13 +264,13 @@ def compare_benchmark_output(csv_path, benchmark_path):
             #     print(rule)
             if module_level_res[2] == 0 and module_level_res[3] == 0:
                 m_rule_correct += 1
-                print(f"---rule level match {rule}")
+                # print(f"---rule level match {rule}")
             if option_name_level_res[2] == 0 and option_name_level_res[3] == 0:
                 on_rule_correct += 1
-                print(f"===option name level match {rule}")
+                # print(f"===option name level match {rule}")
             if option_value_level_res[2] == 0 and option_value_level_res[3] == 0:
                 ov_rule_correct += 1
-                print(f"+++option value level match {rule}")
+                # print(f"+++option value level match {rule}")
 
     output_df = pd.DataFrame(
         output_data,
@@ -307,17 +341,17 @@ if __name__ == "__main__":
     stat_data = []
     root = "data/gpt_answer"
     bm_path = "data/benchmark/simple_benchmark.json"
-    # for file in os.listdir(root + "/3.5"):
-    #     if file.endswith(".csv") and not file.endswith("_compared.csv"):
-    #         stat_data.append(["GPT3.5_" + file[:-4]])
-    #         stat_data[-1].extend(
-    #             compare_benchmark_output(f"{root}/3.5/{file}", bm_path)
-    #         )
+    for file in os.listdir(root + "/3.5"):
+        if file.endswith(".csv") and not file.endswith("_compared.csv"):
+            stat_data.append(["GPT3.5_" + file[:-4]])
+            stat_data[-1].extend(
+                compare_benchmark_output(f"{root}/3.5/{file}", bm_path)
+            )
     for file in os.listdir(root + "/4o"):
         if file.endswith(".csv") and not file.endswith("_compared.csv"):
             stat_data.append(["GPT4o_" + file[:-4]])
-            if "simpledesc_opt" in file:
-                stat_data[-1].extend(compare_benchmark_output(f"{root}/4o/{file}", bm_path))
+            # if "simpledesc_opt" in file:
+            stat_data[-1].extend(compare_benchmark_output(f"{root}/4o/{file}", bm_path))
 
     stat_df = pd.DataFrame(
         stat_data,
@@ -333,9 +367,9 @@ if __name__ == "__main__":
             "ov_recall",
             "ov_precision",
             "ov_accuracy",
-            "m_rule_correct",
-            "on_rule_correct",
-            "ov_rule_correct",
+            "m_rule_accuracy",
+            "on_rule_accuracy",
+            "ov_rule_accuracy",
         ],
     )
     stat_df.to_csv("stat.csv", index=False)

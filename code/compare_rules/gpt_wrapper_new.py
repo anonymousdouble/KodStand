@@ -70,6 +70,17 @@ class GPTAgent:
           optionn: valuen
         }]
         '''
+        if model == 'gpt-4o':
+            self.client = OpenAI(api_key="sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh")
+        else:
+            self.client = OpenAI(
+                base_url="https://api.xty.app/v1",
+                api_key="sk-APsNwhpxXA7mMY24AfC2907d8cDa4798B37b53B38a6bBc14",
+                http_client=httpx.Client(
+                        base_url="https://api.xty.app/v1",
+                        follow_redirects=True,
+                ),
+            )
         answer = self.ask(prompt,examples,model,temperature)
         return answer
         # if len(eslint_rules_simple) > 0:
