@@ -114,7 +114,7 @@ if __name__ == "__main__":
     file_path = "data/rule/checkstyle/java/url_name_desc_opt.json"
     rule_list = get_checkstyle_rules_from_file(file_path)
     agent = GPTAgent()
-    agent.gen_dsl(
+    agent.gen_response_of_rules(
         rule_list,
         dsl,
         examples=checkstyle_dsl_examples,
@@ -123,12 +123,13 @@ if __name__ == "__main__":
         model="gpt-3.5-turbo-0125",
         output_dir="data/dsl_output/checkstyle",
     )
-    res = None
-    with open("data/dsl_output/checkstyle/gpt-3.5-turbo-0125_rule_prompt_response_simple.json") as f:
-        res = json.load(f)
-    for i,rule in enumerate(rule_list[:1]):
-        with open(f"data/dsl_output/checkstyle/{i}.txt", "w") as f:
-            rule_name = rule.split("\n")[1]
-            f.write(res[rule_name][0])
-            f.write("\n=======================================================\n")
-            f.write(res[rule_name][1])
+    # ! check output
+    # res = None
+    # with open("data/dsl_output/checkstyle/gpt-3.5-turbo-0125_rule_prompt_response_simple.json") as f:
+    #     res = json.load(f)
+    # for i,rule in enumerate(rule_list[:1]):
+    #     with open(f"data/dsl_output/checkstyle/{i}.txt", "w") as f:
+    #         rule_name = rule.split("\n")[1]
+    #         f.write(res[rule_name][0])
+    #         f.write("\n=======================================================\n")
+    #         f.write(res[rule_name][1])

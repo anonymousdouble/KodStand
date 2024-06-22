@@ -15,7 +15,7 @@ class GPTAgent:
 
     def __init__(self) -> None:
         ...
-        # self.api_key = "sk-proj-0W1mHlj2J2BnYHauKePhT3Blb======kFJF3W9NDdOrs0BOkyaOJqh"
+        self.api_key = "sk-proj-0W1mHlj2J2BnYHauKePhT3BlbkFJF3W9NDdOrs0BOkyaOJqh"
 
     @retry(delay=0, tries=6, backoff=1, max_delay=120)
     def ask(self, prompt, messages=[], model="gpt-3.5-turbo-0125", temperature=0):
@@ -51,7 +51,11 @@ class GPTAgent:
         )
         return answer
 
-    def gen_dsl(self, rule_list, pargs, prompt_processor, model, output_dir):
+    def gen_response_of_rules(self, rule_list, pargs, prompt_processor, model, output_dir):
+        """
+        返回基于rule list的prompt和response
+        """
+        print("Model:", model)
         # ! test: 只取前10个rule
         result = {}
         result_simple = {}
@@ -65,6 +69,7 @@ class GPTAgent:
             result[rule_description] = [prompt, answer]
             result_simple[rule_name] = [prompt, answer]
             # break
+        os.makedirs(output_dir, exist_ok=True)
         with open(
             os.path.join(output_dir, f"{model}_rule_prompt_response.json"), "w"
         ) as f:
@@ -73,3 +78,4 @@ class GPTAgent:
             os.path.join(output_dir, f"{model}_rule_prompt_response_simple.json"), "w"
         ) as f:
             json.dump(result_simple, f, indent=4)
+        return result, result_simple

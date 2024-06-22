@@ -205,7 +205,12 @@ def gpt_res_of_checkstyle_dsl_from_csv(opt, model, rules,use_examples=False):
     answer_dict = {}
     print(f"baseline: {opt}")
     print(f"model: {model}")
+    # cnt = 0
     for i, row in rules.iterrows():
+        # ! test
+        # cnt += 1
+        # if cnt > 1:
+        #     break
         rule_name = row.rule
         rule_desc = row.desc
         checkstyle_str = get_checkstyle_str(opt,f"{rule_name}\n{rule_desc}")
@@ -220,9 +225,9 @@ def gpt_res_of_checkstyle_dsl_from_csv(opt, model, rules,use_examples=False):
             )
         exmaples = []
         if use_examples:
-            with open(f"data/examples/{opt}_prompt.txt", "r") as f:
+            with open(f"data/examples/google2checkstyle_baseline/{opt}_prompt.txt", "r") as f:
                 exmaples.append({"role": "user", "content": f.read()})
-            with open(f"data/examples/response.txt", "r") as f:
+            with open(f"data/examples/google2checkstyle_baseline/response.txt", "r") as f:
                 exmaples.append({"role": "assistant", "content": f.read()})
         # ! check prompt
         # with open(f"data/testdata/{model}_{opt}_prompt_{i}.txt", "w") as f:
@@ -246,7 +251,7 @@ def gpt_res_of_checkstyle_dsl_from_csv(opt, model, rules,use_examples=False):
     return answer_dict
 
 def offline_res(model:str, opt:str):
-    res = util.load_json(f"data/gpt_answer/{model}/", opt)
+    res = util.load_json(f"data/config_output/baseline/", f"{model}_{opt}")
     return res
 
 if __name__ == "__main__":
@@ -306,12 +311,12 @@ if __name__ == "__main__":
                         else:
                             csv_results[-1].append("No")
             util.save_json(
-                f"data/gpt_answer/{model}/",
-                str_type,
+                f"data/config_output/baseline/",
+                f"{model}_{str_type}",
                 gpt_answers,
             )
             util.save_csv(
-                f"data/gpt_answer/{model}/{str_type}.csv",
+                f"data/config_output/baseline/{model}_{str_type}.csv",
                 csv_results,
                 [
                     "rule_name",

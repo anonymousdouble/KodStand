@@ -73,16 +73,20 @@ def get_all_gpt_res_for_java_google(rule_list, dsl, examples, style, model, outp
         answer = agent.get_response(prompt, model=model)
         res = {rule_description: [prompt, answer]}
         result.append(res)
-        res_simple = {rule_name:  [prompt, answer]}
+        res_simple = {rule_name: [prompt, answer]}
         result_simple.append(res_simple)
         # break
     with open(os.path.join(output_dir, f"{model}_rule_prompt_response.json"), "w") as f:
         json.dump(res_simple, f, indent=4)
-    with open(os.path.join(output_dir, f"{model}_rule_prompt_response_simple.json"), "w") as f:
+    with open(
+        os.path.join(output_dir, f"{model}_rule_prompt_response_simple.json"), "w"
+    ) as f:
         json.dump(res_simple, f, indent=4)
+
 
 if __name__ == "__main__":
     from dsl import dsl
+
     agent = GPTAgent()
     models = ["gpt-4o", "gpt-3.5-turbo-0125"]
     gpt_answer_dir = "data/dsl_output/google/"
@@ -90,15 +94,17 @@ if __name__ == "__main__":
         "data/benchmark/",
         "benchmark",
     )
-    rule_list = [k for k, _ in all_rules.items()]
-
+    rule_list = ["\n" + k for k, _ in all_rules.items()]
+    pargs = {
+        "dsl_syntax": dsl,
+        "example": google2dsl_examples,
+        "style": "Google Java Style Guide",
+    }
     for model in models:
-        agent.gen_dsl(
+        agent.gen_response_of_rules(
             rule_list,
-            dsl,
-            examples=google2dsl_examples,
+            pargs,
             prompt_processor=preprocess_promt,
-            style="Google Java Style Guide",
             model=model,
             output_dir=gpt_answer_dir,
         )

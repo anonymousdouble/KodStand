@@ -436,20 +436,14 @@ def compare_and_cal_metrics(csv_path, benchmark_path):
 
 if __name__ == "__main__":
     stat_data = []
-    root = "data/gpt_answer_with_example_new"
+    root = "data/config_output/baseline/"
     bm_path = "data/benchmark/simple_benchmark.json"
-    for file in os.listdir(root + "/3.5"):
-        if file.endswith(".csv") and not file.endswith("_compared.csv"):
-            stat_data.append(["GPT3.5_" + file[:-4]])
+    for file in os.listdir(root):
+        if file.endswith(".csv") and not file.endswith("_compared.csv") and not file.endswith("stat.csv"):
+            stat_data.append([file[:-4]])
             print("=====================================")
-            print(f"Model: 3.5\nBaseline: {file[:-4]}")
-            stat_data[-1].extend(compare_and_cal_metrics(f"{root}/3.5/{file}", bm_path))
-    for file in os.listdir(root + "/4o"):
-        if file.endswith(".csv") and not file.endswith("_compared.csv"):
-            stat_data.append(["GPT4o_" + file[:-4]])
-            print("=====================================")
-            print(f"Model: 4o\nBaseline: {file[:-4]}")
-            stat_data[-1].extend(compare_and_cal_metrics(f"{root}/4o/{file}", bm_path))
+            print(f"Baseline: {file[:-4]}")
+            stat_data[-1].extend(compare_and_cal_metrics(f"{root}/{file}", bm_path))
 
     stat_df = pd.DataFrame(
         stat_data,
