@@ -364,7 +364,7 @@ OneTopLevelClass",
         <property name='allowMultipleEmptyLinesInsideClassMembers' value='true'/>
         <property name='allowNoEmptyLineBetweenFields' value='true'/>
         <property name='tokens' value='PACKAGE_DEF,IMPORT,CLASS_DEF,INTERFACE_DEF,ENUM_DEF,STATIC_INIT,INSTANCE_INIT,CTOR_DEF,METHOD_DEF,VAR_DEF'/>
-    </module>",true,EmptyLineSeparator,,,,EmptyLineSeparator,EmptyLineSeparator,,EmptyLineSeparator,EmptyLineSeparator
+    </module>",true,EmptyLineSeparator,,,EmptyLineSeparator,,,,EmptyLineSeparator,EmptyLineSeparator
 4.6.2 Horizontal whitespace,"Beyond where required by the language or other style rules, and apart from literals, comments and Javadoc, a single ASCII space also appears in the following places only .
  Separating any reserved word, such as `if` , `for` or `catch` , from an open parenthesis ( `(` ) that follows it on that line 
  Separating any reserved word, such as `else` or `catch` , from a closing curly brace ( `}` ) that precedes it on that line 
@@ -495,7 +495,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
   </module>
 </module>",Yes,"<module name='ModifierOrder'>
         <property name='id' value='id_value_1'/>
-    </module>",true,ModifierOrder,,,,ModifierOrder,ModifierOrder,,ModifierOrder,ModifierOrder
+    </module>",true,ModifierOrder,,,ModifierOrder,,,ModifierOrder,,
 4.8.8 Numeric Literals,"`long` -valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1` ). For example, `3000000000L` rather than `3000000000l` .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""UpperEll""/>
@@ -541,7 +541,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         <property name='applyToProtected' value='true'/>
         <property name='applyToPublic' value='true'/>
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
-    </module>",true,MethodName,,,,MethodName,MethodName,,MethodName,MethodName
+    </module>",true,MethodName,,,MethodName,,,,MethodName,MethodName
 5.2.4 Constant names,"Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. But what is a constant, exactly?
  Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
  // Constants
@@ -781,11 +781,9 @@ InterfaceTypeParameterName"
 <module name='JavadocContentLocation'>
         <property name='location' value='first_line'/>
     </module>",true,SingleLineJavadoc,"JavadocParagraph
-JavadocContentLocation",,,"SingleLineJavadoc
-JavadocParagraph
-JavadocContentLocation",SingleLineJavadoc,,"SingleLineJavadoc
-JavadocParagraph
-JavadocContentLocation",SingleLineJavadoc
+JavadocContentLocation",,SingleLineJavadoc,"JavadocParagraph
+JavadocContentLocation",,SingleLineJavadoc,"JavadocParagraph
+JavadocContentLocation",
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>
@@ -938,9 +936,8 @@ NonEmptyAtclauseDescription"
         </module>
         
 <module name='InnerAssignment'/>",true,VariableDeclarationUsageDistance,"MultipleVariableDeclarations
+InnerAssignment",,VariableDeclarationUsageDistance,"MultipleVariableDeclarations
 InnerAssignment",,,"MultipleVariableDeclarations
-VariableDeclarationUsageDistance
-InnerAssignment",VariableDeclarationUsageDistance,,"MultipleVariableDeclarations
 VariableDeclarationUsageDistance
 InnerAssignment",VariableDeclarationUsageDistance
 "4.8.3.1 Array initializers: can be ""block-like""","Any array initializer may optionally be formatted as if it were a ""block-like construct."" For example, the following are all valid (not an exhaustive list):

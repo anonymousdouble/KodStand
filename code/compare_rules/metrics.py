@@ -59,7 +59,9 @@ def cal_macro_prf(data):
         else:
             f1 += f
 
-    print(f"valid precision: {n - iv_p}/{n}, valid recall: {n - iv_r}/{n}, valid f1: {n - iv_f}/{n}")
+    print(
+        f"valid precision: {n - iv_p}/{n}, valid recall: {n - iv_r}/{n}, valid f1: {n - iv_f}/{n}"
+    )
     macro_p = precision / (n - iv_p) if n - iv_p else ""
     macro_r = recall / (n - iv_r) if n - iv_r else ""
     macro_f1 = f1 / (n - iv_f) if n - iv_f else ""
@@ -72,6 +74,35 @@ def cal_micro_prf(data):
     fn = sum(data[3])
     return cal_prf(tp, fp, fn)
 
+
+def get_default_config(json_path):
+    
+    jdata = None
+    with open(json_path, "r", encoding="utf-8") as f:
+        jdata = json.load(f)
+    default_config = {}
+    for rule in jdata:
+        default_config[rule[1]] = {}
+        if len(rule) == 4 and rule[3].startswith("Properties"):
+            option_str = rule[3][58:]
+            option_str = re.sub(r"(\n)*,(\n)*", ",", option_str)
+            option_str = re.sub(r"(\n)*\.", ".", option_str)
+            option_str = re.sub(r"\.(\n)+", ".\n", option_str)
+            option_str = re.sub(r"(\n)+([A-Z][A-Z]+(_[A-Z]+)*)", r"\n\2", option_str)
+            options = option_str.split("\n\n\n")
+            for option in options:
+                cfg_name = option.strip("\n").split("\n")[0]
+                cfg_type = option.strip("\n").split("\n")[-3]
+                cfg_value = option.strip("\n").split("\n")[-2]
+                set_pattern = r"([A-Z][A-Z]+(_[A-Z]+)*)(,([A-Z][A-Z]+(_[A-Z]+)*))*."
+                if re.match(set_pattern, cfg_type):
+                    cfg_type = cfg_type.strip("\.").split(",")
+                    cfg_type = sorted(cfg_type)
+                if re.match(set_pattern, cfg_value):
+                    cfg_value = cfg_value.strip("\.").split(",")
+                    cfg_value = sorted(cfg_value)
+                default_config[rule[1]][cfg_name] = [cfg_type, cfg_value]
+    return default_config
 
 def compare_config(gpt_answer, benchmark):
     """
@@ -89,9 +120,10 @@ def compare_config(gpt_answer, benchmark):
         module_fn = benchmark.copy()
         option_name_fn = benchmark.copy()
         option_value_fn = benchmark.copy()
-
+        default_config = get_default_config("data/rule/checkstyle/java/url_name_desc_opt.json")
         for gpt_module in gpt_answer:
             for benchmark_module in module_fn:
+                default_module = default_config.get(benchmark_module["modulename"])
                 # TODO 计算方法有问题：同一个module如果存在多个
                 if gpt_module["modulename"] == benchmark_module["modulename"]:
                     module_tp.append(gpt_module)
@@ -101,7 +133,7 @@ def compare_config(gpt_answer, benchmark):
             for benchmark_module in option_name_fn:
                 if gpt_module["modulename"] == benchmark_module["modulename"]:
                     all_prop_name_match, all_prop_value_match = check_option_match(
-                        gpt_module, benchmark_module
+                        gpt_module, benchmark_module, default_module
                     )
                     if all_prop_name_match:
                         option_name_tp.append(gpt_module)
@@ -111,7 +143,7 @@ def compare_config(gpt_answer, benchmark):
             for benchmark_module in option_value_fn:
                 if gpt_module["modulename"] == benchmark_module["modulename"]:
                     all_prop_name_match, all_prop_value_match = check_option_match(
-                        gpt_module, benchmark_module
+                        gpt_module, benchmark_module, default_module
                     )
                     if all_prop_value_match:
                         option_value_tp.append(gpt_module)
@@ -136,25 +168,33 @@ def compare_config(gpt_answer, benchmark):
     return [module_res, option_name_res, option_value_res]
 
 
-def check_option_match(gpt_module: dict, benchmark_module: dict):
+def check_option_match(gpt_module: dict, benchmark_module: dict, default_module: dict):
     """
     对于一个 module ，从 module option name 和 option value 两个维度比较 benchmark 和 gpt answer
     """
     all_prop_name_match = True
     all_prop_value_match = True
     for prop in benchmark_module:
-        if prop != "modulename":
+        if prop != "modulename" and prop != "id":
             cor_prop = gpt_module.get(prop)
             if not cor_prop:
                 all_prop_name_match = False
                 all_prop_value_match = False
             elif cor_prop != benchmark_module[prop]:
                 all_prop_value_match = False
-
     for prop in gpt_module:
-        if prop != "modulename":
-            cor_prop = benchmark_module.get(prop)
-            if not cor_prop:
+        if prop != "modulename" and prop != "id":
+            # 不存在的option
+            if not prop in default_module:
+                continue
+            # benchmark未给出但可配置的option
+            elif prop in default_module and not prop in benchmark_module:
+                default_value = default_module[prop][1]
+                if type(default_value) == list:
+                    all_prop_value_match = default_value == gpt_module[prop].split(",")
+                elif default_value != gpt_module[prop]:
+                    all_prop_value_match = False
+            elif not prop in benchmark_module:
                 all_prop_name_match = False
                 all_prop_value_match = False
             elif cor_prop != gpt_module[prop]:
@@ -439,7 +479,11 @@ if __name__ == "__main__":
     root = "data/config_output/baseline/"
     bm_path = "data/benchmark/simple_benchmark.json"
     for file in os.listdir(root):
-        if file.endswith(".csv") and not file.endswith("_compared.csv") and not file.endswith("stat.csv"):
+        if (
+            file.endswith(".csv")
+            and not file.endswith("_compared.csv")
+            and not file.endswith("stat.csv")
+        ):
             stat_data.append([file[:-4]])
             print("=====================================")
             print(f"Baseline: {file[:-4]}")

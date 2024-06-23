@@ -84,7 +84,7 @@ NoLineWrap"
 </module>",Yes,"<module name='AvoidStarImport'>
         <property name='id' value='AvoidStarImport'/>
         <property name='severity' value='warning'/>
-    </module>",true,AvoidStarImport,,,,AvoidStarImport,AvoidStarImport,,AvoidStarImport,AvoidStarImport
+    </module>",true,AvoidStarImport,,,AvoidStarImport,,,AvoidStarImport,,
 3.3.2 No line-wrapping,"Import statements are not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to import statements.","<module name=""Checker"">
         <module name=""LineLength"">
                 <property name=""fileExtensions"" value=""java""/>
@@ -243,7 +243,7 @@ RightCurly"
         <property name='allowEmptyMethods' value='false'/>
         <property name='allowEmptyTypes' value='false'/>
         <property name='tokens' value='LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_RETURN, LITERAL_BREAK, LITERAL_CONTINUE, SEMI, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, STATIC_INIT, INSTANCE_INIT, ENUM_CONSTANT_DEF, LABELED_STAT, CASE_GROUP, GENERIC_START, GENERIC_END, ENUM_DEF, ANNOTATION_DEF, PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, METHOD_CALL, CTOR_CALL, EXPR, TYPECAST, QUESTION, LAMBDA, METHOD_REF'/>
-    </module>",true,OneStatementPerLine,,,,OneStatementPerLine,OneStatementPerLine,,OneStatementPerLine,OneStatementPerLine
+    </module>",true,OneStatementPerLine,,,OneStatementPerLine,,,OneStatementPerLine,,
 4.4 Column limit: 100,"Java code has a column limit of 100 characters. A ""character"" means any Unicode code point. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping .
  Each Unicode code point counts as one character, even if its display width is greater or less. For example, if using fullwidth characters , you may choose to wrap the line earlier than where this rule strictly requires.
  Exceptions:
@@ -512,7 +512,7 @@ RegexpMultiline",CommentsIndentation
         <property name='format' value='^[a-z]+(\\.[a-z0-9]+)*$'/>
         <property name='illegalFormat' value='^[A-Z]|[_]'/>
         <property name='message' value='Package name must use only lowercase letters and digits, with consecutive words concatenated'/>
-    </module>",true,PackageName,,,,PackageName,PackageName,,PackageName,PackageName
+    </module>",true,PackageName,,,PackageName,,,,PackageName,PackageName
 5.2.2 Class names,"Class names are written in UpperCamelCase .
  Class names are typically nouns or noun phrases. For example, `Character` or `ImmutableList` . Interface names may also be nouns or noun phrases (for example, `List` ), but may sometimes be adjectives or adjective phrases instead (for example, `Readable` ).
  There are no specific rules or even well-established conventions for naming annotation types.
@@ -565,7 +565,7 @@ RegexpMultiline",CommentsIndentation
 </module>",Yes,"<module name='ConstantName'>
         <property name='format' value='^[A-Z][A-Z0-9_]*$'/>
         <property name='ignoreModifiers' value='true'/>
-    </module>",true,ConstantName,,,,ConstantName,ConstantName,,ConstantName,ConstantName
+    </module>",true,ConstantName,,,ConstantName,,,,ConstantName,ConstantName
 5.2.5 Non-constant field names,"Non-constant field names (static or otherwise) are written in lowerCamelCase .
  These names are typically nouns or noun phrases. For example, `computedValues` or `index` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -616,8 +616,7 @@ RegexpMultiline",CommentsIndentation
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
         <property name='allowOneCharVarInForLoop' value='true'/>
     </module>",true,LocalVariableName,,"LocalFinalVariableName
-PatternVariableName",,LocalVariableName,"LocalVariableName
-LocalFinalVariableName
+PatternVariableName",LocalVariableName,,"LocalFinalVariableName
 PatternVariableName",,LocalVariableName,"LocalVariableName
 LocalFinalVariableName
 PatternVariableName"

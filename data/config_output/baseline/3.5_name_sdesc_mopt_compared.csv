@@ -544,14 +544,14 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
   </module>
 </module>",Yes,"<module name='ModifierOrder'>
         <property name='id' value='ModifierOrder'/>
-    </module>",true,ModifierOrder,,,,ModifierOrder,ModifierOrder,,ModifierOrder,ModifierOrder
+    </module>",true,ModifierOrder,,,ModifierOrder,,,ModifierOrder,,
 4.8.8 Numeric Literals,"`long` -valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1` ). For example, `3000000000L` rather than `3000000000l` .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""UpperEll""/>
   </module>
 </module>",Yes,"<module name='UpperEll'>
         <property name='id' value='id_value_1'/>
-    </module>",true,UpperEll,,,,UpperEll,UpperEll,,UpperEll,UpperEll
+    </module>",true,UpperEll,,,UpperEll,,,UpperEll,,
 5.1 Rules common to all identifiers,"Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores. Thus each valid identifier name is matched by the regular expression `\w+` .
  In Google Style, special prefixes or suffixes are not used. For example, these names are not Google Style: `name_` , `mName` , `s_name` and `kName` .",,Yes,"<module name='AbbreviationAsWordInName'>
         <property name='allowedAbbreviationLength' value='3'/>
@@ -615,7 +615,7 @@ MethodName",TypeName
         <property name='applyToPrivate' value='true'/>
         <property name='applyToProtected' value='true'/>
         <property name='applyToPublic' value='true'/>
-    </module>",true,MethodName,,,,MethodName,MethodName,,MethodName,MethodName
+    </module>",true,MethodName,,,MethodName,,,,MethodName,MethodName
 5.2.4 Constant names,"Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. But what is a constant, exactly?
  Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
  // Constants
@@ -649,7 +649,7 @@ MethodName",TypeName
         <property name='applyToPrivate' value='true'/>
         <property name='applyToProtected' value='true'/>
         <property name='applyToPublic' value='true'/>
-    </module>",true,ConstantName,,,,ConstantName,ConstantName,,ConstantName,ConstantName
+    </module>",true,ConstantName,,,ConstantName,,,,ConstantName,ConstantName
 5.2.5 Non-constant field names,"Non-constant field names (static or otherwise) are written in lowerCamelCase .
  These names are typically nouns or noun phrases. For example, `computedValues` or `index` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -713,8 +713,7 @@ RecordComponentName"
         <property name='id' value='localVariableName'/>
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
     </module>",true,LocalVariableName,,"LocalFinalVariableName
-PatternVariableName",,LocalVariableName,"LocalVariableName
-LocalFinalVariableName
+PatternVariableName",LocalVariableName,,"LocalFinalVariableName
 PatternVariableName",,LocalVariableName,"LocalVariableName
 LocalFinalVariableName
 PatternVariableName"
@@ -876,8 +875,7 @@ InterfaceTypeParameterName"
 </module>",Yes,"<module name='JavadocParagraph'>
         <property name='allowNewlineParagraph' value='true'/>
         <property name='violateExecutionOnNonTightHtml' value='true'/>
-    </module>",true,JavadocParagraph,,RequireEmptyLineBeforeBlockTagGroup,,JavadocParagraph,"JavadocParagraph
-RequireEmptyLineBeforeBlockTagGroup",,JavadocParagraph,"JavadocParagraph
+    </module>",true,JavadocParagraph,,RequireEmptyLineBeforeBlockTagGroup,JavadocParagraph,,RequireEmptyLineBeforeBlockTagGroup,,JavadocParagraph,"JavadocParagraph
 RequireEmptyLineBeforeBlockTagGroup"
 7.1.3 Block tags,"Any of the standard ""block tags"" that are used appear in the order `@param` , `@return` , `@throws` , `@deprecated` , and these four types never appear with an empty description. When a block tag doesn't fit on a single line, continuation lines are indented four (or more) spaces from the position of the `@` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -913,7 +911,7 @@ NonEmptyAtclauseDescription"
         <property name='forbiddenSummaryFragments' value='\\{@return\\s+\\w+\\s*\\}|\\{@param\\s+\\w+\\s*\\}|\\{@code\\s+\\w+\\s*\\}'/>
         <property name='period' value='true'/>
         <property name='violateExecutionOnNonTightHtml' value='ignore'/>
-    </module>",true,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc,,SummaryJavadoc,SummaryJavadoc
+    </module>",true,SummaryJavadoc,,,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc
 7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
  Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1053,7 +1051,7 @@ MissingJavadocMethod"
         <property name='name_2' value='value_2'/>
         ...
         <property name='name_n' value='value_n'/>
-    </module>",true,MultipleVariableDeclarations,,,,MultipleVariableDeclarations,MultipleVariableDeclarations,,MultipleVariableDeclarations,MultipleVariableDeclarations
+    </module>",true,MultipleVariableDeclarations,,,MultipleVariableDeclarations,,,MultipleVariableDeclarations,,
 4.8.2.2 Declared when needed,"Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. Local variable declarations typically have initializers, or are initialized immediately after declaration.","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""VariableDeclarationUsageDistance""/>

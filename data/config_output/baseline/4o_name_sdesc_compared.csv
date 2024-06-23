@@ -90,9 +90,7 @@ OneTopLevelClass",EmptyLineSeparator
 </module>",Yes,"<module name='NoLineWrap'>
         <property name='id' value='com.puppycrawl.tools.checkstyle.checks.coding.NoLineWrapCheck'/>
         <property name='tokens' value='PACKAGE_DEF'/>
-    </module>",true,NoLineWrap,,LineLength,,NoLineWrap,"LineLength
-NoLineWrap",,NoLineWrap,"LineLength
-NoLineWrap"
+    </module>",true,NoLineWrap,,LineLength,NoLineWrap,,LineLength,NoLineWrap,,LineLength
 3.3.1 No wildcard imports,"Wildcard imports , static or otherwise, are not used .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""AvoidStarImport""/>
@@ -129,7 +127,7 @@ NoLineWrap"
   </module>
 </module>",Yes,"<module name='OneTopLevelClass'>
         <property name='id' value='oneTopLevelClass'/>
-    </module>",true,OneTopLevelClass,,,,OneTopLevelClass,OneTopLevelClass,,OneTopLevelClass,OneTopLevelClass
+    </module>",true,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass,,
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,No,,,,,,,,,,,
@@ -206,8 +204,7 @@ NoLineWrap"
         <property name='option' value='nl'/>
         <property name='tokens' value='LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR'/>
     </module>",true,RightCurly,,"LeftCurly
-RightCurly",,RightCurly,"LeftCurly
-RightCurly
+RightCurly",RightCurly,,"LeftCurly
 RightCurly",,RightCurly,"LeftCurly
 RightCurly
 RightCurly"
@@ -249,7 +246,7 @@ RightCurly"
 </module>",Yes,"<module name='OneStatementPerLine'>
                         <property name='id' value='oneStatementPerLine'/>
                         <property name='allowSingleLineBlocks' value='false'/>
-                      </module>",true,OneStatementPerLine,,,,OneStatementPerLine,OneStatementPerLine,,OneStatementPerLine,OneStatementPerLine
+                      </module>",true,OneStatementPerLine,,,OneStatementPerLine,,,OneStatementPerLine,,
 4.4 Column limit: 100,"Java code has a column limit of 100 characters. A ""character"" means any Unicode code point. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping .
  Each Unicode code point counts as one character, even if its display width is greater or less. For example, if using fullwidth characters , you may choose to wrap the line earlier than where this rule strictly requires.
  Exceptions:
@@ -550,7 +547,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
 </module>",Yes,"<module name='MethodName'>
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
         <property name='allowUnderscore' value='false'/>
-    </module>",true,MethodName,,,,MethodName,MethodName,,MethodName,MethodName
+    </module>",true,MethodName,,,MethodName,,,,MethodName,MethodName
 5.2.4 Constant names,"Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. But what is a constant, exactly?
  Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
  // Constants
@@ -631,8 +628,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         <property name='ignoreFinal' value='false'/>
         <property name='ignoreStatic' value='false'/>
     </module>",true,LocalVariableName,,"LocalFinalVariableName
-PatternVariableName",,LocalVariableName,"LocalVariableName
-LocalFinalVariableName
+PatternVariableName",LocalVariableName,,"LocalFinalVariableName
 PatternVariableName",,LocalVariableName,"LocalVariableName
 LocalFinalVariableName
 PatternVariableName"
@@ -757,7 +753,7 @@ PatternVariableName"
         ",Yes,"<module name='SingleLineJavadoc'>
         <property name='id' value='com.puppycrawl.tools.checkstyle.checks.javadoc.SingleLineJavadocCheck'/>
         <property name='allowBlockTags' value='false'/>
-    </module>",true,SingleLineJavadoc,,,,SingleLineJavadoc,SingleLineJavadoc,,SingleLineJavadoc,SingleLineJavadoc
+    </module>",true,SingleLineJavadoc,,,SingleLineJavadoc,,,SingleLineJavadoc,,
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>
@@ -798,7 +794,7 @@ NonEmptyAtclauseDescription"
         <property name='id' value='SummaryJavadoc'/>
         <property name='forbiddenSummaryFragments' value='A{@codeFoo}isa,Thismethodreturns,Savetherecord.'/>
         <property name='allowedSummaryFragments' value='ReturnsthecustomerID.'/>
-    </module>",true,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc,,SummaryJavadoc,SummaryJavadoc
+    </module>",true,SummaryJavadoc,,,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc
 7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
  Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -893,7 +889,7 @@ NonEmptyAtclauseDescription"
 </module>",Yes,"<module name='OverloadMethodsDeclarationOrder'>
         <property name='id' value='OverloadMethodsDeclarationOrder'/>
         <property name='option' value='never'/>
-    </module>",true,OverloadMethodsDeclarationOrder,,,,OverloadMethodsDeclarationOrder,OverloadMethodsDeclarationOrder,,OverloadMethodsDeclarationOrder,OverloadMethodsDeclarationOrder
+    </module>",true,OverloadMethodsDeclarationOrder,,,OverloadMethodsDeclarationOrder,,,OverloadMethodsDeclarationOrder,,
 4.8.2.1 One variable per declaration,"Every variable declaration (field or local) declares only one variable: declarations such as int a, b; are not used.
  Exception: Multiple variable declarations are acceptable in the header of a for loop.","<module name=""Checker"">
   <module name=""TreeWalker"">

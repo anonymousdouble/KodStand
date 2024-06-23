@@ -539,8 +539,7 @@ InterfaceMemberImpliedModifier
 ClassMemberImpliedModifier
 HideUtilityClassConstructor
 FinalParameters
-DesignForExtension",,,"ModifierOrder
-RedundantModifier
+DesignForExtension",,ModifierOrder,"RedundantModifier
 FinalClass
 VisibilityModifier
 DeclarationOrder
@@ -548,8 +547,7 @@ InterfaceMemberImpliedModifier
 ClassMemberImpliedModifier
 HideUtilityClassConstructor
 FinalParameters
-DesignForExtension",ModifierOrder,,"ModifierOrder
-RedundantModifier
+DesignForExtension",,ModifierOrder,"RedundantModifier
 FinalClass
 VisibilityModifier
 DeclarationOrder
@@ -557,7 +555,7 @@ InterfaceMemberImpliedModifier
 ClassMemberImpliedModifier
 HideUtilityClassConstructor
 FinalParameters
-DesignForExtension",ModifierOrder
+DesignForExtension",
 4.8.8 Numeric Literals,"`long` -valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1` ). For example, `3000000000L` rather than `3000000000l` .","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""UpperEll""/>
@@ -601,7 +599,7 @@ DesignForExtension",ModifierOrder
 </module>",Yes,"<module name='MethodName'>
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
         <property name='allowConstructorName' value='false'/>
-    </module>",true,MethodName,,,,MethodName,MethodName,,MethodName,MethodName
+    </module>",true,MethodName,,,MethodName,,,,MethodName,MethodName
 5.2.4 Constant names,"Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. But what is a constant, exactly?
  Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
  // Constants
@@ -666,8 +664,7 @@ DesignForExtension",ModifierOrder
         <property name='allowOneCharParameterNames' value='false'/>
     </module>",true,ParameterName,,"LambdaParameterName
 CatchParameterName
-RecordComponentName",,ParameterName,"ParameterName
-LambdaParameterName
+RecordComponentName",ParameterName,,"LambdaParameterName
 CatchParameterName
 RecordComponentName",,ParameterName,"ParameterName
 LambdaParameterName
@@ -825,7 +822,7 @@ PatternVariableName"
 </module>
         ",Yes,"<module name='SingleLineJavadoc'>
         <property name='allowSingleLineJavadoc' value='true'/>
-    </module>",true,SingleLineJavadoc,,,,SingleLineJavadoc,SingleLineJavadoc,,SingleLineJavadoc,SingleLineJavadoc
+    </module>",true,SingleLineJavadoc,,,SingleLineJavadoc,,,SingleLineJavadoc,,
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>

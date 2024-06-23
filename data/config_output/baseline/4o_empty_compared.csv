@@ -81,7 +81,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
 </module>",Yes,"<module name='AvoidStarImport'>
         <property name='id' value='AvoidStarImport'/>
         <property name='severity' value='warning'/>
-    </module>",true,AvoidStarImport,,,,AvoidStarImport,AvoidStarImport,,AvoidStarImport,AvoidStarImport
+    </module>",true,AvoidStarImport,,,AvoidStarImport,,,AvoidStarImport,,
 3.3.2 No line-wrapping,"Import statements are not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to import statements.","<module name=""Checker"">
         <module name=""LineLength"">
                 <property name=""fileExtensions"" value=""java""/>
@@ -483,7 +483,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         <property name='format' value='^[a-z]+(\\.[a-z0-9]+)*$'/>
         <property name='illegalFormat' value='^[a-z]+(_[a-z0-9]+)*$'/>
         <property name='message' value='Package name must use only lowercase letters and digits, with consecutive words concatenated'/>
-    </module>",true,PackageName,,,,PackageName,PackageName,,PackageName,PackageName
+    </module>",true,PackageName,,,PackageName,,,,PackageName,PackageName
 5.2.2 Class names,"Class names are written in UpperCamelCase .
  Class names are typically nouns or noun phrases. For example, `Character` or `ImmutableList` . Interface names may also be nouns or noun phrases (for example, `List` ), but may sometimes be adjectives or adjective phrases instead (for example, `Readable` ).
  There are no specific rules or even well-established conventions for naming annotation types.
@@ -536,7 +536,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
 </module>",Yes,"<module name='ConstantName'>
         <property name='format' value='^[A-Z][A-Z0-9_]*$'/>
         <property name='ignoreModifiers' value='true'/>
-    </module>",true,ConstantName,,,,ConstantName,ConstantName,,ConstantName,ConstantName
+    </module>",true,ConstantName,,,ConstantName,,,,ConstantName,ConstantName
 5.2.5 Non-constant field names,"Non-constant field names (static or otherwise) are written in lowerCamelCase .
  These names are typically nouns or noun phrases. For example, `computedValues` or `index` .","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -571,8 +571,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
         <property name='allowOneCharacterParameterNames' value='false'/>
     </module>",true,ParameterName,,"LambdaParameterName
 CatchParameterName
-RecordComponentName",,ParameterName,"ParameterName
-LambdaParameterName
+RecordComponentName",ParameterName,,"LambdaParameterName
 CatchParameterName
 RecordComponentName",,ParameterName,"ParameterName
 LambdaParameterName
@@ -598,8 +597,7 @@ RecordComponentName"
         <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
         <property name='allowOneLetterAbbreviation' value='false'/>
     </module>",true,LocalVariableName,,"LocalFinalVariableName
-PatternVariableName",,LocalVariableName,"LocalVariableName
-LocalFinalVariableName
+PatternVariableName",LocalVariableName,,"LocalFinalVariableName
 PatternVariableName",,LocalVariableName,"LocalVariableName
 LocalFinalVariableName
 PatternVariableName"
@@ -848,7 +846,7 @@ PatternVariableName"
 </module>
         ",Yes,"<module name='MultipleVariableDeclarations'>
         <property name='allowInForLoopHeaders' value='true'/>
-    </module>",true,MultipleVariableDeclarations,,,,MultipleVariableDeclarations,MultipleVariableDeclarations,,MultipleVariableDeclarations,MultipleVariableDeclarations
+    </module>",true,MultipleVariableDeclarations,,,MultipleVariableDeclarations,,,MultipleVariableDeclarations,,
 4.8.2.2 Declared when needed,"Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. Local variable declarations typically have initializers, or are initialized immediately after declaration.","<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""VariableDeclarationUsageDistance""/>
