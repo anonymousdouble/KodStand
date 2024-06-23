@@ -58,7 +58,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
                 </module>
         </module>
 </module>
-",Yes,<module name='OneTopLevelClass'/>,true,,OneTopLevelClass,EmptyLineSeparator,,OneTopLevelClass,EmptyLineSeparator,,OneTopLevelClass,EmptyLineSeparator
+",Yes,<module name='OneTopLevelClass'/>,true,OneTopLevelClass,,"EmptyLineSeparator
+PackageDeclaration",OneTopLevelClass,,"EmptyLineSeparator
+PackageDeclaration",OneTopLevelClass,,"EmptyLineSeparator
+PackageDeclaration"
 "3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.",,Yes,<module name='OneTopLevelClass'/>,true,,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass,
 3.2 Package statement,"The package statement is not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to package statements.","<module name=""Checker"">
         <module name=""LineLength"">
@@ -111,7 +114,7 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
   <module name=""TreeWalker"">
     <module name=""OneTopLevelClass""/>
   </module>
-</module>",Yes,<module name='OneTopLevelClass'/>,true,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass,,
+</module>",Yes,<module name='OneTopLevelClass'/>,true,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,Yes,"<module name='DeclarationOrder'>
@@ -126,18 +129,15 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
     
 <module name='DesignForExtension'/>
     
-<module name='InnerTypeLast'/>",true,,"DeclarationOrder
-ModifierOrder
+<module name='InnerTypeLast'/>",true,DeclarationOrder,"ModifierOrder
 FinalClass
 HideUtilityClassConstructor
 DesignForExtension
-InnerTypeLast",,,"DeclarationOrder
-ModifierOrder
+InnerTypeLast",,DeclarationOrder,"ModifierOrder
 FinalClass
 HideUtilityClassConstructor
 DesignForExtension
-InnerTypeLast",,,"DeclarationOrder
-ModifierOrder
+InnerTypeLast",,DeclarationOrder,"ModifierOrder
 FinalClass
 HideUtilityClassConstructor
 DesignForExtension
@@ -820,7 +820,7 @@ StaticVariableName",
 </module>
         ",Yes,"<module name='SingleLineJavadoc'>
         <property name='allowSingleLineJavadoc' value='true'/>
-    </module>",true,SingleLineJavadoc,,,SingleLineJavadoc,,,SingleLineJavadoc,,
+    </module>",true,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>

@@ -10,7 +10,8 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
   </module>
 </module>",Yes,"<module name='FileTabCharacter'>
         <property name='eachLine' value='true'/>
-    </module>",true,FileTabCharacter,,,FileTabCharacter,,,FileTabCharacter,,
+    </module>",true,FileTabCharacter,,SingleSpaceSeparator,FileTabCharacter,,SingleSpaceSeparator,,FileTabCharacter,"FileTabCharacter
+SingleSpaceSeparator"
 2.3.2 Special escape sequences,"For any character that has a special escape sequence ( `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` ), that sequence is used rather than the corresponding octal (e.g. `\012` ) or Unicode (e.g. `\u000a` ) escape.","<module name=""Checker"">
 	<module name=""IllegalTokenText"">
 		<property name=""format"" value=""\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)""/>
@@ -71,10 +72,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
 <module name='OneTopLevelClass'>
         <property name='id' value='OneTopLevelClass'/>
         <property name='allowMultipleTopLevelClasses' value='false'/>
-    </module>",true,,"PackageDeclaration
-OneTopLevelClass",EmptyLineSeparator,,"PackageDeclaration
-OneTopLevelClass",EmptyLineSeparator,,"PackageDeclaration
-OneTopLevelClass",EmptyLineSeparator
+    </module>",true,"PackageDeclaration
+OneTopLevelClass",,EmptyLineSeparator,"PackageDeclaration
+OneTopLevelClass",,EmptyLineSeparator,"PackageDeclaration
+OneTopLevelClass",,EmptyLineSeparator
 "3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.",,No,,,,,,,,,,,
 3.2 Package statement,"The package statement is not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to package statements.","<module name=""Checker"">
         <module name=""LineLength"">
@@ -127,7 +128,7 @@ OneTopLevelClass",EmptyLineSeparator
   </module>
 </module>",Yes,"<module name='OneTopLevelClass'>
         <property name='id' value='oneTopLevelClass'/>
-    </module>",true,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass,,
+    </module>",true,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,No,,,,,,,,,,,
@@ -238,7 +239,8 @@ RightCurly"
         <property name='caseIndent' value='2'/>
         <property name='throwsIndent' value='2'/>
         <property name='lineWrappingIndentation' value='2'/>
-    </module>",true,Indentation,,,,Indentation,Indentation,,Indentation,Indentation
+    </module>",true,Indentation,,CommentsIndentation,Indentation,,CommentsIndentation,,Indentation,"Indentation
+CommentsIndentation"
 4.3 One statement per line,Each statement is followed by a line break.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OneStatementPerLine""/>
@@ -262,7 +264,7 @@ RightCurly"
 </module>",Yes,"<module name='LineLength'>
         <property name='max' value='100'/>
         <property name='ignorePattern' value='^import\\s.*|^package\\s.*|^\\s*\\/\\/\\s*.*|^\\s*\\*\\s*.*'/>
-    </module>",true,LineLength,,,,LineLength,LineLength,,LineLength,LineLength
+    </module>",true,LineLength,,,LineLength,,,,LineLength,LineLength
 4.5 Line-wrapping,"Terminology Note: When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping .
  There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
  Note: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
@@ -451,7 +453,7 @@ NoWhitespaceBeforeCaseDefaultColon"
 4.7 Grouping parentheses: recommended,"Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.",,Yes,"<module name='UnnecessaryParentheses'>
         <property name='id' value='com.puppycrawl.tools.checkstyle.checks.coding.UnnecessaryParenthesesCheck'/>
         <property name='tokens' value='LITERAL'/>
-    </module>",true,,UnnecessaryParentheses,,,UnnecessaryParentheses,,,UnnecessaryParentheses,
+    </module>",true,UnnecessaryParentheses,,,UnnecessaryParentheses,,,,UnnecessaryParentheses,UnnecessaryParentheses
 4.8.1 Enum classes,"After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
  private enum Answer {
   YES {
@@ -753,7 +755,7 @@ PatternVariableName"
         ",Yes,"<module name='SingleLineJavadoc'>
         <property name='id' value='com.puppycrawl.tools.checkstyle.checks.javadoc.SingleLineJavadocCheck'/>
         <property name='allowBlockTags' value='false'/>
-    </module>",true,SingleLineJavadoc,,,SingleLineJavadoc,,,SingleLineJavadoc,,
+    </module>",true,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>
@@ -777,8 +779,7 @@ PatternVariableName"
         <property name='allowEmptyDescription' value='false'/>
         <property name='indent' value='4'/>
     </module>",true,AtclauseOrder,,"JavadocTagContinuationIndentation
-NonEmptyAtclauseDescription",,AtclauseOrder,"AtclauseOrder
-JavadocTagContinuationIndentation
+NonEmptyAtclauseDescription",AtclauseOrder,,"JavadocTagContinuationIndentation
 NonEmptyAtclauseDescription",,AtclauseOrder,"AtclauseOrder
 JavadocTagContinuationIndentation
 NonEmptyAtclauseDescription"
@@ -794,7 +795,8 @@ NonEmptyAtclauseDescription"
         <property name='id' value='SummaryJavadoc'/>
         <property name='forbiddenSummaryFragments' value='A{@codeFoo}isa,Thismethodreturns,Savetherecord.'/>
         <property name='allowedSummaryFragments' value='ReturnsthecustomerID.'/>
-    </module>",true,SummaryJavadoc,,,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc
+    </module>",true,SummaryJavadoc,,JavadocStyle,SummaryJavadoc,,JavadocStyle,,SummaryJavadoc,"SummaryJavadoc
+JavadocStyle"
 7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
  Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","<module name=""Checker"">
         <module name=""TreeWalker"">

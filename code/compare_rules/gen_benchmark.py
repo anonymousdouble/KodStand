@@ -38,14 +38,14 @@ def gen_benchmark(file_path):
         java_desc = "\n".join([rule,desc])
         result[java_desc] = config
         simple_result[rule] = config
-    with open ('data/benchmark/benchmark.json','w',encoding='utf-8') as f:
+    with open ('data/benchmark/benchmark_new.json','w',encoding='utf-8') as f:
         f.write(json.dumps(result,ensure_ascii=False, indent=4))
-    with open ('data/benchmark/simple_benchmark.json','w',encoding='utf-8') as f:
+    with open ('data/benchmark/simple_benchmark_new.json','w',encoding='utf-8') as f:
         f.write(json.dumps(simple_result,ensure_ascii=False, indent=4))
 
 if __name__ == '__main__':
-    file_path = 'data/benchmark/checkstyle2google_java_benchmark.xlsx'
+    # file_path = 'data/benchmark/checkstyle2google_java_benchmark.xlsx'
+    # gen_benchmark(file_path)
+    file_path = 'data/benchmark/bm.xlsx'
+
     gen_benchmark(file_path)
-
-
-    

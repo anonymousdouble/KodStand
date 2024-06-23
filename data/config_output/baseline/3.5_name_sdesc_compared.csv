@@ -71,10 +71,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
 <module name='OneTopLevelClass'>
         <property name='id' value='OneTopLevelClass'/>
         <property name='allowMultipleTopLevelClasses' value='false'/>
-    </module>",true,,"PackageDeclaration
-OneTopLevelClass",EmptyLineSeparator,,"PackageDeclaration
-OneTopLevelClass",EmptyLineSeparator,,"PackageDeclaration
-OneTopLevelClass",EmptyLineSeparator
+    </module>",true,"PackageDeclaration
+OneTopLevelClass",,EmptyLineSeparator,"PackageDeclaration
+OneTopLevelClass",,EmptyLineSeparator,"PackageDeclaration
+OneTopLevelClass",,EmptyLineSeparator
 "3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.",,No,,,,,,,,,,,
 3.2 Package statement,"The package statement is not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to package statements.","<module name=""Checker"">
         <module name=""LineLength"">
@@ -129,7 +129,7 @@ OneTopLevelClass",EmptyLineSeparator
   </module>
 </module>",Yes,"<module name='OneTopLevelClass'>
         <property name='id' value='oneTopLevelClass'/>
-    </module>",true,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass,,
+    </module>",true,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,No,,,,,,,,,,,
@@ -239,7 +239,8 @@ RightCurly"
         <property name='caseIndent' value='2'/>
         <property name='throwsIndent' value='2'/>
         <property name='lineWrappingIndentation' value='2'/>
-    </module>",true,Indentation,,,,Indentation,Indentation,,Indentation,Indentation
+    </module>",true,Indentation,,CommentsIndentation,Indentation,,CommentsIndentation,,Indentation,"Indentation
+CommentsIndentation"
 4.3 One statement per line,Each statement is followed by a line break.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OneStatementPerLine""/>
@@ -264,7 +265,7 @@ RightCurly"
         <property name='id' value='com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck'/>
         <property name='max' value='100'/>
         <property name='ignorePattern' value='^package.*|^import.*|.*http[s]?://.*|.*www\\..*|.*\\.com.*|.*\\.net.*|.*\\.org.*|.*\\.html.*|.*\\.htm.*|.*\\.jsni.*'/>
-    </module>",true,LineLength,,,,LineLength,LineLength,,LineLength,LineLength
+    </module>",true,LineLength,,,LineLength,,,,LineLength,LineLength
 4.5 Line-wrapping,"Terminology Note: When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping .
  There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
  Note: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
@@ -480,7 +481,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
  In Google Style, special prefixes or suffixes are not used. For example, these names are not Google Style: `name_` , `mName` , `s_name` and `kName` .",,Yes,"<module name='AbbreviationAsWordInName'>
         <property name='format' value='^[a-z][a-z0-9]*([A-Z][a-z0-9]*)*$'/>
         <property name='allowDigits' value='true'/>
-    </module>",true,,AbbreviationAsWordInName,,,AbbreviationAsWordInName,,,AbbreviationAsWordInName,
+    </module>",true,,AbbreviationAsWordInName,IllegalIdentifierName,,AbbreviationAsWordInName,IllegalIdentifierName,,AbbreviationAsWordInName,IllegalIdentifierName
 5.2.1 Package names,"Package names use only lowercase letters and digits (no underscores). Consecutive words are simply concatenated together. For example, `com.example.deepspace` , not `com.example.deepSpace` or `com.example.deep_space` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""PackageName"">
@@ -712,7 +713,7 @@ InterfaceTypeParameterName"
         <property name='allowByTailComment' value='true'/>
         <property name='allowEscapesForControlCharacters' value='true'/>
         <property name='allowNonPrintableEscapes' value='true'/>
-    </module>",true,,AvoidEscapedUnicodeCharacters,EmptyBlock,,AvoidEscapedUnicodeCharacters,EmptyBlock,,AvoidEscapedUnicodeCharacters,EmptyBlock
+    </module>",true,,AvoidEscapedUnicodeCharacters,EmptyCatchBlock,,AvoidEscapedUnicodeCharacters,EmptyCatchBlock,,AvoidEscapedUnicodeCharacters,EmptyCatchBlock
 6.3 Static members: qualified using class,"When a reference to a static class member must be qualified, it is qualified with that class's name, not with a reference or expression of that class's type.
  Foo aFoo = ...;
  Foo.aStaticMethod(); // good
@@ -746,7 +747,7 @@ InterfaceTypeParameterName"
         ",Yes,"<module name='SingleLineJavadoc'>
         <property name='id' value='SingleLineJavadoc'/>
         <property name='allowSingleLineJavadoc' value='true'/>
-    </module>",true,SingleLineJavadoc,,,SingleLineJavadoc,,,SingleLineJavadoc,,
+    </module>",true,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>
@@ -777,7 +778,8 @@ InterfaceTypeParameterName"
         <property name='id' value='SummaryJavadoc'/>
         <property name='forbiddenSummaryFragments' value='A{@codeFoo}isa,Thismethodreturns,Savetherecord.'/>
         <property name='allowedSummaryFragments' value='ReturnsthecustomerID.'/>
-    </module>",true,SummaryJavadoc,,,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc
+    </module>",true,SummaryJavadoc,,JavadocStyle,SummaryJavadoc,,JavadocStyle,,SummaryJavadoc,"SummaryJavadoc
+JavadocStyle"
 7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
  Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","<module name=""Checker"">
         <module name=""TreeWalker"">

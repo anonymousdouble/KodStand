@@ -12,7 +12,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
         <property name='allowByTailComment' value='true'/>
         <property name='allowEscapesForControlCharacters' value='true'/>
         <property name='allowNonPrintableEscapes' value='true'/>
-    </module>",true,,AvoidEscapedUnicodeCharacters,FileTabCharacter,,AvoidEscapedUnicodeCharacters,FileTabCharacter,,AvoidEscapedUnicodeCharacters,FileTabCharacter
+    </module>",true,,AvoidEscapedUnicodeCharacters,"FileTabCharacter
+SingleSpaceSeparator",,AvoidEscapedUnicodeCharacters,"FileTabCharacter
+SingleSpaceSeparator",,AvoidEscapedUnicodeCharacters,"FileTabCharacter
+SingleSpaceSeparator"
 2.3.2 Special escape sequences,"For any character that has a special escape sequence ( `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` ), that sequence is used rather than the corresponding octal (e.g. `\012` ) or Unicode (e.g. `\u000a` ) escape.","<module name=""Checker"">
 	<module name=""IllegalTokenText"">
 		<property name=""format"" value=""\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)""/>
@@ -71,7 +74,13 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
 ",Yes,"<module name='ImportOrder'>
         <property name='option' value='top'/>
         <property name='groups' value='java.,javax.,org.,com.'/>
-    </module>",true,,ImportOrder,EmptyLineSeparator,,ImportOrder,EmptyLineSeparator,,ImportOrder,EmptyLineSeparator
+    </module>",true,,ImportOrder,"EmptyLineSeparator
+OneTopLevelClass
+PackageDeclaration",,ImportOrder,"EmptyLineSeparator
+OneTopLevelClass
+PackageDeclaration",,ImportOrder,"EmptyLineSeparator
+OneTopLevelClass
+PackageDeclaration"
 "3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.",,Yes,"<module name='AvoidEscapedUnicodeCharacters'>
         <property name='allowByTailComment' value='true'/>
         <property name='allowEscapesForControlCharacters' value='true'/>
@@ -137,12 +146,12 @@ NoLineWrap"
   <module name=""TreeWalker"">
     <module name=""OneTopLevelClass""/>
   </module>
-</module>",Yes,<module name='OneTopLevelClass'/>,true,OneTopLevelClass,,,OneTopLevelClass,,,OneTopLevelClass,,
+</module>",Yes,<module name='OneTopLevelClass'/>,true,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,Yes,"<module name='DeclarationOrder'>
         <property name='id' value='DeclarationOrder'/>
-    </module>",true,,DeclarationOrder,,,DeclarationOrder,,,DeclarationOrder,
+    </module>",true,DeclarationOrder,,,DeclarationOrder,,,DeclarationOrder,,
 4 Formatting,"Terminology Note: 
  block-like construct refers to the body of a class, method or constructor. Note that, by Section 4.8.3.1 on array initializers , any array initializer may optionally be treated as if it were a block-like construct.",,Yes,"<module name='WhitespaceAround'>
         <property name='tokens' value='ASSIGN, EQUAL, NOT_EQUAL, PLUS, MINUS, STAR, DIV, MOD, BAND, BOR, BXOR, BNOT, SL, SR, BSR, LT, GT, LE, GE, QUESTION, COLON, LNOT, LAND, LOR'/>
@@ -261,7 +270,8 @@ RightCurly"
         <property name='caseIndent' value='2'/>
         <property name='throwsIndent' value='2'/>
         <property name='lineWrappingIndentation' value='2'/>
-    </module>",true,Indentation,,,,Indentation,Indentation,,Indentation,Indentation
+    </module>",true,Indentation,,CommentsIndentation,Indentation,,CommentsIndentation,,Indentation,"Indentation
+CommentsIndentation"
 4.3 One statement per line,Each statement is followed by a line break.,"<module name=""Checker"">
   <module name=""TreeWalker"">
     <module name=""OneStatementPerLine""/>
@@ -284,7 +294,7 @@ RightCurly"
 </module>",Yes,"<module name='LineLength'>
         <property name='max' value='100'/>
         <property name='ignorePattern' value='^import\\s.*|^package\\s.*|^\\s*//.*|.*\\s+\\\\$'/>
-    </module>",true,LineLength,,,,LineLength,LineLength,,LineLength,LineLength
+    </module>",true,LineLength,,,LineLength,,,,LineLength,LineLength
 4.5 Line-wrapping,"Terminology Note: When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping .
  There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
  Note: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
@@ -463,7 +473,7 @@ NoWhitespaceBeforeCaseDefaultColon"
         <property name='allowByTailComment' value='true'/>
         <property name='allowEscapesForControlCharacters' value='true'/>
         <property name='allowNonPrintableEscapes' value='true'/>
-    </module>",true,,AvoidEscapedUnicodeCharacters,,,AvoidEscapedUnicodeCharacters,,,AvoidEscapedUnicodeCharacters,
+    </module>",true,,AvoidEscapedUnicodeCharacters,UnnecessaryParentheses,,AvoidEscapedUnicodeCharacters,UnnecessaryParentheses,,AvoidEscapedUnicodeCharacters,UnnecessaryParentheses
 4.8.1 Enum classes,"After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
  private enum Answer {
   YES {
@@ -531,7 +541,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
  In Google Style, special prefixes or suffixes are not used. For example, these names are not Google Style: `name_` , `mName` , `s_name` and `kName` .",,Yes,"<module name='AbbreviationAsWordInName'>
         <property name='format' value='^[a-z][a-z0-9]*([A-Z][a-z0-9]*)*$'/>
         <property name='allowDigits' value='true'/>
-    </module>",true,,AbbreviationAsWordInName,,,AbbreviationAsWordInName,,,AbbreviationAsWordInName,
+    </module>",true,,AbbreviationAsWordInName,IllegalIdentifierName,,AbbreviationAsWordInName,IllegalIdentifierName,,AbbreviationAsWordInName,IllegalIdentifierName
 5.2.1 Package names,"Package names use only lowercase letters and digits (no underscores). Consecutive words are simply concatenated together. For example, `com.example.deepspace` , not `com.example.deepSpace` or `com.example.deep_space` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""PackageName"">
@@ -778,7 +788,7 @@ AvoidEscapedUnicodeCharacters",AbbreviationAsWordInName
         <property name='allowByTailComment' value='true'/>
         <property name='allowEscapesForControlCharacters' value='true'/>
         <property name='allowNonPrintableEscapes' value='true'/>
-    </module>",true,,AvoidEscapedUnicodeCharacters,EmptyBlock,,AvoidEscapedUnicodeCharacters,EmptyBlock,,AvoidEscapedUnicodeCharacters,EmptyBlock
+    </module>",true,,AvoidEscapedUnicodeCharacters,EmptyCatchBlock,,AvoidEscapedUnicodeCharacters,EmptyCatchBlock,,AvoidEscapedUnicodeCharacters,EmptyCatchBlock
 6.3 Static members: qualified using class,"When a reference to a static class member must be qualified, it is qualified with that class's name, not with a reference or expression of that class's type.
  Foo aFoo = ...;
  Foo.aStaticMethod(); // good
@@ -814,7 +824,7 @@ AvoidEscapedUnicodeCharacters",AbbreviationAsWordInName
 </module>
         ",Yes,"<module name='JavadocStyle'>
         <property name='allowSingleLineJavadoc' value='true'/>
-    </module>",true,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc
+    </module>",true,JavadocStyle,,SingleLineJavadoc,JavadocStyle,,SingleLineJavadoc,JavadocStyle,,SingleLineJavadoc
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>
@@ -859,7 +869,8 @@ NonEmptyAtclauseDescription"
 </module>",Yes,"<module name='SummaryJavadoc'>
         <property name='severity' value='warning'/>
         <property name='forbiddenSummaryFragments' value='A{@codeFoo}isa, Thismethodreturns, Savetherecord.'/>
-    </module>",true,SummaryJavadoc,,,SummaryJavadoc,,,,SummaryJavadoc,SummaryJavadoc
+    </module>",true,SummaryJavadoc,,JavadocStyle,SummaryJavadoc,,JavadocStyle,,SummaryJavadoc,"SummaryJavadoc
+JavadocStyle"
 7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
  Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","<module name=""Checker"">
         <module name=""TreeWalker"">

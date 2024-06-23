@@ -120,7 +120,7 @@ NoLineWrap"
         <property name='severity' value='error'/>
         <property name='format' value='^[A-Z].*\\.java$'/>
         <property name='message' value='Outer type name and file name must match, and the file name must start with an uppercase letter.'/>
-    </module>",true,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass,,OuterTypeFilename,OneTopLevelClass
+    </module>",true,OuterTypeFilename,,OneTopLevelClass,OuterTypeFilename,,OneTopLevelClass,OuterTypeFilename,,OneTopLevelClass
 3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
  What is important is that each class uses 
  some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.",,No,,,,,,,,,,,
@@ -251,7 +251,7 @@ RightCurly"
 </module>",Yes,"<module name='LineLength'>
         <property name='max' value='100'/>
         <property name='ignorePattern' value='^import\\s.*|^package\\s.*'/>
-    </module>",true,LineLength,,,,LineLength,LineLength,,LineLength,LineLength
+    </module>",true,LineLength,,,LineLength,,,,LineLength,LineLength
 4.5 Line-wrapping,"Terminology Note: When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping .
  There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
  Note: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
@@ -726,7 +726,7 @@ PatternVariableName"
         ",Yes,"<module name='JavadocStyle'>
         <property name='allowedSingleLineJavadoc' value='true'/>
         <property name='allowBlockTags' value='false'/>
-    </module>",true,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc,,JavadocStyle,SingleLineJavadoc
+    </module>",true,JavadocStyle,,SingleLineJavadoc,JavadocStyle,,SingleLineJavadoc,JavadocStyle,,SingleLineJavadoc
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>

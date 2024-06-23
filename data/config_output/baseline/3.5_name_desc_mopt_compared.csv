@@ -10,7 +10,10 @@ rule_name,description,benchmark,gpt_answer,gpt_configuration,valid_config,module
         <property name='allowByTailComment' value='true'/>
         <property name='allowEscapesForControlCharacters' value='true'/>
         <property name='allowNonPrintableEscapes' value='true'/>
-    </module>",true,,AvoidEscapedUnicodeCharacters,FileTabCharacter,,AvoidEscapedUnicodeCharacters,FileTabCharacter,,AvoidEscapedUnicodeCharacters,FileTabCharacter
+    </module>",true,,AvoidEscapedUnicodeCharacters,"FileTabCharacter
+SingleSpaceSeparator",,AvoidEscapedUnicodeCharacters,"FileTabCharacter
+SingleSpaceSeparator",,AvoidEscapedUnicodeCharacters,"FileTabCharacter
+SingleSpaceSeparator"
 2.3.2 Special escape sequences,"For any character that has a special escape sequence ( `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` ), that sequence is used rather than the corresponding octal (e.g. `\012` ) or Unicode (e.g. `\u000a` ) escape.","<module name=""Checker"">
 	<module name=""IllegalTokenText"">
 		<property name=""format"" value=""\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)""/>
@@ -781,9 +784,9 @@ InterfaceTypeParameterName"
 <module name='JavadocContentLocation'>
         <property name='location' value='first_line'/>
     </module>",true,SingleLineJavadoc,"JavadocParagraph
-JavadocContentLocation",,SingleLineJavadoc,"JavadocParagraph
-JavadocContentLocation",,SingleLineJavadoc,"JavadocParagraph
-JavadocContentLocation",
+JavadocContentLocation",JavadocStyle,SingleLineJavadoc,"JavadocParagraph
+JavadocContentLocation",JavadocStyle,SingleLineJavadoc,"JavadocParagraph
+JavadocContentLocation",JavadocStyle
 7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .","<module name=""Checker"">
         <module name=""TreeWalker"">
                 <module name=""JavadocParagraph""/>

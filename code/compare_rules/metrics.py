@@ -477,7 +477,7 @@ def compare_and_cal_metrics(csv_path, benchmark_path):
 if __name__ == "__main__":
     stat_data = []
     root = "data/config_output/baseline/"
-    bm_path = "data/benchmark/simple_benchmark.json"
+    bm_path = "data/benchmark/simple_benchmark_new.json"
     for file in os.listdir(root):
         if (
             file.endswith(".csv")
