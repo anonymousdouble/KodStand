@@ -76,7 +76,7 @@ def cal_micro_prf(data):
 
 
 def get_default_config(json_path):
-    
+
     jdata = None
     with open(json_path, "r", encoding="utf-8") as f:
         jdata = json.load(f)
@@ -104,6 +104,7 @@ def get_default_config(json_path):
                 default_config[rule[1]][cfg_name] = [cfg_type, cfg_value]
     return default_config
 
+
 def compare_config(gpt_answer, benchmark):
     """
     比较 benchmark 和 gpt answer 对于同一个 rule 的配置
@@ -120,7 +121,9 @@ def compare_config(gpt_answer, benchmark):
         module_fn = benchmark.copy()
         option_name_fn = benchmark.copy()
         option_value_fn = benchmark.copy()
-        default_config = get_default_config("data/rule/checkstyle/java/url_name_desc_opt.json")
+        default_config = get_default_config(
+            "data/rule/checkstyle/java/url_name_desc_opt.json"
+        )
         for gpt_module in gpt_answer:
             for benchmark_module in module_fn:
                 default_module = default_config.get(benchmark_module["modulename"])
@@ -176,11 +179,11 @@ def check_option_match(gpt_module: dict, benchmark_module: dict, default_module:
     all_prop_value_match = True
     for prop in benchmark_module:
         if prop != "modulename" and prop != "id":
-            cor_prop = gpt_module.get(prop)
-            if not cor_prop:
+            prop_val = gpt_module.get(prop)
+            if not prop_val:
                 all_prop_name_match = False
                 all_prop_value_match = False
-            elif cor_prop != benchmark_module[prop]:
+            elif prop_val != benchmark_module[prop]:
                 all_prop_value_match = False
     for prop in gpt_module:
         if prop != "modulename" and prop != "id":
@@ -197,7 +200,7 @@ def check_option_match(gpt_module: dict, benchmark_module: dict, default_module:
             elif not prop in benchmark_module:
                 all_prop_name_match = False
                 all_prop_value_match = False
-            elif cor_prop != gpt_module[prop]:
+            elif (prop_val := benchmark_module[prop]) != gpt_module[prop]:
                 all_prop_value_match = False
     return all_prop_name_match, all_prop_value_match
 
