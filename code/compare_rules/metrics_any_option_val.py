@@ -76,6 +76,8 @@ def cal_micro_prf(data):
 
 
 def option_value_equal(value_1, value_2):
+    if value_1 == "OurSetDefault" or value_2 == "OurSetDefault":
+        return True
     if value_1 == value_2:
         return True
     set_pattern = r"([A-Z][A-Z]+(_[A-Z]+)*)( *, *([A-Z][A-Z]+(_[A-Z]+)*))*."
@@ -203,8 +205,8 @@ def check_option_match(gpt_module: dict, benchmark_module: dict, default_module:
             ):
                 continue
             prop_val = gpt_module.get(prop)
-            if not prop_val:
-                all_prop_name_match = False
+            if prop_val is None:
+                # all_prop_name_match = False
                 all_prop_value_match = False
             elif not option_value_equal(prop_val, benchmark_module[prop]):
                 all_prop_value_match = False
@@ -214,14 +216,11 @@ def check_option_match(gpt_module: dict, benchmark_module: dict, default_module:
             if not prop in default_module:
                 continue
             # benchmark未给出但可配置的option
-            elif prop in default_module and not prop in benchmark_module:
+            elif not prop in benchmark_module:
                 # default_value = default_module[prop][1]
                 # if not option_value_equal(default_value, gpt_module[prop]):
                 #     all_prop_value_match = False
                 continue
-            elif not prop in benchmark_module:
-                all_prop_name_match = False
-                all_prop_value_match = False
             elif not option_value_equal(
                 (prop_val := benchmark_module[prop]), gpt_module[prop]
             ):
@@ -510,7 +509,7 @@ if __name__ == "__main__":
     stat_data = []
     root = "data/debug/"
     # root = "data/config_output/baseline/"
-    bm_path = "data/benchmark/simple_benchmark_new.json"
+    bm_path = "data/benchmark/simple_benchmark.json"
     for file in os.listdir(root):
         if (
             file.endswith(".csv")
