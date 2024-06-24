@@ -205,7 +205,7 @@ OneStatementPerLine",
         </module>
 </module>",Yes,"<module name='NeedBraces'>
         <property name='tokens' value='LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_DO, LITERAL_WHILE'/>
-    </module>",true,NeedBraces,,,,NeedBraces,NeedBraces,,NeedBraces,NeedBraces
+    </module>",true,NeedBraces,,,NeedBraces,,,NeedBraces,,
 4.1.2 Nonempty blocks: K & R style,"Braces follow the Kernighan and Ritchie style ("" Egyptian brackets "") for nonempty blocks and block-like constructs:
  No line break before the opening brace, except as detailed below. 
  Line break after the opening brace. 
@@ -266,9 +266,7 @@ OneStatementPerLine",
 <module name='LeftCurly'>
         <property name='option' value='nl'/>
     </module>",true,"RightCurly
-LeftCurly",,RightCurly,,"RightCurly
-LeftCurly","LeftCurly
-RightCurly
+LeftCurly",,RightCurly,LeftCurly,RightCurly,"RightCurly
 RightCurly",,"RightCurly
 LeftCurly","LeftCurly
 RightCurly
@@ -487,7 +485,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
 </module>",Yes,"<module name='CommentsIndentation'>
         <property name='id' value='CommentsIndentation'/>
         <property name='format' value='SAME'/>
-    </module>",true,CommentsIndentation,,,,CommentsIndentation,CommentsIndentation,,CommentsIndentation,CommentsIndentation
+    </module>",true,CommentsIndentation,,,CommentsIndentation,,,CommentsIndentation,,
 4.8.7 Modifiers,"Class and member modifiers, when present, appear in the order recommended by the Java Language Specification:
  public protected private abstract default static final transient volatile synchronized native strictfp","<module name=""Checker"">
   <module name=""TreeWalker"">

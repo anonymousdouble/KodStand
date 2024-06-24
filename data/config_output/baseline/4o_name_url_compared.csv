@@ -151,7 +151,7 @@ NoLineWrap"
         <property name='specialImportsRegExp' value='^javax\\.\\w+'/>
         <property name='sortImportsInGroupAlphabetically' value='true'/>
         <property name='tokens' value='STATIC_IMPORT,IMPORT'/>
-    </module>",true,CustomImportOrder,,,,CustomImportOrder,CustomImportOrder,,CustomImportOrder,CustomImportOrder
+    </module>",true,CustomImportOrder,,,CustomImportOrder,,,,CustomImportOrder,CustomImportOrder
 3.3.4 No static import for classes,Static import is not used for static nested classes. They are imported with normal imports.,,Yes,"<module name='AvoidStaticImport'>
         <property name='severity' value='warning'/>
     </module>",true,,AvoidStaticImport,,,AvoidStaticImport,,,AvoidStaticImport,
@@ -186,7 +186,7 @@ NoLineWrap"
 </module>",Yes,"<module name='NeedBraces'>
                         <property name='id' value='NeedBraces'/>
                         <property name='tokens' value='LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_DO, LITERAL_WHILE'/>
-                    </module>",true,NeedBraces,,,,NeedBraces,NeedBraces,,NeedBraces,NeedBraces
+                    </module>",true,NeedBraces,,,NeedBraces,,,NeedBraces,,
 4.1.2 Nonempty blocks: K & R style,"Braces follow the Kernighan and Ritchie style ("" Egyptian brackets "") for nonempty blocks and block-like constructs:
  No line break before the opening brace, except as detailed below. 
  Line break after the opening brace. 
@@ -244,8 +244,7 @@ NoLineWrap"
         <property name='option' value='nl'/>
         <property name='tokens' value='CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_TRY, LITERAL_FINALLY, LITERAL_ELSE, LITERAL_DO, LITERAL_WHILE, LITERAL_SWITCH, LITERAL_FOR, LITERAL_IF'/>
     </module>",true,LeftCurly,,"RightCurly
-RightCurly",,LeftCurly,"LeftCurly
-RightCurly
+RightCurly",LeftCurly,,"RightCurly
 RightCurly",,LeftCurly,"LeftCurly
 RightCurly
 RightCurly"
@@ -386,7 +385,7 @@ MethodParamPad"
         <property name='caseIndent' value='0'/>
         <property name='throwsIndent' value='0'/>
         <property name='lineWrappingIndentation' value='4'/>
-    </module>",true,Indentation,,,,Indentation,Indentation,,Indentation,Indentation
+    </module>",true,Indentation,,,Indentation,,,,Indentation,Indentation
 4.6.1 Vertical Whitespace,"A single blank line always appears:
  Between consecutive members or initializers of a class: fields, constructors, methods, nested classes, static initializers, and instance initializers. 
  Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. 
@@ -534,7 +533,7 @@ Tip: When writing multi-line comments, use the /* ... */ style if you want autom
 </module>",Yes,"<module name='CommentsIndentation'>
         <property name='eachLine' value='true'/>
         <property name='format' value='^(\\s*\\*[^/]|\\s*\\*?\\s*[^*\\s/]).*'/>
-    </module>",true,CommentsIndentation,,,,CommentsIndentation,CommentsIndentation,,CommentsIndentation,CommentsIndentation
+    </module>",true,CommentsIndentation,,,CommentsIndentation,,,CommentsIndentation,,
 4.8.7 Modifiers,"Class and member modifiers, when present, appear in the order recommended by the Java Language Specification:
  public protected private abstract default static final transient volatile synchronized native strictfp","<module name=""Checker"">
   <module name=""TreeWalker"">
@@ -1006,7 +1005,7 @@ MissingJavadocMethod"
         <property name='id' value='AnnotationLocation'/>
         <property name='tokens' value='METHOD_DEF,CTOR_DEF'/>
         <property name='allowSingleLine' value='true'/>
-    </module>",true,AnnotationLocation,,,,AnnotationLocation,AnnotationLocation,,AnnotationLocation,AnnotationLocation
+    </module>",true,AnnotationLocation,,,AnnotationLocation,,,AnnotationLocation,,
 4.8.5.4 Field annotations,"Annotations applying to a field also appear immediately after the documentation block, but in this case, multiple annotations (possibly parameterized) may be listed on the same line; for example:
  @Partial @Mock DataLoader loader;","<module name=""Checker"">
         <module name=""TreeWalker"">
@@ -1070,7 +1069,7 @@ MissingJavadocMethod"
   </module>
 </module>",Yes,"<module name='ArrayTypeStyle'>
         <property name='allowCStyleArrayDeclaration' value='false'/>
-    </module>",true,ArrayTypeStyle,,,,ArrayTypeStyle,ArrayTypeStyle,,ArrayTypeStyle,ArrayTypeStyle
+    </module>",true,ArrayTypeStyle,,,ArrayTypeStyle,,,ArrayTypeStyle,,
 4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,Yes,"<module name='MissingSwitchDefault'>
                         <property name='id' value='MissingSwitchDefault'/>
                         <property name='option' value='error'/>

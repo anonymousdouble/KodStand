@@ -8,6 +8,7 @@
 /data/repo
 /data/result
 /data/input
+/data/debug
 /dataSources.local.xml
 *.pyc
 */*.pyc

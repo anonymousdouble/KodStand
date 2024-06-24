@@ -923,7 +923,7 @@ JavadocStyle"
 </module>",Yes,"<module name='ArrayTypeStyle'>
         <property name='id' value='ArrayTypeStyle'/>
         <property name='allowCStyleArrayDeclaration' value='false'/>
-    </module>",true,ArrayTypeStyle,,,,ArrayTypeStyle,ArrayTypeStyle,,ArrayTypeStyle,ArrayTypeStyle
+    </module>",true,ArrayTypeStyle,,,ArrayTypeStyle,,,ArrayTypeStyle,,
 4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).",,No,,,,,,,,,,,
 4.8.4.1 Indentation,"As with any other block, the contents of a switch block are indented +2.
  After a switch label, there is a line break, and the indentation level is increased +2, exactly as if a block were being opened. The following switch label returns to the previous indentation level, as if a block had been closed.","<module name=""Checker"">

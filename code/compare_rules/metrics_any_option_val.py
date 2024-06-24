@@ -215,9 +215,10 @@ def check_option_match(gpt_module: dict, benchmark_module: dict, default_module:
                 continue
             # benchmark未给出但可配置的option
             elif prop in default_module and not prop in benchmark_module:
-                default_value = default_module[prop][1]
-                if not option_value_equal(default_value, gpt_module[prop]):
-                    all_prop_value_match = False
+                # default_value = default_module[prop][1]
+                # if not option_value_equal(default_value, gpt_module[prop]):
+                #     all_prop_value_match = False
+                continue
             elif not prop in benchmark_module:
                 all_prop_name_match = False
                 all_prop_value_match = False

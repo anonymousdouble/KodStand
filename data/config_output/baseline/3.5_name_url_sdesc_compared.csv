@@ -369,7 +369,7 @@ MethodParamPad"
         <property name='caseIndent' value='0'/>
         <property name='throwsIndent' value='0'/>
         <property name='lineWrappingIndentation' value='4'/>
-    </module>",true,Indentation,,,,Indentation,Indentation,,Indentation,Indentation
+    </module>",true,Indentation,,,Indentation,,,,Indentation,Indentation
 4.6.1 Vertical Whitespace,"A single blank line always appears:
  Between consecutive members or initializers of a class: fields, constructors, methods, nested classes, static initializers, and instance initializers. 
  Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. 
@@ -849,10 +849,8 @@ InterfaceTypeParameterName"
         <property name='allowMultipleTags' value='true'/>
         <property name='indentation' value='4'/>
     </module>",true,JavadocTagContinuationIndentation,,"AtclauseOrder
-NonEmptyAtclauseDescription",,JavadocTagContinuationIndentation,"AtclauseOrder
-JavadocTagContinuationIndentation
-NonEmptyAtclauseDescription",,JavadocTagContinuationIndentation,"AtclauseOrder
-JavadocTagContinuationIndentation
+NonEmptyAtclauseDescription",JavadocTagContinuationIndentation,,"AtclauseOrder
+NonEmptyAtclauseDescription",JavadocTagContinuationIndentation,,"AtclauseOrder
 NonEmptyAtclauseDescription"
 7.2 The summary fragment,"Each Javadoc block begins with a brief summary fragment . This fragment is very important: it is the only part of the text that appears in certain contexts such as class and method indexes.
  This is a fragment—a noun phrase or verb phrase, not a complete sentence. It does not begin with `A{@codeFoo}isa...` , or `Thismethodreturns...` , nor does it form a complete imperative sentence like `Savetherecord.` . However, the fragment is capitalized and punctuated as if it were a complete sentence.
