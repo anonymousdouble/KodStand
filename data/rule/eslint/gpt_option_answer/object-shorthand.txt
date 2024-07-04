@@ -1,0 +1,63 @@
+The ESLint rule "object-shorthand" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies when the shorthand syntax should be applied.
+   - **Data Type**: string
+   - **Data Range**: {"always", "methods", "properties", "never", "consistent", "consistent-as-needed"}
+   - **Default Value**: "always"
+
+2. **Option Name**: avoidQuotes
+   - **Option Description**: Indicates that long-form syntax is preferred whenever the object key is a string literal.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: ignoreConstructors
+   - **Option Description**: Prevents the rule from reporting errors for constructor functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: methodsIgnorePattern
+   - **Option Description**: For methods whose names match this regex pattern, the method shorthand will not be enforced.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: avoidExplicitReturnArrows
+   - **Option Description**: Indicates that methods are preferred over explicit-return arrow functions for function properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Here is the structured information:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies when the shorthand syntax should be applied.
+   - **Data Type**: string
+   - **Data Range**: {"always", "methods", "properties", "never", "consistent", "consistent-as-needed"}
+   - **Default Value**: "always"
+
+2. **Option Name**: avoidQuotes
+   - **Option Description**: Indicates that long-form syntax is preferred whenever the object key is a string literal.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: ignoreConstructors
+   - **Option Description**: Prevents the rule from reporting errors for constructor functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: methodsIgnorePattern
+   - **Option Description**: For methods whose names match this regex pattern, the method shorthand will not be enforced.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: avoidExplicitReturnArrows
+   - **Option Description**: Indicates that methods are preferred over explicit-return arrow functions for function properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

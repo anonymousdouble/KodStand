@@ -1,0 +1,9 @@
+The ESLint rule "function-call-argument-newline" has a single string option with three possible values. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces line breaks between arguments of a function call.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consistent"}
+   - **Default Value**: "always"
+
+This rule does not have any nested or sub-options.

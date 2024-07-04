@@ -1,0 +1,115 @@
+The ESLint rule "no-restricted-imports" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies restricted imports as an array of strings.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies restricted imports using an object with "paths" and "patterns".
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.paths
+   - **Option Description**: An array of strings specifying the paths to restrict.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.patterns
+   - **Option Description**: An array of gitignore-style patterns to restrict.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_3
+   - **Option Description**: Specifies restricted imports with custom messages.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_3.name
+   - **Option Description**: The name of the import to restrict.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3.message
+   - **Option Description**: Custom message to display when the import is used.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_4
+   - **Option Description**: Specifies restricted imports with custom messages using "paths".
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+9. **Option Name**: anonymous_option_4.paths
+   - **Option Description**: An array of objects specifying the paths to restrict with custom messages.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+10. **Option Name**: anonymous_option_4.paths.name
+    - **Option Description**: The name of the import to restrict.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+11. **Option Name**: anonymous_option_4.paths.message
+    - **Option Description**: Custom message to display when the import is used.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+12. **Option Name**: anonymous_option_4.paths.importNames
+    - **Option Description**: An array of specific import names to restrict.
+    - **Data Type**: array
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+13. **Option Name**: anonymous_option_5
+    - **Option Description**: Specifies restricted imports with custom messages using "patterns".
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+14. **Option Name**: anonymous_option_5.patterns
+    - **Option Description**: An array of objects specifying the patterns to restrict with custom messages.
+    - **Data Type**: array
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+15. **Option Name**: anonymous_option_5.patterns.group
+    - **Option Description**: An array of gitignore-style patterns to restrict.
+    - **Data Type**: array
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+16. **Option Name**: anonymous_option_5.patterns.message
+    - **Option Description**: Custom message to display when the pattern is matched.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+17. **Option Name**: anonymous_option_5.patterns.caseSensitive
+    - **Option Description**: Specifies if the pattern match should be case-sensitive.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+18. **Option Name**: anonymous_option_5.patterns.importNames
+    - **Option Description**: An array of specific import names to restrict within the pattern.
+    - **Data Type**: array
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+19. **Option Name**: anonymous_option_5.patterns.importNamePattern
+    - **Option Description**: Regex pattern to restrict specific import names within the pattern.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default

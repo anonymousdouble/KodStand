@@ -1,0 +1,7 @@
+The ESLint rule "linebreak-style" has a single string option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces the usage of specific line endings.
+   - **Data Type**: string
+   - **Data Range**: {"unix", "windows"}
+   - **Default Value**: "unix"

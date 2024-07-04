@@ -1,0 +1,7 @@
+The ESLint rule "require-atomic-updates" has one configurable option. Here are the details:
+
+1. **Option Name**: allowProperties
+   - **Option Description**: When set to true, the rule does not report assignments to properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

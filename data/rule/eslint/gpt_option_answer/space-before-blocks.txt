@@ -1,0 +1,31 @@
+The ESLint rule "space-before-blocks" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether blocks must always have at least one preceding space or never have any preceding space.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows different spacing configurations for function blocks, keyword blocks, and classes.
+   - **Data Type**: object
+   - **Data Range**: {"functions": string, "keywords": string, "classes": string}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.functions
+   - **Option Description**: Specifies the spacing rule for function blocks.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "off"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.keywords
+   - **Option Description**: Specifies the spacing rule for keyword blocks.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "off"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.classes
+   - **Option Description**: Specifies the spacing rule for class blocks.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "off"}
+   - **Default Value**: no default

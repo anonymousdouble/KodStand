@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-unsafe-finally" rule. After analyzing the content, it is clear that this rule does not have any configurable options. The rule simply disallows control flow statements (`return`, `throw`, `break`, and `continue`) inside `finally` blocks to prevent unexpected behavior.
+
+Therefore, the result is:
+
+```
+no option
+```

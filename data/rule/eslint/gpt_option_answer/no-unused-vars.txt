@@ -1,0 +1,51 @@
+The ESLint rule "no-unused-vars" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: vars
+   - **Option Description**: Specifies whether to check all variables or only locally-declared variables for usage.
+   - **Data Type**: string
+   - **Data Range**: {"all", "local"}
+   - **Default Value**: "all"
+
+2. **Option Name**: varsIgnorePattern
+   - **Option Description**: Specifies exceptions not to check for usage: variables whose names match a regexp pattern.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+3. **Option Name**: args
+   - **Option Description**: Specifies how to check function arguments for usage.
+   - **Data Type**: string
+   - **Data Range**: {"after-used", "all", "none"}
+   - **Default Value**: "after-used"
+
+4. **Option Name**: argsIgnorePattern
+   - **Option Description**: Specifies exceptions not to check for usage: arguments whose names match a regexp pattern.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: caughtErrors
+   - **Option Description**: Specifies how to check catch block arguments for usage.
+   - **Data Type**: string
+   - **Data Range**: {"none", "all"}
+   - **Default Value**: "none"
+
+6. **Option Name**: caughtErrorsIgnorePattern
+   - **Option Description**: Specifies exceptions not to check for usage: catch arguments whose names match a regexp pattern.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: destructuredArrayIgnorePattern
+   - **Option Description**: Specifies exceptions not to check for usage: elements of array destructuring patterns whose names match a regexp pattern.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+8. **Option Name**: ignoreRestSiblings
+   - **Option Description**: Specifies whether to ignore the rest property’s siblings when using a Rest Property.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+These options allow for fine-tuning the behavior of the "no-unused-vars" rule to fit various coding styles and requirements.

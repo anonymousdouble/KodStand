@@ -1,0 +1,5 @@
+The provided ESLint rule HTML file describes the "no-floating-decimal" rule. After analyzing the content, it is clear that this rule does not have any configurable options. Therefore, the result is:
+
+```
+no option
+```

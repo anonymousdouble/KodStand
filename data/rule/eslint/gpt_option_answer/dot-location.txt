@@ -1,0 +1,13 @@
+The ESLint rule "dot-location" has one configurable option, which is a string. Here are the details of the option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the position of the dot in a member expression.
+   - **Data Type**: string
+   - **Data Range**: {"object", "property"}
+   - **Default Value**: "object"
+
+The analysis is based on the following information extracted from the HTML content:
+
+- The rule takes one option, a string.
+- If the option is "object" (default), the dot in a member expression should be on the same line as the object portion.
+- If the option is "property", the dot in a member expression should be on the same line as the property portion.

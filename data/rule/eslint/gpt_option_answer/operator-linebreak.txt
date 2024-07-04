@@ -1,0 +1,25 @@
+The ESLint rule "operator-linebreak" has both string and object options. Here are the details of the configurable options:
+
+### String Options:
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the linebreak style for operators.
+   - **Data Type**: string
+   - **Data Range**: {"after", "before", "none"}
+   - **Default Value**: "after"
+
+### Object Options:
+1. **Option Name**: anonymous_option_2
+   - **Option Description**: Overrides the global setting for specified operators.
+   - **Data Type**: object
+   - **Data Range**: {"overrides": object}
+   - **Default Value**: {"overrides": {"?": "before", ":": "before"}}
+
+### Sub-options of the Object Option:
+1. **Option Name**: anonymous_option_2.overrides
+   - **Option Description**: Specifies custom linebreak styles for individual operators.
+   - **Data Type**: object
+   - **Data Range**: {"operator": "before" | "after" | "ignore"}
+   - **Default Value**: {"?": "before", ":": "before"}
+
+### Summary:
+The rule has two main options: a string option and an object option. The string option determines the general linebreak style for operators, while the object option allows for specific overrides for individual operators. The default configuration is to place linebreaks after operators, with exceptions for the "?" and ":" operators, which should have linebreaks before them.

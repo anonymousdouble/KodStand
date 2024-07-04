@@ -1,0 +1,7 @@
+The ESLint rule "no-eval" has one configurable option. Here are the details:
+
+1. **Option Name**: allowIndirect
+   - **Option Description**: Allows indirect calls to `eval`. Indirect calls to `eval` are less dangerous than direct calls because they cannot dynamically change the scope and do not negatively impact performance to the same degree.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

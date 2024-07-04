@@ -1,0 +1,5 @@
+The provided ESLint rule "no-useless-return" has no configurable options. The analysis is as follows:
+
+```
+no option
+```

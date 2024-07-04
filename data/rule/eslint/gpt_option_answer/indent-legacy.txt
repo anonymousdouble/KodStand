@@ -1,0 +1,91 @@
+The ESLint rule "indent-legacy" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the number of spaces or the use of tabs for indentation.
+   - **Data Type**: mixed (number or string)
+   - **Data Range**: {number, "tab"}
+   - **Default Value**: 4
+
+2. **Option Name**: SwitchCase
+   - **Option Description**: Enforces indentation level for `case` clauses in `switch` statements.
+   - **Data Type**: number
+   - **Data Range**: {0, 1, 2, ...}
+   - **Default Value**: 0
+
+3. **Option Name**: VariableDeclarator
+   - **Option Description**: Enforces indentation level for `var` declarators; can also take an object to define separate rules for `var`, `let`, and `const` declarations.
+   - **Data Type**: mixed (number or object)
+   - **Data Range**: {number, {"var": number, "let": number, "const": number}}
+   - **Default Value**: 1
+
+4. **Option Name**: outerIIFEBody
+   - **Option Description**: Enforces indentation level for file-level IIFEs.
+   - **Data Type**: number
+   - **Data Range**: {0, 1, 2, ...}
+   - **Default Value**: 1
+
+5. **Option Name**: MemberExpression
+   - **Option Description**: Enforces indentation level for multi-line property chains (except in variable declarations and assignments).
+   - **Data Type**: number
+   - **Data Range**: {0, 1, 2, ...}
+   - **Default Value**: off
+
+6. **Option Name**: FunctionDeclaration
+   - **Option Description**: Takes an object to define rules for function declarations.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+7. **Option Name**: FunctionDeclaration.parameters
+   - **Option Description**: Enforces indentation level for parameters in a function declaration. This can either be a number indicating indentation level, or the string "first" indicating that all parameters of the declaration must be aligned with the first parameter.
+   - **Data Type**: mixed (number or string)
+   - **Data Range**: {number, "first"}
+   - **Default Value**: off
+
+8. **Option Name**: FunctionDeclaration.body
+   - **Option Description**: Enforces indentation level for the body of a function declaration.
+   - **Data Type**: number
+   - **Data Range**: {0, 1, 2, ...}
+   - **Default Value**: 1
+
+9. **Option Name**: FunctionExpression
+   - **Option Description**: Takes an object to define rules for function expressions.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+10. **Option Name**: FunctionExpression.parameters
+    - **Option Description**: Enforces indentation level for parameters in a function expression. This can either be a number indicating indentation level, or the string "first" indicating that all parameters of the expression must be aligned with the first parameter.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first"}
+    - **Default Value**: off
+
+11. **Option Name**: FunctionExpression.body
+    - **Option Description**: Enforces indentation level for the body of a function expression.
+    - **Data Type**: number
+    - **Data Range**: {0, 1, 2, ...}
+    - **Default Value**: 1
+
+12. **Option Name**: CallExpression
+    - **Option Description**: Takes an object to define rules for function call expressions.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+13. **Option Name**: CallExpression.arguments
+    - **Option Description**: Enforces indentation level for arguments in a call expression. This can either be a number indicating indentation level, or the string "first" indicating that all arguments of the expression must be aligned with the first argument.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first"}
+    - **Default Value**: off
+
+14. **Option Name**: ArrayExpression
+    - **Option Description**: Enforces indentation level for elements in arrays. It can also be set to the string "first", indicating that all the elements in the array should be aligned with the first element.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first"}
+    - **Default Value**: 1
+
+15. **Option Name**: ObjectExpression
+    - **Option Description**: Enforces indentation level for properties in objects. It can be set to the string "first", indicating that all properties in the object should be aligned with the first property.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first"}
+    - **Default Value**: 1

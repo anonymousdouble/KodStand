@@ -1,0 +1,25 @@
+The ESLint rule "func-names" has both string and object options. Here are the details of the configurable options:
+
+### String Options:
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires function expressions to have a name, requires function expressions to have a name if the name isn’t assigned automatically per the ECMAScript specification, or disallows named function expressions except in recursive functions.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed", "never"}
+   - **Default Value**: "always"
+
+### Object Options:
+1. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures the behavior for generator functions.
+   - **Data Type**: object
+   - **Data Range**: {"generators": string}
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_2.generators
+   - **Option Description**: Specifies the behavior for generator functions, requiring named generators, requiring named generators if the name isn’t assigned automatically per the ECMAScript specification, or disallowing named generators where possible.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed", "never"}
+   - **Default Value**: no default
+
+### Summary:
+- The rule has a string option with values "always", "as-needed", and "never", with a default value of "always".
+- The rule also has an object option with a property "generators" that can take the same string values, but has no default value.

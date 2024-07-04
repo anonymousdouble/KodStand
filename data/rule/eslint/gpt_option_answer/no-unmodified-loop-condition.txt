@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-unmodified-loop-condition`. Based on the content, it appears that this rule does not have any configurable options. The rule details and examples provided do not mention any options that can be configured.
+
+Therefore, the result is:
+
+```
+no option
+```

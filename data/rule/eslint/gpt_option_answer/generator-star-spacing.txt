@@ -1,0 +1,46 @@
+The provided ESLint rule HTML file describes the "generator-star-spacing" rule, which enforces consistent spacing around `*` operators in generator functions. The rule has several configurable options. Here are the extracted details:
+
+1. **Option Name**: before
+   - **Option Description**: Enforces spacing between the `*` and the `function` keyword. If it is `true`, a space is required; otherwise, spaces are disallowed.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: after
+   - **Option Description**: Enforces spacing between the `*` and the function name (or the opening parenthesis for anonymous generator functions). If it is `true`, a space is required; otherwise, spaces are disallowed.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: anonymous
+   - **Option Description**: Provides overrides for anonymous functions.
+   - **Data Type**: string
+   - **Data Range**: {"neither", "before", "after", "both"}
+   - **Default Value**: no default
+
+4. **Option Name**: method
+   - **Option Description**: Provides overrides for class methods or property function shorthand.
+   - **Data Type**: object
+   - **Data Range**: {"before": boolean, "after": boolean}
+   - **Default Value**: no default
+
+5. **Option Name**: method.before
+   - **Option Description**: Enforces spacing between the `*` and the method keyword. If it is `true`, a space is required; otherwise, spaces are disallowed.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: method.after
+   - **Option Description**: Enforces spacing between the `*` and the method name (or the opening parenthesis for anonymous generator methods). If it is `true`, a space is required; otherwise, spaces are disallowed.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+The rule also allows shorthand configurations for the `before` and `after` options:
+
+- `{ "before": true, "after": false }` → `"before"`
+- `{ "before": false, "after": true }` → `"after"`
+- `{ "before": true, "after": true }` → `"both"`
+- `{ "before": false, "after": false }` → `"neither"`
+
+These shorthand configurations can be used to simplify the rule configuration.

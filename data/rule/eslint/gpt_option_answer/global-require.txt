@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "global-require" rule. Based on the content, it appears that this rule does not have any configurable options. The rule enforces that all `require()` calls must be at the top level of the module, similar to ES6 `import` and `export` statements.
+
+Here is the analysis:
+
+```
+no option
+```

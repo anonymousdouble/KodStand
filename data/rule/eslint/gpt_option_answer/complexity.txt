@@ -1,0 +1,33 @@
+The provided ESLint rule HTML file describes the "complexity" rule. Based on the content, here are the extracted details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the maximum cyclomatic complexity allowed in a program.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 20
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies the maximum cyclomatic complexity allowed in a program using an object property.
+   - **Data Type**: object
+   - **Data Range**: {"max": number}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.max
+   - **Option Description**: Specifies the maximum cyclomatic complexity allowed in a program.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_3
+   - **Option Description**: Specifies the maximum cyclomatic complexity allowed in a program using a deprecated object property.
+   - **Data Type**: object
+   - **Data Range**: {"maximum": number}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_3.maximum
+   - **Option Description**: Specifies the maximum cyclomatic complexity allowed in a program (deprecated).
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+The rule has options that can be configured either as a direct number or as an object with properties "max" or the deprecated "maximum".

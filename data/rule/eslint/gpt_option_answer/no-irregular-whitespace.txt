@@ -1,0 +1,31 @@
+The ESLint rule "no-irregular-whitespace" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: skipStrings
+   - **Option Description**: Allows any whitespace characters in string literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: skipComments
+   - **Option Description**: Allows any whitespace characters in comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+3. **Option Name**: skipRegExps
+   - **Option Description**: Allows any whitespace characters in regular expression literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: skipTemplates
+   - **Option Description**: Allows any whitespace characters in template literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: skipJSXText
+   - **Option Description**: Allows any whitespace characters in JSX text.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

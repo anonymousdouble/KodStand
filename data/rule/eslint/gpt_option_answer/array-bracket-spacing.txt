@@ -1,0 +1,57 @@
+The ESLint rule "array-bracket-spacing" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Disallows spaces inside array brackets.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures exceptions to the "never" option.
+   - **Data Type**: object
+   - **Data Range**: {"singleValue": boolean, "objectsInArrays": boolean, "arraysInArrays": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.singleValue
+   - **Option Description**: Requires one or more spaces or newlines inside brackets of array literals that contain a single element.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.objectsInArrays
+   - **Option Description**: Requires one or more spaces or newlines between brackets of array literals and braces of their object literal elements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.arraysInArrays
+   - **Option Description**: Requires one or more spaces or newlines between brackets of array literals and brackets of their array literal elements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_3
+   - **Option Description**: Configures exceptions to the "always" option.
+   - **Data Type**: object
+   - **Data Range**: {"singleValue": boolean, "objectsInArrays": boolean, "arraysInArrays": boolean}
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3.singleValue
+   - **Option Description**: Disallows spaces inside brackets of array literals that contain a single element.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_3.objectsInArrays
+   - **Option Description**: Disallows spaces between brackets of array literals and braces of their object literal elements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+9. **Option Name**: anonymous_option_3.arraysInArrays
+   - **Option Description**: Disallows spaces between brackets of array literals and brackets of their array literal elements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+The rule has both string and object options, with nested boolean sub-options for specific configurations.

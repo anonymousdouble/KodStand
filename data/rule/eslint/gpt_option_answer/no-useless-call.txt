@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-useless-call`. After analyzing the content, it is clear that this rule does not have any configurable options. The rule simply flags unnecessary calls to `.call()` and `.apply()` that can be replaced with normal function invocations.
+
+Therefore, the result is:
+
+```
+no option
+```

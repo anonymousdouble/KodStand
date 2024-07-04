@@ -1,0 +1,25 @@
+The ESLint rule "max-nested-callbacks" has configurable options. Here are the details of the options:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum depth that callbacks can be nested.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 10
+
+2. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces a maximum depth that callbacks can be nested.
+   - **Data Type**: object
+   - **Data Range**: {"max": number, "maximum": number (deprecated)}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_1.max
+   - **Option Description**: Enforces a maximum depth that callbacks can be nested.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 10
+
+4. **Option Name**: anonymous_option_1.maximum
+   - **Option Description**: Enforces a maximum depth that callbacks can be nested (deprecated).
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default

@@ -1,0 +1,39 @@
+The ESLint rule "multiline-comment-style" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the style for multiline comments.
+   - **Data Type**: string
+   - **Data Range**: {"starred-block", "bare-block", "separate-lines"}
+   - **Default Value**: "starred-block"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Applies the rule to JSDoc comments when using the "separate-lines" option.
+   - **Data Type**: object
+   - **Data Range**: {"checkJSDoc": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.checkJSDoc
+   - **Option Description**: Determines whether to apply the "separate-lines" rule to JSDoc comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+Summary of the options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the style for multiline comments.
+   - **Data Type**: string
+   - **Data Range**: {"starred-block", "bare-block", "separate-lines"}
+   - **Default Value**: "starred-block"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Applies the rule to JSDoc comments when using the "separate-lines" option.
+   - **Data Type**: object
+   - **Data Range**: {"checkJSDoc": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.checkJSDoc
+   - **Option Description**: Determines whether to apply the "separate-lines" rule to JSDoc comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

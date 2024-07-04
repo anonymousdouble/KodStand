@@ -1,0 +1,69 @@
+The ESLint rule "no-restricted-modules" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: The names of restricted modules.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: An object with lists of paths and gitignore-style patterns strings.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.paths
+   - **Option Description**: List of restricted module paths.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.patterns
+   - **Option Description**: List of restricted module patterns.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_3
+   - **Option Description**: An object specifying a custom message for any paths you want to restrict.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_3.name
+   - **Option Description**: The name of the restricted module.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3.message
+   - **Option Description**: Custom message to be appended to the default error message.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_4
+   - **Option Description**: An object specifying paths with custom messages.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+9. **Option Name**: anonymous_option_4.paths
+   - **Option Description**: List of objects with name and message properties for restricted modules.
+   - **Data Type**: array of objects
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+10. **Option Name**: anonymous_option_4.paths.name
+    - **Option Description**: The name of the restricted module.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+11. **Option Name**: anonymous_option_4.paths.message
+    - **Option Description**: Custom message to be appended to the default error message.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+The rule does not have a single default value for any of its options. Each option is open-ended, allowing for a wide range of configurations.

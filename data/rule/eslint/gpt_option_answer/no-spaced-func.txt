@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-spaced-func`. Based on the content, this rule does not have any configurable options. The rule details and examples provided do not mention any parameters or configurations that can be adjusted.
+
+Therefore, the result is:
+
+```
+no option
+```

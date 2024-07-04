@@ -1,0 +1,27 @@
+The provided ESLint rule "no-restricted-properties" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the object name and property name to be disallowed.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_1.object
+   - **Option Description**: The name of the object whose property is to be disallowed.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_1.property
+   - **Option Description**: The name of the property to be disallowed on the specified object.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_1.message
+   - **Option Description**: An optional message to indicate an alternative API or a reason for the restriction.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+If the object name is omitted, the property is disallowed for all objects. If the property name is omitted, accessing any property of the given object is disallowed.

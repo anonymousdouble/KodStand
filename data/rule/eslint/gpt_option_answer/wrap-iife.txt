@@ -1,0 +1,19 @@
+The ESLint rule "wrap-iife" has two configurable options: a string option and an object option. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Determines how the immediate function invocation should be wrapped.
+   - **Data Type**: string
+   - **Data Range**: {"outside", "inside", "any"}
+   - **Default Value**: "outside"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies whether to enforce wrapping function expressions invoked using `.call` and `.apply`.
+   - **Data Type**: object
+   - **Data Range**: {"functionPrototypeMethods": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.functionPrototypeMethods
+   - **Option Description**: Enforces wrapping function expressions invoked using `.call` and `.apply`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

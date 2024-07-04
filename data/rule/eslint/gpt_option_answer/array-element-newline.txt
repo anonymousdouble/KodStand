@@ -1,0 +1,51 @@
+The ESLint rule "array-element-newline" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires line breaks between array elements.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consistent"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Requires line breaks if any of the properties is satisfied. Otherwise, disallows line breaks.
+   - **Data Type**: object
+   - **Data Range**: {"multiline": boolean, "minItems": number}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.multiline
+   - **Option Description**: Requires line breaks if there are line breaks inside elements. If this is false, this condition is disabled.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.minItems
+   - **Option Description**: Requires line breaks if the number of elements is at least the given integer. If this is 0, this condition will act the same as the option "always". If this is null (the default), this condition is disabled.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: null
+
+5. **Option Name**: anonymous_option_3
+   - **Option Description**: Configuration for array expressions.
+   - **Data Type**: object
+   - **Data Range**: {"ArrayExpression": string, "ArrayPattern": object}
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_3.ArrayExpression
+   - **Option Description**: Configuration for array expressions (if unspecified, this rule will not apply to array expressions).
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3.ArrayPattern
+   - **Option Description**: Configuration for array patterns of destructuring assignments (if unspecified, this rule will not apply to array patterns).
+   - **Data Type**: object
+   - **Data Range**: {"minItems": number}
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_3.ArrayPattern.minItems
+   - **Option Description**: Requires line breaks if the number of elements is at least the given integer.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 3
+
+These options provide flexibility in configuring how line breaks between array elements should be enforced.

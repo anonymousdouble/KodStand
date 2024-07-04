@@ -1,0 +1,9 @@
+The provided ESLint rule "no-unsafe-negation" has one configurable option. Here are the details:
+
+1. **Option Name**: enforceForOrderingRelations
+   - **Option Description**: Disallows negation of the left-hand side of ordering relational operators.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+There are no nested options for this rule.

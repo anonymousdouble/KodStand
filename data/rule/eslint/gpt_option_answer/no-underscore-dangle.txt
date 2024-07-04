@@ -1,0 +1,55 @@
+The ESLint rule "no-underscore-dangle" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: allow
+   - **Option Description**: Allows specified identifiers to have dangling underscores.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+2. **Option Name**: allowAfterThis
+   - **Option Description**: Disallows dangling underscores in members of the `this` object.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: allowAfterSuper
+   - **Option Description**: Disallows dangling underscores in members of the `super` object.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: allowAfterThisConstructor
+   - **Option Description**: Disallows dangling underscores in members of the `this.constructor` object.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: enforceInMethodNames
+   - **Option Description**: Allows dangling underscores in method names.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+6. **Option Name**: enforceInClassFields
+   - **Option Description**: Allows dangling underscores in ES2022 class fields names.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+7. **Option Name**: allowInArrayDestructuring
+   - **Option Description**: Allows dangling underscores in variable names assigned by array destructuring.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+8. **Option Name**: allowInObjectDestructuring
+   - **Option Description**: Allows dangling underscores in variable names assigned by object destructuring.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+9. **Option Name**: allowFunctionParams
+   - **Option Description**: Allows dangling underscores in function parameter names.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

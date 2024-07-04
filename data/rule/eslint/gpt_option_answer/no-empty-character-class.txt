@@ -1,0 +1,7 @@
+The provided ESLint rule "no-empty-character-class" does not have any configurable options. The rule simply disallows empty character classes in regular expressions without any additional parameters or configurations.
+
+Therefore, the result is:
+
+```
+no option
+```

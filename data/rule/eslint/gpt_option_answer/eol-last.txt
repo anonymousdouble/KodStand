@@ -1,0 +1,9 @@
+The ESLint rule "eol-last" has a single string option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces the presence or absence of a newline at the end of non-empty files.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "unix", "windows"}
+   - **Default Value**: "always"
+
+The options "unix" and "windows" are deprecated and should be used in conjunction with the "linebreak-style" rule if a specific linebreak style is needed.

@@ -1,0 +1,51 @@
+The ESLint rule "no-shadow" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: builtinGlobals
+   - **Option Description**: Prevents shadowing of built-in global variables like `Object`, `Array`, `Number`, etc.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: hoist
+   - **Option Description**: Controls the reporting of shadowing before the outer variables/functions are defined.
+   - **Data Type**: string
+   - **Data Range**: {"functions", "all", "never"}
+   - **Default Value**: "functions"
+
+3. **Option Name**: allow
+   - **Option Description**: An array of identifier names for which shadowing is allowed.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []
+
+4. **Option Name**: ignoreOnInitialization
+   - **Option Description**: Prevents reporting shadowing of variables in their initializers when the shadowed variable is presumably still uninitialized.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Here is the structured information:
+
+1. **Option Name**: builtinGlobals
+   - **Option Description**: Prevents shadowing of built-in global variables like `Object`, `Array`, `Number`, etc.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: hoist
+   - **Option Description**: Controls the reporting of shadowing before the outer variables/functions are defined.
+   - **Data Type**: string
+   - **Data Range**: {"functions", "all", "never"}
+   - **Default Value**: "functions"
+
+3. **Option Name**: allow
+   - **Option Description**: An array of identifier names for which shadowing is allowed.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []
+
+4. **Option Name**: ignoreOnInitialization
+   - **Option Description**: Prevents reporting shadowing of variables in their initializers when the shadowed variable is presumably still uninitialized.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

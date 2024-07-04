@@ -1,0 +1,1860 @@
+{
+    "2.1 File name": [
+        {},
+        {}
+    ],
+    "2.2 File encoding: UTF-8": [
+        {},
+        {}
+    ],
+    "2.3.1 Whitespace characters": [
+        {
+            "no-irregular-whitespace": "error",
+            "no-tabs": "error"
+        },
+        {
+            "no-irregular-whitespace": "error",
+            "no-tabs": [
+                "error",
+                {
+                    "allowIndentationTabs": false
+                }
+            ]
+        }
+    ],
+    "2.3.2 Special escape sequences": [
+        {},
+        {}
+    ],
+    "2.3.3 Non-ASCII characters": [
+        {},
+        {}
+    ],
+    "3 Source file structure": [
+        {},
+        {}
+    ],
+    "3.1 License or copyright information, if present": [
+        {},
+        {}
+    ],
+    "3.3 goog.module statement": [
+        {
+            "max-len": [
+                "error",
+                {
+                    "ignorePattern": "OurSetDefault"
+                }
+            ]
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": "OurSetDefault",
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreUrls": "OurSetDefault",
+                    "ignoreStrings": "OurSetDefault",
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.3.1 Hierarchy": [
+        {},
+        {}
+    ],
+    "3.3.2 goog.module.declareLegacyNamespace": [
+        {},
+        {}
+    ],
+    "3.3.3 goog.module Exports": [
+        {},
+        {}
+    ],
+    "3.4.1 Imports": [
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "ignorePattern": "OurSetDefault"
+                }
+            ]
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreUrls": "OurSetDefault",
+                    "ignoreStrings": "OurSetDefault",
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.4.1.1 Import paths": [
+        {
+            "no-restricted-syntax": [
+                {
+                    "selector": "CallExpression[callee.object.name=\"goog\"][callee.property.name=\"require\"]",
+                    "message": "OurSetDefault"
+                }
+            ]
+        },
+        {
+            "no-restricted-syntax": [
+                {
+                    "selector": "CallExpression[callee.object.name=\"goog\"][callee.property.name=\"require\"]",
+                    "message": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.4.1.1.1 File extensions in import paths": [
+        {},
+        {}
+    ],
+    "3.4.1.2 Importing the same file multiple times": [
+        {
+            "no-duplicate-imports": "error"
+        },
+        {
+            "no-duplicate-imports": [
+                {
+                    "includeExports": false
+                }
+            ]
+        }
+    ],
+    "3.4.1.3.1 Naming module imports": [
+        {
+            "camelcase": [
+                "error",
+                {
+                    "ignoreImports": false
+                }
+            ]
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "OurSetDefault",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": false,
+                    "ignoreGlobals": "OurSetDefault",
+                    "allow": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.4.1.3.2 Naming default imports": [
+        {},
+        {}
+    ],
+    "3.4.1.3.3 Naming named imports": [
+        {
+            "no-useless-rename": "error"
+        },
+        {
+            "no-useless-rename": [
+                {
+                    "ignoreImport": false,
+                    "ignoreExport": "OurSetDefault",
+                    "ignoreDestructuring": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.4.2 Exports": [
+        {},
+        {}
+    ],
+    "3.4.2.1 Named vs default exports": [
+        {
+            "no-restricted-exports": [
+                "error",
+                {
+                    "restrictDefaultExports": {
+                        "direct": true
+                    }
+                }
+            ]
+        },
+        {
+            "no-restricted-exports": [
+                {
+                    "restrictedNamedExports": [],
+                    "restrictDefaultExports": {
+                        "direct": true,
+                        "named": false,
+                        "defaultFrom": true,
+                        "namedFrom": false,
+                        "namespaceFrom": true
+                    }
+                }
+            ]
+        }
+    ],
+    "3.4.2.2 Exporting static container classes and objects": [
+        {},
+        {}
+    ],
+    "3.4.2.3 Mutability of exports": [
+        {},
+        {}
+    ],
+    "3.4.2.4 export from": [
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "ignorePattern": "OurSetDefault"
+                }
+            ]
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": "OurSetDefault",
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreUrls": "OurSetDefault",
+                    "ignoreStrings": "OurSetDefault",
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.4.3 Circular Dependencies in ES modules": [
+        {},
+        {}
+    ],
+    "3.4.4.1 Referencing goog": [
+        {},
+        {}
+    ],
+    "3.4.4.2 goog.require in ES modules": [
+        {},
+        {}
+    ],
+    "3.4.4.3 Declaring Closure Module IDs in ES modules": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "OurSetDefault",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": "OurSetDefault",
+                    "allow": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "3.5 goog.setTestOnly": [
+        {},
+        {}
+    ],
+    "3.6 goog.require and goog.requireType statements": [
+        {
+            "max-len": "error"
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreUrls": "OurSetDefault",
+                    "ignoreStrings": "OurSetDefault",
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ],
+            "key-spacing": [
+                {
+                    "beforeColon": "OurSetDefault",
+                    "afterColon": true,
+                    "mode": "OurSetDefault",
+                    "align": {},
+                    "multiLine": {}
+                }
+            ]
+        }
+    ],
+    "3.7 The file\u2019s implementation": [
+        {},
+        {}
+    ],
+    "4.1.1 Braces are used for all control structures": [
+        {
+            "curly": "multi-line"
+        },
+        {
+            "curly": "multi-line"
+        }
+    ],
+    "4.1.2 Nonempty blocks: K&R style": [
+        {
+            "brace-style": [
+                "error",
+                "1tbs"
+            ]
+        },
+        {
+            "brace-style": [
+                "error",
+                "1tbs"
+            ]
+        }
+    ],
+    "4.1.3 Empty blocks: may be concise": [
+        {},
+        {}
+    ],
+    "4.2 Block indentation: +2 spaces": [
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "ignoreComments": false
+                }
+            ]
+        },
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "ignoreComments": false
+                }
+            ]
+        }
+    ],
+    "4.2.1 Array literals: optionally block-like": [
+        {},
+        {}
+    ],
+    "4.2.2 Object literals: optionally block-like": [
+        {},
+        {}
+    ],
+    "4.2.3 Class literals": [
+        {
+            "indent": [
+                "error",
+                2
+            ],
+            "no-extra-semi": "error"
+        },
+        {
+            "indent": [
+                "error",
+                2
+            ],
+            "no-extra-semi": "error"
+        }
+    ],
+    "4.2.4 Function expressions": [
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "FunctionExpression": {
+                        "body": 1,
+                        "parameters": "OurSetDefault"
+                    }
+                }
+            ]
+        },
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "FunctionExpression": {
+                        "body": 1,
+                        "parameters": "OurSetDefault"
+                    }
+                }
+            ]
+        }
+    ],
+    "4.2.5 Switch statements": [
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "SwitchCase": 1
+                }
+            ]
+        },
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "SwitchCase": 1
+                }
+            ]
+        }
+    ],
+    "4.3.1 One statement per line": [
+        {
+            "max-statements-per-line": [
+                "error",
+                {
+                    "max": 1
+                }
+            ]
+        },
+        {
+            "max-statements-per-line": [
+                "error",
+                {
+                    "max": 1
+                }
+            ]
+        }
+    ],
+    "4.3.2 Semicolons are required": [
+        {
+            "semi": [
+                "error",
+                "always"
+            ]
+        },
+        {
+            "semi": [
+                "error",
+                "always"
+            ]
+        }
+    ],
+    "4.4 Column limit: 80": [
+        {
+            "max-len": [
+                "error",
+                {
+                    "ignoreUrls": true,
+                    "ignoreStrings": true,
+                    "ignorePattern": "OurSetDefault"
+                }
+            ]
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreUrls": true,
+                    "ignoreStrings": true,
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "4.5.1 Where to break": [
+        {
+            "operator-linebreak": [
+                "error",
+                "after"
+            ],
+            "space-before-function-paren": [
+                "error",
+                "never"
+            ],
+            "comma-style": [
+                "error",
+                "last"
+            ],
+            "comma-spacing": [
+                "error",
+                {
+                    "before": false
+                }
+            ]
+        },
+        {
+            "operator-linebreak": [
+                "error",
+                "after",
+                {
+                    "overrides": "OurSetDefault"
+                }
+            ],
+            "space-before-function-paren": [
+                "error",
+                {
+                    "anonymous": "never",
+                    "named": "never",
+                    "asyncArrow": "never"
+                }
+            ],
+            "comma-style": [
+                "error",
+                "last",
+                {
+                    "exceptions": "OurSetDefault"
+                }
+            ],
+            "comma-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "4.5.2 Indent continuation lines at least +4 spaces": [
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "VariableDeclarator": 2,
+                    "MemberExpression": 2,
+                    "FunctionDeclaration": {
+                        "parameters": 2
+                    },
+                    "FunctionExpression": {
+                        "parameters": 2
+                    },
+                    "CallExpression": {
+                        "arguments": 2
+                    }
+                }
+            ]
+        },
+        {
+            "indent": [
+                "error",
+                2,
+                {
+                    "ignoredNodes": "OurSetDefault",
+                    "SwitchCase": "OurSetDefault",
+                    "VariableDeclarator": 2,
+                    "outerIIFEBody": "OurSetDefault",
+                    "MemberExpression": 2,
+                    "FunctionDeclaration": {
+                        "parameters": 2,
+                        "body": "OurSetDefault"
+                    },
+                    "FunctionExpression": {
+                        "parameters": 2,
+                        "body": "OurSetDefault"
+                    },
+                    "StaticBlock": {
+                        "body": "OurSetDefault"
+                    },
+                    "CallExpression": {
+                        "arguments": 2
+                    },
+                    "ArrayExpression": "OurSetDefault",
+                    "ObjectExpression": "OurSetDefault",
+                    "ImportDeclaration": "OurSetDefault",
+                    "flatTernaryExpressions": "OurSetDefault",
+                    "offsetTernaryExpressions": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "4.6.1 Vertical whitespace": [
+        {
+            "lines-between-class-members": [
+                "error",
+                {
+                    "enforce": [
+                        {
+                            "blankLine": "always",
+                            "prev": "method",
+                            "next": "method"
+                        }
+                    ]
+                }
+            ],
+            "padded-blocks": [
+                "error",
+                "never"
+            ],
+            "no-multiple-empty-lines": "error"
+        },
+        {
+            "lines-between-class-members": [
+                "error",
+                {
+                    "enforce": [
+                        {
+                            "blankLine": "always",
+                            "prev": "method",
+                            "next": "method"
+                        }
+                    ]
+                }
+            ],
+            "padded-blocks": [
+                "error",
+                "never"
+            ],
+            "no-multiple-empty-lines": [
+                "error",
+                {
+                    "max": "OurSetDefault",
+                    "maxEOF": "OurSetDefault",
+                    "maxBOF": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "4.6.2 Horizontal whitespace": [
+        {
+            "no-trailing-spaces": "error",
+            "keyword-spacing": "error",
+            "spaced-comment": "error",
+            "space-before-function-paren": [
+                "error",
+                "never"
+            ],
+            "space-before-blocks": "error",
+            "space-infix-ops": "error",
+            "comma-spacing": "error",
+            "semi-spacing": "error",
+            "key-spacing": "error"
+        },
+        {
+            "no-trailing-spaces": [
+                "error",
+                {
+                    "skipBlankLines": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault"
+                }
+            ],
+            "keyword-spacing": [
+                "error",
+                {
+                    "before": true,
+                    "after": true
+                }
+            ],
+            "spaced-comment": [
+                "error",
+                "always"
+            ],
+            "space-before-function-paren": [
+                "error",
+                {
+                    "anonymous": "never",
+                    "named": "never",
+                    "asyncArrow": "never"
+                }
+            ],
+            "space-before-blocks": [
+                "error",
+                "always"
+            ],
+            "space-infix-ops": [
+                "error",
+                {
+                    "int32Hint": "OurSetDefault"
+                }
+            ],
+            "comma-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": true
+                }
+            ],
+            "semi-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": true
+                }
+            ],
+            "key-spacing": [
+                "error",
+                {
+                    "beforeColon": false,
+                    "afterColon": true,
+                    "mode": "OurSetDefault",
+                    "align": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "4.6.3 Horizontal alignment: discouraged": [
+        {},
+        {}
+    ],
+    "4.6.4 Function arguments": [
+        {
+            "max-len": "error",
+            "indent": [
+                "error",
+                2,
+                {
+                    "FunctionDeclaration": {
+                        "parameters": 2
+                    }
+                }
+            ]
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignoreUrls": "OurSetDefault",
+                    "ignoreStrings": "OurSetDefault",
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ],
+            "indent": [
+                "error",
+                2,
+                {
+                    "ignoredNodes": "OurSetDefault",
+                    "SwitchCase": "OurSetDefault",
+                    "VariableDeclarator": "OurSetDefault",
+                    "outerIIFEBody": "OurSetDefault",
+                    "MemberExpression": "OurSetDefault",
+                    "FunctionDeclaration": {
+                        "parameters": 2,
+                        "body": "OurSetDefault"
+                    },
+                    "FunctionExpression": {
+                        "parameters": 2,
+                        "body": "OurSetDefault"
+                    },
+                    "StaticBlock": {
+                        "body": "OurSetDefault"
+                    },
+                    "CallExpression": {
+                        "arguments": "OurSetDefault"
+                    },
+                    "ArrayExpression": "OurSetDefault",
+                    "ObjectExpression": "OurSetDefault",
+                    "ImportDeclaration": "OurSetDefault",
+                    "flatTernaryExpressions": "OurSetDefault",
+                    "offsetTernaryExpressions": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "4.7 Grouping parentheses: recommended": [
+        {
+            "no-extra-parens": [
+                "error",
+                "all",
+                {
+                    "allowParensAfterCommentPattern": "@type"
+                }
+            ],
+            "arrow-parens": [
+                "error",
+                "always"
+            ]
+        },
+        {
+            "no-extra-parens": [
+                "error",
+                "all",
+                {
+                    "conditionalAssign": "OurSetDefault",
+                    "returnAssign": "OurSetDefault",
+                    "nestedBinaryExpressions": "OurSetDefault",
+                    "ternaryOperandBinaryExpressions": "OurSetDefault",
+                    "ignoreJSX": "OurSetDefault",
+                    "enforceForArrowConditionals": "OurSetDefault",
+                    "enforceForSequenceExpressions": "OurSetDefault",
+                    "enforceForNewInMemberExpressions": "OurSetDefault",
+                    "enforceForFunctionPrototypeMethods": "OurSetDefault",
+                    "allowParensAfterCommentPattern": "@type"
+                }
+            ],
+            "arrow-parens": [
+                "error",
+                "always"
+            ]
+        }
+    ],
+    "4.8.1 Block comment style": [
+        {
+            "multiline-comment-style": [
+                "error",
+                "starred-block"
+            ]
+        },
+        {
+            "multiline-comment-style": [
+                "error",
+                "starred-block"
+            ]
+        }
+    ],
+    "4.8.2 Parameter Name Comments": [
+        {},
+        {}
+    ],
+    "5.1.1 Use const and let": [
+        {
+            "no-var": "error",
+            "prefer-const": [
+                "error",
+                {
+                    "destructuring": "any"
+                }
+            ]
+        },
+        {
+            "no-var": "error",
+            "prefer-const": [
+                "error",
+                {
+                    "destructuring": "any",
+                    "ignoreReadBeforeAssign": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "5.1.2 One variable per declaration": [
+        {
+            "one-var": [
+                "error",
+                "always"
+            ]
+        },
+        {
+            "one-var": [
+                "error",
+                {
+                    "var": "always",
+                    "let": "always",
+                    "const": "always",
+                    "separateRequires": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "5.1.3 Declared when needed, initialized as soon as possible": [
+        {},
+        {}
+    ],
+    "5.1.4 Declare types as needed": [
+        {},
+        {}
+    ],
+    "5.2.1 Use trailing commas": [
+        {
+            "comma-dangle": [
+                "error",
+                "always"
+            ]
+        },
+        {
+            "comma-dangle": [
+                "error",
+                {
+                    "arrays": "always",
+                    "objects": "OurSetDefault",
+                    "imports": "OurSetDefault",
+                    "exports": "OurSetDefault",
+                    "functions": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "5.2.2 Do not use the variadic Array constructor": [
+        {
+            "no-array-constructor": "error"
+        },
+        {
+            "no-array-constructor": "error"
+        }
+    ],
+    "5.2.3 Non-numeric properties": [
+        {},
+        {}
+    ],
+    "5.2.4 Destructuring": [
+        {},
+        {}
+    ],
+    "5.2.5 Spread operator": [
+        {
+            "rest-spread-spacing": [
+                "error",
+                "never"
+            ]
+        },
+        {
+            "rest-spread-spacing": [
+                "error",
+                "never"
+            ]
+        }
+    ],
+    "5.3.1 Use trailing commas": [
+        {
+            "comma-dangle": [
+                "error",
+                "always"
+            ]
+        },
+        {
+            "comma-dangle": [
+                "error",
+                {
+                    "arrays": "OurSetDefault",
+                    "objects": "always",
+                    "imports": "OurSetDefault",
+                    "exports": "OurSetDefault",
+                    "functions": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "5.3.2 Do not use the Object constructor": [
+        {
+            "no-object-constructor": "error",
+            "no-new-object": "error"
+        },
+        {
+            "no-object-constructor": "error",
+            "no-new-object": "error"
+        }
+    ],
+    "5.3.3 Do not mix quoted and unquoted keys": [
+        {
+            "quote-props": [
+                "error",
+                "consistent"
+            ]
+        },
+        {
+            "quote-props": [
+                "error",
+                "consistent"
+            ]
+        }
+    ],
+    "5.3.4 Computed property names": [
+        {},
+        {}
+    ],
+    "5.3.5 Method shorthand": [
+        {},
+        {}
+    ],
+    "5.3.6 Shorthand properties": [
+        {},
+        {}
+    ],
+    "5.3.7 Destructuring": [
+        {},
+        {}
+    ],
+    "5.3.8 Enums": [
+        {},
+        {}
+    ],
+    "5.4.1 Constructors": [
+        {
+            "constructor-super": "error",
+            "no-this-before-super": "error"
+        },
+        {
+            "constructor-super": "error",
+            "no-this-before-super": "error"
+        }
+    ],
+    "5.4.2 Fields": [
+        {},
+        {}
+    ],
+    "5.4.3 Computed properties": [
+        {},
+        {}
+    ],
+    "5.4.4 Static methods": [
+        {},
+        {}
+    ],
+    "5.4.5 Old-style class declarations": [
+        {},
+        {}
+    ],
+    "5.4.6 Do not manipulate prototype s directly": [
+        {},
+        {}
+    ],
+    "5.4.7 Getters and Setters": [
+        {},
+        {}
+    ],
+    "5.4.8 Overriding toString": [
+        {},
+        {}
+    ],
+    "5.4.9 Interfaces": [
+        {},
+        {}
+    ],
+    "5.4.10 Abstract Classes": [
+        {},
+        {}
+    ],
+    "5.5.1 Top-level functions": [
+        {},
+        {}
+    ],
+    "5.5.2 Nested functions and closures": [
+        {},
+        {}
+    ],
+    "5.5.3 Arrow functions": [
+        {
+            "arrow-parens": [
+                "error",
+                "always"
+            ],
+            "prefer-arrow-callback": [
+                "error",
+                {
+                    "allowNamedFunctions": false,
+                    "allowUnboundThis": false
+                }
+            ]
+        },
+        {
+            "arrow-parens": [
+                "error",
+                "always"
+            ],
+            "prefer-arrow-callback": [
+                "error",
+                {
+                    "allowNamedFunctions": false,
+                    "allowUnboundThis": false
+                }
+            ]
+        }
+    ],
+    "5.5.4 Generators": [
+        {
+            "generator-star-spacing": [
+                "error",
+                "after"
+            ],
+            "yield-star-spacing": [
+                "error",
+                "after"
+            ]
+        },
+        {
+            "generator-star-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": true
+                }
+            ],
+            "yield-star-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": true
+                }
+            ]
+        }
+    ],
+    "5.5.5 Parameter and return types": [
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true
+                    }
+                }
+            ],
+            "valid-jsdoc": [
+                "error",
+                {
+                    "requireReturn": true,
+                    "requireReturnType": true
+                }
+            ]
+        },
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true,
+                        "ClassDeclaration": "OurSetDefault",
+                        "ArrowFunctionExpression": "OurSetDefault",
+                        "FunctionExpression": "OurSetDefault"
+                    }
+                }
+            ],
+            "valid-jsdoc": [
+                "error",
+                {
+                    "requireReturn": true,
+                    "requireReturnType": true,
+                    "requireParamDescription": "OurSetDefault",
+                    "requireReturnDescription": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "5.5.5.1 Default parameters": [
+        {
+            "space-infix-ops": "error",
+            "default-param-last": "error"
+        },
+        {
+            "space-infix-ops": [
+                "error",
+                {
+                    "int32Hint": "OurSetDefault"
+                }
+            ],
+            "default-param-last": "error"
+        }
+    ],
+    "5.5.5.2 Rest parameters": [
+        {
+            "rest-spread-spacing": [
+                "error",
+                "never"
+            ],
+            "id-denylist": [
+                "error",
+                "arguments"
+            ]
+        },
+        {
+            "rest-spread-spacing": [
+                "error",
+                "never"
+            ],
+            "id-denylist": [
+                "error",
+                "arguments"
+            ]
+        }
+    ],
+    "5.5.6 Generics": [
+        {},
+        {}
+    ],
+    "5.5.7 Spread operator": [
+        {
+            "rest-spread-spacing": [
+                "error",
+                "never"
+            ]
+        },
+        {
+            "rest-spread-spacing": [
+                "error",
+                "never"
+            ]
+        }
+    ],
+    "5.6.1 Use single quotes": [
+        {
+            "quotes": [
+                "error",
+                "single",
+                {
+                    "avoidEscape": false,
+                    "allowTemplateLiterals": true
+                }
+            ],
+            "no-multi-str": "error"
+        },
+        {
+            "quotes": [
+                "error",
+                "single",
+                {
+                    "avoidEscape": false,
+                    "allowTemplateLiterals": true
+                }
+            ],
+            "no-multi-str": "error"
+        }
+    ],
+    "5.6.2 Template literals": [
+        {},
+        {}
+    ],
+    "5.6.3 No line continuations": [
+        {
+            "no-multi-str": "error"
+        },
+        {
+            "no-multi-str": "error"
+        }
+    ],
+    "5.7 Number literals": [
+        {
+            "no-octal": "error"
+        },
+        {
+            "no-octal": "error"
+        }
+    ],
+    "5.8.1 For loops": [
+        {},
+        {}
+    ],
+    "5.8.2 Exceptions": [
+        {
+            "no-throw-literal": "error",
+            "prefer-promise-reject-errors": "error"
+        },
+        {
+            "no-throw-literal": "error",
+            "prefer-promise-reject-errors": [
+                "error",
+                {
+                    "allowEmptyReject": false
+                }
+            ]
+        }
+    ],
+    "5.8.2.1 Empty catch blocks": [
+        {},
+        {}
+    ],
+    "5.8.3.1 Fall-through: commented": [
+        {
+            "no-fallthrough": [
+                "error",
+                {
+                    "commentPattern": "OurSetDefault"
+                }
+            ]
+        },
+        {
+            "no-fallthrough": [
+                "error",
+                {
+                    "commentPattern": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "5.8.3.2 The default case is present": [
+        {
+            "default-case": "error",
+            "default-case-last": "error"
+        },
+        {
+            "default-case": "error",
+            "default-case-last": "error"
+        }
+    ],
+    "5.9 this": [
+        {},
+        {}
+    ],
+    "5.10 Equality Checks": [
+        {
+            "eqeqeq": [
+                "error",
+                "always",
+                {
+                    "null": "ignore"
+                }
+            ]
+        },
+        {
+            "eqeqeq": [
+                "error",
+                "always",
+                {
+                    "null": "ignore"
+                }
+            ]
+        }
+    ],
+    "5.10.1 Exceptions Where Coercion is Desirable": [
+        {
+            "eqeqeq": [
+                "error",
+                "always",
+                {
+                    "null": "ignore"
+                }
+            ]
+        },
+        {
+            "eqeqeq": [
+                "error",
+                "always",
+                {
+                    "null": "ignore"
+                }
+            ]
+        }
+    ],
+    "5.11.1 with": [
+        {
+            "no-with": "error"
+        },
+        {
+            "no-with": "error"
+        }
+    ],
+    "5.11.2 Dynamic code evaluation": [
+        {
+            "no-eval": "error",
+            "no-new-func": "error"
+        },
+        {
+            "no-eval": [
+                "error",
+                {
+                    "allowIndirect": false
+                }
+            ],
+            "no-new-func": "error"
+        }
+    ],
+    "5.11.3 Automatic semicolon insertion": [
+        {
+            "semi": [
+                "error",
+                "always"
+            ]
+        },
+        {
+            "semi": [
+                "error",
+                "always",
+                {
+                    "omitLastInOneLineBlock": false,
+                    "omitLastInOneLineClassBody": false
+                }
+            ]
+        }
+    ],
+    "5.11.4 Non-standard features": [
+        {},
+        {}
+    ],
+    "5.11.5 Wrapper objects for primitive types": [
+        {
+            "no-new-wrappers": "error"
+        },
+        {
+            "no-new-wrappers": "error"
+        }
+    ],
+    "5.11.6 Modifying builtin objects": [
+        {
+            "no-extend-native": "error",
+            "no-global-assign": "error",
+            "no-native-reassign": "error"
+        },
+        {
+            "no-extend-native": "error",
+            "no-global-assign": "error",
+            "no-native-reassign": "error"
+        }
+    ],
+    "5.11.7 Omitting () when invoking a constructor": [
+        {
+            "new-parens": "error"
+        },
+        {
+            "new-parens": [
+                "error",
+                "always"
+            ]
+        }
+    ],
+    "6.1 Rules common to all identifiers": [
+        {},
+        {}
+    ],
+    "6.2.1 Package names": [
+        {},
+        {}
+    ],
+    "6.2.2 Class names": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "OurSetDefault",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "6.2.3 Method names": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "always",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "6.2.4 Enum names": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "always",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "6.2.5 Constant names": [
+        {},
+        {}
+    ],
+    "6.2.5.2 Local aliases": [
+        {},
+        {}
+    ],
+    "6.2.6 Non-constant field names": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "always",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "6.2.7 Parameter names": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "OurSetDefault",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "6.2.8 Local variable names": [
+        {
+            "camelcase": "error"
+        },
+        {
+            "camelcase": [
+                "error",
+                {
+                    "properties": "OurSetDefault",
+                    "ignoreDestructuring": "OurSetDefault",
+                    "ignoreImports": "OurSetDefault",
+                    "ignoreGlobals": false
+                }
+            ]
+        }
+    ],
+    "6.2.9 Template parameter names": [
+        {},
+        {}
+    ],
+    "6.2.10 Module-local names": [
+        {},
+        {}
+    ],
+    "6.3 Camel case: defined": [
+        {},
+        {}
+    ],
+    "7 JSDoc": [
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true,
+                        "ClassDeclaration": true
+                    }
+                }
+            ]
+        },
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true,
+                        "ClassDeclaration": true,
+                        "ArrowFunctionExpression": "OurSetDefault",
+                        "FunctionExpression": "OurSetDefault"
+                    }
+                }
+            ]
+        }
+    ],
+    "7.1 General form": [
+        {
+            "valid-jsdoc": "error"
+        },
+        {
+            "valid-jsdoc": [
+                "error",
+                {
+                    "prefer": "OurSetDefault",
+                    "preferType": "OurSetDefault",
+                    "requireReturn": "OurSetDefault",
+                    "requireReturnType": "OurSetDefault",
+                    "matchDescription": "OurSetDefault",
+                    "requireParamDescription": "OurSetDefault",
+                    "requireReturnDescription": "OurSetDefault",
+                    "requireParamType": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "7.2 Markdown": [
+        {},
+        {}
+    ],
+    "7.3 JSDoc tags": [
+        {},
+        {}
+    ],
+    "7.4 Line wrapping": [
+        {},
+        {}
+    ],
+    "7.5 Top/file-level comments": [
+        {},
+        {}
+    ],
+    "7.6 Class comments": [
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "ClassDeclaration": true
+                    }
+                }
+            ]
+        },
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": "OurSetDefault",
+                        "MethodDefinition": "OurSetDefault",
+                        "ClassDeclaration": true,
+                        "ArrowFunctionExpression": "OurSetDefault",
+                        "FunctionExpression": "OurSetDefault"
+                    }
+                }
+            ]
+        }
+    ],
+    "7.7 Enum and typedef comments": [
+        {},
+        {}
+    ],
+    "7.8 Method and function comments": [
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true
+                    }
+                }
+            ],
+            "valid-jsdoc": [
+                "error",
+                {
+                    "requireReturn": true,
+                    "requireReturnType": true,
+                    "requireParamType": true
+                }
+            ]
+        },
+        {
+            "require-jsdoc": [
+                "error",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true,
+                        "ClassDeclaration": "OurSetDefault",
+                        "ArrowFunctionExpression": "OurSetDefault",
+                        "FunctionExpression": "OurSetDefault"
+                    }
+                }
+            ],
+            "valid-jsdoc": [
+                "error",
+                {
+                    "prefer": "OurSetDefault",
+                    "preferType": "OurSetDefault",
+                    "requireReturn": true,
+                    "requireReturnType": true,
+                    "matchDescription": "OurSetDefault",
+                    "requireParamDescription": "OurSetDefault",
+                    "requireReturnDescription": "OurSetDefault",
+                    "requireParamType": true
+                }
+            ]
+        }
+    ],
+    "7.9 Property comments": [
+        {},
+        {}
+    ],
+    "7.10 Type annotations": [
+        {
+            "valid-jsdoc": "error"
+        },
+        {
+            "valid-jsdoc": [
+                "error",
+                {
+                    "prefer": "OurSetDefault",
+                    "preferType": "OurSetDefault",
+                    "requireReturn": "OurSetDefault",
+                    "requireReturnType": "OurSetDefault",
+                    "matchDescription": "OurSetDefault",
+                    "requireParamDescription": "OurSetDefault",
+                    "requireReturnDescription": "OurSetDefault",
+                    "requireParamType": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "7.10.1 Nullability": [
+        {},
+        {}
+    ],
+    "7.10.2 Type Casts": [
+        {},
+        {}
+    ],
+    "7.10.3 Template Parameter Types": [
+        {},
+        {}
+    ],
+    "7.10.4 Function type expressions": [
+        {},
+        {}
+    ],
+    "7.10.5 Whitespace": [
+        {},
+        {}
+    ],
+    "7.11 Visibility annotations": [
+        {},
+        {}
+    ],
+    "8.2.1 Use a standard warning set": [
+        {},
+        {}
+    ],
+    "8.2.3 Suppress a warning at the narrowest reasonable scope": [
+        {},
+        {}
+    ],
+    "8.3 Deprecation": [
+        {},
+        {}
+    ],
+    "8.4.2 Newly added code: use Google Style": [
+        {},
+        {}
+    ],
+    "8.6 Generated code: mostly exempt": [
+        {},
+        {}
+    ],
+    "9.1.2 Documentation annotations": [
+        {},
+        {}
+    ],
+    "9.1.4 Notes about standard Closure Compiler annotations": [
+        {},
+        {}
+    ],
+    "9.4.2.2 Declare variables as close as possible to first use": [
+        {
+            "block-scoped-var": "error"
+        },
+        {
+            "block-scoped-var": "error"
+        }
+    ],
+    "9.4.2.3 Use @const for constants variables": [
+        {},
+        {}
+    ],
+    "9.4.3 Do not use block scoped functions declarations": [
+        {
+            "no-inner-declarations": [
+                "error",
+                "functions"
+            ]
+        },
+        {
+            "no-inner-declarations": [
+                "error",
+                "functions"
+            ]
+        }
+    ],
+    "9.4.4.1 Summary": [
+        {
+            "max-len": [
+                "error",
+                {
+                    "ignorePattern": "OurSetDefault"
+                }
+            ],
+            "padding-line-between-statements": [
+                "error",
+                {
+                    "blankLine": "always",
+                    "prev": "OurSetDefault",
+                    "next": "OurSetDefault"
+                }
+            ],
+            "sort-imports": "error"
+        },
+        {
+            "max-len": [
+                "error",
+                {
+                    "code": 80,
+                    "tabWidth": "OurSetDefault",
+                    "comments": "OurSetDefault",
+                    "ignorePattern": "OurSetDefault",
+                    "ignoreComments": "OurSetDefault",
+                    "ignoreTrailingComments": "OurSetDefault",
+                    "ignoreUrls": "OurSetDefault",
+                    "ignoreStrings": "OurSetDefault",
+                    "ignoreTemplateLiterals": "OurSetDefault",
+                    "ignoreRegExpLiterals": "OurSetDefault"
+                }
+            ],
+            "padding-line-between-statements": [
+                "error",
+                {
+                    "blankLine": "always",
+                    "prev": "OurSetDefault",
+                    "next": "OurSetDefault"
+                }
+            ],
+            "sort-imports": [
+                "error",
+                {
+                    "ignoreCase": false,
+                    "ignoreDeclarationSort": true,
+                    "ignoreMemberSort": "OurSetDefault",
+                    "memberSyntaxSortOrder": "OurSetDefault",
+                    "allowSeperatedGroups": "OurSetDefault"
+                }
+            ]
+        }
+    ],
+    "9.4.4.2 Aliasing with goog.scope": [
+        {},
+        {}
+    ],
+    "9.4.4.3 goog.forwardDeclare": [
+        {},
+        {}
+    ]
+}

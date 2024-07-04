@@ -1,0 +1,9 @@
+The ESLint rule "implicit-arrow-linebreak" has a single string option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces the location of arrow function bodies.
+   - **Data Type**: string
+   - **Data Range**: {"beside", "below"}
+   - **Default Value**: "beside"
+
+The rule does not have any nested or additional options beyond this single string option.

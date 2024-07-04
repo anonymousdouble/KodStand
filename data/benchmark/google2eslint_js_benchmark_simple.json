@@ -1,0 +1,667 @@
+{
+    "1 Introduction": {},
+    "1.1 Terminology notes": {},
+    "1.2 Guide notes": {},
+    "2 Source file basics": {},
+    "2.1 File name": {},
+    "2.2 File encoding: UTF-8": {},
+    "2.3 Special characters": {},
+    "2.3.1 Whitespace characters": {
+        "no-irregular-whitespace": "error",
+        "indent": [
+            "error",
+            2
+        ]
+    },
+    "2.3.2 Special escape sequences": {},
+    "2.3.3 Non-ASCII characters": {},
+    "3 Source file structure": {},
+    "3.1 License or copyright information, if present": {},
+    "3.2 @fileoverview JSDoc, if present": {},
+    "3.3 goog.module statement": {
+        "max-len": [
+            "error",
+            {
+                "ignorePattern": "OurSetDefault"
+            }
+        ]
+    },
+    "3.3.1 Hierarchy": {},
+    "3.3.2 goog.module.declareLegacyNamespace": {},
+    "3.3.3 goog.module Exports": {},
+    "3.4 ES modules": {},
+    "3.4.1 Imports": {
+        "max-len": [
+            "error",
+            {
+                "code": 80,
+                "ignorePattern": "OurSetDefault"
+            }
+        ]
+    },
+    "3.4.1.1 Import paths": {},
+    "3.4.1.1.1 File extensions in import paths": {},
+    "3.4.1.2 Importing the same file multiple times": {
+        "no-duplicate-imports": [
+            "error"
+        ]
+    },
+    "3.4.1.3 Naming imports": {},
+    "3.4.1.3.1 Naming module imports": {
+        "camelcase": [
+            "error",
+            {
+                "ignoreImports": false
+            }
+        ]
+    },
+    "3.4.1.3.2 Naming default imports": {},
+    "3.4.1.3.3 Naming named imports": {},
+    "3.4.2 Exports": {},
+    "3.4.2.1 Named vs default exports": {
+        "no-restricted-exports": [
+            "error",
+            {
+                "restrictDefaultExports": {
+                    "direct": true
+                }
+            }
+        ]
+    },
+    "3.4.2.2 Exporting static container classes and objects": {},
+    "3.4.2.3 Mutability of exports": {},
+    "3.4.2.4 export from": {
+        "max-len": [
+            "error",
+            {
+                "code": 80,
+                "ignorePattern": "OurSetDefault"
+            }
+        ]
+    },
+    "3.4.3 Circular Dependencies in ES modules": {},
+    "3.4.4 Interoperating with Closure": {},
+    "3.4.4.1 Referencing goog": {},
+    "3.4.4.2 goog.require in ES modules": {},
+    "3.4.4.3 Declaring Closure Module IDs in ES modules": {},
+    "3.5 goog.setTestOnly": {},
+    "3.6 goog.require and goog.requireType statements": {},
+    "3.7 The file\u2019s implementation": {},
+    "4 Formatting": {},
+    "4.1 Braces": {},
+    "4.1.1 Braces are used for all control structures": {
+        "curly": [
+            "error",
+            "all"
+        ]
+    },
+    "4.1.2 Nonempty blocks: K&R style": {
+        "brace-style": [
+            "error",
+            "1tbs"
+        ]
+    },
+    "4.1.3 Empty blocks: may be concise": {},
+    "4.2 Block indentation: +2 spaces": {
+        "indent": [
+            "error",
+            2,
+            {
+                "ignoreComments": false
+            }
+        ]
+    },
+    "4.2.1 Array literals: optionally block-like": {},
+    "4.2.2 Object literals: optionally block-like": {},
+    "4.2.3 Class literals": {
+        "indent": [
+            "error",
+            2
+        ],
+        "no-extra-semi": "error"
+    },
+    "4.2.4 Function expressions": {
+        "indent": [
+            "error",
+            2,
+            {
+                "FunctionExpression": {
+                    "body": 1,
+                    "parameters": 2
+                },
+                "MemberExpression": 2
+            }
+        ]
+    },
+    "4.2.5 Switch statements": {
+        "indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ]
+    },
+    "4.3 Statements": {},
+    "4.3.1 One statement per line": {
+        "max-statements-per-line": [
+            "error",
+            {
+                "max": 1
+            }
+        ]
+    },
+    "4.3.2 Semicolons are required": {
+        "semi": [
+            "error",
+            "always"
+        ]
+    },
+    "4.4 Column limit: 80": {
+        "max-len": [
+            "error",
+            {
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignorePattern": "OurSetDefault"
+            }
+        ]
+    },
+    "4.5 Line-wrapping": {},
+    "4.5.1 Where to break": {
+        "operator-linebreak": [
+            "error",
+            "after"
+        ],
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ],
+        "comma-style": [
+            "error",
+            "last"
+        ],
+        "comma-spacing": [
+            "error",
+            {
+                "before": false
+            }
+        ]
+    },
+    "4.5.2 Indent continuation lines at least +4 spaces": {
+        "indent": [
+            "error",
+            2,
+            {
+                "VariableDeclarator": 2,
+                "MemberExpression": 2,
+                "FunctionDeclaration": {
+                    "body": 1,
+                    "parameters": 2
+                },
+                "FunctionExpression": {
+                    "body": 1,
+                    "parameters": 2
+                },
+                "CallExpression": {
+                    "arguments": 2
+                }
+            }
+        ]
+    },
+    "4.6 Whitespace": {},
+    "4.6.1 Vertical whitespace": {
+        "padding-line-between-statements": [
+            "error",
+            {
+                "blankLine": "always",
+                "prev": "function",
+                "next": "function"
+            }
+        ],
+        "lines-between-class-members": [
+            "error",
+            {
+                "enforce": [
+                    {
+                        "blankLine": "always",
+                        "prev": "method",
+                        "next": "method"
+                    }
+                ]
+            }
+        ],
+        "padded-blocks": [
+            "error",
+            "never"
+        ]
+    },
+    "4.6.2 Horizontal whitespace": {
+        "keyword-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ],
+        "space-in-parens": [
+            "error",
+            "never"
+        ],
+        "space-before-blocks": [
+            "error",
+            "always"
+        ],
+        "array-bracket-spacing": [
+            "error",
+            "never"
+        ],
+        "space-infix-ops": "error",
+        "comma-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "key-spacing": [
+            "error",
+            {
+                "afterColon": true
+            }
+        ]
+    },
+    "4.6.3 Horizontal alignment: discouraged": {},
+    "4.6.4 Function arguments": {
+        "max-len": [
+            "error",
+            {
+                "code": 80
+            }
+        ],
+        "indent": [
+            "error",
+            2,
+            {
+                "FunctionDeclaration": {
+                    "parameters": 2
+                }
+            }
+        ]
+    },
+    "4.7 Grouping parentheses: recommended": {
+        "no-extra-parens": [
+            "error",
+            "all",
+            {
+                "allowParensAfterCommentPattern": "@type"
+            }
+        ]
+    },
+    "4.8 Comments": {},
+    "4.8.1 Block comment style": {
+        "indent": [
+            "error",
+            2,
+            {
+                "ignoreComments": true
+            }
+        ],
+        "multiline-comment-style": [
+            "error",
+            "starred-block"
+        ]
+    },
+    "4.8.2 Parameter Name Comments": {},
+    "5 Language features": {},
+    "5.1 Local variable declarations": {},
+    "5.1.1 Use const and let": {
+        "no-var": "error"
+    },
+    "5.1.2 One variable per declaration": {
+        "one-var": [
+            "error",
+            "always"
+        ]
+    },
+    "5.1.3 Declared when needed, initialized as soon as possible": {},
+    "5.1.4 Declare types as needed": {},
+    "5.2 Array literals": {},
+    "5.2.1 Use trailing commas": {
+        "comma-dangle": [
+            "error",
+            "always"
+        ]
+    },
+    "5.2.2 Do not use the variadic Array constructor": {
+        "no-array-constructor": "error"
+    },
+    "5.2.3 Non-numeric properties": {},
+    "5.2.4 Destructuring": {},
+    "5.2.5 Spread operator": {
+        "rest-spread-spacing": [
+            "error",
+            "never"
+        ]
+    },
+    "5.3 Object literals": {},
+    "5.3.1 Use trailing commas": {
+        "comma-dangle": [
+            "error",
+            "always"
+        ]
+    },
+    "5.3.2 Do not use the Object constructor": {
+        "no-object-constructor": "error"
+    },
+    "5.3.3 Do not mix quoted and unquoted keys": {
+        "quote-props": [
+            "error",
+            "consistent"
+        ]
+    },
+    "5.3.4 Computed property names": {},
+    "5.3.5 Method shorthand": {},
+    "5.3.6 Shorthand properties": {},
+    "5.3.7 Destructuring": {},
+    "5.3.8 Enums": {},
+    "5.4 Classes": {},
+    "5.4.1 Constructors": {
+        "constructor-super": "error",
+        "no-this-before-super": "error"
+    },
+    "5.4.2 Fields": {},
+    "5.4.3 Computed properties": {},
+    "5.4.4 Static methods": {},
+    "5.4.5 Old-style class declarations": {},
+    "5.4.6 Do not manipulate prototype s directly": {},
+    "5.4.7 Getters and Setters": {},
+    "5.4.8 Overriding toString": {},
+    "5.4.9 Interfaces": {},
+    "5.4.10 Abstract Classes": {},
+    "5.5 Functions": {},
+    "5.5.1 Top-level functions": {},
+    "5.5.2 Nested functions and closures": {},
+    "5.5.3 Arrow functions": {
+        "arrow-parens": [
+            "error",
+            "always"
+        ]
+    },
+    "5.5.4 Generators": {
+        "generator-star-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "yield-star-spacing": [
+            "error",
+            "after"
+        ]
+    },
+    "5.5.5 Parameter and return types": {
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": false,
+                    "ClassDeclaration": false,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ]
+    },
+    "5.5.5.1 Default parameters": {
+        "space-infix-ops": "error",
+        "default-param-last": "error"
+    },
+    "5.5.5.2 Rest parameters": {
+        "rest-spread-spacing": [
+            "error",
+            "never"
+        ]
+    },
+    "5.5.6 Generics": {},
+    "5.5.7 Spread operator": {
+        "rest-spread-spacing": [
+            "error",
+            "never"
+        ]
+    },
+    "5.6 String literals": {},
+    "5.6.1 Use single quotes": {
+        "quotes": [
+            "error",
+            "single"
+        ]
+    },
+    "5.6.2 Template literals": {},
+    "5.6.3 No line continuations": {
+        "no-multi-str": "error"
+    },
+    "5.7 Number literals": {
+        "no-octal": "error"
+    },
+    "5.8 Control structures": {},
+    "5.8.1 For loops": {},
+    "5.8.2 Exceptions": {
+        "no-throw-literal": "error"
+    },
+    "5.8.2.1 Empty catch blocks": {},
+    "5.8.3 Switch statements": {},
+    "5.8.3.1 Fall-through: commented": {
+        "no-fallthrough": [
+            "error",
+            {
+                "commentPattern": "OurSetDefault"
+            }
+        ]
+    },
+    "5.8.3.2 The default case is present": {
+        "default-case": "error",
+        "default-case-last": "error"
+    },
+    "5.9 this": {},
+    "5.10 Equality Checks": {
+        "eqeqeq": [
+            "error",
+            "always",
+            {
+                "null": "ignore"
+            }
+        ]
+    },
+    "5.10.1 Exceptions Where Coercion is Desirable": {
+        "eqeqeq": [
+            "error",
+            "always",
+            {
+                "null": "ignore"
+            }
+        ]
+    },
+    "5.11 Disallowed features": {},
+    "5.11.1 with": {
+        "no-with": "error"
+    },
+    "5.11.2 Dynamic code evaluation": {
+        "no-eval": "error",
+        "no-new-func": "error"
+    },
+    "5.11.3 Automatic semicolon insertion": {
+        "semi": [
+            "error",
+            "always"
+        ]
+    },
+    "5.11.4 Non-standard features": {},
+    "5.11.5 Wrapper objects for primitive types": {
+        "no-new-wrappers": "error"
+    },
+    "5.11.6 Modifying builtin objects": {
+        "no-extend-native": "error"
+    },
+    "5.11.7 Omitting () when invoking a constructor": {
+        "new-parens": "error"
+    },
+    "6 Naming": {},
+    "6.1 Rules common to all identifiers": {},
+    "6.2 Rules by identifier type": {},
+    "6.2.1 Package names": {
+        "camelcase": "error"
+    },
+    "6.2.2 Class names": {
+        "camelcase": "error"
+    },
+    "6.2.3 Method names": {
+        "camelcase": "error"
+    },
+    "6.2.4 Enum names": {
+        "camelcase": "error"
+    },
+    "6.2.5 Constant names": {},
+    "6.2.5.1 Definition of \u201cconstant\u201d": {},
+    "6.2.5.2 Local aliases": {},
+    "6.2.6 Non-constant field names": {
+        "camelcase": "error"
+    },
+    "6.2.7 Parameter names": {
+        "camelcase": "error"
+    },
+    "6.2.8 Local variable names": {
+        "camelcase": "error"
+    },
+    "6.2.9 Template parameter names": {},
+    "6.2.10 Module-local names": {},
+    "6.3 Camel case: defined": {},
+    "7 JSDoc": {
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ]
+    },
+    "7.1 General form": {
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ]
+    },
+    "7.2 Markdown": {},
+    "7.3 JSDoc tags": {},
+    "7.4 Line wrapping": {},
+    "7.5 Top/file-level comments": {},
+    "7.6 Class comments": {
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ],
+        "valid-jsdoc": "error"
+    },
+    "7.7 Enum and typedef comments": {},
+    "7.8 Method and function comments": {
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ],
+        "valid-jsdoc": "error"
+    },
+    "7.9 Property comments": {},
+    "7.10 Type annotations": {
+        "valid-jsdoc": "error"
+    },
+    "7.10.1 Nullability": {},
+    "7.10.2 Type Casts": {},
+    "7.10.3 Template Parameter Types": {},
+    "7.10.4 Function type expressions": {},
+    "7.10.5 Whitespace": {},
+    "7.11 Visibility annotations": {},
+    "8 Policies": {},
+    "8.1 Issues unspecified by Google Style: Be Consistent!": {},
+    "8.2 Compiler warnings": {},
+    "8.2.1 Use a standard warning set": {},
+    "8.2.2 How to handle a warning": {},
+    "8.2.3 Suppress a warning at the narrowest reasonable scope": {},
+    "8.3 Deprecation": {},
+    "8.4 Code not in Google Style": {},
+    "8.4.1 Reformatting existing code": {},
+    "8.4.2 Newly added code: use Google Style": {},
+    "8.5 Local style rules": {},
+    "8.6 Generated code: mostly exempt": {},
+    "9 Appendices": {},
+    "9.1 JSDoc tag reference": {},
+    "9.1.1 Type annotations and other Closure Compiler annotations": {},
+    "9.1.2 Documentation annotations": {},
+    "9.1.3 Framework specific annotations": {},
+    "9.1.4 Notes about standard Closure Compiler annotations": {},
+    "9.2 Commonly misunderstood style rules": {},
+    "9.3 Style-related tools": {},
+    "9.3.1 Closure Compiler": {},
+    "9.3.2 clang-format": {},
+    "9.3.3 Closure compiler linter": {},
+    "9.3.4 Conformance framework": {},
+    "9.4 Exceptions for legacy platforms": {},
+    "9.4.1 Overview": {},
+    "9.4.2 Use var": {},
+    "9.4.2.1 var declarations are NOT block-scoped": {},
+    "9.4.2.2 Declare variables as close as possible to first use": {
+        "block-scoped-var": "error"
+    },
+    "9.4.2.3 Use @const for constants variables": {},
+    "9.4.3 Do not use block scoped functions declarations": {
+        "no-inner-declarations": [
+            "error",
+            "functions"
+        ]
+    },
+    "9.4.4 Dependency management with goog.provide / goog.require": {},
+    "9.4.4.1 Summary": {
+        "max-len": [
+            "error",
+            {
+                "ignorePattern": "OurSetDefault"
+            }
+        ]
+    },
+    "9.4.4.2 Aliasing with goog.scope": {},
+    "9.4.4.3 goog.forwardDeclare": {}
+}

@@ -1,0 +1,99 @@
+The provided ESLint rule "valid-jsdoc" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: prefer
+   - **Option Description**: Enforces consistent documentation tags specified by an object whose properties mean instead of key use value.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+2. **Option Name**: preferType
+   - **Option Description**: Enforces consistent type strings specified by an object whose properties mean instead of key use value.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: requireReturn
+   - **Option Description**: Requires a return tag.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: requireReturnType
+   - **Option Description**: Allows missing type in return tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: matchDescription
+   - **Option Description**: Specifies a regular expression to match the description in each JSDoc comment.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+6. **Option Name**: requireParamDescription
+   - **Option Description**: Allows missing description in parameter tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+7. **Option Name**: requireReturnDescription
+   - **Option Description**: Allows missing description in return tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+8. **Option Name**: requireParamType
+   - **Option Description**: Allows missing type in parameter tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Here is the structured information for each option:
+
+1. **Option Name**: prefer
+   - **Option Description**: Enforces consistent documentation tags specified by an object whose properties mean instead of key use value.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+2. **Option Name**: preferType
+   - **Option Description**: Enforces consistent type strings specified by an object whose properties mean instead of key use value.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: requireReturn
+   - **Option Description**: Requires a return tag.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: requireReturnType
+   - **Option Description**: Allows missing type in return tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: matchDescription
+   - **Option Description**: Specifies a regular expression to match the description in each JSDoc comment.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+6. **Option Name**: requireParamDescription
+   - **Option Description**: Allows missing description in parameter tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+7. **Option Name**: requireReturnDescription
+   - **Option Description**: Allows missing description in return tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+8. **Option Name**: requireParamType
+   - **Option Description**: Allows missing type in parameter tags.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

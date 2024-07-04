@@ -1,0 +1,37 @@
+The ESLint rule "no-magic-numbers" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: ignore
+   - **Option Description**: An array of numbers to ignore.
+   - **Data Type**: array
+   - **Data Range**: {number, string}
+   - **Default Value**: []
+
+2. **Option Name**: ignoreArrayIndexes
+   - **Option Description**: A boolean to specify if numbers used in the context of array indexes are considered okay.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: ignoreDefaultValues
+   - **Option Description**: A boolean to specify if numbers used in default value assignments are considered okay.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: ignoreClassFieldInitialValues
+   - **Option Description**: A boolean to specify if numbers used as initial values of class fields are considered okay.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: enforceConst
+   - **Option Description**: A boolean to specify if we should check for the const keyword in variable declaration of numbers.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+6. **Option Name**: detectObjects
+   - **Option Description**: A boolean to specify if we should detect numbers when setting object properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

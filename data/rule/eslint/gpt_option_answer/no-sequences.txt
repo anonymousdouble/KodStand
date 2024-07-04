@@ -1,0 +1,7 @@
+The ESLint rule "no-sequences" has one configurable option. Here are the details:
+
+1. **Option Name**: allowInParentheses
+   - **Option Description**: Allows expression sequences that are explicitly wrapped in parentheses.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

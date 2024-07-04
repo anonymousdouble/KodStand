@@ -1,0 +1,13 @@
+The ESLint rule "comma-spacing" has configurable options. Here are the details of each option:
+
+1. **Option Name**: before
+   - **Option Description**: Controls whether spaces are allowed before commas.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: after
+   - **Option Description**: Controls whether spaces are required after commas.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

@@ -1,0 +1,21 @@
+The provided ESLint rule HTML file describes the "function-paren-newline" rule, which enforces consistent line breaks inside function parentheses. The rule has several configurable options, which can be either strings or objects. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows line breaks inside all function parentheses.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "multiline", "multiline-arguments", "consistent"}
+   - **Default Value**: "multiline"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Requires line breaks inside function parentheses if the number of parameters/arguments is at least a specified value.
+   - **Data Type**: object
+   - **Data Range**: {"minItems": number}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.minItems
+   - **Option Description**: Specifies the minimum number of parameters/arguments required to enforce line breaks inside function parentheses.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+In summary, the "function-paren-newline" rule has two main options: a string option with predefined values and an object option with a sub-option specifying a minimum number of items.

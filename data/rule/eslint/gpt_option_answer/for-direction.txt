@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "for-direction" rule. Based on the content, it appears that this rule does not have any configurable options. The rule is straightforward and enforces a specific behavior without any parameters to adjust its functionality.
+
+Therefore, the result is:
+
+```
+no option
+```

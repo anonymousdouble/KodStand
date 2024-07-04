@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the rule "no-script-url" does not mention any configurable options. It only describes the rule's purpose, provides examples of incorrect code, and mentions compatibility and version details.
+
+Therefore, the result is:
+
+```
+no option
+```

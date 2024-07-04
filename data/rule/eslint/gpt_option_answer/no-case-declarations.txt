@@ -1,0 +1,5 @@
+The provided ESLint rule HTML file describes the rule `no-case-declarations`. Based on the content, this rule does not have any configurable options. Therefore, the result is:
+
+```
+no option
+```

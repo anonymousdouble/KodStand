@@ -1,0 +1,9 @@
+The ESLint rule "no-promise-executor-return" has one configurable option. Here are the details:
+
+1. **Option Name**: allowVoid
+   - **Option Description**: If set to `true`, this rule will allow returning void values.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+There are no nested options for this rule.

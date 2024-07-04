@@ -1,0 +1,19 @@
+The provided ESLint rule HTML file describes the "arrow-parens" rule, which has both string and object options. Here are the extracted details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires parens around arguments in all cases, or enforces no parens where they can be omitted.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Modifies the as-needed rule to require parens if the function body is in an instructions block (surrounded by braces).
+   - **Data Type**: object
+   - **Data Range**: {"requireForBlockBody": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.requireForBlockBody
+   - **Option Description**: Requires parens if the function body is in an instructions block (surrounded by braces).
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

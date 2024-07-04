@@ -1,0 +1,7 @@
+The provided ESLint rule "no-template-curly-in-string" does not have any configurable options. The rule description and examples do not mention any parameters or settings that can be adjusted.
+
+Therefore, the result is:
+
+```
+no option
+```

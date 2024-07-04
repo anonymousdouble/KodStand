@@ -1,0 +1,13 @@
+The ESLint rule "no-labels" has two configurable options. Here are the details:
+
+1. **Option Name**: allowLoop
+   - **Option Description**: If this option is set to true, the rule ignores labels that are attached to loop statements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: allowSwitch
+   - **Option Description**: If this option is set to true, the rule ignores labels that are attached to switch statements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

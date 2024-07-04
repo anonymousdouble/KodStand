@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-multi-str" rule. After analyzing the content, it is clear that this rule does not have any configurable options. The rule simply disallows the use of multiline strings in JavaScript.
+
+Here is the result based on the analysis:
+
+```
+no option
+```

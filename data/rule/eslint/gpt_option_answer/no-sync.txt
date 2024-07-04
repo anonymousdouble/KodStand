@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-sync" rule. Based on the content, the rule has one configurable option. Here are the details:
+
+1. **Option Name**: allowAtRootLevel
+   - **Option Description**: Determines whether synchronous methods should be allowed at the top level of a file, outside of any functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

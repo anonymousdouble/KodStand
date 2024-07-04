@@ -1,0 +1,31 @@
+Please generate {{style}} configurations based on the following style convention. Ensure that the output includes only the relevant configurations for the style convention and excludes any unrelated rules.
+
+Style Convention:
+{{rule}}
+
+Response Format Should be a json object:
+{
+    "Answer":  Respond with either Yes or No to show whether {{style}} configurations exist for the given style convention,
+    "Configuration": If the answer is Yes, provide the configuration. There can be one or multiple {{style}} rules for the given style convention. The configuration format should be json format:
+    "{
+        "eslint_rule_1": [
+            "option_1",
+            "option_2"
+        ],
+        "eslint_rule_2": "option_1",
+        "eslint_rule_3": [
+            "option_1",
+            {
+            "option2": value_2
+            }
+        ],
+        ...
+        "eslint_rule_n": [
+            "option_1",
+            {
+            "option_2": value_2,
+            "option_3": value_3
+            }
+        ]
+    }"
+}

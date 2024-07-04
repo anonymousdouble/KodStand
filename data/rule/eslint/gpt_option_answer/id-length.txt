@@ -1,0 +1,33 @@
+The provided ESLint rule HTML file describes the "id-length" rule, which enforces minimum and maximum identifier lengths. The rule has several configurable options. Here are the extracted details of all configurable options:
+
+1. **Option Name**: min
+   - **Option Description**: Enforces a minimum identifier length.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 2
+
+2. **Option Name**: max
+   - **Option Description**: Enforces a maximum identifier length.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: Infinity
+
+3. **Option Name**: properties
+   - **Option Description**: Determines whether to enforce identifier length convention for property names.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+4. **Option Name**: exceptions
+   - **Option Description**: Allows an array of specified identifier names to be exceptions to the rule.
+   - **Data Type**: array
+   - **Data Range**: null
+   - **Default Value**: no default
+
+5. **Option Name**: exceptionPatterns
+   - **Option Description**: Allows identifiers that match any of the specified regular expression patterns.
+   - **Data Type**: array
+   - **Data Range**: null
+   - **Default Value**: no default
+
+These options allow users to customize the "id-length" rule according to their coding standards and preferences.

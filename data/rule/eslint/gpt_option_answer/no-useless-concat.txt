@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-useless-concat`. Based on the content, it appears that this rule does not have any configurable options. The rule simply disallows unnecessary concatenation of literals or template literals.
+
+Therefore, the result is:
+
+```
+no option
+```

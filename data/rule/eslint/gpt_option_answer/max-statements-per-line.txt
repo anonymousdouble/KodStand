@@ -1,0 +1,9 @@
+The ESLint rule "max-statements-per-line" has one configurable option. Here are the details:
+
+1. **Option Name**: max
+   - **Option Description**: Specifies the maximum number of statements allowed per line.
+   - **Data Type**: object
+   - **Data Range**: {"max": integer}
+   - **Default Value**: {"max": 1}
+
+Since there is only one option, there are no nested sub-options to consider.

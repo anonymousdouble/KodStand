@@ -1,0 +1,73 @@
+The ESLint rule "object-curly-newline" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires line breaks after opening and before closing braces, or disallows line breaks after opening and before closing braces.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Requires line breaks if there are line breaks inside properties or between properties. Otherwise, it disallows line breaks.
+   - **Data Type**: object
+   - **Data Range**: {"multiline": boolean, "minProperties": integer, "consistent": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.multiline
+   - **Option Description**: Requires line breaks if there are line breaks inside properties or between properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.minProperties
+   - **Option Description**: Requires line breaks if the number of properties is at least the given integer.
+   - **Data Type**: integer
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.consistent
+   - **Option Description**: Requires that either both curly braces, or neither, directly enclose newlines.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+6. **Option Name**: ObjectExpression
+   - **Option Description**: Configuration for object literals.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+7. **Option Name**: ObjectPattern
+   - **Option Description**: Configuration for object patterns of destructuring assignments.
+   - **Data Type**: object
+   - **Data Range**: {"multiline": boolean}
+   - **Default Value**: no default
+
+8. **Option Name**: ObjectPattern.multiline
+   - **Option Description**: Requires line breaks if there are line breaks inside properties or between properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+9. **Option Name**: ImportDeclaration
+   - **Option Description**: Configuration for named imports.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+10. **Option Name**: ExportDeclaration
+    - **Option Description**: Configuration for named exports.
+    - **Data Type**: object
+    - **Data Range**: {"multiline": boolean, "minProperties": integer}
+    - **Default Value**: no default
+
+11. **Option Name**: ExportDeclaration.multiline
+    - **Option Description**: Requires line breaks if there are line breaks inside properties or between properties.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+12. **Option Name**: ExportDeclaration.minProperties
+    - **Option Description**: Requires line breaks if the number of properties is at least the given integer.
+    - **Data Type**: integer
+    - **Data Range**: open-ended
+    - **Default Value**: no default

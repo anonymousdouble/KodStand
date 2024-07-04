@@ -1,0 +1,7 @@
+The ESLint rule "no-duplicate-imports" has one configurable option. Here are the details:
+
+1. **Option Name**: includeExports
+   - **Option Description**: Determines whether to include exports when checking for duplicate imports.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

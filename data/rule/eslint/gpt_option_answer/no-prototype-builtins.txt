@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-prototype-builtins" rule. Based on the content, it appears that this rule does not have any configurable options. The rule's purpose is to disallow calling some `Object.prototype` methods directly on objects to avoid potential errors and security vulnerabilities.
+
+Here is the analysis:
+
+```
+no option
+```

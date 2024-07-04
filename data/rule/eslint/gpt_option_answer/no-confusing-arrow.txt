@@ -1,0 +1,13 @@
+The ESLint rule "no-confusing-arrow" has two configurable options. Here are the details:
+
+1. **Option Name**: allowParens
+   - **Option Description**: Relaxes the rule and accepts parenthesis as a valid “confusion-preventing” syntax.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: onlyOneSimpleParam
+   - **Option Description**: Relaxes the rule and doesn’t report errors if the arrow function has 0 or more than 1 parameters, or the parameter is not an identifier.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

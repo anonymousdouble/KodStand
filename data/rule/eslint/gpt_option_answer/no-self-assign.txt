@@ -1,0 +1,9 @@
+The provided ESLint rule "no-self-assign" has one configurable option. Here are the details:
+
+1. **Option Name**: props
+   - **Option Description**: If this is true, the rule warns self-assignments of properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+There are no nested options for this rule.

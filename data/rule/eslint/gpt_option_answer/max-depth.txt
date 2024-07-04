@@ -1,0 +1,15 @@
+The provided ESLint rule HTML file describes the "max-depth" rule. Based on the content, here are the extracted details of the configurable options:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum depth that blocks can be nested.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 4
+
+2. **Option Name**: anonymous_option_1
+   - **Option Description**: The object property "maximum" is deprecated; please use the object property "max" instead.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+Since the rule has only one primary option and a deprecated object property, the analysis is complete.

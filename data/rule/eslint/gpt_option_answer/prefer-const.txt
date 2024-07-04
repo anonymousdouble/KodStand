@@ -1,0 +1,13 @@
+The ESLint rule "prefer-const" has two configurable options: "destructuring" and "ignoreReadBeforeAssign". Here are the details for each option:
+
+1. **Option Name**: destructuring
+   - **Option Description**: The kind of way to address variables in destructuring.
+   - **Data Type**: string
+   - **Data Range**: {"any", "all"}
+   - **Default Value**: "any"
+
+2. **Option Name**: ignoreReadBeforeAssign
+   - **Option Description**: This option avoids conflicting with the `no-use-before-define` rule (without the "nofunc" option). If true, this rule will ignore variables that are read between the declaration and the first assignment.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

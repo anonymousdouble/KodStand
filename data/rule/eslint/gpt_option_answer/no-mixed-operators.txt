@@ -1,0 +1,39 @@
+The ESLint rule "no-mixed-operators" has two configurable options: `groups` and `allowSamePrecedence`. Below is the detailed analysis of these options:
+
+1. **Option Name**: groups
+   - **Option Description**: Specifies operator groups to be checked. The `groups` option is a list of groups, and a group is a list of binary operators.
+   - **Data Type**: array of arrays of strings
+   - **Data Range**: null
+   - **Default Value**: `[["+","-","*","/","%","**"], ["&","|","^","~","<<",">>",">>>"], ["==","!=","===","!==",">",">=","<","<="], ["&&","||"], ["in","instanceof"]]`
+
+2. **Option Name**: allowSamePrecedence
+   - **Option Description**: Specifies whether to allow mixed operators if they are of equal precedence.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+### Nested Options for `groups`
+
+The `groups` option can contain nested arrays of strings representing different operator groups. Here are the possible operators that can be included in these groups:
+
+- Arithmetic Operators: `"+", "-", "*", "/", "%", "**"`
+- Bitwise Operators: `"&", "|", "^", "~", "<<", ">>", ">>>"`
+- Comparison Operators: `"==", "!=", "===", "!==", ">", ">=", "<", "<="`
+- Logical Operators: `"&&", "||"`
+- Coalesce Operator: `"??"`
+- Relational Operators: `"in", "instanceof"`
+- Ternary Operator: `?:`
+
+### Summary
+
+1. **Option Name**: groups
+   - **Option Description**: Specifies operator groups to be checked.
+   - **Data Type**: array of arrays of strings
+   - **Data Range**: null
+   - **Default Value**: `[["+","-","*","/","%","**"], ["&","|","^","~","<<",">>",">>>"], ["==","!=","===","!==",">",">=","<","<="], ["&&","||"], ["in","instanceof"]]`
+
+2. **Option Name**: allowSamePrecedence
+   - **Option Description**: Specifies whether to allow mixed operators if they are of equal precedence.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

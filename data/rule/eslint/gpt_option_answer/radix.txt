@@ -1,0 +1,13 @@
+The ESLint rule "radix" has two configurable options. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces providing a radix.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Disallows providing the `10` radix.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed"}
+   - **Default Value**: "always"

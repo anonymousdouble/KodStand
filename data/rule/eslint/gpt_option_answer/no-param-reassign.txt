@@ -1,0 +1,39 @@
+The ESLint rule "no-param-reassign" has configurable options. Here are the details of each option:
+
+1. **Option Name**: props
+   - **Option Description**: Warns against the modification of parameter properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: ignorePropertyModificationsFor
+   - **Option Description**: An array of parameter names for which property modifications are ignored.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []
+
+3. **Option Name**: ignorePropertyModificationsForRegex
+   - **Option Description**: An array of regex patterns for parameter names for which property modifications are ignored.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []
+
+Here is the structured information:
+
+1. **Option Name**: props
+   - **Option Description**: Warns against the modification of parameter properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: ignorePropertyModificationsFor
+   - **Option Description**: An array of parameter names for which property modifications are ignored.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []
+
+3. **Option Name**: ignorePropertyModificationsForRegex
+   - **Option Description**: An array of regex patterns for parameter names for which property modifications are ignored.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []

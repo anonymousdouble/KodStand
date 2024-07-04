@@ -1,0 +1,23 @@
+**Task**: Extract details of all configurable options from the provided ESLint rule HTML file. If the rule has no options, return "no option".
+
+An option can be an object, a string, or other value forms.
+
+For example, for the rule "arrow-body-style", it takes one or two options. It forms like ["error", "as-needed", {"requireReturnForObjectLiteral": true}].
+
+"error" stands for severity, which can be ignored. The first option is a string, which can be "always", "as-needed" or "never". The second option is an object, which means it has keys and corresponding values. "requireReturnForObjectLiteral" is a sub-option of the second option.
+
+**For each option, provide:**
+1. **Option Name**: The name of the option. If the option does not have a name, name it "anonymous_option_k" for the Kth option.
+2. **Option Description**: A short description of the option.
+3. **Data Type**: The data type of the option value.
+4. **Value Range**: It can be a set, which contains elements that can be assigned to the option. It can be "open-ended" if the option does not have a fixed range of value.
+5. **Default Value**: Specify the default value, or "none" if there is no default value mentioned.
+
+**Guidelines:**
+- **Anonymous Options**: All object options are anonymous options, except when they are the corresponding value of a certain key.
+- **Nested Options**: For nested options, reflect the hierarchy in the name. For example, for the rule "no-restricted-exports" configured as `["error", {"restrictDefaultExports": {"direct": true}}]`, name the option "restrictDefaultExports.direct".
+
+**ESLint Rule:**
+```html
+{{html_content}}
+```

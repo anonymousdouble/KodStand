@@ -1,0 +1,25 @@
+The ESLint rule "lines-around-directive" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces or disallows blank newlines around directives.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies whether to enforce or disallow blank newlines before and after directives.
+   - **Data Type**: object
+   - **Data Range**: {"before": string, "after": string}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.before
+   - **Option Description**: Specifies whether to enforce or disallow blank newlines before directives.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.after
+   - **Option Description**: Specifies whether to enforce or disallow blank newlines after directives.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default

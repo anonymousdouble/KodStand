@@ -1,0 +1,19 @@
+The ESLint rule "func-call-spacing" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Disallows or requires space between the function name and the opening parenthesis.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows newlines when in "always" mode.
+   - **Data Type**: object
+   - **Data Range**: {"allowNewlines": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.allowNewlines
+   - **Option Description**: Permits newlines when in "always" mode.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

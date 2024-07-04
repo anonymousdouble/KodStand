@@ -1,0 +1,7 @@
+The ESLint rule "no-plusplus" has one configurable option. Here are the details:
+
+1. **Option Name**: allowForLoopAfterthoughts
+   - **Option Description**: Allows unary operators `++` and `--` in the afterthought (final expression) of a `for` loop.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

@@ -1,0 +1,13 @@
+The ESLint rule "no-trailing-spaces" has two configurable options. Here are the details:
+
+1. **Option Name**: skipBlankLines
+   - **Option Description**: Allows or disallows trailing whitespace on empty lines.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: ignoreComments
+   - **Option Description**: Allows or disallows trailing whitespace in comment blocks.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

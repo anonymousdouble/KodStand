@@ -1,0 +1,7 @@
+The provided ESLint rule "no-useless-constructor" has no configurable options. The rule details and examples provided do not mention any configurable parameters or options.
+
+Therefore, the result is:
+
+```
+no option
+```

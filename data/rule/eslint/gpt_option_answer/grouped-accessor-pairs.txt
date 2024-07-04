@@ -1,0 +1,7 @@
+The ESLint rule "grouped-accessor-pairs" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the order enforcement for getter and setter pairs.
+   - **Data Type**: string
+   - **Data Range**: {"anyOrder", "getBeforeSet", "setBeforeGet"}
+   - **Default Value**: "anyOrder"

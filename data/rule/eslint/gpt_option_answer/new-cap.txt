@@ -1,0 +1,43 @@
+The ESLint rule "new-cap" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: newIsCap
+   - **Option Description**: Requires all `new` operators to be called with uppercase-started functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: capIsNew
+   - **Option Description**: Requires all uppercase-started functions to be called with `new` operators.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: newIsCapExceptions
+   - **Option Description**: Allows specified lowercase-started function names to be called with the `new` operator.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+4. **Option Name**: newIsCapExceptionPattern
+   - **Option Description**: Allows any lowercase-started function names that match the specified regex pattern to be called with the `new` operator.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: capIsNewExceptions
+   - **Option Description**: Allows specified uppercase-started function names to be called without the `new` operator.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+6. **Option Name**: capIsNewExceptionPattern
+   - **Option Description**: Allows any uppercase-started function names that match the specified regex pattern to be called without the `new` operator.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: properties
+   - **Option Description**: Enables or disables checks on object properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

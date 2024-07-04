@@ -1,0 +1,5 @@
+The provided ESLint rule HTML file for the rule "id-blacklist" does not contain any configurable options. The rule is deprecated and replaced by the "id-denylist" rule. Therefore, the result is:
+
+```
+no option
+```

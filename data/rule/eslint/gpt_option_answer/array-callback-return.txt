@@ -1,0 +1,21 @@
+The ESLint rule "array-callback-return" has three configurable options. Here are the details for each option:
+
+1. **Option Name**: allowImplicit
+   - **Option Description**: Allows callbacks of methods that require a return value to implicitly return `undefined` with a `return` statement containing no expression.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: checkForEach
+   - **Option Description**: Reports `forEach` callbacks that return a value.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: allowVoid
+   - **Option Description**: Allows `void` in `forEach` callbacks, so the rule will not report the return value with a `void` operator.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+**Note**: The `allowVoid` option works only if the `checkForEach` option is set to `true`.

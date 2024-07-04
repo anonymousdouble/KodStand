@@ -1,0 +1,31 @@
+The ESLint rule "space-unary-ops" has three configurable options. Here are the details for each option:
+
+1. **Option Name**: words
+   - **Option Description**: Applies to unary word operators such as: `new`, `delete`, `typeof`, `void`, `yield`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+2. **Option Name**: nonwords
+   - **Option Description**: Applies to unary operators such as: `-`, `+`, `--`, `++`, `!`, `!!`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+3. **Option Name**: overrides
+   - **Option Description**: Specifies overwriting usage of spacing for each operator, word or non-word. This is empty by default, but can be used to enforce or disallow spacing around operators.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+4. **Option Name**: overrides.new
+   - **Option Description**: Specifies whether to enforce or disallow spacing around the `new` operator.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: overrides.++
+   - **Option Description**: Specifies whether to enforce or disallow spacing around the `++` operator.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

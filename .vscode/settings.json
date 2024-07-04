@@ -1,3 +1,12 @@
 {
-    "java.compile.nullAnalysis.mode": "disabled"
+    "java.compile.nullAnalysis.mode": "disabled",
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "C:\\Users\\shuli\\workspace\\KodStand"
+    },
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "C:\\Users\\shuli\\workspace\\KodStand"
+    },
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "C:\\Users\\shuli\\workspace\\KodStand"
+    }
 }

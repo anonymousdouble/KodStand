@@ -1,0 +1,51 @@
+The ESLint rule "keyword-spacing" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: before
+   - **Option Description**: Requires or disallows spaces before keywords.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: after
+   - **Option Description**: Requires or disallows spaces after keywords.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: overrides
+   - **Option Description**: Allows overriding spacing style for specified keywords.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+4. **Option Name**: overrides.if.after
+   - **Option Description**: Specifies the spacing style after the "if" keyword.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: overrides.for.after
+   - **Option Description**: Specifies the spacing style after the "for" keyword.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: overrides.while.after
+   - **Option Description**: Specifies the spacing style after the "while" keyword.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+7. **Option Name**: overrides.static.after
+   - **Option Description**: Specifies the spacing style after the "static" keyword.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+8. **Option Name**: overrides.as.after
+   - **Option Description**: Specifies the spacing style after the "as" keyword.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+These options allow you to configure the spacing around keywords in your code, ensuring consistency according to your style guide.

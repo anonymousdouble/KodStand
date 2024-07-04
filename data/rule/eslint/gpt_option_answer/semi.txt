@@ -1,0 +1,39 @@
+The provided ESLint rule HTML file describes the "semi" rule, which has several configurable options. Here are the extracted details of all configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows semicolons at the end of statements.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Configurable options when the string option is set to "always".
+   - **Data Type**: object
+   - **Data Range**: {"omitLastInOneLineBlock": boolean, "omitLastInOneLineClassBody": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.omitLastInOneLineBlock
+   - **Option Description**: Disallows the last semicolon in a block in which its braces (and therefore the content of the block) are in the same line.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.omitLastInOneLineClassBody
+   - **Option Description**: Disallows the last semicolon in a class body in which its braces (and therefore the content of the class body) are in the same line.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_3
+   - **Option Description**: Configurable options when the string option is set to "never".
+   - **Data Type**: object
+   - **Data Range**: {"beforeStatementContinuationChars": string}
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_3.beforeStatementContinuationChars
+   - **Option Description**: Controls semicolon usage at the end of statements if the next line starts with certain characters.
+   - **Data Type**: string
+   - **Data Range**: {"any", "always", "never"}
+   - **Default Value**: "any"
+
+In summary, the "semi" rule has a string option and two object options with nested boolean and string sub-options.

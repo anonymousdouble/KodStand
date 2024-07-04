@@ -1,0 +1,13 @@
+The ESLint rule "jsx-quotes" has two string options. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces the use of double quotes for all JSX attribute values that don’t contain a double quote.
+   - **Data Type**: string
+   - **Data Range**: {"prefer-double", "prefer-single"}
+   - **Default Value**: "prefer-double"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Enforces the use of single quotes for all JSX attribute values that don’t contain a single quote.
+   - **Data Type**: string
+   - **Data Range**: {"prefer-double", "prefer-single"}
+   - **Default Value**: no default

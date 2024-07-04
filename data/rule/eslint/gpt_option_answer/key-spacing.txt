@@ -1,0 +1,99 @@
+The ESLint rule "key-spacing" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: beforeColon
+   - **Option Description**: Controls spacing before the colon in object literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: afterColon
+   - **Option Description**: Controls spacing after the colon in object literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: mode
+   - **Option Description**: Defines the mode for spacing around colons in object literals.
+   - **Data Type**: string
+   - **Data Range**: {"strict", "minimum"}
+   - **Default Value**: "strict"
+
+4. **Option Name**: align
+   - **Option Description**: Enforces horizontal alignment of values or colons in object literals.
+   - **Data Type**: string
+   - **Data Range**: {"value", "colon"}
+   - **Default Value**: no default
+
+5. **Option Name**: align
+   - **Option Description**: Allows for fine-grained spacing when values are being aligned in object literals.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+6. **Option Name**: align.beforeColon
+   - **Option Description**: Controls spacing before the colon when aligning.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+7. **Option Name**: align.afterColon
+   - **Option Description**: Controls spacing after the colon when aligning.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+8. **Option Name**: align.on
+   - **Option Description**: Specifies whether to align on the colon or the value.
+   - **Data Type**: string
+   - **Data Range**: {"colon", "value"}
+   - **Default Value**: "colon"
+
+9. **Option Name**: align.mode
+   - **Option Description**: Defines the mode for spacing around colons when aligning.
+   - **Data Type**: string
+   - **Data Range**: {"strict", "minimum"}
+   - **Default Value**: "strict"
+
+10. **Option Name**: singleLine
+    - **Option Description**: Specifies a spacing style for single-line object literals.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+11. **Option Name**: singleLine.beforeColon
+    - **Option Description**: Controls spacing before the colon in single-line object literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+12. **Option Name**: singleLine.afterColon
+    - **Option Description**: Controls spacing after the colon in single-line object literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: true
+
+13. **Option Name**: multiLine
+    - **Option Description**: Specifies a spacing style for multi-line object literals.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+14. **Option Name**: multiLine.beforeColon
+    - **Option Description**: Controls spacing before the colon in multi-line object literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: true
+
+15. **Option Name**: multiLine.afterColon
+    - **Option Description**: Controls spacing after the colon in multi-line object literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: true
+
+16. **Option Name**: multiLine.align
+    - **Option Description**: Specifies whether to align colons or values in multi-line object literals.
+    - **Data Type**: string
+    - **Data Range**: {"colon", "value"}
+    - **Default Value**: "colon"
+
+These options provide a comprehensive way to configure the spacing around colons in object literals, allowing for both simple and complex configurations.

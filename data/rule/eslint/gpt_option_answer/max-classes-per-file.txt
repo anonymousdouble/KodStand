@@ -1,0 +1,25 @@
+The ESLint rule "max-classes-per-file" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the maximum number of classes allowed per file.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 1
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: An object containing additional configuration options.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.ignoreExpressions
+   - **Option Description**: A boolean option to ignore class expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: anonymous_option_2.max
+   - **Option Description**: A numeric option to specify the maximum number of classes.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 1

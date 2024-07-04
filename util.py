@@ -2,7 +2,7 @@
 import json,os,csv,tokenize,token,pickle
 root="/Users/zhangzejunzhangzejun/PycharmProjects/CodeStandard/"
 
-data_root=root+"data/"
+data_root="data/origin/"
 
 import shutil
 copy_file_suffix="_copy_zejun"

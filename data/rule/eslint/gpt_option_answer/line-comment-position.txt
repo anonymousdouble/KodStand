@@ -1,0 +1,43 @@
+The provided ESLint rule "line-comment-position" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: position
+   - **Option Description**: Specifies the position of line comments.
+   - **Data Type**: string
+   - **Data Range**: {"above", "beside"}
+   - **Default Value**: "above"
+
+2. **Option Name**: ignorePattern
+   - **Option Description**: A regular expression to specify which comments to ignore.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+3. **Option Name**: applyDefaultIgnorePatterns
+   - **Option Description**: Determines whether to apply default ignore patterns.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+### Nested Options for "position"
+
+1. **Option Name**: position.above
+   - **Option Description**: Enforces line comments only above code, in its own line.
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: no default
+
+2. **Option Name**: position.beside
+   - **Option Description**: Enforces line comments only at the end of code lines.
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: no default
+
+### Deprecated Option
+
+1. **Option Name**: applyDefaultPatterns
+   - **Option Description**: Deprecated. Use applyDefaultIgnorePatterns instead.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+These options allow you to configure the rule to enforce the position of line comments, specify patterns to ignore, and decide whether to apply default ignore patterns.

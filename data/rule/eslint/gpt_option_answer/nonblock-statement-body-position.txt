@@ -1,0 +1,27 @@
+The ESLint rule "nonblock-statement-body-position" has both string and object options. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the position of single-line statements.
+   - **Data Type**: string
+   - **Data Range**: {"beside", "below", "any"}
+   - **Default Value**: "beside"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Overrides the default position for specific statements.
+   - **Data Type**: object
+   - **Data Range**: {"overrides": object}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.overrides
+   - **Option Description**: Specifies the position for particular statements that override the default.
+   - **Data Type**: object
+   - **Data Range**: {"statement_type": string}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.overrides.statement_type
+   - **Option Description**: Specifies the position for a particular statement type.
+   - **Data Type**: string
+   - **Data Range**: {"beside", "below", "any"}
+   - **Default Value**: no default
+
+These options allow users to configure the rule to enforce the position of single-line statements and provide specific overrides for particular statement types.

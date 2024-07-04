@@ -1,0 +1,69 @@
+The ESLint rule "spaced-comment" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether comments should always have a space after the `//` or `/*` or never have a space.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: An object that can contain keys "exceptions" and "markers" to specify exceptions and markers for the rule.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.exceptions
+   - **Option Description**: An array of string patterns considered exceptions to the rule.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.markers
+   - **Option Description**: An array of string patterns considered markers for docblock-style comments.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.line
+   - **Option Description**: An object to define separate exceptions and markers for line comments.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_2.line.exceptions
+   - **Option Description**: An array of string patterns considered exceptions for line comments.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_2.line.markers
+   - **Option Description**: An array of string patterns considered markers for line comments.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_2.block
+   - **Option Description**: An object to define separate exceptions and markers for block comments.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+9. **Option Name**: anonymous_option_2.block.exceptions
+   - **Option Description**: An array of string patterns considered exceptions for block comments.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+10. **Option Name**: anonymous_option_2.block.markers
+    - **Option Description**: An array of string patterns considered markers for block comments.
+    - **Data Type**: array of strings
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+11. **Option Name**: anonymous_option_2.block.balanced
+    - **Option Description**: A boolean that specifies if inline block comments should have balanced spacing.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+These options allow for detailed customization of how comments should be spaced in the code, including exceptions and markers for specific comment styles.

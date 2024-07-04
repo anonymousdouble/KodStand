@@ -1,0 +1,19 @@
+The ESLint rule "semi-spacing" has one main option, which is an object with two keys: "before" and "after". Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces or disallows spacing before and after semicolons.
+   - **Data Type**: object
+   - **Data Range**: {"before": boolean, "after": boolean}
+   - **Default Value**: {"before": false, "after": true}
+
+2. **Option Name**: anonymous_option_1.before
+   - **Option Description**: Enforces or disallows spacing before semicolons.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: anonymous_option_1.after
+   - **Option Description**: Enforces or disallows spacing after semicolons.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

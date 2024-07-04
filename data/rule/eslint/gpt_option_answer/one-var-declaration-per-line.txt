@@ -1,0 +1,9 @@
+The provided ESLint rule "one-var-declaration-per-line" has configurable options. Here are the details of the options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces a newline around variable initializations or declarations.
+   - **Data Type**: string
+   - **Data Range**: {"initializations", "always"}
+   - **Default Value**: "initializations"
+
+The rule has a single string option with two possible values: "initializations" (default) and "always". The "initializations" option enforces a newline around variable initializations, while the "always" option enforces a newline around variable declarations.

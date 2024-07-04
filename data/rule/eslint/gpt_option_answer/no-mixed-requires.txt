@@ -1,0 +1,13 @@
+The ESLint rule "no-mixed-requires" has two configurable options: "grouping" and "allowCall". Here are the details for each option:
+
+1. **Option Name**: grouping
+   - **Option Description**: Ensures that all require declarations are of the same type.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: allowCall
+   - **Option Description**: Allows calling any function within require declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

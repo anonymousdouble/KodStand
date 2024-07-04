@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-negated-in-lhs`. Based on the content, this rule does not have any configurable options. The rule is straightforward and only disallows negating the left operand in `in` expressions.
+
+Here is the analysis:
+
+```
+no option
+```

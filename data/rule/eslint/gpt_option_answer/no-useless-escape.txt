@@ -1,0 +1,5 @@
+The provided ESLint rule "no-useless-escape" does not have any configurable options. Therefore, the result is:
+
+```
+no option
+```

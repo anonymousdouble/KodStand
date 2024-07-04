@@ -1,0 +1,7 @@
+The provided ESLint rule "no-new-native-nonconstructor" does not specify any configurable options. The rule description and examples focus on preventing the use of the `new` operator with certain global functions like `Symbol` and `BigInt`, but there are no parameters or options that can be configured for this rule.
+
+Therefore, the result is:
+
+```
+no option
+```

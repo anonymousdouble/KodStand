@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the rule "prefer-rest-params" does not mention any configurable options. The rule details and examples provided focus solely on the usage and enforcement of rest parameters instead of the `arguments` object, without specifying any configurable parameters.
+
+Therefore, the result is:
+
+```
+no option
+```

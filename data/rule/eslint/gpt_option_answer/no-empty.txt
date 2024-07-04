@@ -1,0 +1,9 @@
+The provided ESLint rule HTML file describes the "no-empty" rule. Based on the content, the rule has one configurable option. Here are the details:
+
+1. **Option Name**: allowEmptyCatch
+   - **Option Description**: Allows empty `catch` clauses (that is, which do not contain a comment).
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+There are no other options mentioned in the document.

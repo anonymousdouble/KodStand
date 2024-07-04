@@ -1,0 +1,67 @@
+The ESLint rule "no-empty-function" has one main option, which is an object with a property "allow". This property is an array of strings that specify which types of functions are allowed to be empty. Here are the details of the configurable options:
+
+1. **Option Name**: allow
+   - **Option Description**: A list of kinds of functions to allow being empty.
+   - **Data Type**: array of strings
+   - **Data Range**: {"functions", "arrowFunctions", "generatorFunctions", "methods", "generatorMethods", "getters", "setters", "constructors", "asyncFunctions", "asyncMethods"}
+   - **Default Value**: []
+
+2. **Option Name**: allow.functions
+   - **Option Description**: Normal functions.
+   - **Data Type**: string
+   - **Data Range**: {"functions"}
+   - **Default Value**: no default
+
+3. **Option Name**: allow.arrowFunctions
+   - **Option Description**: Arrow functions.
+   - **Data Type**: string
+   - **Data Range**: {"arrowFunctions"}
+   - **Default Value**: no default
+
+4. **Option Name**: allow.generatorFunctions
+   - **Option Description**: Generator functions.
+   - **Data Type**: string
+   - **Data Range**: {"generatorFunctions"}
+   - **Default Value**: no default
+
+5. **Option Name**: allow.methods
+   - **Option Description**: Class methods and method shorthands of object literals.
+   - **Data Type**: string
+   - **Data Range**: {"methods"}
+   - **Default Value**: no default
+
+6. **Option Name**: allow.generatorMethods
+   - **Option Description**: Class methods and method shorthands of object literals with generator.
+   - **Data Type**: string
+   - **Data Range**: {"generatorMethods"}
+   - **Default Value**: no default
+
+7. **Option Name**: allow.getters
+   - **Option Description**: Getters.
+   - **Data Type**: string
+   - **Data Range**: {"getters"}
+   - **Default Value**: no default
+
+8. **Option Name**: allow.setters
+   - **Option Description**: Setters.
+   - **Data Type**: string
+   - **Data Range**: {"setters"}
+   - **Default Value**: no default
+
+9. **Option Name**: allow.constructors
+   - **Option Description**: Class constructors.
+   - **Data Type**: string
+   - **Data Range**: {"constructors"}
+   - **Default Value**: no default
+
+10. **Option Name**: allow.asyncFunctions
+    - **Option Description**: Async functions.
+    - **Data Type**: string
+    - **Data Range**: {"asyncFunctions"}
+    - **Default Value**: no default
+
+11. **Option Name**: allow.asyncMethods
+    - **Option Description**: Async class methods and method shorthands of object literals.
+    - **Data Type**: string
+    - **Data Range**: {"asyncMethods"}
+    - **Default Value**: no default

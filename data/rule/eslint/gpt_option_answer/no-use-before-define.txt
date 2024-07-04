@@ -1,0 +1,27 @@
+The ESLint rule "no-use-before-define" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: functions
+   - **Option Description**: The flag which shows whether or not this rule checks function declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: classes
+   - **Option Description**: The flag which shows whether or not this rule checks class declarations of upper scopes.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: variables
+   - **Option Description**: This flag determines whether or not the rule checks variable declarations in upper scopes.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: allowNamedExports
+   - **Option Description**: If this flag is set to true, the rule always allows references in `export {};` declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+These options allow you to customize the behavior of the "no-use-before-define" rule to suit your coding standards and preferences.

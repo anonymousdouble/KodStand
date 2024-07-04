@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-delete-var`. Based on the content, this rule does not have any configurable options. The rule simply disallows the use of the `delete` operator on variables, and there are no parameters or settings that can be adjusted.
+
+Therefore, the result is:
+
+```
+no option
+```

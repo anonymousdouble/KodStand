@@ -1,0 +1,31 @@
+The ESLint rule "sort-imports" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: ignoreCase
+   - **Option Description**: Ignores the case-sensitivity of the imports' local names.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: ignoreDeclarationSort
+   - **Option Description**: Ignores the sorting of import declaration statements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: ignoreMemberSort
+   - **Option Description**: Ignores the member sorting within a multiple member import declaration.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: memberSyntaxSortOrder
+   - **Option Description**: Specifies the order of different import styles.
+   - **Data Type**: array
+   - **Data Range**: ["none", "all", "multiple", "single"]
+   - **Default Value**: ["none", "all", "multiple", "single"]
+
+5. **Option Name**: allowSeparatedGroups
+   - **Option Description**: Checks the sorting of import declaration statements only for those that appear on consecutive lines.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

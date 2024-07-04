@@ -1,0 +1,39 @@
+The ESLint rule "func-style" has two main options: a string option and an object option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether to use function expressions or function declarations.
+   - **Data Type**: string
+   - **Data Range**: {"expression", "declaration"}
+   - **Default Value**: "expression"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows the use of arrow functions when the string option is set to "declaration".
+   - **Data Type**: object
+   - **Data Range**: {"allowArrowFunctions": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.allowArrowFunctions
+   - **Option Description**: Allows the use of arrow functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Here is the structured information:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether to use function expressions or function declarations.
+   - **Data Type**: string
+   - **Data Range**: {"expression", "declaration"}
+   - **Default Value**: "expression"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows the use of arrow functions when the string option is set to "declaration".
+   - **Data Type**: object
+   - **Data Range**: {"allowArrowFunctions": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.allowArrowFunctions
+   - **Option Description**: Allows the use of arrow functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

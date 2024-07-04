@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-new" rule. After analyzing the content, it is clear that this rule does not have any configurable options. The rule's purpose is to disallow the use of the `new` operator outside of assignments or comparisons, and it does not mention any parameters or options that can be configured.
+
+Therefore, the result is:
+
+```
+no option
+```

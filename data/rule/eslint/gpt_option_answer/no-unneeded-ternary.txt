@@ -1,0 +1,7 @@
+The ESLint rule "no-unneeded-ternary" has one configurable option, which is an object option named "defaultAssignment". Here are the details of the option:
+
+1. **Option Name**: defaultAssignment
+   - **Option Description**: Allows or disallows the conditional expression as a default assignment pattern.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

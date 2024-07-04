@@ -1,0 +1,15 @@
+The provided ESLint rule HTML file describes the "no-cond-assign" rule, which disallows assignment operators in conditional expressions. The rule has configurable options, which are detailed below:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Allows assignments in test conditions only if they are enclosed in parentheses.
+   - **Data Type**: string
+   - **Data Range**: {"except-parens", "always"}
+   - **Default Value**: "except-parens"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Disallows all assignments in test conditions.
+   - **Data Type**: string
+   - **Data Range**: {"except-parens", "always"}
+   - **Default Value**: "except-parens"
+
+The rule has two string options, "except-parens" and "always", with "except-parens" being the default value. The "except-parens" option allows assignments in test conditions only if they are enclosed in parentheses, while the "always" option disallows all assignments in test conditions.

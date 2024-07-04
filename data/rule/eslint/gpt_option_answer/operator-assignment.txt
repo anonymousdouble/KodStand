@@ -1,0 +1,9 @@
+The ESLint rule "operator-assignment" has a single string option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows assignment operator shorthand where possible.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+There are no nested or additional options for this rule.

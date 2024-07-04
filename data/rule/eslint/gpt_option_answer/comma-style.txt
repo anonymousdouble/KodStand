@@ -1,0 +1,81 @@
+The provided ESLint rule HTML file describes the "comma-style" rule. Here are the extracted details of all configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires a comma after and on the same line as an array element, object property, or variable declaration, or requires a comma before and on the same line as an array element, object property, or variable declaration.
+   - **Data Type**: string
+   - **Data Range**: {"last", "first"}
+   - **Default Value**: "last"
+
+2. **Option Name**: exceptions
+   - **Option Description**: Specifies exceptions to the comma style rule for various node types in the abstract syntax tree (AST) of JavaScript code.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: exceptions.ArrayExpression
+   - **Option Description**: Ignores comma style in array literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: exceptions.ArrayPattern
+   - **Option Description**: Ignores comma style in array patterns of destructuring.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: exceptions.ArrowFunctionExpression
+   - **Option Description**: Ignores comma style in the parameters of arrow function expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: exceptions.CallExpression
+   - **Option Description**: Ignores comma style in the arguments of function calls.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+7. **Option Name**: exceptions.FunctionDeclaration
+   - **Option Description**: Ignores comma style in the parameters of function declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+8. **Option Name**: exceptions.FunctionExpression
+   - **Option Description**: Ignores comma style in the parameters of function expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+9. **Option Name**: exceptions.ImportDeclaration
+   - **Option Description**: Ignores comma style in the specifiers of import declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+10. **Option Name**: exceptions.ObjectExpression
+    - **Option Description**: Ignores comma style in object literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+11. **Option Name**: exceptions.ObjectPattern
+    - **Option Description**: Ignores comma style in object patterns of destructuring.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+12. **Option Name**: exceptions.VariableDeclaration
+    - **Option Description**: Ignores comma style in variable declarations.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+13. **Option Name**: exceptions.NewExpression
+    - **Option Description**: Ignores comma style in the parameters of constructor expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+These options allow for detailed customization of the "comma-style" rule, including specific exceptions for different types of JavaScript code structures.

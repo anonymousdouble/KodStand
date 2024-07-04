@@ -1,0 +1,19 @@
+The ESLint rule "logical-assignment-operators" has both string and object options. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows logical assignment operator shorthand.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Additional configuration for the "always" string option.
+   - **Data Type**: object
+   - **Data Range**: {"enforceForIfStatements": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.enforceForIfStatements
+   - **Option Description**: Checks for equivalent if statements that can be expressed with the logical assignment operator.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

@@ -1,0 +1,25 @@
+The ESLint rule "no-unused-expressions" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: allowShortCircuit
+   - **Option Description**: Allows the use of short circuit evaluations in expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: allowTernary
+   - **Option Description**: Enables the use of ternary operators in expressions similarly to short circuit evaluations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: allowTaggedTemplates
+   - **Option Description**: Enables the use of tagged template literals in expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: enforceForJSX
+   - **Option Description**: Flags unused JSX element expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

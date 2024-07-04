@@ -1,0 +1,25 @@
+The ESLint rule "object-curly-spacing" has both a string option and an object option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether to disallow or require spacing inside of braces.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies additional configurations for spacing inside of braces when the first option is set to "never" or "always".
+   - **Data Type**: object
+   - **Data Range**: {"arraysInObjects": boolean, "objectsInObjects": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.arraysInObjects
+   - **Option Description**: Requires or disallows spacing inside of braces of objects beginning and/or ending with an array element.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.objectsInObjects
+   - **Option Description**: Requires or disallows spacing inside of braces of objects beginning and/or ending with an object element.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

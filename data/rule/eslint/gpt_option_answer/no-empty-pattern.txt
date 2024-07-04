@@ -1,0 +1,19 @@
+The provided ESLint rule HTML file describes the "no-empty-pattern" rule. Based on the content, the rule has one configurable option. Here are the details:
+
+1. **Option Name**: allowObjectPatternsAsParameters
+   - **Option Description**: Allows empty object patterns as function parameters.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+The analysis is as follows:
+
+The rule "no-empty-pattern" has an object option for exceptions, specifically the "allowObjectPatternsAsParameters" option. This option is a boolean that, when set to true, allows empty object patterns as function parameters. The default value for this option is false. 
+
+Therefore, the result is:
+
+1. **Option Name**: allowObjectPatternsAsParameters
+   - **Option Description**: Allows empty object patterns as function parameters.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

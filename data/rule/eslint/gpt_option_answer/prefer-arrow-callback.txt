@@ -1,0 +1,13 @@
+The ESLint rule "prefer-arrow-callback" has two configurable options. Here are the details:
+
+1. **Option Name**: allowNamedFunctions
+   - **Option Description**: Allows the use of named functions as callbacks or function arguments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: allowUnboundThis
+   - **Option Description**: Allows function expressions containing `this` to be used as callbacks, as long as the function in question has not been explicitly bound.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

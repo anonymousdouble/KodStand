@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-ternary" rule. Based on the content, this rule does not have any configurable options. The rule simply disallows the use of ternary operators in the code.
+
+Here is the analysis:
+
+```
+no option
+```

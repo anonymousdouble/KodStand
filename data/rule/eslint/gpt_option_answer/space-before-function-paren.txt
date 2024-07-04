@@ -1,0 +1,37 @@
+The ESLint rule "space-before-function-paren" has both string and object options. Here are the details of the configurable options:
+
+### String Options:
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows a space before the opening parenthesis of function arguments.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+### Object Options:
+1. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures spacing before function parentheses for different types of functions.
+   - **Data Type**: object
+   - **Data Range**: {"anonymous": string, "named": string, "asyncArrow": string}
+   - **Default Value**: no default
+
+#### Sub-options of anonymous_option_2:
+1. **Option Name**: anonymous_option_2.anonymous
+   - **Option Description**: Configures spacing before parentheses for anonymous function expressions.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "ignore"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2.named
+   - **Option Description**: Configures spacing before parentheses for named function expressions.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "ignore"}
+   - **Default Value**: "always"
+
+3. **Option Name**: anonymous_option_2.asyncArrow
+   - **Option Description**: Configures spacing before parentheses for async arrow function expressions.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "ignore"}
+   - **Default Value**: "always"
+
+### Summary:
+The rule "space-before-function-paren" has two main options: a string option and an object option. The string option can be either "always" or "never", with a default value of "always". The object option allows for more granular control with sub-options for anonymous, named, and async arrow functions, each of which can be set to "always", "never", or "ignore".

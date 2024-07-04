@@ -1,0 +1,27 @@
+The ESLint rule "dot-notation" has two configurable options: `allowKeywords` and `allowPattern`. Here are the details for each option:
+
+1. **Option Name**: allowKeywords
+   - **Option Description**: Determines whether to allow dot notation for reserved word properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: allowPattern
+   - **Option Description**: Allows bracket notation for property names that match a specified regular expression pattern.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+Here is the structured information:
+
+1. **Option Name**: allowKeywords
+   - **Option Description**: Determines whether to allow dot notation for reserved word properties.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: allowPattern
+   - **Option Description**: Allows bracket notation for property names that match a specified regular expression pattern.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default

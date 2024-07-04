@@ -1,0 +1,33 @@
+The ESLint rule "camelcase" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: properties
+   - **Option Description**: Enforces camelcase style for property names.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: ignoreDestructuring
+   - **Option Description**: Determines whether to enforce camelcase style for destructured identifiers.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: ignoreImports
+   - **Option Description**: Determines whether to enforce camelcase style for ES2015 imports.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: ignoreGlobals
+   - **Option Description**: Determines whether to enforce camelcase style for global variables.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: allow
+   - **Option Description**: List of properties to accept. Accepts regex.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+These options allow users to customize the enforcement of camelcase naming conventions in their code.

@@ -1,0 +1,19 @@
+The ESLint rule "no-useless-rename" has three configurable options. Here are the details for each option:
+
+1. **Option Name**: ignoreImport
+   - **Option Description**: When set to true, this rule does not check imports.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: ignoreExport
+   - **Option Description**: When set to true, this rule does not check exports.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: ignoreDestructuring
+   - **Option Description**: When set to true, this rule does not check destructuring assignments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

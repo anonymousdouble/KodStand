@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-void" rule. Based on the content, the rule has one configurable option. Here are the details of the option:
+
+1. **Option Name**: allowAsStatement
+   - **Option Description**: Allows the void operator to be used as a statement.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

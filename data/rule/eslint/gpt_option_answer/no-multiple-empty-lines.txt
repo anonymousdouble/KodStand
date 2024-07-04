@@ -1,0 +1,19 @@
+The ESLint rule "no-multiple-empty-lines" has three configurable options. Here are the details for each option:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum number of consecutive empty lines.
+   - **Data Type**: integer
+   - **Data Range**: open-ended
+   - **Default Value**: 2
+
+2. **Option Name**: maxEOF
+   - **Option Description**: Enforces a maximum number of consecutive empty lines at the end of files.
+   - **Data Type**: integer
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+3. **Option Name**: maxBOF
+   - **Option Description**: Enforces a maximum number of consecutive empty lines at the beginning of files.
+   - **Data Type**: integer
+   - **Data Range**: open-ended
+   - **Default Value**: no default

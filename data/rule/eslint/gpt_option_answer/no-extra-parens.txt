@@ -1,0 +1,127 @@
+The ESLint rule "no-extra-parens" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Disallows unnecessary parentheses around any expression.
+   - **Data Type**: string
+   - **Data Range**: {"all", "functions"}
+   - **Default Value**: "all"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows extra parentheses around assignments in conditional test expressions.
+   - **Data Type**: object
+   - **Data Range**: {"conditionalAssign": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.conditionalAssign
+   - **Option Description**: Allows extra parentheses around assignments in conditional test expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: anonymous_option_3
+   - **Option Description**: Allows extra parentheses around assignments in return statements.
+   - **Data Type**: object
+   - **Data Range**: {"returnAssign": boolean}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_3.returnAssign
+   - **Option Description**: Allows extra parentheses around assignments in return statements.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+6. **Option Name**: anonymous_option_4
+   - **Option Description**: Allows extra parentheses in nested binary expressions.
+   - **Data Type**: object
+   - **Data Range**: {"nestedBinaryExpressions": boolean}
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_4.nestedBinaryExpressions
+   - **Option Description**: Allows extra parentheses in nested binary expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+8. **Option Name**: anonymous_option_5
+   - **Option Description**: Allows extra parentheses around binary expressions that are operands of ternary `?:`.
+   - **Data Type**: object
+   - **Data Range**: {"ternaryOperandBinaryExpressions": boolean}
+   - **Default Value**: no default
+
+9. **Option Name**: anonymous_option_5.ternaryOperandBinaryExpressions
+   - **Option Description**: Allows extra parentheses around binary expressions that are operands of ternary `?:`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+10. **Option Name**: anonymous_option_6
+    - **Option Description**: Allows extra parentheses around JSX components.
+    - **Data Type**: object
+    - **Data Range**: {"ignoreJSX": string}
+    - **Default Value**: "none"
+
+11. **Option Name**: anonymous_option_6.ignoreJSX
+    - **Option Description**: Allows extra parentheses around JSX components.
+    - **Data Type**: string
+    - **Data Range**: {"none", "all", "multi-line", "single-line"}
+    - **Default Value**: "none"
+
+12. **Option Name**: anonymous_option_7
+    - **Option Description**: Allows extra parentheses around ternary expressions which are the body of an arrow function.
+    - **Data Type**: object
+    - **Data Range**: {"enforceForArrowConditionals": boolean}
+    - **Default Value**: no default
+
+13. **Option Name**: anonymous_option_7.enforceForArrowConditionals
+    - **Option Description**: Allows extra parentheses around ternary expressions which are the body of an arrow function.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+14. **Option Name**: anonymous_option_8
+    - **Option Description**: Allows extra parentheses around sequence expressions.
+    - **Data Type**: object
+    - **Data Range**: {"enforceForSequenceExpressions": boolean}
+    - **Default Value**: no default
+
+15. **Option Name**: anonymous_option_8.enforceForSequenceExpressions
+    - **Option Description**: Allows extra parentheses around sequence expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+16. **Option Name**: anonymous_option_9
+    - **Option Description**: Allows extra parentheses around `new` expressions in member expressions.
+    - **Data Type**: object
+    - **Data Range**: {"enforceForNewInMemberExpressions": boolean}
+    - **Default Value**: no default
+
+17. **Option Name**: anonymous_option_9.enforceForNewInMemberExpressions
+    - **Option Description**: Allows extra parentheses around `new` expressions in member expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+18. **Option Name**: anonymous_option_10
+    - **Option Description**: Allows extra parentheses around immediate `.call` and `.apply` method calls on function expressions and around function expressions in the same context.
+    - **Data Type**: object
+    - **Data Range**: {"enforceForFunctionPrototypeMethods": boolean}
+    - **Default Value**: no default
+
+19. **Option Name**: anonymous_option_10.enforceForFunctionPrototypeMethods
+    - **Option Description**: Allows extra parentheses around immediate `.call` and `.apply` method calls on function expressions and around function expressions in the same context.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+20. **Option Name**: anonymous_option_11
+    - **Option Description**: Allows extra parentheses preceded by a comment that matches a regular expression.
+    - **Data Type**: object
+    - **Data Range**: {"allowParensAfterCommentPattern": string}
+    - **Default Value**: no default
+
+21. **Option Name**: anonymous_option_11.allowParensAfterCommentPattern
+    - **Option Description**: Allows extra parentheses preceded by a comment that matches a regular expression.
+    - **Data Type**: string
+    - **Data Range**: "any-string-pattern"
+    - **Default Value**: no default

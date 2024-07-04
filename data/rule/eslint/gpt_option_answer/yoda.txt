@@ -1,0 +1,51 @@
+The ESLint rule "yoda" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Determines whether comparisons must be Yoda conditions or not.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Exception options for the "never" configuration.
+   - **Data Type**: object
+   - **Data Range**: {"exceptRange": boolean, "onlyEquality": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.exceptRange
+   - **Option Description**: Allows Yoda conditions in range comparisons which are wrapped directly in parentheses.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: anonymous_option_2.onlyEquality
+   - **Option Description**: Reports Yoda conditions only for the equality operators `==` and `===`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Here is the structured information for each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Determines whether comparisons must be Yoda conditions or not.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Exception options for the "never" configuration.
+   - **Data Type**: object
+   - **Data Range**: {"exceptRange": boolean, "onlyEquality": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.exceptRange
+   - **Option Description**: Allows Yoda conditions in range comparisons which are wrapped directly in parentheses.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: anonymous_option_2.onlyEquality
+   - **Option Description**: Reports Yoda conditions only for the equality operators `==` and `===`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

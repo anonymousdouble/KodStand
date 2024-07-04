@@ -1,0 +1,27 @@
+The ESLint rule "max-statements" has two configurable options: "max" and "ignoreTopLevelFunctions". Here are the details for each option:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum number of statements allowed in function blocks.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 10
+
+2. **Option Name**: ignoreTopLevelFunctions
+   - **Option Description**: Ignores top-level functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+Here is the structured information:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum number of statements allowed in function blocks.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 10
+
+2. **Option Name**: ignoreTopLevelFunctions
+   - **Option Description**: Ignores top-level functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

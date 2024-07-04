@@ -1,0 +1,19 @@
+The ESLint rule "init-declarations" has two main options: a string option and an object option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces initialization at declaration or disallows initialization during declaration.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Controls the behavior of the rule with additional parameters.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.ignoreForLoopInit
+   - **Option Description**: Indicates if initialization at declaration is allowed in `for` loops when "never" is set.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

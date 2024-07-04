@@ -1,0 +1,13 @@
+The ESLint rule "switch-colon-spacing" has two configurable options. Here are the details:
+
+1. **Option Name**: after
+   - **Option Description**: Requires or disallows spaces after colons.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: before
+   - **Option Description**: Requires or disallows spaces before colons.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

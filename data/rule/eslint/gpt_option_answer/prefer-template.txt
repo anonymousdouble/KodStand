@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "prefer-template" rule. Based on the content, this rule does not have any configurable options. It simply enforces the use of template literals instead of string concatenation.
+
+Here is the analysis:
+
+```
+no option
+```

@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for "no-dupe-class-members" does not specify any configurable options. The rule is aimed at flagging the use of duplicate names in class members, but it does not provide any parameters or options that can be configured.
+
+Therefore, the result is:
+
+```
+no option
+```

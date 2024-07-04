@@ -1,0 +1,21 @@
+The provided ESLint rule HTML file describes the "brace-style" rule, which enforces consistent brace style for blocks. The rule has both string and object options. Here are the extracted details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces a specific brace style.
+   - **Data Type**: string
+   - **Data Range**: {"1tbs", "stroustrup", "allman"}
+   - **Default Value**: "1tbs"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows the opening and closing braces for a block to be on the same line.
+   - **Data Type**: object
+   - **Data Range**: {"allowSingleLine": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.allowSingleLine
+   - **Option Description**: Allows the opening and closing braces for a block to be on the same line.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+These options allow users to configure the "brace-style" rule to enforce different brace styles and specify whether single-line blocks are allowed.

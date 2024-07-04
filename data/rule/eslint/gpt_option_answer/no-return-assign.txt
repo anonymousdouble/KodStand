@@ -1,0 +1,15 @@
+The ESLint rule "no-return-assign" has configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Disallow assignments unless they are enclosed in parentheses.
+   - **Data Type**: string
+   - **Data Range**: {"except-parens", "always"}
+   - **Default Value**: "except-parens"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Disallow all assignments.
+   - **Data Type**: string
+   - **Data Range**: {"except-parens", "always"}
+   - **Default Value**: "except-parens"
+
+The rule has two string options, "except-parens" and "always", with "except-parens" being the default value.

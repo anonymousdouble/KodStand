@@ -1,0 +1,21 @@
+The provided ESLint rule HTML file describes the "computed-property-spacing" rule. Here are the extracted details of all configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Disallows or requires spaces inside computed property brackets.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Applies the rule to class members.
+   - **Data Type**: object
+   - **Data Range**: {"enforceForClassMembers": boolean}
+   - **Default Value**: {"enforceForClassMembers": true}
+
+3. **Option Name**: anonymous_option_2.enforceForClassMembers
+   - **Option Description**: Disallows or enforces spaces inside of computed keys of class methods, getters, and setters.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+These options allow configuring the rule to either disallow or require spaces inside computed property brackets and to apply the rule to class members.

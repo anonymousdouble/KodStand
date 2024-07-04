@@ -1,0 +1,151 @@
+The provided ESLint rule HTML file describes the "indent" rule, which has several configurable options. Below is the extracted information for each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the number of spaces or the use of tabs for indentation.
+   - **Data Type**: mixed (number or string)
+   - **Data Range**: {number, "tab"}
+   - **Default Value**: 4
+
+2. **Option Name**: ignoredNodes
+   - **Option Description**: Disables indentation checking for specified AST nodes.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+3. **Option Name**: SwitchCase
+   - **Option Description**: Enforces indentation level for `case` clauses in `switch` statements.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 0
+
+4. **Option Name**: VariableDeclarator
+   - **Option Description**: Enforces indentation level for variable declarators.
+   - **Data Type**: mixed (number or object)
+   - **Data Range**: open-ended
+   - **Default Value**: 1
+
+5. **Option Name**: VariableDeclarator.var
+   - **Option Description**: Enforces indentation level for `var` declarators.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+6. **Option Name**: VariableDeclarator.let
+   - **Option Description**: Enforces indentation level for `let` declarators.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+7. **Option Name**: VariableDeclarator.const
+   - **Option Description**: Enforces indentation level for `const` declarators.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+8. **Option Name**: outerIIFEBody
+   - **Option Description**: Enforces indentation level for file-level IIFEs.
+   - **Data Type**: mixed (number or string)
+   - **Data Range**: {number, "off"}
+   - **Default Value**: 1
+
+9. **Option Name**: MemberExpression
+   - **Option Description**: Enforces indentation level for multi-line property chains.
+   - **Data Type**: mixed (number or string)
+   - **Data Range**: {number, "off"}
+   - **Default Value**: 1
+
+10. **Option Name**: FunctionDeclaration
+    - **Option Description**: Defines rules for function declarations.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+11. **Option Name**: FunctionDeclaration.parameters
+    - **Option Description**: Enforces indentation level for parameters in a function declaration.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first", "off"}
+    - **Default Value**: 1
+
+12. **Option Name**: FunctionDeclaration.body
+    - **Option Description**: Enforces indentation level for the body of a function declaration.
+    - **Data Type**: number
+    - **Data Range**: open-ended
+    - **Default Value**: 1
+
+13. **Option Name**: FunctionExpression
+    - **Option Description**: Defines rules for function expressions.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+14. **Option Name**: FunctionExpression.parameters
+    - **Option Description**: Enforces indentation level for parameters in a function expression.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first", "off"}
+    - **Default Value**: 1
+
+15. **Option Name**: FunctionExpression.body
+    - **Option Description**: Enforces indentation level for the body of a function expression.
+    - **Data Type**: number
+    - **Data Range**: open-ended
+    - **Default Value**: 1
+
+16. **Option Name**: StaticBlock
+    - **Option Description**: Defines rules for class static blocks.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+17. **Option Name**: StaticBlock.body
+    - **Option Description**: Enforces indentation level for the body of a class static block.
+    - **Data Type**: number
+    - **Data Range**: open-ended
+    - **Default Value**: 1
+
+18. **Option Name**: CallExpression
+    - **Option Description**: Defines rules for function call expressions.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: no default
+
+19. **Option Name**: CallExpression.arguments
+    - **Option Description**: Enforces indentation level for arguments in a call expression.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first", "off"}
+    - **Default Value**: 1
+
+20. **Option Name**: ArrayExpression
+    - **Option Description**: Enforces indentation level for elements in arrays.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first", "off"}
+    - **Default Value**: 1
+
+21. **Option Name**: ObjectExpression
+    - **Option Description**: Enforces indentation level for properties in objects.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first", "off"}
+    - **Default Value**: 1
+
+22. **Option Name**: ImportDeclaration
+    - **Option Description**: Enforces indentation level for import statements.
+    - **Data Type**: mixed (number or string)
+    - **Data Range**: {number, "first", "off"}
+    - **Default Value**: 1
+
+23. **Option Name**: flatTernaryExpressions
+    - **Option Description**: Requires no indentation for ternary expressions nested in other ternary expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+24. **Option Name**: offsetTernaryExpressions
+    - **Option Description**: Requires indentation for values of ternary expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false
+
+25. **Option Name**: ignoreComments
+    - **Option Description**: Ignores alignment of comments with nodes on the previous or next line.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: false

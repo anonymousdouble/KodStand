@@ -1,0 +1,5 @@
+The provided ESLint rule "require-await" has no configurable options. Therefore, the result is:
+
+```
+no option
+```

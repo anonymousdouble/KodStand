@@ -1,0 +1,7 @@
+The ESLint rule "prefer-regex-literals" has one configurable option. Here are the details:
+
+1. **Option Name**: disallowRedundantWrapping
+   - **Option Description**: Checks for unnecessarily wrapped regex literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

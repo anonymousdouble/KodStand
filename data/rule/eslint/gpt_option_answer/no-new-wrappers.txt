@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the rule "no-new-wrappers" does not specify any configurable options. The rule description and examples focus on the behavior and purpose of the rule without mentioning any parameters or options that can be configured.
+
+Therefore, the result is:
+
+```
+no option
+```

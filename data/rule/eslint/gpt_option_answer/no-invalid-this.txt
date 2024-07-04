@@ -1,0 +1,7 @@
+The ESLint rule "no-invalid-this" has one configurable option. Here are the details:
+
+1. **Option Name**: capIsConstructor
+   - **Option Description**: Disables the assumption that a function whose name starts with an uppercase letter is a constructor.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

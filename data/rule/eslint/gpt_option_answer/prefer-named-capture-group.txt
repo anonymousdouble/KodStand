@@ -1,0 +1,7 @@
+The provided ESLint rule "prefer-named-capture-group" does not have any configurable options. The rule enforces using named capture groups in regular expressions to improve readability, but it does not provide any parameters or options for configuration.
+
+Therefore, the result is:
+
+```
+no option
+```

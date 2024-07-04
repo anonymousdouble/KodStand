@@ -1,0 +1,3448 @@
+{
+    "accessor-pairs": {
+        "setWithoutGet": {
+            "description": "Warns for setters without getters.",
+            "type": "boolean",
+            "default": true
+        },
+        "getWithoutSet": {
+            "description": "Warns for getters without setters.",
+            "type": "boolean",
+            "default": false
+        },
+        "enforceForClassMembers": {
+            "description": "Applies this rule to class getters/setters.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "array-bracket-newline": {
+        "always": {
+            "description": "Requires line breaks inside brackets.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Disallows line breaks inside brackets.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Requires consistent usage of line breaks for each pair of brackets. Reports an error if one bracket in the pair has a line break inside it and the other bracket does not.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "multiline": {
+            "description": "Requires line breaks if there are line breaks inside elements or between elements. If this is false, this condition is disabled.",
+            "type": "boolean",
+            "default": true
+        },
+        "minItems": {
+            "description": "Requires line breaks if the number of elements is at least the given integer. If this is 0, this condition will act the same as the option 'always'. If this is null (the default), this condition is disabled.",
+            "type": "int",
+            "default": null
+        }
+    },
+    "array-bracket-spacing": {
+        "never": {
+            "description": "Disallows spaces inside array brackets.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires one or more spaces or newlines inside array brackets.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "singleValue": {
+            "description": "Requires one or more spaces or newlines inside brackets of array literals that contain a single element (when using 'never') or disallows spaces inside brackets of array literals that contain a single element (when using 'always').",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "objectsInArrays": {
+            "description": "Requires one or more spaces or newlines between brackets of array literals and braces of their object literal elements `[ {` or `} ]` (when using 'never') or disallows spaces between brackets of array literals and braces of their object literal elements `[{` or `}]` (when using 'always').",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "arraysInArrays": {
+            "description": "Requires one or more spaces or newlines between brackets of array literals and brackets of their array literal elements `[ [` or `] ]` (when using 'never') or disallows spaces between brackets of array literals and brackets of their array literal elements `[[` or `]]` (when using 'always').",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "array-callback-return": {
+        "allowImplicit": {
+            "description": "When set to `true`, allows callbacks of methods that require a return value to implicitly return `undefined` with a `return` statement containing no expression.",
+            "type": "boolean",
+            "default": false
+        },
+        "checkForEach": {
+            "description": "When set to `true`, rule will also report `forEach` callbacks that return a value.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowVoid": {
+            "description": "When set to `true`, allows `void` in `forEach` callbacks, so rule will not report the return value with a `void` operator. Note: `{ \"allowVoid\": true }` works only if `checkForEach` option is set to `true`.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "array-element-newline": {
+        "always": {
+            "description": "Requires line breaks between array elements.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows line breaks between array elements.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Requires consistent usage of line breaks between array elements.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "multiline": {
+            "description": "Requires line breaks if there are line breaks inside elements. If this is false, this condition is disabled.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "minItems": {
+            "description": "Requires line breaks if the number of elements is at least the given integer. If this is 0, this condition will act the same as the option 'always'. If this is null (the default), this condition is disabled.",
+            "type": "number",
+            "default": "None"
+        },
+        "ArrayExpression": {
+            "description": "Configuration for array expressions (if unspecified, this rule will not apply to array expressions).",
+            "type": "object",
+            "default": "Unused"
+        },
+        "ArrayPattern": {
+            "description": "Configuration for array patterns of destructuring assignments (if unspecified, this rule will not apply to array patterns).",
+            "type": "object",
+            "default": "Unused"
+        }
+    },
+    "arrow-body-style": {
+        "always": {
+            "description": "Enforces braces around the function body.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "as-needed": {
+            "description": "Enforces no braces where they can be omitted.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Enforces no braces around the function body, constraining arrow functions to the role of returning an expression.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "requireReturnForObjectLiteral": {
+            "description": "Requires braces and an explicit return for object literals when the first option is 'as-needed'.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "arrow-parens": {
+        "always": {
+            "description": "Requires parens around arguments in all cases.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "as-needed": {
+            "description": "Enforces no parens where they can be omitted.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "requireForBlockBody": {
+            "description": "Modifies the as-needed rule to require parens if the function body is in an instructions block (surrounded by braces).",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "arrow-spacing": {
+        "before": {
+            "description": "Enforce consistent spacing before the arrow in arrow functions. Set to true for one or more spaces, false for no spaces.",
+            "type": "boolean",
+            "default": true
+        },
+        "after": {
+            "description": "Enforce consistent spacing after the arrow in arrow functions. Set to true for one or more spaces, false for no spaces.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "block-spacing": {
+        "always": {
+            "description": "Requires one or more spaces inside of blocks after opening block and before closing block.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows spaces inside of blocks after opening block and before closing block.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "brace-style": {
+        "1tbs": {
+            "description": "Enforces one true brace style.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "stroustrup": {
+            "description": "Enforces Stroustrup style.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "allman": {
+            "description": "Enforces Allman style.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "allowSingleLine": {
+            "description": "Allows the opening and closing braces for a block to be on the same line.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "callback-return": {
+        "callbackNames": {
+            "description": "An array of possible callback names, which may include object methods.",
+            "type": "array",
+            "default": [
+                "callback",
+                "cb",
+                "next"
+            ]
+        }
+    },
+    "camelcase": {
+        "properties": {
+            "description": "Enforces camelcase style for property names.",
+            "type": "string",
+            "default": "always"
+        },
+        "ignoreDestructuring": {
+            "description": "Enforces camelcase style for destructured identifiers.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreImports": {
+            "description": "Enforces camelcase style for ES2015 imports.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreGlobals": {
+            "description": "Enforces camelcase style for global variables.",
+            "type": "boolean",
+            "default": false
+        },
+        "allow": {
+            "description": "List of properties to accept. Accepts regex.",
+            "type": "string[]",
+            "default": "None"
+        }
+    },
+    "capitalized-comments": {
+        "always": {
+            "description": "Using the 'always' option means that this rule will report any comments which start with a lowercase letter.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Using the 'never' option means that this rule will report any comments which start with an uppercase letter.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "ignorePattern": {
+            "description": "A string representing a regular expression pattern of words that should be ignored by this rule. If the first word of a comment matches the pattern, this rule will not report that comment.",
+            "type": "string",
+            "default": "None"
+        },
+        "ignoreInlineComments": {
+            "description": "If this is true, the rule will not report on comments in the middle of code.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "ignoreConsecutiveComments": {
+            "description": "If this is true, the rule will not report on a comment which violates the rule, as long as the comment immediately follows another comment.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "class-methods-use-this": {
+        "exceptMethods": {
+            "description": "Allows specified method names to be ignored with this rule.",
+            "type": "array",
+            "default": "None"
+        },
+        "enforceForClassFields": {
+            "description": "Enforces that functions used as instance field initializers utilize `this`.",
+            "type": "boolean",
+            "default": "true"
+        }
+    },
+    "comma-dangle": {
+        "never": {
+            "description": "Disallows trailing commas.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires trailing commas.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "always-multiline": {
+            "description": "Requires trailing commas when the last element or property is in a different line than the closing `]` or `}` and disallows trailing commas when the last element or property is on the same line as the closing `]` or `}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "only-multiline": {
+            "description": "Allows (but does not require) trailing commas when the last element or property is in a different line than the closing `]` or `}` and disallows trailing commas when the last element or property is on the same line as the closing `]` or `}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "arrays": {
+            "description": "Configures trailing commas for array literals and array patterns of destructuring.",
+            "type": "string",
+            "default": "never"
+        },
+        "objects": {
+            "description": "Configures trailing commas for object literals and object patterns of destructuring.",
+            "type": "string",
+            "default": "never"
+        },
+        "imports": {
+            "description": "Configures trailing commas for import declarations of ES Modules.",
+            "type": "string",
+            "default": "never"
+        },
+        "exports": {
+            "description": "Configures trailing commas for export declarations of ES Modules.",
+            "type": "string",
+            "default": "never"
+        },
+        "functions": {
+            "description": "Configures trailing commas for function declarations and function calls. Should only be enabled when linting ECMAScript 2017 or higher.",
+            "type": "string",
+            "default": "never"
+        }
+    },
+    "comma-spacing": {
+        "before": {
+            "description": "Disallows or requires one or more spaces before commas.",
+            "type": "boolean",
+            "default": false
+        },
+        "after": {
+            "description": "Disallows or requires one or more spaces after commas.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "comma-style": {
+        "last": {
+            "description": "Requires a comma after and on the same line as an array element, object property, or variable declaration.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "first": {
+            "description": "Requires a comma before and on the same line as an array element, object property, or variable declaration.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "exceptions": {
+            "description": "An object to specify exceptions for certain node types in the abstract syntax tree (AST) of JavaScript code.",
+            "type": "object",
+            "default": "None"
+        },
+        "ArrayExpression": {
+            "description": "Ignores comma style in array literals.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "ArrayPattern": {
+            "description": "Ignores comma style in array patterns of destructuring.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "ArrowFunctionExpression": {
+            "description": "Ignores comma style in the parameters of arrow function expressions.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "CallExpression": {
+            "description": "Ignores comma style in the arguments of function calls.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "FunctionDeclaration": {
+            "description": "Ignores comma style in the parameters of function declarations.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "FunctionExpression": {
+            "description": "Ignores comma style in the parameters of function expressions.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "ImportDeclaration": {
+            "description": "Ignores comma style in the specifiers of import declarations.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "ObjectExpression": {
+            "description": "Ignores comma style in object literals.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "ObjectPattern": {
+            "description": "Ignores comma style in object patterns of destructuring.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "VariableDeclaration": {
+            "description": "Ignores comma style in variable declarations.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "NewExpression": {
+            "description": "Ignores comma style in the parameters of constructor expressions.",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "complexity": {
+        "max": {
+            "description": "Specifies the maximum cyclomatic complexity allowed in a program.",
+            "type": "int",
+            "default": 20
+        },
+        "maximum": {
+            "description": "Deprecated: Use 'max' instead. Specifies the maximum cyclomatic complexity allowed in a program.",
+            "type": "int",
+            "default": "Unused"
+        }
+    },
+    "computed-property-spacing": {
+        "never": {
+            "description": "Disallows spaces inside computed property brackets.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires one or more spaces inside computed property brackets.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "enforceForClassMembers": {
+            "description": "Additionally applies this rule to class members.",
+            "type": "boolean",
+            "default": "true"
+        }
+    },
+    "consistent-return": {
+        "treatUndefinedAsUnspecified": {
+            "description": "Always either specify values or return `undefined` explicitly or implicitly.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "consistent-this": {
+        "designated alias names for `this`": {
+            "description": "Specify the alias names for `this` that should be used consistently throughout the application.",
+            "type": "literal_string",
+            "default": "Used"
+        }
+    },
+    "curly": {
+        "all": {
+            "description": "Enforce the use of curly braces for all control statements.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "multi": {
+            "description": "Enforce the use of curly braces only when there are multiple statements in the block.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "multi-line": {
+            "description": "Allow brace-less single-line control statements, but enforce curly braces for multi-line statements.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "multi-or-nest": {
+            "description": "Force brace-less control statements if their body contains only one single-line statement, and enforce braces in all other cases.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Enforce all bodies of an if-else chain to be with or without braces when using any of the multi* options.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "default-case": {
+        "commentPattern": {
+            "description": "Set the `commentPattern` option to a regular expression string to change the default `/^no default$/i` comment test pattern.",
+            "type": "string",
+            "default": "/^no default$/i"
+        }
+    },
+    "dot-location": {
+        "object": {
+            "description": "The dot in a member expression should be on the same line as the object portion.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "property": {
+            "description": "The dot in a member expression should be on the same line as the property portion.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "dot-notation": {
+        "allowKeywords": {
+            "description": "Set to false to follow ECMAScript version 3 compatible style, avoiding dot notation for reserved word properties.",
+            "type": "boolean",
+            "default": true
+        },
+        "allowPattern": {
+            "description": "Set to a regular expression string to allow bracket notation for property names that match a pattern.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "eol-last": {
+        "always": {
+            "description": "Enforces that files end with a newline (LF).",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Enforces that files do not end with a newline.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "unix": {
+            "description": "Deprecated. Identical to 'always'.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "windows": {
+            "description": "Deprecated. Identical to 'always', but will use a CRLF character when autofixing.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "eqeqeq": {
+        "always": {
+            "description": "Enforces the use of `===` and `!==` in every situation (except when you opt-in to more specific handling of `null`).",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "smart": {
+            "description": "Enforces the use of `===` and `!==` except for comparing two literal values, evaluating the value of `typeof`, and comparing against `null`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "null": {
+            "description": "Customize how this rule treats `null` literals. Possible values: `always` (default) - Always use `===` or `!==`. `never` - Never use `===` or `!==` with `null`. `ignore` - Do not apply this rule to `null`.",
+            "type": "string",
+            "default": "always"
+        },
+        "allow-null": {
+            "description": "Deprecated: Instead of using this option use `\"always\"` and pass a `\"null\"` option property with value `\"ignore\"`. This will tell ESLint to always enforce strict equality except when comparing with the `null` literal.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "func-call-spacing": {
+        "never": {
+            "description": "Disallows space between the function name and the opening parenthesis.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires space between the function name and the opening parenthesis.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "allowNewlines": {
+            "description": "Allows newlines between the function name and the opening parenthesis when in 'always' mode.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "func-name-matching": {
+        "always": {
+            "description": "Requires function names to always match the name of the variable or property to which they are assigned.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Requires function names to never match the name of the variable or property to which they are assigned.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "considerPropertyDescriptor": {
+            "description": "If set to true, the check will take into account the use of Object.create, Object.defineProperty, Object.defineProperties, and Reflect.defineProperty.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "includeCommonJSModuleExports": {
+            "description": "If set to true, module.exports and module['exports'] will be checked by this rule.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "func-names": {
+        "always": {
+            "description": "Requires function expressions to have a name.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "as-needed": {
+            "description": "Requires function expressions to have a name, if the name isn\u2019t assigned automatically per the ECMAScript specification.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Disallows named function expressions, except in recursive functions, where a name is needed.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "generators": {
+            "description": "Configures the naming requirement for generator functions.",
+            "type": "object",
+            "default": "Unused"
+        }
+    },
+    "func-style": {
+        "expression": {
+            "description": "Requires the use of function expressions instead of function declarations.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "declaration": {
+            "description": "Requires the use of function declarations instead of function expressions.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "allowArrowFunctions": {
+            "description": "Allows the use of arrow functions. This option applies only when the string option is set to 'declaration' (arrow functions are always allowed when the string option is set to 'expression', regardless of this option).",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "function-call-argument-newline": {
+        "always": {
+            "description": "Requires line breaks between arguments.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows line breaks between arguments.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Requires consistent usage of line breaks between arguments.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "function-paren-newline": {
+        "always": {
+            "description": "Requires line breaks inside all function parentheses.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Disallows line breaks inside all function parentheses.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "multiline": {
+            "description": "Requires line breaks inside function parentheses if any of the parameters/arguments have a line break between them. Otherwise, it disallows line breaks.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "multiline-arguments": {
+            "description": "Works like 'multiline' but allows line breaks inside function parentheses if there is only one parameter/argument.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Requires consistent usage of line breaks for each pair of parentheses. It reports an error if one parenthesis in the pair has a line break inside it and the other parenthesis does not.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "minItems": {
+            "description": "Requires line breaks inside function parentheses if the number of parameters/arguments is at least the specified value. Otherwise, it disallows line breaks.",
+            "type": "object",
+            "default": "None"
+        }
+    },
+    "generator-star-spacing": {
+        "before": {
+            "description": "Shorthand configuration for `{\"before\": true, \"after\": false}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "after": {
+            "description": "Shorthand configuration for `{\"before\": false, \"after\": true}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "named": {
+            "description": "Provides overrides for named functions. Overrides can be either an object with `before` and `after`, or a shorthand string.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "anonymous": {
+            "description": "Provides overrides for anonymous functions. Overrides can be either an object with `before` and `after`, or a shorthand string.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "method": {
+            "description": "Provides overrides for class methods or property function shorthand. Overrides can be either an object with `before` and `after`, or a shorthand string.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "both": {
+            "description": "Shorthand configuration for `{\"before\": true, \"after\": true}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "neither": {
+            "description": "Shorthand configuration for `{\"before\": false, \"after\": false}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "getter-return": {
+        "allowImplicit": {
+            "description": "Disallows implicitly returning `undefined` with a `return` statement when set to false.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "grouped-accessor-pairs": {
+        "anyOrder": {
+            "description": "Does not enforce order of getter and setter.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "getBeforeSet": {
+            "description": "If a property has both getter and setter, requires the getter to be defined before the setter.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "setBeforeGet": {
+            "description": "If a property has both getter and setter, requires the setter to be defined before the getter.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "handle-callback-err": {
+        "errorParameterName": {
+            "description": "The name of the error parameter to be handled in callbacks. Can be a string or a regular expression pattern.",
+            "type": "string",
+            "default": "err"
+        }
+    },
+    "id-denylist": {
+        "restricted_identifiers": {
+            "description": "The names of restricted identifiers to disallow in variable declarations, function declarations, object properties assigned to during object creation, class fields, and class methods.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "id-length": {
+        "min": {
+            "description": "Enforces a minimum identifier length.",
+            "type": "int",
+            "default": 2
+        },
+        "max": {
+            "description": "Enforces a maximum identifier length.",
+            "type": "int",
+            "default": "Infinity"
+        },
+        "properties": {
+            "description": "Enforces identifier length convention for property names.",
+            "type": "string",
+            "default": "always"
+        },
+        "exceptions": {
+            "description": "Allows an array of specified identifier names.",
+            "type": "array",
+            "default": "None"
+        },
+        "exceptionPatterns": {
+            "description": "Array of strings representing regular expression patterns, allows identifiers that match any of the patterns.",
+            "type": "array",
+            "default": "None"
+        }
+    },
+    "id-match": {
+        "specified regular expression": {
+            "description": "The regular expression that identifiers must match.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "properties": {
+            "description": "Determines whether object literal properties and member expression assignment properties should match the specified regular expression.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "classFields": {
+            "description": "Determines whether class field names should match the specified regular expression.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "onlyDeclarations": {
+            "description": "Determines whether only variable, function, and class declarations should match the specified regular expression.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "ignoreDestructuring": {
+            "description": "Determines whether destructured identifiers should be checked against the specified regular expression.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "implicit-arrow-linebreak": {
+        "beside": {
+            "description": "Disallows a newline before an arrow function body.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "below": {
+            "description": "Requires a newline before an arrow function body.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "indent-legacy": {
+        "indent": {
+            "description": "Specifies the indentation style. Can be a number for spaces or the string 'tab' for tabbed indentation.",
+            "type": "int|string",
+            "default": 4
+        },
+        "SwitchCase": {
+            "description": "Enforces indentation level for `case` clauses in `switch` statements.",
+            "type": "int",
+            "default": 0
+        },
+        "VariableDeclarator": {
+            "description": "Enforces indentation level for `var` declarators; can also take an object to define separate rules for `var`, `let` and `const` declarations.",
+            "type": "int|object",
+            "default": 1
+        },
+        "outerIIFEBody": {
+            "description": "Enforces indentation level for file-level IIFEs.",
+            "type": "int",
+            "default": 1
+        },
+        "MemberExpression": {
+            "description": "Enforces indentation level for multi-line property chains (except in variable declarations and assignments).",
+            "type": "int",
+            "default": "Unused"
+        },
+        "FunctionDeclaration": {
+            "description": "Takes an object to define rules for function declarations.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "FunctionDeclaration.parameters": {
+            "description": "Enforces indentation level for parameters in a function declaration. This can either be a number indicating indentation level, or the string 'first' indicating that all parameters of the declaration must be aligned with the first parameter.",
+            "type": "int|string",
+            "default": "Unused"
+        },
+        "FunctionDeclaration.body": {
+            "description": "Enforces indentation level for the body of a function declaration.",
+            "type": "int",
+            "default": 1
+        },
+        "FunctionExpression": {
+            "description": "Takes an object to define rules for function expressions.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "FunctionExpression.parameters": {
+            "description": "Enforces indentation level for parameters in a function expression. This can either be a number indicating indentation level, or the string 'first' indicating that all parameters of the expression must be aligned with the first parameter.",
+            "type": "int|string",
+            "default": "Unused"
+        },
+        "FunctionExpression.body": {
+            "description": "Enforces indentation level for the body of a function expression.",
+            "type": "int",
+            "default": 1
+        },
+        "CallExpression": {
+            "description": "Takes an object to define rules for function call expressions.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "CallExpression.arguments": {
+            "description": "Enforces indentation level for arguments in a call expression. This can either be a number indicating indentation level, or the string 'first' indicating that all arguments of the expression must be aligned with the first argument.",
+            "type": "int|string",
+            "default": "Unused"
+        },
+        "ArrayExpression": {
+            "description": "Enforces indentation level for elements in arrays. It can also be set to the string 'first', indicating that all the elements in the array should be aligned with the first element.",
+            "type": "int|string",
+            "default": 1
+        },
+        "ObjectExpression": {
+            "description": "Enforces indentation level for properties in objects. It can be set to the string 'first', indicating that all properties in the object should be aligned with the first property.",
+            "type": "int|string",
+            "default": 1
+        }
+    },
+    "indent": {
+        "ignoredNodes": {
+            "description": "Disable indentation checking for any AST node. Accepts an array of selectors. If an AST node is matched by any of the selectors, the indentation of tokens which are direct children of that node will be ignored.",
+            "type": "array",
+            "default": "None"
+        },
+        "SwitchCase": {
+            "description": "Enforces indentation level for `case` clauses in `switch` statements.",
+            "type": "int",
+            "default": 0
+        },
+        "VariableDeclarator": {
+            "description": "Enforces indentation level for `var` declarators; can also take an object to define separate rules for `var`, `let` and `const` declarations. It can also be `first`, indicating all the declarators should be aligned with the first declarator.",
+            "type": "int or object",
+            "default": 1
+        },
+        "outerIIFEBody": {
+            "description": "Enforces indentation level for file-level IIFEs. This can also be set to `off` to disable checking for file-level IIFEs.",
+            "type": "int or string",
+            "default": 1
+        },
+        "MemberExpression": {
+            "description": "Enforces indentation level for multi-line property chains. This can also be set to `off` to disable checking for MemberExpression indentation.",
+            "type": "int or string",
+            "default": 1
+        },
+        "FunctionDeclaration": {
+            "description": "Takes an object to define rules for function declarations.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "FunctionDeclaration.parameters": {
+            "description": "Enforces indentation level for parameters in a function declaration. This can either be a number indicating indentation level, or the string `first` indicating that all parameters of the declaration must be aligned with the first parameter. This can also be set to `off` to disable checking for FunctionDeclaration parameters.",
+            "type": "int or string",
+            "default": 1
+        },
+        "FunctionDeclaration.body": {
+            "description": "Enforces indentation level for the body of a function declaration.",
+            "type": "int",
+            "default": 1
+        },
+        "FunctionExpression": {
+            "description": "Takes an object to define rules for function expressions.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "FunctionExpression.parameters": {
+            "description": "Enforces indentation level for parameters in a function expression. This can either be a number indicating indentation level, or the string `first` indicating that all parameters of the expression must be aligned with the first parameter. This can also be set to `off` to disable checking for FunctionExpression parameters.",
+            "type": "int or string",
+            "default": 1
+        },
+        "FunctionExpression.body": {
+            "description": "Enforces indentation level for the body of a function expression.",
+            "type": "int",
+            "default": 1
+        },
+        "StaticBlock": {
+            "description": "Takes an object to define rules for class static blocks.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "StaticBlock.body": {
+            "description": "Enforces indentation level for the body of a class static block.",
+            "type": "int",
+            "default": 1
+        },
+        "CallExpression": {
+            "description": "Takes an object to define rules for function call expressions.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "CallExpression.arguments": {
+            "description": "Enforces indentation level for arguments in a call expression. This can either be a number indicating indentation level, or the string `first` indicating that all arguments of the expression must be aligned with the first argument. This can also be set to `off` to disable checking for CallExpression arguments.",
+            "type": "int or string",
+            "default": 1
+        },
+        "ArrayExpression": {
+            "description": "Enforces indentation level for elements in arrays. It can also be set to the string `first`, indicating that all the elements in the array should be aligned with the first element. This can also be set to `off` to disable checking for array elements.",
+            "type": "int or string",
+            "default": 1
+        },
+        "ObjectExpression": {
+            "description": "Enforces indentation level for properties in objects. It can be set to the string `first`, indicating that all properties in the object should be aligned with the first property. This can also be set to `off` to disable checking for object properties.",
+            "type": "int or string",
+            "default": 1
+        },
+        "ImportDeclaration": {
+            "description": "Enforces indentation level for import statements. It can be set to the string `first`, indicating that all imported members from a module should be aligned with the first member in the list. This can also be set to `off` to disable checking for imported module members.",
+            "type": "int or string",
+            "default": 1
+        },
+        "flatTernaryExpressions": {
+            "description": "Requires no indentation for ternary expressions which are nested in other ternary expressions.",
+            "type": "boolean",
+            "default": false
+        },
+        "offsetTernaryExpressions": {
+            "description": "Requires indentation for values of ternary expressions.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreComments": {
+            "description": "Can be used when comments do not need to be aligned with nodes on the previous or next line.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "init-declarations": {
+        "always": {
+            "description": "Enforce initialization at declaration for variables.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallow initialization during declaration for variables.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "ignoreForLoopInit": {
+            "description": "Allow initialization at declaration in for loops when 'never' is set.",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "jsx-quotes": {
+        "prefer-double": {
+            "description": "Enforces the use of double quotes for all JSX attribute values that don\u2019t contain a double quote.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "prefer-single": {
+            "description": "Enforces the use of single quotes for all JSX attribute values that don\u2019t contain a single quote.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "key-spacing": {
+        "beforeColon": {
+            "description": "Disallows or requires spaces between the key and the colon in object literals.",
+            "type": "boolean",
+            "default": false
+        },
+        "afterColon": {
+            "description": "Requires or disallows spaces between the colon and the value in object literals.",
+            "type": "boolean",
+            "default": true
+        },
+        "mode": {
+            "description": "Enforces exactly one space or one or more spaces before or after colons in object literals.",
+            "type": "string",
+            "default": "strict"
+        },
+        "align": {
+            "description": "Enforces horizontal alignment of values or both colons and values in object literals.",
+            "type": "string or object",
+            "default": "Unused"
+        },
+        "singleLine": {
+            "description": "Specifies a spacing style for single-line object literals.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "multiLine": {
+            "description": "Specifies a spacing style for multi-line object literals.",
+            "type": "object",
+            "default": "Unused"
+        }
+    },
+    "keyword-spacing": {
+        "before": {
+            "description": "Requires at least one space before keywords.",
+            "type": "boolean",
+            "default": true
+        },
+        "after": {
+            "description": "Requires at least one space after keywords.",
+            "type": "boolean",
+            "default": true
+        },
+        "overrides": {
+            "description": "Allows overriding spacing style for specified keywords.",
+            "type": "object",
+            "default": "None"
+        }
+    },
+    "line-comment-position": {
+        "position": {
+            "description": "Enforces the position of line comments. The options are 'above' to enforce comments above code and 'beside' to enforce comments beside code.",
+            "type": "string",
+            "default": "above"
+        },
+        "ignorePattern": {
+            "description": "A regular expression to specify which comments to ignore. By default, comments starting with 'eslint', 'jshint', 'jslint', 'istanbul', 'global', 'exported', 'jscs', 'falls through' are ignored.",
+            "type": "string",
+            "default": "None"
+        },
+        "applyDefaultIgnorePatterns": {
+            "description": "Determines whether to apply default ignore patterns even when a custom ignorePattern is provided. Set to 'false' to omit default patterns.",
+            "type": "boolean",
+            "default": "true"
+        },
+        "above": {
+            "description": "Enforces line comments only above code, in its own line.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "beside": {
+            "description": "Enforces line comments only at the end of code lines.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "linebreak-style": {
+        "unix": {
+            "description": "Enforces the usage of Unix line endings: \\n for LF.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "windows": {
+            "description": "Enforces the usage of Windows line endings: \\r\\n for CRLF.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "lines-around-comment": {
+        "beforeBlockComment": {
+            "description": "Requires an empty line before block comments.",
+            "type": "boolean",
+            "default": true
+        },
+        "afterBlockComment": {
+            "description": "Requires an empty line after block comments.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "beforeLineComment": {
+            "description": "Requires an empty line before line comments.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "afterLineComment": {
+            "description": "Requires an empty line after line comments.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowBlockStart": {
+            "description": "Allows comments to appear at the start of block statements, function bodies, classes, switch statements, and class static blocks.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowBlockEnd": {
+            "description": "Allows comments to appear at the end of block statements, function bodies, classes, switch statements, and class static blocks.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowObjectStart": {
+            "description": "Allows comments to appear at the start of object literals.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowObjectEnd": {
+            "description": "Allows comments to appear at the end of object literals.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowArrayStart": {
+            "description": "Allows comments to appear at the start of array literals.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowArrayEnd": {
+            "description": "Allows comments to appear at the end of array literals.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowClassStart": {
+            "description": "Allows comments to appear at the start of classes.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowClassEnd": {
+            "description": "Allows comments to appear at the end of classes.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "applyDefaultIgnorePatterns": {
+            "description": "Enables or disables the default comment patterns to be ignored by the rule.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "ignorePattern": {
+            "description": "Custom patterns to be ignored by the rule.",
+            "type": "string",
+            "default": "None"
+        },
+        "afterHashbangComment": {
+            "description": "Requires an empty line after hashbang comments.",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "lines-around-directive": {
+        "always": {
+            "description": "Enforces blank newlines around directives.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows blank newlines around directives.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "before": {
+            "description": "Configures whether to enforce or disallow blank newlines before directives.",
+            "type": "string",
+            "default": "None"
+        },
+        "after": {
+            "description": "Configures whether to enforce or disallow blank newlines after directives.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "lines-between-class-members": {
+        "always": {
+            "description": "Require an empty line after class members.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallow an empty line after class members.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "enforce": {
+            "description": "An array of configurations specifying the enforcement of empty lines between specific pairs of class members.",
+            "type": "object",
+            "default": "None"
+        },
+        "blankLine": {
+            "description": "Indicates whether a blank line should be required or disallowed between the specified members.",
+            "type": "literal_string",
+            "default": "None"
+        },
+        "prev": {
+            "description": "Specifies the type of the preceding class member. It can be 'method' for class methods, 'field' for class fields, or '*' for any class member.",
+            "type": "literal_string",
+            "default": "None"
+        },
+        "next": {
+            "description": "Specifies the type of the following class member. It follows the same options as 'prev'.",
+            "type": "literal_string",
+            "default": "None"
+        },
+        "exceptAfterSingleLine": {
+            "description": "Skip checking empty lines after single-line class members.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "logical-assignment-operators": {
+        "always": {
+            "description": "This option checks for expressions that can be shortened using logical assignment operator. For example, `a = a || b` can be shortened to `a ||= b`. Expressions with associativity such as `a = a || b || c` are reported as being able to be shortened to `a ||= b || c` unless the evaluation order is explicitly defined using parentheses, such as `a = (a || b) || c`.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "This option disallows the use of logical assignment operator shorthand.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "enforceForIfStatements": {
+            "description": "This option checks for additional patterns with if statements which could be expressed with the logical assignment operator.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "max-classes-per-file": {
+        "ignoreExpressions": {
+            "description": "A boolean option to ignore class expressions.",
+            "type": "boolean",
+            "default": false
+        },
+        "max": {
+            "description": "A numeric option to specify the maximum number of classes.",
+            "type": "int",
+            "default": 1
+        }
+    },
+    "max-depth": {
+        "max": {
+            "description": "Enforces a maximum depth that blocks can be nested.",
+            "type": "int",
+            "default": 4
+        },
+        "maximum": {
+            "description": "Deprecated: Please use the object property 'max' instead.",
+            "type": "int",
+            "default": "Unused"
+        }
+    },
+    "max-len": {
+        "code": {
+            "description": "Enforces a maximum line length.",
+            "type": "int",
+            "default": 80
+        },
+        "tabWidth": {
+            "description": "Specifies the character width for tab characters.",
+            "type": "int",
+            "default": 4
+        },
+        "comments": {
+            "description": "Enforces a maximum line length for comments; defaults to value of `code`.",
+            "type": "int",
+            "default": "code"
+        },
+        "ignorePattern": {
+            "description": "Ignores lines matching a regular expression; can only match a single line and need to be double escaped when written in YAML or JSON.",
+            "type": "string",
+            "default": "None"
+        },
+        "ignoreComments": {
+            "description": "Ignores all trailing comments and comments on their own line.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreTrailingComments": {
+            "description": "Ignores only trailing comments.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreUrls": {
+            "description": "Ignores lines that contain a URL.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreStrings": {
+            "description": "Ignores lines that contain a double-quoted or single-quoted string.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreTemplateLiterals": {
+            "description": "Ignores lines that contain a template literal.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreRegExpLiterals": {
+            "description": "Ignores lines that contain a RegExp literal.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "max-lines-per-function": {
+        "max": {
+            "description": "Enforces a maximum number of lines in a function.",
+            "type": "int",
+            "default": 50
+        },
+        "skipBlankLines": {
+            "description": "Ignore lines made up purely of whitespace.",
+            "type": "boolean",
+            "default": false
+        },
+        "skipComments": {
+            "description": "Ignore lines containing just comments.",
+            "type": "boolean",
+            "default": false
+        },
+        "IIFEs": {
+            "description": "Include any code included in IIFEs.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "max-lines": {
+        "max": {
+            "description": "Enforces a maximum number of lines in a file.",
+            "type": "int",
+            "default": 300
+        },
+        "skipBlankLines": {
+            "description": "Ignore lines made up purely of whitespace.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "skipComments": {
+            "description": "Ignore lines containing just comments.",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "max-nested-callbacks": {
+        "max": {
+            "description": "Enforces a maximum depth that callbacks can be nested.",
+            "type": "int",
+            "default": 10
+        }
+    },
+    "max-params": {
+        "max": {
+            "description": "Enforces a maximum number of parameters in function definitions.",
+            "type": "int",
+            "default": 3
+        },
+        "maximum": {
+            "description": "Deprecated: Please use the object property 'max' instead.",
+            "type": "int",
+            "default": "Unused"
+        }
+    },
+    "max-statements-per-line": {
+        "max": {
+            "description": "Specifies the maximum number of statements allowed per line.",
+            "type": "int",
+            "default": 1
+        }
+    },
+    "max-statements": {
+        "max": {
+            "description": "Enforces a maximum number of statements allowed in function blocks.",
+            "type": "int",
+            "default": 10
+        },
+        "ignoreTopLevelFunctions": {
+            "description": "Ignores top-level functions when counting the number of statements.",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "multiline-comment-style": {
+        "starred-block": {
+            "description": "Disallows consecutive line comments in favor of block comments. Additionally, requires block comments to have an aligned `*` character before each line.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "bare-block": {
+            "description": "Disallows consecutive line comments in favor of block comments, and disallows block comments from having a `*` character before each line. This option ignores JSDoc comments.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "separate-lines": {
+            "description": "Disallows block comments in favor of consecutive line comments. By default, this option ignores JSDoc comments. To also apply this rule to JSDoc comments, set the `checkJSDoc` option to `true`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "checkJSDoc": {
+            "description": "When set to `true`, applies the `separate-lines` rule to JSDoc comments as well.",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "multiline-ternary": {
+        "always": {
+            "description": "Enforces newlines between the operands of a ternary expression.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always-multiline": {
+            "description": "Enforces newlines between the operands of a ternary expression if the expression spans multiple lines.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Disallows newlines between the operands of a ternary expression.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "new-cap": {
+        "newIsCap": {
+            "description": "Requires all `new` operators to be called with uppercase-started functions.",
+            "type": "boolean",
+            "default": true
+        },
+        "capIsNew": {
+            "description": "Requires all uppercase-started functions to be called with `new` operators.",
+            "type": "boolean",
+            "default": true
+        },
+        "newIsCapExceptions": {
+            "description": "Allows specified lowercase-started function names to be called with the `new` operator.",
+            "type": "array",
+            "default": "None"
+        },
+        "newIsCapExceptionPattern": {
+            "description": "Allows any lowercase-started function names that match the specified regex pattern to be called with the `new` operator.",
+            "type": "string",
+            "default": "None"
+        },
+        "capIsNewExceptions": {
+            "description": "Allows specified uppercase-started function names to be called without the `new` operator.",
+            "type": "array",
+            "default": "None"
+        },
+        "capIsNewExceptionPattern": {
+            "description": "Allows any uppercase-started function names that match the specified regex pattern to be called without the `new` operator.",
+            "type": "string",
+            "default": "None"
+        },
+        "properties": {
+            "description": "Enables or disables checks on object properties.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "new-parens": {
+        "always": {
+            "description": "Enforces parenthesis after a new constructor with no arguments.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Enforces no parenthesis after a new constructor with no arguments.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "newline-after-var": {
+        "always": {
+            "description": "Requires an empty line after `var`, `let`, or `const` statements.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows empty lines after `var`, `let`, or `const` statements.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "newline-per-chained-call": {
+        "ignoreChainWithDepth": {
+            "description": "Allows chains up to a specified depth without requiring newlines.",
+            "type": "int",
+            "default": 2
+        }
+    },
+    "no-bitwise": {
+        "allow": {
+            "description": "Allows a list of bitwise operators to be used as exceptions.",
+            "type": "array",
+            "default": "None"
+        },
+        "int32Hint": {
+            "description": "Allows the use of bitwise OR in `|0` pattern for type casting.",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "no-cond-assign": {
+        "except-parens": {
+            "description": "Allows assignments in test conditions only if they are enclosed in parentheses (for example, to allow reassigning a variable in the test of a `while` or `do...while` loop).",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Disallows all assignments in test conditions.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-confusing-arrow": {
+        "allowParens": {
+            "description": "Relaxes the rule and accepts parenthesis as a valid 'confusion-preventing' syntax.",
+            "type": "boolean",
+            "default": true
+        },
+        "onlyOneSimpleParam": {
+            "description": "Relaxes the rule and doesn\u2019t report errors if the arrow function has 0 or more than 1 parameters, or the parameter is not an identifier.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-console": {
+        "allow": {
+            "description": "An array of strings which are allowed methods of the `console` object.",
+            "type": "array of strings",
+            "default": "None"
+        }
+    },
+    "no-constant-condition": {
+        "checkLoops": {
+            "description": "Set to `true` by default. Setting this option to `false` allows constant expressions in loops.",
+            "type": "boolean",
+            "default": "true"
+        }
+    },
+    "no-duplicate-imports": {
+        "includeExports": {
+            "description": "If re-exporting from an imported module, you should add the imports to the import-statement, and export that directly, not use export ... from.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-else-return": {
+        "allowElseIf": {
+            "description": "Allows `else if` blocks after a return statement.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "no-empty-function": {
+        "allow": {
+            "description": "A list of kinds of functions to allow being empty. List items can be any of the following strings: 'functions', 'arrowFunctions', 'generatorFunctions', 'methods', 'generatorMethods', 'getters', 'setters', 'constructors', 'asyncFunctions', 'asyncMethods'.",
+            "type": "string[]",
+            "default": []
+        },
+        "functions": {
+            "description": "Allow normal functions to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "arrowFunctions": {
+            "description": "Allow arrow functions to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "generatorFunctions": {
+            "description": "Allow generator functions to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "methods": {
+            "description": "Allow class methods and method shorthands of object literals to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "generatorMethods": {
+            "description": "Allow class methods and method shorthands of object literals with generator to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "getters": {
+            "description": "Allow getters to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "setters": {
+            "description": "Allow setters to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "constructors": {
+            "description": "Allow class constructors to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "asyncFunctions": {
+            "description": "Allow async functions to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "asyncMethods": {
+            "description": "Allow async class methods and method shorthands of object literals to be empty.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-empty-pattern": {
+        "allowObjectPatternsAsParameters": {
+            "description": "Allows empty object patterns as function parameters when set to true.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-empty": {
+        "allowEmptyCatch": {
+            "description": "Allows empty catch clauses (that is, which do not contain a comment).",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "no-eval": {
+        "allowIndirect": {
+            "description": "This option allows indirect calls to `eval`. Indirect calls to `eval` are less dangerous than direct calls to `eval` because they cannot dynamically change the scope. Because of this, they also will not negatively impact performance to the degree of direct `eval`.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-extend-native": {
+        "exceptions": {
+            "description": "Specifies a list of builtins for which extensions will be allowed.",
+            "type": "array",
+            "default": "None"
+        }
+    },
+    "no-extra-boolean-cast": {
+        "enforceForLogicalOperands": {
+            "description": "When set to true, in addition to checking default contexts, checks whether the extra boolean cast is contained within a logical expression.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-extra-parens": {
+        "all": {
+            "description": "Disallows unnecessary parentheses around any expression.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "functions": {
+            "description": "Disallows unnecessary parentheses only around function expressions.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "conditionalAssign": {
+            "description": "Allows extra parentheses around assignments in conditional test expressions.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "returnAssign": {
+            "description": "Allows extra parentheses around assignments in return statements.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "nestedBinaryExpressions": {
+            "description": "Allows extra parentheses in nested binary expressions.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "ternaryOperandBinaryExpressions": {
+            "description": "Allows extra parentheses around binary expressions that are operands of ternary `?:`.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "ignoreJSX": {
+            "description": "Allows extra parentheses around no/all/multi-line/single-line JSX components.",
+            "type": "string",
+            "default": "none"
+        },
+        "enforceForArrowConditionals": {
+            "description": "Allows extra parentheses around ternary expressions which are the body of an arrow function.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "enforceForSequenceExpressions": {
+            "description": "Allows extra parentheses around sequence expressions.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "enforceForNewInMemberExpressions": {
+            "description": "Allows extra parentheses around `new` expressions in member expressions.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "enforceForFunctionPrototypeMethods": {
+            "description": "Allows extra parentheses around immediate `.call` and `.apply` method calls on function expressions and around function expressions in the same context.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "allowParensAfterCommentPattern": {
+            "description": "Allows extra parentheses preceded by a comment that matches a regular expression.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "no-fallthrough": {
+        "commentPattern": {
+            "description": "Set the commentPattern option to a regular expression string to change the test for intentional fallthrough comment. If the fallthrough comment matches a directive, that takes precedence over commentPattern.",
+            "type": "string",
+            "default": "None"
+        },
+        "allowEmptyCase": {
+            "description": "Set the allowEmptyCase option to true to allow empty cases regardless of the layout. By default, this rule does not require a fallthrough comment after an empty case only if the empty case and the next case are on the same line or on consecutive lines.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-global-assign": {
+        "exceptions": {
+            "description": "Specifies a list of built-in global variables for which reassignments will be allowed.",
+            "type": "array",
+            "default": "None"
+        }
+    },
+    "no-implicit-coercion": {
+        "boolean": {
+            "description": "When this is `true`, this rule warns shorter type conversions for `boolean` type.",
+            "type": "boolean",
+            "default": true
+        },
+        "number": {
+            "description": "When this is `true`, this rule warns shorter type conversions for `number` type.",
+            "type": "boolean",
+            "default": true
+        },
+        "string": {
+            "description": "When this is `true`, this rule warns shorter type conversions for `string` type.",
+            "type": "boolean",
+            "default": true
+        },
+        "disallowTemplateShorthand": {
+            "description": "When this is `true`, this rule warns `string` type conversions using `${expression}` form.",
+            "type": "boolean",
+            "default": false
+        },
+        "allow": {
+            "description": "Each entry in this array can be one of `~`, `!!`, `+` or `*` that are to be allowed.",
+            "type": "array",
+            "default": "empty"
+        }
+    },
+    "no-implicit-globals": {
+        "lexicalBindings": {
+            "description": "Set to true if you want this rule to check const, let and class declarations as well.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-inline-comments": {
+        "ignorePattern": {
+            "description": "To make this rule ignore specific comments, set the `ignorePattern` option to a string pattern that will be passed to the RegExp constructor.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "no-inner-declarations": {
+        "functions": {
+            "description": "Disallows `function` declarations in nested blocks.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "both": {
+            "description": "Disallows `function` and `var` declarations in nested blocks.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-invalid-regexp": {
+        "allowConstructorFlags": {
+            "description": "Specify additional constructor flags to be ignored by the rule.",
+            "type": "array",
+            "default": "None"
+        }
+    },
+    "no-invalid-this": {
+        "capIsConstructor": {
+            "description": "Disables the assumption that a function which name starts with an uppercase is a constructor.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "no-irregular-whitespace": {
+        "skipStrings": {
+            "description": "Allows any whitespace characters in string literals.",
+            "type": "boolean",
+            "default": true
+        },
+        "skipComments": {
+            "description": "Allows any whitespace characters in comments.",
+            "type": "boolean",
+            "default": false
+        },
+        "skipRegExps": {
+            "description": "Allows any whitespace characters in regular expression literals.",
+            "type": "boolean",
+            "default": false
+        },
+        "skipTemplates": {
+            "description": "Allows any whitespace characters in template literals.",
+            "type": "boolean",
+            "default": false
+        },
+        "skipJSXText": {
+            "description": "Allows any whitespace characters in JSX text.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-labels": {
+        "allowLoop": {
+            "description": "If this option is set to `true`, this rule ignores labels which are sticking to loop statements.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "allowSwitch": {
+            "description": "If this option is set to `true`, this rule ignores labels which are sticking to switch statements.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-magic-numbers": {
+        "ignore": {
+            "description": "An array of numbers to ignore. It\u2019s set to `[]` by default. If provided, it must be an `Array`. The array can contain values of `number` and `string` types. If it\u2019s a string, the text must be parsed as `bigint` literal (e.g., \"100n\").",
+            "type": "array",
+            "default": []
+        },
+        "ignoreArrayIndexes": {
+            "description": "A boolean to specify if numbers used in the context of array indexes (e.g., `data[2]`) are considered okay. `false` by default.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreDefaultValues": {
+            "description": "A boolean to specify if numbers used in default value assignments are considered okay. `false` by default.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreClassFieldInitialValues": {
+            "description": "A boolean to specify if numbers used as initial values of class fields are considered okay. `false` by default.",
+            "type": "boolean",
+            "default": false
+        },
+        "enforceConst": {
+            "description": "A boolean to specify if we should check for the const keyword in variable declaration of numbers. `false` by default.",
+            "type": "boolean",
+            "default": false
+        },
+        "detectObjects": {
+            "description": "A boolean to specify if we should detect numbers when setting object properties for example. `false` by default.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-mixed-operators": {
+        "groups": {
+            "description": "Specifies operator groups to be checked. The `groups` option is a list of groups, and a group is a list of binary operators. Default operator groups are defined as arithmetic, bitwise, comparison, logical, and relational operators. Note: Ternary operator(?:) can be part of any group and by default is allowed to be mixed with other operators.",
+            "type": "string[][]",
+            "default": [
+                [
+                    "+",
+                    "-",
+                    "*",
+                    "/",
+                    "%",
+                    "**"
+                ],
+                [
+                    "&",
+                    "|",
+                    "^",
+                    "~",
+                    "<<",
+                    ">>",
+                    ">>>"
+                ],
+                [
+                    "==",
+                    "!=",
+                    "===",
+                    "!==",
+                    ">",
+                    ">=",
+                    "<",
+                    "<="
+                ],
+                [
+                    "&&",
+                    "||"
+                ],
+                [
+                    "in",
+                    "instanceof"
+                ]
+            ]
+        },
+        "allowSamePrecedence": {
+            "description": "Specifies whether to allow mixed operators if they are of equal precedence.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "no-mixed-requires": {
+        "grouping": {
+            "description": "Enforces that all require declarations must be of the same type.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowCall": {
+            "description": "Allows require calls to be mixed with regular variable declarations if the require call is a function call.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-mixed-spaces-and-tabs": {
+        "smart-tabs": {
+            "description": "Allows mixed tabs and spaces when the spaces are used for alignment.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-multi-assign": {
+        "ignoreNonDeclaration": {
+            "description": "When set to `true`, the rule allows chains that don\u2019t include initializing a variable in a declaration or initializing a class field.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-multi-spaces": {
+        "ignoreEOLComments": {
+            "description": "Ignores multiple spaces before comments that occur at the end of lines.",
+            "type": "boolean",
+            "default": false
+        },
+        "exceptions": {
+            "description": "Specifies nodes to ignore. This option is an object that expects property names to be AST node types as defined by ESTree.",
+            "type": "object",
+            "default": {
+                "Property": true
+            }
+        }
+    },
+    "no-multiple-empty-lines": {
+        "max": {
+            "description": "Enforces a maximum number of consecutive empty lines.",
+            "type": "int",
+            "default": 2
+        },
+        "maxEOF": {
+            "description": "Enforces a maximum number of consecutive empty lines at the end of files.",
+            "type": "int",
+            "default": "None"
+        },
+        "maxBOF": {
+            "description": "Enforces a maximum number of consecutive empty lines at the beginning of files.",
+            "type": "int",
+            "default": "None"
+        }
+    },
+    "no-native-reassign": {
+        "exceptions": {
+            "description": "Specifies a list of builtins for which reassignments will be allowed.",
+            "type": "array",
+            "default": "None"
+        }
+    },
+    "no-param-reassign": {
+        "props": {
+            "description": "Warn against the modification of parameter properties.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignorePropertyModificationsFor": {
+            "description": "An array of parameter names for which property modifications are ignored.",
+            "type": "array",
+            "default": []
+        },
+        "ignorePropertyModificationsForRegex": {
+            "description": "An array of regex patterns for parameter names for which property modifications are ignored.",
+            "type": "array",
+            "default": []
+        }
+    },
+    "no-plusplus": {
+        "allowForLoopAfterthoughts": {
+            "description": "Allows unary operators `++` and `--` in the afterthought (final expression) of a `for` loop.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-promise-executor-return": {
+        "allowVoid": {
+            "description": "If set to true, this rule will allow returning void values.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-redeclare": {
+        "builtinGlobals": {
+            "description": "The \"builtinGlobals\" option will check for redeclaration of built-in globals in global scope.",
+            "type": "boolean",
+            "default": "true"
+        }
+    },
+    "no-restricted-exports": {
+        "restrictedNamedExports": {
+            "description": "An array of strings, where each string is a name to be restricted from being used as an exported name.",
+            "type": "array of strings",
+            "default": "None"
+        },
+        "restrictDefaultExports": {
+            "description": "An object option with boolean properties to restrict certain default export declarations. This option works only if the `restrictedNamedExports` option does not contain the `default` value.",
+            "type": "object",
+            "default": "Unused"
+        },
+        "restrictDefaultExports.direct": {
+            "description": "Restricts `export default` declarations.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "restrictDefaultExports.named": {
+            "description": "Restricts `export { foo as default };` declarations.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "restrictDefaultExports.defaultFrom": {
+            "description": "Restricts `export { default } from 'foo';` declarations.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "restrictDefaultExports.namedFrom": {
+            "description": "Restricts `export { foo as default } from 'foo';` declarations.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "restrictDefaultExports.namespaceFrom": {
+            "description": "Restricts `export * as default from 'foo';` declarations.",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "no-restricted-globals": {
+        "restricted_globals": {
+            "description": "A list of global variable names that you don\u2019t want to use in your application.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "restricted_globals_with_message": {
+            "description": "An object specifying the global name and an optional custom message to be displayed when the global is used.",
+            "type": "object",
+            "default": "Unused"
+        }
+    },
+    "no-restricted-imports": {
+        "paths": {
+            "description": "Specify an array of restricted import paths.",
+            "type": "array",
+            "default": "None"
+        },
+        "patterns": {
+            "description": "Specify an array of gitignore-style patterns for restricted imports.",
+            "type": "array",
+            "default": "None"
+        },
+        "name": {
+            "description": "Specify the name of the restricted import path.",
+            "type": "string",
+            "default": "None"
+        },
+        "message": {
+            "description": "Specify a custom message for the restricted import path.",
+            "type": "string",
+            "default": "None"
+        },
+        "importNames": {
+            "description": "Specify an array of restricted import names from a module.",
+            "type": "array",
+            "default": "None"
+        },
+        "group": {
+            "description": "Specify an array of patterns for restricted imports.",
+            "type": "array",
+            "default": "None"
+        },
+        "caseSensitive": {
+            "description": "Specify whether the pattern match should be case-sensitive.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "importNamePattern": {
+            "description": "Specify a regex pattern to restrict specific import names.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "no-restricted-modules": {
+        "paths": {
+            "description": "Specify the names of restricted modules.",
+            "type": "array of strings",
+            "default": "None"
+        },
+        "patterns": {
+            "description": "Specify gitignore-style patterns for restricted modules.",
+            "type": "array of strings",
+            "default": "None"
+        },
+        "name": {
+            "description": "Specify the name of a restricted module.",
+            "type": "string",
+            "default": "None"
+        },
+        "message": {
+            "description": "Provide a custom message for a restricted module.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "no-restricted-properties": {
+        "object": {
+            "description": "Specifies the name of the object whose properties are to be restricted.",
+            "type": "string",
+            "default": "None"
+        },
+        "property": {
+            "description": "Specifies the name of the property to be restricted on the given object.",
+            "type": "string",
+            "default": "None"
+        },
+        "message": {
+            "description": "An optional message to indicate an alternative API or a reason for the restriction.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "no-restricted-syntax": {
+        "selector": {
+            "description": "Specifies the AST selector to restrict. This can be any valid AST node type or a more complex AST selector.",
+            "type": "string",
+            "default": "None"
+        },
+        "message": {
+            "description": "Provides a custom message to be used when the specified syntax is encountered. This is optional.",
+            "type": "string",
+            "default": "None"
+        }
+    },
+    "no-return-assign": {
+        "except-parens": {
+            "description": "Disallow assignments unless they are enclosed in parentheses.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Disallow all assignments.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-self-assign": {
+        "props": {
+            "description": "If this is `true`, `no-self-assign` rule warns self-assignments of properties.",
+            "type": "boolean",
+            "default": "true"
+        }
+    },
+    "no-sequences": {
+        "allowInParentheses": {
+            "description": "If set to true (default), this rule allows expression sequences that are explicitly wrapped in parentheses.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "no-shadow": {
+        "builtinGlobals": {
+            "description": "Prevents shadowing of built-in global variables like Object, Array, Number, etc.",
+            "type": "boolean",
+            "default": false
+        },
+        "hoist": {
+            "description": "Controls the reporting of shadowing before outer variables/functions are defined.",
+            "type": "string",
+            "default": "functions"
+        },
+        "allow": {
+            "description": "An array of identifier names for which shadowing is allowed.",
+            "type": "array",
+            "default": []
+        },
+        "ignoreOnInitialization": {
+            "description": "Prevents reporting shadowing of variables in their initializers when the shadowed variable is presumably still uninitialized.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-sync": {
+        "allowAtRootLevel": {
+            "description": "Determines whether synchronous methods should be allowed at the top level of a file, outside of any functions.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-tabs": {
+        "allowIndentationTabs": {
+            "description": "If this is set to true, then the rule will not report tabs used for indentation.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-trailing-spaces": {
+        "skipBlankLines": {
+            "description": "Allows trailing whitespace on empty lines when set to true.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreComments": {
+            "description": "Allows trailing whitespace in comment blocks when set to true.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-undef": {
+        "typeof": {
+            "description": "Warn for variables used inside typeof check.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-underscore-dangle": {
+        "allow": {
+            "description": "Allows specified identifiers to have dangling underscores.",
+            "type": "array",
+            "default": "None"
+        },
+        "allowAfterThis": {
+            "description": "Disallows dangling underscores in members of the `this` object.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowAfterSuper": {
+            "description": "Disallows dangling underscores in members of the `super` object.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowAfterThisConstructor": {
+            "description": "Disallows dangling underscores in members of the `this.constructor` object.",
+            "type": "boolean",
+            "default": false
+        },
+        "enforceInMethodNames": {
+            "description": "Allows dangling underscores in method names.",
+            "type": "boolean",
+            "default": false
+        },
+        "enforceInClassFields": {
+            "description": "Allows dangling underscores in ES2022 class fields names.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowInArrayDestructuring": {
+            "description": "Allows dangling underscores in variable names assigned by array destructuring.",
+            "type": "boolean",
+            "default": true
+        },
+        "allowInObjectDestructuring": {
+            "description": "Allows dangling underscores in variable names assigned by object destructuring.",
+            "type": "boolean",
+            "default": true
+        },
+        "allowFunctionParams": {
+            "description": "Allows dangling underscores in function parameter names.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "no-unneeded-ternary": {
+        "defaultAssignment": {
+            "description": "Allows the conditional expression as a default assignment pattern when set to true.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "no-unreachable-loop": {
+        "ignore": {
+            "description": "An optional array of loop types that will be ignored by this rule. You can specify up to 5 different elements in the array: 'WhileStatement', 'DoWhileStatement', 'ForStatement', 'ForInStatement', 'ForOfStatement'.",
+            "type": "array",
+            "default": "None"
+        },
+        "WhileStatement": {
+            "description": "To ignore all 'while' loops.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "DoWhileStatement": {
+            "description": "To ignore all 'do-while' loops.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "ForStatement": {
+            "description": "To ignore all 'for' loops (does not apply to 'for-in' and 'for-of' loops).",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "ForInStatement": {
+            "description": "To ignore all 'for-in' loops.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "ForOfStatement": {
+            "description": "To ignore all 'for-of' loops.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-unsafe-negation": {
+        "enforceForOrderingRelations": {
+            "description": "Allows negation of the left-hand side of ordering relational operators (`<`, `>`, `<=`, `>=`) when set to `false`. Disallows negation of the left-hand side of ordering relational operators when set to `true`.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-unsafe-optional-chaining": {
+        "disallowArithmeticOperators": {
+            "description": "Disallow arithmetic operations on optional chaining expressions. If this is true, this rule warns arithmetic operations on optional chaining expressions, which possibly result in NaN.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-unused-expressions": {
+        "allowShortCircuit": {
+            "description": "Allows the use of short circuit evaluations in expressions.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowTernary": {
+            "description": "Enables the use of ternary operators in expressions similarly to short circuit evaluations.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowTaggedTemplates": {
+            "description": "Enables the use of tagged template literals in expressions.",
+            "type": "boolean",
+            "default": false
+        },
+        "enforceForJSX": {
+            "description": "Flags unused JSX element expressions.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-unused-vars": {
+        "vars": {
+            "description": "Checks for usage of variables. 'all' checks all variables including those in the global scope. 'local' checks only locally-declared variables.",
+            "type": "string",
+            "default": "all"
+        },
+        "varsIgnorePattern": {
+            "description": "Specifies exceptions not to check for usage: variables whose names match a regexp pattern.",
+            "type": "string",
+            "default": "None"
+        },
+        "args": {
+            "description": "Checks for usage of function arguments. 'after-used' checks unused positional arguments after the last used argument. 'all' checks all named arguments. 'none' does not check arguments.",
+            "type": "string",
+            "default": "after-used"
+        },
+        "argsIgnorePattern": {
+            "description": "Specifies exceptions not to check for usage: arguments whose names match a regexp pattern.",
+            "type": "string",
+            "default": "None"
+        },
+        "caughtErrors": {
+            "description": "Checks for usage of catch block arguments. 'none' does not check error objects. 'all' checks all named arguments.",
+            "type": "string",
+            "default": "none"
+        },
+        "caughtErrorsIgnorePattern": {
+            "description": "Specifies exceptions not to check for usage: catch arguments whose names match a regexp pattern.",
+            "type": "string",
+            "default": "None"
+        },
+        "destructuredArrayIgnorePattern": {
+            "description": "Specifies exceptions not to check for usage: elements of array destructuring patterns whose names match a regexp pattern.",
+            "type": "string",
+            "default": "None"
+        },
+        "ignoreRestSiblings": {
+            "description": "A boolean option to ignore rest property siblings when using a Rest Property.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-use-before-define": {
+        "functions": {
+            "description": "The flag which shows whether or not this rule checks function declarations. If this is `true`, this rule warns every reference to a function before the function declaration. Otherwise, ignores those references. Function declarations are hoisted, so it\u2019s safe.",
+            "type": "boolean",
+            "default": "true"
+        },
+        "classes": {
+            "description": "The flag which shows whether or not this rule checks class declarations of upper scopes. If this is `true`, this rule warns every reference to a class before the class declaration. Otherwise, ignores those references if the declaration is in upper function scopes. Class declarations are not hoisted, so it might be danger.",
+            "type": "boolean",
+            "default": "true"
+        },
+        "variables": {
+            "description": "This flag determines whether or not the rule checks variable declarations in upper scopes. If this is `true`, the rule warns every reference to a variable before the variable declaration. Otherwise, the rule ignores a reference if the declaration is in an upper scope, while still reporting the reference if it\u2019s in the same scope as the declaration.",
+            "type": "boolean",
+            "default": "true"
+        },
+        "allowNamedExports": {
+            "description": "If this flag is set to `true`, the rule always allows references in `export {};` declarations. These references are safe even if the variables are declared later in the code.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "nofunc": {
+            "description": "`nofunc` is the same as `{ \"functions\": false, \"classes\": true, \"variables\": true, \"allowNamedExports\": false }`.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "no-useless-computed-key": {
+        "enforceForClassMembers": {
+            "description": "When set to true, this option applies the rule to class members, disallowing unnecessary computed keys inside of class fields, class methods, class getters, and class setters.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "no-useless-rename": {
+        "ignoreImport": {
+            "description": "When set to `true`, this rule does not check imports",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreExport": {
+            "description": "When set to `true`, this rule does not check exports",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreDestructuring": {
+            "description": "When set to `true`, this rule does not check destructuring assignments",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-void": {
+        "allowAsStatement": {
+            "description": "When set to true, the rule will not error on cases where the void operator is used as a statement, i.e., when it\u2019s not used in an expression position, like in a variable assignment or a function return.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "no-warning-comments": {
+        "terms": {
+            "description": "Optional array of terms to match. Terms are matched case-insensitively and as whole words. Terms can consist of multiple words.",
+            "type": "array",
+            "default": [
+                "todo",
+                "fixme",
+                "xxx"
+            ]
+        },
+        "location": {
+            "description": "Optional string that configures where in your comments to check for matches. The start is from the first non-decorative character, ignoring whitespace, new lines and characters specified in 'decoration'. The other value is match 'anywhere' in comments.",
+            "type": "string",
+            "default": "start"
+        },
+        "decoration": {
+            "description": "Optional array of characters that are ignored at the start of a comment, when location is 'start'. Any sequence of whitespace or the characters from this property are ignored. This option is ignored when location is 'anywhere'.",
+            "type": "array",
+            "default": []
+        }
+    },
+    "nonblock-statement-body-position": {
+        "beside": {
+            "description": "Disallows a newline before a single-line statement.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "below": {
+            "description": "Requires a newline before a single-line statement.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "any": {
+            "description": "Does not enforce the position of a single-line statement.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "overrides": {
+            "description": "Specifies a location for particular statements that override the default.",
+            "type": "object",
+            "default": "None"
+        }
+    },
+    "object-curly-newline": {
+        "always": {
+            "description": "Requires line breaks after opening and before closing braces.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Disallows line breaks after opening and before closing braces.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "multiline": {
+            "description": "Requires line breaks if there are line breaks inside properties or between properties. Otherwise, it disallows line breaks.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "minProperties": {
+            "description": "Requires line breaks if the number of properties is at least the given integer. By default, an error will also be reported if an object contains line breaks and has fewer properties than the given integer. However, the second behavior is disabled if the `consistent` option is set to `true`.",
+            "type": "int",
+            "default": "None"
+        },
+        "consistent": {
+            "description": "Requires that either both curly braces, or neither, directly enclose newlines. Note that enabling this option will also change the behavior of the `minProperties` option.",
+            "type": "boolean",
+            "default": "true"
+        },
+        "ObjectExpression": {
+            "description": "Configuration for object literals.",
+            "type": "string",
+            "default": "None"
+        },
+        "ObjectPattern": {
+            "description": "Configuration for object patterns of destructuring assignments.",
+            "type": "object",
+            "default": "None"
+        },
+        "ImportDeclaration": {
+            "description": "Configuration for named imports.",
+            "type": "string",
+            "default": "None"
+        },
+        "ExportDeclaration": {
+            "description": "Configuration for named exports.",
+            "type": "object",
+            "default": "None"
+        }
+    },
+    "object-curly-spacing": {
+        "never": {
+            "description": "Disallows spacing inside of braces.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires spacing inside of braces (except {}).",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "arraysInObjects": {
+            "description": "Requires or disallows spacing inside of braces of objects beginning and/or ending with an array element.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "objectsInObjects": {
+            "description": "Requires or disallows spacing inside of braces of objects beginning and/or ending with an object element.",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "object-property-newline": {
+        "allowAllPropertiesOnSameLine": {
+            "description": "Allows all properties to be on the same line if set to true.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "allowMultiplePropertiesPerLine": {
+            "description": "Deprecated synonym for allowAllPropertiesOnSameLine.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "object-shorthand": {
+        "always": {
+            "description": "Expects that the shorthand will be used whenever possible.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "methods": {
+            "description": "Ensures the method shorthand is used (also applies to generators).",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "properties": {
+            "description": "Ensures the property shorthand is used (where the key and variable name match).",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Ensures that no property or method shorthand is used in any object literal.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Ensures that either all shorthand or all long-form will be used in an object literal.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent-as-needed": {
+            "description": "Ensures that either all shorthand or all long-form will be used in an object literal, but ensures all shorthand whenever possible.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "avoidQuotes": {
+            "description": "Indicates that long-form syntax is preferred whenever the object key is a string literal.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "ignoreConstructors": {
+            "description": "Prevents the rule from reporting errors for constructor functions.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "methodsIgnorePattern": {
+            "description": "For methods whose names match this regex pattern, the method shorthand will not be enforced.",
+            "type": "string",
+            "default": "None"
+        },
+        "avoidExplicitReturnArrows": {
+            "description": "Indicates that methods are preferred over explicit-return arrow functions for function properties.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "one-var-declaration-per-line": {
+        "initializations": {
+            "description": "Enforces a newline around variable initializations.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Enforces a newline around variable declarations.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "one-var": {
+        "always": {
+            "description": "Requires one variable declaration per scope.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Requires multiple variable declarations per scope.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consecutive": {
+            "description": "Allows multiple variable declarations per scope but requires consecutive variable declarations to be combined into a single declaration.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "var": {
+            "description": "Configures the rule for `var` declarations.",
+            "type": "string",
+            "default": "Unused"
+        },
+        "let": {
+            "description": "Configures the rule for `let` declarations.",
+            "type": "string",
+            "default": "Unused"
+        },
+        "const": {
+            "description": "Configures the rule for `const` declarations.",
+            "type": "string",
+            "default": "Unused"
+        },
+        "separateRequires": {
+            "description": "Enforces `requires` to be separate from declarations.",
+            "type": "boolean",
+            "default": "Unused"
+        },
+        "initialized": {
+            "description": "Configures the rule for initialized variables.",
+            "type": "string",
+            "default": "Unused"
+        },
+        "uninitialized": {
+            "description": "Configures the rule for uninitialized variables.",
+            "type": "string",
+            "default": "Unused"
+        }
+    },
+    "operator-assignment": {
+        "always": {
+            "description": "Requires assignment operator shorthand where possible.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows assignment operator shorthand.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "operator-linebreak": {
+        "after": {
+            "description": "Requires linebreaks to be placed after the operator.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "before": {
+            "description": "Requires linebreaks to be placed before the operator.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "none": {
+            "description": "Disallows linebreaks on either side of the operator.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "overrides": {
+            "description": "Overrides the global setting for specified operators.",
+            "type": "object",
+            "default": {
+                "?": "before",
+                ":": "before"
+            }
+        }
+    },
+    "padded-blocks": {
+        "always": {
+            "description": "Requires empty lines at the beginning and ending of block statements, function bodies, class static blocks, classes, and switch statements.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows empty lines at the beginning and ending of block statements, function bodies, class static blocks, classes, and switch statements.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "blocks": {
+            "description": "Require or disallow padding within block statements, function bodies, and class static blocks.",
+            "type": "string",
+            "default": "None"
+        },
+        "classes": {
+            "description": "Require or disallow padding within classes.",
+            "type": "string",
+            "default": "None"
+        },
+        "switches": {
+            "description": "Require or disallow padding within switch statements.",
+            "type": "string",
+            "default": "None"
+        },
+        "allowSingleLineBlocks": {
+            "description": "Allows single-line blocks.",
+            "type": "boolean",
+            "default": "Unused"
+        }
+    },
+    "prefer-arrow-callback": {
+        "allowNamedFunctions": {
+            "description": "This boolean option prohibits using named functions as callbacks or function arguments when set to false. Changing this value to true will allow the use of named functions without restriction.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowUnboundThis": {
+            "description": "This boolean option allows function expressions containing 'this' to be used as callbacks, as long as the function in question has not been explicitly bound when set to true. Setting this option to false prohibits the use of function expressions as callbacks or function arguments entirely, without exception.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "prefer-const": {
+        "destructuring": {
+            "description": "The kind of the way to address variables in destructuring.",
+            "type": "string",
+            "default": "any"
+        },
+        "ignoreReadBeforeAssign": {
+            "description": "This is an option to avoid conflicting with `no-use-before-define` rule (without `\"nofunc\"` option). If `true` is specified, this rule will ignore variables that are read between the declaration and the first assignment.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "prefer-destructuring": {
+        "array": {
+            "description": "Turn on or off the destructuring requirement for arrays.",
+            "type": "boolean",
+            "default": true
+        },
+        "object": {
+            "description": "Turn on or off the destructuring requirement for objects.",
+            "type": "boolean",
+            "default": true
+        },
+        "VariableDeclarator": {
+            "description": "Control the destructuring requirement for variable declarations independently for arrays and objects.",
+            "type": "object",
+            "default": {
+                "array": true,
+                "object": true
+            }
+        },
+        "AssignmentExpression": {
+            "description": "Control the destructuring requirement for assignment expressions independently for arrays and objects.",
+            "type": "object",
+            "default": {
+                "array": true,
+                "object": true
+            }
+        },
+        "enforceForRenamedProperties": {
+            "description": "Determine whether the object destructuring applies to renamed variables.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "prefer-promise-reject-errors": {
+        "allowEmptyReject": {
+            "description": "Allows calls to `Promise.reject()` with no arguments.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "prefer-reflect": {
+        "exceptions": {
+            "description": "Allows you to pass an array of method names you\u2019d like to continue to use in the old style.",
+            "type": "array",
+            "default": "None"
+        }
+    },
+    "prefer-regex-literals": {
+        "disallowRedundantWrapping": {
+            "description": "Set to true to additionally check for unnecessarily wrapped regex literals.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "quote-props": {
+        "always": {
+            "description": "Requires quotes around all object literal property names.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "as-needed": {
+            "description": "Disallows quotes around object literal property names that are not strictly required.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent": {
+            "description": "Enforces a consistent quote style; in a given object, either all of the properties should be quoted, or none of the properties should be quoted.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "consistent-as-needed": {
+            "description": "Requires quotes around all object literal property names if any name strictly requires quotes, otherwise disallows quotes around object property names.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "keywords": {
+            "description": "Requires quotes around language keywords used as object property names (only applies when using 'as-needed' or 'consistent-as-needed').",
+            "type": "boolean",
+            "default": "None"
+        },
+        "unnecessary": {
+            "description": "Disallows quotes around object literal property names that are not strictly required (only applies when using 'as-needed').",
+            "type": "boolean",
+            "default": true
+        },
+        "numbers": {
+            "description": "Requires quotes around numbers used as object property names (only applies when using 'as-needed').",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "quotes": {
+        "double": {
+            "description": "Requires the use of double quotes wherever possible.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "single": {
+            "description": "Requires the use of single quotes wherever possible.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "backtick": {
+            "description": "Requires the use of backticks wherever possible.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "avoidEscape": {
+            "description": "Allows strings to use single-quotes or double-quotes so long as the string contains a quote that would have to be escaped otherwise.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "allowTemplateLiterals": {
+            "description": "Allows strings to use backticks.",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "radix": {
+        "always": {
+            "description": "Enforces providing a radix argument to parseInt() to ensure the string is interpreted in the intended way.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "as-needed": {
+            "description": "Disallows providing the radix argument if it is 10, assuming the code targets only ES5-compliant environments.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "require-atomic-updates": {
+        "allowProperties": {
+            "description": "When set to `true`, the rule does not report assignments to properties.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "require-jsdoc": {
+        "require": {
+            "description": "Requires JSDoc comments for the specified nodes.",
+            "type": "object",
+            "default": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": false,
+                "ClassDeclaration": false,
+                "ArrowFunctionExpression": false,
+                "FunctionExpression": false
+            }
+        }
+    },
+    "rest-spread-spacing": {
+        "never": {
+            "description": "Whitespace is not allowed between spread operators and their expressions.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Whitespace is required between spread operators and their expressions.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "semi-spacing": {
+        "before": {
+            "description": "Enforces or disallows spacing before semicolons.",
+            "type": "boolean",
+            "default": false
+        },
+        "after": {
+            "description": "Enforces or disallows spacing after semicolons.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "semi-style": {
+        "last": {
+            "description": "Enforces that semicolons are at the end of statements.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "first": {
+            "description": "Enforces that semicolons are at the beginning of statements. Semicolons of `for` loop heads (`for(a;b;c){}`) should be at the end of lines even if you use this option.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "semi": {
+        "always": {
+            "description": "Requires semicolons at the end of statements.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows semicolons at the end of statements (except to disambiguate statements beginning with `[`, `(`, `/`, `+`, or `-`).",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "omitLastInOneLineBlock": {
+            "description": "Disallows the last semicolon in a block in which its braces (and therefore the content of the block) are in the same line.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "omitLastInOneLineClassBody": {
+            "description": "Disallows the last semicolon in a class body in which its braces (and therefore the content of the class body) are in the same line.",
+            "type": "boolean",
+            "default": "None"
+        },
+        "beforeStatementContinuationChars": {
+            "description": "Controls semicolon usage at the end of statements if the next line starts with `[`, `(`, `/`, `+`, or `-`.",
+            "type": "string",
+            "default": "any"
+        }
+    },
+    "sort-imports": {
+        "ignoreCase": {
+            "description": "Ignore case when sorting import declarations.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreDeclarationSort": {
+            "description": "Ignore the sorting of import declarations.",
+            "type": "boolean",
+            "default": false
+        },
+        "ignoreMemberSort": {
+            "description": "Ignore the sorting of members within import declarations.",
+            "type": "boolean",
+            "default": false
+        },
+        "memberSyntaxSortOrder": {
+            "description": "Specify the order of member syntax types for sorting.",
+            "type": "array",
+            "default": [
+                "none",
+                "all",
+                "multiple",
+                "single"
+            ]
+        },
+        "allowSeparatedGroups": {
+            "description": "Allow separated groups of import declarations.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "sort-keys": {
+        "asc": {
+            "description": "Enforce properties to be in ascending order.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "desc": {
+            "description": "Enforce properties to be in descending order.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "caseSensitive": {
+            "description": "If true, enforce properties to be in case-sensitive order.",
+            "type": "boolean",
+            "default": true
+        },
+        "minKeys": {
+            "description": "Specifies the minimum number of keys that an object should have in order for the object\u2019s unsorted keys to produce an error.",
+            "type": "int",
+            "default": 2
+        },
+        "natural": {
+            "description": "If true, enforce properties to be in natural order. Natural Order compares strings containing combination of letters and numbers in the way a human being would sort.",
+            "type": "boolean",
+            "default": false
+        },
+        "allowLineSeparatedGroups": {
+            "description": "If true, the rule allows to group object keys through line breaks. A blank line after a property will reset the sorting of keys.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "sort-vars": {
+        "ignoreCase": {
+            "description": "Ignores the case-sensitivity of the variables order.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "space-before-blocks": {
+        "always": {
+            "description": "Blocks must always have at least one preceding space.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "All blocks should never have any preceding space.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "functions": {
+            "description": "Configures spacing before function blocks.",
+            "type": "string",
+            "default": "Unused"
+        },
+        "keywords": {
+            "description": "Configures spacing before keyword blocks.",
+            "type": "string",
+            "default": "Unused"
+        },
+        "classes": {
+            "description": "Configures spacing before class blocks.",
+            "type": "string",
+            "default": "Unused"
+        }
+    },
+    "space-before-function-paren": {
+        "always": {
+            "description": "Requires a space followed by the `(` of arguments.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "Disallows any space followed by the `(` of arguments.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "anonymous": {
+            "description": "Configures spacing for anonymous function expressions (e.g. `function () {}`).",
+            "type": "string",
+            "default": "always"
+        },
+        "named": {
+            "description": "Configures spacing for named function expressions (e.g. `function foo () {}`).",
+            "type": "string",
+            "default": "always"
+        },
+        "asyncArrow": {
+            "description": "Configures spacing for async arrow function expressions (e.g. `async () => {}`).",
+            "type": "string",
+            "default": "always"
+        }
+    },
+    "space-in-parens": {
+        "never": {
+            "description": "Enforces zero spaces inside of parentheses.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Enforces a space inside of parentheses.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "exceptions": {
+            "description": "Specifies exceptions to the spacing rule inside parentheses. Available exceptions are: ['{}', '[]', '()', 'empty'].",
+            "type": "object",
+            "default": "None"
+        }
+    },
+    "space-infix-ops": {
+        "int32Hint": {
+            "description": "Set the `int32Hint` option to `true` to allow writing `a|0` without space.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "space-unary-ops": {
+        "words": {
+            "description": "Applies to unary word operators such as: `new`, `delete`, `typeof`, `void`, `yield`.",
+            "type": "boolean",
+            "default": true
+        },
+        "nonwords": {
+            "description": "Applies to unary operators such as: `-`, `+`, `--`, `++`, `!`, `!!`.",
+            "type": "boolean",
+            "default": false
+        },
+        "overrides": {
+            "description": "Specifies overwriting usage of spacing for each operator, word or non-word. Can be used to enforce or disallow spacing around operators.",
+            "type": "object",
+            "default": "None"
+        }
+    },
+    "spaced-comment": {
+        "always": {
+            "description": "If set to 'always', the // or /* must be followed by at least one whitespace.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "never": {
+            "description": "If set to 'never', there should be no whitespace following the // or /*.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "exceptions": {
+            "description": "An array of string patterns which are considered exceptions to the rule. The rule will not warn when the pattern starts from the beginning of the comment and repeats until the end of the line or */ if the comment is a single line comment. Exceptions are ignored if the first argument is 'never'.",
+            "type": "array",
+            "default": "None"
+        },
+        "markers": {
+            "description": "An array of string patterns which are considered markers for docblock-style comments, such as an additional /, used to denote documentation read by doxygen, vsdoc, etc. which must have additional characters. The markers array will apply regardless of the value of the first argument, e.g. 'always' or 'never'.",
+            "type": "array",
+            "default": "None"
+        },
+        "balanced": {
+            "description": "A boolean that specifies if inline block comments should have balanced spacing. If 'balanced': true and 'always', then the /* must be followed by at least one whitespace, and the */ must be preceded by at least one whitespace. If 'balanced': true and 'never', then there should be no whitespace following /* or preceding */. If 'balanced': false, then balanced whitespace is not enforced.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "strict": {
+        "safe": {
+            "description": "The 'safe' option corresponds to the 'global' option if ESLint considers a file to be a Node.js or CommonJS module because the configuration specifies either of the following: 'node' or 'commonjs' environments, or 'globalReturn': true property in the 'ecmaFeatures' object of parser options. Otherwise, the 'safe' option corresponds to the 'function' option. Note that if 'globalReturn': false is explicitly specified in the configuration, the 'safe' option will correspond to the 'function' option regardless of the specified environment.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "global": {
+            "description": "Requires one strict mode directive in the global scope (and disallows any other strict mode directives).",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "function": {
+            "description": "Requires one strict mode directive in each top-level function declaration or expression (and disallows any other strict mode directives). This option ensures that all function bodies are strict mode code, while global code is not.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Disallows strict mode directives.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "switch-colon-spacing": {
+        "after": {
+            "description": "Requires one or more spaces after colons.",
+            "type": "boolean",
+            "default": true
+        },
+        "before": {
+            "description": "Requires one or more spaces before colons.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "template-curly-spacing": {
+        "never": {
+            "description": "Disallows spaces inside of the curly brace pair.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires one or more spaces inside of the curly brace pair.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "template-tag-spacing": {
+        "never": {
+            "description": "Disallows spaces between a tag function and its template literal.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "Requires one or more spaces between a tag function and its template literal.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "unicode-bom": {
+        "always": {
+            "description": "Files must begin with the Unicode BOM",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "never": {
+            "description": "Files must not begin with the Unicode BOM",
+            "type": "literal_string",
+            "default": "Used"
+        }
+    },
+    "use-isnan": {
+        "enforceForSwitchCase": {
+            "description": "Disallows `case NaN` and `switch(NaN)` in `switch` statements.",
+            "type": "boolean",
+            "default": true
+        },
+        "enforceForIndexOf": {
+            "description": "Disallows the use of `indexOf` and `lastIndexOf` methods with `NaN`.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "valid-jsdoc": {
+        "prefer": {
+            "description": "Enforces consistent documentation tags specified by an object whose properties mean instead of key use value (for example, \"return\": \"returns\" means instead of @return use @returns).",
+            "type": "object",
+            "default": "None"
+        },
+        "preferType": {
+            "description": "Enforces consistent type strings specified by an object whose properties mean instead of key use value (for example, \"object\": \"Object\" means instead of object use Object).",
+            "type": "object",
+            "default": "None"
+        },
+        "requireReturn": {
+            "description": "Requires a return tag: true (default) even if the function or method does not have a return statement (this option value does not apply to constructors); false if and only if the function or method has a return statement or returns a value e.g. async function (this option value does apply to constructors).",
+            "type": "boolean",
+            "default": "true"
+        },
+        "requireReturnType": {
+            "description": "Allows missing type in return tags.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "matchDescription": {
+            "description": "Specifies (as a string) a regular expression to match the description in each JSDoc comment (for example, \".+\" requires a description; this option does not apply to descriptions in parameter or return tags).",
+            "type": "string",
+            "default": "None"
+        },
+        "requireParamDescription": {
+            "description": "Allows missing description in parameter tags.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "requireReturnDescription": {
+            "description": "Allows missing description in return tags.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "requireParamType": {
+            "description": "Allows missing type in parameter tags.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "valid-typeof": {
+        "requireStringLiterals": {
+            "description": "Requires `typeof` expressions to only be compared to string literals or other `typeof` expressions, and disallows comparisons to any other value.",
+            "type": "boolean",
+            "default": "None"
+        }
+    },
+    "wrap-iife": {
+        "outside": {
+            "description": "Enforces always wrapping the call expression.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "inside": {
+            "description": "Enforces always wrapping the function expression.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "any": {
+            "description": "Enforces always wrapping, but allows either style.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "functionPrototypeMethods": {
+            "description": "Additionally enforces wrapping function expressions invoked using `.call` and `.apply`.",
+            "type": "boolean",
+            "default": "false"
+        }
+    },
+    "yield-star-spacing": {
+        "before": {
+            "description": "Shorthand for `{\"before\": true, \"after\": false}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "after": {
+            "description": "Shorthand for `{\"before\": false, \"after\": true}`.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "both": {
+            "description": "Shorthand for `{\"before\": true, \"after\": true}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "neither": {
+            "description": "Shorthand for `{\"before\": false, \"after\": false}`.",
+            "type": "literal_string",
+            "default": "Unused"
+        }
+    },
+    "yoda": {
+        "never": {
+            "description": "Comparisons must never be Yoda conditions.",
+            "type": "literal_string",
+            "default": "Used"
+        },
+        "always": {
+            "description": "The literal value must always come first in comparisons.",
+            "type": "literal_string",
+            "default": "Unused"
+        },
+        "exceptRange": {
+            "description": "Allows Yoda conditions in range comparisons which are wrapped directly in parentheses, including the parentheses of an `if` or `while` condition.",
+            "type": "boolean",
+            "default": "false"
+        },
+        "onlyEquality": {
+            "description": "Reports Yoda conditions only for the equality operators `==` and `===`.",
+            "type": "boolean",
+            "default": "false"
+        }
+    }
+}

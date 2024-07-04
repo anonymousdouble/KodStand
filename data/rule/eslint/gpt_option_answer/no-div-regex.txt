@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-div-regex" rule. After analyzing the content, it appears that this rule does not have any configurable options. The rule simply disallows equal signs explicitly at the beginning of regular expressions to avoid confusion with the division assignment operator.
+
+Therefore, the result is:
+
+```
+no option
+```

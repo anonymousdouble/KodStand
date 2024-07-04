@@ -1,0 +1,36 @@
+The ESLint rule "quote-props" has both string and object options. Here are the details of the configurable options:
+
+### String Options:
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires quotes around all object literal property names, or disallows quotes around object literal property names that are not strictly required.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed", "consistent", "consistent-as-needed"}
+   - **Default Value**: "always"
+
+### Object Options:
+1. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures additional behaviors for the rule when using "as-needed" or "consistent-as-needed".
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_2.keywords
+   - **Option Description**: Requires quotes around language keywords used as object property names.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.unnecessary
+   - **Option Description**: Disallows quotes around object literal property names that are not strictly required.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: anonymous_option_2.numbers
+   - **Option Description**: Requires quotes around numbers used as object property names.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+### Summary:
+The rule "quote-props" has a string option with four possible values and an object option with three sub-options. The string option controls the general behavior of quoting properties, while the object option provides additional configurations for specific cases.

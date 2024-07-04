@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the "no-negated-condition" rule does not specify any configurable options. The rule description and examples focus on the behavior of the rule without mentioning any parameters or settings that can be adjusted.
+
+Therefore, the result is:
+
+```
+no option
+```

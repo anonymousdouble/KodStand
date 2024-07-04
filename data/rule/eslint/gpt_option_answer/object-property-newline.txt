@@ -1,0 +1,9 @@
+The ESLint rule "object-property-newline" has one configurable option. Here are the details:
+
+1. **Option Name**: allowAllPropertiesOnSameLine
+   - **Option Description**: Allows all properties to be on the same line if set to true.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+There are no nested or additional options within this rule.

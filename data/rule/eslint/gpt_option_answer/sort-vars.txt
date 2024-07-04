@@ -1,0 +1,7 @@
+The ESLint rule "sort-vars" has one configurable option. Here are the details:
+
+1. **Option Name**: ignoreCase
+   - **Option Description**: Ignores the case-sensitivity of the variables order.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

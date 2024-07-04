@@ -1,0 +1,53 @@
+The ESLint rule "max-lines-per-function" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum number of lines in a function.
+   - **Data Type**: integer
+   - **Data Range**: open-ended
+   - **Default Value**: 50
+
+2. **Option Name**: skipBlankLines
+   - **Option Description**: Ignore lines made up purely of whitespace.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: skipComments
+   - **Option Description**: Ignore lines containing just comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: IIFEs
+   - **Option Description**: Include any code included in IIFEs (Immediately Invoked Function Expressions).
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Additionally, the rule allows specifying a single integer for the `max` option directly, which is equivalent to setting the `max` property in an object.
+
+Here is the structured information:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum number of lines in a function.
+   - **Data Type**: integer
+   - **Data Range**: open-ended
+   - **Default Value**: 50
+
+2. **Option Name**: skipBlankLines
+   - **Option Description**: Ignore lines made up purely of whitespace.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: skipComments
+   - **Option Description**: Ignore lines containing just comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: IIFEs
+   - **Option Description**: Include any code included in IIFEs.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

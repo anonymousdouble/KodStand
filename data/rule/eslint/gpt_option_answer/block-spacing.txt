@@ -1,0 +1,9 @@
+The provided ESLint rule HTML file describes the "block-spacing" rule. Based on the content, here are the extracted details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires one or more spaces inside an open block token and the next token on the same line, and inside a close block token and the previous token on the same line.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+The rule has a single string option with two possible values: "always" and "never". The default value is "always". There are no nested or additional options.

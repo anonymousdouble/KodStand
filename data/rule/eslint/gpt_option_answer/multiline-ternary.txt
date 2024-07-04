@@ -1,0 +1,9 @@
+The ESLint rule "multiline-ternary" has a single string option with three possible values. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces or disallows newlines between operands of a ternary expression.
+   - **Data Type**: string
+   - **Data Range**: {"always", "always-multiline", "never"}
+   - **Default Value**: "always"
+
+Since there are no nested or additional options, the analysis is complete.

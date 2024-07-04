@@ -1,0 +1,7 @@
+The ESLint rule "no-mixed-spaces-and-tabs" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Allows mixed tabs and spaces when the spaces are used for alignment.
+   - **Data Type**: string
+   - **Data Range**: {"smart-tabs"}
+   - **Default Value**: no default

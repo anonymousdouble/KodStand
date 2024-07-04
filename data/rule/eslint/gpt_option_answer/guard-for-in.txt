@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "guard-for-in" rule. After analyzing the content, it appears that this rule does not have any configurable options. The rule's purpose is to ensure that `for-in` loops include an `if` statement to filter out properties from the prototype chain.
+
+Here is the result based on the analysis:
+
+```
+no option
+```

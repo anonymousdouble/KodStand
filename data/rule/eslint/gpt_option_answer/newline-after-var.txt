@@ -1,0 +1,9 @@
+The ESLint rule "newline-after-var" has a single string option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows an empty line after `var`, `let`, or `const` statements.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+The rule does not have any nested or additional options beyond this single string option.

@@ -1,0 +1,39 @@
+The provided ESLint rule HTML file describes the "strict" rule, which has several configurable options. Here are the extracted details of all configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the mode for strict mode directives.
+   - **Data Type**: string
+   - **Data Range**: {"safe", "global", "function", "never"}
+   - **Default Value**: "safe"
+
+2. **Option Name**: safe
+   - **Option Description**: Corresponds to either "global" or "function" based on the file type (CommonJS or otherwise).
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: "global" for CommonJS modules, "function" otherwise
+
+3. **Option Name**: global
+   - **Option Description**: Requires one strict mode directive in the global scope and disallows any other strict mode directives.
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: no default
+
+4. **Option Name**: function
+   - **Option Description**: Requires one strict mode directive in each top-level function declaration or expression and disallows any other strict mode directives.
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: no default
+
+5. **Option Name**: never
+   - **Option Description**: Disallows strict mode directives.
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: no default
+
+6. **Option Name**: earlier_default_removed
+   - **Option Description**: The earlier default option (removed) ensured that all functions are executed in strict mode.
+   - **Data Type**: string
+   - **Data Range**: null
+   - **Default Value**: no default
+
+In summary, the "strict" rule has one main string option with four possible values ("safe", "global", "function", "never"), and each of these values has specific behaviors and requirements. The default value for the main option is "safe".

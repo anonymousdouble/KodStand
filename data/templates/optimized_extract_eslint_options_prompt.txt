@@ -1,0 +1,84 @@
+Here's an optimized version of your prompt with a refined analysis section:
+
+---
+
+**Task**: Extract details of all configurable options from the provided ESLint rule HTML file. If the rule has no options, return "no option". Options are configurable parameters of ESLint rules and can be objects, strings, or other value forms.
+
+**For each option, provide:**
+1. **Option Name**: The name of the option. If unnamed, use "anonymous_option_k" for the Kth option.
+2. **Option Description**: A short description of the option.
+3. **Data Type**: The data type of the option value.
+4. **Data Range**: The data range of the option value, or "open-ended". For options with sub-options, use "null".
+5. **Default Value**: Specify the default value, or "no default" if there is no default value.
+
+**Guidelines:**
+- **Nested Options**: Reflect the hierarchy in the name. For example, for the rule "no-restricted-exports" configured as `["error", {"restrictDefaultExports": {"direct": true}}]`, the option "direct" is a sub-option of "restrictDefaultExports", so name it "restrictDefaultExports.direct".
+
+**Example Analysis:**
+Extracted details of configurable options of the Rule "array-element-newline" are as follows:
+
+```
+Options
+This rule has either a string option:
+
+"always" (default) requires line breaks between array elements
+"never" disallows line breaks between array elements
+"consistent" requires consistent usage of line breaks between array elements
+Or an object option (Requires line breaks if any of the properties are satisfied. Otherwise, disallows line breaks):
+
+"multiline": <boolean> requires line breaks if there are line breaks inside elements. If this is false, this condition is disabled.
+"minItems": <number> requires line breaks if the number of elements is at least the given integer. If this is 0, this condition will act the same as the option "always". If this is null (the default), this condition is disabled.
+Alternatively, different configurations can be specified for array expressions and array patterns:
+
+{
+    "array-element-newline": ["error", {
+        "ArrayExpression": "consistent",
+        "ArrayPattern": { "minItems": 3 },
+    }]
+}
+
+"ArrayExpression" configuration for array expressions (if unspecified, this rule will not apply to array expressions)
+"ArrayPattern" configuration for array patterns of destructuring assignments (if unspecified, this rule will not apply to array patterns)
+```
+
+**Analysis:**
+The rule "array-element-newline" has one main option that can take three forms: a string form and two object forms.
+
+1. **Option Name**: anonymous_option_1_form_1
+   - **Option Description**: Requires line breaks between array elements.
+   - **Data Type**: string | object
+   - **Data Range**: {"always", "never", "consistent"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_1_form_2
+   - **Option Description**: Requires line breaks if any properties are satisfied. Otherwise, disallows line breaks.
+   - **Data Type**: object
+   - **Data Range**: { "multiline": boolean, "minItems": number }
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_1_form_2.multiline
+   - **Option Description**: Requires line breaks if there are line breaks inside elements. If false, this condition is disabled.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_1_form_2.minItems
+   - **Option Description**: Requires line breaks if the number of elements is at least the given integer. If 0, acts like "always". If null (default), this condition is disabled.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: null
+
+5. **Option Name**: anonymous_option_1_form_3
+   - **Option Description**: Specify different configurations for array expressions and array patterns.
+   - **Data Type**: object
+   - **Data Range**: {"ArrayExpression": anonymous_option_1_form_1 | anonymous_option_1_form_2, "ArrayPattern": anonymous_option_1_form_1 | anonymous_option_1_form_2}
+   - **Default Value**: no default
+
+**ESLint Rule:**
+```html
+{{html_content}}
+```
+
+---
+
+This version is more concise and clear, ensuring that the instructions and analysis are easy to follow.

@@ -1,0 +1,33 @@
+The ESLint rule "space-in-parens" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces zero spaces inside of parentheses.
+   - **Data Type**: string
+   - **Data Range**: {"never"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Enforces a space inside of parentheses.
+   - **Data Type**: string
+   - **Data Range**: {"always"}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_3
+   - **Option Description**: Specifies exceptions to the spacing rule.
+   - **Data Type**: object
+   - **Data Range**: {"exceptions": array}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_3.exceptions
+   - **Option Description**: An array of exceptions to the spacing rule.
+   - **Data Type**: array
+   - **Data Range**: {"{}", "[]", "()", "empty"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_3.exceptions.empty
+   - **Option Description**: Concerns empty parentheses and inverts the first option.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+The rule has both string and object options, with the object option containing an array of exceptions. The default value for the primary option is "never", which enforces zero spaces inside parentheses.

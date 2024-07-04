@@ -1,0 +1,27 @@
+The provided ESLint rule HTML file describes the "quotes" rule, which enforces the consistent use of either backticks, double, or single quotes. The rule has both string and object options. Here are the extracted details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires the use of double quotes, single quotes, or backticks wherever possible.
+   - **Data Type**: string
+   - **Data Range**: {"double", "single", "backtick"}
+   - **Default Value**: "double"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Allows strings to use single-quotes or double-quotes so long as the string contains a quote that would have to be escaped otherwise, and allows strings to use backticks.
+   - **Data Type**: object
+   - **Data Range**: {"avoidEscape": boolean, "allowTemplateLiterals": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.avoidEscape
+   - **Option Description**: Allows strings to use single-quotes or double-quotes so long as the string contains a quote that would have to be escaped otherwise.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.allowTemplateLiterals
+   - **Option Description**: Allows strings to use backticks.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+The rule does not have any other options beyond these.

@@ -1,0 +1,57 @@
+The ESLint rule "prefer-reflect" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: exceptions
+   - **Option Description**: Allows you to pass an array of method names you’d like to continue to use in the old style.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+2. **Option Name**: reflectapply
+   - **Option Description**: Deprecates `Function.prototype.apply()` and `Function.prototype.call()`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: reflectdefineproperty
+   - **Option Description**: Deprecates `Object.defineProperty()`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+4. **Option Name**: reflectgetownpropertydescriptor
+   - **Option Description**: Deprecates `Object.getOwnPropertyDescriptor()`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+5. **Option Name**: reflectgetprototypeof
+   - **Option Description**: Deprecates `Object.getPrototypeOf()`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+6. **Option Name**: reflectsetprototypeof
+   - **Option Description**: Deprecates `Object.setPrototypeOf()`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+7. **Option Name**: reflectisextensible
+   - **Option Description**: Deprecates `Object.isExtensible`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+8. **Option Name**: reflectpreventextensions
+   - **Option Description**: Deprecates `Object.preventExtensions()`.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+9. **Option Name**: reflectdeleteproperty
+   - **Option Description**: Deprecates the `delete` keyword.
+   - **Data Type**: null
+   - **Data Range**: null
+   - **Default Value**: no default
+
+In summary, the rule "prefer-reflect" has one main option (`exceptions`) that allows for an array of method names to be specified, and several other options that deprecate specific methods or keywords.

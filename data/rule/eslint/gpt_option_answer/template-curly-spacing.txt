@@ -1,0 +1,9 @@
+The provided ESLint rule "template-curly-spacing" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Controls the spacing inside of template literals.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+The rule does not have any nested or sub-options.

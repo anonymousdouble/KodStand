@@ -1,0 +1,19 @@
+The provided ESLint rule HTML file describes the "no-undef" rule. Based on the content, the rule has one configurable option. Here are the details:
+
+1. **Option Name**: typeof
+   - **Option Description**: Warns for variables used inside `typeof` check.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+The analysis is as follows:
+
+The rule has a single boolean option named `typeof`. This option, when set to true, will warn for variables used inside a `typeof` check. The default value for this option is false.
+
+Here is the extracted detail:
+
+1. **Option Name**: typeof
+   - **Option Description**: Warns for variables used inside `typeof` check.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

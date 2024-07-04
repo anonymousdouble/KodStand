@@ -1,0 +1,7 @@
+The ESLint rule "consistent-this" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Designated alias names for `this`.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: "that"

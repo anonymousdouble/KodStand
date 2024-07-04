@@ -1,0 +1,37 @@
+The ESLint rule "sort-keys" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces properties to be in ascending or descending order.
+   - **Data Type**: string
+   - **Data Range**: {"asc", "desc"}
+   - **Default Value**: "asc"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: An object containing additional properties to configure the rule.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.caseSensitive
+   - **Option Description**: If true, enforces properties to be in case-sensitive order.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: anonymous_option_2.minKeys
+   - **Option Description**: Specifies the minimum number of keys that an object should have in order for the object’s unsorted keys to produce an error.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 2
+
+5. **Option Name**: anonymous_option_2.natural
+   - **Option Description**: If true, enforces properties to be in natural order, which sorts numerically instead of alphabetically.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+6. **Option Name**: anonymous_option_2.allowLineSeparatedGroups
+   - **Option Description**: If true, allows grouping object keys through line breaks, resetting the sorting of keys after a blank line.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

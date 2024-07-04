@@ -1,0 +1,9 @@
+The ESLint rule "rest-spread-spacing" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether whitespace is allowed or required between rest and spread operators and their expressions.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always"}
+   - **Default Value**: "never"
+
+The rule does not have any nested or sub-options.

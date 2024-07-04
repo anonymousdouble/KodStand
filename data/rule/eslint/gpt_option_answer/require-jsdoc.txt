@@ -1,0 +1,37 @@
+The ESLint rule "require-jsdoc" has a single object option. Here are the details of the configurable options:
+
+1. **Option Name**: require
+   - **Option Description**: Requires JSDoc comments for the specified nodes.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+2. **Option Name**: require.FunctionDeclaration
+   - **Option Description**: Requires JSDoc comments for function declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: require.MethodDefinition
+   - **Option Description**: Requires JSDoc comments for method definitions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: require.ClassDeclaration
+   - **Option Description**: Requires JSDoc comments for class declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: require.ArrowFunctionExpression
+   - **Option Description**: Requires JSDoc comments for arrow function expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+6. **Option Name**: require.FunctionExpression
+   - **Option Description**: Requires JSDoc comments for function expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

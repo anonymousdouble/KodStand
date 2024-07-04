@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the rule "prefer-object-has-own" does not mention any configurable options. The rule details, examples of correct and incorrect code, and other information are provided, but there are no configurable parameters specified.
+
+Therefore, the result is:
+
+```
+no option
+```

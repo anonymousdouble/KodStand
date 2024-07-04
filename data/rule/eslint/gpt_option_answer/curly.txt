@@ -1,0 +1,63 @@
+The provided ESLint rule HTML file describes the "curly" rule, which enforces consistent brace style for all control statements. The rule has several configurable options. Here are the extracted details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the default behavior to enforce consistent use of curly braces for all control statements.
+   - **Data Type**: string
+   - **Data Range**: {"all"}
+   - **Default Value**: "all"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies that block statements should be used only when there are multiple statements in the block.
+   - **Data Type**: string
+   - **Data Range**: {"multi"}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_3
+   - **Option Description**: Allows brace-less single-line control statements while enforcing curly braces for multi-line statements.
+   - **Data Type**: string
+   - **Data Range**: {"multi-line"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_4
+   - **Option Description**: Forces brace-less control statements if their body contains only one single-line statement and forces braces in all other cases.
+   - **Data Type**: string
+   - **Data Range**: {"multi-or-nest"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_5
+   - **Option Description**: Enforces all bodies of an if-else chain to be with or without braces when using any of the multi* options.
+   - **Data Type**: string
+   - **Data Range**: {"consistent"}
+   - **Default Value**: no default
+
+Here is the structured information:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the default behavior to enforce consistent use of curly braces for all control statements.
+   - **Data Type**: string
+   - **Data Range**: {"all"}
+   - **Default Value**: "all"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Specifies that block statements should be used only when there are multiple statements in the block.
+   - **Data Type**: string
+   - **Data Range**: {"multi"}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_3
+   - **Option Description**: Allows brace-less single-line control statements while enforcing curly braces for multi-line statements.
+   - **Data Type**: string
+   - **Data Range**: {"multi-line"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_4
+   - **Option Description**: Forces brace-less control statements if their body contains only one single-line statement and forces braces in all other cases.
+   - **Data Type**: string
+   - **Data Range**: {"multi-or-nest"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_5
+   - **Option Description**: Enforces all bodies of an if-else chain to be with or without braces when using any of the multi* options.
+   - **Data Type**: string
+   - **Data Range**: {"consistent"}
+   - **Default Value**: no default

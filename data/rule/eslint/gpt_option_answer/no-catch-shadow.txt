@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the "no-catch-shadow" rule. Based on the content, it appears that this rule does not have any configurable options. The rule is aimed at preventing unexpected behavior in programs due to a bug in IE 8 and earlier, where the catch clause parameter can leak into outer scopes.
+
+Here is the analysis:
+
+```
+no option
+```

@@ -1,0 +1,5 @@
+The provided ESLint rule HTML file for the rule "no-extra-label" does not specify any configurable options. Therefore, the result is:
+
+```
+no option
+```

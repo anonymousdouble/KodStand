@@ -1,0 +1,13 @@
+The provided ESLint rule HTML file describes the "arrow-spacing" rule. Here are the extracted details of the configurable options:
+
+1. **Option Name**: before
+   - **Option Description**: Specifies whether there should be one or more spaces before the arrow in arrow functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: after
+   - **Option Description**: Specifies whether there should be one or more spaces after the arrow in arrow functions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

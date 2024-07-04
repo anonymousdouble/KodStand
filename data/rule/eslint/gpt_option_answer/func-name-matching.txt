@@ -1,0 +1,25 @@
+The ESLint rule "func-name-matching" has several configurable options. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies whether function names should always or never match the name of the variable or property to which they are assigned.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: An object containing additional configuration properties.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.considerPropertyDescriptor
+   - **Option Description**: If set to true, the check will take into account the use of `Object.create`, `Object.defineProperty`, `Object.defineProperties`, and `Reflect.defineProperty`.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+4. **Option Name**: anonymous_option_2.includeCommonJSModuleExports
+   - **Option Description**: If set to true, `module.exports` and `module["exports"]` will be checked by this rule.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

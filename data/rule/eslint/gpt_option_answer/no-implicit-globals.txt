@@ -1,0 +1,7 @@
+The ESLint rule "no-implicit-globals" has one configurable option, which is an object option. Here are the details of the configurable option:
+
+1. **Option Name**: lexicalBindings
+   - **Option Description**: Set to true if you want this rule to check `const`, `let`, and `class` declarations as well.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

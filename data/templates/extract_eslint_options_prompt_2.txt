@@ -1,0 +1,18 @@
+**Task**: Extract details of all configurable options from the provided ESLint rule HTML file. If the rule has no options, return "no option".
+Options are configurable parameters of ESLint rules.
+An option can be an object, a string, or other value forms.
+
+**For each option, provide:**
+1. **Option Name**: The name of the option. If the option does not have a name, name it "anonymous_option_k" for the Kth option.
+2. **Option Description**: A short description of the option.
+3. **Data Type**: The data type of the option value.
+4. **Possible Values**: The data range of the option value, or "open-ended". For options with sub-options, use "null".
+5. **Default Value**: Specify the default value, or "none" if there is no default value.
+
+**Guidelines:**
+- **Nested Options**: For nested options, reflect the hierarchy in the name. For example, for the rule "no-restricted-exports" configured as `["error", {"restrictDefaultExports": {"direct": true}}]`, the option "direct" is a sub-option of "restrictDefaultExports", so name it "restrictDefaultExports.direct".
+
+**ESLint Rule:**
+```html
+{{html_content}}
+```

@@ -1,0 +1,7 @@
+The ESLint rule "no-multi-assign" has one configurable option. Here are the details:
+
+1. **Option Name**: ignoreNonDeclaration
+   - **Option Description**: When set to true, the rule allows chains that don’t include initializing a variable in a declaration or initializing a class field.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

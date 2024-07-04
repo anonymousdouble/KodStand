@@ -1,0 +1,51 @@
+The ESLint rule "lines-between-class-members" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows an empty line after class members.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: An object with a property named `enforce` to specify configurations for enforcing empty lines between specific pairs of class members.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.enforce
+   - **Option Description**: Specifies configurations for enforcing empty lines between specific pairs of class members.
+   - **Data Type**: array of objects
+   - **Data Range**: null
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.enforce.blankLine
+   - **Option Description**: Indicates whether a blank line should be required or disallowed between the specified members.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.enforce.prev
+   - **Option Description**: Specifies the type of the preceding class member.
+   - **Data Type**: string
+   - **Data Range**: {"method", "field", "*"}
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_2.enforce.next
+   - **Option Description**: Specifies the type of the following class member.
+   - **Data Type**: string
+   - **Data Range**: {"method", "field", "*"}
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3
+   - **Option Description**: An object with a property named `exceptAfterSingleLine` to skip checking empty lines after single-line class members.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_3.exceptAfterSingleLine
+   - **Option Description**: Skip checking empty lines after single-line class members.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+These options allow for detailed configuration of the rule to enforce or disallow empty lines between class members based on specific conditions.

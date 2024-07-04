@@ -1,0 +1,21 @@
+The ESLint rule "no-warning-comments" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: terms
+   - **Option Description**: An optional array of terms to match in comments.
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: ["todo", "fixme", "xxx"]
+
+2. **Option Name**: location
+   - **Option Description**: An optional string that configures where in your comments to check for matches.
+   - **Data Type**: string
+   - **Data Range**: {"start", "anywhere"}
+   - **Default Value**: "start"
+
+3. **Option Name**: decoration
+   - **Option Description**: An optional array of characters that are ignored at the start of a comment when location is "start".
+   - **Data Type**: array
+   - **Data Range**: open-ended
+   - **Default Value**: []
+
+These options allow you to customize the behavior of the "no-warning-comments" rule to match specific terms in comments, specify where in the comments to look for these terms, and define characters to ignore at the start of comments.

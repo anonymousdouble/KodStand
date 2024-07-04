@@ -1,0 +1,9 @@
+The ESLint rule "id-denylist" has configurable options. Here are the details of the options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: The names of restricted identifiers.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+The rule takes one or more strings as options, which are the names of restricted identifiers. There is no default value specified for these options.

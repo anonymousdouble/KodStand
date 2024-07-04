@@ -1,0 +1,57 @@
+The ESLint rule "one-var" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires one variable declaration per scope.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consecutive"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures variable declarations for `var`, `let`, and `const` separately.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.var
+   - **Option Description**: Configures `var` declarations.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consecutive"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.let
+   - **Option Description**: Configures `let` declarations.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consecutive"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.const
+   - **Option Description**: Configures `const` declarations.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consecutive"}
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_2.separateRequires
+   - **Option Description**: Enforces `require` statements to be separate from variable declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3
+   - **Option Description**: Configures variable declarations for initialized and uninitialized variables separately.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+8. **Option Name**: anonymous_option_3.initialized
+   - **Option Description**: Configures declarations for initialized variables.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consecutive"}
+   - **Default Value**: no default
+
+9. **Option Name**: anonymous_option_3.uninitialized
+   - **Option Description**: Configures declarations for uninitialized variables.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "consecutive"}
+   - **Default Value**: no default
+
+These options allow for flexible configuration of how variables are declared in JavaScript code, catering to different coding styles and preferences.

@@ -1,0 +1,73 @@
+The ESLint rule "prefer-destructuring" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Determines what types of destructuring the rule applies to.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: {"array": true, "object": true}
+
+2. **Option Name**: anonymous_option_1.array
+   - **Option Description**: Controls the destructuring requirement for arrays.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: anonymous_option_1.object
+   - **Option Description**: Controls the destructuring requirement for objects.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: anonymous_option_2
+   - **Option Description**: Determines whether the object destructuring applies to renamed variables.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: {"enforceForRenamedProperties": false}
+
+5. **Option Name**: anonymous_option_2.enforceForRenamedProperties
+   - **Option Description**: Controls whether the object destructuring applies to renamed variables.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+6. **Option Name**: anonymous_option_3
+   - **Option Description**: Controls the destructuring requirement for variable declarations and assignment expressions.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: {"VariableDeclarator": {"array": true, "object": true}, "AssignmentExpression": {"array": true, "object": true}}
+
+7. **Option Name**: anonymous_option_3.VariableDeclarator
+   - **Option Description**: Controls the destructuring requirement for variable declarations.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: {"array": true, "object": true}
+
+8. **Option Name**: anonymous_option_3.VariableDeclarator.array
+   - **Option Description**: Controls the destructuring requirement for arrays in variable declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+9. **Option Name**: anonymous_option_3.VariableDeclarator.object
+   - **Option Description**: Controls the destructuring requirement for objects in variable declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+10. **Option Name**: anonymous_option_3.AssignmentExpression
+    - **Option Description**: Controls the destructuring requirement for assignment expressions.
+    - **Data Type**: object
+    - **Data Range**: null
+    - **Default Value**: {"array": true, "object": true}
+
+11. **Option Name**: anonymous_option_3.AssignmentExpression.array
+    - **Option Description**: Controls the destructuring requirement for arrays in assignment expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: true
+
+12. **Option Name**: anonymous_option_3.AssignmentExpression.object
+    - **Option Description**: Controls the destructuring requirement for objects in assignment expressions.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: true

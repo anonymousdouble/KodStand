@@ -1,0 +1,3454 @@
+url,rule_name,description,,,,Style Rules,Tool URL,Tool Description,,Tool Rules (Can Ignore),Options,,Our Results,"Flag: 0, not exist 1, match 2, partial 3, no rule","Flag1: 0, 1 to 1 1, 1 to n","Option: 0, no option 1, has option",,Checkstyle,有点困惑,缺少某些规则,,gpt_answer,gpt_configuration,,,
+"https://google.github.io/styleguide/javaguide.html#s2.2-file-encoding
+
+
+2 Source file basics
+",2.2 File encoding: UTF-8,Source files are encoded in UTF-8 .,,"Value Constraints/Restriction
+
+[character encoding scheme] of  [source files] is UTF-8
+
+is / :
+
+专有名词/Data   []
+[character encoding scheme]: UTF-8, …, UTF-16
+
+[source files]:
+.java, …, 
+
+
+",,The encoding of [.java file] is UTF-8,,,,,,,CheckStyle Cannot Handle,,,,,,,,,Yes,"<module name='FileTabCharacter'>
+  <property name='charset' value='UTF-8'/>
+</module>",,,
+"https://google.github.io/styleguide/javaguide.html#s2.3.1-whitespace-characters 
+
+
+2.3 Special characters
+",2.3.1 Whitespace characters,"Aside from the line terminator sequence, the ASCII horizontal space character ( 0x20 ) is the only whitespace character that appears anywhere in a source file. This implies that:
+All other whitespace characters in string and character literals are escaped. 
+Tab characters are not used for indentation.","Aside from the line terminator sequence, the ASCII horizontal space character ( 0x20 ) is the only whitespace character that appears anywhere in a source file.
+
+‘\v’</>‘\f’ </> ‘\t’ <not in>  [code] 
+space is only Whitespace Whitespace is  space
+
+?? [ASCII horizontal space character (0x20)] in [code] 
+
+?? [Whitespace characters] : / is ASCII horizontal space character (0x20)
+
+
+[\v] not in  [code]
+
+[Whitespace characters] : / isn’t \t
+
+********************************************************************
+All other whitespace characters in string and character literals are escaped.
+
+垂直制表符（Vertical Tab）：'\u000B' \v
+换页符（Form Feed）：'\u000C' \f
+回车符（Carriage Return）：'\u000D' \r
+水平制表符（Tab）：'\u0009' \t
+换行符（New Line）：'\u000A' \n
+
+[\v] of [string] is  [Escape Sequences] / [Unicode Escapes]
+
+[\v] of [character literals] is  [Escape Sequences] / [Unicode Escapes]
+
+********************************************************************
+Tab characters are not used for indentation.
+[Indentation] isn’t \t
+
+
+
+
+","Value Constraint: Whitespace characters in source files are restricted to the ASCII horizontal space character (0x20).
+
+1. ‘\v’</>‘\f’ </> ‘\t’ <not in>  [code]  
+2. ‘\v’</>‘\f’ </> ‘\t’ <of> [string </> literal]  <is>   [Escape Sequences </> Unicode Escapes] 
+3. [Indentation] <is not>  ‘\t’
+Allowed: Whitespace in [source file] is [0x20] // ASCII horizontal space Line terminator sequence in [source file]: includes [0x0A] // LF (Line Feed) includes [0x0D] // CR (Carriage Return) includes [0x0D 0x0A] // CRLF (Carriage Return + Line Feed) Disallowed: Other Whitespace in [source file] except [0x20, line terminator sequence] including: - [0x09] // Tab - [0x0B] // Vertical Tab - [0x0C] // Form Feed - [0xA0] // Non-breaking Space - Any other Unicode whitespace characters
+
+
+
+
+
+
+
+
+
+
+
+
+
+Java 专有名词 line terminator sequence 和  whitespace character，列出他们的all values
+
+
+在 Java 中，""line terminator sequence"" 和 ""whitespace character"" 是两个特定的术语，它们的值如下：
+Line Terminator Sequence（行终止序列）:
+在 Java 中，行终止序列表示一行代码的结束符号。
+Java 中的行终止序列有两种形式：
+Carriage Return (CR): \r （十六进制表示为 0x0D）
+Line Feed (LF): \n （十六进制表示为 0x0A）
+一般情况下，Unix 和 Linux 系统使用 LF 作为行终止符，而 Windows 系统使用 CRLF（\r\n）作为行终止符。
+Whitespace Character（空白字符）:
+在 Java 中，空白字符指的是在源代码中用于分隔其他标记的字符，但在语义上不产生实际效果。
+Java 中的空白字符包括：
+Space（空格符）: （ASCII码为 0x20）
+Tab（制表符）: \t （ASCII码为 0x09）
+Line Feed（换行符）: \n （ASCII码为 0x0A）
+Carriage Return（回车符）: \r （ASCII码为 0x0D）
+",,"Aside from the line terminator sequence, the ASCII horizontal space character ( 0x20 ) is the only whitespace character that appears anywhere in a source file. [constrain character usage]: (except whitespaces,line terminator sequence) or can only use 
+
+Data + Operation
+XXXX [whitespace character- {0x20, line terminator sequence}] cannot occur in XXX [.java] source file? [contains]
+
+XXXX [whitespace character- {0x20, line terminator sequence}] of string or character literals should be esecaped into XXXX [].  [replace]
+
+each line of .java file cannot starts with ‘\t’. [starts with]
+'\t' [Tab characters] are not used for indentation/ each line.
+
+这样粗糙的泛化不行
+rule WhitespaceUsage {
+    condition: 
+        onlySpaceForWhitespace() and
+        noTabIndentation()
+}
+它关注的是源文件中是否有其他空白字符，以及这些空白字符是否被正确转义。
+function onlySpaceForWhitespace() {
+    // Check if only ASCII horizontal space characters are used for whitespace in the source file
+}
+是否有制表符用于缩进，进一步强调了不允许使用制表符进行缩进的规则。
+function noTabIndentation() {
+    // Check if tab characters are used for indentation in the source file
+}",https://checkstyle.org/checks/whitespace/filetabcharacter.html#FileTabCharacter,"Checks that there are no tab characters ('\t') in the source code.
+Rationale:
+Developers should not need to configure the tab width of their text editors in order to be able to read source code.
+From the Apache jakarta coding standards: In a distributed development environment, when the commit messages get sent to a mailing list, they are almost impossible to read if you use tabs.
+
+
+rule WhitespaceRules {
+    condition: 
+noWhitespaceExceptSpaceInSource() and
+        not containsTabIndentation()
+}
+
+function noWhitespaceExceptSpaceInSource() {
+    // Your implementation to check if all whitespace characters in string and character literals are escaped except space
+}
+
+
+function containsTabIndentation() {
+    // Your implementation to check if the source code contains tab characters for indentation
+}","\t’ not in {code}
+
+<print> []
+\t' cannot occur in source code [fileExtensions files]
+
+[fileExtensions files]
+
+Actions: whether to report on each line containing a tab, or just the first instance.
+
+And 
+
+[file extension] of [file] is {}",,"name
+description
+type
+default value
+since
+eachLine
+Control whether to report on each line containing a tab, or just the first instance.
+boolean
+false
+5.0
+fileExtensions
+Specify the file extensions of the files to process.
+String[]
+all files
+5.0
+",,"<module name=""FileTabCharacter"">
+
+<property name=""eachLine"" value=""true""/>
+
+</module>",,,,,,,,,Yes,"<module name='RegexpSinglelineCheck'>
+  <property name='format' value='[^\x20\t\n\x0B\f\r]' />
+  <property name='message' value='Whitespace characters other than space should be escaped' />
+</module>
+******
+<module name='RegexpSinglelineCheck'>
+  <property name='format' value='\t' />
+  <property name='message' value='Tab characters should not be used for indentation' />
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s2.3.2-special-escape-sequences,2.3.2 Special escape sequences,"For any character that has a special escape sequence ( `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` ), that sequence is used rather than the corresponding octal (e.g. `\012` ) or Unicode (e.g. `\u000a` ) escape."," `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\`
+
+`\b` is [Escape Sequences]
+And
+`\b` isn’t  [Octal Sequences]
+And
+`\b` isn’t  [Unicode Sequences]","1. `\b`</>`\t` </>`\n`</>`\f`</>`\r`</>`\""`</>`\'` </> `\\` <is>  [Escape Sequences]  
+2. `\b`</>`\t` </>`\n`</>`\f`</>`\r`</>`\""`</>`\'` </> `\\` <is not>  [Octal Sequences]
+3. `\b`</>`\t` </>`\n`</>`\f`</>`\r`</>`\""`</>`\'` </> `\\` <is not>  [Unicode Sequences]
+",,"[avoid ways of using special escape sequence]
+Do not use octal (e.g. `\012` ) or Unicode (e.g. `\u000a` ) escape for 
+`\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` can occur in code .java
+Use escape sequence `\b` , `\t` , `\n` , `\f` , `\r` , `\""` , `\'` and `\\` )
+`\b` 
+	\b：退格（backspace）
+	\t：制表符（tab）
+	\n：换行符（newline）
+	\f：换页符（form feed）
+	\r：回车符（carriage return）
+	\""：双引号（double quote）
+	\'：单引号（single quote）
+	\\：反斜杠（backslash）
+
+
+octal representation `\012` cannot not occur  in code  .java  [contains]
+Unicode escape `\u000a` cannot not occur  in code .java     [contains]
+
+",https://checkstyle.org/checks/coding/illegaltokentext.html#IllegalTokenText,"Checks specified tokens text for matching an illegal pattern. By default, no tokens are specified.
+
+
+[format] occur in [token] of .java file
+
+—- ignoreCase
+—- not ignoreCase
+","{tokens} is {format}
+
+And
+ignoreCase?? And CaseSensitive
+
+
+And
+<print> {msg}
+Format  is RegularExpression
+
+",,"name
+description
+type
+default value
+since
+format
+Define the RegExp for illegal pattern.
+Pattern
+""^$""
+3.2
+ignoreCase
+Control whether to ignore case when matching.
+boolean
+false
+3.2
+message
+Define the message which is used to notify about violations; if empty then the default message is used.
+String
+""""
+3.2
+tokens
+tokens to check
+subset of tokens NUM_DOUBLE , NUM_FLOAT , NUM_INT , NUM_LONG , IDENT , COMMENT_CONTENT , STRING_LITERAL , CHAR_LITERAL , TEXT_BLOCK_CONTENT , STRING_TEMPLATE_CONTENT .
+empty
+3.2
+",,"<module name=""IllegalTokenText"">
+      <property name=""tokens"" value=""STRING_LITERAL, CHAR_LITERAL""/>
+      <property name=""format""
+               value=""\\u00(09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)""/>
+    </module>",,,,,,,,,Yes,"<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\b'/>
+  <property name='message' value='Use special escape sequence \\b'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\t'/>
+  <property name='message' value='Use special escape sequence \\t'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\n'/>
+  <property name='message' value='Use special escape sequence \\n'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\f'/>
+  <property name='message' value='Use special escape sequence \\f'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\r'/>
+  <property name='message' value='Use special escape sequence \\r'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\""'/>
+  <property name='message' value='Use special escape sequence \\""'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\'/>
+  <property name='message' value='Use special escape sequence \\'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\	'/>
+  <property name='message' value='Use special escape sequence \\	'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\
+'/>
+  <property name='message' value='Use special escape sequence \\
+'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\'/>
+  <property name='message' value='Use special escape sequence \\'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\'/>
+  <property name='message' value='Use special escape sequence \\'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\""'/>
+  <property name='message' value='Use special escape sequence \\\""'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\'/>
+  <property name='message' value='Use special escape sequence \\\b'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\	'/>
+  <property name='message' value='Use special escape sequence \\\t'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\
+'/>
+  <property name='message' value='Use special escape sequence \\\n'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\'/>
+  <property name='message' value='Use special escape sequence \\\f'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\'/>
+  <property name='message' value='Use special escape sequence \\\r'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\\""'/>
+  <property name='message' value='Use special escape sequence \\\""'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s2.3.3-non-ascii-characters,2.3.3 Non-ASCII characters,"For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+Examples:
+Example 
+Discussion 
+`StringunitAbbrev=""μs"";` 
+Best: perfectly clear even without a comment. 
+`StringunitAbbrev=""\u03bcs"";//""μs""` 
+Allowed, but there's no reason to do this. 
+`StringunitAbbrev=""\u03bcs"";//Greeklettermu,""s""` 
+Allowed, but awkward and prone to mistakes. 
+`StringunitAbbrev=""\u03bcs"";` 
+Poor: the reader has no idea what this is. 
+`return'\ufeff'+content;//byteordermark` 
+Good: use escapes for non-printable characters, and comment if necessary.
+Tip: Never make your code less readable simply out of fear that some programs might not handle non-ASCII characters properly. If that should happen, those programs are broken and they must be fixed .","如果（字符是非ASCII字符）且（不属于特殊的转义序列范围），那么（应该根据使代码更易读和理解的原则选择使用实际的Unicode字符或Unicode转义序列），但是在字符串字面值和注释之外使用Unicode转义序列是不被鼓励的。
+
+
+Source code cannot use Unicode escapes
+string literals can use Unicode escapes
+Comment can use Unicode escapes
+
+
+For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. 
+
+non-printable characters, white characters, control characters 
+
+
+The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+
+1. [Unicode Escapes] only in [string] <or> [comment]
+OR
+2. character of [string] <or> [comment] is [actual Unicode character]
+
+Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+
+1. [Unicode Escapes] has [comment]
+2. [actual Unicode character] has [comment]","For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞` ) or the equivalent Unicode escape (e.g. `\u221e` ) is used. 
+[Non-ASCII characters] <is> [Unicode character] <or> [Unicode escape].
+
+The choice depends only on which makes the code easier to read and understand , although Unicode escapes outside string literals and comments are strongly discouraged.
+[Unicode Escapes] only <in> [string] <or> [comment] 
+[string] <or> [comment] can contain [Unicode Escapes] 
+[Unicode Escapes] not outside [string] <or> [comment]
+Areas outside [string] <or> [comment] not contain [Unicode Escapes] 
+
+
+character of [string] <or> [comment] is actual Unicode character
+
+Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
+[Unicode Escapes] <or> [Unicode Character] <has> [comment]
+
+
+
+[Unicode Escapes] has [comment] [actual Unicode character] has [comment]
+
+",,"How to use non-ASCII characters
+Can use actual Unicode character (e.g. `∞` ) or the equivalent Unicode escape
+
+ASCII characters  ‘or’
+non-ASCII characters + actual Unicode character ‘or’
+non-ASCII characters + Unicode escape 
+
+Unicode escapes should not occur in source code, except in string literals or comments.  ——>
+一种
+Unicode escapes should not occur in source code ‘or’
+Unicode escapes + string literals ‘or’
+
+Unicode escapes + comments ‘or’
+
+另一种 not
+Unicode escapes occur in source code ‘and’
+
+Not Unicode escapes + string literals  ‘and’
+
+Not Unicode escapes + string literals  ‘and’
+
+Unicode escape should not occur in  source code,
+
+If actual unicode make code easier to read, use actual Unicode character instead of Unicode escape
+
+If Unicode escape make code easier to read, use actual Unicode character instead of Unicode escape
+
+Unicode escape should not occur in  source code, if actual Unicode character is easier read.
+
+“Unicode escape” should have Explanatory comment , if code uses a “Unicode escape”  
+
+If code has trailing comment, it can use unicode escape (unicode escape can occur in code)
+        
+
+Unicode escapes cannot occur in source code [.java], except Unicode escapes can occur in string literals or comments.",https://checkstyle.org/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters,"Restricts using Unicode escapes (such as \u221e). It is possible to allow using escapes for non-printable, control characters. Also, this check can be configured to allow using escapes if trail comment is present. By the option it is possible to allow using escapes if literal contains only them.","Unicode escapes cannot occur in source code ‘or’
+
+Unicode escapes occur + Unicode escapes accompany/have comment  ‘or’
+
+Unicode escapes occur + Unicode escapes belongs to {non-printable characters, control characters}  
+{non-printable characters, control characters} can use Unicode escapes
+‘or’
+
+Unicode escapes occur in a literal + its all characters are Unicode escapes.   
+all characters of literal can use Unicode escapes
+
+‘or’
+
+Unicode escapes + Unicode escapes belongs to {non-printable characters, white characters}
+
+
+",,,"TC: [Unicode Escapes] <not in> [code]
+[Charater] is not [Unicode Escapes]
+OR
+
+‘allowByComment’: { ‘true’: [Unicode Escapes] <has> [comment]  ——> [Unicode Escapes] <in> [code];
+[Unicode Escapes] <in>/<not in> [code];  not TC
+‘false’: [Unicode Escapes] <has> [comment]  ——> [Unicode Escapes] <not in> [code]; 
+
+OR
+True
+all characters of string are Unicode escapes —-> [Unicode Escapes] <in> string not TC
+False
+all characters of string are Unicode escapes —-> [Unicode Escapes] <not in> string
+
+OR
+‘true’: Character <is> [Non-Printable Character] <or> [Control Character]  ——> Character is [Unicode Escapes] / [Unicode Escapes] in Character
+Character is/is not [Unicode Escapes] / [Unicode Escapes] in/not in Character
+??? not TC
+
+‘false’: [Non-Printable Character] <or> [Control Character]  ——> Character is not [Unicode Escapes] / [Unicode Escapes] not in Character
+
+OR
+
+‘true’: Character <is> [Non-Printable Character] <or> [White Character]  ——> [Character] is [Unicode Escapes] / [Unicode Escapes] <in> [Character]
+‘false’: Character <is> [Non-Printable Character] <or> [White Character]  ——> [Character] is not [Unicode Escapes] / [Unicode Escapes] <not in> [Character]
+not TC
+
+","<module name=""AvoidEscapedUnicodeCharacters"">
+
+<property name=""allowEscapesForControlCharacters"" value=""true""/>
+
+<property name=""allowByTailComment"" value=""true""/>
+
+<property name=""allowNonPrintableEscapes"" value=""true""/>",,,,,,"<property name=""allowByTailComment"" value=""true""/>
+",,,Yes,"<module name='RegexpMultilineCheck'>
+  <property name='format' value='[^\p{ASCII}]'/>
+  <property name='message' value='Non-ASCII characters should be either actual Unicode characters or Unicode escapes.'/>
+  <property name='ignoreComments' value='true'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3-source-file-structure,3 Source file structure,"A source file consists of, in order : 
+License or copyright information, if present 
+Package statement 
+Import statements 
+Exactly one top-level class
+
+Exactly one blank line separates each section that is present.
+
+","A source file consists of, in order : 
+License or copyright information, if present 
+Package statement 
+Import statements 
+Exactly one top-level class
+
+Order: License or copyright information, Package statement, Import statements, Exactly one top-level class
+<order> <of> [code] <is> [License] [Package] [Import] [Class]
+
+Where {[Class] <is> [top-leve class] And <number> <of> [top-level class] <is> 1}
+
+
+Exactly one blank line separates each section that is present.
+
+[License] [Package] [Import] [Class] <has> [separator] 
+
+[separator] is between [License] and [Package]and [Import] and [Class]
+[separator] is [number: 1] blank line
+
+blank line should occur between []
+[], [], [], [], [] 之间应该有blank line and the num of blank line is one
+
+The top-level class of  source file is one
+
+",,,"Exactly one blank line separates each section that is present. [seperator, num constraint]
+
+[order]
+A source file consists of, in order : 
+License or copyright information, if present 
+Package statement 
+Import statements 
+Exactly one top-level class",https://checkstyle.org/checks/whitespace/emptylineseparator.html#EmptyLineSeparator,"Checks for empty line separators before package, all import declarations, fields, constructors, methods, nested classes, static initializers and instance initializers.
+Checks for empty line separators before not only statements but implementation and documentation comments and blocks as well.
+ATTENTION: empty line separator is required between token siblings, not after line where token is found. If token does not have a sibling of the same type, then empty line is required at its end (for example for CLASS_DEF it is after '}'). Also, trailing comments are skipped.","empty line separators should occur in [tokens],   and A
+
+[separator] is within [package]/ token1, … token n
+And
+[separator] is [number: 1] blank line
+
+OR
+True: 
+[separator] is between [class member]—>
+[separator] is [number: >=1] blank line
+
+False:
+[separator] is between [class member]—> 
+[separator] is [number: =1] blank line
+
+OR
+True
+[separator] is within body/implementation of [class member]—>
+[separator] is [number: >=1] blank line
+
+False
+[separator] is within body/implementation of [class member]—>
+[separator] is [number: =1] blank line  
+
+OR
+True: 
+[separator] is not between [field] OR
+[separator] is between [field]—>
+[separator] is [number: = 0] blank line
+
+
+False:
+[separator] is between [field]—>
+[separator] is [number: = 1] blank line
+
+Tokens 
+{}
+
+
+
+",,,"[package] [import] <has> [separator] 
+
+[implementation] [documentation] [comment] <has> [separator] 
+
+[separator] <between> [token siblings], and [separator] <not after> [token line]
+
+[token] <has not> [siblings],  type <of> [siblings] [token] <same>—-> 
+[separator] <after> [token]
+
+[token] … [token] <has> [separator]
+
+And {’true’: {{number}} of [separator] <>> 1 OR
+‘false’: {{number}} of [separator] < = > 1
+}
+
+
+
+","    <module name=""EmptyLineSeparator"">
+      <property name=""tokens""
+               value=""PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF”/>   <!-- changed value -->
+      <property name=""allowNoEmptyLineBetweenFields"" value=“true""/>
+<property name=""allowMultipleEmptyLines"" value=“false""/>  <!-- changed value -->
+    </module>",,,,,,,"License or copyright information,  rule
+Not handle",不一致,Yes,"<module name='RegexpMultilineCheck'>
+  <property name='format' value='^\s*$'/>
+  <property name='message' value='Empty line is required between sections.'/>
+</module>
+******
+<module name='RegexpSinglelineCheck'>
+  <property name='format' value='^\s*$'/>
+  <property name='message' value='Empty line is required between sections.'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.1-copyright-statement,"3.1 License or copyright information, if present","If license or copyright information belongs in a file, it belongs here.
+
+",,,,,,,,,,,"这个Google Java Style规则不算规则
+本身这个规范没有规则",,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s3.2-package-statement,3.2 Package statement,"The package statement is not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to package statements.","the number of lines of a package statement = 1
+
+Number of line of package: 1 
+And
+number of characters of package in [Num: 1] line: Any
+
+package statement is [Num: 1] line",,,"The package statement is not line-wrapped .  
+
+
+The column limit (Section 4.4, Column limit: 100 ) does not apply to package statements.","https://checkstyle.org/checks/whitespace/nolinewrap.html#NoLineWrap
+","Checks that chosen statements are not line-wrapped. By default, this Check restricts wrapping import and package statements, but it's possible to check any statement.","Number of line of [statement] is 1
+statement is [tokens]
+Tokens is {}
+
+[statement]  is not [line-wrapped]
+
+Tokens is {}",,"tokens
+tokens to check
+subset of tokens IMPORT , STATIC_IMPORT , PACKAGE_DEF , CLASS_DEF , METHOD_DEF , CTOR_DEF , ENUM_DEF , INTERFACE_DEF , RECORD_DEF , COMPACT_CTOR_DEF .
+PACKAGE_DEF , IMPORT , STATIC_IMPORT .
+5.8
+",,"<module name=""LineLength"">
+    <property name=""fileExtensions"" value=""java""/>
+    <property name=""max"" value=""100""/>
+    <property name=""ignorePattern"" value=""^package.*""/>
+  </module>
+
+<module name=""NoLineWrap"">
+
+<property name=""tokens"" value=""PACKAGE_DEF""/>
+
+</module>",,,,,多对一,,,,Yes,"<module name='PackageDeclarationWrapCheck'>
+******
+  <property name='id' value='PackageDeclarationWrap'/>
+******
+  <property name='option' value='never'/>
+******
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.3.1-wildcard-imports,3.3.1 No wildcard imports,"Wildcard imports , static or otherwise, are not used .
+
+","Do not use Wildcard imports === Wildcard imports cannot occur in source code
+
+“*” not in import",,,"Do not use Wildcard imports === Wildcard imports cannot occur in source code
+
+Do not use static    === static imports cannot occur in source code
+ 
+https://en.wikipedia.org/wiki/Static_import",https://checkstyle.org/checks/imports/avoidstarimport.html#AvoidStarImport,"Checks that there are no import statements that use the * notation.
+“*” not in [import]
+Rationale: Importing all classes from a package or static members from a class leads to tight coupling between packages or classes and might lead to problems when a new version of a library introduces name clashes.
+Notes
+
+Note that property excludes is not recursive, subpackages of excluded packages are not automatically excluded.",,,"Checks that there are no import statements that use the * notation.
+“*” not in [import]
+Or
+allowClassImports 
+True: “*” in/not in [class][import] (Null)
+False: “*” not in [class][import]
+Or
+allowStaticMemberImports
+True: “*” in/not in [static member][import] (Null)
+False: “*” not in [class][import]
+Or
+excludes 
+“*” in/not in [tokens][import] (Null)","Allow Star Import in Checkstyle Configuration:
+============================================
+
+1. For general class imports (import java.util.*;)
+    - If allowClassImports is True:
+        - ""*"" is allowed in [class][import]
+    - If allowClassImports is False:
+        - ""*"" is not allowed in [class][import]
+        - Unless the package/class is in the excludes list:
+            - ""*"" is allowed in [class][import for packages/classes in the excludes list]
+
+2. For static member imports (import static org.junit.Assert.*;)
+    - If allowStaticMemberImports is True:
+        - ""*"" is allowed in [static member][import]
+    - If allowStaticMemberImports is False:
+        - ""*"" is not allowed in [static member][import]
+        - Unless the package/class is in the excludes list:
+            - ""*"" is allowed in [static member][import for packages/classes in the excludes list]
+
+3. For specifying exclusions (excludes property):
+    - If a package or class is listed in excludes:
+        - ""*"" is allowed in those specified [tokens][import]
+    - excludes is not recursive:
+        - Subpackages of excluded packages are not automatically included.
+
+4. Always enforce:
+    - ""*"" is not allowed in [import] unless it complies with the allowClassImports, allowStaticMemberImports, and excludes settings.","<module name=""AvoidStarImport""/>",,,,,,,"yes
+Do not use static",,Yes,"<module name='ImportControl'>
+  <property name='illegalImport' value='.*'/>
+  <property name='severity' value='error'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.3.2-import-line-wrapping,3.3.2 No line-wrapping,"Import statements are not line-wrapped . The column limit (Section 4.4, Column limit: 100 ) does not apply to import statements.","the number of lines of import statement = 1
+
+Number of line of import: 1 
+And
+number of characters of import in [Num: 1] line: Any
+
+import statement is [Num: 1] line",,,Import statements are not line-wrapped .,"https://checkstyle.org/checks/whitespace/nolinewrap.html#NoLineWrap
+","Checks that chosen statements are not line-wrapped. By default, this Check restricts wrapping import and package statements, but it's possible to check any statement.","Number of line of [statement] is 1
+statement is [tokens]
+Tokens is {}
+
+[statement]  is not [line-wrapped]
+
+Tokens is {}",,,,"<module name=""NoLineWrap"">
+
+<property name=""tokens"" value=""IMPORT, STATIC_IMPORT""/>
+
+</module>",,,,,多对一,,,不一致,Yes,"<module name='ImportControl'>
+  <property name='allowLineWrapping' value='false'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.3.3-import-ordering-and-spacing,3.3.3 Ordering and spacing,"Imports are ordered as follows:
+All static imports in a single block. 
+All non-static imports in a single block.
+If there are both static and non-static imports, a single blank line separates the two blocks. There are no other blank lines between import statements.
+Within each block the imported names appear in ASCII sort order. ( Note: this is not the same as the import statements being in ASCII sort order, since '.' sorts before ';'.)
+
+","Order: import
+[static import], [non-static imports]
+
+And
+[static import] in code and [non-static imports] in code —>[blank line] between [static import], [non-static imports]  and [Num] of [blank line]  is 1
+And
+[blank line] not between[non-static imports] 
+[blank line] not between[static imports]
+—> 
+
+And
+
+Order of [static import] is ASCII sort order
+
+And
+Order of [non-static imports] is ASCII sort order
+
+
+
+",,,"All static imports in a single block. 
+All non-static imports in a single block.
+If there are both static and non-static imports, a single blank line separates the two blocks. 
+There are no other blank lines between import statements.
+Within each block the imported names appear in ASCII sort order. ",https://checkstyle.org/checks/imports/customimportorder.html#CustomImportOrder,"Checks that the groups of import declarations appear in the order specified by the user. If there is an import but its group is not specified in the configuration such an import should be placed at the end of the import list.
+Rule Description
+
+The rule consists of:
+STATIC group. This group sets the ordering of static imports.
+SAME_PACKAGE(n) group. This group sets the ordering of the same package imports. Imports are considered on SAME_PACKAGE group if n first domains in package name and import name are identical:
+Rules are configured as a comma-separated ordered list.
+Note: '###' group separator is deprecated (in favor of a comma-separated list), but is currently supported for backward compatibility.
+To set RegExps for THIRD_PARTY_PACKAGE and STANDARD_JAVA_PACKAGE groups use thirdPartyPackageRegExp and standardPackageRegExp options.
+Pretty often one import can match more than one group. For example, static import from standard package or regular expressions are configured to allow one import match multiple groups. In this case, group will be assigned according to priorities:
+STATIC has top priority
+SAME_PACKAGE has second priority
+STANDARD_JAVA_PACKAGE and SPECIAL_IMPORTS will compete using ""best match"" rule: longer matching substring wins; in case of the same length, lower position of matching substring wins; if position is the same, order of rules in configuration solves the puzzle.
+THIRD_PARTY has the least priority
+Few examples to illustrate ""best match"":
+","order of importants
+
+The order of imports is [customOrder {}]
+Or []
+
+And
+
+blank line should occur between [] ?
+Or it doesn’t matter
+
+And
+
+Imports should in alphabetically, in ASCII sort order
+
+Or it doesn’t matter
+
+And
+
+The pattern of SPECIAL_IMPORTS are [regExp]
+
+
+And 
+
+standardPackageRegExp are [regExp]
+
+
+And
+thirdPartyPackageRegExp are [regExp]
+
+customOrder: {STATIC, SAME_PACKAGE, STANDARD_JAVA_PACKAGE, SPECIAL_IMPORTS} 这个的子集",,"Properties
+
+name
+description
+type
+default value
+since
+customImportOrderRules
+Specify ordered list of import groups.
+String[]
+{}
+5.8
+separateLineBetweenGroups
+Force empty line separator between import groups.
+boolean
+true
+5.8
+sortImportsInGroupAlphabetically
+Force grouping alphabetically, in ASCII sort order.
+boolean
+false
+5.8
+specialImportsRegExp
+Specify RegExp for SPECIAL_IMPORTS group imports.
+Pattern
+""^$""
+5.8
+standardPackageRegExp
+Specify RegExp for STANDARD_JAVA_PACKAGE group imports.
+Pattern
+""^(java|javax)\.""
+5.8
+thirdPartyPackageRegExp
+Specify RegExp for THIRD_PARTY_PACKAGE group imports.
+Pattern
+"".*""
+5.8
+","order of imports is [customImportOrderRules]
+
+And separateLineBetweenGroups
+True [blank line] between [customImportOrderRules]
+False [blank line] between / not between [customImportOrderRules]
+
+
+And sortImportsInGroupAlphabetically
+Order of  a [customImportOrderRules] between ASCII sort order.
+Order of  a [customImportOrderRules] between/not between ASCII sort order.
+
+
+And
+SPECIAL_IMPORTS is [RegExp]
+
+STANDARD_JAVA_PACKAGE is [RegExp]
+
+THIRD_PARTY_PACKAGE is [RegExp]
+
+","    <module name=""CustomImportOrder"">
+      <property name=""sortImportsInGroupAlphabetically"" value=“true""/>
+<property name=""separateLineBetweenGroups"" value=""true""/> 
+     <property name=""customImportOrderRules"" value=""STATIC”/>  <!-- changed value -->
+    </module>",,,,,,,"If there are both static and non-static imports, a single blank line separates the two blocks. ","不一致
+<module name=""CustomImportOrder"">
+      <property name=""sortImportsInGroupAlphabetically"" value=""true""/>
+      <property name=""separateLineBetweenGroups"" value=""true""/>
+      <property name=""customImportOrderRules"" value=""STATIC###THIRD_PARTY_PACKAGE""/>
+      <property name=""tokens"" value=""IMPORT, STATIC_IMPORT, PACKAGE_DEF""/>
+    </module>",Yes,"<module name='ImportOrder'>
+  <property name='option' value='top'/>
+  <property name='groups' value='static,java,javax,com,org,net'/>
+  <property name='separated' value='true'/>
+  <property name='ordered' value='true'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.3.4-import-class-not-static,3.3.4 No static import for classes,"Static import is not used for static nested classes. They are imported with normal imports.
+
+","the type of import of static nested classes cannot be static
+
+Class is static and nested  -> 
+Import of class is not static
+","	Static Nested Classes:
+	A nested class is a class declared within another class.
+	If a nested class is declared with the static keyword, it is called a static nested class.
+",,,,,,,,,"CheckStyle Cannot handle
+ That validation could not be checked by Checkstyle. It's need information from another class(java file). But Checkstyle have no way to open or look at another java file.",,,,,,,,,Yes,"<module name='TreeWalker'>
+<module name='StaticImportCheck'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.4.1-one-top-level-class,3.4.1 Exactly one top-level class declaration,"Each top-level class resides in a source file of its own.
+
+","A [.java source file] should only contain a top-level class declaration
+
+The number of top-level class declaration in a [.java source file]  is 1
+
+每个源文件应该只包含一个顶级类的声明
+
+
+File only has a top-level class
+And 
+Number of top-level class of file is 1
+Class name of top-level class = file name
+
+
+",,,,https://checkstyle.org/checks/design/onetoplevelclass.html#OneTopLevelClass,"Since Checkstyle 5.8
+Description
+
+Checks that each top-level class, interface, enum or annotation resides in a source file of its own. Official description of a 'top-level' term: 7.6. Top Level Type Declarations. If file doesn't contain public class, interface, enum or annotation, top-level type is the first type in file.
+Examples
+
+To configure the check:
+
+
+<module name=""Checker"">
+  <module name=""TreeWalker"">
+    <module name=""OneTopLevelClass""/>
+  </module>
+</module>
+        
+ATTENTION: This Check does not support customization of validated tokens, so do not use the ""tokens"" property.","The number of top-level class declaration in a [.java source file]  is 1
+
+And 
+
+The number of top-level interface declaration in a [.java source file]  is 1
+
+
+And 
+
+The number of enum declaration in a [.java source file]  is 1
+
+
+And 
+
+The number of annotation declaration in a [.java source file]  is 1",,"Number of top-level class and interface and enum and annotation  of file is 1
+And
+name of top-level class and interface and enum and annotation = name of file
+
+
+
+
+
+
+
+",,"<module name=""OneTopLevelClass""/>",,,,,,,,,Yes,"<module name='OuterTypeFilenameCheck'>
+******
+  <property name='format' value='^[A-Z][a-zA-Z0-9]*$'/>
+******
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.4.2-ordering-class-contents,3.4.2 Ordering of class contents,"The order you choose for the members and initializers of your class can have a great effect on learnability. However, there's no single correct recipe for how to do it; different classes may order their contents in different ways.
+What is important is that each class uses 
+some logical order , which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield ""chronological by date added"" ordering, which is not a logical ordering.
+
+","Order of members of class and initializer of class is [uncertain]
+
+Order of new methods not end of the class
+
+没有明确的rule",,,"The order you choose for the members and initializers 
+What is important is that each class uses 
+some logical order , which its maintainer could explain if asked.",,,,,,,do not exists,,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s4-formatting,4 Formatting,"Terminology Note: 
+block-like construct refers to the body of a class, method or constructor. Note that, by Section 4.8.3.1 on array initializers , any array initializer may optionally be treated as if it were a block-like construct.",,,,,,,,,,,本身这个规范没有规则,,,,,,,,,Yes,"<module name='MethodDefinition'  id='MethodDefinition' class='com.puppycrawl.tools.checkstyle.checks.coding.MethodDefinitionCheck'>
+<property name='allowOverloads' value='false'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.1.1-braces-always-used,4.1.1 Use of optional braces,"Braces are used with `if` , `else` , `for` , `do` and `while` statements, even when the body is empty or contains only a single statement.
+Other optional braces, such as those in a lambda expression, remain optional.
+
+
+","`if` , `else` , `for` , `do` and `while` statements should contain braces","[if, else, for, do, while] has [Brace]
+[Brace] in [if, else, for, do, while]
+And
+ ([body] of [if, else, for, do, while] is [Null] —> [if, else, for, do, while] has [Brace] 
+And
+[body] of [if, else, for, do, while] has 
+[Num: 1] [statement]) —> [if, else, for, do, while] has [Brace]
+
+Brace in [if]
+Brace in [else]
+Brace in [for]
+Brace in [do]
+Brace in [while]
+
+
+body of [if] is [Null] —>  Brace in [if]
+Brace in [else]
+Brace in [for]
+Brace in [do]
+Brace in [while]
+
+body of [if] has [Num: 1] [statement] —>  
+Brace in [if]
+Brace in [else]
+Brace in [for]
+Brace in [do]
+Brace in [while]",,,https://checkstyle.org/checks/blocks/needbraces.html#NeedBraces,Checks for braces around code blocks.,"name
+description
+type
+default value
+since
+allowEmptyLoopBody
+Allow loops with empty bodies.
+boolean
+false
+6.12.1
+allowSingleLineStatement
+Allow single-line statements without braces.
+boolean
+false
+6.5
+tokens
+tokens to check
+subset of tokens LITERAL_DO , LITERAL_ELSE , LITERAL_FOR , LITERAL_IF , LITERAL_WHILE , LITERAL_CASE , LITERAL_DEFAULT , LAMBDA .
+LITERAL_DO , LITERAL_ELSE , LITERAL_FOR , LITERAL_IF , LITERAL_WHILE .
+3.0",,"[tokens] has braces 
+
+And {
+allowEmptyLoopBody option:
+False: [body] of [for, do, while] is not [Null]
+True: [body] of [for, do, while] is/is not [Null]
+}
+
+OR{
+allowSingleLineStatement option:
+False: [body] of [if, else, for, do, while] has 
+[Num: 1] [statement]) —> [tokens] has [Brace] 
+True: [body] of [if, else, for, do, while] has 
+[Num: 1] [statement]) —> [tokens] has/has not [Brace]
+}
+Tokens is from {}
+
+
+
+
+
+
+",,"<module name=""NeedBraces"">
+
+<property name=""tokens""
+
+value=""LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE""/>
+
+</module>",,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s4.1.2-blocks-k-r-style,4.1.2 Nonempty blocks: K & R style,"Braces follow the Kernighan and Ritchie style ("" Egyptian brackets "") for nonempty blocks and block-like constructs:
+No line break before the opening brace, except as detailed below. 
+Line break after the opening brace. 
+Line break before the closing brace. 
+Line break after the closing brace, only if that brace terminates a statement or terminates the body of a method, constructor, or named class. For example, there is no line break after the brace if it is followed by `else` or a comma.
+Exception: In places where these rules allow a single statement ending with a semicolon ( `;` ), a block of statements can appear, and the opening brace of this block is preceded by a line break. Blocks like these are typically introduced to limit the scope of local variables, for example inside switch statements.
+Examples:
+return () -> {
+  while (condition()) {
+    method();
+  }
+};
+
+return new MyClass() {
+  @Override public void method() {
+    if (condition()) {
+      try {
+        something();
+      } catch (ProblemException e) {
+        recover();
+      }
+    } else if (otherCondition()) {
+      somethingElse();
+    } else {
+      lastThing();
+    }
+    {
+      int x = foo();
+      frob(x);
+    }
+  }
+};
+
+A few exceptions for enum classes are given in Section 4.8.1, Enum classes ."," denote the opening brace as { and the line break as LB
+
+LB not before { 
+And
+LB after {
+
+And
+LB before }
+
+And
+If } ends the statement OR statement of } is method, constructor, or named class —>
+LB after the  } Or
+If } not ends the statement or statement of } is method, constructor, and named class —>
+LB not after the  }
+
+Or
+
+block of { has [Num:1] statement and the statement of the block { ends with ; —> LB not before/before {
+
+And
+{ the type of block of ‘}’ belongs to {statement, method, constructor, class} —-> character after [ } ] == [line break]  and
+Not the type of block of ‘}’ belongs to {statement, method, constructor, class} —-> character after [ } ] != [line break]
+}
+OR
+{
+character before [{Openning brace] == [line break]  and ‘{‘.block = the scope of local vars
+}
+
+
+
+character before [{Openning brace] != [line break]
+And
+character after [{Openning brace]  == [line break]
+And
+character before [ } ] == [line break]
+And
+{ the type of block of ‘}’ belongs to {statement, method, constructor, class} —-> character after [ } ] == [line break]  and
+Not the type of block of ‘}’ belongs to {statement, method, constructor, class} —-> character after [ } ] != [line break]
+}
+OR
+{
+character before [{Openning brace] == [line break]  and ‘{‘.block = the scope of local vars
+}
+
+
+
+"," { 
+
+The '{' should be placed immediately after the code on the same line.; 
+The ‘{' and its preceding code are on the same line
+The ‘{' and its following code are not on the same line
+
+The left curly brace '{' should directly follow the end of its line, without occupying a separate line, and there should be no extra blank lines before it.
+
+Braces are typically placed on the same line as the preceding code.
+
+{ should follow its code of statemtn should immediately follow the statement or declaration on the same line. not a new line
+And
+LB appears after {",,"	No line break before the opening brace, except as detailed below.
+	Line break after the opening brace.
+	Line break before the closing brace.
+	Line break after the closing brace, only if that brace terminates a statement or terminates the body of a method, constructor, or named class. For example, there is no line break after the brace if it is followed by else or a comma.
+Exception: In places where these rules allow a single statement ending with a semicolon (;), a block of statements can appear, and the opening brace of this block is preceded by a line break. 
+Blocks like these are typically introduced to limit the scope of local variables, for example inside switch statements.","https://checkstyle.org/checks/blocks/leftcurly.html#LeftCurly
+
+
+https://checkstyle.org/checks/blocks/rightcurly.html#RightCurly","Checks for the placement of left curly braces ('{') for code blocks.
+name
+description
+type
+default value
+since
+ignoreEnums
+Allow to ignore enums when left curly brace policy is EOL.
+boolean
+true
+6.9
+option
+Specify the policy on placement of a left curly brace ('{').
+LeftCurlyOption
+eol
+3.0
+tokens
+tokens to check
+subset of tokens ANNOTATION_DEF , CLASS_DEF , CTOR_DEF , ENUM_CONSTANT_DEF , ENUM_DEF , INTERFACE_DEF , LAMBDA , LITERAL_CASE , LITERAL_CATCH , LITERAL_DEFAULT , LITERAL_DO , LITERAL_ELSE , LITERAL_FINALLY , LITERAL_FOR , LITERAL_IF , LITERAL_SWITCH , LITERAL_SYNCHRONIZED , LITERAL_TRY , LITERAL_WHILE , METHOD_DEF , OBJBLOCK , STATIC_INIT , RECORD_DEF , COMPACT_CTOR_DEF .
+ANNOTATION_DEF , CLASS_DEF , CTOR_DEF , ENUM_CONSTANT_DEF , ENUM_DEF , INTERFACE_DEF , LAMBDA , LITERAL_CASE , LITERAL_CATCH , LITERAL_DEFAULT , LITERAL_DO , LITERAL_ELSE , LITERAL_FINALLY , LITERAL_FOR , LITERAL_IF , LITERAL_SWITCH , LITERAL_SYNCHRONIZED , LITERAL_TRY , LITERAL_WHILE , METHOD_DEF , OBJBLOCK , STATIC_INIT , RECORD_DEF , COMPACT_CTOR_DEF .
+3.0","
+rightcurly
+Works like alone_or_singleline but the brace should be on the same line as the next part of a multi-block statement (one that directly contains multiple blocks: if/else-if/else or try/catch/finally). If no next part of a multi-block statement present, brace must be alone on line. It also allows single-line format of multi-block statements.
+If } is end of the statement —> Line break not after }
+",,"same
+Works like alone_or_singleline but the brace should be on the same line as the next part of a multi-block statement (one that directly contains multiple blocks: if/else-if/else or try/catch/finally). If no next part of a multi-block statement present, brace must be alone on line. It also allows single-line format of multi-block statements.
+Examples:
+    public long getId() {return id;} // this is OK, it is single-line
+
+    // try-catch-finally blocks
+    try {
+        ...
+    } catch (Exception ex) { // this is OK
+        ...
+    } finally { // this is OK
+        ...
+    }
+",L ends with {,"    <module name=“LeftCurly"">
+<property name=""option""
+               value=""eol"">
+      <property name=""tokens""
+               value=""ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF,
+                    INTERFACE_DEF, LAMBDA, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT,
+                    LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF,
+                    LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF,
+                    OBJBLOCK, STATIC_INIT, RECORD_DEF, COMPACT_CTOR_DEF""/>
+    </module>
+
+    <module name=""RightCurly"">
+      <property name=""id"" value=“RightCurlyAlone""/>
+ <property name=“option"" value=“alone""/>
+      <property name=""tokens""
+               value=""ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF,
+                    INTERFACE_DEF, LAMBDA, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE, METHOD_DEF,
+                    OBJBLOCK, STATIC_INIT, RECORD_DEF, COMPACT_CTOR_DEF”/>
+    </module>
+
+
+    <module name=""RightCurly"">
+      <property name=""id"" value=“RightCurlySame""/>
+ <property name=“option"" value=""same""/>
+      <property name=""tokens""
+               value=""LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE,
+                    LITERAL_DO""/>
+    </module>
+",,,,,这个描述里虽然没有指明do 后面不加空行，但是实际上是有的,,,"    <module name=“LeftCurly"">
+<property name=""option""
+               value=""eol"">
+      <property name=""tokens""
+               value=""ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF,
+                    INTERFACE_DEF, LAMBDA, LITERAL_CASE, LITERAL_CATCH, LITERAL_DEFAULT,
+                    LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF,
+                    LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF,
+                    OBJBLOCK, STATIC_INIT, RECORD_DEF, COMPACT_CTOR_DEF""/>
+    </module>
+
+    <module name=""RightCurly"">
+      <property name=""id"" value=“RightCurlySame""/>
+ <property name=“option"" value=""same""/>
+      <property name=""tokens""
+               value=""LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE,
+                    LITERAL_DO""/>
+    </module>
+",Yes,"<module name='Checker'>
+  <module name='EmptyBlock'>
+    <property name='option' value='TEXT'/>
+    <property name='tokens' value='LITERAL_IF, LITERAL_ELSE, LITERAL_DO, LITERAL_WHILE, LITERAL_FOR'/>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.1.3-braces-empty-blocks,4.1.3 Empty blocks: may be concise,"An empty block or block-like construct may be in K & R style (as described in Section 4.1.2 ). Alternatively, it may be closed immediately after it is opened, with no characters or line break in between ( `{}` ), unless it is part of a multi-block statement (one that directly contains multiple blocks: `if/else` or `try/catch/finally` ).
+Examples:
+  // This is acceptable
+  void doNothing() {}
+
+  // This is equally acceptable
+  void doNothingElse() {
+  }
+
+  // This is not acceptable: No concise empty blocks in a multi-block statement
+  try {
+    doSomething();
+  } catch (Exception e) {}","
+Alternatively, it may be closed immediately after it is opened, with no characters or line break in between ( `{}` )
+Line break not after {
+And
+Line break not before }
+
+unless it is part of a multi-block statement (one that directly contains multiple blocks: `if/else` or `try/catch/finally` )
+Or 
+If   number of block of } > 1—> Line break before }
+Or
+If   } of statement is if-else or try-catch-finally —> Line break before }
+",,," it may be closed immediately after it is opened, with no characters or line break in between ( `{}` ), unless it is part of a multi-block statement (one that directly contains multiple blocks: `if/else` or `try/catch/finally` ).
+",https://checkstyle.org/checks/blocks/emptyblock.html#EmptyBlock,"
+Checks for empty blocks. This check does not validate sequential blocks.
+Sequential blocks won't be checked. Also, no violations for fallthrough:
+switch (a) {
+  case 1:                          // no violation
+  case 2:                          // no violation
+  case 3: someMethod(); { }        // no violation
+  default: break;
+}
+        
+NOTE: This check processes LITERAL_CASE and LITERAL_DEFAULT separately. Verification empty block is done for single nearest {@code case} or {@code default}.
+",,,"option
+Specify the policy on block contents.
+BlockOption
+statement
+3.0
+tokens
+tokens to check
+subset of tokens LITERAL_WHILE , LITERAL_TRY , LITERAL_CATCH , LITERAL_FINALLY , LITERAL_DO , LITERAL_IF , LITERAL_ELSE , LITERAL_FOR , INSTANCE_INIT , STATIC_INIT , LITERAL_SWITCH , LITERAL_SYNCHRONIZED , LITERAL_CASE , LITERAL_DEFAULT , ARRAY_INIT .
+LITERAL_WHILE , LITERAL_TRY , LITERAL_FINALLY , LITERAL_DO , LITERAL_IF , LITERAL_ELSE , LITERAL_FOR , INSTANCE_INIT , STATIC_INIT , LITERAL_SWITCH , LITERAL_SYNCHRONIZED .
+","Block option:
+Statement: block have statement
+Text: block have text
+
+Block is not Null
+",CheckStyle not exists,,,,,,"这个应该不算因为这个检测的是是否允许empty block而不是empty block的braces可以精简
+
+<module name=""EmptyBlock"">
+      <property name=""option"" value=""TEXT""/>
+      <property name=""tokens""
+               value=""LITERAL_TRY, LITERAL_FINALLY, LITERAL_CATCH, LITERAL_IF, LITERAL_ELSE""/>
+    </module>
+",,"    <module name=""EmptyBlock"">
+      <property name=""option"" value=""TEXT""/>
+      <property name=""tokens""
+               value=""LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH""/>
+    </module>
+    <module name=""EmptyCatchBlock"">
+      <property name=""exceptionVariableName"" value=""expected""/>
+    </module>",Yes,"<module name='Checker'>
+  <property name='severity' value='warning'/>
+  <module name='FileTabCharacter'>
+    <property name='eachLine' value='true'/>
+  </module>
+  <module name='LineLength'>
+    <property name='max' value='120'/>
+    <property name='ignorePattern' value='^package .*'/>
+  </module>
+  <module name='MethodParamPad'/>
+  <module name='NoWhitespaceAfter'>
+    <property name='tokens' value='SEMI,POST_INC,POST_DEC'/>
+  </module>
+  <module name='NoWhitespaceBefore'/>
+  <module name='ParenPad'/>
+  <module name='TypecastParenPad'/>
+  <module name='WhitespaceAfter'>
+    <property name='tokens' value='COMMA,SEMI,TYPECAST'/>
+  </module>
+  <module name='WhitespaceAround'>
+    <property name='tokens' value='ASSIGN,BAND,BOR,BXOR,COLON,DO,ELIST,QUESTION,SL,SR'
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.2-block-indentation,4.2 Block indentation: +2 spaces,"Each time a new block or block-like construct is opened, the indent increases by two spaces. When the block ends, the indent returns to the previous indent level. The indent level applies to both code and comments throughout the block. (See the example in Section 4.1.2, Nonempty blocks: K & R Style .)","Each time a new block or block-like construct is opened, the indent increases by two spaces. 
+If new block begins —> indent of code/comment of new block  +2
+
+
+When the block ends, the indent returns to the previous indent level.
+If new block ends —> indent of code/comment of new block  -2
+
+If new Method/if, else if, else/switch-case/for, while, do-while/Try-Catch-Finally begins —> indent of code/comment of new block  +2
+
+The indent level applies to both code and comments throughout the block.
+",,,,https://checkstyle.org/checks/misc/indentation.html#Indentation,"Checks correct indentation of Java code.
+The idea behind this is that while pretty printers are sometimes convenient for bulk reformats of legacy code, they often either aren't configurable enough or just can't anticipate how format should be done. Sometimes this is personal preference, other times it is practical experience. In any case, this check should just ensure that a minimal set of indentation rules is followed.
+Basic offset indentation is used for indentation inside code blocks. For any lines that span more than 1, line wrapping indentation is used for those lines after the first. Brace adjustment, case, and throws indentations are all used only if those specific identifiers start the line. If, for example, a brace is used in the middle of the line, its indentation will not take effect. All indentations have an accumulative/recursive effect when they are triggered. If during a line wrapping, another code block is found and it doesn't end on that same line, then the subsequent lines afterwards, in that new code block, are increased on top of the line wrap and any indentations above it.","arrayInitIndent
+
+If array initialization begins —> indent of array initialization +[arrayInitIndent]
+AND
+basicOffset
+
+code block begins —> indent of code block + [basicOffset]
+AND
+braceAdjustment
+
+Brace begins —> indent of Brace +[braceAdjustment]
+AND
+caseIndent
+
+Case of Switch statement begins —> indent of Case of Switch statement +[caseIndent]
+AND
+forceStrictCondition
+
+True: line wrapping indentation = indent of line-wrapping +[lineWrappingIndentation]
+False: line-wrapping begins —> indent of line-wrapping > indent of line-wrapping +[lineWrappingIndentation] 
+AND
+lineWrappingIndentation
+line-wrapping begins —> indent of line-wrapping +[lineWrappingIndentation]
+AND
+throwsIndent
+
+throw begins —> indent of throw +[throwsIndent]
+",,"basicOffset:
+  Description: Specify how far a new indentation level should be indented when on the next line.
+  Type: int
+  Default: 4
+  Since: Checkstyle 3.1
+  Constraints:
+    - When starting a new code block or statement, the next line should be indented by the specified number of spaces, representing the new indentation level.
+",,"    <module name=""Indentation"">
+      <property name=""basicOffset"" value=""2""/>
+      <property name=""braceAdjustment"" value=""2""/>
+      <property name=""caseIndent"" value=""2""/>
+      <property name=""arrayInitIndent"" value=""2""/>
+    </module>",,,,,不一致,,,"    <module name=""Indentation"">
+      <property name=""basicOffset"" value=""2""/>
+      <property name=""braceAdjustment"" value=""2""/>
+      <property name=""caseIndent"" value=""2""/>
+      <property name=""throwsIndent"" value=""4""/>
+      <property name=""lineWrappingIndentation"" value=""4""/>
+      <property name=""arrayInitIndent"" value=""2""/>
+    </module>",Yes,"<module name='EmptyBlockCheck'>
+  <property name='option' value='concise'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.3-one-statement-per-line,4.3 One statement per line,"Each statement is followed by a line break.
+
+","Line break after statement
+",,,,https://checkstyle.org/checks/coding/onestatementperline.html#OneStatementPerLine,"Checks that there is only one statement per line.
+Rationale: It's very difficult to read multiple statements on one line.
+In the Java programming language, statements are the fundamental unit of execution. All statements except blocks are terminated by a semicolon. Blocks are denoted by open and close curly braces.
+OneStatementPerLineCheck checks the following types of statements: variable declaration statements, empty statements, import statements, assignment statements, expression statements, increment statements, object creation statements, 'for loop' statements, 'break' statements, 'continue' statements, 'return' statements, resources statements (optional).","Checks that there is only one statement per line.
+Line break after statement
+the number of line of a statement is/= 1
+OR
+treatTryResourcesAsStatement
+True,  if  a statement  is try resource statement—> the number of line of a statement is/= 1
+False, True,  if a statement  is try resource statement —> the number of line of a statement is/is not =/!= 1",,,,"<module name=""OneStatementPerLine""/>",,,,,一致,,,,Yes,"<module name='Indentation' enabled='true'>
+  <property name='basicOffset' value='2'/>
+  <property name='braceAdjustment' value='2'/>
+  <property name='caseIndent' value='2'/>
+  <property name='throwsIndent' value='2'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.4-column-limit,4.4 Column limit: 100,"Java code has a column limit of 100 characters. A ""character"" means any Unicode code point. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping .
+Each Unicode code point counts as one character, even if its display width is greater or less. For example, if using fullwidth characters , you may choose to wrap the line earlier than where this rule strictly requires.
+Exceptions:
+Lines where obeying the column limit is not possible (for example, a long URL in Javadoc, or a long JSNI method reference). 
+`package` and `import` statements (see Sections 3.2 Package statement and 3.3 Import statements ). 
+Command lines in a comment that may be copied-and-pasted into a shell. 
+Very long identifiers, on the rare occasions they are called for, are allowed to exceed the column limit. In that case, the valid wrapping for the surrounding code is as produced by google-java-format .","Java code has a column limit of 100 characters.
+Number of character of code <= 100
+
+OR
+Lines where obeying the column limit is not possible (for example, a long URL in Javadoc, or a long JSNI method reference).
+Number of character of URL of Javadoc and JSNI method reference Any
+
+`package` and `import` statements (see Sections 3.2 Package statement and 3.3 Import statements ).
+Number of character of package and import Any
+
+OR
+Command lines in a comment that may be copied-and-pasted into a shell. 
+Very long identifiers, on the rare occasions they are called for, are allowed to exceed the column limit.
+Number of character of identifier and command of a comment Any
+
+
+AND
+Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping .
+If Number of character of a line >= 100 and URL of Javadoc and JSNI method reference and package and import and identifier and command not in the line —>  line is line-wrapped
+
+break after character Number of character of a line >= 100","column limit explaining the meaning and the standard expression is what
+
+The standard expression for specifying the column limit is simply the maximum number of characters allowed on a single line.
+
+",,"Java code has a column limit of 100 characters. 
+
+exceptions我们需要设置参数
+Lines where obeying the column limit is not possible (for example, a long URL in Javadoc, or a long JSNI method reference). 
+`package` and `import` statements (see Sections 3.2 Package statement and 3.3 Import statements ). 
+Command lines in a comment that may be copied-and-pasted into a shell. 
+Very long identifiers, on the rare occasions they are called for, are allowed to exceed the column limit. In that case, the valid wrapping for the surrounding code is as produced by google-java-format .",https://checkstyle.org/checks/sizes/linelength.html#LineLength,"Checks for long lines.
+Rationale: Long lines are hard to read in printouts or if developers have limited screen space for the source code, e.g. if the IDE displays additional information like project tree, class hierarchy, etc.
+","Checks for long lines.
+Number of character of code <= {{max}}
+OR
+ignorePattern
+Number of character of [ignorePattern] Any
+
+AND
+fileExtensions
+Filename of code is/belong to [fileExtensions]
+
+max",,,,"  <module name=""LineLength"">
+    <property name=""fileExtensions"" value=""java""/>
+    <property name=""max"" value=""100""/>
+    <property name=""ignorePattern"" value=""^package.*|^import.*|a href|href|http://|https://|ftp://""/>
+  </module>",,,,,这里融入了其他的规范,,,,Yes,"<module name='OneStatementPerLineCheck'>
+  <property name='allowEmptyStatement' value='false'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.5-line-wrapping,4.5 Line-wrapping,"Terminology Note: When code that might otherwise legally occupy a single line is divided into multiple lines, this activity is called line-wrapping .
+There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
+Note: While the typical reason for line-wrapping is to avoid overflowing the column limit, even code that would in fact fit within the column limit may be line-wrapped at the author's discretion.
+Tip: Extracting a method or local variable may solve the problem without the need to line-wrap.
+
+",number of characters of a line > [column limit] —> line is line-wrapped,,,"There is no comprehensive, deterministic formula showing exactly how to line-wrap in every situation. Very often there are several valid ways to line-wrap the same piece of code.
+",,,,,,,本身这个规范没有规则,,,,,,,,,Yes,"<module name='Checker'>
+  <module name='FileLength'>
+    <property name='max' value='100'/>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.5.1-line-wrapping-where-to-break,4.5.1 Where to break,"The prime directive of line-wrapping is: prefer to break at a higher syntactic level . Also:
+When a line is broken at a non-assignment operator the break comes before the symbol. (Note that this is not the same practice used in Google style for other languages, such as C++ and JavaScript.) 
+This also applies to the following ""operator-like"" symbols: 
+the dot separator ( `.` ) 
+the two colons of a method reference ( `::` ) 
+an ampersand in a type bound ( `<TextendsFoo&Bar>` ) 
+a pipe in a catch block ( `catch(FooException|BarExceptione)` ). 
+When a line is broken at an assignment operator the break typically comes after the symbol, but either way is acceptable. 
+This also applies to the ""assignment-operator-like"" colon in an enhanced `for` (""foreach"") statement. 
+A method or constructor name stays attached to the open parenthesis ( `(` ) that follows it. 
+A comma ( `,` ) stays attached to the token that precedes it. 
+A line is never broken adjacent to the arrow in a lambda, except that a break may come immediately after the arrow if the body of the lambda consists of a single unbraced expression. Examples:
+MyLambda<String, Long, Object> lambda =
+    (String label, Long value, Object obj) -> {
+        ...
+    };
+
+Predicate<String> predicate = str ->
+    longExpressionInvolving(str);
+
+Note: The primary goal for line wrapping is to have clear code, not necessarily code that fits in the smallest number of lines.","If line is line-wrapping  and line is not assignment stmt—>
+line break after non-assignment operator OR
+line break after . OR
+line break after :: OR
+line break after & of type bound OR
+line break after | of catch block OR
+
+
+If line is line-wrapping  and line is assignment stmt—>
+
+line break after non-assignment operator OR
+line break before non-assignment operator
+
+If line is line-wrapping  and line is foreach—>
+line break after : OR
+line break before :
+
+If line is line-wrapping and line is lambda  and body of lambda is not [Num: 1] expression —>
+Line break not after arrow
+
+No space between Name of method and constructor  and `(`
+
+No space between token and `,`
+
+
+",,,"	When a line is broken at a non-assignment operator the break comes before the symbol. (Note that this is not the same practice used in Google style for other languages, such as C++ and JavaScript.)
+	This also applies to the following ""operator-like"" symbols:
+	the dot separator (.)
+	the two colons of a method reference (::)
+	an ampersand in a type bound (<T extends Foo & Bar>)
+	a pipe in a catch block (catch (FooException | BarException e)).
+	When a line is broken at an assignment operator the break typically comes after the symbol, but either way is acceptable.
+	This also applies to the ""assignment-operator-like"" colon in an enhanced for (""foreach"") statement.
+	A method or constructor name stays attached to the open parenthesis (() that follows it.
+	A comma (,) stays attached to the token that precedes it.
+	A line is never broken adjacent to the arrow in a lambda, except that a break may come immediately after the arrow if the body of the lambda consists of a single unbraced expression. Examples: MyLambda<String, Long, Object> lambda =
+	    (String label, Long value, Object obj) -> {
+	        ...
+	    };
+	
+	Predicate<String> predicate = str ->
+	    longExpressionInvolving(str);
+","https://checkstyle.org/checks/whitespace/operatorwrap.html#OperatorWrap
+
+https://checkstyle.org/checks/whitespace/separatorwrap.html#SeparatorWrap
+
+
+https://checkstyle.org/checks/whitespace/methodparampad.html#MethodParamPad","OperatorWrap
+Line break  after/before [token]
+
+
+SeparatorWrap
+Line break  after/before [token]
+
+
+
+MethodParamPad
+Checks the padding between the identifier of a method definition, constructor definition, method call, or constructor invocation; and the left parenthesis of the parameter list.
+
+[option] between [identifier of method definition, constructor definition, method call, or constructor invocation]  and [( of parameter list]
+option: nospace, space
+
+allowLineBreaks
+Allow a line break between the identifier and left parenthesis.
+false： line break not between identifier and left parenthesis
+True: line break not between/between identifier and left parenthesis
+
+
+
+
+",,,,,"    <module name=""OperatorWrap"">
+      <property name=""option"" value=""NL""/>
+      <property name=""tokens""
+               value=""BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR,
+                    LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR, METHOD_REF,
+                    TYPE_EXTENSION_AND ""/>
+    </module>
+
+    <module name=""MethodParamPad"">
+      <property name=""tokens""
+               value=""CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF,
+                    SUPER_CTOR_CALL, ENUM_CONSTANT_DEF, RECORD_DEF""/>
+    </module>
+
+    <module name=""SeparatorWrap"">
+      <property name=""id"" value=""SeparatorWrapDot""/>
+      <property name=""tokens"" value=""DOT""/>
+      <property name=""option"" value=""nl""/>
+    </module>
+
+    <module name=""SeparatorWrap"">
+      <property name=""id"" value=""SeparatorWrapComma""/>
+      <property name=""tokens"" value=""COMMA""/>
+      <property name=""option"" value=""EOL""/>
+    </module>
+
+    <module name=""SeparatorWrap"">
+      <!-- ELLIPSIS is EOL until https://github.com/google/styleguide/issues/259 -->
+      <property name=""id"" value=""SeparatorWrapEllipsis""/>
+      <property name=""tokens"" value=""ELLIPSIS""/>
+      <property name=""option"" value=""EOL""/>
+    </module>
+    <module name=""SeparatorWrap"">
+      <!-- ARRAY_DECLARATOR is EOL until https://github.com/google/styleguide/issues/258 -->
+      <property name=""id"" value=""SeparatorWrapArrayDeclarator""/>
+      <property name=""tokens"" value=""ARRAY_DECLARATOR""/>
+      <property name=""option"" value=""EOL""/>
+    </module>
+    <module name=""SeparatorWrap"">
+      <property name=""id"" value=""SeparatorWrapMethodRef""/>
+      <property name=""tokens"" value=""METHOD_REF""/>
+      <property name=""option"" value=""nl""/>
+    </module>",,,,,"https://github.com/checkstyle/checkstyle/blob/9dad7996c7676702744095c28c8feab70d3a0ca7/src/main/resources/google_checks.xml#L149
+
+
+
+",,,,Yes,"<module name='LineLength'>
+  <property name='max' value='120'/>
+</module>
+******
+<module name='MethodLength'>
+  <property name='max' value='100'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.5.2-line-wrapping-indent,4.5.2 Indent continuation lines at least +4 spaces,"When line-wrapping, each line after the first (each continuation line ) is indented at least +4 from the original line.
+When there are multiple continuation lines, indentation may be varied beyond +4 as desired. In general, two continuation lines use the same indentation level if and only if they begin with syntactically parallel elements.
+Section 4.6.3 on Horizontal alignment addresses the discouraged practice of using a variable number of spaces to align certain tokens with previous lines.","When line-wrapping, each line after the first (each continuation line ) is indented at least +4 from the original line.
+
+If line is [line-wrapping] —>
+Indent of [each line after the line] + >=4
+
+OR
+When there are multiple continuation lines, indentation may be varied beyond +4 as desired.
+
+If line is [line-wrapping] and number of line after the line >1 —> Indent of [each line after the line] + >4
+
+OR
+In general, two continuation lines use the same indentation level if and only if they begin with syntactically parallel elements.
+
+If line is [line-wrapping] and two continuation lines begin with [syntactically parallel elements (e.g., method calls, variable declarations) —> Indent of two continuation lines same",,,,https://checkstyle.org/checks/misc/indentation.html#Indentation,"Checks correct indentation of Java code.
+The idea behind this is that while pretty printers are sometimes convenient for bulk reformats of legacy code, they often either aren't configurable enough or just can't anticipate how format should be done. Sometimes this is personal preference, other times it is practical experience. In any case, this check should just ensure that a minimal set of indentation rules is followed.
+Basic offset indentation is used for indentation inside code blocks. For any lines that span more than 1, line wrapping indentation is used for those lines after the first. Brace adjustment, case, and throws indentations are all used only if those specific identifiers start the line. If, for example, a brace is used in the middle of the line, its indentation will not take effect. All indentations have an accumulative/recursive effect when they are triggered. If during a line wrapping, another code block is found and it doesn't end on that same line, then the subsequent lines afterwards, in that new code block, are increased on top of the line wrap and any indentations above it.","arrayInitIndent
+
+If array initialization begins —> indent of array initialization +[arrayInitIndent]
+AND
+basicOffset
+
+code block begins —> indent of code block + [basicOffset]
+AND
+braceAdjustment
+
+Brace begins —> indent of Brace +[braceAdjustment]
+AND
+caseIndent
+
+Case of Switch statement begins —> indent of Case of Switch statement +[caseIndent]
+AND
+forceStrictCondition
+
+True: line wrapping indentation = indent of line-wrapping +[lineWrappingIndentation]
+False: line-wrapping begins —> indent of line-wrapping > indent of line-wrapping +[lineWrappingIndentation] 
+AND
+lineWrappingIndentation
+line-wrapping begins —> indent of line-wrapping +[lineWrappingIndentation]
+AND
+throwsIndent
+
+throw begins —> indent of throw +[throwsIndent]
+",,"basicOffset:
+  Description: Specify how far a new indentation level should be indented when on the next line.
+  Type: int
+  Default: 4
+  Since: Checkstyle 3.1
+  Constraints:
+    - When starting a new code block or statement, the next line should be indented by the specified number of spaces, representing the new indentation level.
+",,"    <module name=""Indentation"">
+<property name=""forceStrictCondition"" value=""false""/>
+      <property name=""lineWrappingIndentation"" value=""4""/>
+        </module>",,,,,"    <module name=""Indentation"">
+      <property name=""basicOffset"" value=""2""/>
+      <property name=""braceAdjustment"" value=""2""/>
+      <property name=""caseIndent"" value=""2""/>
+      <property name=""throwsIndent"" value=""4""/>
+      <property name=""lineWrappingIndentation"" value=""4""/>
+      <property name=""arrayInitIndent"" value=""2""/>
+    </module>",,,,Yes,"<module name='LineLength'>
+  <property name='max' value='120'/>
+</module>
+******
+<module name='OperatorWrap'>
+  <property name='option' value='NL_BEFORE'/>
+  <property name='tokens' value='DOT, METHOD_REF, TYPEBOUND_AND, CATCH'
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>
+******
+<module name='MethodParamPad'>
+  <property name='option' value='space'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.6.1-vertical-whitespace,4.6.1 Vertical Whitespace,"A single blank line always appears:
+Between consecutive members or initializers of a class: fields, constructors, methods, nested classes, static initializers, and instance initializers. 
+Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. 
+Exception: Blank lines between enum constants are covered in Section 4.8.1 . 
+As required by other sections of this document (such as Section 3, Source file structure , and Section 3.3, Import statements ).
+A single blank line may also appear anywhere it improves readability, for example between statements to organize the code into logical subsections. A blank line before the first member or initializer, or after the last member or initializer of the class, is neither encouraged nor discouraged.
+Multiple consecutive blank lines are permitted, but never required (or encouraged).","A single blank line always appears:
+Between consecutive members or initializers of a class: fields, constructors, methods, nested classes, static initializers, and instance initializers. 
+
+A blank line between fields, constructors, methods, nested classes, static initializers, and instance initializers
+
+OR
+Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines are used as needed to create logical groupings of fields. 
+
+If No code between two consecutive fields —>
+No blank line between fields
+
+OR
+Exception: Blank lines between enum constants are covered in Section 4.8.1 . 
+
+OR
+A single blank line may also appear anywhere it improves readability, for example between statements to organize the code into logical subsections. 
+If A blank line between statements improves readability —-> A blank line between statements
+If A blank line between statements improves organisation —-> A blank line between statements
+
+
+
+OR
+A blank line before the first member or initializer, or after the last member or initializer of the class, is neither encouraged nor discouraged.
+
+blank line before/not before first member or initializer  NULL
+blank line after/not before first member or initializer NULL",,,,https://checkstyle.org/checks/whitespace/emptylineseparator.html#EmptyLineSeparator,"Checks for empty line separators before package, all import declarations, fields, constructors, methods, nested classes, static initializers and instance initializers.
+Checks for empty line separators before not only statements but implementation and documentation comments and blocks as well.
+ATTENTION: empty line separator is required between token siblings, not after line where token is found. If token does not have a sibling of the same type, then empty line is required at its end (for example for CLASS_DEF it is after '}'). Also, trailing comments are skipped.","empty line separators between each [tokens],   and A
+
+[separator] is within [package]/ token1, … token n
+And
+[separator] is [number: 1] blank line
+
+OR
+True: 
+[separator] is between [class member]—>
+[separator] is [number: >=1] blank line
+
+False:
+[separator] is between [class member]—> 
+[separator] is [number: =1] blank line
+
+OR
+True
+[separator] is within body/implementation of [class member]—>
+[separator] is [number: >=1] blank line
+
+False
+[separator] is within body/implementation of [class member]—>
+[separator] is [number: =1] blank line  
+
+OR
+True: 
+[separator] is not between [field] OR
+[separator] is between [field]—>
+[separator] is [number: = 0] blank line
+
+
+False:
+[separator] is between [field]—>
+[separator] is [number: = 1] blank line
+
+Tokens 
+{}
+
+
+
+",,,"[package] [import] <has> [separator] 
+
+[implementation] [documentation] [comment] <has> [separator] 
+
+[separator] <between> [token siblings], and [separator] <not after> [token line]
+
+[token] <has not> [siblings],  type <of> [siblings] [token] <same>—-> 
+[separator] <after> [token]
+
+[token] … [token] <has> [separator]
+
+And {’true’: {{number}} of [separator] <>> 1 OR
+‘false’: {{number}} of [separator] < = > 1
+}
+
+
+
+","    <module name=""EmptyLineSeparator"">
+      <property name=""tokens""
+               value=""STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF""/>
+      <property name=""allowNoEmptyLineBetweenFields"" value=""true""/>
+    </module>",,,,,"    <module name=""EmptyLineSeparator"">
+      <property name=""tokens""
+               value=""PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                    STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF,
+                    COMPACT_CTOR_DEF""/>
+      <property name=""allowNoEmptyLineBetweenFields"" value=""true""/>
+    </module>",,,,Yes,"<module name='Indentation'  include='Checker'>
+  <property name='basicOffset' value='4'/>
+  <property name='braceAdjustment' value='0'/>
+  <property name='caseIndent' value='4'/>
+  <property name='throwsIndent' value='4'/>
+  <property name='lineWrappingIndentation' value='4'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.6.2-horizontal-whitespace,4.6.2 Horizontal whitespace,"Beyond where required by the language or other style rules, and apart from literals, comments and Javadoc, a single ASCII space also appears in the following places only .
+Separating any reserved word, such as `if` , `for` or `catch` , from an open parenthesis ( `(` ) that follows it on that line 
+Separating any reserved word, such as `else` or `catch` , from a closing curly brace ( `}` ) that precedes it on that line 
+Before any open curly brace ( `{` ), with two exceptions: 
+`@SomeAnnotation({a,b})` (no space is used) 
+`String[][]x={{""foo""}};` (no space is required between `{{` , by item 9 below) 
+On both sides of any binary or ternary operator. This also applies to the following ""operator-like"" symbols: 
+the ampersand in a conjunctive type bound: `<TextendsFoo&Bar>` 
+the pipe for a catch block that handles multiple exceptions: `catch(FooException|BarExceptione)` 
+the colon ( `:` ) in an enhanced `for` (""foreach"") statement 
+the arrow in a lambda expression: `(Stringstr)->str.length()` 
+but not 
+the two colons ( `::` ) of a method reference, which is written like `Object::toString` 
+the dot separator ( `.` ), which is written like `object.toString()` 
+After `,:;` or the closing parenthesis ( `)` ) of a cast 
+Between any content and a double slash ( `//` ) which begins a comment. Multiple spaces are allowed. 
+Between a double slash ( `//` ) which begins a comment and the comment's text. Multiple spaces are allowed. 
+Between the type and variable of a declaration: `List<String>list` 
+Optional just inside both braces of an array initializer 
+`newint[]{5,6}` and `newint[]{5,6}` are both valid 
+Between a type annotation and `[]` or `...` .
+This rule is never interpreted as requiring or forbidding additional space at the start or end of a line; it addresses only interior space.","Separating any reserved word, such as `if` , `for` or `catch` , from an open parenthesis ( `(` ) that follows it on that line 
+LITERAL_FOR …
+a ASCII space] between [reserved word] and [(]
+
+And
+Separating any reserved word, such as else or catch, from a closing curly brace (}) that precedes it on that line
+[a single ASCII space] between [reserved word] and [}]
+
+And LCURLY
+Before any open curly brace ({), with two exceptions:
+@SomeAnnotation({a, b}) (no space is used)
+String[][] x = {{""foo""}}; (no space is required between {{, by item 9 below)
+And
+[a ASCII space] Before { 
+OR
+No [a ASCII space] between ( and {
+No [a ASCII space] between { and {
+
+
+And CheckStyle: Token: LAMBDA TYPE_EXTENSION_ANDignoreEnhancedForColon
+the ampersand in a conjunctive type bound: <T extends Foo & Bar>
+the pipe for a catch block that handles multiple exceptions: catch (FooException | BarException e)
+the colon (:) in an enhanced for (""foreach"") statement
+the arrow in a lambda expression: (String str) -> str.length()
+
+[a single ASCII space] before & of type bound/| of catch/: of foreach/ -> of lambda
+And
+[a single ASCII space] after &/|/: of foreach/ -> of lambda
+
+And DOT METHOD_REF
+the two colons (::) of a method reference, which is written like Object::toString
+the dot separator (.), which is written like object.toString()
+
+No [a ASCII space] before :: of method reference / .
+No [a ASCII space] after :: of method reference / .
+
+
+And COLON TYPECAST COMMA SEMI
+
+After ,:; or the closing parenthesis ()) of a cast
+[a ASCII space] after ,/ : / ; / ) of cast
+
+And
+Between any content and a double slash (//) which begins a comment. Multiple spaces are allowed.
+[>=1 ASCII space] before // of comment
+
+And
+Between a double slash ( `//` ) which begins a comment and the comment's text. Multiple spaces are allowed.
+[>=1 ASCII space] between // of comment and comment
+
+And
+Between the type and variable of a declaration: List<String> list
+
+[a ASCII space] between type and variable of a declaration
+
+
+And ARRAY_INIT
+Optional just inside both braces of an array initializer
+new int[] {5, 6} and new int[] { 5, 6 } are both valid
+[a ASCII space] before/not before { of array initialize NULL
+And 
+[a ASCII space] after/not after { of array initialize  NULL
+
+And  ELLIPSIS 
+Between a type annotation and [] or ....
+[A ASCII space] between type annotation and []
+[A ASCII space] between type annotation and …",,,,https://checkstyle.org/checks/whitespace/methodparampad.html#MethodParamPad,"WhitespaceAround
+Checks that a token is surrounded by whitespace
+
+[whitespace] before [token]
+And [whitespace] after [token]
+
+allowEmptyCatches
+allowEmptyConstructors
+allowEmptyLambdas
+allowEmptyLoops
+allowEmptyMethods
+allowEmptyTypes
+
+True: body Catch/../  is/is not empty
+False body Catch/../  is not empty
+
+
+ignoreEnhancedForColon
+True: [whitespace] before/not before [:] of foreach
+And [whitespace] after/not after [:] of foreach
+False: [whitespace] before [:] of foreach
+And [whitespace] after [:] of foreach
+
+WhitespaceAfter
+[whitespace] after [token]
+
+
+GenericWhitespace：
+Left angle bracket (""<""):
+should be preceded with whitespace only in generic methods definitions.
+should not be preceded with whitespace when it is preceded method name or constructor.
+should not be preceded with whitespace when following type name.
+should not be followed with whitespace in all cases.
+Right angle bracket ("">""):
+should not be preceded with whitespace in all cases.
+should be followed with whitespace in almost all cases, except diamond operators and when preceding a method name, constructor, or record header.
+
+[whitespace] before [<] of generic method  OR
+If [<] after method name or constructor —> [whitespace] not before [<]
+OR
+If [<] after type name —> [whitespace] not before [<]
+OR
+[whitespace] not before [<]
+
+AND
+[whitespace] before [>] and
+[whitespace] not after [>] OR
+If > after method name or constructor or record header —> whitespace] not after/after [>]
+
+
+MethodParamPad
+Checks the padding between the identifier of a method definition, constructor definition, method call, or constructor invocation; and the left parenthesis of the parameter list.
+
+allowLineBreaks
+option
+tokens
+
+
+NoWhitespaceBefore
+Checks that there is no whitespace before a token.
+allowLineBreaks
+
+NoWhitespaceBeforeCaseDefaultColon
+Checks that there is no whitespace before the colon in a switch block.",,,,,"    <module name=""WhitespaceAround"">
+      <property name=""allowEmptyConstructors"" value=""true""/>
+      <property name=""allowEmptyLambdas"" value=""true""/>
+      <property name=""allowEmptyMethods"" value=""true""/>
+      <property name=""allowEmptyTypes"" value=""true""/>
+      <property name=""allowEmptyLoops"" value=""true""/>
+      <property name=""ignoreEnhancedForColon"" value=""false""/>
+      <property name=""tokens""
+               value=""ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR,
+                    BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, DO_WHILE, EQUAL, GE, GT, LAMBDA, LAND,
+                    LCURLY, LE, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY,
+                    LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH, LITERAL_SYNCHRONIZED,
+                    LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN,
+                    NOT_EQUAL, PLUS, PLUS_ASSIGN, QUESTION, RCURLY, SL, SLIST, SL_ASSIGN, SR,
+                    SR_ASSIGN, STAR, STAR_ASSIGN, LITERAL_ASSERT, TYPE_EXTENSION_AND""/>
+      <message key=""ws.notFollowed""
+              value=""WhitespaceAround: ''{0}'' is not followed by whitespace. Empty blocks
+               may only be represented as '{}' when not part of a multi-block statement (4.1.3)""/>
+      <message key=""ws.notPreceded""
+              value=""WhitespaceAround: ''{0}'' is not preceded with whitespace.""/>
+    </module>",,,,,"    <module name=""WhitespaceAround"">
+      <property name=""allowEmptyConstructors"" value=""true""/>
+      <property name=""allowEmptyLambdas"" value=""true""/>
+      <property name=""allowEmptyMethods"" value=""true""/>
+      <property name=""allowEmptyTypes"" value=""true""/>
+      <property name=""allowEmptyLoops"" value=""true""/>
+      <property name=""ignoreEnhancedForColon"" value=""false""/>
+      <property name=""tokens""
+               value=""ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR,
+                    BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, DO_WHILE, EQUAL, GE, GT, LAMBDA, LAND,
+                    LCURLY, LE, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY,
+                    LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH, LITERAL_SYNCHRONIZED,
+                    LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN,
+                    NOT_EQUAL, PLUS, PLUS_ASSIGN, QUESTION, RCURLY, SL, SLIST, SL_ASSIGN, SR,
+                    SR_ASSIGN, STAR, STAR_ASSIGN, LITERAL_ASSERT, TYPE_EXTENSION_AND""/>
+      <message key=""ws.notFollowed""
+              value=""WhitespaceAround: ''{0}'' is not followed by whitespace. Empty blocks
+               may only be represented as '{}' when not part of a multi-block statement (4.1.3)""/>
+      <message key=""ws.notPreceded""
+              value=""WhitespaceAround: ''{0}'' is not preceded with whitespace.""/>
+    </module>",,,,Yes,"<module name='EmptyLineSeparatorCheck'>
+  <property name='allowMultipleEmptyLines' value='true'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.6.3-horizontal-alignment,4.6.3 Horizontal alignment: never required,"Terminology Note: 
+Horizontal alignment is the practice of adding a variable number of additional spaces in your code with the goal of making certain tokens appear directly below certain other tokens on previous lines.
+This practice is permitted, but is never required by Google Style. It is not even required to maintain horizontal alignment in places where it was already used.
+Here is an example without alignment, then using alignment:
+private int x; // this is fine
+private Color color; // this too
+
+private int   x;      // permitted, but future edits
+private Color color;  // may leave it unaligned
+
+Tip: Alignment can aid readability, but it creates problems for future maintenance. Consider a future change that needs to touch just one line. This change may leave the formerly-pleasing formatting mangled, and that is allowed . More often it prompts the coder (perhaps you) to adjust whitespace on nearby lines as well, possibly triggering a cascading series of reformattings. That one-line change now has a ""blast radius."" This can at worst result in pointless busywork, but at best it still corrupts version history information, slows down reviewers and exacerbates merge conflicts.",no rule,,,,,,,,,,no rule,,,,,,,,,Yes,"<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(else|catch)\s*\{}/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='\b(if|for|catch|else)\s*\('/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.7-grouping-parentheses,4.7 Grouping parentheses: recommended,"Optional grouping parentheses are omitted only when author and reviewer agree that there is no reasonable chance the code will be misinterpreted without them, nor would they have made the code easier to read. It is not reasonable to assume that every reader has the entire Java operator precedence table memorized.
+
+","no rule
+If no grouping parentheses make code is not misinterpret  and make code more readable —>
+
+Code have/ not have grouping parentheses NULL",,,,,,,,,,no rule,,,,,,,,,Yes,"<module name='HorizontalSeparatorCheck'>
+******
+  <property name='id' value='horizontalSeparator'/>
+******
+  <property name='option' value='never'/>
+******
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.1-enum-classes,4.8.1 Enum classes,"After each comma that follows an enum constant, a line break is optional. Additional blank lines (usually just one) are also allowed. This is one possibility:
+private enum Answer {
+  YES {
+    @Override public String toString() {
+      return ""yes"";
+    }
+  },
+
+  NO,
+  MAYBE
+}
+
+An enum class with no methods and no documentation on its constants may optionally be formatted as if it were an array initializer (see Section 4.8.3.1 on array initializers ).
+private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
+
+Since enum classes are classes , all other rules for formatting classes apply.","no rule
+
+After each comma that follows an enum constant, a line break is optional. 
+Line break after/not after comma before enum constant NULL
+
+Additional blank lines (usually just one) are also allowed.
+[Num: >=1] blank line after/not after comma before enum constant
+NULL
+
+An enum class with no methods and no documentation on its constants may optionally be formatted as if it were an array initializer (see Section 4.8.3.1 on array initializers).
+if constants of enum class no methods and no document —>
+Format of  enum class =/ != format of array initializer 
+
+",,,,,,,,,,no rule,,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s4.8.4-switch,4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).
+
+",,,,,,,,,,,no rule,,,,,,,,,Yes,"<module name='TreeWalker'>
+  <module name='com.puppycrawl.tools.checkstyle.checks.coding.LineLength'>
+    <property name='max' value='120'/>
+  </module>
+</module>
+******
+<module name='TreeWalker'>
+  <module name='com.puppycrawl.tools.checkstyle.checks.coding.EmptyForIteratorPadCheck'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.6-comments,4.8.6 Comments,"This section addresses implementation comments . Javadoc is addressed separately in Section 7, Javadoc .
+Any line break may be preceded by arbitrary whitespace followed by an implementation comment. Such a comment renders the line non-blank.","Line break after [Any] whitespaces
+And 
+whitespaces before comment
+",,,,,,,,,,,,,,,,,,,Yes,"<module name='MultipleVariableDeclarationsCheck'>
+  <property name='allowInForLoopHeaders' value='true'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.7-modifiers,4.8.7 Modifiers,"Class and member modifiers, when present, appear in the order recommended by the Java Language Specification:
+public protected private abstract default static final transient volatile synchronized native strictfp
+
+","Order of  Class and member modifiers: 
+public protected private abstract default static final transient volatile synchronized native strictfp
+",,,,https://checkstyle.org/checks/modifier/modifierorder.html#ModifierOrder,"Checks that the order of modifiers conforms to the suggestions in the Java Language specification, § 8.1.1, 8.3.1, 8.4.3 and 9.4. The correct order is:
+In additional, modifiers are checked to ensure all annotations are declared before all other modifiers.
+Rationale: Code is easier to read if everybody follows a standard.
+ATTENTION: We skip type annotations from validation.
+",,,,,"<module name=""ModifierOrder""/>",,,,,,,,,Yes,"<module name='LocalVariableDeclarationDistance'>
+  <property name='max' value='5'/>
+</module>
+******
+<module name='LocalVariableName'>
+  <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.8-numeric-literals,4.8.8 Numeric Literals,"`long` -valued integer literals use an uppercase `L` suffix, never lowercase (to avoid confusion with the digit `1` ). For example, `3000000000L` rather than `3000000000l` .","integer literals is long —> L after integer literals And l not after literals
+
+Long integer literals ends with L 
+And
+Long integer literals not ends with l
+
+Long literals in JavaDoc
+Examples of long literals:
+https://docs.oracle.com/javase/specs/jls/se22/html/jls-3.html#jls-3.10.1",,,,https://checkstyle.org/checks/misc/upperell.html#UpperEll,"Checks that long constants are defined with an upper ell. That is 'L' and not 'l'. This is in accordance with the Java Language Specification, Section 3.10.1.
+Rationale: The lower-case ell 'l' looks a lot like 1.
+Long constants ends with L
+And
+Long constants not ends with l",,,,,"<module name=""UpperEll""/>",,,,,,,,,Yes,"<module name='ArrayInitializerPadOption'>
+  <property name='option' value='block'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s5.1-identifier-names,5.1 Rules common to all identifiers,"Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores. Thus each valid identifier name is matched by the regular expression `\w+` .
+In Google Style, special prefixes or suffixes are not used. For example, these names are not Google Style: `name_` , `mName` , `s_name` and `kName` .
+
+","Identifiers use only ASCII letters and digits, and, in a small number of cases noted below, underscores. Thus, each valid identifier name is matched by the regular expression \w+ .
+
+Name of Identifier is \w+
+OR
+Name of Identifier only use ASCII letters, digits, _
+
+And 
+Name of Identifier not starts with name_, mName, s_name and kName
+",,,,,,,,,,,,,,,,,,,Yes,"<module name='ArrayTypeStyleCheck'>
+  <property name='allowCStyleArrayDeclaration' value='false'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s5.2.1-package-names,5.2.1 Package names,"Package names use only lowercase letters and digits (no underscores). Consecutive words are simply concatenated together. For example, `com.example.deepspace` , not `com.example.deepSpace` or `com.example.deep_space` .
+
+","Package names use only lowercase letters and digits (no underscores).
+
+Package names use only lowercase letters and digits
+And 
+Package names not use underscores
+
+
+
+",,,,https://checkstyle.org/checks/naming/packagename.html#PackageName,"Checks that package names conform to a specified pattern.
+
+package name match/ is [format/regular expression]","format
+Control the pattern to match valid identifiers.
+Pattern
+""^[a-z]+(\.[a-zA-Z_]\w*)*$""
+",,,,"    <module name=""PackageName"">
+      <property name=""format"" value=“^[a-z]+(\.[a-z][a-z0-9]*)*$""/>
+    </module>",,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s5.2.2-class-names,5.2.2 Class names,"Class names are written in UpperCamelCase .
+Class names are typically nouns or noun phrases. For example, `Character` or `ImmutableList` . Interface names may also be nouns or noun phrases (for example, `List` ), but may sometimes be adjectives or adjective phrases instead (for example, `Readable` ).
+There are no specific rules or even well-established conventions for naming annotation types.
+A test class has a name that ends with `Test` , for example, `HashIntegrationTest` . If it covers a single class, its name is the name of that class plus `Test` , for example `HashImplTest` .
+
+","Class name is UpperCamelCase
+And
+Class name is nouns or noun phrases
+And
+Class name is nouns or noun phrases or adjectives or adjective phrases
+And
+test class name ends Test",,,,https://checkstyle.org/checks/naming/typename.html#TypeName,"Checks that type names conform to a specified pattern.
+[tokens] name is [format]
+OR 
+applyToPackage
+True: package-private members name is/is not [format]
+False: 
+
+OR
+applyToPrivate
+True: private members  name
+False: private members  name is/is not [format]
+
+applyToProtected
+True: protected member  name
+False: protected member  name is/is not [format]
+
+applyToPublic
+True: public member  name
+False: public member  name is/is not [format]",,,,,"    <module name=""TypeName"">
+      <property name=""tokens"" value=""CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                    ANNOTATION_DEF, RECORD_DEF""/>
+    </module>",,,,,"    <module name=""TypeName"">
+      <property name=""tokens"" value=""CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                    ANNOTATION_DEF, RECORD_DEF""/>
+      <message key=""name.invalidPattern""
+             value=""Type name ''{0}'' must match pattern ''{1}''.""/>
+    </module>",,,,Yes,"<module name='Indentation'  id='Indentation' class='com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck'>
+  <property name='basicOffset' value='2'/>
+  <property name='caseIndent' value='2'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s5.2.3-method-names,5.2.3 Method names,"Method names are written in lowerCamelCase .
+Method names are typically verbs or verb phrases. For example, `sendMessage` or `stop` .
+Underscores may appear in JUnit test method names to separate logical components of the name, with each component written in lowerCamelCase , for example `transferMoney_deductsFromSource` . There is no One Correct Way to name test methods.
+
+","Method name is lowerCamelCase
+
+And
+Method name is verbs or verb phrasess
+
+And
+JUnit test method names have/ not have underscore 
+And
+JUnit test method names have underscore —> 
+underscore separate method name into groups and each group is lowerCamelCase
+",,,,https://checkstyle.org/checks/naming/methodname.html#MethodName,"Checks that method names conform to a specified pattern.
+Method name is [format] OR
+Also, checks if a method name has the same name as the residing class. The default is false (it is not allowed). It is legal in Java to have method with the same name as a class. As long as a return type is specified it is a method and not a constructor which it could be easily confused as. Does not check-style the name of an overridden methods because the developer does not have a choice in renaming such methods.
+allowClassName
+Control whether to allow a method name to have the same name as the enclosing class name. Setting this property false helps to avoid confusion between constructors and methods.
+boolean
+false
+
+OR
+False: method name != enclosing class name
+True: method name != / = enclosing class name
+
+OR 
+applyToPackage
+True: package-private members name is/is not [format]
+False: 
+
+OR
+applyToPrivate
+True: private members  name
+False: private members  name is/is not [format]
+
+applyToProtected
+True: protected member  name
+False: protected member  name is/is not [format]
+
+applyToPublic
+True: public member  name
+False: public member  name is/is not [format]",,,,,"<module name=""MethodName"">
+      <property name=""format"" value=""^[a-z][a-z0-9]\w*$""/>
+    </module>",,,,,,,,,Yes,"<module name='FallThroughCheck'>
+  <property name='commentFormat' value='// fall through'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s5.2.4-constant-names,5.2.4 Constant names,"Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. But what is a constant, exactly?
+Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. Examples:
+// Constants
+static final int NUMBER = 5;
+static final ImmutableList<String> NAMES = ImmutableList.of(""Ed"", ""Ann"");
+static final Map<String, Integer> AGES = ImmutableMap.of(""Ed"", 35, ""Ann"", 32);
+static final Joiner COMMA_JOINER = Joiner.on(','); // because Joiner is immutable
+static final SomeMutableType[] EMPTY_ARRAY = {};
+
+// Not constants
+static String nonFinal = ""non-final"";
+final String nonStatic = ""non-static"";
+static final Set<String> mutableCollection = new HashSet<String>();
+static final ImmutableSet<SomeMutableType> mutableElements = ImmutableSet.of(mutable);
+static final ImmutableMap<String, SomeMutableType> mutableValues =
+    ImmutableMap.of(""Ed"", mutableInstance, ""Ann"", mutableInstance2);
+static final Logger logger = Logger.getLogger(MyClass.getName());
+static final String[] nonEmptyArray = {""these"", ""can"", ""change""};
+
+These names are typically nouns or noun phrases.","Constant names use `UPPER_SNAKE_CASE` : all uppercase letters, with each word separated from the next by a single underscore. 
+
+Constant name is UPPER_SNAKE_CASE 
+And
+A underscore separate each word 
+
+
+Not rule is a Definition
+Constants are static final fields whose contents are deeply immutable and whose methods have no detectable side effects. Examples include primitives, strings, immutable value classes, and anything set to `null` . If any of the instance's observable state can change, it is not a constant. Merely intending to never mutate the object is not enough. 
+Constant is static final field —> content is immutable And
+Method have not side effect
+
+ 
+And
+
+",,,,,,,,,,,,,,,,,,,Yes,"<module name='EmptySwitchBlockCheck'/>
+******
+<module name='MissingSwitchDefaultCheck'/>",,,
+https://google.github.io/styleguide/javaguide.html#s5.2.5-non-constant-field-names,5.2.5 Non-constant field names,"Non-constant field names (static or otherwise) are written in lowerCamelCase .
+These names are typically nouns or noun phrases. For example, `computedValues` or `index` .
+
+","Non-constant field name is lowerCamelCase
+And 
+Non-constant field name is noun or noun phrase
+",,,,https://checkstyle.org/checks/naming/membername.html#MemberName,"MemberName
+Checks that instance variable names conform to a specified pattern.
+instance variable name is [format]
+
+OR 
+applyToPackage
+True: package-private members name is/is not [format]
+False: 
+
+OR
+applyToPrivate
+True: private members  name
+False: private members  name is/is not [format]
+
+applyToProtected
+True: protected member  name
+False: protected member  name is/is not [format]
+
+applyToPublic
+True: public member  name
+False: public member  name is/is not [format]",,,,,"    <module name=""MemberName"">
+      <property name=""format"" value=""^[a-z][a-z0-9][a-zA-Z0-9]*$""/>
+    </module>",,,,,"    <module name=""MemberName"">
+      <property name=""format"" value=""^[a-z][a-z0-9][a-zA-Z0-9]*$""/>
+      <message key=""name.invalidPattern""
+             value=""Member name ''{0}'' must match pattern ''{1}''.""/>
+    </module>",,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s5.2.6-parameter-names,5.2.6 Parameter names,"Parameter names are written in lowerCamelCase .
+One-character parameter names in public methods should be avoided.
+
+","Parameter name is lowerCamelCase
+And 
+The number of character of Parameter name of public method != 1
+","这里不管是catch/lamda/recordComponent parameter
+",,,https://checkstyle.org/checks/naming/parametername.html#ParameterName,"ParameterName
+Checks that method parameter names conform to a specified pattern.
+
+method parameter name is [format]
+
+accessModifiers
+Access modifiers of methods where parameters are checked.
+AccessModifierOption[]
+public, protected, package, private
+
+AND
+Modifier of method parameter name is [accessModifiers]
+
+
+ignoreOverridden
+Allows to skip methods with Override annotation from validation.
+boolean
+false
+AND
+False: method has override annotation —>  method parameter name is [format]
+
+True: method has override annotation —>  method parameter name is/is not [format] NULL",,,,,,,,,,"<module name=""ParameterName"">
+
+<property name=""format"" value=""^[a-z]([a-z0-9][a-zA-Z0-9]*)?$""/>
+
+
+</module>
+
+    <module name=""CatchParameterName"">
+      <property name=""format"" value=""^[a-z]([a-z0-9][a-zA-Z0-9]*)?$""/>
+      <message key=""name.invalidPattern""
+             value=""Catch parameter name ''{0}'' must match pattern ''{1}''.""/>
+    </module>
+
+    <module name=""LambdaParameterName"">
+      <property name=""format"" value=""^[a-z]([a-z0-9][a-zA-Z0-9]*)?$""/>
+      <message key=""name.invalidPattern""
+             value=""Lambda parameter name ''{0}'' must match pattern ''{1}''.""/>
+    </module>
+
+    <module name=""RecordComponentName"">
+      <property name=""format"" value=""^[a-z]([a-z0-9][a-zA-Z0-9]*)?$""/>
+      <message key=""name.invalidPattern""
+               value=""Record component name ''{0}'' must match pattern ''{1}''.""/>
+    </module>",,,,Yes,"<module name='AnnotationLocation' enabled='true'>
+******
+    <property name='tokens' value='CLASS_DEF' />
+******
+    <property name='allowLineBreaks' value='true' />
+******
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s5.2.7-local-variable-names,5.2.7 Local variable names,"Local variable names are written in lowerCamelCase .
+Even when final and immutable, local variables are not considered to be constants, and should not be styled as constants.
+
+","Local variable name is lowerCamelCase
+
+And
+If Local variable has final and immutable —> 
+The format of Local variable name != format of constant
+
+Even when final and immutable, local variables are not considered to be constants, and should not be styled as constants.",,,,https://checkstyle.org/checks/naming/localvariablename.html#LocalVariableName,"LocalVariableName
+Checks that local, non-final variable names conform to a specified pattern. A catch parameter is considered to be a local variable.
+Local variable has not final —-> Local variable name is [format]
+
+allowOneCharVarInForLoop
+Allow one character variable name in initialization expressions in FOR loop if one char variable name is prohibited by format regexp.
+boolean
+false
+False: the number of character of variable name of for statement !=1
+True: the number of character of variable name of for statement  =/!=1
+
+PatternVariableName
+Checks that pattern variable names conform to a specified pattern.
+Pattern variable name is [format]",,,,,"    <module name=""LocalVariableName"">
+      <property name=""format"" value=""^[a-z]([a-z0-9][a-zA-Z0-9]*)?$""/>
+    </module>",,,,,"    <module name=""LocalVariableName"">
+      <property name=""format"" value=""^[a-z]([a-z0-9][a-zA-Z0-9]*)?$""/>
+      <message key=""name.invalidPattern""
+             value=""Local variable name ''{0}'' must match pattern ''{1}''.""/>
+    </module>",,,,Yes,"<module name='MethodAnnotationCheck'>
+  <property name='id' value='MethodAnnotationCheck'/>
+  <property name='annotationFormat' value='@Annotation'/>
+</module>
+******
+<module name='ConstructorAnnotationCheck'>
+  <property name='id' value='ConstructorAnnotationCheck'/>
+  <property name='annotationFormat' value='@Annotation'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s5.2.8-type-variable-names,5.2.8 Type variable names,"Each type variable is named in one of two styles:
+A single capital letter, optionally followed by a single numeral (such as `E` , `T` , `X` , `T2` ) 
+A name in the form used for classes (see Section 5.2.2, Class names ), followed by the capital letter `T` (examples: `RequestT` , `FooBarT` ).","type variable name starts A capital letter, follow/not follow a single numeral
+
+OR
+type variable name = class name + a capital letter
+
+",,,,https://checkstyle.org/checks/naming/methodtypeparametername.html#MethodTypeParameterName,"MethodTypeParameterName
+Checks that method type parameter names conform to a specified pattern.
+Method type parameter name is [format]
+
+ClassTypeParameterName
+Checks that class type parameter names conform to a specified pattern.
+InterfaceTypeParameterName
+Checks that interface type parameter names conform to a specified pattern.
+
+RecordTypeParameterName
+Checks that record type parameter names conform to a specified pattern
+",,,,,"       <module name=""ClassTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+    </module>
+ 
+<module name=""MethodTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+    </module>
+
+    <module name=""InterfaceTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+    </module>
+
+    <module name=""RecordTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+    </module>",,,,,"    <module name=""MethodTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+      <message key=""name.invalidPattern""
+             value=""Method type name ''{0}'' must match pattern ''{1}''.""/>
+    </module>
+
+    <module name=""InterfaceTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+      <message key=""name.invalidPattern""
+             value=""Interface type name ''{0}'' must match pattern ''{1}''.""/>
+    </module>
+
+    <module name=""RecordTypeParameterName"">
+      <property name=""format"" value=""(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)""/>
+      <message key=""name.invalidPattern""
+               value=""Record type name ''{0}'' must match pattern ''{1}''.""/>
+    </module>",,,,Yes,<module name='AnnotationLocation' enable='true'><property name='tokens' value='VARIABLE_DEF'/></module>,,,
+https://google.github.io/styleguide/javaguide.html#s5.3-camel-case,5.3 Camel case: defined,"Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like ""IPv6"" or ""iOS"" are present. To improve predictability, Google Style specifies the following (nearly) deterministic scheme.
+Beginning with the prose form of the name:
+Convert the phrase to plain ASCII and remove any apostrophes. For example, ""Müller's algorithm"" might become ""Muellers algorithm"". 
+Divide this result into words, splitting on spaces and any remaining punctuation (typically hyphens). 
+Recommended: if any word already has a conventional camel-case appearance in common usage, split this into its constituent parts (e.g., ""AdWords"" becomes ""ad words""). Note that a word such as ""iOS"" is not really in camel case per se ; it defies any convention, so this recommendation does not apply. 
+Now lowercase everything (including acronyms), then uppercase only the first character of: 
+... each word, to yield upper camel case , or 
+... each word except the first, to yield lower camel case 
+Finally, join all the words into a single identifier.
+Note that the casing of the original words is almost entirely disregarded. Examples:
+Prose form 
+Correct 
+Incorrect 
+""XML HTTP request"" 
+`XmlHttpRequest` 
+`XMLHTTPRequest` 
+""new customer ID"" 
+`newCustomerId` 
+`newCustomerID` 
+""inner stopwatch"" 
+`innerStopwatch` 
+`innerStopWatch` 
+""supports IPv6 on iOS?"" 
+`supportsIpv6OnIos` 
+`supportsIPv6OnIOS` 
+""YouTube importer"" 
+`YouTubeImporter` 
+`YoutubeImporter` *
+*Acceptable, but not recommended.
+Note: Some words are ambiguously hyphenated in the English language: for example ""nonempty"" and ""non-empty"" are both correct, so the method names `checkNonempty` and `checkNonEmpty` are likewise both correct.","No Rule
+Camel case definition
+Rules how to transform to camel case",CheckStyle set a config,,,,,,,,,,,,,,"    <module name=""AbbreviationAsWordInName"">
+      <property name=""ignoreFinal"" value=""false""/>
+      <property name=""allowedAbbreviationLength"" value=""0""/>
+      <property name=""tokens""
+               value=""CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF,
+                    PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF,
+                    RECORD_COMPONENT_DEF""/>
+    </module>",,,,No,,,,
+https://checkstyle.org/styleguides/google-java-style-20180523/javaguide.html#s6.1-override-annotation,"6.1 @Override: always used
+","A method is marked with the @Override annotation whenever it is legal. This includes a class method overriding a superclass method, a class method implementing an interface method, and an interface method respecifying a superinterface method.
+Exception: @Override may be omitted when the parent method is @Deprecated.
+","If a method of a subclass overrides a method of its superclass.
+If a method of a class implements a method defined of an interface.
+If a method of an interface redefines a method declared of a superinterfaces.
+—> 
+method has @Override annotation
+
+OR
+If a method of a subclass overrides a method of its superclass And  method of its superclass has @Deprecated
+If a method of a class implements a method defined of an interface And  
+If a method of an interface redefines a method declared of a superinterfaces And  
+—> 
+method has/has not @Override annotation
+",,,,,,,,,,,,,,,,,,,,,,,
+https://google.github.io/styleguide/javaguide.html#s6.2-caught-exceptions,6.2 Caught exceptions: not ignored,"Except as noted below, it is very rarely correct to do nothing in response to a caught exception. (Typical responses are to log it, or if it is considered ""impossible"", rethrow it as an `AssertionError` .)
+When it truly is appropriate to take no action whatsoever in a catch block, the reason this is justified is explained in a comment.
+try {
+  int i = Integer.parseInt(response);
+  return handleNumericResponse(i);
+} catch (NumberFormatException ok) {
+  // it's not numeric; that's fine, just continue
+}
+return handleTextResponse(response);
+
+Exception: In tests, a caught exception may be ignored without comment if its name is or begins with `expected` . The following is a very common idiom for ensuring that the code under test does throw an exception of the expected type, so a comment is unnecessary here.
+try {
+  emptyStack.pop();
+  fail();
+} catch (NoSuchElementException expected) {
+}
+
+","Except as noted below, it is very rarely correct to do nothing in response to a caught exception. 
+
+The catch block not has code
+
+OR
+
+If catch block not has code —> 
+catch block has comment/ comment in body of catch block
+
+OR
+If catch block belongs to test and ( the name of exception = “expected”  OR exception variable name starts “expected” ) —->
+catch block has/ not has comment/ 
+comment in/ not in catch block ",,,,https://checkstyle.org/checks/blocks/emptyblock.html#EmptyBlock,"EmptyBlock
+Checks for empty blocks. This check does not validate sequential blocks.
+
+[tokens] has [blockoption]
+
+option
+Specify the policy on block contents.
+BlockOption
+statement
+block has statement/code
+text
+block has text/non-whitespace characters and comments and code
+
+",,,,,"    <module name=""EmptyBlock"">
+      <property name=""option"" value=""TEXT""/>
+      <property name=""tokens""
+               value=""LITERAL_CATCH""/>
+    </module>",,,,,"    <module name=""EmptyBlock"">
+      <property name=""option"" value=""TEXT""/>
+      <property name=""tokens""
+               value=""LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH""/>
+    </module>",,,,Yes,"<module name='CommentsSeparatorCheck'>
+  <property name='format' value='ALLOWED'/>
+</module>
+******
+<module name='RegexpSinglelineCheck'>
+  <property name='format' value='^\s*//.*'/>
+  <property name='ignoreFormat' value='true'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s6.3-static-members,6.3 Static members: qualified using class,"When a reference to a static class member must be qualified, it is qualified with that class's name, not with a reference or expression of that class's type.
+Foo aFoo = ...;
+Foo.aStaticMethod(); // good
+aFoo.aStaticMethod(); // bad
+somethingThatYieldsAFoo().aStaticMethod(); // very bad
+
+","Qualified Reference to a static class member
+
+reference of static class member is class name
+And
+reference of static class member is not class reference
+And
+reference of static class member is not expression 
+
+""reference to a static class member"" refers to accessing or invoking a static field or method of a class.
+""qualified with that class's name"" means using the class name directly to access the static member.
+""expression of that class's type"" refers to an instance of the class or an expression that evaluates to an instance of the class
+",,,,,,,,,,,,,,,,,,,Yes,"<module name='Checker'>
+  <module name='FileTabCharacter'>
+    <property name='eachLine' value='true'/>
+  </module>
+</module>
+******
+<module name='Checker'>
+  <module name='RegexpSingleline'>
+    <property name='format' value='^\s*\*.*'/>
+    <property name='message' value='Block comments must start with * aligned'/>
+    <property name='ignoreComments' value='false'/>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s6.4-finalizers,6.4 Finalizers: not used,"It is extremely rare to override `Object.finalize` .
+Tip: Don't do it. If you absolutely must, first read and understand Effective Java
+ 
+ Item 8 , ""Avoid finalizers and cleaners"" very carefully, and then don't do it.","Not override `Object.finalize` method
+not override finalize method
+暗含了method name is not  finalize
+
+""Finalizers"" refers to the finalize method in Java, which is a special method invoked by the garbage collector before reclaiming the memory occupied by an object.
+""Override"" means providing a specific implementation for a method in a subclass that is already present in its superclass. In this case, it refers to providing a custom implementation for the finalize method in a class.
+",,,,https://checkstyle.org/checks/coding/nofinalizer.html#NoFinalizer,"NoFinalizer
+Checks that there is no method finalize with zero parameters.
+See Object.finalize()
+Rationale: Finalizers are unpredictable, often dangerous, and generally unnecessary. Their use can cause erratic behavior, poor performance, and portability problems. For more information for the finalize method and its issues, see Effective Java: Programming Language Guide Third Edition by Joshua Bloch, §8.
+method name is not finalize and finalize method has not parameters
+VS
+method name is not finalize and method has not parameters
+",,,,,"<module name=""NoFinalizer""/>",,,,,"<module name=""NoFinalizer""/>",,,,Yes,"<module name='ModifierOrderCheck'>
+  <property name='tokens' value='PUBLIC, PROTECTED, PRIVATE, ABSTRACT, DEFAULT, STATIC, FINAL, TRANSIENT, VOLATILE, SYNCHRONIZED, NATIVE, STRICTFP'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.1.1-javadoc-multi-line,7.1.1 General form,"The basic formatting of Javadoc blocks is as seen in this example:
+/**
+ * Multiple lines of Javadoc text are written here,
+ * wrapped normally...
+ */
+public int method(String p1) { ... }
+
+... or in this single-line example:
+/** An especially short bit of Javadoc. */
+
+The basic form is always acceptable. The single-line form may be substituted when the entirety of the Javadoc block (including comment markers) can fit on a single line. Note that this only applies when there are no block tags such as `@return` .","Format of javadoc is 
+Number of lines of javadoc is >= 1 and javadoc starts /** and ends  */
+OR
+Format of javadoc is 
+Number of lines of javadoc is 1 and javadoc starts /** and ends  */
+
+
+And
+If java doc  has not block tag —>number of lines of java doc != 1 
+OR
+If java doc  has not block tag —>number of lines of java doc !=/= 1
+",,,,https://checkstyle.org/checks/javadoc/singlelinejavadoc.html#SingleLineJavadoc,"SingleLineJavadoc
+Checks that a Javadoc block can fit in a single-line and doesn't contain block tags. Javadoc comment that contains at least one block tag should be formatted in a few lines.
+Javadoc not have block tag —> number of lines of Javadoc =/!= 1
+And
+Javadoc have block tag —> number of lines of Javadoc != 1
+ignoreInlineTags
+True: Javadoc have Inline tags —> number of lines of Javadoc =/!= 1
+False: Javadoc have Inline tags —> number of lines of Javadoc != 1
+
+ignoredTags
+Javadoc have [ignoredTags] —> number of lines of Javadoc =/!= 1
+violateExecutionOnNonTightHtml
+False: if Javadoc violates the tight html rules —> number of lines of Javadoc =/!= 1
+True: if Javadoc violates the tight html rules —> number of lines of Javadoc != 1",,,,,,,,,,"<module name=""SingleLineJavadoc""/>",,,,Yes,"<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='L\b'/>
+  <property name='message' value='Numeric literals of type long should use uppercase L suffix.'/>
+  <property name='ignoreComments' value='true'/>
+  <property name='ignoreCase' value='false'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.1.2-javadoc-paragraphs,7.1.2 Paragraphs,"One blank line—that is, a line containing only the aligned leading asterisk ( `*` )—appears between paragraphs, and before the group of block tags if present. Each paragraph except the first has `<p>` immediately before the first word, with no space after it. HTML tags for other block-level elements, such as `<ul>` or `<table>` , are not preceded with `<p>` .
+
+","Blank line between paragraphs 
+And
+If block tag in Javadoc —> Blank line before block tag
+
+Paragraph is not first paragraph of JavaDoc —> <p> before the first word of a paragraph and
+No space after <p>
+
+<p> not before Remaining html tags ",,,,"https://checkstyle.org/checks/javadoc/javadocparagraph.html#JavadocParagraph
+
+https://checkstyle.org/checks/javadoc/requireemptylinebeforeblocktaggroup.html#RequireEmptyLineBeforeBlockTagGroup","JavadocParagraph
+Checks the Javadoc paragraph.
+Checks that:
+There is one blank line between each of two paragraphs.
+Each paragraph but the first has <p> immediately before the first word, with no space after.
+Blank line between two paragraph of Javadoc
+AND
+If paragraph is not first paragraph of Javadoc —> <p> before the first word of paragraph and no space after <p> 
+allowNewlineParagraph
+Control whether the <p> tag should be placed immediately before the first word.
+boolean
+true: <p> before first word of paragraph
+False: <p> not before/before first word of paragraph
+violateExecutionOnNonTightHtml
+Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at Tight-HTML Rules.
+boolean
+false:Java doc violates/not violates satisfy/not satisfy the tight html rules
+True: Java doc violates the tight html rules","RequireEmptyLineBeforeBlockTagGroup
+Checks that one blank line before the block tag if it is present in Javadoc.
+
+If block tag in Javadoc —> blank line before block tag
+
+violateExecutionOnNonTightHtml
+Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at Tight-HTML Rules.
+boolean
+false
+
+
+",,,,"<module name=“JavadocParagraph""/>
+<module name=""RequireEmptyLineBeforeBlockTagGroup""/>",,,,,"<module name=“JavadocParagraph""/>
+<module name=""RequireEmptyLineBeforeBlockTagGroup""/>",,,,Yes,"<module name='Checker'>
+  <module name='RegexpSinglelineJava'>
+    <property name='format' value='^[a-zA-Z][a-zA-Z0-9]*$'/>
+    <property name='message' value='Identifier does not match the regular expression ''^[a-zA-Z][a-zA-Z0-9]*$''.'/>
+    <property name='ignoreFormat' value='true'/>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.1.3-javadoc-block-tags,7.1.3 Block tags,"Any of the standard ""block tags"" that are used appear in the order `@param` , `@return` , `@throws` , `@deprecated` , and these four types never appear with an empty description. When a block tag doesn't fit on a single line, continuation lines are indented four (or more) spaces from the position of the `@` .
+
+","Order of block tag of Javadoc: 
+`@param` , `@return` , `@throws` , `@deprecated`
+
+And
+Description of `@param` , `@return` , `@throws` , `@deprecated` is not Null
+
+And
+The number of lines of block tag >1 —> indentation of other lines - indentation of first line >=4",,,,"https://checkstyle.org/checks/javadoc/atclauseorder.html#AtclauseOrder
+
+https://checkstyle.org/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation
+
+https://checkstyle.org/checks/javadoc/nonemptyatclausedescription.html#NonEmptyAtclauseDescription","Checks the order of javadoc block-tags or javadoc tags.
+Order of block tag of Javadoc of [target] is [tagOrder]
+
+tagOrder
+Specify the order by tags.
+String[]
+@author, @deprecated, @exception, @param, @return, @see, @serial, @serialData, @serialField, @since, @throws, @version
+
+
+target
+Specify block tags targeted.
+subset of tokens TokenTypes
+CLASS_DEF , COMPACT_CTOR_DEF , CTOR_DEF , ENUM_DEF , INTERFACE_DEF , METHOD_DEF , RECORD_DEF , VARIABLE_DEF
+
+
+violateExecutionOnNonTightHtml","JavadocTagContinuationIndentation
+Checks the indentation of the continuation lines in block tags. T
+
+Indentation of continuation lines of block tags = Indentation of first line of block tags + [offset]
+
+
+offset
+Specify how many spaces to use for new indentation level.
+int
+4
+
+
+violateExecutionOnNonTightHtml
+
+
+NonEmptyAtclauseDescription
+Checks that the block tag is followed by description.
+
+block tag of Javadoc of [javadocTokens]  has Description and Description after block tag of Javadoc of [javadocTokens]
+
+javadocTokens
+javadoc tokens to check
+subset of javadoc tokens PARAM_LITERAL , RETURN_LITERAL , THROWS_LITERAL , EXCEPTION_LITERAL , DEPRECATED_LITERAL .
+PARAM_LITERAL , RETURN_LITERAL , THROWS_LITERAL , EXCEPTION_LITERAL , DEPRECATED_LITERAL .
+
+violateExecutionOnNonTightHtml",,,,,,,,,"    <module name=""AtclauseOrder"">
+      <property name=""tagOrder"" value=""@param, @return, @throws, @deprecated""/>
+      <property name=""target""
+               value=""CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF""/>
+    </module>
+
+<module name=“JavadocTagContinuationIndentation""/>
+
+<module name=“NonEmptyAtclauseDescription""/>",,,,Yes,"<module name='Checker'>
+  <module name='TreeWalker'>
+    <module name='PackageName'>
+      <property name='format' value='^[a-z]+(\.[a-z0-9]+)*$'/>
+      <property name='illegalFormat' value='^[A-Z]' message='Package name must be in lowercase'/>
+      <property name='illegalChar' value='_' message='Package name must not contain underscores'/>
+    </module>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.2-summary-fragment,7.2 The summary fragment,"Each Javadoc block begins with a brief summary fragment . This fragment is very important: it is the only part of the text that appears in certain contexts such as class and method indexes.
+This is a fragment—a noun phrase or verb phrase, not a complete sentence. It does not begin with `A{@codeFoo}isa...` , or `Thismethodreturns...` , nor does it form a complete imperative sentence like `Savetherecord.` . However, the fragment is capitalized and punctuated as if it were a complete sentence.
+Tip: A common mistake is to write simple Javadoc in the form `/**@returnthecustomerID*/` . This is incorrect, and should be changed to `/**ReturnsthecustomerID.*/` .
+
+","Javadoc block begins summary description.
+
+AND
+summary description is a noun phrase OR verb phrase AND not a complete sentence.
+AND
+summary description not begin with “A {@code Foo} is a"", 
+OR  not begin with “This method returns”
+
+AND
+
+",,,,https://checkstyle.org/checks/javadoc/summaryjavadoc.html#SummaryJavadoc,"SummaryJavadoc
+Checks that Javadoc summary sentence does not contain phrases that are not recommended to use. Summaries that contain only the {@inheritDoc} tag are skipped. Summaries that contain a non-empty {@code {@return}} are allowed. Check also violate Javadoc that does not contain first sentence, though with {@code {@return}} a period is not required as the Javadoc tool adds it.
+
+Summary is not [forbiddenSummaryFragments]
+AND 
+Summary ends [period]
+AND
+Javadoc has the first sentence 
+AND
+Javadoc has {@code {@return}}—> Javadoc has/not has [period]  NULL
+
+AND
+If {@inheritDoc} tag  in Summary —>  NULL
+
+
+forbiddenSummaryFragments
+Specify the regexp for forbidden summary fragments.
+Pattern
+""^$""
+
+period
+Specify the period symbol at the end of first javadoc sentence.
+String
+"".""
+
+
+violateExecutionOnNonTightHtml
+Control when to print violations if the Javadoc being examined by this check violates the tight html rules defined at Tight-HTML Rules.
+boolean
+false
+",,,,,,,,,,,,,,Yes,"<module name='Checker'>
+  <module name='TreeWalker'>
+    <module name='com.puppycrawl.tools.checkstyle.checks.naming.ClassNameCheck'>
+      <property name='format' value='^[A-Z][a-zA-Z0-9]*$'/>
+      <property name='ignoreAnnotation' value='true'/>
+      <property name='ignoreInterface' value='false'/>
+      <property name='ignoreTestClasses' value='true'/>
+    </module>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.3-javadoc-where-required,7.3 Where Javadoc is used,"At the minimum , Javadoc is present for every `public` class, and every `public` or `protected` member of such a class, with a few exceptions noted below.
+Additional Javadoc content may also be present, as explained in Section 7.3.4, Non-required Javadoc .","Javadoc in public class
+And
+Public members and protected members of public class
+
+",,,,"https://checkstyle.org/checks/javadoc/missingjavadoctype.html#MissingJavadocType
+
+https://checkstyle.org/checks/javadoc/missingjavadocmethod.html#MissingJavadocMethod
+
+","MissingJavadocType
+Checks for missing Javadoc comments for class, enum, interface, and annotation interface definitions.
+
+[tokens] has Javadoc
+
+excludeScope
+Specify the visibility scope where Javadoc comments are not checked.
+Scope
+null
+
+AND if scope of [tokens] is [excludeScope]—>  [tokens] has/has not Javadoc NULL
+	nothing
+	public
+	protected
+	package
+	private
+	anoninner
+
+scope
+Specify the visibility scope where Javadoc comments are checked.
+Scope
+public
+
+AND if scope of [tokens] is [Scope]—>  [tokens] has Javadoc NULL
+
+skipAnnotations
+Specify annotations that allow missed documentation. If annotation is present in target sources in multiple forms of qualified name, all forms should be listed in this property.
+String[]
+Generated
+
+AND if annotation of [tokens] is [skipAnnotations]—>  [tokens] has/has not Javadoc NULL
+
+tokens","MissingJavadocMethod
+Checks for missing Javadoc comments for a method or constructor. The scope to verify is specified using the Scope class and defaults to Scope.PUBLIC. To verify another scope, set property scope to a different scope.
+Javadoc is not required on a method that is tagged with the @Override annotation. However, under Java 5 it is not possible to mark a method required for an interface (this was corrected under Java 6). Hence, Checkstyle supports using the convention of using a single {@inheritDoc} tag instead of all the other tags.
+For getters and setters for the property allowMissingPropertyJavadoc, the methods must match exactly the structures below.
+[tokens] has Javadoc
+
+allowMissingPropertyJavadoc
+Control whether to allow missing Javadoc on accessor methods for properties (setters and getters).
+boolean
+false
+
+ignoreMethodNamesRegex
+Ignore method whose names are matching specified regex.
+Pattern
+null
+
+minLineCount
+Control the minimal amount of lines in method to allow no documentation.
+int
+-1
+
+allowedAnnotations
+excludeScope
+scope",,,,"    <module name=""MissingJavadocType"">
+      <property name=""scope"" value=""public""/>
+      <property name=""tokens""
+                value=""CLASS_DEF""/>
+      <property name=""excludeScope"" value=""nothing""/>
+    </module>
+
+    <module name=""MissingJavadocMethod"">
+      <property name=""scope"" value=""public""/>
+      <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF,
+                                   COMPACT_CTOR_DEF""/>
+    </module>
+    <module name=""MissingJavadocMethod"">
+      <property name=""scope"" value=""protected""/>
+      <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF,
+                                   COMPACT_CTOR_DEF""/>
+    </module>
+
+",,,,,"    <module name=""MissingJavadocType"">
+      <property name=""scope"" value=""protected""/>
+      <property name=""tokens""
+                value=""CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                      RECORD_DEF, ANNOTATION_DEF""/>
+      <property name=""excludeScope"" value=""nothing""/>
+    </module>
+
+    <module name=""MissingJavadocMethod"">
+      <property name=""scope"" value=""public""/>
+      <property name=""minLineCount"" value=""2""/>
+      <property name=""allowedAnnotations"" value=""Override, Test""/>
+      <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF,
+                                   COMPACT_CTOR_DEF""/>
+    </module>
+
+    <module name=""JavadocMethod"">
+      <property name=""accessModifiers"" value=""public""/>
+      <property name=""allowMissingParamTags"" value=""true""/>
+      <property name=""allowMissingReturnTag"" value=""true""/>
+      <property name=""allowedAnnotations"" value=""Override, Test""/>
+      <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF""/>
+    </module>",,,,Yes,"<module name='MethodNameCheck'>
+  <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+  <property name='ignoreOverriddenMethods' value='true'/>
+</module>
+******
+<module name='MethodName'>
+  <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+  <property name='ignoreOverriddenMethods' value='true'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.3.1-javadoc-exception-self-explanatory,7.3.1 Exception: self-explanatory members,"Javadoc is optional for ""simple, obvious"" members like `getFoo()` , in cases where there really and truly is nothing else worthwhile to say but ""Returns the foo"".
+Important: it is not appropriate to cite this exception to justify omitting relevant information that a typical reader might need to know. For example, for a method named `getCanonicalName` , don't omit its documentation (with the rationale that it would say only `/**Returnsthecanonicalname.*/` ) if a typical reader may have no idea what the term ""canonical name"" means!
+
+",,,,,,,,,,,,,,,,,,,,Yes,<module name='ConstantName'><property name='format' value='^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'/></module>,,,
+https://google.github.io/styleguide/javaguide.html#s7.3.2-javadoc-exception-overrides,7.3.2 Exception: overrides,"Javadoc is not always present on a method that overrides a supertype method.
+
+",,,,,https://checkstyle.org/checks/javadoc/missingjavadocmethod.html#MissingJavadocMethod,"MissingJavadocMethod
+Checks for missing Javadoc comments for a method or constructor. The scope to verify is specified using the Scope class and defaults to Scope.PUBLIC. To verify another scope, set property scope to a different scope.
+Javadoc is not required on a method that is tagged with the @Override annotation. However, under Java 5 it is not possible to mark a method required for an interface (this was corrected under Java 6). Hence, Checkstyle supports using the convention of using a single {@inheritDoc} tag instead of all the other tags.
+For getters and setters for the property allowMissingPropertyJavadoc, the methods must match exactly the structures below.
+
+allowedAnnotations
+Configure annotations that allow missed documentation.
+String[]
+Override
+",,,,,,,,,,"<module name=""JavadocMethod"">
+      <property name=""accessModifiers"" value=""public""/>
+      <property name=""allowMissingParamTags"" value=""true""/>
+      <property name=""allowMissingReturnTag"" value=""true""/>
+      <property name=""allowedAnnotations"" value=""Override, Test""/>
+      <property name=""tokens"" value=""METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF""/>
+    </module>",,,,Yes,"<module name='Checker'>
+    <module name='MemberName'>
+        <property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+        <property name='ignoreModifiers' value='true'/>
+        <property name='ignoreStatic' value='false'/>
+        <property name='ignoreFinal' value='false'/>
+    </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s7.3.4-javadoc-non-required,7.3.4 Non-required Javadoc,"Other classes and members have Javadoc as needed or desired .
+Whenever an implementation comment would be used to define the overall purpose or behavior of a class or member, that comment is written as Javadoc instead (using `/**` ).
+Non-required Javadoc is not strictly required to follow the formatting rules of Sections 7.1.1, 7.1.2, 7.1.3, and 7.2, though it is of course recommended.",,,,,,,,,,,,,,,,,,,,Yes,"<module name='ParameterName'><property name='format' value='^[a-z][a-zA-Z0-9]*$'/></module>
+******
+<module name='ParameterName'><property name='allowOneCharParameterNames' value='false'/></module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations,4.8.5.1 Type-use annotations,"Type-use annotations appear immediately before the annotated type. An annotation is a type-use annotation if it is meta-annotated with @Target(ElementType.TYPE_USE). Example:
+final @Nullable String name;
+
+public @Nullable Person getPersonByName(String name);
+","Type-use annotations appear immediately before the annotated type.
+If annotation is type-use annotation —-> Annotation before annotated type
+
+Annotation before annotated type and annotation is type-use annotation
+
+
+",,,,,"Attention: Annotations among modifiers are ignored (looks like false-negative) as there might be a problem with annotations for return types:
+public @Nullable Long getStartTimeOrNull() { ... }
+Such annotations are better to keep close to type. Due to limitations, Checkstyle can not examine the target of an annotation.",,,,,CheckStyle Cannot Handle,,,,,,,,,Yes,<module name='LocalVariableName'><property name='format' value='^[a-z][a-zA-Z0-9]*$'/></module>,错误,,TypeUseAnnotations 不存在
+https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations,4.8.5.2 Class annotations,"Annotations applying to a class appear immediately after the documentation block, and each annotation is listed on a line of its own (that is, one annotation per line). These line breaks do not constitute line-wrapping (Section 4.5, Line-wrapping), so the indentation level is not increased. Example:
+@Deprecated
+@CheckReturnValue
+public final class Frozzler { ... }","
+
+Annotation of class after document block 
+And 
+The number of annotation of a line is 1 
+And
+Indention of annotations is same
+
+
+
+",,,"Annotations applying to a class appear immediately after the documentation block [Position, after xxxx]
+2. each annotation is listed on a line of its own (that is, one annotation per line)  
+[Position, oneline]
+3. These line breaks do not constitute line-wrapping (Section 4.5, Line-wrapping), so the indentation level is not increased. [Indentlevel, all annotations should be the same indentation level]",https://checkstyle.org/checks/annotation/annotationlocation.html#AnnotationLocation,"Checks location of annotation on language elements. By default, Check enforce to locate annotations immediately after documentation block and before target element, annotation should be located on separate line from target element. This check also verifies that the annotations are on the same indenting level as the annotated element if they are not on the same line.
+
+
+Attention: Elements that cannot have JavaDoc comments like local variables are not in the scope of this check even though a token type like VARIABLE_DEF would match them.
+Attention: Annotations among modifiers are ignored (looks like false-negative) as there might be a problem with annotations for return types:","Checks location of annotation on language elements.
+
+By default, Check enforce to locate annotations immediately after documentation block and before target element, annotation should be located on separate line from target element.
+annotations after documentation block and before [target element {{tokens}}]
+[Position, after xxxx]
+
+And
+
+The number of annotation of a line is 1
+
+And
+
+Indention of annotations is same
+
+OR
+allowSamelineMultipleAnnotations
+True: line number of Annotations = / != line number of target element
+False: line number of Annotations != line number of target element
+
+OR
+allowSamelineParameterizedAnnotation
+True: line number of Annotations and annotation is parameterized = / != line number of target element
+False:  line number of Annotations and annotation is parameterized != line number of target element
+
+OR
+allowSamelineSingleParameterlessAnnotation
+True: line number of Annotations and annotation is parameterized = / != line number of target element
+False:  
+
+
+2. annotation should be located on separate line from target element  
+[Position, oneline]
+3. annotations are on the same indenting level as the annotated element if they are not on the same line 
+[Indentlevel, all annotations should be the same indentation level]",,"allowSamelineMultipleAnnotations
+Allow annotation(s) to be located on the same line as target element.
+boolean
+false
+6.0
+
+
+allowSamelineParameterizedAnnotation
+Allow one and only parameterized annotation to be located on the same line as target element.
+boolean
+false
+6.4
+
+
+allowSamelineSingleParameterlessAnnotation
+Allow single parameterless annotation to be located on the same line as target element.
+boolean
+true
+6.1
+
+
+tokens
+tokens to check
+subset of tokens CLASS_DEF , INTERFACE_DEF , PACKAGE_DEF , ENUM_CONSTANT_DEF , ENUM_DEF , METHOD_DEF , CTOR_DEF , VARIABLE_DEF , ANNOTATION_DEF , ANNOTATION_FIELD_DEF , RECORD_DEF , COMPACT_CTOR_DEF .
+CLASS_DEF , INTERFACE_DEF , PACKAGE_DEF , ENUM_CONSTANT_DEF , ENUM_DEF , METHOD_DEF , CTOR_DEF , VARIABLE_DEF , RECORD_DEF , COMPACT_CTOR_DEF .
+6.0",,"<module name=""AnnotationLocation"">
+<property name=""id"" value=""AnnotationLocationClass""/>
+<property name=""allowSamelineMultipleAnnotations"" value=""false""/>
+<property name=""allowSamelineParameterizedAnnotation"" value=""false""/>
+<property name=""allowSamelineSingleParameterlessAnnotation"" value=""false""/> <!-- changed value -->
+<property name=""tokens"" value=""CLASS_DEF""/> <!-- changed value -->
+</module>",,,,,,,,,Yes,"<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='^[A-Z][0-9]?$'/>
+  <property name='message' value='Type variable name must be a single capital letter, optionally followed by a single numeral.'/>
+</module>
+******
+<module name='RegexpSinglelineJavaCheck'>
+  <property name='format' value='^[A-Z][a-zA-Z0-9]*T$'/>
+  <property name='message' value='Type variable name must be in the form used for classes followed by the capital letter T.'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations,4.8.5.3 Method and constructor annotations,"The rules for annotations on method and constructor declarations are the same as the previous section. Example:
+@Deprecated
+@Override
+public String getNameIfPresent() { ... }
+Exception: A single parameterless annotation may instead appear together with the first line of the signature, for example:
+@Override public int hashCode() { ... }","
+
+Annotation of method after document block 
+And 
+The number of annotation of a line is 1 
+And
+Indention of annotations is same
+
+
+
+",,,,,,,,,,"<module name=""AnnotationLocation"">
+<property name=""id"" value=“AnnotationLocationMethodCTOR""/>
+<property name=""allowSamelineMultipleAnnotations"" value=""false""/>
+<property name=""allowSamelineParameterizedAnnotation"" value=""false""/>
+<property name=""allowSamelineSingleParameterlessAnnotation"" value=“true""/> 
+<property name=""tokens"" value=“METHOD_DEF, CTOR_DEF""/> <!-- changed/set value -->
+</module>",,,,,,,,,Yes,"<module name='Checker'>
+  <module name='TreeWalker'>
+    <module name='MethodName'>
+      <property name='format' value='^[a-z]+[a-zA-Z0-9]*$'/>
+      <property name='allowunderscores' value='false'/>
+      <property name='tokens' value='METHOD_DEF'/>
+    </module>
+  </module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations,4.8.5.4 Field annotations,"Annotations applying to a field also appear immediately after the documentation block, but in this case, multiple annotations (possibly parameterized) may be listed on the same line; for example:
+@Partial @Mock DataLoader loader;","
+
+Annotation of field after document block 
+And 
+The number of annotation of a line >= 1 
+And
+Indention of annotations is same
+
+
+
+",,,,,,,,"public static final int VARIABLE_DEF
+A field or local variable declaration",,"<module name=""AnnotationLocation"">
+<property name=""id"" value=“AnnotationLocationField""/>
+<property name=""allowSamelineMultipleAnnotations"" value=""true""/>
+<property name=""allowSamelineParameterizedAnnotation"" value=""true""/>
+<property name=""allowSamelineSingleParameterlessAnnotation"" value=“true""/> 
+<property name=""tokens"" value=“VARIABLE_DEF""/> <!-- changed/set value -->
+</module>",,,,,,,,,Yes,"<module name='EmptyCatchBlock'>
+  <property name='id' value='com.puppycrawl.tools.checkstyle.checks.coding.EmptyCatchBlockCheck'/>
+  <property name='tokens' value='LITERAL_CATCH'/>
+</module>
+******
+<module name='RegexpSinglelineJava'>
+  <property name='id' value='com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck'/>
+  <property name='format' value='catch\s*\(.*\)\s*\{\s*\/\/.*\s*\/\/.*\s*}'/>
+  <property name='message' value='Caught exceptions should not be ignored without explanation'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations,4.8.5.5 Parameter and local variable annotations,"There are no specific rules for formatting annotations on parameters or local variables (except, of course, when the annotation is a type-use annotation).",no rule,,,,,,,,,,None,,,,,,,,,Yes,"<module name='Checker'>
+<property name='severity' value='warning'/>
+<module name='MemberName'>
+<property name='format' value='^[a-z][a-zA-Z0-9]*$'/>
+<property name='tokens' value='VARIABLE_DEF'/>
+</module>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s3.4.2-ordering-class-contents,3.4.2.1 Overloads: never split,Methods of a class that share the same name appear in a single contiguous group with no other members in between. The same applies to multiple constructors (which always have the same name). This rule applies even when modifiers such as static or private differ between the methods.,"class.methods.name
+Order of same method names of methods of a class in a source code are contiguous
+
+Order of same constructor names of methods of a class in a source code are contiguous
+
+
+
+",,,,https://checkstyle.org/checks/coding/overloadmethodsdeclarationorder.html#OverloadMethodsDeclarationOrder,"OverloadMethodsDeclarationOrder
+
+Since Checkstyle 5.8
+Description
+
+Checks that overloaded methods are grouped together. Overloaded methods have the same name but different signatures where the signature can differ by the number of input parameters or type of input parameters or both.
+Examples
+
+To configure the check:
+
+
+<module name=""Checker"">
+  <module name=""TreeWalker"">
+    <module name=""OverloadMethodsDeclarationOrder""/>
+  </module>
+</module>
+        
+",The order of  overloaded methods is same,,,,,,,,,,,,,Yes,"<module name='FinalizerCheck'>
+******
+  <property name='severity' value='warning'/>
+******
+  <property name='tokens' value='CLASS_DEF'/>
+******
+  <property name='ignoreClasses' value='java.lang.Object'/>
+******
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.2-variable-declarations,4.8.2.1 One variable per declaration,"Every variable declaration (field or local) declares only one variable: declarations such as int a, b; are not used.
+Exception: Multiple variable declarations are acceptable in the header of a for loop.","Every variable declaration (field or local) declares only one variable: declarations such as int a, b; are not used.
+
+The number of variable of a Variable declaration = 1
+
+OR
+Multiple variable declarations are acceptable in the header of a for loop.
+If variable declaration in header of for statement —> The number of variable of Variable declaration >= 1
+
+The number of variable of Variable declaration in  header of for statement/for control  >= 1
+
+",,,,https://checkstyle.org/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations,"MultipleVariableDeclarations
+Checks that each variable declaration is in its own statement and on its own line.
+A declaration statement only has 1 variable declaration.
+And
+A line only has 1 variable declaration",,,,,"<module name=""MultipleVariableDeclarations""/>",,,,,,,,,Yes,"<module name='JavadocStyleCheck'>
+  <property name='format' value='MULTI_LINE'/>
+</module>
+******
+<module name='JavadocStyleCheck'>
+  <property name='format' value='SINGLE_LINE'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.2-variable-declarations,4.8.2.2 Declared when needed,"Local variables are not habitually declared at the start of their containing block or block-like construct. Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. Local variable declarations typically have initializers, or are initialized immediately after declaration.","Rule is obscure
+
+Local variables are not habitually declared at the start of their containing block or block-like construct.
+
+local variable is not at begin of block or block-like construct
+
+Instead, local variables are declared close to the point they are first used (within reason), to minimize their scope. 
+The line number of local variable declaration - The line number of first usage of local variable 尽可能小?
+/
+Declaration of local variable close to  first usage of local variable
+
+Local variable declarations typically have initializers, or are initialized immediately after declaration.
+Initializer of variable declaration of Local variable after variable declaration of Local variable",Has Rule and default distance,,,https://checkstyle.org/checks/coding/variabledeclarationusagedistance.html#VariableDeclarationUsageDistance,"VariableDeclarationUsageDistance
+Checks the distance between declaration of variable and its first usage.
+
+allowedDistance
+If the scope of variable usage = scope of variable declaration —>
+The line number of variable usage - The line number of variable declaration <=[allowedDistance]
+
+OR
+ignoreFinal
+Allow to ignore variables with a 'final' modifier.
+True: If variable declaration has 'final' modifier —> The line number of variable usage - The line number of variable declaration the <=/ not <=[allowedDistance]
+False: If variable declaration has 'final' modifier —> The line number of variable usage - The line number of variable declaration the <=[allowedDistance]
+
+OR
+ignoreVariablePattern
+If variable name of declaration satisfy [ignoreVariablePattern] —> The line number of variable usage - The line number of variable declaration the <=/ not <=[allowedDistance]
+
+OR
+validateBetweenScopes
+
+False: If the scope of variable usage != scope of variable declaration —>
+The line number of variable usage - The line number of variable declaration <= / not <= [allowedDistance]
+
+True: The line number of variable usage - The line number of variable declaration the <=[allowedDistance]
+If the scope of variable usage != scope of variable declaration —>
+The line number of variable usage - The line number of variable declaration <=[allowedDistance]
+
+
+
+",,,,,"<module name=""VariableDeclarationUsageDistance""/>",,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s4.8.3-arrays,"4.8.3.1 Array initializers: can be ""block-like""","Any array initializer may optionally be formatted as if it were a ""block-like construct."" For example, the following are all valid (not an exhaustive list):
+new int[] {           new int[] {
+  0, 1, 2, 3            0,
+}                       1,
+                        2,
+new int[] {             3,
+  0, 1,               }
+  2, 3
+}                     new int[]
+                          {0, 1, 2, 3}","Optional
+the format of array initializer =/!= format of block-like construct",CheckStyle No rule,,,,,,,,,CheckStyle No rule,,,,,,,,,Yes,"<module name='JavadocMethodCheck'>
+  <property name='blockTags' value='param,return,throws,deprecated'/>
+  <property name='allowEmpty' value='false'/>
+</module>
+******
+<module name='JavadocTypeCheck'>
+  <property name='blockTags' value='param,return,throws,deprecated'/>
+  <property name='allowEmpty' value='false'/>
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.3-arrays,4.8.3.2 No C-style array declarations,"The square brackets form a part of the type, not the variable: String[] args, not String args[].","[] after type And
+[] not after variable name
+
+After 和next to???区别",,,,https://checkstyle.org/checks/misc/arraytypestyle.html#ArrayTypeStyle,"Checks the style of array type definitions.
+javaStyle
+Control whether to enforce Java style (true) or C style (false).
+
+True:[] after/next to type And
+[] not after variable name
+False:
+[] after/next to variable name",,,,,"<module name=“ArrayTypeStyle"">
+<property name=""javaStyle"" value=“true""/>
+</module>",,,,,,,,,Yes,"<module
+        ""
+******
+<module name='JavadocMethodCheck'>\n  <property name='scope' value='public'/>\n  <property name='allowMissingJavadoc' value='false'/>\n  <property name='allowMissingJavadocInOverriddenMethods' value='false'/>\n  <property name='allowMissingJavadocVisibility' value='private'/>\n  <property name='allowUndeclaredRTE' value='true'/>\n  <property name='allowThrowsTags' value='true'/>\n  <property name='allowDefaultAccessMembers' value='false'/>\n  <property name='allowProtectedMembers' value='false'/>\n  <property name='allowPackagePrivateMembers' value='false'/>\n  <property name='allowPublicMembers' value='true'/>\n  <property name='tokens' value='METHOD_DEF'/>\n  <property name='tokens' value='CTOR_DEF'/>\n  <property name='tokens' value='VARIABLE_DEF'/>\n  <property name='tokens' value='STATIC_INIT'/>\n  <property name='tokens' value='INSTANCE_INIT'/>\n  <property name='tokens' value='ANNOTATION_DEF'/>\n  <property name='tokens' value='ENUM_DEF'/>\n  <property name='tokens' value='INTERFACE_DEF'/>\n  <property name='tokens' value='CLASS_DEF'/>\n  <property name='tokens' value='INTERFACE_DEF'/>\n  <property name='tokens' value='ENUM_DEF'/>\n  <property name='tokens' value='ANNOTATION_DEF'/>\n  <property name='tokens' value='CLASS_DEF'/>\n  <property name='tokens' value='CTOR_DEF'/>\n  <property name='tokens' value='METHOD_DEF'/>\n  <property name='tokens' value='VARIABLE_DEF'/>\n  <property name='tokens' value='STATIC_INIT'/>\n  <property name='tokens' value='INSTANCE_INIT'/>\n  <property name='tokens' value='ENUM_CONSTANT_DEF'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n  <property name='tokens' value='LITERAL_CONTINUE'/>\n  <property name='tokens' value='LITERAL_THROW'/>\n  <property name='tokens' value='LITERAL_ASSERT'/>\n  <property name='tokens' value='LITERAL_CATCH'/>\n  <property name='tokens' value='LITERAL_DO'/>\n  <property name='tokens' value='LITERAL_ELSE'/>\n  <property name='tokens' value='LITERAL_FINALLY'/>\n  <property name='tokens' value='LITERAL_FOR'/>\n  <property name='tokens' value='LITERAL_IF'/>\n  <property name='tokens' value='LITERAL_RETURN'/>\n  <property name='tokens' value='LITERAL_SYNCHRONIZED'/>\n  <property name='tokens' value='LITERAL_TRY'/>\n  <property name='tokens' value='LITERAL_WHILE'/>\n  <property name='tokens' value='LITERAL_SWITCH'/>\n  <property name='tokens' value='LITERAL_CASE'/>\n  <property name='tokens' value='LITERAL_DEFAULT'/>\n  <property name='tokens' value='LITERAL_BREAK'/>\n ",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.4-switch,4.8.4 Switch statements,"Terminology Note: Inside the braces of a switch block are one or more statement groups . Each statement group consists of one or more switch labels (either `caseFOO:` or `default:` ), followed by one or more statements (or, for the last statement group, zero or more statements).
+
+","Terminology Note
+No rule",CheckStyle: No Rule,,,,,,,,,No rule,,,,,,,,,Yes,"<module name='JavadocMethodCheck'>
+******
+  <property name='scope' value='public'/>
+******
+</module>
+******
+<module name='JavadocTypeCheck'>
+******
+  <property name='scope' value='public'/>
+******
+</module>",,,
+https://google.github.io/styleguide/javaguide.html#s4.8.4-switch,4.8.4.1 Indentation,"As with any other block, the contents of a switch block are indented +2.
+After a switch label, there is a line break, and the indentation level is increased +2, exactly as if a block were being opened. The following switch label returns to the previous indentation level, as if a block had been closed.","Indention of switch block +2
+And
+Line break after switch label
+And
+Indention of switch label +2
+And
+Indention of following switch label = Indention of switch label",,,,https://checkstyle.org/checks/misc/indentation.html#Indentation,"Checks correct indentation of Java code.
+The idea behind this is that while pretty printers are sometimes convenient for bulk reformats of legacy code, they often either aren't configurable enough or just can't anticipate how format should be done. Sometimes this is personal preference, other times it is practical experience. In any case, this check should just ensure that a minimal set of indentation rules is followed.
+Basic offset indentation is used for indentation inside code blocks. For any lines that span more than 1, line wrapping indentation is used for those lines after the first. Brace adjustment, case, and throws indentations are all used only if those specific identifiers start the line. If, for example, a brace is used in the middle of the line, its indentation will not take effect. All indentations have an accumulative/recursive effect when they are triggered. If during a line wrapping, another code block is found and it doesn't end on that same line, then the subsequent lines afterwards, in that new code block, are increased on top of the line wrap and any indentations above it.","arrayInitIndent
+
+If array initialization begins —> indent of array initialization +[arrayInitIndent]
+AND
+basicOffset
+
+code block begins —> indent of code block + [basicOffset]
+AND
+braceAdjustment
+
+Brace begins —> indent of Brace +[braceAdjustment]
+AND
+caseIndent
+
+Case of Switch statement begins —> indent of Case of Switch statement +[caseIndent]
+AND
+forceStrictCondition
+
+True: line wrapping indentation = indent of line-wrapping +[lineWrappingIndentation]
+False: line-wrapping begins —> indent of line-wrapping > indent of line-wrapping +[lineWrappingIndentation] 
+AND
+lineWrappingIndentation
+line-wrapping begins —> indent of line-wrapping +[lineWrappingIndentation]
+AND
+throwsIndent
+
+throw begins —> indent of throw +[throwsIndent]
+",,"basicOffset:
+  Description: Specify how far a new indentation level should be indented when on the next line.
+  Type: int
+  Default: 4
+  Since: Checkstyle 3.1
+  Constraints:
+    - When starting a new code block or statement, the next line should be indented by the specified number of spaces, representing the new indentation level.
+",,"    <module name=""Indentation"">
+<property name=""caseIndent"" value=“2""/>
+      <property name=""basicOffset"" value=""2""/>
+        </module>",,,,,"    <module name=""Indentation"">
+      <property name=""basicOffset"" value=""2""/>
+      <property name=""braceAdjustment"" value=""2""/>
+      <property name=""caseIndent"" value=""2""/>
+      <property name=""throwsIndent"" value=""4""/>
+      <property name=""lineWrappingIndentation"" value=""4""/>
+      <property name=""arrayInitIndent"" value=""2""/>
+    </module>",,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s4.8.4-switch,4.8.4.2 Fall-through: commented,"Within a switch block, each statement group either terminates abruptly (with a break, continue, return or thrown exception), or is marked with a comment to indicate that execution will or might continue into the next statement group. Any comment that communicates the idea of fall-through is sufficient (typically // fall through). This special comment is not required in the last statement group of the switch block. Example:
+switch (input) {
+  case 1:
+  case 2:
+    prepareOneOrTwo();
+    // fall through
+  case 3:
+    handleOneTwoOrThree();
+    break;
+  default:
+    handleLargeNumber(input);
+}
+Notice that no comment is needed after case 1:, only at the end of the statement group.","Comment after each statement group of switch block
+OR
+statement group of switch block ends break/continue/return/throw exception —> Comment after/not after
+ each statement group of switch block
+
+statement group of switch block is last statement—> Comment after/not after
+ each statement group of switch block
+
+And
+Comment is fall through",,,,https://checkstyle.org/checks/coding/fallthrough.html#FallThrough,"Checks for fall-through in switch statements.
+[reliefPattern] in Case group  of switch statement 
+
+OR
+If case group of switch block not ends break/continue/return/throw exception —> [reliefPattern] in/not in case group of switch block
+或者表述成
+ [reliefPattern] in/not in case group of switch block And case group of switch block not ends break/continue/return/throw exception
+
+
+checkLastCaseGroup
+True: if case group of switch statement is last —> [reliefPattern] after Case group  of switch statement
+False:  if case group of switch statement is last —> [reliefPattern] after/not after Case group  of switch statement
+
+reliefPattern",,,,,"<module name=""FallThrough""/>",,,,,,,,,No,,,,
+https://google.github.io/styleguide/javaguide.html#s4.8.4-switch,4.8.4.3 Presence of the default label,"Each switch statement includes a default statement group, even if it contains no code.
+Exception: A switch statement for an enum type may omit the default statement group, if it includes explicit cases covering all possible values of that type. This enables IDEs or other static analysis tools to issue a warning if any cases were missed.","Each switch statement includes a default statement group, even if it contains no code.
+
+default statement in switch statement
+
+OR
+
+if default statement does not have code —> default statement in switch statement
+
+
+OR
+Exception: A switch statement for an enum type may omit the default statement group, if it includes explicit cases covering all possible values of that type. 
+
+Switch statement for enum type  and case label of Switch statement has all values of enum type —> default statement in/not in switch statement
+
+",,,,https://checkstyle.org/checks/coding/missingswitchdefault.html#MissingSwitchDefault,"MissingSwitchDefault
+Checks that switch statement has a default clause.
+
+
+Default clause in switch statement",,,,,"<module name=""MissingSwitchDefault""/>",,,,,"<module name=""MissingSwitchDefault""/>",,,,Yes,"<module name='JavadocMethodCheck'>
+******
+  <property name='scope' value='public'/>
+******
+  <property name='allowMissingJavadoc' value='true'/>
+******
+</module>
+******
+<module name='JavadocTypeCheck'>
+******
+  <property name='scope' value='public'/>
+******
+  <property name='allowMissingJavadoc' value='true'/>
+******
+</module>",,,
+https://checkstyle.org/styleguides/google-java-style-20180523/javaguide.html#s4.8.6-comments,4.8.6 Block comment style,"Block comments are indented at the same level as the surrounding code. They may be in /* ... */ style or // ... style. For multi-line /* ... */ comments, subsequent lines must start with * aligned with the * on the previous line.
+Comments are not enclosed in boxes drawn with asterisks or other characters.
+Tip: When writing multi-line comments, use the /* ... */ style if you want automatic code formatters to re-wrap the lines when necessary (paragraph-style). Most formatters don't re-wrap lines in // ... style comment blocks.","
+Block comments are indented at the same level as the surrounding code. 
+Indention of comment block = ideation of code ？？ And format of comment block is /* ... */, //
+And
+If the number of lines of comment block >1 —> line starts * and indention of lines of comment block is same
+And
+If the number of lines of comment block >1 and re-wrap lines of comment block —> format of comment block is /* ... */
+
+
+",,,,https://checkstyle.org/checks/misc/commentsindentation.html#CommentsIndentation,"Controls the indentation between comments and surrounding code. Comments are indented at the same level as the surrounding code. Detailed info about such convention can be found here
+
+Idention of [comment {{tokens}}] = Idention of [code] 
+
+single-line comment: ‘//‘
+BLOCK_COMMENT_BEGIN /*
+
+",,,,,"<module name=""CommentsIndentation"">
+
+<property name=""tokens"" value=""SINGLE_LINE_COMMENT, BLOCK_COMMENT_BEGIN""/>
+
+</module>",,,,,,,,,,,,,

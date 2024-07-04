@@ -1,0 +1,7 @@
+The ESLint rule "no-redeclare" has one configurable option. Here are the details:
+
+1. **Option Name**: builtinGlobals
+   - **Option Description**: Checks for redeclaration of built-in globals in the global scope.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

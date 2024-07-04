@@ -1,0 +1,7 @@
+The ESLint rule "no-useless-computed-key" has one configurable option. Here are the details:
+
+1. **Option Name**: enforceForClassMembers
+   - **Option Description**: Applies the rule to class members when set to true.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

@@ -1,0 +1,19 @@
+The ESLint rule "no-else-return" has one configurable option, which is an object option. Here are the details:
+
+1. **Option Name**: allowElseIf
+   - **Option Description**: Allows or disallows `else if` blocks after a return statement.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+The analysis is as follows:
+
+The rule has an object option named `allowElseIf`. This option can be either `true` or `false`. The default value for this option is `true`.
+
+The result is as follows:
+
+1. **Option Name**: allowElseIf
+   - **Option Description**: Allows or disallows `else if` blocks after a return statement.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true

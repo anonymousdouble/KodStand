@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file describes the rule `no-import-assign`. After analyzing the content, it is clear that this rule does not have any configurable options. The rule details, examples of incorrect and correct code, and other sections do not mention any options that can be configured.
+
+Therefore, the result is:
+
+```
+no option
+```

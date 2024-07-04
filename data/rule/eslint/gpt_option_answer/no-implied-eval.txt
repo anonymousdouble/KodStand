@@ -1,0 +1,7 @@
+The provided ESLint rule "no-implied-eval" does not have any configurable options. The rule description and examples focus on the usage of `setTimeout()`, `setInterval()`, and `execScript()` with string arguments, but there are no specific options mentioned for configuration.
+
+Therefore, the result is:
+
+```
+no option
+```

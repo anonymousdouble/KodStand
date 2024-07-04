@@ -1,0 +1,91 @@
+The ESLint rule "lines-around-comment" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: beforeBlockComment
+   - **Option Description**: Requires an empty line before block comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: afterBlockComment
+   - **Option Description**: Requires an empty line after block comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+3. **Option Name**: beforeLineComment
+   - **Option Description**: Requires an empty line before line comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: afterLineComment
+   - **Option Description**: Requires an empty line after line comments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: allowBlockStart
+   - **Option Description**: Allows comments to appear at the start of block statements, function bodies, classes, switch statements, and class static blocks.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: allowBlockEnd
+   - **Option Description**: Allows comments to appear at the end of block statements, function bodies, classes, switch statements, and class static blocks.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+7. **Option Name**: allowClassStart
+   - **Option Description**: Allows comments to appear at the start of classes.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+8. **Option Name**: allowClassEnd
+   - **Option Description**: Allows comments to appear at the end of classes.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+9. **Option Name**: allowObjectStart
+   - **Option Description**: Allows comments to appear at the start of object literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+10. **Option Name**: allowObjectEnd
+    - **Option Description**: Allows comments to appear at the end of object literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+11. **Option Name**: allowArrayStart
+    - **Option Description**: Allows comments to appear at the start of array literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+12. **Option Name**: allowArrayEnd
+    - **Option Description**: Allows comments to appear at the end of array literals.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+13. **Option Name**: ignorePattern
+    - **Option Description**: Custom patterns to be ignored by the rule.
+    - **Data Type**: string
+    - **Data Range**: open-ended
+    - **Default Value**: no default
+
+14. **Option Name**: applyDefaultIgnorePatterns
+    - **Option Description**: Enables or disables the default comment patterns to be ignored by the rule.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default
+
+15. **Option Name**: afterHashbangComment
+    - **Option Description**: Requires an empty line after hashbang comments.
+    - **Data Type**: boolean
+    - **Data Range**: {true, false}
+    - **Default Value**: no default

@@ -1,0 +1,9 @@
+The ESLint rule "no-inner-declarations" has a string option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Disallows `function` declarations in nested blocks or disallows both `function` and `var` declarations in nested blocks.
+   - **Data Type**: string
+   - **Data Range**: {"functions", "both"}
+   - **Default Value**: "functions"
+
+Since there are no nested options or additional sub-options, the analysis is complete.

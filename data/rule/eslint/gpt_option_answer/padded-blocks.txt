@@ -1,0 +1,45 @@
+The ESLint rule "padded-blocks" has several configurable options. Here are the details extracted from the provided HTML file:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Requires or disallows padding within blocks.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures padding within specific block types.
+   - **Data Type**: object
+   - **Data Range**: {"blocks": string, "classes": string, "switches": string}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.blocks
+   - **Option Description**: Requires or disallows padding within block statements, function bodies, and class static blocks.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_2.classes
+   - **Option Description**: Requires or disallows padding within classes.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+5. **Option Name**: anonymous_option_2.switches
+   - **Option Description**: Requires or disallows padding within switch statements.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: no default
+
+6. **Option Name**: anonymous_option_3
+   - **Option Description**: Allows single-line blocks.
+   - **Data Type**: object
+   - **Data Range**: {"allowSingleLineBlocks": boolean}
+   - **Default Value**: no default
+
+7. **Option Name**: anonymous_option_3.allowSingleLineBlocks
+   - **Option Description**: Allows single-line blocks.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+These options allow users to configure the rule to enforce or disallow padding within various types of blocks, with specific settings for block statements, classes, and switch statements, as well as an option to allow single-line blocks.

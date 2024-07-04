@@ -1,0 +1,13 @@
+The ESLint rule "no-unreachable-loop" has one configurable option, which is an object with a sub-option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: An optional array of loop types that will be ignored by this rule.
+   - **Data Type**: object
+   - **Data Range**: {"ignore": array}
+   - **Default Value**: no default
+
+2. **Option Name**: anonymous_option_1.ignore
+   - **Option Description**: Specifies the loop types to be ignored by the rule.
+   - **Data Type**: array
+   - **Data Range**: {"WhileStatement", "DoWhileStatement", "ForStatement", "ForInStatement", "ForOfStatement"}
+   - **Default Value**: no default

@@ -1,0 +1,33 @@
+The ESLint rule "no-implicit-coercion" has several configurable options. Here are the details for each option:
+
+1. **Option Name**: boolean
+   - **Option Description**: When this is true, this rule warns shorter type conversions for boolean type.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+2. **Option Name**: number
+   - **Option Description**: When this is true, this rule warns shorter type conversions for number type.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+3. **Option Name**: string
+   - **Option Description**: When this is true, this rule warns shorter type conversions for string type.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: disallowTemplateShorthand
+   - **Option Description**: When this is true, this rule warns string type conversions using ${expression} form.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+5. **Option Name**: allow
+   - **Option Description**: Each entry in this array can be one of ~, !!, + or * that are to be allowed.
+   - **Data Type**: array
+   - **Data Range**: {"~", "!!", "+", "*"}
+   - **Default Value**: empty array
+
+These options allow you to configure the rule to suit your specific needs by enabling or disabling warnings for different types of implicit coercions.

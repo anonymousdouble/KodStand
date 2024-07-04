@@ -1,0 +1,5 @@
+The provided ESLint rule "no-shadow-restricted-names" has no configurable options. Therefore, the result is:
+
+```
+no option
+```

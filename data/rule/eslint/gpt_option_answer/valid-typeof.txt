@@ -1,0 +1,9 @@
+The ESLint rule "valid-typeof" has one configurable option, which is an object. Here are the details of the option:
+
+1. **Option Name**: requireStringLiterals
+   - **Option Description**: Requires `typeof` expressions to only be compared to string literals or other `typeof` expressions, and disallows comparisons to any other value.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+Since there is only one option and it is named, there are no anonymous options or nested sub-options.

@@ -1,0 +1,7 @@
+The provided ESLint rule "no-caller" has no configurable options. The rule details and examples provided do not mention any configurable parameters.
+
+Therefore, the result is:
+
+```
+no option
+```

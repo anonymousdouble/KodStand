@@ -1,0 +1,7 @@
+The ESLint rule "new-parens" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces or disallows parentheses when invoking a constructor with no arguments.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never"}
+   - **Default Value**: "always"

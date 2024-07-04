@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the rule "no-buffer-constructor" does not specify any configurable options. The rule simply disallows the use of the `Buffer()` constructor and suggests using `Buffer.from`, `Buffer.alloc`, and `Buffer.allocUnsafe` instead.
+
+Therefore, the result is:
+
+```
+no option
+```

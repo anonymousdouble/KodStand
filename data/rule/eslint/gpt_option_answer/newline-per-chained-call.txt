@@ -1,0 +1,7 @@
+The ESLint rule "newline-per-chained-call" has one configurable option. Here are the details:
+
+1. **Option Name**: ignoreChainWithDepth
+   - **Option Description**: Allows chains up to a specified depth.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 2

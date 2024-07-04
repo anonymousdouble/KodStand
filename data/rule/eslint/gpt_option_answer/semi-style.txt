@@ -1,0 +1,9 @@
+The ESLint rule "semi-style" has one configurable option. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces the location of semicolons in statements.
+   - **Data Type**: string
+   - **Data Range**: {"last", "first"}
+   - **Default Value**: "last"
+
+This rule does not have any nested or sub-options.

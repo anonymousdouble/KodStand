@@ -1,0 +1,7 @@
+The ESLint rule "no-inline-comments" has one configurable option. Here are the details:
+
+1. **Option Name**: ignorePattern
+   - **Option Description**: A string pattern that will be passed to the `RegExp` constructor to make the rule ignore specific comments.
+   - **Data Type**: string
+   - **Data Range**: open-ended
+   - **Default Value**: no default

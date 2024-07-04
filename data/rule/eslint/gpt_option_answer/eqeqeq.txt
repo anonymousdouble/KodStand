@@ -1,0 +1,27 @@
+The ESLint rule "eqeqeq" has several configurable options. Here are the details:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces the use of `===` and `!==` in every situation.
+   - **Data Type**: string
+   - **Data Range**: {"always"}
+   - **Default Value**: "always"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Enforces the use of `===` and `!==` except for specific cases.
+   - **Data Type**: string
+   - **Data Range**: {"smart"}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_3
+   - **Option Description**: Deprecated option to allow `==` and `!=` with `null`.
+   - **Data Type**: string
+   - **Data Range**: {"allow-null"}
+   - **Default Value**: no default
+
+4. **Option Name**: anonymous_option_1.null
+   - **Option Description**: Customize how the rule treats `null` literals.
+   - **Data Type**: string
+   - **Data Range**: {"always", "never", "ignore"}
+   - **Default Value**: "always"
+
+The rule has a primary string option that can be "always" or "smart", and an additional object option for customizing the handling of `null` literals. The deprecated "allow-null" option is also mentioned but should be replaced with the `null` property in the object option.

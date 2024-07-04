@@ -1,0 +1,13 @@
+The provided ESLint rule HTML file describes the rule `no-empty-static-block`. Based on the content, here is the analysis of the configurable options:
+
+```
+This rule disallows empty static blocks. This rule ignores static blocks which contain a comment.
+```
+
+From the provided HTML content, it appears that the rule `no-empty-static-block` does not have any configurable options. The rule simply disallows empty static blocks and ignores static blocks that contain a comment. There are no parameters or options mentioned that can be configured for this rule.
+
+Therefore, the result is:
+
+```
+no option
+```

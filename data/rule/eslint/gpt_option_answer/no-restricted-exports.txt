@@ -1,0 +1,45 @@
+The ESLint rule "no-restricted-exports" has several configurable options. Here are the details of each option:
+
+1. **Option Name**: restrictedNamedExports
+   - **Option Description**: An array of strings, where each string is a name to be restricted.
+   - **Data Type**: array of strings
+   - **Data Range**: open-ended
+   - **Default Value**: no default
+
+2. **Option Name**: restrictDefaultExports
+   - **Option Description**: An object option with boolean properties to restrict certain default export declarations.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+3. **Option Name**: restrictDefaultExports.direct
+   - **Option Description**: Restricts `export default` declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+4. **Option Name**: restrictDefaultExports.named
+   - **Option Description**: Restricts `export { foo as default };` declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: restrictDefaultExports.defaultFrom
+   - **Option Description**: Restricts `export { default } from 'foo';` declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: restrictDefaultExports.namedFrom
+   - **Option Description**: Restricts `export { foo as default } from 'foo';` declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+7. **Option Name**: restrictDefaultExports.namespaceFrom
+   - **Option Description**: Restricts `export * as default from 'foo';` declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+In summary, the rule "no-restricted-exports" has several configurable options, including an array of strings and an object with boolean properties. Each option is detailed above with its name, description, data type, data range, and default value.

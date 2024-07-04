@@ -1,0 +1,19 @@
+The ESLint rule "arrow-body-style" has two main options: a string option and an object option. Here are the details of the configurable options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces or disallows the use of braces around the arrow function body.
+   - **Data Type**: string
+   - **Data Range**: {"always", "as-needed", "never"}
+   - **Default Value**: "as-needed"
+
+2. **Option Name**: anonymous_option_2
+   - **Option Description**: Provides more fine-grained configuration when the first option is "as-needed".
+   - **Data Type**: object
+   - **Data Range**: {"requireReturnForObjectLiteral": boolean}
+   - **Default Value**: no default
+
+3. **Option Name**: anonymous_option_2.requireReturnForObjectLiteral
+   - **Option Description**: Requires braces and an explicit return for object literals when the first option is "as-needed".
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

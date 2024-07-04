@@ -1,0 +1,5 @@
+The provided ESLint rule "no-misleading-character-class" does not specify any configurable options. Therefore, the result is:
+
+```
+no option
+```

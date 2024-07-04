@@ -1,0 +1,7 @@
+The ESLint rule "space-infix-ops" has one configurable option. Here are the details:
+
+1. **Option Name**: int32Hint
+   - **Option Description**: Allows writing `a|0` without space.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false

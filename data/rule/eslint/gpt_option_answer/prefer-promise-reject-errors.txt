@@ -1,0 +1,9 @@
+The ESLint rule "prefer-promise-reject-errors" has one configurable option. Here are the details:
+
+1. **Option Name**: allowEmptyReject
+   - **Option Description**: Allows calls to `Promise.reject()` with no arguments.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+Since there is only one option, there are no nested or additional options to consider.

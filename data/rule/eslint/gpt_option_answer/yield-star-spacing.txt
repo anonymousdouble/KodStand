@@ -1,0 +1,33 @@
+The ESLint rule "yield-star-spacing" has configurable options. Here are the details of the options:
+
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Enforces spacing around the `*` in `yield*` expressions.
+   - **Data Type**: object
+   - **Data Range**: {"before": boolean, "after": boolean}
+   - **Default Value**: {"before": false, "after": true}
+
+2. **Option Name**: anonymous_option_1.before
+   - **Option Description**: Enforces spacing between the `yield` and the `*`. If `true`, a space is required; otherwise, spaces are disallowed.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+3. **Option Name**: anonymous_option_1.after
+   - **Option Description**: Enforces spacing between the `*` and the argument. If `true`, a space is required; otherwise, spaces are disallowed.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+Additionally, the rule provides string shorthand options:
+
+4. **Option Name**: anonymous_option_2
+   - **Option Description**: Shorthand for the object option.
+   - **Data Type**: string
+   - **Data Range**: {"after", "before", "both", "neither"}
+   - **Default Value**: "after" (equivalent to {"before": false, "after": true})
+
+The string shorthand options map to the object options as follows:
+- `"after"` → {"before": false, "after": true}
+- `"before"` → {"before": true, "after": false}
+- `"both"` → {"before": true, "after": true}
+- `"neither"` → {"before": false, "after": false}

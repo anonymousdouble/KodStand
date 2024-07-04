@@ -1,0 +1,7 @@
+The provided ESLint rule HTML file for the rule "no-setter-return" does not mention any configurable options. The rule description and examples focus solely on the behavior of the rule without specifying any parameters or options that can be configured.
+
+Therefore, the result is:
+
+```
+no option
+```

@@ -1,0 +1,75 @@
+The ESLint rule "no-multi-spaces" has two main configurable options: `ignoreEOLComments` and `exceptions`. Here are the details for each option:
+
+1. **Option Name**: ignoreEOLComments
+   - **Option Description**: Ignores multiple spaces before comments that occur at the end of lines.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: exceptions
+   - **Option Description**: Specifies nodes to ignore to avoid contradictions with other rules that require multiple spaces.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: {"Property": true}
+
+3. **Option Name**: exceptions.Property
+   - **Option Description**: Ignores multiple spaces in properties of object literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: exceptions.BinaryExpression
+   - **Option Description**: Ignores multiple spaces in binary expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: exceptions.VariableDeclarator
+   - **Option Description**: Ignores multiple spaces in variable declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: exceptions.ImportDeclaration
+   - **Option Description**: Ignores multiple spaces in import declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+Here is the structured information:
+
+1. **Option Name**: ignoreEOLComments
+   - **Option Description**: Ignores multiple spaces before comments that occur at the end of lines.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: false
+
+2. **Option Name**: exceptions
+   - **Option Description**: Specifies nodes to ignore to avoid contradictions with other rules that require multiple spaces.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: {"Property": true}
+
+3. **Option Name**: exceptions.Property
+   - **Option Description**: Ignores multiple spaces in properties of object literals.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: true
+
+4. **Option Name**: exceptions.BinaryExpression
+   - **Option Description**: Ignores multiple spaces in binary expressions.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+5. **Option Name**: exceptions.VariableDeclarator
+   - **Option Description**: Ignores multiple spaces in variable declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default
+
+6. **Option Name**: exceptions.ImportDeclaration
+   - **Option Description**: Ignores multiple spaces in import declarations.
+   - **Data Type**: boolean
+   - **Data Range**: {true, false}
+   - **Default Value**: no default

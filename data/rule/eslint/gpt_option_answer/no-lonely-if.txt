@@ -1,0 +1,5 @@
+The provided ESLint rule HTML file for the rule "no-lonely-if" does not mention any configurable options. Therefore, the result is:
+
+```
+no option
+```

@@ -1,0 +1,49 @@
+The ESLint rule "comma-dangle" has both string and object options. Here are the details of the configurable options:
+
+### String Options:
+1. **Option Name**: anonymous_option_1
+   - **Option Description**: Specifies the requirement for trailing commas.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always", "always-multiline", "only-multiline"}
+   - **Default Value**: "never"
+
+### Object Options:
+1. **Option Name**: anonymous_option_2
+   - **Option Description**: Configures the rule for each type of syntax.
+   - **Data Type**: object
+   - **Data Range**: null
+   - **Default Value**: no default
+
+#### Sub-options of anonymous_option_2:
+1. **Option Name**: anonymous_option_2.arrays
+   - **Option Description**: Specifies the requirement for trailing commas in array literals and array patterns of destructuring.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always", "always-multiline", "only-multiline", "ignore"}
+   - **Default Value**: "never"
+
+2. **Option Name**: anonymous_option_2.objects
+   - **Option Description**: Specifies the requirement for trailing commas in object literals and object patterns of destructuring.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always", "always-multiline", "only-multiline", "ignore"}
+   - **Default Value**: "never"
+
+3. **Option Name**: anonymous_option_2.imports
+   - **Option Description**: Specifies the requirement for trailing commas in import declarations of ES Modules.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always", "always-multiline", "only-multiline", "ignore"}
+   - **Default Value**: "never"
+
+4. **Option Name**: anonymous_option_2.exports
+   - **Option Description**: Specifies the requirement for trailing commas in export declarations of ES Modules.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always", "always-multiline", "only-multiline", "ignore"}
+   - **Default Value**: "never"
+
+5. **Option Name**: anonymous_option_2.functions
+   - **Option Description**: Specifies the requirement for trailing commas in function declarations and function calls.
+   - **Data Type**: string
+   - **Data Range**: {"never", "always", "always-multiline", "only-multiline", "ignore"}
+   - **Default Value**: "never"
+
+### Summary:
+The rule "comma-dangle" has both string and object options. The string option can be one of "never", "always", "always-multiline", or "only-multiline", with a default value of "never". The object option allows for more granular configuration for different types of syntax, each with the same set of possible values and a default of "never".

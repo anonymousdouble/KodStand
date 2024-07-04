@@ -1,0 +1,7 @@
+The ESLint rule "max-params" has one configurable option. Here are the details:
+
+1. **Option Name**: max
+   - **Option Description**: Enforces a maximum number of parameters in function definitions.
+   - **Data Type**: number
+   - **Data Range**: open-ended
+   - **Default Value**: 3
