@@ -79,6 +79,7 @@ def compare_config(gpt_answer, benchmark, benchmark_default, check_option_match_
     option_name_tp = {}
     option_value_tp = {}
 
+
     module_fp: dict = copy.deepcopy(gpt_answer)
     option_name_fp: dict = copy.deepcopy(gpt_answer)
     option_value_fp: dict = copy.deepcopy(gpt_answer)
@@ -139,16 +140,11 @@ def compare_config(gpt_answer, benchmark, benchmark_default, check_option_match_
                 option_value_fn.pop(gpt_rule_name)
                 option_value_fp.pop(gpt_rule_name)
 
-    module_res = [module_tp, [], module_fp, module_fn]
+    module_res = [list(module_tp.keys()), [], list(module_fp.keys()), list(module_fn.keys())]
 
-    option_name_res = [option_name_tp, [], option_name_fp, option_name_fn]
+    option_name_res = [list(option_name_tp.keys()), [], list(option_name_fp.keys()), list(option_name_fn.keys())]
 
-    option_value_res = [
-        option_value_tp,
-        [],
-        option_value_fp,
-        option_value_fn,
-    ]
+    option_value_res = [list(option_value_tp.keys()), [], list(option_value_fp.keys()), list(option_value_fn.keys())]
     return [module_res, option_name_res, option_value_res]
 
 
@@ -382,13 +378,14 @@ def compare_and_cal_metrics(csv_path, benchmark_path, check_option_match_func):
             continue
         # print(f"Processing rule: {rule}")
         rule_count += 1
-        cor_benchmark,cor_benchmark_default = jdata[rule]
+        cor_benchmark,cor_benchmark_default,cor_benchmark_third = jdata[rule]
         benchmark_exist_config = len(cor_benchmark) > 0
         line_result = [
             line["rule_name"],
             line["description"],
             "\n".join([f"{rule}: {config}" for rule, config in cor_benchmark.items()]),
             "\n".join([f"{rule}: {config}" for rule, config in cor_benchmark_default.items()]),
+            "\n".join([f"{rule}: {config}" for rule, config in cor_benchmark_third.items()]),
             line["gpt_answer"],
             line["gpt_configuration"],
         ]
@@ -427,12 +424,36 @@ def compare_and_cal_metrics(csv_path, benchmark_path, check_option_match_func):
                 aa = 1
             answer_str = "\n".join([f"{k}: {v}" for k, v in answer_json.items()])
             line_result[5] = answer_str
+
+            # ! 分别使用 benchmark + default 和 third config 进行比较
             compare_result = compare_config(
                 answer_json,
                 cor_benchmark,
                 cor_benchmark_default,
                 check_option_match_func,
             )
+            if cor_benchmark_third != {}:
+                compare_result_third = compare_config(
+                    answer_json,
+                    cor_benchmark_third,
+                    cor_benchmark_third,
+                    check_option_match_func
+                )
+                for i in range(3):
+
+                    # TP 取并集
+                    origin_fp = copy.deepcopy(compare_result[i][2])
+                    third_tp = copy.deepcopy(compare_result_third[i][0])
+                    for rule_name in origin_fp:
+                        if rule_name in third_tp:
+                            compare_result[i][2].remove(rule_name)
+                            compare_result[i][0].append(rule_name)
+
+                    origin_fn = compare_result[i][3]
+                    third_fn = compare_result_third[i][3]
+                    # FN 取小的
+                    if len(origin_fn) > len(third_fn):
+                        compare_result[i][3] = third_fn
             indices = [
                 (0, 0),
                 (0, 2),
@@ -546,6 +567,7 @@ def compare_and_cal_metrics(csv_path, benchmark_path, check_option_match_func):
             "description",
             "benchmark",
             "benchmark_default",
+            "benchmark_third",
             "gpt_answer",
             "gpt_configuration",
             "valid_config",
@@ -649,9 +671,9 @@ def compare_and_cal_metrics(csv_path, benchmark_path, check_option_match_func):
 if __name__ == "__main__":
     stat_data = []
 
-    # input_data_root = "data/debug/"
-    input_data_root = "data/config_output/google2eslint_js/baseline"
-    benchmark_path = "data/benchmark/google2eslint_js_benchmark_simple_v3.json"
+    input_data_root = "data/debug/"
+    # input_data_root = "data/config_output/google2eslint_js/baseline"
+    benchmark_path = "data/benchmark/google2eslint_js_benchmark_simple_v5.json"
 
     statistic_path = os.path.join(input_data_root, "stat.csv")
     for file in os.listdir(input_data_root):
