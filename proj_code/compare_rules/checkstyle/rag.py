@@ -7,7 +7,6 @@ import json
 
 dbm = None
 os.environ["OPENAI_API_KEY"] = (
-    "sk-proj-pl6tyVRB5V7vbQj4NSNdT3BlbkFJlCzsHfc8jFzoEhzLgbfD"
 )
 
 

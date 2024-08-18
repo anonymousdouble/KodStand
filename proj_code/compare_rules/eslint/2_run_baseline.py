@@ -42,13 +42,13 @@ def gen_prompt(rule: str, tool_rules: str, style="ESLint"):
 
 
 baselines = [
-    # "empty",
-    # "name",
-    # "name_desc",
-    # "name_desc_opt", #! 159k tokens
+    "empty",
+    "name",
+    "name_desc",
+    "name_desc_opt", #! 159k tokens
     # "name_sdesc_opt",#! only extracted options
-    # "rag_name_desc", #! extracted or origin
-    # "rag_name_desc_opt", #! extracted or origin
+    "rag_name_desc", #! extracted or origin
+    "rag_name_desc_opt", #! extracted or origin
     # "rag_name_sdesc_opt",#! only extracted options
     # "name_url",
     # "name_url_sdesc",
@@ -235,10 +235,10 @@ def get_gpt_response_config(baseline, model, rules, use_examples=False):
         #     with open(f"{exmaple_root}/response.txt", "r", encoding="utf-8") as f:
         #         exmaples.append({"role": "assistant", "content": f.read()})
         # ! check prompt
-        # with open(
-        #     f"data/debug/{model}_{baseline}_prompt_{cnt}.txt", "w", encoding="utf-8"
-        # ) as f:
-        #     f.write(prompt)
+        with open(
+            f"data/debug/js/{model}_{baseline}_prompt_{cnt}.txt", "w", encoding="utf-8"
+        ) as f:
+            f.write(prompt)
         if DEBUG:
             continue
         try:
@@ -279,17 +279,17 @@ def json_from_text(json_str):
 
 if __name__ == "__main__":
     DEBUG = True
-    DEBUG = False
+    # DEBUG = False
     save_root = "data/config_output/google2eslint_js/baseline/"
-    bm_data_path = "data/benchmark/google2eslint_js_benchmark.json"
+    bm_data_path = "data/benchmark/google2eslint_js_benchmark_v5.json"
     offline_root = save_root
     all_rules = json.load(open(bm_data_path, "r", encoding="utf-8"))
     for model in ["gpt-4o"]:
         for baseline in baselines:
             print(f"model: {model}, baseline: {baseline}")
-            # gpt_answers = get_gpt_response_config(
-            #     baseline, model, all_rules, use_examples=False
-            # )
+            gpt_answers = get_gpt_response_config(
+                baseline, model, all_rules, use_examples=False
+            )
             if DEBUG:
                 continue
             ## ! use offline data

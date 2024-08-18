@@ -92,10 +92,10 @@ str_types = [
     "name_desc_mopt",
     "rag_name_desc",
     "rag_name_desc_mopt",
-    "name_sdesc_mopt",
-    "name_url",
-    "name_url_sdesc",
-    "name_sdesc",
+    # "name_sdesc_mopt",
+    # "name_url",
+    # "name_url_sdesc",
+    # "name_sdesc",
 ]
 
 
@@ -225,6 +225,35 @@ def get_checkstyle_str(opt, rule: str=""):
 
     raise Exception(f"Invalid option: {opt}")
 
+def gen_all_prompt(baseline,model,rules,use_examples=False):
+    answer_dict = {}
+    print(f"baseline: {baseline}")
+    print(f"model: {model}")
+    cnt = 0
+    for rule in rules:
+        rule_name = rule.split("\n")[0]
+        rule_desc = rule[rule.find("\n")+1:]
+        checkstyle_str = get_checkstyle_str(baseline,f"{rule_name}\n{rule_desc}")
+        print(f"rule_name: {rule_name}")
+        if baseline == "empty":
+            prompt = gen_nocheckstyle_prompt(rule=f"{rule_name}\n{rule_desc}")
+        else:
+            prompt = gen_prompt(
+                rule=f"{rule_name}\n{rule_desc}",
+                tool_rules=checkstyle_str,
+                style="CheckStyle",
+            )
+        exmaples = []
+        if use_examples:
+            with open(os.path.join(examples_root, f"{baseline}_prompt.txt"), "w") as f:
+                exmaples.append({"role": "user", "content": f.read()})
+            with open(os.path.join(examples_root, "response.txt"), "r") as f:
+                exmaples.append({"role": "assistant", "content": f.read()})
+        # ! check prompt
+        with open(f"data/debug/Java/{model}_{baseline}_prompt_{cnt}.txt", "w") as f:
+            f.write(prompt)
+        cnt += 1
+    return answer_dict
 
 def gpt_res_of_checkstyle_dsl_from_csv(opt, model, rules,use_examples=False):
     """
@@ -262,7 +291,7 @@ def gpt_res_of_checkstyle_dsl_from_csv(opt, model, rules,use_examples=False):
             with open(os.path.join(examples_root, "response.txt"), "r") as f:
                 exmaples.append({"role": "assistant", "content": f.read()})
         # ! check prompt
-        with open(f"data/debug/{model}_{opt}_prompt_{i}.txt", "w") as f:
+        with open(f"data/debug/Java/{model}_{opt}_prompt_{i}.txt", "w") as f:
             f.write(prompt)
             continue
         try:
@@ -298,7 +327,8 @@ if __name__ == "__main__":
     for model in ["4o"]:
         for str_type in str_types:
             # gpt_answers = gpt_res_of_checkstyle_dsl_from_csv(str_type, model, bm_data,use_examples=False)
-            # continue
+            gen_all_prompt(str_type,model,bm_data,use_examples=False)
+            continue
             # ! use offline data
             gpt_answers = offline_res(model,str_type)
             csv_results = []

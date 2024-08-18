@@ -46,6 +46,6 @@ def gen_benchmark(file_path):
 if __name__ == '__main__':
     # file_path = 'data/benchmark/checkstyle2google_java_benchmark_old.xlsx'
     # gen_benchmark(file_path)
-    file_path = 'data/benchmark/java_bm.xlsx'
+    file_path = 'data/benchmark/java_bm_5.xlsx'
 
     gen_benchmark(file_path)
